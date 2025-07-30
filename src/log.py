@@ -3,7 +3,7 @@ import json
 import pandas as pd
 import datetime
 import hashlib
-from config import RESULTS_FILE, USE_PROMPT_CONTRACT
+from config import RESULTS_FILE
 from config import RESULTS_DIR
 
 # --- Excel Summary Logging ---
