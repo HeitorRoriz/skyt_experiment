@@ -3,6 +3,12 @@ import os
 # OpenAI API key from environment variable
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
+# Contracts directory (where all JSON contracts are stored)
+CONTRACTS_DIR = "contracts"
+
+# Results directory (where all results are stored)
+RESULTS_DIR = "results"
+
 # Model and temperature settings
 MODEL = "gpt-3.5-turbo"
 TEMPERATURE = 0.0  # Change here to experiment with different temperatures

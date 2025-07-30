@@ -271,7 +271,9 @@ def regex_extract_user_why(prompt):
     # Heuristic fallback for WHY (embedded/system context included)
     pl = prompt.lower()
     if "fibonacci" in pl:
-        return "To analyze or visualize the Fibonacci sequence"
+        return "To generate or analyze a mathematical sequence"
+    if "sequence" in pl or "series" in pl:
+        return "To generate or analyze a numerical sequence"
     if "sort" in pl:
         return "To arrange data for further processing or display"
     if "prime" in pl:
