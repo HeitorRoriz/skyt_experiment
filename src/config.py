@@ -5,7 +5,7 @@ OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
 # Model and temperature settings
 MODEL = "gpt-3.5-turbo"
-TEMPERATURE = 0.7  # Change here to experiment with different temperatures
+TEMPERATURE = 0.0  # Change here to experiment with different temperatures
 
 # Experiment settings
 NUM_RUNS = 5
@@ -17,7 +17,7 @@ RESULTS_FILE = "outputs/results.xlsx"
 EXPERIMENT_MATRIX_FILE = "outputs/experiment_matrix.xlsx"
 
 # Prompt contract settings
-USE_PROMPT_CONTRACT = False  # Set to False to use simple prompts without contract structure
+USE_PROMPT_CONTRACT = True  # Set to False to use simple prompts without contract structure
 
 # Experiment templates (prompts)
 EXPERIMENT_TEMPLATES = [

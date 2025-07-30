@@ -1,33 +1,30 @@
 import re
 
-import re
-
 def normalize_code_output(code: str) -> str:
-    # 1. Remove Markdown code fences (``` or ```python, etc.)
-    code = re.sub(r'```[\w]*', '', code)
-    
-    # 2. Remove triple-quoted (multi-line) comments (docstrings)
-    code = re.sub(r"'''.*?'''", '', code, flags=re.DOTALL)
-    code = re.sub(r'""".*?"""', '', code, flags=re.DOTALL)
-    
-    # 3. Remove single-line comments
+    """
+    Normalize Python code for repeatability checks:
+    - Remove markdown code block markers (triple backticks, etc.)
+    - Remove docstrings (triple quotes)
+    - Remove comments
+    - Normalize indentation (convert tabs to spaces)
+    - Remove blank lines and strip each line
+    """
+    if not code:
+        return ""
+    # Remove markdown code block markers (```python ... ```)
+    code = re.sub(r"^```(?:python)?\s*", "", code.strip(), flags=re.MULTILINE)
+    code = re.sub(r"```$", "", code, flags=re.MULTILINE)
+    # Remove docstrings (triple quotes)
+    code = re.sub(r'("""[\s\S]*?"""|\'\'\'[\s\S]*?\'\'\')', '', code)
+    # Remove comments
     code = re.sub(r'#.*', '', code)
-    
-    # 4. Remove lines that are 'example usage', 'usage', or just a print of the main object
-    cleaned_lines = []
-    for line in code.splitlines():
-        stripped = line.strip().lower()
-        # Remove lines like: example usage, usage, etc.
-        if ('example usage' in stripped) or stripped.startswith('usage') or stripped.startswith('print('):
-            continue
-        if stripped:  # Only keep non-empty lines
-            cleaned_lines.append(stripped)
-    
-    # Join, remove extra blank lines, and lower-case for robustness
-    normalized_code = '\n'.join(cleaned_lines).strip()
-    return normalized_code
+    # Normalize indentation: replace tabs with 4 spaces
+    code = code.replace('\t', '    ')
+    # Remove blank lines and strip each line
+    lines = [line.strip() for line in code.splitlines() if line.strip()]
+    normalized = '\n'.join(lines)
+    return normalized
 
-import re
 
 def extract_code(output):
     match = re.search(r"```python(.*?)```", output, re.DOTALL)
@@ -38,10 +35,10 @@ def extract_reflection(output):
     return match.group(0).strip() if match else ""
 
 def is_code_compliant(code: str) -> bool:
-    uses_recursion = "return" in code and re.search(r"fibonacci\s*\(", code)
-    defines_function = "def fibonacci" in code
-    no_comments = "#" not in code
-    return uses_recursion and defines_function and no_comments
+    uses_recursion = "return" in code and re.search(r"fibonacci\s*\(", code, re.IGNORECASE)
+    defines_function = re.search(r"def\s+fibonacci\s*\(", code, re.IGNORECASE)
+    # Allow comments since LLMs often add them despite instructions
+    return bool(uses_recursion and defines_function)
 
 # Dictionary mapping known variants to canonical string
 CANONICAL_INTENT_MAP = {

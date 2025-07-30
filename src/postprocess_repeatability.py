@@ -1,6 +1,7 @@
 import pandas as pd
 from collections import Counter
 from config import RESULTS_FILE, NUM_RUNS
+from normalize import normalize_code_output
 import time
 import os
 import sys
@@ -27,8 +28,12 @@ def compute_repeatability():
     print("[DEBUG] Results file loaded.")
     summary = []
     repeatability_map = {}
+
+    # We'll recompute normalized_output from raw_output for each row
+    df['fresh_normalized_output'] = df['raw_output'].apply(normalize_code_output)
+
     for prompt, group in df.groupby('prompt'):
-        outputs = group['normalized_output'].tolist()
+        outputs = group['fresh_normalized_output'].tolist()
         count = Counter(outputs)
         most_common_count = count.most_common(1)[0][1] if count else 0
         repeatability_score = most_common_count / len(outputs) if outputs else 0
@@ -48,6 +53,5 @@ def compute_repeatability():
     print("[DEBUG] Done. Repeatability metrics updated.")
 
 # This block checks if the script is being run directly (not imported as a module).
-# If so, it calls the compute_repeatability() function to process the results and compute repeatability statistics.
 if __name__ == "__main__":
-    compute_repeatability() 
+    compute_repeatability()
