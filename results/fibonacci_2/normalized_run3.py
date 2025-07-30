@@ -7,4 +7,5 @@ def fibonacci_2(n):
         return [0, 1]
     else:
         fib = fibonacci_2(n - 1)
+        fib.append(fib[-1] + fib[-2])
         return fib

@@ -4,7 +4,7 @@ from contract import PromptContract
 from llm import call_llm
 from compliance_checker import check_compliance
 from prompt_builder import build_prompt_from_contract
-from normalizer import normalize_code
+from smart_normalizer import smart_normalize_code
 import log
 from config import NUM_RUNS, CONTRACTS_DIR
 from contract_generator import generate_contracts_from_prompts
@@ -88,15 +88,21 @@ def run_experiments_with_repeatability():
             log.save_compliance(contract, run, compliance, "raw")
 
             if not all(compliance.values()):
-                normalized_code, corrections = normalize_code(raw_output, contract)
-                compliance_norm = check_compliance(normalized_code, contract)
+                # Use smart normalization with rescue capability
+                normalized_code, corrections, status = smart_normalize_code(raw_output, contract, run)
+                
+                # Log the normalization/rescue attempt
                 log.save_normalized(contract, run, normalized_code, corrections)
-                log.save_compliance(contract, run, compliance_norm, "normalized")
-                if all(compliance_norm.values()):
+                
+                # Check final compliance
+                compliance_final = check_compliance(normalized_code, contract)
+                log.save_compliance(contract, run, compliance_final, status)
+                
+                if all(compliance_final.values()):
                     final_code = normalized_code
-                    status = "normalized"
+                    # status is already set by smart_normalize_code ('normalized' or 'rescued')
                 else:
-                    final_code = None
+                    final_code = normalized_code  # Keep the best attempt even if failed
                     status = "failed"
             else:
                 final_code = raw_output

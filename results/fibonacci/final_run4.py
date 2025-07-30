@@ -6,5 +6,5 @@ def fibonacci(n):
     elif n == 2:
         return [0, 1]
     else:
-        fib_list = fibonacci(n - 1)
-        return fib_list
+        fib = fibonacci(n - 1)
+        return fib

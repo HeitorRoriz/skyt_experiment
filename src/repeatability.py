@@ -22,6 +22,25 @@ def normalize_code_for_comparison(code):
     
     return '\n'.join(normalized_lines)
 
+def load_run_statuses(contract_name):
+    """Load the status of each run (raw, normalized, rescued, failed)"""
+    contract_dir = os.path.join(RESULTS_DIR, contract_name)
+    if not os.path.exists(contract_dir):
+        return []
+    
+    statuses = []
+    for filename in os.listdir(contract_dir):
+        if filename.startswith("final_status_run") and filename.endswith(".txt"):
+            filepath = os.path.join(contract_dir, filename)
+            try:
+                with open(filepath, 'r', encoding='utf-8') as f:
+                    status = f.read().strip()
+                    statuses.append(status)
+            except Exception:
+                statuses.append("unknown")
+    
+    return statuses
+
 def load_experiment_outputs(contract_name):
     """Load all final outputs for a specific contract from results directory"""
     outputs = []
@@ -33,13 +52,15 @@ def load_experiment_outputs(contract_name):
         return outputs
     
     # Find all final_run*.py files for this contract
+    # These represent the final working code (raw, normalized, or rescued)
     for filename in os.listdir(contract_dir):
         if filename.startswith("final_run") and filename.endswith(".py"):
             filepath = os.path.join(contract_dir, filename)
             try:
                 with open(filepath, 'r', encoding='utf-8') as f:
                     content = f.read().strip()
-                    outputs.append(content)
+                    if content:  # Only include non-empty outputs
+                        outputs.append(content)
             except Exception as e:
                 print(f"Warning: Could not read {filepath}: {e}")
     
@@ -195,8 +216,9 @@ def export_repeatability_to_excel(scores, output_file="outputs/repeatability_det
             contract_dict = contract.to_dict()
             contract_details = json.dumps(contract_dict, indent=2)
         
-        # Load all outputs for this contract
+        # Load all outputs and statuses for this contract
         outputs = load_experiment_outputs(contract_name)
+        statuses = load_run_statuses(contract_name)
         
         # Normalize outputs for comparison
         normalized_outputs = [normalize_code_for_comparison(output) for output in outputs]
@@ -209,14 +231,25 @@ def export_repeatability_to_excel(scores, output_file="outputs/repeatability_det
         # Get the most common output count
         max_count = max(output_counts.values()) if output_counts else 0
         
+        # Calculate status statistics
+        status_counts = defaultdict(int)
+        for status in statuses:
+            status_counts[status] += 1
+        
         # Prepare code columns (up to 10 runs)
         code_columns = {}
+        status_columns = {}
         for i, output in enumerate(outputs[:10]):  # Limit to 10 runs for Excel readability
             code_columns[f'Code_Run_{i+1}'] = output
+            status_columns[f'Status_Run_{i+1}'] = statuses[i] if i < len(statuses) else "unknown"
         
         # Fill empty columns if fewer than 10 runs
         for i in range(len(outputs), 10):
             code_columns[f'Code_Run_{i+1}'] = ""
+            status_columns[f'Status_Run_{i+1}'] = ""
+        
+        # Create status summary
+        status_summary = f"Raw: {status_counts.get('raw', 0)}, Normalized: {status_counts.get('normalized', 0)}, Rescued: {status_counts.get('rescued', 0)}, Failed: {status_counts.get('failed', 0)}"
         
         # Create row data
         row_data = {
@@ -227,7 +260,10 @@ def export_repeatability_to_excel(scores, output_file="outputs/repeatability_det
             'Similar_Code_Count': max_count,
             'Repeatability_Score': score_info['score'],
             'Score_Description': score_info['description'],
-            **code_columns
+            'Status_Summary': status_summary,
+            'Rescued_Count': status_counts.get('rescued', 0),
+            **code_columns,
+            **status_columns
         }
         
         detailed_data.append(row_data)
@@ -238,8 +274,9 @@ def export_repeatability_to_excel(scores, output_file="outputs/repeatability_det
     # Reorder columns for better readability
     column_order = [
         'Contract_Name', 'Original_Prompt', 'Contract_Details',
-        'Total_Runs', 'Similar_Code_Count', 'Repeatability_Score', 'Score_Description'
-    ] + [f'Code_Run_{i+1}' for i in range(10)]
+        'Total_Runs', 'Similar_Code_Count', 'Repeatability_Score', 'Score_Description',
+        'Status_Summary', 'Rescued_Count'
+    ] + [f'Code_Run_{i+1}' for i in range(10)] + [f'Status_Run_{i+1}' for i in range(10)]
     
     df = df.reindex(columns=column_order)
     

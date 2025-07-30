@@ -1,7 +1,11 @@
-```python
-def fibonacci_4():
-    fib_list = [0, 1]
-    while len(fib_list) < 4:
-        fib_list.append(fib_list[-1] + fib_list[-2])
-    return fib_list
-```
+def fibonacci_4(n):
+    if n <= 0:
+        return []
+    elif n == 1:
+        return [0]
+    elif n == 2:
+        return [0, 1]
+    fib = [0, 1]
+    for i in range(2, n):
+        fib.append(fib[i-1] + fib[i-2])
+    return fib
