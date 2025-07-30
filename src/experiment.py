@@ -1,6 +1,7 @@
 import time
 from config import MAX_ATTEMPTS, DELAY_SECONDS, USE_PROMPT_CONTRACT
-from dev_intent_extract import get_prompt_contract, generate_prompt_contract
+from intent_extract import extract_dev_intent, extract_user_intent
+from contract import create_prompt_contract, build_llm_prompt_for_code
 from llm import call_llm, call_llm_simple
 from normalize import extract_code, extract_reflection, is_code_compliant, normalize_code_output
 from log import log_results, log_experiment_result
@@ -18,20 +19,27 @@ def run_experiment(task, run_id):
     for attempt in range(1, MAX_ATTEMPTS + 1):
         if USE_PROMPT_CONTRACT:
             # Use prompt contract mode
-            contract = get_prompt_contract(task)
-            raw_output = call_llm(contract)
-            # Generate normalized intents for printing
-            contract_log = generate_prompt_contract(
-                {
-                    **task,
-                    "run_id": run_id
-                },
-                normalize_code_output(extract_code(raw_output)),
-                raw_output,
-                compute_output_delta(raw_output, normalize_code_output(extract_code(raw_output)))
-            )
-            normalized_dev_intent = contract_log.get("normalized_developer_intent", None)
-            normalized_user_intent = contract_log.get("normalized_user_intent", None)
+            dev_intent = extract_dev_intent(task["prompt"])
+            user_intent = extract_user_intent(task["prompt"])
+            
+            # Create contract structure for LLM
+            contract_data = {
+                "developer_intent": dev_intent,
+                "user_intent": {"goal": user_intent}
+            }
+            
+            # Build prompt using contract structure
+            system_message = "You are a professional software engineer. Generate code that fulfills the following contract."
+            user_prompt = build_llm_prompt_for_code(contract_data)
+            
+            # Call LLM with contract structure
+            raw_output = call_llm({
+                "system_message": system_message,
+                "user_prompt": user_prompt
+            })
+            
+            normalized_dev_intent = dev_intent.get("goal", "")
+            normalized_user_intent = user_intent
         else:
             # Use simple prompt mode
             raw_output = call_llm_simple(task["prompt"])
@@ -58,14 +66,19 @@ def run_experiment(task, run_id):
     
     if USE_PROMPT_CONTRACT:
         # Generate final contract log for results
-        contract_log = generate_prompt_contract(
-            {
-                **task,
-                "run_id": run_id
-            },
-            normalized_output,
-            raw_output,
-            delta
+        dev_intent = extract_dev_intent(task["prompt"])
+        user_intent = extract_user_intent(task["prompt"])
+        
+        contract_log = create_prompt_contract(
+            prompt=task["prompt"],
+            dev_intent=dev_intent,
+            user_intent={"goal": user_intent},
+            model=task.get("model", "gpt-3.5-turbo"),
+            temperature=task.get("temperature", 0.7),
+            run_id=run_id,
+            raw_output=raw_output,
+            normalized_output=normalized_output,
+            delta=delta
         )
         log_results(contract_log)
     else:

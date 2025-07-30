@@ -8,7 +8,7 @@ MODEL = "gpt-3.5-turbo"
 TEMPERATURE = 0.7  # Change here to experiment with different temperatures
 
 # Experiment settings
-NUM_RUNS = 20
+NUM_RUNS = 5
 MAX_ATTEMPTS = 3
 DELAY_SECONDS = 2
 

@@ -1,6 +1,6 @@
 from experiment import run_experiment
 from config import EXPERIMENT_TEMPLATES, NUM_RUNS, MODEL, TEMPERATURE, USE_PROMPT_CONTRACT
-from user_intent_extract import extract_intent
+from intent_extract import extract_user_intent
 
 if __name__ == "__main__":
     for idx, template in enumerate(EXPERIMENT_TEMPLATES):
@@ -15,7 +15,7 @@ if __name__ == "__main__":
         # Add contract-specific fields only if using prompt contracts
         if USE_PROMPT_CONTRACT:
             task.update({
-                "intent": extract_intent(template["prompt"]),
+                "intent": extract_user_intent(template["prompt"]),
                 "constraints": ["Use recursion", "No comments", "No explanation", "First 20 Fibonacci numbers"],
                 "language": "Python",
                 "function_name": "fibonacci",
