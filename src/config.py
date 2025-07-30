@@ -11,7 +11,7 @@ RESULTS_DIR = "results"
 
 # Model and temperature settings
 MODEL = "gpt-3.5-turbo"
-TEMPERATURE = 0.7  # Change here to experiment with different temperatures
+TEMPERATURE = 0.5  # Change here to experiment with different temperatures
 
 # Experiment settings
 NUM_RUNS = 5

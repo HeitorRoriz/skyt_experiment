@@ -1,7 +1,7 @@
 ```python
 def fibonacci_4():
-    sequence = [0, 1]
-    while len(sequence) < 4:
-        sequence.append(sequence[-1] + sequence[-2])
-    return sequence
+    fib_list = [0, 1]
+    for i in range(2, 4):
+        fib_list.append(fib_list[i-1] + fib_list[i-2])
+    return fib_list
 ```

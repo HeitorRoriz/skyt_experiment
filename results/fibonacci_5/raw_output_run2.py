@@ -1,13 +1,11 @@
 ```python
 def fibonacci_5(n):
     if n <= 1:
-        return n
+        return [0] if n == 0 else [0, 1]
     else:
-        return fibonacci_5(n-1) + fibonacci_5(n-2)
+        fib_list = fibonacci_5(n - 1)
+        fib_list.append(fib_list[-1] + fib_list[-2])
+        return fib_list
 
-def fibonacci_5_list():
-    fib_list = []
-    for i in range(5):
-        fib_list.append(fibonacci_5(i))
-    return fib_list
+print(fibonacci_5(5))
 ```
