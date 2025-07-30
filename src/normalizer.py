@@ -58,4 +58,18 @@ def normalize_code(code_str, contract: PromptContract):
             code_str = remove_comments(code_str)
             corrections.append("Removed comments")
     # Strip explanations
-    if "No ex
+    if "No explanation" in [c.lower().capitalize() for c in contract.constraints] or contract.output_format == "code only":
+        if not check_code_only(code_str):
+            code_str = strip_non_code(code_str)
+            corrections.append("Removed non-code/explanation text")
+    # Output type
+    if not check_output_type(code_str, contract.output_type):
+        code_str = enforce_output_type(code_str, contract.output_type)
+        corrections.append(f"Attempted to enforce output type '{contract.output_type}'")
+    # Add more normalization steps as your contract evolves
+    return code_str, corrections
+
+# Import compliance checks
+from compliance_checker import (
+    check_function_name, check_no_comments, check_code_only, check_output_type
+)
