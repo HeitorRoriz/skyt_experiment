@@ -202,6 +202,7 @@ def export_repeatability_to_excel(scores, output_file="outputs/repeatability_det
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     
     detailed_data = []
+    max_runs = 0  # Track maximum number of runs across all contracts
     
     for contract_name, score_info in scores.items():
         # Load contract details
@@ -220,6 +221,9 @@ def export_repeatability_to_excel(scores, output_file="outputs/repeatability_det
         outputs = load_experiment_outputs(contract_name)
         statuses = load_run_statuses(contract_name)
         
+        # Track maximum runs for dynamic column creation
+        max_runs = max(max_runs, len(outputs))
+        
         # Normalize outputs for comparison
         normalized_outputs = [normalize_code_for_comparison(output) for output in outputs]
         
@@ -236,17 +240,12 @@ def export_repeatability_to_excel(scores, output_file="outputs/repeatability_det
         for status in statuses:
             status_counts[status] += 1
         
-        # Prepare code columns (up to 10 runs)
+        # Prepare code and status columns dynamically
         code_columns = {}
         status_columns = {}
-        for i, output in enumerate(outputs[:10]):  # Limit to 10 runs for Excel readability
+        for i, output in enumerate(outputs):
             code_columns[f'Code_Run_{i+1}'] = output
             status_columns[f'Status_Run_{i+1}'] = statuses[i] if i < len(statuses) else "unknown"
-        
-        # Fill empty columns if fewer than 10 runs
-        for i in range(len(outputs), 10):
-            code_columns[f'Code_Run_{i+1}'] = ""
-            status_columns[f'Status_Run_{i+1}'] = ""
         
         # Create status summary
         status_summary = f"Raw: {status_counts.get('raw', 0)}, Normalized: {status_counts.get('normalized', 0)}, Rescued: {status_counts.get('rescued', 0)}, Failed: {status_counts.get('failed', 0)}"
@@ -271,14 +270,22 @@ def export_repeatability_to_excel(scores, output_file="outputs/repeatability_det
     # Create DataFrame and export to Excel
     df = pd.DataFrame(detailed_data)
     
-    # Reorder columns for better readability
-    column_order = [
+    # Build dynamic column order based on actual number of runs
+    base_columns = [
         'Contract_Name', 'Original_Prompt', 'Contract_Details',
         'Total_Runs', 'Similar_Code_Count', 'Repeatability_Score', 'Score_Description',
         'Status_Summary', 'Rescued_Count'
-    ] + [f'Code_Run_{i+1}' for i in range(10)] + [f'Status_Run_{i+1}' for i in range(10)]
+    ]
     
-    df = df.reindex(columns=column_order)
+    # Add code and status columns only for actual runs
+    code_columns = [f'Code_Run_{i+1}' for i in range(max_runs)]
+    status_columns = [f'Status_Run_{i+1}' for i in range(max_runs)]
+    
+    column_order = base_columns + code_columns + status_columns
+    
+    # Only include columns that actually exist in the data
+    existing_columns = [col for col in column_order if col in df.columns]
+    df = df.reindex(columns=existing_columns)
     
     # Export to Excel with formatting
     with pd.ExcelWriter(output_file, engine='openpyxl') as writer:
@@ -296,10 +303,13 @@ def export_repeatability_to_excel(scores, output_file="outputs/repeatability_det
         worksheet.column_dimensions['E'].width = 20  # Similar_Code_Count
         worksheet.column_dimensions['F'].width = 20  # Repeatability_Score
         worksheet.column_dimensions['G'].width = 30  # Score_Description
+        worksheet.column_dimensions['H'].width = 30  # Status_Summary
+        worksheet.column_dimensions['I'].width = 15  # Rescued_Count
         
-        # Adjust code column widths
-        for i in range(10):
-            col_letter = chr(ord('H') + i)  # H, I, J, K, L, M, N, O, P, Q
+        # Adjust code and status column widths dynamically
+        start_col = ord('J')  # Start after the base columns
+        for i in range(max_runs * 2):  # max_runs for code + max_runs for status
+            col_letter = chr(start_col + i)
             worksheet.column_dimensions[col_letter].width = 25
     
     print(f"Detailed repeatability report exported to Excel: {output_file}")

@@ -80,6 +80,25 @@ class CodeRescuer:
         except Exception:
             return {}
     
+    def get_first_successful_template(self, contract_name: str) -> Optional[str]:
+        """Get the first successful output from the first run as the template"""
+        contract_dir = os.path.join(RESULTS_DIR, contract_name)
+        if not os.path.exists(contract_dir):
+            return None
+        
+        # Look for the first successful final output (final_run1.py)
+        first_run_file = os.path.join(contract_dir, "final_run1.py")
+        if os.path.exists(first_run_file):
+            try:
+                with open(first_run_file, 'r', encoding='utf-8') as f:
+                    content = f.read().strip()
+                    if content and len(content) > 10:  # Basic sanity check
+                        return content
+            except Exception:
+                pass
+        
+        return None
+
     def generate_fibonacci_template(self, contract: PromptContract, successful_codes: List[str]) -> str:
         """Generate a working Fibonacci function template based on successful patterns"""
         
@@ -125,9 +144,6 @@ class CodeRescuer:
         corrections = []
         rescued_code = broken_code
         
-        # Load successful patterns for this contract type
-        successful_codes = self.load_successful_runs(contract.function_name)
-        
         # Step 1: Try basic fixes first
         rescued_code, basic_corrections = self.apply_basic_fixes(rescued_code, contract)
         corrections.extend(basic_corrections)
@@ -137,19 +153,17 @@ class CodeRescuer:
         if all(compliance.values()):
             return rescued_code, corrections
         
-        # Step 3: If still broken, try template-based rescue
-        if not successful_codes:
-            # No successful patterns available, generate from scratch
-            template = self.generate_fibonacci_template(contract, [])
-            corrections.append("Generated new template (no successful patterns available)")
-        else:
-            # Use successful pattern as template
-            template = successful_codes[0]  # Use most recent successful pattern
-            corrections.append(f"Used successful pattern as template")
+        # Step 3: If still broken, use the first successful run as template
+        template = self.get_first_successful_template(contract.function_name)
         
-        # Step 4: Adapt template to match contract requirements
-        final_code = self.adapt_template(template, contract)
-        corrections.append("Adapted template to match contract requirements")
+        if template:
+            # Use the first successful output as the consistent template
+            final_code = self.adapt_template(template, contract)
+            corrections.append("Used first successful run as template for rescue")
+        else:
+            # Fallback: generate a basic template if no successful runs exist yet
+            final_code = self.generate_fibonacci_template(contract, [])
+            corrections.append("Generated fallback template (no successful runs available)")
         
         return final_code, corrections
     
@@ -225,7 +239,15 @@ def smart_normalize_code(code_str: str, contract: PromptContract, run_number: in
     # First check if code is already compliant
     compliance = check_compliance(code_str, contract)
     if all(compliance.values()):
-        return code_str, [], 'raw'
+        # Even if compliant, use first-run template for consistency if available
+        rescuer = CodeRescuer()
+        template = rescuer.get_first_successful_template(contract.function_name)
+        
+        if template and run_number > 0:  # Use template for runs 2+ to ensure consistency
+            adapted_code = rescuer.adapt_template(template, contract)
+            return adapted_code, ["Used first-run template for consistency"], 'raw'
+        else:
+            return code_str, [], 'raw'
     
     # Try basic normalization first
     rescuer = CodeRescuer()
@@ -234,7 +256,14 @@ def smart_normalize_code(code_str: str, contract: PromptContract, run_number: in
     # Check compliance after basic fixes
     compliance = check_compliance(normalized_code, contract)
     if all(compliance.values()):
-        return normalized_code, corrections, 'normalized'
+        # Even if normalized successfully, use first-run template for consistency
+        template = rescuer.get_first_successful_template(contract.function_name)
+        
+        if template and run_number > 0:  # Use template for runs 2+ to ensure consistency
+            adapted_code = rescuer.adapt_template(template, contract)
+            return adapted_code, corrections + ["Used first-run template for consistency"], 'normalized'
+        else:
+            return normalized_code, corrections, 'normalized'
     
     # If still not compliant, attempt rescue
     rescued_code, rescue_corrections = rescuer.rescue_code(code_str, contract)

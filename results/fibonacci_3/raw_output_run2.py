@@ -1,7 +1,9 @@
 ```python
 def fibonacci_3(n):
-    fibonacci_list = [0, 1, 1]
-    for i in range(3, n):
-        fibonacci_list.append(fibonacci_list[i-1] + fibonacci_list[i-2])
-    return fibonacci_list[:n]
+    fib_list = []
+    a, b = 0, 1
+    for _ in range(n):
+        fib_list.append(a)
+        a, b = b, a + b
+    return fib_list
 ```

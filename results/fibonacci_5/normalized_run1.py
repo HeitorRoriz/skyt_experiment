@@ -1,10 +1,11 @@
 def fibonacci_5(n):
-    if n <= 1:
+    if n <= 0:
+        return []
+    elif n == 1:
+        return [0]
+    elif n == 2:
         return [0, 1]
     else:
-        fib_list = fibonacci_5(n - 1)
-        fib_list.append(fib_list[-1] + fib_list[-2])
-        return fib_list
-
-result = fibonacci_5(5)
-print(result)
+        fib = fibonacci_5(n-1)
+        fib.append(fib[-1] + fib[-2])
+        return fib
