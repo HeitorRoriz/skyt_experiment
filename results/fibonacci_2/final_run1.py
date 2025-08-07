@@ -6,5 +6,6 @@ def fibonacci_2(n):
     elif n == 2:
         return [0, 1]
     else:
-        prev = fibonacci_2(n-1)
-        return prev + [prev[-1] + prev[-2]]
+        fib = fibonacci_2(n - 1)
+        fib.append(fib[-1] + fib[-2])
+        return fib

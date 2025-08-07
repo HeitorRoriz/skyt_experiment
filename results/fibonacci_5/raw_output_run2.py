@@ -1,11 +1,10 @@
 ```python
-def fibonacci_5(i):
-    if i in (0, 1):
-        return i
-    return fibonacci_5(i-1) + fibonacci_5(i-2)
+def fibonacci_5(n):
+    if n <= 1:
+        return n
+    else:
+        return fibonacci_5(n-1) + fibonacci_5(n-2)
 
-def fibonacci_lst(num_range):
-    return [fibonacci_5(i) for i in range(num_range)]
-    
-print(fibonacci_lst(5))
+def fibonacci_5_list():
+    return [fibonacci_5(i) for i in range(5)]
 ```
