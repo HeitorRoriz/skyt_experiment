@@ -20,6 +20,10 @@ class PromptContract:
     test_cases: Optional[List[Dict[str, Any]]] = None        # [{"input": {...}, "expected_output": ...}]
     docstring_required: Optional[bool] = None
     safety_critical: Optional[bool] = None
+    determinism: Optional[str] = None
+    canonicalization_policy: Optional[str] = None
+    environment_pin: Optional[str] = None
+    decoder_pin: Optional[str] = None
     extra_fields: Dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self):
@@ -36,7 +40,8 @@ class PromptContract:
             "function_name", "language", "output_type", "constraints", "output_format",
             "required_logic", "variables", "method_signature", "allowed_libraries",
             "disallowed_libraries", "hardware_constraints", "test_cases",
-            "docstring_required", "safety_critical"
+            "docstring_required", "safety_critical", "determinism", "canonicalization_policy",
+            "environment_pin", "decoder_pin"
         }
         known = {k: d.get(k) for k in keys if k in d}
         extra = {k: v for k, v in d.items() if k not in keys}
