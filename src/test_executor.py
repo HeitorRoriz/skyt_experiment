@@ -88,13 +88,19 @@ class TestExecutor:
         result["processing_steps"] = self._get_processing_steps(config)
         return result
     
-    def run_full_experiment(self, num_runs: int = 5) -> Dict[str, Any]:
+    def run_full_experiment(self, num_runs: int = 5, selected_families: List[str] = None) -> Dict[str, Any]:
         """Run complete A/B/C ablation experiment"""
+        
+        # Get all prompts, optionally filtered by family
+        all_prompts = self.prompt_generator.get_all_prompts()
+        if selected_families:
+            all_prompts = [p for p in all_prompts if p.family in selected_families]
         
         results = {
             "experiment_config": {
                 "num_runs": num_runs,
-                "total_tests": len(self.prompt_generator.get_all_prompts()) * 3 * num_runs  # 10 prompts × 3 modes × N runs
+                "selected_families": selected_families or "all",
+                "total_tests": len(all_prompts) * 3 * num_runs  # N prompts × 3 modes × N runs
             },
             "results": []
         }
@@ -107,7 +113,7 @@ class TestExecutor:
         )
         
         # Test each prompt across all modes
-        for prompt in self.prompt_generator.get_all_prompts():
+        for prompt in all_prompts:
             for mode_config in [
                 TestConfiguration.create_mode_a(env_config),
                 TestConfiguration.create_mode_b(env_config), 

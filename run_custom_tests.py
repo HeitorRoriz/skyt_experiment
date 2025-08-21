@@ -28,8 +28,10 @@ def main():
     
     print("🧪 Starting A/B/C ablation study...")
     
-    # Run experiment with 5 runs per prompt/mode combination
-    results = executor.run_full_experiment(num_runs=5)
+    # Run experiment with 2 runs per prompt/mode combination
+    # To test just one algorithm family, use: selected_families=["merge_sort"]
+    # results = executor.run_full_experiment(num_runs=2)
+    results = executor.run_full_experiment(num_runs=2, selected_families=["merge_sort"])
     
     print("✅ Experiment completed!")
     print(f"📁 Results saved in: test_results/ablation_study_results.json")
