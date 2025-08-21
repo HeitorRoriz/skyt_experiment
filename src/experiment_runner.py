@@ -9,6 +9,7 @@ from test_config import TestConfiguration, TestMode, EnvironmentConfig
 from test_prompts import TestPromptGenerator, AlgorithmPrompt
 from test_executor import TestExecutor
 from llm_client import LLMClient
+from enhanced_repeatability import calculate_enhanced_repeatability, print_repeatability_report
 
 class ExperimentRunner:
     """Orchestrate A/B/C ablation experiments"""
@@ -72,45 +73,21 @@ class ExperimentRunner:
                         canonical_reference = result['canonical_reference']
                 
                 # Calculate repeatability for this mode
-                repeatability = self._calculate_repeatability(mode_results)
-                print(f"\n      Mode {mode_config.mode.value} Results: {repeatability:.2f} repeatability ({num_runs} runs)")
+                repeatability = calculate_enhanced_repeatability(mode_results)
+                print_repeatability_report(repeatability)
+                print(f"\n      Mode {mode_config.mode.value} Results: {repeatability['score']:.2f} repeatability ({num_runs} runs)")
                 
                 results["results"].append({
                     "family": prompt.family,
                     "variant": prompt.variant,
                     "mode": mode_config.mode.value,
                     "runs": mode_results,
-                    "repeatability_score": repeatability
+                    "repeatability_score": repeatability['score']
                 })
         
         # Save results
         self._save_experiment_results(results)
         return results
-    
-    def _calculate_repeatability(self, results: List[Dict[str, Any]]) -> float:
-        """Calculate repeatability score for a set of results"""
-        if len(results) < 2:
-            return 1.0
-        
-        final_outputs = [r["final_output"] for r in results]
-        
-        # Normalize outputs for comparison
-        normalized_outputs = []
-        for output in final_outputs:
-            # Remove whitespace and comments for comparison
-            normalized = output.strip().replace(" ", "").replace("\n", "")
-            normalized_outputs.append(normalized)
-        
-        # Count identical outputs
-        unique_outputs = set(normalized_outputs)
-        if len(unique_outputs) == 1:
-            return 1.0
-        
-        # Find most common output
-        counter = Counter(normalized_outputs)
-        most_common_count = counter.most_common(1)[0][1]
-        
-        return most_common_count / len(results)
     
     def _save_experiment_results(self, results: Dict[str, Any]):
         """Save complete experiment results"""
