@@ -245,15 +245,24 @@ class CanonicalRepairSystem:
         
         return in_single or in_double
 
-def smart_normalize_code(code_str: str, contract: PromptContract, run_number: int = 0) -> Tuple[str, List[str], str]:
+def smart_normalize_code(code_str: str, contract: PromptContract, run_number: int = 0, 
+                        enable_cache: bool = True) -> Tuple[str, List[str], str]:
     """
     New canonicalization-based normalization (replaces template replay)
     Returns (normalized_code, corrections, status)
     Status can be: 'raw', 'normalized', 'repaired', 'failed'
+    
+    Args:
+        enable_cache: If False, disables cache/replay for Mode B testing
     """
     
     # Use the new canonical repair system instead of template replay
     repair_system = CanonicalRepairSystem()
+    
+    # Pass cache control to repair system
+    if hasattr(repair_system, 'set_cache_enabled'):
+        repair_system.set_cache_enabled(enable_cache)
+    
     return repair_system.repair_code(code_str, contract)
 
 # Backward compatibility function
