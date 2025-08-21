@@ -36,20 +36,20 @@ class CanonicalRepairSystem:
             repaired_code = raw_code
         
         # Step 2: Check contract compliance
-        print(f"    📋 Step 1: Checking compliance...")
+        print(f"    Step 1: Checking compliance...")
         try:
             compliance_result = check_compliance(repaired_code, contract)
             if not all(compliance_result.values()):
-                print(f"    ❌ Compliance violations: {compliance_result}")
+                print(f"    Compliance violations: {compliance_result}")
                 repair_steps.append("compliance_violations_detected")
             else:
-                print(f"    ✅ Code is compliant")
+                print(f"    Code is compliant")
         except Exception as e:
-            print(f"    ⚠️ Compliance check failed: {e}")
+            print(f"    Compliance check failed: {e}")
             repair_steps.append(f"compliance_check_failed_{str(e)[:20]}")
 
         # Step 3: Canonicalize the repaired code
-        print(f"    🔄 Step 2: Applying canonicalization...")
+        print(f"    Step 2: Applying canonicalization...")
         try:
             canonicalization_result = canonicalize_code(repaired_code, contract)
             canonical_code = canonicalization_result.canonical_code
@@ -66,7 +66,7 @@ class CanonicalRepairSystem:
                 return canonical_code, repair_steps, 'failed'
                 
         except Exception as e:
-            print(f"    ❌ Canonicalization failed: {e}")
+            print(f"    Canonicalization failed: {e}")
             repair_steps.append(f"canonicalization_failed_{str(e)[:20]}")
             return repaired_code, repair_steps, 'failed'
     
@@ -265,7 +265,7 @@ def smart_normalize_code(code_str: str, contract: PromptContract, run_number: in
         enable_cache: Whether to use caching (deprecated in favor of test config)
     """
     
-    print(f"  🔧 Smart normalizer starting for run {run_number}")
+    print(f"  Smart normalizer starting for run {run_number}")
     corrections = []
     status = "raw"
     

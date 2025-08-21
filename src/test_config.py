@@ -74,14 +74,14 @@ class TestConfiguration:
     
     @classmethod
     def create_mode_b(cls, env: EnvironmentConfig) -> 'TestConfiguration':
-        """Contract-only mode: contract + lint + canonicalization + repair; no cache"""
+        """Contract-only mode: enhanced prompts + contracts only; no repair, canonicalization or cache"""
         return cls(
             mode=TestMode.CONTRACT_ONLY,
             environment=env,
             enable_caching=False,
             enable_contracts=True,
-            enable_canonicalization=True,
-            enable_repair=True,
+            enable_canonicalization=False,
+            enable_repair=False,  # Remove repair to clean ablation study
             enable_replay=False
         )
     

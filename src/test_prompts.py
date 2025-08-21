@@ -158,6 +158,128 @@ class TestPromptGenerator:
             contract = self.create_contract_from_prompt(prompt)
             matrix.append((prompt.family, prompt.variant, prompt, contract))
         return matrix
+    
+    def build_enhanced_prompt(self, prompt: AlgorithmPrompt, contract: 'PromptContract') -> str:
+        """Build enhanced prompt with dual intent capture"""
+        
+        # Base prompt
+        base_text = prompt.prompt_text
+        
+        # Developer Intent Section
+        developer_intent = self._extract_developer_intent(contract)
+        
+        # User Intent Section  
+        user_intent = self._extract_user_intent(contract)
+        
+        # Contract Constraints
+        constraints_text = self._format_constraints(contract)
+        
+        # Build enhanced prompt
+        enhanced_prompt = f"""
+{base_text}
+
+## IMPLEMENTATION GUIDANCE (Developer Intent)
+{developer_intent}
+
+## BEHAVIORAL REQUIREMENTS (User Intent)  
+{user_intent}
+
+## CONTRACT CONSTRAINTS
+{constraints_text}
+
+## OUTPUT REQUIREMENTS
+- Function name: {contract.function_name}
+- Return type: {contract.output_type}
+- Output format: {contract.output_format}
+- Include comprehensive docstring
+- Follow contract specifications exactly
+
+Please implement the function following both the developer's implementation approach and the user's behavioral expectations.
+"""
+        
+        return enhanced_prompt.strip()
+    
+    def _extract_developer_intent(self, contract: 'PromptContract') -> str:
+        """Extract developer implementation intent from contract"""
+        intent_parts = []
+        
+        # Algorithm approach from required_logic
+        if contract.required_logic:
+            logic = contract.required_logic
+            intent_parts.append(f"- Algorithmic approach: {logic}")
+            
+            # Specific implementation hints
+            if "recursive" in logic.lower():
+                intent_parts.append("- Use recursive implementation with clear base case")
+                intent_parts.append("- Ensure tail recursion optimization where possible")
+            elif "iterative" in logic.lower() or "loop" in logic.lower():
+                intent_parts.append("- Use iterative approach with explicit loop structure")
+                intent_parts.append("- Minimize loop complexity and nesting")
+            elif "sort" in logic.lower():
+                intent_parts.append("- Implement efficient sorting algorithm")
+                intent_parts.append("- Handle edge cases (empty, single element)")
+        
+        # Library preferences
+        if contract.allowed_libraries:
+            intent_parts.append(f"- Preferred libraries: {', '.join(contract.allowed_libraries)}")
+        if contract.disallowed_libraries:
+            intent_parts.append(f"- Avoid libraries: {', '.join(contract.disallowed_libraries)}")
+        
+        # Code style preferences
+        if contract.docstring_required:
+            intent_parts.append("- Include comprehensive docstrings")
+        
+        return "\n".join(intent_parts) if intent_parts else "- Follow standard implementation practices"
+    
+    def _extract_user_intent(self, contract: 'PromptContract') -> str:
+        """Extract user behavioral intent from contract"""
+        intent_parts = []
+        
+        # Expected behavior from test cases
+        if contract.test_cases:
+            intent_parts.append("- Expected behavior:")
+            for i, test_case in enumerate(contract.test_cases[:3]):  # Show first 3
+                if 'input' in test_case and 'expected_output' in test_case:
+                    input_val = test_case['input']
+                    expected = test_case['expected_output']
+                    intent_parts.append(f"  * Input {input_val} → Output {expected}")
+        
+        # Performance expectations
+        if contract.hardware_constraints:
+            hw = contract.hardware_constraints
+            if 'max_latency_us' in hw:
+                intent_parts.append(f"- Maximum latency: {hw['max_latency_us']} microseconds")
+            if 'memory_limit' in hw:
+                intent_parts.append(f"- Memory limit: {hw['memory_limit']}")
+        
+        # Safety and reliability
+        if contract.safety_critical:
+            intent_parts.append("- Safety-critical: Handle all edge cases robustly")
+        
+        # Determinism requirements
+        if contract.determinism:
+            intent_parts.append(f"- Determinism: {contract.determinism}")
+        
+        return "\n".join(intent_parts) if intent_parts else "- Provide correct and reliable behavior"
+    
+    def _format_constraints(self, contract: 'PromptContract') -> str:
+        """Format contract constraints for prompt"""
+        constraints = []
+        
+        # Add contract constraints
+        if contract.constraints:
+            constraints.extend([f"- {c}" for c in contract.constraints])
+        
+        # Add method signature if specified
+        if contract.method_signature:
+            constraints.append(f"- Method signature: {contract.method_signature}")
+        
+        # Add variable requirements
+        if contract.variables:
+            var_list = [f"{v['name']} ({v['type']})" for v in contract.variables]
+            constraints.append(f"- Required variables: {', '.join(var_list)}")
+        
+        return "\n".join(constraints) if constraints else "- Follow standard coding practices"
 
 def create_test_prompts() -> TestPromptGenerator:
     """Factory function to create test prompt generator"""

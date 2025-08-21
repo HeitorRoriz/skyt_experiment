@@ -10,7 +10,7 @@ from pathlib import Path
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 
-from test_executor import TestExecutor
+from experiment_runner import ExperimentRunner
 from llm_client import LLMClient
 
 def main():
@@ -23,11 +23,11 @@ def main():
     # Initialize LLM client
     llm_client = LLMClient(api_key, provider="openai")
     
-    # Create test executor
-    executor = TestExecutor(llm_client, output_dir="test_results")
+    # Create experiment runner
+    runner = ExperimentRunner(llm_client, output_dir="test_results")
     
-    print("🧪 Starting A/B/C ablation study...")
-    print(f"📊 Test Configuration:")
+    print("Starting A/B/C ablation study...")
+    print(f"Test Configuration:")
     print(f"   Model: gpt-4")
     print(f"   Temperature: 0.0")
     print(f"   Top-p: None")
@@ -40,8 +40,7 @@ def main():
     
     # Run experiment with 2 runs per prompt/mode combination
     # To test just one algorithm family, use: selected_families=["merge_sort"]
-    # results = executor.run_full_experiment(num_runs=2)
-    results = executor.run_full_experiment(num_runs=2, selected_families=["merge_sort"])
+    results = runner.run_full_experiment(num_runs=2, selected_families=["merge_sort"])
     
     print("✅ Experiment completed!")
     print(f"📁 Results saved in: test_results/ablation_study_results.json")
