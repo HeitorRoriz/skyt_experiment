@@ -33,19 +33,25 @@ class TestExecutor:
         self.prompt_generator = TestPromptGenerator()
     
     def run_single_test(self, prompt: AlgorithmPrompt, config: TestConfiguration, run_id: int) -> Dict[str, Any]:
-        """Execute a single test run with the specified configuration"""
+        """Run a single test with specified configuration"""
         
-        # Step 1: Get raw LLM output
-        raw_output = self._get_llm_output(prompt.prompt_text, config)
+        print(f"\n🧪 Starting Test: {prompt.family}_{prompt.variant} (Mode {config.mode.value}, Run {run_id})")
+        print(f"   📝 Prompt: {prompt.prompt_text[:100]}...")
+        print(f"   ⚙️ Config: temp={config.environment.temperature}, top_p={config.environment.top_p}, top_k={config.environment.top_k}")
+        print(f"   🔧 Capabilities: caching={config.enable_caching}, contracts={config.enable_contracts}, canonicalization={config.enable_canonicalization}")
         
         result = {
             "run_id": run_id,
             "mode": config.mode.value,
             "family": prompt.family,
             "variant": prompt.variant,
-            "raw_output": raw_output,
             "config": config.to_dict()
         }
+        
+        # Step 1: Get raw LLM output
+        raw_output = self._get_llm_output(prompt.prompt_text, config)
+        
+        result["raw_output"] = raw_output
         
         # Mode A: No-contract (raw LLM only)
         if config.mode == TestMode.NO_CONTRACT:
@@ -55,6 +61,19 @@ class TestExecutor:
         
         # Mode B & C: Contract-based processing
         contract = self.prompt_generator.create_contract_from_prompt(prompt)
+        
+        # Step 2: Check cache first (Mode C only)
+        if config.enable_caching:
+            print(f"🔍 Step 2: Checking cache...")
+            cached_result = self._check_cache(prompt, config)
+            if cached_result:
+                print(f"✅ Cache hit! Using cached result")
+                result["final_output"] = cached_result["output"]
+                result["cache_hit"] = True
+                result["processing_steps"] = self._get_processing_steps(config)
+                return result
+            else:
+                print(f"❌ Cache miss, proceeding with processing")
         
         # Step 2: Compliance checking (if contracts enabled)
         if config.enable_contracts:
@@ -67,25 +86,26 @@ class TestExecutor:
                 return result
         
         # Step 3: Smart normalization (includes canonicalization and repair)
+        print(f"🔧 Step 3: Starting smart normalization...")
         final_output, corrections, status = smart_normalize_code(
             raw_output, contract, run_number=run_id
         )
+        
+        print(f"📊 Normalization complete: status={status}, corrections={len(corrections)}")
+        if corrections:
+            print(f"   Corrections applied: {corrections}")
         
         result["final_output"] = final_output
         result["corrections"] = corrections
         result["status"] = status
         
         # Step 4: Cache handling (Mode C only)
-        if config.mode == TestMode.FULL_SKYT and config.enable_replay:
-            cache_result = self._check_cache(prompt, config)
-            if cache_result:
-                result["cache_hit"] = True
-                result["final_output"] = cache_result["output"]
-            else:
-                result["cache_hit"] = False
-                self._save_to_cache(prompt, config, final_output)
+        if config.enable_caching:
+            result["cache_hit"] = False
+            self._save_to_cache(prompt, config, final_output)
         
         result["processing_steps"] = self._get_processing_steps(config)
+        print(f"✅ Test completed: {prompt.family}_{prompt.variant} (Mode {config.mode.value}, Run {run_id})")
         return result
     
     def run_full_experiment(self, num_runs: int = 5, selected_families: List[str] = None) -> Dict[str, Any]:
@@ -114,11 +134,18 @@ class TestExecutor:
         
         # Test each prompt across all modes
         for prompt in all_prompts:
+            print(f"\n📋 Testing Algorithm: {prompt.family} (variant {prompt.variant})")
+            print(f"   Expected function: {prompt.expected_function_name}")
+            print(f"   Expected output: {prompt.expected_output_type}")
+            
             for mode_config in [
                 TestConfiguration.create_mode_a(env_config),
                 TestConfiguration.create_mode_b(env_config), 
                 TestConfiguration.create_mode_c(env_config)
             ]:
+                print(f"\n🔄 Mode {mode_config.mode.value} Configuration:")
+                print(f"   Environment: model={env_config.model_identifier}, temp={env_config.temperature}")
+                print(f"   Capabilities: {[k for k, v in mode_config.to_dict()['capabilities'].items() if v]}")
                 # Run multiple times for repeatability analysis
                 mode_results = []
                 for run in range(num_runs):
@@ -127,6 +154,7 @@ class TestExecutor:
                 
                 # Calculate repeatability for this mode
                 repeatability = self._calculate_repeatability(mode_results)
+                print(f"\n📊 Mode {mode_config.mode.value} Results: {repeatability:.1%} repeatability ({num_runs} runs)")
                 
                 results["results"].append({
                     "family": prompt.family,

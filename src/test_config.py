@@ -87,15 +87,15 @@ class TestConfiguration:
     
     @classmethod
     def create_mode_c(cls, env: EnvironmentConfig) -> 'TestConfiguration':
-        """Full Skyt mode: B + replay/cache"""
+        """Full Skyt mode: canonicalization + repair without cache dependency"""
         return cls(
             mode=TestMode.FULL_SKYT,
             environment=env,
-            enable_caching=True,
+            enable_caching=False,  # Disable cache to test true canonicalization
             enable_contracts=True,
             enable_canonicalization=True,
             enable_repair=True,
-            enable_replay=True
+            enable_replay=False
         )
     
     def to_dict(self) -> Dict[str, Any]:

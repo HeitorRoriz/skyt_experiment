@@ -27,6 +27,16 @@ def main():
     executor = TestExecutor(llm_client, output_dir="test_results")
     
     print("🧪 Starting A/B/C ablation study...")
+    print(f"📊 Test Configuration:")
+    print(f"   Model: gpt-4")
+    print(f"   Temperature: 0.0")
+    print(f"   Top-p: None")
+    print(f"   Top-k: None")
+    print(f"   Seed: 42")
+    print(f"   Selected families: ['merge_sort']")
+    print(f"   Runs per test: 2")
+    print(f"   Total tests: 12 (2 variants × 3 modes × 2 runs)")
+    print("-" * 60)
     
     # Run experiment with 2 runs per prompt/mode combination
     # To test just one algorithm family, use: selected_families=["merge_sort"]

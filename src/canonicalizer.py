@@ -238,7 +238,7 @@ class Canonicalizer:
             test_results = self._run_test_battery(code)
             result_str = str(sorted(test_results))  # Ensure deterministic ordering
             return hashlib.sha256(result_str.encode('utf-8')).hexdigest()[:16]
-        except Exception:
+        except Exception as e:
             # Fallback: use canonical hash if execution fails
             return hashlib.sha256(code.encode('utf-8')).hexdigest()[:16]
     
@@ -333,8 +333,46 @@ class Canonicalizer:
         return in_single or in_double
 
 def canonicalize_code(code: str, contract: PromptContract) -> CanonicalizationResult:
-    """
-    Convenience function to canonicalize code
-    """
-    canonicalizer = Canonicalizer(contract)
-    return canonicalizer.canonicalize(code)
+    """Main canonicalization function"""
+    print(f"      🔄 Canonicalizer: Processing {len(code)} chars of code...")
+    transformations = []
+    canonical_code = code
+    
+    # Apply transformations in order
+    try:
+        # 1. Normalize whitespace
+        print(f"        📝 Normalizing whitespace...")
+        canonical_code = _normalize_whitespace(canonical_code)
+        transformations.append("whitespace_normalized")
+        
+        # 2. Sort imports
+        print(f"        📦 Sorting imports...")
+        canonical_code = _sort_imports(canonical_code)
+        transformations.append("imports_sorted")
+        
+        # 3. Standardize function names if specified
+        if hasattr(contract, 'function_name') and contract.function_name:
+            print(f"        🏷️ Standardizing function name to '{contract.function_name}'...")
+            canonical_code = _standardize_function_name(canonical_code, contract.function_name)
+            transformations.append("function_name_standardized")
+        
+        # 4. Remove comments (optional)
+        print(f"        💬 Removing comments...")
+        canonical_code = _remove_comments(canonical_code)
+        transformations.append("comments_removed")
+        
+    except Exception as e:
+        # Fallback to basic transformations
+        print(f"        ⚠️ Canonicalization error: {e}, applying fallback...")
+        canonical_code = _basic_fallback_canonicalization(code)
+        transformations = ["fallback_applied", f"error_{str(e)[:20]}"]
+    
+    result = CanonicalizationResult(
+        canonical_code=canonical_code,
+        transformations=transformations,
+        hash_canonical=_compute_hash(canonical_code),
+        hash_behavioral=_compute_behavioral_hash(canonical_code)
+    )
+    
+    print(f"      ✅ Canonicalization complete: {len(transformations)} transformations applied")
+    return result

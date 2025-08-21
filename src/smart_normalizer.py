@@ -36,15 +36,20 @@ class CanonicalRepairSystem:
             repaired_code = raw_code
         
         # Step 2: Check contract compliance
-        compliance = check_compliance(repaired_code, contract)
-        if not all(compliance.values()):
-            # Apply targeted compliance repairs
-            repaired_code, compliance_repairs = self._repair_compliance_violations(
-                repaired_code, compliance, contract
-            )
-            repair_steps.extend(compliance_repairs)
-        
+        print(f"    📋 Step 1: Checking compliance...")
+        try:
+            compliance_result = check_compliance(repaired_code, contract)
+            if not all(compliance_result.values()):
+                print(f"    ❌ Compliance violations: {compliance_result}")
+                repair_steps.append("compliance_violations_detected")
+            else:
+                print(f"    ✅ Code is compliant")
+        except Exception as e:
+            print(f"    ⚠️ Compliance check failed: {e}")
+            repair_steps.append(f"compliance_check_failed_{str(e)[:20]}")
+
         # Step 3: Canonicalize the repaired code
+        print(f"    🔄 Step 2: Applying canonicalization...")
         try:
             canonicalization_result = canonicalize_code(repaired_code, contract)
             canonical_code = canonicalization_result.canonical_code
@@ -61,7 +66,8 @@ class CanonicalRepairSystem:
                 return canonical_code, repair_steps, 'failed'
                 
         except Exception as e:
-            repair_steps.append(f"canonicalization_failed_{type(e).__name__}")
+            print(f"    ❌ Canonicalization failed: {e}")
+            repair_steps.append(f"canonicalization_failed_{str(e)[:20]}")
             return repaired_code, repair_steps, 'failed'
     
     def _repair_determinism_violations(self, code: str, violations: List[DeterminismViolation], 
@@ -205,13 +211,13 @@ class CanonicalRepairSystem:
             return re.sub(r'def\s+\w+\s*\(', f'def {required_name}(', code)
     
     def _remove_comments(self, code: str) -> str:
-        """Remove comments from code"""
+        """Remove comments from code while preserving structure"""
         lines = []
         for line in code.split('\n'):
             if '#' in line and not self._is_in_string(line, line.find('#')):
                 line = line[:line.find('#')].rstrip()
-            if line.strip():
-                lines.append(line)
+            # Keep all lines including empty ones to preserve structure
+            lines.append(line)
         return '\n'.join(lines)
     
     def _fix_output_type(self, code: str, required_type: str) -> str:
@@ -253,8 +259,15 @@ def smart_normalize_code(code_str: str, contract: PromptContract, run_number: in
     Status can be: 'raw', 'normalized', 'repaired', 'failed'
     
     Args:
-        enable_cache: If False, disables cache/replay for Mode B testing
+        code_str: Raw LLM output to normalize
+        contract: Contract specifying requirements
+        run_number: Run identifier for logging
+        enable_cache: Whether to use caching (deprecated in favor of test config)
     """
+    
+    print(f"  🔧 Smart normalizer starting for run {run_number}")
+    corrections = []
+    status = "raw"
     
     # Use the new canonical repair system instead of template replay
     repair_system = CanonicalRepairSystem()

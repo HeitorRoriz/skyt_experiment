@@ -144,33 +144,11 @@ class TestPromptGenerator:
         """Convert algorithm prompt to PromptContract for testing"""
         return PromptContract(
             function_name=prompt.expected_function_name,
+            language="python",
             output_type=prompt.expected_output_type,
+            output_format="function",
             required_logic=prompt.required_logic,
-            constraints=prompt.constraints,
-            determinism={
-                "allowed_imports": ["collections", "heapq", "math", "typing"],
-                "forbidden_calls": ["input", "print", "eval", "exec", "random", "time"],
-                "forbidden_imports": ["random", "time", "os", "pathlib", "sys"],
-                "side_effects_policy": "none",
-                "output_ordering_policy": "deterministic"
-            },
-            canonicalization={
-                "normalize_whitespace": True,
-                "sort_imports": True,
-                "remove_docstrings": True,
-                "standardize_quotes": True,
-                "remove_type_hints": False
-            },
-            environment={
-                "python_version_min": "3.8",
-                "required_packages": [],
-                "forbidden_packages": ["numpy", "pandas", "requests"]
-            },
-            decoder_config={
-                "temperature_max": 1.0,
-                "top_p_max": 1.0,
-                "require_seed": False
-            }
+            constraints=prompt.constraints
         )
     
     def get_test_matrix(self) -> List[Tuple[str, str, AlgorithmPrompt, PromptContract]]:
