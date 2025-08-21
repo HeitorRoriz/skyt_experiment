@@ -18,6 +18,7 @@ from canonicalizer import canonicalize_code
 from smart_normalizer import smart_normalize_code
 from log import save_final, save_raw_output
 from prompt_enhancer import enhance_prompt
+from acceptance_test_runner import run_acceptance_tests, AcceptanceTestReport
 
 class TestExecutor:
     """Execute individual test runs with proper mode handling"""
@@ -125,12 +126,24 @@ class TestExecutor:
         result["corrections"] = corrections
         result["status"] = status
         
-        # Step 7: Cache handling (Mode C only)
+        # Step 6: Run acceptance tests for correctness validation
+        acceptance_report = None
+        if hasattr(contract, 'acceptance_tests') and contract.acceptance_tests:
+            try:
+                acceptance_report = run_acceptance_tests(final_output, contract)
+                print(f"        Acceptance tests: {acceptance_report.passed_tests}/{acceptance_report.total_tests} passed "
+                      f"({acceptance_report.pass_rate:.1%}), correctness score: {acceptance_report.correctness_score:.3f}")
+            except Exception as e:
+                print(f"        Acceptance test execution failed: {e}")
+                acceptance_report = None
+        
+        # Step 7: Cache result if enabled
         if config.enable_caching:
             result["cache_hit"] = False
             self._save_to_cache(prompt, config, final_output)
         
         result["processing_steps"] = self._get_processing_steps(config)
+        result["acceptance_report"] = acceptance_report  # Add acceptance test results
         print(f"✅ Test completed: {prompt.family}_{prompt.variant} (Mode {config.mode.value}, Run {run_id})")
         return result
     

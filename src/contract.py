@@ -16,14 +16,35 @@ class PromptContract:
     method_signature: Optional[str] = None                   # "int read_sensor(uint8_t sensor_pin, uint16_t timeout_ms);"
     allowed_libraries: Optional[List[str]] = None
     disallowed_libraries: Optional[List[str]] = None
-    hardware_constraints: Optional[Dict[str, Any]] = None    # {"pin": "GPIO17", "max_latency_us": 100}
-    test_cases: Optional[List[Dict[str, Any]]] = None        # [{"input": {...}, "expected_output": ...}]
-    docstring_required: Optional[bool] = None
-    safety_critical: Optional[bool] = None
-    determinism: Optional[str] = None
-    canonicalization_policy: Optional[str] = None
+    hardware_constraints: Optional[List[str]] = None
+    test_cases: Optional[List[Dict[str, Any]]] = None
+    docstring_required: Optional[bool] = False
+    safety_critical: Optional[bool] = False
+    determinism: Optional[Dict[str, Any]] = None
+    canonicalization_policy: Optional[Dict[str, Any]] = None
     environment_pin: Optional[str] = None
     decoder_pin: Optional[str] = None
+    
+    # Enhanced acceptance testing framework
+    acceptance_tests: Optional[Dict[str, Any]] = field(default_factory=lambda: {
+        "unit_tests": [],           # Basic input/output validation
+        "integration_tests": [],    # Function composition and interaction
+        "edge_cases": [],          # Boundary conditions and error handling
+        "performance_tests": [],   # Time/space complexity validation
+        "property_tests": [],      # Mathematical properties and invariants
+        "regression_tests": [],    # Previously failing cases
+        "stress_tests": []         # Large inputs and extreme conditions
+    })
+    
+    # Test execution configuration
+    test_config: Optional[Dict[str, Any]] = field(default_factory=lambda: {
+        "timeout_seconds": 5.0,
+        "memory_limit_mb": 100,
+        "required_pass_rate": 1.0,  # 100% by default
+        "allow_approximate": False,
+        "tolerance": 1e-9
+    })
+    
     extra_fields: Dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self):
@@ -41,7 +62,7 @@ class PromptContract:
             "required_logic", "variables", "method_signature", "allowed_libraries",
             "disallowed_libraries", "hardware_constraints", "test_cases",
             "docstring_required", "safety_critical", "determinism", "canonicalization_policy",
-            "environment_pin", "decoder_pin"
+            "environment_pin", "decoder_pin", "acceptance_tests", "test_config"
         }
         known = {k: d.get(k) for k in keys if k in d}
         extra = {k: v for k, v in d.items() if k not in keys}

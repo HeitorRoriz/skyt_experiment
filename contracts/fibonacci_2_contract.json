@@ -9,6 +9,72 @@
   ],
   "output_format": "code only",
   "required_logic": "recursion",
+  "acceptance_tests": {
+    "unit_tests": [
+      {
+        "name": "basic_fibonacci_sequence",
+        "input": 5,
+        "expected_output": [0, 1, 1, 2, 3],
+        "description": "First 5 Fibonacci numbers"
+      },
+      {
+        "name": "single_element",
+        "input": 1,
+        "expected_output": [0],
+        "description": "Single element case"
+      },
+      {
+        "name": "two_elements",
+        "input": 2,
+        "expected_output": [0, 1],
+        "description": "Two element case"
+      }
+    ],
+    "edge_cases": [
+      {
+        "name": "zero_input",
+        "input": 0,
+        "expected_output": [],
+        "description": "Empty sequence for n=0"
+      },
+      {
+        "name": "large_input",
+        "input": 20,
+        "expected_output": [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181],
+        "description": "Full 20-element sequence"
+      }
+    ],
+    "property_tests": [
+      {
+        "name": "fibonacci_property",
+        "property": "for n >= 2: result[n] == result[n-1] + result[n-2]",
+        "description": "Each element is sum of previous two"
+      },
+      {
+        "name": "sequence_length",
+        "property": "len(result) == input_n",
+        "description": "Output length matches input"
+      },
+      {
+        "name": "monotonic_growth",
+        "property": "all(result[i] <= result[i+1] for i in range(len(result)-1))",
+        "description": "Sequence is non-decreasing"
+      }
+    ],
+    "performance_tests": [
+      {
+        "name": "recursive_efficiency",
+        "input": 15,
+        "max_time_seconds": 1.0,
+        "description": "Should complete within reasonable time"
+      }
+    ]
+  },
+  "test_config": {
+    "timeout_seconds": 2.0,
+    "required_pass_rate": 1.0,
+    "allow_approximate": false
+  },
   "extra_fields": {
     "description": "Generate Fibonacci numbers - Variant 2"
   }

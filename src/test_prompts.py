@@ -4,7 +4,9 @@ Total: 10 prompts for comprehensive repeatability testing
 """
 
 from dataclasses import dataclass
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Any
+import os
+import json
 from contract import PromptContract
 
 @dataclass
@@ -141,15 +143,183 @@ class TestPromptGenerator:
         return list(set(p.family for p in self.prompts))
     
     def create_contract_from_prompt(self, prompt: AlgorithmPrompt) -> PromptContract:
-        """Convert algorithm prompt to PromptContract for testing"""
-        return PromptContract(
+        """Convert algorithm prompt to PromptContract with comprehensive acceptance tests"""
+        
+        # Generate algorithm-specific acceptance tests
+        acceptance_tests = self._generate_acceptance_tests(prompt)
+        
+        # Set embedded/firmware quality gates by default
+        test_config = {
+            "timeout_seconds": 5.0,
+            "required_pass_rate": 1.0,
+            "correctness_threshold": 1.0,
+            "allow_approximate": False,
+            "tolerance": 1e-9
+        }
+        
+        contract = PromptContract(
             function_name=prompt.expected_function_name,
             language="python",
             output_type=prompt.expected_output_type,
             output_format="function",
             required_logic=prompt.required_logic,
-            constraints=prompt.constraints
+            constraints=prompt.constraints,
+            acceptance_tests=acceptance_tests,
+            test_config=test_config
         )
+        
+        # Save contract to JSON file
+        contract_dict = contract.__dict__
+        with open(f"{prompt.family}_{prompt.variant}.json", 'w') as f:
+            json.dump(contract_dict, f, indent=4)
+        
+        return contract
+    
+    def _generate_acceptance_tests(self, prompt: AlgorithmPrompt) -> Dict[str, Any]:
+        """Generate comprehensive acceptance tests based on algorithm family"""
+        
+        if prompt.family == "fibonacci":
+            return self._fibonacci_acceptance_tests()
+        elif prompt.family == "merge_sort":
+            return self._merge_sort_acceptance_tests()
+        elif prompt.family == "binary_search":
+            return self._binary_search_acceptance_tests()
+        elif prompt.family == "sieve_eratosthenes":
+            return self._sieve_acceptance_tests()
+        elif prompt.family == "dijkstra":
+            return self._dijkstra_acceptance_tests()
+        else:
+            return self._default_acceptance_tests(prompt)
+    
+    def _fibonacci_acceptance_tests(self) -> Dict[str, Any]:
+        """Comprehensive Fibonacci acceptance tests"""
+        return {
+            "unit_tests": [
+                {"name": "fibonacci_base_case_0", "input": 0, "expected_output": [], "description": "Empty sequence for n=0"},
+                {"name": "fibonacci_base_case_1", "input": 1, "expected_output": [0], "description": "Single element for n=1"},
+                {"name": "fibonacci_small", "input": 5, "expected_output": [0, 1, 1, 2, 3], "description": "First 5 Fibonacci numbers"},
+                {"name": "fibonacci_medium", "input": 10, "expected_output": [0, 1, 1, 2, 3, 5, 8, 13, 21, 34], "description": "First 10 Fibonacci numbers"}
+            ],
+            "edge_cases": [
+                {"name": "fibonacci_negative", "input": -1, "expected_output": [], "description": "Negative input handling"},
+                {"name": "fibonacci_zero", "input": 0, "expected_output": [], "description": "Zero input handling"},
+                {"name": "fibonacci_large", "input": 20, "expected_output": [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181], "description": "Large sequence"}
+            ],
+            "property_tests": [
+                {"name": "fibonacci_property", "property": "for n >= 2: result[n] == result[n-1] + result[n-2]", "description": "Each element is sum of previous two"},
+                {"name": "fibonacci_length", "property": "len(result) == input_n", "description": "Output length matches input"},
+                {"name": "fibonacci_starts_correctly", "property": "result[0] == 0 and result[1] == 1", "description": "Sequence starts with 0, 1"}
+            ],
+            "performance_tests": [
+                {"name": "fibonacci_performance", "input": 30, "max_time_seconds": 2.0, "description": "Reasonable performance for n=30"}
+            ]
+        }
+    
+    def _merge_sort_acceptance_tests(self) -> Dict[str, Any]:
+        """Comprehensive merge sort acceptance tests"""
+        return {
+            "unit_tests": [
+                {"name": "merge_sort_empty", "input": [], "expected_output": [], "description": "Empty list"},
+                {"name": "merge_sort_single", "input": [5], "expected_output": [5], "description": "Single element"},
+                {"name": "merge_sort_two", "input": [3, 1], "expected_output": [1, 3], "description": "Two elements"},
+                {"name": "merge_sort_basic", "input": [64, 34, 25, 12, 22, 11, 90], "expected_output": [11, 12, 22, 25, 34, 64, 90], "description": "Basic sorting"}
+            ],
+            "edge_cases": [
+                {"name": "merge_sort_already_sorted", "input": [1, 2, 3, 4, 5], "expected_output": [1, 2, 3, 4, 5], "description": "Already sorted"},
+                {"name": "merge_sort_reverse_sorted", "input": [5, 4, 3, 2, 1], "expected_output": [1, 2, 3, 4, 5], "description": "Reverse sorted"},
+                {"name": "merge_sort_duplicates", "input": [3, 1, 4, 1, 5, 9, 2, 6, 5], "expected_output": [1, 1, 2, 3, 4, 5, 5, 6, 9], "description": "With duplicates"}
+            ],
+            "property_tests": [
+                {"name": "merge_sort_sorted", "property": "all(result[i] <= result[i+1] for i in range(len(result)-1))", "description": "Output is sorted"},
+                {"name": "merge_sort_same_length", "property": "len(result) == len(input)", "description": "Same length as input"},
+                {"name": "merge_sort_same_elements", "property": "sorted(result) == sorted(input)", "description": "Contains same elements"}
+            ],
+            "performance_tests": [
+                {"name": "merge_sort_performance", "input": list(range(1000, 0, -1)), "max_time_seconds": 1.0, "description": "Performance on 1000 elements"}
+            ]
+        }
+    
+    def _binary_search_acceptance_tests(self) -> Dict[str, Any]:
+        """Comprehensive binary search acceptance tests"""
+        return {
+            "unit_tests": [
+                {"name": "binary_search_found", "input": ([1, 2, 3, 4, 5], 3), "expected_output": 2, "description": "Element found"},
+                {"name": "binary_search_not_found", "input": ([1, 2, 4, 5], 3), "expected_output": -1, "description": "Element not found"},
+                {"name": "binary_search_first", "input": ([1, 2, 3, 4, 5], 1), "expected_output": 0, "description": "First element"},
+                {"name": "binary_search_last", "input": ([1, 2, 3, 4, 5], 5), "expected_output": 4, "description": "Last element"}
+            ],
+            "edge_cases": [
+                {"name": "binary_search_empty", "input": ([], 1), "expected_output": -1, "description": "Empty array"},
+                {"name": "binary_search_single_found", "input": ([5], 5), "expected_output": 0, "description": "Single element found"},
+                {"name": "binary_search_single_not_found", "input": ([5], 3), "expected_output": -1, "description": "Single element not found"}
+            ],
+            "property_tests": [
+                {"name": "binary_search_correctness", "property": "result == -1 or arr[result] == target", "description": "Returns correct index or -1"},
+                {"name": "binary_search_bounds", "property": "result == -1 or (0 <= result < len(arr))", "description": "Index within bounds"}
+            ],
+            "performance_tests": [
+                {"name": "binary_search_performance", "input": (list(range(10000)), 5000), "max_time_seconds": 0.1, "description": "Logarithmic time complexity"}
+            ]
+        }
+    
+    def _sieve_acceptance_tests(self) -> Dict[str, Any]:
+        """Comprehensive sieve of Eratosthenes acceptance tests"""
+        return {
+            "unit_tests": [
+                {"name": "sieve_small", "input": 10, "expected_output": [2, 3, 5, 7], "description": "Primes up to 10"},
+                {"name": "sieve_medium", "input": 30, "expected_output": [2, 3, 5, 7, 11, 13, 17, 19, 23, 29], "description": "Primes up to 30"},
+                {"name": "sieve_edge_2", "input": 2, "expected_output": [2], "description": "Only prime 2"}
+            ],
+            "edge_cases": [
+                {"name": "sieve_zero", "input": 0, "expected_output": [], "description": "No primes below 0"},
+                {"name": "sieve_one", "input": 1, "expected_output": [], "description": "No primes below 1"},
+                {"name": "sieve_negative", "input": -5, "expected_output": [], "description": "Negative input"}
+            ],
+            "property_tests": [
+                {"name": "sieve_all_prime", "property": "all(is_prime(p) for p in result)", "description": "All results are prime"},
+                {"name": "sieve_in_range", "property": "all(2 <= p <= n for p in result)", "description": "All primes in range"},
+                {"name": "sieve_sorted", "property": "result == sorted(result)", "description": "Results are sorted"}
+            ],
+            "performance_tests": [
+                {"name": "sieve_performance", "input": 1000, "max_time_seconds": 0.5, "description": "Performance for n=1000"}
+            ]
+        }
+    
+    def _dijkstra_acceptance_tests(self) -> Dict[str, Any]:
+        """Comprehensive Dijkstra's algorithm acceptance tests"""
+        return {
+            "unit_tests": [
+                {"name": "dijkstra_simple", "input": ({'A': {'B': 1, 'C': 4}, 'B': {'C': 2, 'D': 5}, 'C': {'D': 1}, 'D': {}}, 'A'), 
+                 "expected_output": {'A': 0, 'B': 1, 'C': 3, 'D': 4}, "description": "Simple graph"},
+                {"name": "dijkstra_single_node", "input": ({'A': {}}, 'A'), "expected_output": {'A': 0}, "description": "Single node"}
+            ],
+            "edge_cases": [
+                {"name": "dijkstra_disconnected", "input": ({'A': {'B': 1}, 'B': {}, 'C': {}}, 'A'), 
+                 "expected_output": {'A': 0, 'B': 1, 'C': float('inf')}, "description": "Disconnected graph"},
+                {"name": "dijkstra_empty", "input": ({}, 'A'), "expected_output": {}, "description": "Empty graph"}
+            ],
+            "property_tests": [
+                {"name": "dijkstra_source_zero", "property": "result[source] == 0", "description": "Source distance is 0"},
+                {"name": "dijkstra_non_negative", "property": "all(d >= 0 for d in result.values() if d != float('inf'))", "description": "Non-negative distances"}
+            ],
+            "performance_tests": [
+                {"name": "dijkstra_performance", "input": "large_graph", "max_time_seconds": 2.0, "description": "Performance on large graph"}
+            ]
+        }
+    
+    def _default_acceptance_tests(self, prompt: AlgorithmPrompt) -> Dict[str, Any]:
+        """Default acceptance tests for unknown algorithm families"""
+        return {
+            "unit_tests": [
+                {"name": "basic_functionality", "input": "test_input", "expected_output": "expected", "description": "Basic functionality test"}
+            ],
+            "edge_cases": [
+                {"name": "empty_input", "input": None, "expected_output": None, "description": "Handle empty input"}
+            ],
+            "property_tests": [
+                {"name": "output_type", "property": f"isinstance(result, {prompt.expected_output_type})", "description": f"Output is {prompt.expected_output_type}"}
+            ]
+        }
     
     def get_test_matrix(self) -> List[Tuple[str, str, AlgorithmPrompt, PromptContract]]:
         """Get complete test matrix: (family, variant, prompt, contract)"""
