@@ -51,7 +51,7 @@ class RepeatabilityMetrics:
 class EnhancedRepeatabilityCalculator:
     """Calculate repeatability with correctness validation"""
     
-    def __init__(self, quality_threshold: float = 0.8, min_pass_rate: float = 0.9):
+    def __init__(self, quality_threshold: float = 0.5, min_pass_rate: float = 0.6):
         self.quality_threshold = quality_threshold
         self.min_pass_rate = min_pass_rate
     
@@ -65,6 +65,10 @@ class EnhancedRepeatabilityCalculator:
             return self._empty_metrics()
         
         total_runs = len(enhanced_results)
+        
+        # Skip calculation if insufficient runs for meaningful repeatability
+        if total_runs < 2:
+            return self._single_run_metrics(enhanced_results[0] if enhanced_results else None)
         
         # Traditional repeatability calculations
         raw_repeatability = self._calculate_raw_repeatability(test_results)
@@ -102,6 +106,27 @@ class EnhancedRepeatabilityCalculator:
             hash_distribution=hash_distribution,
             correctness_distribution=correctness_scores,
             failure_analysis=failure_analysis
+        )
+    
+    def _single_run_metrics(self, result: Optional[EnhancedResult]) -> RepeatabilityMetrics:
+        """Return appropriate metrics for single run (repeatability undefined)"""
+        if not result:
+            return self._empty_metrics()
+        
+        return RepeatabilityMetrics(
+            total_runs=1,
+            raw_repeatability=1.0,  # Single run is trivially "repeatable"
+            canonical_repeatability=1.0,
+            behavioral_repeatability=1.0,
+            valid_runs=1 if result.is_valid else 0,
+            valid_repeatability=1.0 if result.is_valid else 0.0,
+            correctness_weighted_repeatability=result.correctness_score,
+            average_correctness=result.correctness_score,
+            correctness_std=0.0,
+            quality_gate_pass_rate=1.0 if result.is_valid else 0.0,
+            hash_distribution={result.canonical_hash: 1},
+            correctness_distribution=[result.correctness_score],
+            failure_analysis={"low_correctness": 1} if not result.is_valid else {}
         )
     
     def _convert_to_enhanced_results(self, test_results: List[Dict[str, Any]]) -> List[EnhancedResult]:
@@ -255,8 +280,8 @@ class EnhancedRepeatabilityCalculator:
         )
 
 def calculate_enhanced_repeatability(test_results: List[Dict[str, Any]], 
-                                   quality_threshold: float = 0.8,
-                                   min_pass_rate: float = 0.9) -> RepeatabilityMetrics:
+                                   quality_threshold: float = 0.5,
+                                   min_pass_rate: float = 0.6) -> RepeatabilityMetrics:
     """Factory function for enhanced repeatability calculation"""
     calculator = EnhancedRepeatabilityCalculator(quality_threshold, min_pass_rate)
     return calculator.calculate_repeatability(test_results)

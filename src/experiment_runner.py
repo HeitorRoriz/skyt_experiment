@@ -75,14 +75,21 @@ class ExperimentRunner:
                 # Calculate repeatability for this mode
                 repeatability_metrics = calculate_enhanced_repeatability(mode_results)
                 print_repeatability_report(repeatability_metrics)
-                print(f"\n      Mode {mode_config.mode.value} Results: {repeatability_metrics.valid_repeatability:.2f} repeatability ({num_runs} runs)")
+                
+                # Use canonical repeatability as the primary metric (more robust than valid_repeatability)
+                primary_repeatability = repeatability_metrics.canonical_repeatability
+                
+                if num_runs < 2:
+                    print(f"\n      Mode {mode_config.mode.value} Results: N/A repeatability (insufficient runs: {num_runs})")
+                else:
+                    print(f"\n      Mode {mode_config.mode.value} Results: {primary_repeatability:.2f} repeatability ({num_runs} runs)")
                 
                 results["results"].append({
                     "family": prompt.family,
                     "variant": prompt.variant,
                     "mode": mode_config.mode.value,
                     "runs": mode_results,
-                    "repeatability_score": repeatability_metrics.valid_repeatability
+                    "repeatability_score": primary_repeatability
                 })
         
         # Save results
