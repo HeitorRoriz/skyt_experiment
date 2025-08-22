@@ -14,76 +14,30 @@
       "runs": [
         {
           "run_id": 1,
-          "mode": "A",
           "family": "merge_sort",
           "variant": "A",
-          "config": {
-            "mode": "A",
-            "environment": {
-              "model_identifier": "gpt-4",
-              "temperature": 0.0,
-              "top_p": null,
-              "top_k": null,
-              "seed": 42,
-              "python_version": "3.12",
-              "black_version": "23.12.1",
-              "isort_version": "5.13.2",
-              "os_info": "Windows 11",
-              "contract_version": "1.0",
-              "canonicalization_policy_version": "1.0",
-              "cache_key": "2ea9a4c20e0c2f62"
-            },
-            "capabilities": {
-              "enable_caching": false,
-              "enable_contracts": false,
-              "enable_canonicalization": false,
-              "enable_repair": false,
-              "enable_replay": false
-            }
-          },
-          "raw_output": "Here is a Python function that implements the merge sort algorithm:\n\n```python\ndef merge_sort(lst):\n    if len(lst) <= 1:\n        return lst\n\n    mid = len(lst) // 2\n    left_half = merge_sort(lst[:mid])\n    right_half = merge_sort(lst[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] <= right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    while left_index < len(left):\n        merged.append(left[left_index])\n        left_index += 1\n\n    while right_index < len(right):\n        merged.append(right[right_index])\n        right_index += 1\n\n    return merged\n```\n\nThis function works by recursively dividing the input list into two halves until each sublist contains only one element. Then, it merges these sublists back together in sorted order. The `merge` helper function is used to merge two sorted lists into one sorted list.",
-          "final_output": "Here is a Python function that implements the merge sort algorithm:\n\n```python\ndef merge_sort(lst):\n    if len(lst) <= 1:\n        return lst\n\n    mid = len(lst) // 2\n    left_half = merge_sort(lst[:mid])\n    right_half = merge_sort(lst[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] <= right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    while left_index < len(left):\n        merged.append(left[left_index])\n        left_index += 1\n\n    while right_index < len(right):\n        merged.append(right[right_index])\n        right_index += 1\n\n    return merged\n```\n\nThis function works by recursively dividing the input list into two halves until each sublist contains only one element. Then, it merges these sublists back together in sorted order. The `merge` helper function is used to merge two sorted lists into one sorted list.",
+          "mode": "A",
+          "timestamp": 1755820508.193258,
+          "raw_output": "Here is a Python function that implements the merge sort algorithm:\n\n```python\ndef merge_sort(lst):\n    if len(lst) <= 1:\n        return lst\n\n    mid = len(lst) // 2\n    left_half = lst[:mid]\n    right_half = lst[mid:]\n\n    return merge(merge_sort(left_half), merge_sort(right_half))\n\ndef merge(left, right):\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    merged += left[left_index:]\n    merged += right[right_index:]\n\n    return merged\n```\n\nThe `merge_sort` function first checks if the list is already sorted (i.e., if it contains one or zero elements). If not, it divides the list into two halves and recursively sorts each half. The `merge` function then merges the two sorted halves into a single sorted list.",
+          "final_output": "Here is a Python function that implements the merge sort algorithm:\n\n```python\ndef merge_sort(lst):\n    if len(lst) <= 1:\n        return lst\n\n    mid = len(lst) // 2\n    left_half = lst[:mid]\n    right_half = lst[mid:]\n\n    return merge(merge_sort(left_half), merge_sort(right_half))\n\ndef merge(left, right):\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    merged += left[left_index:]\n    merged += right[right_index:]\n\n    return merged\n```\n\nThe `merge_sort` function first checks if the list is already sorted (i.e., if it contains one or zero elements). If not, it divides the list into two halves and recursively sorts each half. The `merge` function then merges the two sorted halves into a single sorted list.",
           "processing_steps": [
-            "raw_only"
+            "raw_llm"
           ]
         },
         {
           "run_id": 2,
-          "mode": "A",
           "family": "merge_sort",
           "variant": "A",
-          "config": {
-            "mode": "A",
-            "environment": {
-              "model_identifier": "gpt-4",
-              "temperature": 0.0,
-              "top_p": null,
-              "top_k": null,
-              "seed": 42,
-              "python_version": "3.12",
-              "black_version": "23.12.1",
-              "isort_version": "5.13.2",
-              "os_info": "Windows 11",
-              "contract_version": "1.0",
-              "canonicalization_policy_version": "1.0",
-              "cache_key": "2ea9a4c20e0c2f62"
-            },
-            "capabilities": {
-              "enable_caching": false,
-              "enable_contracts": false,
-              "enable_canonicalization": false,
-              "enable_repair": false,
-              "enable_replay": false
-            }
-          },
+          "mode": "A",
+          "timestamp": 1755820516.5279825,
           "raw_output": "Here is a Python function that implements the merge sort algorithm:\n\n```python\ndef merge_sort(lst):\n    if len(lst) <= 1:\n        return lst\n\n    mid = len(lst) // 2\n    left_half = lst[:mid]\n    right_half = lst[mid:]\n\n    return merge(merge_sort(left_half), merge_sort(right_half))\n\ndef merge(left, right):\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    merged += left[left_index:]\n    merged += right[right_index:]\n\n    return merged\n```\n\nThe `merge_sort` function first checks if the list is already sorted (i.e., if it contains one or zero elements). If not, it divides the list into two halves and recursively sorts each half. The `merge` function then merges the two sorted halves into a single sorted list.",
           "final_output": "Here is a Python function that implements the merge sort algorithm:\n\n```python\ndef merge_sort(lst):\n    if len(lst) <= 1:\n        return lst\n\n    mid = len(lst) // 2\n    left_half = lst[:mid]\n    right_half = lst[mid:]\n\n    return merge(merge_sort(left_half), merge_sort(right_half))\n\ndef merge(left, right):\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    merged += left[left_index:]\n    merged += right[right_index:]\n\n    return merged\n```\n\nThe `merge_sort` function first checks if the list is already sorted (i.e., if it contains one or zero elements). If not, it divides the list into two halves and recursively sorts each half. The `merge` function then merges the two sorted halves into a single sorted list.",
           "processing_steps": [
-            "raw_only"
+            "raw_llm"
           ]
         }
       ],
-      "repeatability_score": 0.5
+      "repeatability_score": 0.0
     },
     {
       "family": "merge_sort",
@@ -92,106 +46,388 @@
       "runs": [
         {
           "run_id": 1,
-          "mode": "B",
           "family": "merge_sort",
           "variant": "A",
-          "config": {
-            "mode": "B",
-            "environment": {
-              "model_identifier": "gpt-4",
-              "temperature": 0.0,
-              "top_p": null,
-              "top_k": null,
-              "seed": 42,
-              "python_version": "3.12",
-              "black_version": "23.12.1",
-              "isort_version": "5.13.2",
-              "os_info": "Windows 11",
-              "contract_version": "1.0",
-              "canonicalization_policy_version": "1.0",
-              "cache_key": "2ea9a4c20e0c2f62"
-            },
-            "capabilities": {
-              "enable_caching": false,
-              "enable_contracts": true,
-              "enable_canonicalization": true,
-              "enable_repair": true,
-              "enable_replay": false
+          "mode": "B",
+          "timestamp": 1755820524.2725022,
+          "raw_output": "def merge_sort(lst):\n    \"\"\"\n    Function to sort a list of integers using the merge sort algorithm.\n    The function uses recursion and divides the list into halves until it is able to merge them back in sorted order.\n\n    Parameters:\n    lst (list): List of integers to be sorted.\n\n    Returns:\n    list: Sorted list of integers.\n    \"\"\"\n\n    if len(lst) <= 1:\n        return lst\n\n    mid = len(lst) // 2\n    left_half = merge_sort(lst[:mid])\n    right_half = merge_sort(lst[mid:])\n\n    return merge(left_half, right_half)\n\n\ndef merge(left, right):\n    \"\"\"\n    Helper function to merge two sorted lists into one sorted list.\n\n    Parameters:\n    left (list): First sorted list.\n    right (list): Second sorted list.\n\n    Returns:\n    list: Merged and sorted list.\n    \"\"\"\n\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] <= right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    while left_index < len(left):\n        merged.append(left[left_index])\n        left_index += 1\n\n    while right_index < len(right):\n        merged.append(right[right_index])\n        right_index += 1\n\n    return merged",
+          "compliance": {
+            "compliant": false,
+            "details": {
+              "function_name": true,
+              "output_type": false,
+              "no_comments": true
             }
           },
-          "raw_output": "Here is a Python function that implements the merge sort algorithm:\n\n```python\ndef merge_sort(lst):\n    if len(lst) <= 1:\n        return lst\n\n    mid = len(lst) // 2\n    left_half = merge_sort(lst[:mid])\n    right_half = merge_sort(lst[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] <= right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    merged += left[left_index:]\n    merged += right[right_index:]\n\n    return merged\n```\n\nThe `merge_sort` function first checks if the list is already sorted (i.e., if it contains one or zero elements). If not, it divides the list into two halves and recursively sorts each half. The `merge` function then merges the two sorted halves into a single sorted list.",
-          "compliance": {
-            "function_name": false,
-            "output_type": false,
-            "no_comments": true
-          },
-          "final_output": "Here is a Python function that implements the merge sort algorithm:\n    ```python\n    def merge_sort(lst):\n        if len(lst) <= 1:\n            return lst\n            mid = len(lst) // 2\n            left_half = merge_sort(lst[:mid])\n            right_half = merge_sort(lst[mid:])\n            return merge(left_half, right_half)\n            def merge(left, right):\n                merged = []\n                left_index = 0\n                right_index = 0\n                while left_index < len(left) and right_index < len(right):\n                    if left[left_index] <= right[right_index]:\n                        merged.append(left[left_index])\n                        left_index += 1\n                        else:\n                            merged.append(right[right_index])\n                            right_index += 1\n                            merged += left[left_index:]\n                            merged += right[right_index:]\n                            return merged\n                            ```\n                            The `merge_sort` function first checks if the list is already sorted (i.e., if it contains one or zero elements). If not, it divides the list into two halves and recursively sorts each half. The `merge` function then merges the two sorted halves into a single sorted list.",
-          "corrections": [
-            "determinism_repair_failed_syntax_error",
-            "compliance_violations_detected",
-            "canonicalization_stripped_comments_regex_fallback",
-            "canonicalization_basic_formatting_fallback"
-          ],
-          "status": "failed",
+          "final_output": "def merge_sort(lst):\n    \"\"\"\n    Function to sort a list of integers using the merge sort algorithm.\n    The function uses recursion and divides the list into halves until it is able to merge them back in sorted order.\n\n    Parameters:\n    lst (list): List of integers to be sorted.\n\n    Returns:\n    list: Sorted list of integers.\n    \"\"\"\n\n    if len(lst) <= 1:\n        return lst\n\n    mid = len(lst) // 2\n    left_half = merge_sort(lst[:mid])\n    right_half = merge_sort(lst[mid:])\n\n    return merge(left_half, right_half)\n\n\ndef merge(left, right):\n    \"\"\"\n    Helper function to merge two sorted lists into one sorted list.\n\n    Parameters:\n    left (list): First sorted list.\n    right (list): Second sorted list.\n\n    Returns:\n    list: Merged and sorted list.\n    \"\"\"\n\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] <= right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    while left_index < len(left):\n        merged.append(left[left_index])\n        left_index += 1\n\n    while right_index < len(right):\n        merged.append(right[right_index])\n        right_index += 1\n\n    return merged",
+          "corrections": [],
+          "status": "success",
           "processing_steps": [
             "raw_llm",
-            "compliance_check",
-            "canonicalization",
-            "repair"
-          ]
+            "compliance_check"
+          ],
+          "acceptance_report": {
+            "total_tests": 11,
+            "passed_tests": 8,
+            "failed_tests": 3,
+            "pass_rate": 0.7272727272727273,
+            "execution_time": 0.0019996166229248047,
+            "test_results": [
+              {
+                "name": "merge_sort_empty",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [],
+                "expected_output": []
+              },
+              {
+                "name": "merge_sort_single",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [
+                  5
+                ],
+                "expected_output": [
+                  5
+                ]
+              },
+              {
+                "name": "merge_sort_two",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [
+                  1,
+                  3
+                ],
+                "expected_output": [
+                  1,
+                  3
+                ]
+              },
+              {
+                "name": "merge_sort_basic",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [
+                  11,
+                  12,
+                  22,
+                  25,
+                  34,
+                  64,
+                  90
+                ],
+                "expected_output": [
+                  11,
+                  12,
+                  22,
+                  25,
+                  34,
+                  64,
+                  90
+                ]
+              },
+              {
+                "name": "merge_sort_already_sorted",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ],
+                "expected_output": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              },
+              {
+                "name": "merge_sort_reverse_sorted",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ],
+                "expected_output": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              },
+              {
+                "name": "merge_sort_duplicates",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [
+                  1,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  5,
+                  6,
+                  9
+                ],
+                "expected_output": [
+                  1,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  5,
+                  6,
+                  9
+                ]
+              },
+              {
+                "name": "merge_sort_sorted",
+                "passed": false,
+                "execution_time": 0.0,
+                "error_message": "Execution error: object of type 'int' has no len()",
+                "actual_output": null,
+                "expected_output": null
+              },
+              {
+                "name": "merge_sort_same_length",
+                "passed": false,
+                "execution_time": 0.0,
+                "error_message": "Execution error: object of type 'int' has no len()",
+                "actual_output": null,
+                "expected_output": null
+              },
+              {
+                "name": "merge_sort_same_elements",
+                "passed": false,
+                "execution_time": 0.0,
+                "error_message": "Execution error: object of type 'int' has no len()",
+                "actual_output": null,
+                "expected_output": null
+              },
+              {
+                "name": "merge_sort_performance",
+                "passed": true,
+                "execution_time": 0.0019996166229248047,
+                "error_message": null,
+                "actual_output": "Execution time: 0.002s",
+                "expected_output": null
+              }
+            ],
+            "correctness_score": 0.7272727272727273
+          }
         },
         {
           "run_id": 2,
-          "mode": "B",
           "family": "merge_sort",
           "variant": "A",
-          "config": {
-            "mode": "B",
-            "environment": {
-              "model_identifier": "gpt-4",
-              "temperature": 0.0,
-              "top_p": null,
-              "top_k": null,
-              "seed": 42,
-              "python_version": "3.12",
-              "black_version": "23.12.1",
-              "isort_version": "5.13.2",
-              "os_info": "Windows 11",
-              "contract_version": "1.0",
-              "canonicalization_policy_version": "1.0",
-              "cache_key": "2ea9a4c20e0c2f62"
-            },
-            "capabilities": {
-              "enable_caching": false,
-              "enable_contracts": true,
-              "enable_canonicalization": true,
-              "enable_repair": true,
-              "enable_replay": false
+          "mode": "B",
+          "timestamp": 1755820533.6667979,
+          "raw_output": "def merge_sort(lst):\n    \"\"\"\n    Function to sort a list of integers using the merge sort algorithm.\n    The function uses recursion and divides the list into halves until it is able to merge them back in sorted order.\n\n    Parameters:\n    lst (list): List of integers to be sorted.\n\n    Returns:\n    list: Sorted list of integers.\n    \"\"\"\n\n    if len(lst) <= 1:\n        return lst\n\n    mid = len(lst) // 2\n    left_half = merge_sort(lst[:mid])\n    right_half = merge_sort(lst[mid:])\n\n    return merge(left_half, right_half)\n\n\ndef merge(left, right):\n    \"\"\"\n    Helper function to merge two sorted lists into one sorted list.\n\n    Parameters:\n    left (list): First sorted list.\n    right (list): Second sorted list.\n\n    Returns:\n    list: Merged sorted list.\n    \"\"\"\n\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] <= right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    while left_index < len(left):\n        merged.append(left[left_index])\n        left_index += 1\n\n    while right_index < len(right):\n        merged.append(right[right_index])\n        right_index += 1\n\n    return merged",
+          "compliance": {
+            "compliant": false,
+            "details": {
+              "function_name": true,
+              "output_type": false,
+              "no_comments": true
             }
           },
-          "raw_output": "Here is a Python function that implements the merge sort algorithm:\n\n```python\ndef merge_sort(lst):\n    if len(lst) <= 1:\n        return lst\n\n    mid = len(lst) // 2\n    left_half = merge_sort(lst[:mid])\n    right_half = merge_sort(lst[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] <= right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    merged += left[left_index:]\n    merged += right[right_index:]\n\n    return merged\n```\n\nThe `merge_sort` function first checks if the list is already sorted (i.e., if it contains one or zero elements). If not, it divides the list into two halves and recursively sorts each half. The `merge` function then merges the two sorted halves into a single sorted list.",
-          "compliance": {
-            "function_name": false,
-            "output_type": false,
-            "no_comments": true
-          },
-          "final_output": "Here is a Python function that implements the merge sort algorithm:\n    ```python\n    def merge_sort(lst):\n        if len(lst) <= 1:\n            return lst\n            mid = len(lst) // 2\n            left_half = merge_sort(lst[:mid])\n            right_half = merge_sort(lst[mid:])\n            return merge(left_half, right_half)\n            def merge(left, right):\n                merged = []\n                left_index = 0\n                right_index = 0\n                while left_index < len(left) and right_index < len(right):\n                    if left[left_index] <= right[right_index]:\n                        merged.append(left[left_index])\n                        left_index += 1\n                        else:\n                            merged.append(right[right_index])\n                            right_index += 1\n                            merged += left[left_index:]\n                            merged += right[right_index:]\n                            return merged\n                            ```\n                            The `merge_sort` function first checks if the list is already sorted (i.e., if it contains one or zero elements). If not, it divides the list into two halves and recursively sorts each half. The `merge` function then merges the two sorted halves into a single sorted list.",
-          "corrections": [
-            "determinism_repair_failed_syntax_error",
-            "compliance_violations_detected",
-            "canonicalization_stripped_comments_regex_fallback",
-            "canonicalization_basic_formatting_fallback"
-          ],
-          "status": "failed",
+          "final_output": "def merge_sort(lst):\n    \"\"\"\n    Function to sort a list of integers using the merge sort algorithm.\n    The function uses recursion and divides the list into halves until it is able to merge them back in sorted order.\n\n    Parameters:\n    lst (list): List of integers to be sorted.\n\n    Returns:\n    list: Sorted list of integers.\n    \"\"\"\n\n    if len(lst) <= 1:\n        return lst\n\n    mid = len(lst) // 2\n    left_half = merge_sort(lst[:mid])\n    right_half = merge_sort(lst[mid:])\n\n    return merge(left_half, right_half)\n\n\ndef merge(left, right):\n    \"\"\"\n    Helper function to merge two sorted lists into one sorted list.\n\n    Parameters:\n    left (list): First sorted list.\n    right (list): Second sorted list.\n\n    Returns:\n    list: Merged sorted list.\n    \"\"\"\n\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] <= right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    while left_index < len(left):\n        merged.append(left[left_index])\n        left_index += 1\n\n    while right_index < len(right):\n        merged.append(right[right_index])\n        right_index += 1\n\n    return merged",
+          "corrections": [],
+          "status": "success",
           "processing_steps": [
             "raw_llm",
-            "compliance_check",
-            "canonicalization",
-            "repair"
-          ]
+            "compliance_check"
+          ],
+          "acceptance_report": {
+            "total_tests": 11,
+            "passed_tests": 8,
+            "failed_tests": 3,
+            "pass_rate": 0.7272727272727273,
+            "execution_time": 0.002493143081665039,
+            "test_results": [
+              {
+                "name": "merge_sort_empty",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [],
+                "expected_output": []
+              },
+              {
+                "name": "merge_sort_single",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [
+                  5
+                ],
+                "expected_output": [
+                  5
+                ]
+              },
+              {
+                "name": "merge_sort_two",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [
+                  1,
+                  3
+                ],
+                "expected_output": [
+                  1,
+                  3
+                ]
+              },
+              {
+                "name": "merge_sort_basic",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [
+                  11,
+                  12,
+                  22,
+                  25,
+                  34,
+                  64,
+                  90
+                ],
+                "expected_output": [
+                  11,
+                  12,
+                  22,
+                  25,
+                  34,
+                  64,
+                  90
+                ]
+              },
+              {
+                "name": "merge_sort_already_sorted",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ],
+                "expected_output": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              },
+              {
+                "name": "merge_sort_reverse_sorted",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ],
+                "expected_output": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              },
+              {
+                "name": "merge_sort_duplicates",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [
+                  1,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  5,
+                  6,
+                  9
+                ],
+                "expected_output": [
+                  1,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  5,
+                  6,
+                  9
+                ]
+              },
+              {
+                "name": "merge_sort_sorted",
+                "passed": false,
+                "execution_time": 0.0,
+                "error_message": "Execution error: object of type 'int' has no len()",
+                "actual_output": null,
+                "expected_output": null
+              },
+              {
+                "name": "merge_sort_same_length",
+                "passed": false,
+                "execution_time": 0.0,
+                "error_message": "Execution error: object of type 'int' has no len()",
+                "actual_output": null,
+                "expected_output": null
+              },
+              {
+                "name": "merge_sort_same_elements",
+                "passed": false,
+                "execution_time": 0.0,
+                "error_message": "Execution error: object of type 'int' has no len()",
+                "actual_output": null,
+                "expected_output": null
+              },
+              {
+                "name": "merge_sort_performance",
+                "passed": true,
+                "execution_time": 0.0015366077423095703,
+                "error_message": null,
+                "actual_output": "Execution time: 0.002s",
+                "expected_output": null
+              }
+            ],
+            "correctness_score": 0.7272727272727273
+          }
         }
       ],
-      "repeatability_score": 1.0
+      "repeatability_score": 0.0
     },
     {
       "family": "merge_sort",
@@ -200,106 +436,93 @@
       "runs": [
         {
           "run_id": 1,
-          "mode": "C",
           "family": "merge_sort",
           "variant": "A",
-          "config": {
-            "mode": "C",
-            "environment": {
-              "model_identifier": "gpt-4",
-              "temperature": 0.0,
-              "top_p": null,
-              "top_k": null,
-              "seed": 42,
-              "python_version": "3.12",
-              "black_version": "23.12.1",
-              "isort_version": "5.13.2",
-              "os_info": "Windows 11",
-              "contract_version": "1.0",
-              "canonicalization_policy_version": "1.0",
-              "cache_key": "2ea9a4c20e0c2f62"
-            },
-            "capabilities": {
-              "enable_caching": false,
-              "enable_contracts": true,
-              "enable_canonicalization": true,
-              "enable_repair": true,
-              "enable_replay": false
+          "mode": "C",
+          "timestamp": 1755820544.8750155,
+          "raw_output": "def merge_sort(lst):\n    \"\"\"\n    Sorts a list of integers using the merge sort algorithm.\n\n    Parameters:\n    lst (list): The list of integers to be sorted.\n\n    Returns:\n    list: The sorted list of integers.\n    \"\"\"\n    if len(lst) <= 1:\n        return lst\n\n    mid = len(lst) // 2\n    left_half = merge_sort(lst[:mid])\n    right_half = merge_sort(lst[mid:])\n\n    return merge(left_half, right_half)\n\n\ndef merge(left, right):\n    \"\"\"\n    Merges two sorted lists into one sorted list.\n\n    Parameters:\n    left (list): The first sorted list.\n    right (list): The second sorted list.\n\n    Returns:\n    list: The merged sorted list.\n    \"\"\"\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] <= right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    while left_index < len(left):\n        merged.append(left[left_index])\n        left_index += 1\n\n    while right_index < len(right):\n        merged.append(right[right_index])\n        right_index += 1\n\n    return merged",
+          "canonical_reference": "def merge_sort(n):\n    \"\"\"\n    recursion\n\n    Args:\n        n: Input parameter\n\n    Returns:\n        list: function\n    \"\"\"\n        # Canonical implementation structure\n    result = process_input(input_parameters)\n    return format_output(result)\n",
+          "compliance": {
+            "compliant": false,
+            "details": {
+              "function_name": true,
+              "output_type": false,
+              "no_comments": true
             }
           },
-          "raw_output": "Here is a Python function that implements the merge sort algorithm:\n\n```python\ndef merge_sort(lst):\n    if len(lst) <= 1:\n        return lst\n\n    mid = len(lst) // 2\n    left_half = merge_sort(lst[:mid])\n    right_half = merge_sort(lst[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] <= right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    merged += left[left_index:]\n    merged += right[right_index:]\n\n    return merged\n```\n\nThe `merge_sort` function first checks if the list is already sorted (i.e., if it contains one or zero elements). If not, it divides the list into two halves and recursively sorts each half. The `merge` function then merges the two sorted halves into a single sorted list.",
-          "compliance": {
-            "function_name": false,
-            "output_type": false,
-            "no_comments": true
-          },
-          "final_output": "Here is a Python function that implements the merge sort algorithm:\n    ```python\n    def merge_sort(lst):\n        if len(lst) <= 1:\n            return lst\n            mid = len(lst) // 2\n            left_half = merge_sort(lst[:mid])\n            right_half = merge_sort(lst[mid:])\n            return merge(left_half, right_half)\n            def merge(left, right):\n                merged = []\n                left_index = 0\n                right_index = 0\n                while left_index < len(left) and right_index < len(right):\n                    if left[left_index] <= right[right_index]:\n                        merged.append(left[left_index])\n                        left_index += 1\n                        else:\n                            merged.append(right[right_index])\n                            right_index += 1\n                            merged += left[left_index:]\n                            merged += right[right_index:]\n                            return merged\n                            ```\n                            The `merge_sort` function first checks if the list is already sorted (i.e., if it contains one or zero elements). If not, it divides the list into two halves and recursively sorts each half. The `merge` function then merges the two sorted halves into a single sorted list.",
-          "corrections": [
-            "determinism_repair_failed_syntax_error",
-            "compliance_violations_detected",
-            "canonicalization_stripped_comments_regex_fallback",
-            "canonicalization_basic_formatting_fallback"
-          ],
-          "status": "failed",
+          "transformation_success": true,
+          "final_output": "def merge_sort(lst):\n    if len(lst) <= 1:\n        return lst\n        mid = len(lst) // 2\n        left_half = merge_sort(lst[:mid])\n        right_half = merge_sort(lst[mid:])\n        return merge(left_half, right_half)\n        def merge(left, right):\n            merged = []\n            left_index = 0\n            right_index = 0\n            while left_index < len(left) and right_index < len(right):\n                if left[left_index] <= right[right_index]:\n                    merged.append(left[left_index])\n                    left_index += 1\n                    else:\n                        merged.append(right[right_index])\n                        right_index += 1\n                        while left_index < len(left):\n                            merged.append(left[left_index])\n                            left_index += 1\n                            while right_index < len(right):\n                                merged.append(right[right_index])\n                                right_index += 1\n                                return merged",
+          "corrections": [],
+          "status": "success",
           "processing_steps": [
             "raw_llm",
             "compliance_check",
-            "canonicalization",
-            "repair"
-          ]
+            "canonicalization"
+          ],
+          "acceptance_report": {
+            "total_tests": 1,
+            "passed_tests": 0,
+            "failed_tests": 1,
+            "pass_rate": 0.0,
+            "execution_time": 0.0,
+            "test_results": [
+              {
+                "name": "critical_error",
+                "passed": false,
+                "execution_time": 0.0,
+                "error_message": "Code execution failed: invalid syntax (<string>, line 16)",
+                "actual_output": null,
+                "expected_output": null
+              }
+            ],
+            "correctness_score": 0.0
+          }
         },
         {
           "run_id": 2,
-          "mode": "C",
           "family": "merge_sort",
           "variant": "A",
-          "config": {
-            "mode": "C",
-            "environment": {
-              "model_identifier": "gpt-4",
-              "temperature": 0.0,
-              "top_p": null,
-              "top_k": null,
-              "seed": 42,
-              "python_version": "3.12",
-              "black_version": "23.12.1",
-              "isort_version": "5.13.2",
-              "os_info": "Windows 11",
-              "contract_version": "1.0",
-              "canonicalization_policy_version": "1.0",
-              "cache_key": "2ea9a4c20e0c2f62"
-            },
-            "capabilities": {
-              "enable_caching": false,
-              "enable_contracts": true,
-              "enable_canonicalization": true,
-              "enable_repair": true,
-              "enable_replay": false
+          "mode": "C",
+          "timestamp": 1755820552.1691306,
+          "raw_output": "def merge_sort(lst):\n    \"\"\"\n    Function to sort a list of integers using the merge sort algorithm.\n    The function uses recursion and divides the list into halves until it has singleton lists.\n    It then merges these lists back together in sorted order.\n\n    Parameters:\n    lst (list): List of integers to be sorted.\n\n    Returns:\n    list: Sorted list of integers.\n    \"\"\"\n\n    if len(lst) <= 1:\n        return lst\n\n    mid = len(lst) // 2\n    left_half = merge_sort(lst[:mid])\n    right_half = merge_sort(lst[mid:])\n\n    return merge(left_half, right_half)\n\n\ndef merge(left, right):\n    \"\"\"\n    Helper function to merge two sorted lists into one sorted list.\n\n    Parameters:\n    left (list): First sorted list.\n    right (list): Second sorted list.\n\n    Returns:\n    list: Merged and sorted list.\n    \"\"\"\n\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] <= right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    while left_index < len(left):\n        merged.append(left[left_index])\n        left_index += 1\n\n    while right_index < len(right):\n        merged.append(right[right_index])\n        right_index += 1\n\n    return merged",
+          "compliance": {
+            "compliant": false,
+            "details": {
+              "function_name": true,
+              "output_type": false,
+              "no_comments": true
             }
           },
-          "raw_output": "Here is a Python function that implements the merge sort algorithm:\n\n```python\ndef merge_sort(lst):\n    if len(lst) <= 1:\n        return lst\n\n    mid = len(lst) // 2\n    left_half = lst[:mid]\n    right_half = lst[mid:]\n\n    return merge(merge_sort(left_half), merge_sort(right_half))\n\ndef merge(left, right):\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    merged += left[left_index:]\n    merged += right[right_index:]\n\n    return merged\n```\n\nThe `merge_sort` function first checks if the list is already sorted (i.e., if it contains one or zero elements). If not, it divides the list into two halves and recursively sorts each half. The `merge` function then merges the two sorted halves into a single sorted list.",
-          "compliance": {
-            "function_name": false,
-            "output_type": false,
-            "no_comments": true
-          },
-          "final_output": "Here is a Python function that implements the merge sort algorithm:\n    ```python\n    def merge_sort(lst):\n        if len(lst) <= 1:\n            return lst\n            mid = len(lst) // 2\n            left_half = lst[:mid]\n            right_half = lst[mid:]\n            return merge(merge_sort(left_half), merge_sort(right_half))\n            def merge(left, right):\n                merged = []\n                left_index = 0\n                right_index = 0\n                while left_index < len(left) and right_index < len(right):\n                    if left[left_index] < right[right_index]:\n                        merged.append(left[left_index])\n                        left_index += 1\n                        else:\n                            merged.append(right[right_index])\n                            right_index += 1\n                            merged += left[left_index:]\n                            merged += right[right_index:]\n                            return merged\n                            ```\n                            The `merge_sort` function first checks if the list is already sorted (i.e., if it contains one or zero elements). If not, it divides the list into two halves and recursively sorts each half. The `merge` function then merges the two sorted halves into a single sorted list.",
-          "corrections": [
-            "determinism_repair_failed_syntax_error",
-            "compliance_violations_detected",
-            "canonicalization_stripped_comments_regex_fallback",
-            "canonicalization_basic_formatting_fallback"
-          ],
-          "status": "failed",
+          "transformation_success": true,
+          "final_output": "def merge_sort(lst):\n    if len(lst) <= 1:\n        return lst\n        mid = len(lst) // 2\n        left_half = merge_sort(lst[:mid])\n        right_half = merge_sort(lst[mid:])\n        return merge(left_half, right_half)\n        def merge(left, right):\n            merged = []\n            left_index = 0\n            right_index = 0\n            while left_index < len(left) and right_index < len(right):\n                if left[left_index] <= right[right_index]:\n                    merged.append(left[left_index])\n                    left_index += 1\n                    else:\n                        merged.append(right[right_index])\n                        right_index += 1\n                        while left_index < len(left):\n                            merged.append(left[left_index])\n                            left_index += 1\n                            while right_index < len(right):\n                                merged.append(right[right_index])\n                                right_index += 1\n                                return merged",
+          "corrections": [],
+          "status": "success",
           "processing_steps": [
             "raw_llm",
             "compliance_check",
-            "canonicalization",
-            "repair"
-          ]
+            "canonicalization"
+          ],
+          "acceptance_report": {
+            "total_tests": 1,
+            "passed_tests": 0,
+            "failed_tests": 1,
+            "pass_rate": 0.0,
+            "execution_time": 0.0,
+            "test_results": [
+              {
+                "name": "critical_error",
+                "passed": false,
+                "execution_time": 0.0,
+                "error_message": "Code execution failed: invalid syntax (<string>, line 16)",
+                "actual_output": null,
+                "expected_output": null
+              }
+            ],
+            "correctness_score": 0.0
+          }
         }
       ],
-      "repeatability_score": 0.5
+      "repeatability_score": 0.0
     },
     {
       "family": "merge_sort",
@@ -308,76 +531,30 @@
       "runs": [
         {
           "run_id": 1,
-          "mode": "A",
           "family": "merge_sort",
           "variant": "B",
-          "config": {
-            "mode": "A",
-            "environment": {
-              "model_identifier": "gpt-4",
-              "temperature": 0.0,
-              "top_p": null,
-              "top_k": null,
-              "seed": 42,
-              "python_version": "3.12",
-              "black_version": "23.12.1",
-              "isort_version": "5.13.2",
-              "os_info": "Windows 11",
-              "contract_version": "1.0",
-              "canonicalization_policy_version": "1.0",
-              "cache_key": "2ea9a4c20e0c2f62"
-            },
-            "capabilities": {
-              "enable_caching": false,
-              "enable_contracts": false,
-              "enable_canonicalization": false,
-              "enable_repair": false,
-              "enable_replay": false
-            }
-          },
+          "mode": "A",
+          "timestamp": 1755820563.6428528,
           "raw_output": "Here is a Python implementation of the merge sort algorithm:\n\n```python\ndef merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = arr[:mid]\n    right_half = arr[mid:]\n\n    return merge(merge_sort(left_half), merge_sort(right_half))\n\ndef merge(left, right):\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] <= right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    # If there are remaining elements in left or right half, append them to the merged list\n    while left_index < len(left):\n        merged.append(left[left_index])\n        left_index += 1\n\n    while right_index < len(right):\n        merged.append(right[right_index])\n        right_index += 1\n\n    return merged\n```\n\nThis function works by recursively splitting the input array into two halves until each half contains only one element. Then, it merges these halves back together in sorted order. The `merge` function is responsible for merging two sorted arrays into one sorted array.",
           "final_output": "Here is a Python implementation of the merge sort algorithm:\n\n```python\ndef merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = arr[:mid]\n    right_half = arr[mid:]\n\n    return merge(merge_sort(left_half), merge_sort(right_half))\n\ndef merge(left, right):\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] <= right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    # If there are remaining elements in left or right half, append them to the merged list\n    while left_index < len(left):\n        merged.append(left[left_index])\n        left_index += 1\n\n    while right_index < len(right):\n        merged.append(right[right_index])\n        right_index += 1\n\n    return merged\n```\n\nThis function works by recursively splitting the input array into two halves until each half contains only one element. Then, it merges these halves back together in sorted order. The `merge` function is responsible for merging two sorted arrays into one sorted array.",
           "processing_steps": [
-            "raw_only"
+            "raw_llm"
           ]
         },
         {
           "run_id": 2,
-          "mode": "A",
           "family": "merge_sort",
           "variant": "B",
-          "config": {
-            "mode": "A",
-            "environment": {
-              "model_identifier": "gpt-4",
-              "temperature": 0.0,
-              "top_p": null,
-              "top_k": null,
-              "seed": 42,
-              "python_version": "3.12",
-              "black_version": "23.12.1",
-              "isort_version": "5.13.2",
-              "os_info": "Windows 11",
-              "contract_version": "1.0",
-              "canonicalization_policy_version": "1.0",
-              "cache_key": "2ea9a4c20e0c2f62"
-            },
-            "capabilities": {
-              "enable_caching": false,
-              "enable_contracts": false,
-              "enable_canonicalization": false,
-              "enable_repair": false,
-              "enable_replay": false
-            }
-          },
-          "raw_output": "Here is a Python implementation of the merge sort algorithm:\n\n```python\ndef merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = arr[:mid]\n    right_half = arr[mid:]\n\n    return merge(merge_sort(left_half), merge_sort(right_half))\n\ndef merge(left, right):\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    merged.extend(left[left_index:])\n    merged.extend(right[right_index:])\n\n    return merged\n```\n\nIn this implementation, the `merge_sort` function first checks if the input array has one or zero elements. If so, it returns the array as it is already sorted. If not, it splits the array into two halves and recursively sorts each half. The sorted halves are then merged together in sorted order using the `merge` function.\n\nThe `merge` function takes two sorted arrays and merges them into a single sorted array. It does this by repeatedly taking the smallest unprocessed element from either array and appending it to the result. Once all elements from one array have been processed, it appends all remaining elements from the other array to the result.",
-          "final_output": "Here is a Python implementation of the merge sort algorithm:\n\n```python\ndef merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = arr[:mid]\n    right_half = arr[mid:]\n\n    return merge(merge_sort(left_half), merge_sort(right_half))\n\ndef merge(left, right):\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    merged.extend(left[left_index:])\n    merged.extend(right[right_index:])\n\n    return merged\n```\n\nIn this implementation, the `merge_sort` function first checks if the input array has one or zero elements. If so, it returns the array as it is already sorted. If not, it splits the array into two halves and recursively sorts each half. The sorted halves are then merged together in sorted order using the `merge` function.\n\nThe `merge` function takes two sorted arrays and merges them into a single sorted array. It does this by repeatedly taking the smallest unprocessed element from either array and appending it to the result. Once all elements from one array have been processed, it appends all remaining elements from the other array to the result.",
+          "mode": "A",
+          "timestamp": 1755820571.7067223,
+          "raw_output": "Here is a Python implementation of the merge sort algorithm:\n\n```python\ndef merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = arr[:mid]\n    right_half = arr[mid:]\n\n    return merge(merge_sort(left_half), merge_sort(right_half))\n\ndef merge(left, right):\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] <= right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    merged += left[left_index:]\n    merged += right[right_index:]\n\n    return merged\n```\n\nIn this implementation, the `merge_sort` function first checks if the input array has one or zero elements. If so, it simply returns the array as it is already sorted. If not, it splits the array into two halves and recursively sorts each half. The sorted halves are then merged together using the `merge` function.\n\nThe `merge` function takes two sorted arrays and merges them into a single sorted array. It does this by repeatedly taking the smallest unprocessed element from either array and appending it to the merged array. Once all elements from one array have been processed, it appends all remaining elements from the other array to the merged array.",
+          "final_output": "Here is a Python implementation of the merge sort algorithm:\n\n```python\ndef merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = arr[:mid]\n    right_half = arr[mid:]\n\n    return merge(merge_sort(left_half), merge_sort(right_half))\n\ndef merge(left, right):\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] <= right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    merged += left[left_index:]\n    merged += right[right_index:]\n\n    return merged\n```\n\nIn this implementation, the `merge_sort` function first checks if the input array has one or zero elements. If so, it simply returns the array as it is already sorted. If not, it splits the array into two halves and recursively sorts each half. The sorted halves are then merged together using the `merge` function.\n\nThe `merge` function takes two sorted arrays and merges them into a single sorted array. It does this by repeatedly taking the smallest unprocessed element from either array and appending it to the merged array. Once all elements from one array have been processed, it appends all remaining elements from the other array to the merged array.",
           "processing_steps": [
-            "raw_only"
+            "raw_llm"
           ]
         }
       ],
-      "repeatability_score": 0.5
+      "repeatability_score": 0.0
     },
     {
       "family": "merge_sort",
@@ -386,106 +563,388 @@
       "runs": [
         {
           "run_id": 1,
-          "mode": "B",
           "family": "merge_sort",
           "variant": "B",
-          "config": {
-            "mode": "B",
-            "environment": {
-              "model_identifier": "gpt-4",
-              "temperature": 0.0,
-              "top_p": null,
-              "top_k": null,
-              "seed": 42,
-              "python_version": "3.12",
-              "black_version": "23.12.1",
-              "isort_version": "5.13.2",
-              "os_info": "Windows 11",
-              "contract_version": "1.0",
-              "canonicalization_policy_version": "1.0",
-              "cache_key": "2ea9a4c20e0c2f62"
-            },
-            "capabilities": {
-              "enable_caching": false,
-              "enable_contracts": true,
-              "enable_canonicalization": true,
-              "enable_repair": true,
-              "enable_replay": false
+          "mode": "B",
+          "timestamp": 1755820582.0997381,
+          "raw_output": "def merge_sort(arr):\n    \"\"\"\n    Function to sort an array using merge sort algorithm.\n    The function uses recursion to split the array into halves, sort them and merge them back.\n\n    Parameters:\n    arr (list): The array to be sorted.\n\n    Returns:\n    list: The sorted array.\n    \"\"\"\n\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = arr[:mid]\n    right_half = arr[mid:]\n\n    return merge(merge_sort(left_half), merge_sort(right_half))\n\n\ndef merge(left, right):\n    \"\"\"\n    Function to merge two sorted arrays into a single sorted array.\n\n    Parameters:\n    left (list): The left half of the array.\n    right (list): The right half of the array.\n\n    Returns:\n    list: The merged sorted array.\n    \"\"\"\n\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] <= right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    while left_index < len(left):\n        merged.append(left[left_index])\n        left_index += 1\n\n    while right_index < len(right):\n        merged.append(right[right_index])\n        right_index += 1\n\n    return merged",
+          "compliance": {
+            "compliant": false,
+            "details": {
+              "function_name": true,
+              "output_type": false,
+              "no_comments": true
             }
           },
-          "raw_output": "Here is a Python implementation of the merge sort algorithm:\n\n```python\ndef merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = arr[:mid]\n    right_half = arr[mid:]\n\n    return merge(merge_sort(left_half), merge_sort(right_half))\n\ndef merge(left, right):\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] <= right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    merged += left[left_index:]\n    merged += right[right_index:]\n\n    return merged\n```\n\nIn this implementation, the `merge_sort` function first checks if the input array has one or zero elements. If so, it returns the array as it is already sorted. If not, it splits the array into two halves and recursively sorts each half. The sorted halves are then merged together in sorted order using the `merge` function.\n\nThe `merge` function takes two sorted arrays and merges them into a single sorted array. It does this by repeatedly taking the smallest remaining element from either array and appending it to the result. Once all elements from one array have been added to the result, it appends all remaining elements from the other array.",
-          "compliance": {
-            "function_name": false,
-            "output_type": false,
-            "no_comments": true
-          },
-          "final_output": "Here is a Python implementation of the merge sort algorithm:\n    ```python\n    def merge_sort(arr):\n        if len(arr) <= 1:\n            return arr\n            mid = len(arr) // 2\n            left_half = arr[:mid]\n            right_half = arr[mid:]\n            return merge(merge_sort(left_half), merge_sort(right_half))\n            def merge(left, right):\n                merged = []\n                left_index = 0\n                right_index = 0\n                while left_index < len(left) and right_index < len(right):\n                    if left[left_index] <= right[right_index]:\n                        merged.append(left[left_index])\n                        left_index += 1\n                        else:\n                            merged.append(right[right_index])\n                            right_index += 1\n                            merged += left[left_index:]\n                            merged += right[right_index:]\n                            return merged\n                            ```\n                            In this implementation, the `merge_sort` function first checks if the input array has one or zero elements. If so, it returns the array as it is already sorted. If not, it splits the array into two halves and recursively sorts each half. The sorted halves are then merged together in sorted order using the `merge` function.\n                            The `merge` function takes two sorted arrays and merges them into a single sorted array. It does this by repeatedly taking the smallest remaining element from either array and appending it to the result. Once all elements from one array have been added to the result, it appends all remaining elements from the other array.",
-          "corrections": [
-            "determinism_repair_failed_syntax_error",
-            "compliance_violations_detected",
-            "canonicalization_stripped_comments_regex_fallback",
-            "canonicalization_basic_formatting_fallback"
-          ],
-          "status": "failed",
+          "final_output": "def merge_sort(arr):\n    \"\"\"\n    Function to sort an array using merge sort algorithm.\n    The function uses recursion to split the array into halves, sort them and merge them back.\n\n    Parameters:\n    arr (list): The array to be sorted.\n\n    Returns:\n    list: The sorted array.\n    \"\"\"\n\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = arr[:mid]\n    right_half = arr[mid:]\n\n    return merge(merge_sort(left_half), merge_sort(right_half))\n\n\ndef merge(left, right):\n    \"\"\"\n    Function to merge two sorted arrays into a single sorted array.\n\n    Parameters:\n    left (list): The left half of the array.\n    right (list): The right half of the array.\n\n    Returns:\n    list: The merged sorted array.\n    \"\"\"\n\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] <= right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    while left_index < len(left):\n        merged.append(left[left_index])\n        left_index += 1\n\n    while right_index < len(right):\n        merged.append(right[right_index])\n        right_index += 1\n\n    return merged",
+          "corrections": [],
+          "status": "success",
           "processing_steps": [
             "raw_llm",
-            "compliance_check",
-            "canonicalization",
-            "repair"
-          ]
+            "compliance_check"
+          ],
+          "acceptance_report": {
+            "total_tests": 11,
+            "passed_tests": 8,
+            "failed_tests": 3,
+            "pass_rate": 0.7272727272727273,
+            "execution_time": 0.0020101070404052734,
+            "test_results": [
+              {
+                "name": "merge_sort_empty",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [],
+                "expected_output": []
+              },
+              {
+                "name": "merge_sort_single",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [
+                  5
+                ],
+                "expected_output": [
+                  5
+                ]
+              },
+              {
+                "name": "merge_sort_two",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [
+                  1,
+                  3
+                ],
+                "expected_output": [
+                  1,
+                  3
+                ]
+              },
+              {
+                "name": "merge_sort_basic",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [
+                  11,
+                  12,
+                  22,
+                  25,
+                  34,
+                  64,
+                  90
+                ],
+                "expected_output": [
+                  11,
+                  12,
+                  22,
+                  25,
+                  34,
+                  64,
+                  90
+                ]
+              },
+              {
+                "name": "merge_sort_already_sorted",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ],
+                "expected_output": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              },
+              {
+                "name": "merge_sort_reverse_sorted",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ],
+                "expected_output": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              },
+              {
+                "name": "merge_sort_duplicates",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [
+                  1,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  5,
+                  6,
+                  9
+                ],
+                "expected_output": [
+                  1,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  5,
+                  6,
+                  9
+                ]
+              },
+              {
+                "name": "merge_sort_sorted",
+                "passed": false,
+                "execution_time": 0.0,
+                "error_message": "Execution error: object of type 'int' has no len()",
+                "actual_output": null,
+                "expected_output": null
+              },
+              {
+                "name": "merge_sort_same_length",
+                "passed": false,
+                "execution_time": 0.0,
+                "error_message": "Execution error: object of type 'int' has no len()",
+                "actual_output": null,
+                "expected_output": null
+              },
+              {
+                "name": "merge_sort_same_elements",
+                "passed": false,
+                "execution_time": 0.0,
+                "error_message": "Execution error: object of type 'int' has no len()",
+                "actual_output": null,
+                "expected_output": null
+              },
+              {
+                "name": "merge_sort_performance",
+                "passed": true,
+                "execution_time": 0.001007080078125,
+                "error_message": null,
+                "actual_output": "Execution time: 0.001s",
+                "expected_output": null
+              }
+            ],
+            "correctness_score": 0.7272727272727273
+          }
         },
         {
           "run_id": 2,
-          "mode": "B",
           "family": "merge_sort",
           "variant": "B",
-          "config": {
-            "mode": "B",
-            "environment": {
-              "model_identifier": "gpt-4",
-              "temperature": 0.0,
-              "top_p": null,
-              "top_k": null,
-              "seed": 42,
-              "python_version": "3.12",
-              "black_version": "23.12.1",
-              "isort_version": "5.13.2",
-              "os_info": "Windows 11",
-              "contract_version": "1.0",
-              "canonicalization_policy_version": "1.0",
-              "cache_key": "2ea9a4c20e0c2f62"
-            },
-            "capabilities": {
-              "enable_caching": false,
-              "enable_contracts": true,
-              "enable_canonicalization": true,
-              "enable_repair": true,
-              "enable_replay": false
+          "mode": "B",
+          "timestamp": 1755820591.6938677,
+          "raw_output": "def merge_sort(arr):\n    \"\"\"\n    Function to sort an array using merge sort algorithm.\n    :param arr: List of integers\n    :return: Sorted list of integers\n    \"\"\"\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = arr[:mid]\n    right_half = arr[mid:]\n\n    return merge(merge_sort(left_half), merge_sort(right_half))\n\n\ndef merge(left, right):\n    \"\"\"\n    Function to merge two sorted lists.\n    :param left: Sorted list of integers\n    :param right: Sorted list of integers\n    :return: Merged sorted list of integers\n    \"\"\"\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] <= right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    merged += left[left_index:]\n    merged += right[right_index:]\n\n    return merged",
+          "compliance": {
+            "compliant": false,
+            "details": {
+              "function_name": true,
+              "output_type": false,
+              "no_comments": true
             }
           },
-          "raw_output": "Here is a Python implementation of the merge sort algorithm:\n\n```python\ndef merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = arr[:mid]\n    right_half = arr[mid:]\n\n    return merge(merge_sort(left_half), merge_sort(right_half))\n\ndef merge(left, right):\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] <= right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    merged += left[left_index:]\n    merged += right[right_index:]\n\n    return merged\n```\n\nIn this implementation, the `merge_sort` function first checks if the input array has one or zero elements. If so, it simply returns the array as it is already sorted. If not, it splits the array into two halves and recursively sorts each half. The sorted halves are then merged together in sorted order using the `merge` function.\n\nThe `merge` function takes two sorted arrays and merges them into a single sorted array. It does this by repeatedly taking the smallest unprocessed element from either array and appending it to the result. Once all elements from one array have been processed, it appends all remaining elements from the other array to the result.",
-          "compliance": {
-            "function_name": false,
-            "output_type": false,
-            "no_comments": true
-          },
-          "final_output": "Here is a Python implementation of the merge sort algorithm:\n    ```python\n    def merge_sort(arr):\n        if len(arr) <= 1:\n            return arr\n            mid = len(arr) // 2\n            left_half = arr[:mid]\n            right_half = arr[mid:]\n            return merge(merge_sort(left_half), merge_sort(right_half))\n            def merge(left, right):\n                merged = []\n                left_index = 0\n                right_index = 0\n                while left_index < len(left) and right_index < len(right):\n                    if left[left_index] <= right[right_index]:\n                        merged.append(left[left_index])\n                        left_index += 1\n                        else:\n                            merged.append(right[right_index])\n                            right_index += 1\n                            merged += left[left_index:]\n                            merged += right[right_index:]\n                            return merged\n                            ```\n                            In this implementation, the `merge_sort` function first checks if the input array has one or zero elements. If so, it simply returns the array as it is already sorted. If not, it splits the array into two halves and recursively sorts each half. The sorted halves are then merged together in sorted order using the `merge` function.\n                            The `merge` function takes two sorted arrays and merges them into a single sorted array. It does this by repeatedly taking the smallest unprocessed element from either array and appending it to the result. Once all elements from one array have been processed, it appends all remaining elements from the other array to the result.",
-          "corrections": [
-            "determinism_repair_failed_syntax_error",
-            "compliance_violations_detected",
-            "canonicalization_stripped_comments_regex_fallback",
-            "canonicalization_basic_formatting_fallback"
-          ],
-          "status": "failed",
+          "final_output": "def merge_sort(arr):\n    \"\"\"\n    Function to sort an array using merge sort algorithm.\n    :param arr: List of integers\n    :return: Sorted list of integers\n    \"\"\"\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = arr[:mid]\n    right_half = arr[mid:]\n\n    return merge(merge_sort(left_half), merge_sort(right_half))\n\n\ndef merge(left, right):\n    \"\"\"\n    Function to merge two sorted lists.\n    :param left: Sorted list of integers\n    :param right: Sorted list of integers\n    :return: Merged sorted list of integers\n    \"\"\"\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] <= right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    merged += left[left_index:]\n    merged += right[right_index:]\n\n    return merged",
+          "corrections": [],
+          "status": "success",
           "processing_steps": [
             "raw_llm",
-            "compliance_check",
-            "canonicalization",
-            "repair"
-          ]
+            "compliance_check"
+          ],
+          "acceptance_report": {
+            "total_tests": 11,
+            "passed_tests": 8,
+            "failed_tests": 3,
+            "pass_rate": 0.7272727272727273,
+            "execution_time": 0.0018391609191894531,
+            "test_results": [
+              {
+                "name": "merge_sort_empty",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [],
+                "expected_output": []
+              },
+              {
+                "name": "merge_sort_single",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [
+                  5
+                ],
+                "expected_output": [
+                  5
+                ]
+              },
+              {
+                "name": "merge_sort_two",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [
+                  1,
+                  3
+                ],
+                "expected_output": [
+                  1,
+                  3
+                ]
+              },
+              {
+                "name": "merge_sort_basic",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [
+                  11,
+                  12,
+                  22,
+                  25,
+                  34,
+                  64,
+                  90
+                ],
+                "expected_output": [
+                  11,
+                  12,
+                  22,
+                  25,
+                  34,
+                  64,
+                  90
+                ]
+              },
+              {
+                "name": "merge_sort_already_sorted",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ],
+                "expected_output": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              },
+              {
+                "name": "merge_sort_reverse_sorted",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ],
+                "expected_output": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              },
+              {
+                "name": "merge_sort_duplicates",
+                "passed": true,
+                "execution_time": 0.0,
+                "error_message": null,
+                "actual_output": [
+                  1,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  5,
+                  6,
+                  9
+                ],
+                "expected_output": [
+                  1,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  5,
+                  6,
+                  9
+                ]
+              },
+              {
+                "name": "merge_sort_sorted",
+                "passed": false,
+                "execution_time": 0.0,
+                "error_message": "Execution error: object of type 'int' has no len()",
+                "actual_output": null,
+                "expected_output": null
+              },
+              {
+                "name": "merge_sort_same_length",
+                "passed": false,
+                "execution_time": 0.0,
+                "error_message": "Execution error: object of type 'int' has no len()",
+                "actual_output": null,
+                "expected_output": null
+              },
+              {
+                "name": "merge_sort_same_elements",
+                "passed": false,
+                "execution_time": 0.0,
+                "error_message": "Execution error: object of type 'int' has no len()",
+                "actual_output": null,
+                "expected_output": null
+              },
+              {
+                "name": "merge_sort_performance",
+                "passed": true,
+                "execution_time": 0.0018391609191894531,
+                "error_message": null,
+                "actual_output": "Execution time: 0.002s",
+                "expected_output": null
+              }
+            ],
+            "correctness_score": 0.7272727272727273
+          }
         }
       ],
-      "repeatability_score": 0.5
+      "repeatability_score": 0.0
     },
     {
       "family": "merge_sort",
@@ -494,106 +953,93 @@
       "runs": [
         {
           "run_id": 1,
-          "mode": "C",
           "family": "merge_sort",
           "variant": "B",
-          "config": {
-            "mode": "C",
-            "environment": {
-              "model_identifier": "gpt-4",
-              "temperature": 0.0,
-              "top_p": null,
-              "top_k": null,
-              "seed": 42,
-              "python_version": "3.12",
-              "black_version": "23.12.1",
-              "isort_version": "5.13.2",
-              "os_info": "Windows 11",
-              "contract_version": "1.0",
-              "canonicalization_policy_version": "1.0",
-              "cache_key": "2ea9a4c20e0c2f62"
-            },
-            "capabilities": {
-              "enable_caching": false,
-              "enable_contracts": true,
-              "enable_canonicalization": true,
-              "enable_repair": true,
-              "enable_replay": false
+          "mode": "C",
+          "timestamp": 1755820600.6933458,
+          "raw_output": "def merge_sort(arr):\n    \"\"\"\n    Function to sort an array using merge sort algorithm.\n    The function uses recursion to split the array into halves, sort them and merge them back.\n\n    Parameters:\n    arr (list): The array to be sorted.\n\n    Returns:\n    list: The sorted array.\n    \"\"\"\n\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = merge_sort(arr[:mid])\n    right_half = merge_sort(arr[mid:])\n\n    return merge(left_half, right_half)\n\n\ndef merge(left, right):\n    \"\"\"\n    Function to merge two sorted arrays into a single sorted array.\n\n    Parameters:\n    left (list): The left half of the array.\n    right (list): The right half of the array.\n\n    Returns:\n    list: The merged sorted array.\n    \"\"\"\n\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] <= right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    while left_index < len(left):\n        merged.append(left[left_index])\n        left_index += 1\n\n    while right_index < len(right):\n        merged.append(right[right_index])\n        right_index += 1\n\n    return merged",
+          "canonical_reference": "def merge_sort(n):\n    \"\"\"\n    recursion\n\n    Args:\n        n: Input parameter\n\n    Returns:\n        list: function\n    \"\"\"\n        # Canonical implementation structure\n    result = process_input(input_parameters)\n    return format_output(result)\n",
+          "compliance": {
+            "compliant": false,
+            "details": {
+              "function_name": true,
+              "output_type": false,
+              "no_comments": true
             }
           },
-          "raw_output": "Here is a Python implementation of the merge sort algorithm:\n\n```python\ndef merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = arr[:mid]\n    right_half = arr[mid:]\n\n    return merge(merge_sort(left_half), merge_sort(right_half))\n\ndef merge(left, right):\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] <= right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    # If there are remaining elements in left or right half, append them to the merged list\n    while left_index < len(left):\n        merged.append(left[left_index])\n        left_index += 1\n\n    while right_index < len(right):\n        merged.append(right[right_index])\n        right_index += 1\n\n    return merged\n```\n\nThis function works by recursively splitting the input array into two halves until each half contains only one element. Then, it merges these halves back together in sorted order. The `merge` function is responsible for merging two sorted arrays into one sorted array.",
-          "compliance": {
-            "function_name": false,
-            "output_type": false,
-            "no_comments": false
-          },
-          "final_output": "Here is a Python implementation of the merge sort algorithm:\n    ```python\n    def merge_sort(arr):\n        if len(arr) <= 1:\n            return arr\n            mid = len(arr) // 2\n            left_half = arr[:mid]\n            right_half = arr[mid:]\n            return merge(merge_sort(left_half), merge_sort(right_half))\n            def merge(left, right):\n                merged = []\n                left_index = 0\n                right_index = 0\n                while left_index < len(left) and right_index < len(right):\n                    if left[left_index] <= right[right_index]:\n                        merged.append(left[left_index])\n                        left_index += 1\n                        else:\n                            merged.append(right[right_index])\n                            right_index += 1\n                            while left_index < len(left):\n                                merged.append(left[left_index])\n                                left_index += 1\n                                while right_index < len(right):\n                                    merged.append(right[right_index])\n                                    right_index += 1\n                                    return merged\n                                    ```\n                                    This function works by recursively splitting the input array into two halves until each half contains only one element. Then, it merges these halves back together in sorted order. The `merge` function is responsible for merging two sorted arrays into one sorted array.",
-          "corrections": [
-            "determinism_repair_failed_syntax_error",
-            "compliance_violations_detected",
-            "canonicalization_stripped_comments_regex_fallback",
-            "canonicalization_basic_formatting_fallback"
-          ],
-          "status": "failed",
+          "transformation_success": true,
+          "final_output": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n        mid = len(arr) // 2\n        left_half = merge_sort(arr[:mid])\n        right_half = merge_sort(arr[mid:])\n        return merge(left_half, right_half)\n        def merge(left, right):\n            merged = []\n            left_index = 0\n            right_index = 0\n            while left_index < len(left) and right_index < len(right):\n                if left[left_index] <= right[right_index]:\n                    merged.append(left[left_index])\n                    left_index += 1\n                    else:\n                        merged.append(right[right_index])\n                        right_index += 1\n                        while left_index < len(left):\n                            merged.append(left[left_index])\n                            left_index += 1\n                            while right_index < len(right):\n                                merged.append(right[right_index])\n                                right_index += 1\n                                return merged",
+          "corrections": [],
+          "status": "success",
           "processing_steps": [
             "raw_llm",
             "compliance_check",
-            "canonicalization",
-            "repair"
-          ]
+            "canonicalization"
+          ],
+          "acceptance_report": {
+            "total_tests": 1,
+            "passed_tests": 0,
+            "failed_tests": 1,
+            "pass_rate": 0.0,
+            "execution_time": 0.0,
+            "test_results": [
+              {
+                "name": "critical_error",
+                "passed": false,
+                "execution_time": 0.0,
+                "error_message": "Code execution failed: invalid syntax (<string>, line 16)",
+                "actual_output": null,
+                "expected_output": null
+              }
+            ],
+            "correctness_score": 0.0
+          }
         },
         {
           "run_id": 2,
-          "mode": "C",
           "family": "merge_sort",
           "variant": "B",
-          "config": {
-            "mode": "C",
-            "environment": {
-              "model_identifier": "gpt-4",
-              "temperature": 0.0,
-              "top_p": null,
-              "top_k": null,
-              "seed": 42,
-              "python_version": "3.12",
-              "black_version": "23.12.1",
-              "isort_version": "5.13.2",
-              "os_info": "Windows 11",
-              "contract_version": "1.0",
-              "canonicalization_policy_version": "1.0",
-              "cache_key": "2ea9a4c20e0c2f62"
-            },
-            "capabilities": {
-              "enable_caching": false,
-              "enable_contracts": true,
-              "enable_canonicalization": true,
-              "enable_repair": true,
-              "enable_replay": false
+          "mode": "C",
+          "timestamp": 1755820610.2675617,
+          "raw_output": "def merge_sort(arr):\n    \"\"\"\n    Function to sort an array using merge sort algorithm.\n    :param arr: list of numbers\n    :return: sorted list of numbers\n    \"\"\"\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = arr[:mid]\n    right_half = arr[mid:]\n\n    return merge(merge_sort(left_half), merge_sort(right_half))\n\n\ndef merge(left, right):\n    \"\"\"\n    Function to merge two sorted lists.\n    :param left: sorted list of numbers\n    :param right: sorted list of numbers\n    :return: merged sorted list of numbers\n    \"\"\"\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    while left_index < len(left):\n        merged.append(left[left_index])\n        left_index += 1\n\n    while right_index < len(right):\n        merged.append(right[right_index])\n        right_index += 1\n\n    return merged",
+          "compliance": {
+            "compliant": false,
+            "details": {
+              "function_name": true,
+              "output_type": false,
+              "no_comments": true
             }
           },
-          "raw_output": "Here is a Python implementation of the merge sort algorithm:\n\n```python\ndef merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = arr[:mid]\n    right_half = arr[mid:]\n\n    return merge(merge_sort(left_half), merge_sort(right_half))\n\ndef merge(left, right):\n    merged = []\n    left_index = 0\n    right_index = 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] <= right[right_index]:\n            merged.append(left[left_index])\n            left_index += 1\n        else:\n            merged.append(right[right_index])\n            right_index += 1\n\n    merged.extend(left[left_index:])\n    merged.extend(right[right_index:])\n\n    return merged\n```\n\nIn this implementation, the `merge_sort` function first checks if the input array has one or zero elements. If so, it simply returns the array as it is already sorted. If the array has more than one element, it splits the array into two halves and recursively sorts each half. The sorted halves are then merged together in sorted order using the `merge` function.\n\nThe `merge` function takes two sorted arrays and merges them into a single sorted array. It does this by repeatedly taking the smallest remaining element from either array and appending it to the merged array. Once all elements from one array have been added to the merged array, it appends all remaining elements from the other array.",
-          "compliance": {
-            "function_name": false,
-            "output_type": false,
-            "no_comments": true
-          },
-          "final_output": "Here is a Python implementation of the merge sort algorithm:\n    ```python\n    def merge_sort(arr):\n        if len(arr) <= 1:\n            return arr\n            mid = len(arr) // 2\n            left_half = arr[:mid]\n            right_half = arr[mid:]\n            return merge(merge_sort(left_half), merge_sort(right_half))\n            def merge(left, right):\n                merged = []\n                left_index = 0\n                right_index = 0\n                while left_index < len(left) and right_index < len(right):\n                    if left[left_index] <= right[right_index]:\n                        merged.append(left[left_index])\n                        left_index += 1\n                        else:\n                            merged.append(right[right_index])\n                            right_index += 1\n                            merged.extend(left[left_index:])\n                            merged.extend(right[right_index:])\n                            return merged\n                            ```\n                            In this implementation, the `merge_sort` function first checks if the input array has one or zero elements. If so, it simply returns the array as it is already sorted. If the array has more than one element, it splits the array into two halves and recursively sorts each half. The sorted halves are then merged together in sorted order using the `merge` function.\n                            The `merge` function takes two sorted arrays and merges them into a single sorted array. It does this by repeatedly taking the smallest remaining element from either array and appending it to the merged array. Once all elements from one array have been added to the merged array, it appends all remaining elements from the other array.",
-          "corrections": [
-            "determinism_repair_failed_syntax_error",
-            "compliance_violations_detected",
-            "canonicalization_stripped_comments_regex_fallback",
-            "canonicalization_basic_formatting_fallback"
-          ],
-          "status": "failed",
+          "transformation_success": true,
+          "final_output": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n        mid = len(arr) // 2\n        left_half = arr[:mid]\n        right_half = arr[mid:]\n        return merge(merge_sort(left_half), merge_sort(right_half))\n        def merge(left, right):\n            merged = []\n            left_index = 0\n            right_index = 0\n            while left_index < len(left) and right_index < len(right):\n                if left[left_index] < right[right_index]:\n                    merged.append(left[left_index])\n                    left_index += 1\n                    else:\n                        merged.append(right[right_index])\n                        right_index += 1\n                        while left_index < len(left):\n                            merged.append(left[left_index])\n                            left_index += 1\n                            while right_index < len(right):\n                                merged.append(right[right_index])\n                                right_index += 1\n                                return merged",
+          "corrections": [],
+          "status": "success",
           "processing_steps": [
             "raw_llm",
             "compliance_check",
-            "canonicalization",
-            "repair"
-          ]
+            "canonicalization"
+          ],
+          "acceptance_report": {
+            "total_tests": 1,
+            "passed_tests": 0,
+            "failed_tests": 1,
+            "pass_rate": 0.0,
+            "execution_time": 0.0,
+            "test_results": [
+              {
+                "name": "critical_error",
+                "passed": false,
+                "execution_time": 0.0,
+                "error_message": "Code execution failed: invalid syntax (<string>, line 16)",
+                "actual_output": null,
+                "expected_output": null
+              }
+            ],
+            "correctness_score": 0.0
+          }
         }
       ],
-      "repeatability_score": 0.5
+      "repeatability_score": 0.0
     }
   ]
 }

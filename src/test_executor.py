@@ -93,7 +93,8 @@ class TestExecutor:
         
         # Contract compliance check
         if config.enable_contracts:
-            is_compliant, compliance_details = check_compliance(raw_output, contract)
+            compliance_details = check_compliance(raw_output, contract)
+            is_compliant = all(compliance_details.values())
             result["compliance"] = {"compliant": is_compliant, "details": compliance_details}
             if not is_compliant:
                 print(f"   Contract compliance: FAILED - {compliance_details}")
@@ -102,8 +103,10 @@ class TestExecutor:
         
         # Canonicalization with reference-based transformation
         if config.enable_canonicalization and canonical_reference:
-            if config.mode == TestMode.CANONICALIZE_WITH_REPAIR:
-                final_output, transformation_success = canonicalize_code(raw_output, canonical_reference, contract)
+            if config.mode == TestMode.FULL_SKYT:
+                canonicalization_result = canonicalize_code(raw_output, contract)
+                final_output = canonicalization_result.canonical_code
+                transformation_success = True  # canonicalize_code returns CanonicalizationResult, not tuple
             else:
                 final_output, transformation_success = self._transform_to_canonical_reference(
                     raw_output, canonical_reference, contract
@@ -115,7 +118,7 @@ class TestExecutor:
                 print(f"   Canonical transformation: FAILED - using best effort")
         
         # Repair if needed
-        if config.enable_repair and config.mode != TestMode.CANONICALIZE_WITH_REPAIR:
+        if config.enable_repair and config.mode != TestMode.FULL_SKYT:
             final_output, corrections, status = smart_normalize_code(final_output, contract)
             print(f"   Repair status: {status}")
         
@@ -180,7 +183,7 @@ class TestExecutor:
             steps.append("compliance_check")
         if config.enable_canonicalization:
             steps.append("canonicalization")
-        if config.enable_repair and config.mode != TestMode.CANONICALIZE_WITH_REPAIR:
+        if config.enable_repair and config.mode != TestMode.FULL_SKYT:
             steps.append("repair")
         if config.enable_replay:
             steps.append("cache_replay")

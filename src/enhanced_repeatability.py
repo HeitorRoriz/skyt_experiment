@@ -3,10 +3,16 @@ Enhanced Repeatability Calculation with Correctness Validation
 Measures true repeatability by combining structural similarity with functional correctness
 """
 
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Any, Tuple, Optional
 from dataclasses import dataclass
 from collections import defaultdict, Counter
 import statistics
+
+# Import for proper type hints
+try:
+    from acceptance_test_runner import AcceptanceTestReport
+except ImportError:
+    AcceptanceTestReport = Any
 
 @dataclass
 class EnhancedResult:
@@ -14,7 +20,7 @@ class EnhancedResult:
     run_id: int
     canonical_hash: str
     behavior_hash: str
-    acceptance_report: Dict[str, Any]
+    acceptance_report: Optional[AcceptanceTestReport]  # AcceptanceTestReport object or None
     correctness_score: float
     is_valid: bool  # Passes quality gates
 
@@ -104,9 +110,13 @@ class EnhancedRepeatabilityCalculator:
         
         for i, result in enumerate(test_results):
             # Extract acceptance report
-            acceptance_report = result.get("acceptance_report", {})
-            correctness_score = acceptance_report.get("correctness_score", 0.0)
-            pass_rate = acceptance_report.get("pass_rate", 0.0)
+            acceptance_report = result.get("acceptance_report", None)
+            if acceptance_report and hasattr(acceptance_report, 'correctness_score'):
+                correctness_score = acceptance_report.correctness_score
+                pass_rate = acceptance_report.pass_rate
+            else:
+                correctness_score = 0.0
+                pass_rate = 0.0
             
             # Apply quality gates
             is_valid = (
@@ -188,14 +198,18 @@ class EnhancedRepeatabilityCalculator:
         
         return max_weighted_score / total_weight if total_weight > 0 else 0.0
     
-    def _all_property_tests_pass(self, acceptance_report: Dict[str, Any]) -> bool:
+    def _all_property_tests_pass(self, acceptance_report) -> bool:
         """Check if all property tests passed (critical for correctness)"""
-        test_results = acceptance_report.get("test_results", [])
+        if not acceptance_report:
+            return True  # If no acceptance tests, consider as passing
         
-        for test_result in test_results:
-            test_name = test_result.get("name", "")
-            if "property" in test_name.lower() and not test_result.get("passed", False):
-                return False
+        if not hasattr(acceptance_report, 'test_results'):
+            return True
+        
+        for test_result in acceptance_report.test_results:
+            if hasattr(test_result, 'name') and hasattr(test_result, 'passed'):
+                if "property" in test_result.name.lower() and not test_result.passed:
+                    return False
         
         return True
     
@@ -213,7 +227,7 @@ class EnhancedRepeatabilityCalculator:
                     failure_types["low_correctness"] += 1
                 
                 acceptance_report = result.acceptance_report
-                pass_rate = acceptance_report.get("pass_rate", 0.0)
+                pass_rate = acceptance_report.pass_rate if hasattr(acceptance_report, 'pass_rate') else 0.0
                 if pass_rate < self.min_pass_rate:
                     failure_types["low_pass_rate"] += 1
                 

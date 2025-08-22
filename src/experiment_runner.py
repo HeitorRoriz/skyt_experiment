@@ -73,16 +73,16 @@ class ExperimentRunner:
                         canonical_reference = result['canonical_reference']
                 
                 # Calculate repeatability for this mode
-                repeatability = calculate_enhanced_repeatability(mode_results)
-                print_repeatability_report(repeatability)
-                print(f"\n      Mode {mode_config.mode.value} Results: {repeatability['score']:.2f} repeatability ({num_runs} runs)")
+                repeatability_metrics = calculate_enhanced_repeatability(mode_results)
+                print_repeatability_report(repeatability_metrics)
+                print(f"\n      Mode {mode_config.mode.value} Results: {repeatability_metrics.valid_repeatability:.2f} repeatability ({num_runs} runs)")
                 
                 results["results"].append({
                     "family": prompt.family,
                     "variant": prompt.variant,
                     "mode": mode_config.mode.value,
                     "runs": mode_results,
-                    "repeatability_score": repeatability['score']
+                    "repeatability_score": repeatability_metrics.valid_repeatability
                 })
         
         # Save results
@@ -93,8 +93,25 @@ class ExperimentRunner:
         """Save complete experiment results"""
         results_file = self.output_dir / "ablation_study_results.json"
         
+        # Convert AcceptanceTestReport objects to dictionaries for JSON serialization
+        def convert_for_json(obj):
+            if hasattr(obj, '__dict__'):
+                # Convert dataclass/object to dict recursively
+                result = {}
+                for key, value in obj.__dict__.items():
+                    result[key] = convert_for_json(value)
+                return result
+            elif isinstance(obj, list):
+                return [convert_for_json(item) for item in obj]
+            elif isinstance(obj, dict):
+                return {key: convert_for_json(value) for key, value in obj.items()}
+            else:
+                return obj
+        
+        serializable_results = convert_for_json(results)
+        
         with open(results_file, 'w') as f:
-            json.dump(results, f, indent=2)
+            json.dump(serializable_results, f, indent=2)
         
         print(f"Experiment results saved to: {results_file}")
 
