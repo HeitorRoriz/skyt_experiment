@@ -3,12 +3,12 @@
 from typing import Dict, Any, List
 from contract import PromptContract
 from test_prompts import AlgorithmPrompt
-from llm_client import LLMClient
+from llm import call_llm_simple
 
 class DualIntentCapture:
     """Advanced dual intent capture with LLM-based WHY extraction"""
     
-    def __init__(self, llm_client: LLMClient = None):
+    def __init__(self, llm_client=None):
         self.llm_client = llm_client
     
     def capture_user_intent_with_llm(self, prompt: AlgorithmPrompt, contract: PromptContract) -> Dict[str, Any]:
@@ -162,11 +162,8 @@ Provide 3-5 concise bullet points explaining the user's likely motivations:
 """
 
         try:
-            llm_response = self.llm_client.generate_code(
-                analysis_prompt,
-                temperature=0.3,  # Low temperature for consistent analysis
-                seed=42
-            )
+            # Use direct llm.py call for analysis
+            llm_response = call_llm_simple(analysis_prompt)
             
             # Parse LLM response into structured format
             why_reasoning = self._parse_llm_why_response(llm_response)
@@ -222,7 +219,7 @@ Provide 3-5 concise bullet points explaining the user's likely motivations:
         
         return "\n".join(lines) if lines else "- Provide correct and reliable behavior"
 
-def capture_dual_intent_with_llm(prompt: AlgorithmPrompt, contract: PromptContract, llm_client: LLMClient = None) -> Dict[str, Any]:
+def capture_dual_intent_with_llm(prompt: AlgorithmPrompt, contract: PromptContract, llm_client=None) -> Dict[str, Any]:
     """Factory function for dual intent capture with LLM enhancement"""
     capturer = DualIntentCapture(llm_client)
     return capturer.capture_user_intent_with_llm(prompt, contract)
