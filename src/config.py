@@ -1,35 +1,21 @@
+# src/config.py
+"""
+Centralized configuration for SKYT experiment
+"""
+
 import os
 
-# OpenAI API key from environment variable
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+# OpenAI Configuration
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+DEFAULT_MODEL = "gpt-4"
+DEFAULT_TEMPERATURE = 0.0
 
-# Contracts directory (where all JSON contracts are stored)
-CONTRACTS_DIR = "contracts"
+# Metrics Version
+METRICS_VERSION = "simplified_v1"
 
-# Results directory (where all results are stored)
+# Experiment Settings
+NUM_RUNS = 5
 RESULTS_DIR = "results"
 
-# Model and temperature settings
-MODEL = "gpt-3.5-turbo"
-TEMPERATURE = 0.0  # Change here to experiment with different temperatures
-
-# Experiment settings
-NUM_RUNS = 5
-MAX_ATTEMPTS = 3
-DELAY_SECONDS = 2
-
-# File paths
-RESULTS_FILE = "outputs/results.xlsx"
-EXPERIMENT_MATRIX_FILE = "outputs/experiment_matrix.xlsx"
-
-# Prompt contract settings
-USE_PROMPT_CONTRACT = True  # Set to False to use simple prompts without contract structure
-
-# Experiment templates (prompts)
-EXPERIMENT_TEMPLATES = [
-    {"prompt": "Write a Python function to generate the first 20 Fibonacci numbers."},
-    {"prompt": "Write a Python function that returns the first 20 Fibonacci numbers using recursion."},
-    {"prompt": "Generate Python code to compute the first 20 Fibonacci numbers and return them as a list."},
-    {"prompt": "Create a Python function named fibonacci that outputs the first 20 Fibonacci numbers."},
-    {"prompt": "Implement a recursive Python function to produce the first 20 Fibonacci numbers."},
-] 
+# Anchor Oracle for Fibonacci 20
+FIBONACCI_20_EXPECTED = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181] 

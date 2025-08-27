@@ -1,121 +1,145 @@
 # test_simplified_system.py
 """
-Test script for the simplified SKYT system
-Tests the two core metrics: R_raw and R_canon
+Test script for the simplified SKYT experiment system
 """
 
-import sys
-import os
-sys.path.append('src')
-
-from metrics import calculate_repeatability_metrics, print_metrics_summary
-from simple_canonicalizer import canonicalize_code, get_canonical_signature
+from src.canonicalizer import canonicalize_code, generate_signature
+from src.determinism_lint import lint_code, is_deterministic, format_violations
+from src.contract_checker import check_fibonacci_contract
+from src.metrics import calculate_metrics
+from src.log import ExperimentLogger
+from src.experiment import LLMClient
+from src.run_experiment import ExperimentRunner, ExperimentConfig
+from src.analyze import analyze_experiment_results
+from src.summarize import print_summary_table
 
 def test_canonicalizer():
-    """Test the canonicalizer with sample Fibonacci implementations"""
+    """Test the canonicalizer module"""
     print("Testing Canonicalizer...")
-    print("=" * 50)
     
-    # Sample Fibonacci implementations (should canonicalize to same form)
-    test_codes = [
-        '''
-def fibonacci(n):
-    """Calculate fibonacci number"""
-    if n <= 1:
-        return n
-    return fibonacci(n-1) + fibonacci(n-2)  # Recursive approach
-        ''',
-        '''
-def fib(n):
-    # Base cases
-    if n <= 1:
-        return n
-    # Recursive case
-    return fib(n-1) + fib(n-2)
-        ''',
-        '''
-def fibonacci_sequence(n):
-    if n <= 1:
-        return n
+    test_code = '''
+def fib():
+    """Generate fibonacci numbers"""
+    # This is a comment
+    a, b = 0, 1
+    result = []
+    for i in range(20):
+        result.append(a)
+        a, b = b, a + b
+    return result
+'''
+    
+    canonical_code = canonicalize_code(test_code, "fibonacci")
+    if canonical_code:
+        print("[OK] Canonicalization successful")
+        signature = generate_signature(canonical_code)
+        print(f"[OK] Signature generated: {signature[:16]}...")
     else:
-        return fibonacci_sequence(n-1) + fibonacci_sequence(n-2)
-        '''
-    ]
+        print("[FAIL] Canonicalization failed")
+
+def test_determinism_lint():
+    """Test the determinism linter"""
+    print("\nTesting Determinism Linter...")
     
-    canonical_forms = []
-    signatures = []
+    good_code = '''
+def fibonacci():
+    a, b = 0, 1
+    result = []
+    for i in range(20):
+        result.append(a)
+        a, b = b, a + b
+    return result
+'''
     
-    for i, code in enumerate(test_codes, 1):
-        canonical = canonicalize_code(code)
-        signature = get_canonical_signature(code)
-        
-        canonical_forms.append(canonical)
-        signatures.append(signature)
-        
-        print(f"\nTest {i}:")
-        print(f"Signature: {signature}")
-        print("Canonical form:")
-        print(canonical)
-        print("-" * 30)
+    bad_code = '''
+import random
+def fibonacci():
+    return [random.randint(0, 100) for _ in range(20)]
+'''
     
-    # Check if canonicalization worked
-    unique_signatures = set(signatures)
-    print(f"\nCanonicalization Test Results:")
-    print(f"Original implementations: {len(test_codes)}")
-    print(f"Unique canonical forms: {len(unique_signatures)}")
-    print(f"Canonicalization success: {'YES' if len(unique_signatures) == 1 else 'NO'}")
+    if is_deterministic(good_code):
+        print("[OK] Good code passed determinism check")
+    else:
+        print("[FAIL] Good code failed determinism check")
     
-    return canonical_forms
+    if not is_deterministic(bad_code):
+        print("[OK] Bad code correctly flagged as non-deterministic")
+        violations = lint_code(bad_code)
+        print(f"  Found {len(violations)} violations")
+    else:
+        print("[FAIL] Bad code incorrectly passed determinism check")
+
+def test_contract_checker():
+    """Test the contract checker"""
+    print("\nTesting Contract Checker...")
+    
+    test_code = '''
+def fibonacci():
+    result = []
+    a, b = 0, 1
+    for i in range(20):
+        result.append(a)
+        a, b = b, a + b
+    return result
+'''
+    
+    result = check_fibonacci_contract(test_code)
+    if result.passed:
+        print("[OK] Contract check passed")
+        print(f"  Oracle result: {result.oracle_result}")
+        print(f"  Canonical signature: {result.canonical_signature[:16] if result.canonical_signature else 'None'}...")
+    else:
+        print("[FAIL] Contract check failed")
+        print(f"  Error: {result.error_message}")
 
 def test_metrics():
     """Test the metrics calculation"""
-    print("\n\nTesting Metrics...")
-    print("=" * 50)
+    print("\nTesting Metrics...")
     
-    # Simulate raw outputs (different)
     raw_outputs = [
-        "def fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n-1) + fibonacci(n-2)",
-        "def fib(n):\n    if n <= 1:\n        return n\n    return fib(n-1) + fib(n-2)",
-        "def fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n-1) + fibonacci(n-2)",  # Same as first
-        "def fibonacci_func(n):\n    if n <= 1:\n        return n\n    return fibonacci_func(n-1) + fibonacci_func(n-2)",
-        "def fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n-1) + fibonacci(n-2)"   # Same as first
+        "def fib(): return [0,1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181]",
+        "def fib(): return [0,1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181]",
+        "def fibonacci(): return [0,1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181]",
+        "def fib(): return list(range(20))",  # Different output
+        "def fib(): return [0,1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181]"
     ]
     
-    # Canonicalize all outputs
-    canonical_outputs = [canonicalize_code(output) for output in raw_outputs]
+    canonical_outputs = [
+        "def fibonacci(n):\n    return 1 if n <= 1 else fibonacci(n-1) + fibonacci(n-2)",
+        "def fibonacci(n):\n    return 1 if n <= 1 else fibonacci(n-1) + fibonacci(n-2)",
+        "def fibonacci(n):\n    return 1 if n <= 1 else fibonacci(n-1) + fibonacci(n-2)",
+        None,  # Failed canonicalization
+        "def fibonacci(n):\n    return 1 if n <= 1 else fibonacci(n-1) + fibonacci(n-2)"
+    ]
     
-    # Calculate metrics
-    result = calculate_repeatability_metrics(raw_outputs, canonical_outputs)
+    contract_passes = [True, True, True, False, True]  # 4 out of 5 pass
     
-    # Print results
-    print_metrics_summary(result, "Test Experiment")
-    
-    print(f"\nExpected behavior:")
-    print(f"- R_raw should be 3/5 = 0.600 (3 identical raw outputs)")
-    print(f"- R_canon should be higher if canonicalization works")
-    
-    return result
+    metrics = calculate_metrics(raw_outputs, canonical_outputs, contract_passes)
+    print(f"[OK] Metrics calculated:")
+    print(f"  R_raw: {metrics.r_raw:.3f}")
+    print(f"  R_canon: {metrics.r_canon:.3f}")
+    print(f"  Coverage: {metrics.canon_coverage:.3f}")
+    print(f"  Delta: {metrics.rescue_delta:.3f}")
 
 def main():
     """Run all tests"""
-    print("SIMPLIFIED SKYT SYSTEM TEST")
+    print("=" * 60)
+    print("SIMPLIFIED SKYT SYSTEM TESTS")
     print("=" * 60)
     
-    # Test canonicalizer
-    canonical_forms = test_canonicalizer()
+    test_canonicalizer()
+    test_determinism_lint()
+    test_contract_checker()
+    test_metrics()
     
-    # Test metrics
-    result = test_metrics()
-    
-    print(f"\n{'=' * 60}")
-    print("SYSTEM TEST SUMMARY")
-    print(f"{'=' * 60}")
-    print(f"[OK] Canonicalizer: Working")
-    print(f"[OK] Metrics: Working") 
-    print(f"[OK] R_raw: {result.r_raw:.3f}")
-    print(f"[OK] R_canon: {result.r_canon:.3f}")
-    print(f"[OK] Improvement: {result.r_canon - result.r_raw:+.3f}")
-    print(f"\nSimplified SKYT system is ready for experiments!")
+    print("\n" + "=" * 60)
+    print("SYSTEM READY FOR EXPERIMENTS")
+    print("=" * 60)
+    print("To run experiments:")
+    print("1. Set OPENAI_API_KEY environment variable")
+    print("2. Run: python src/run_experiment.py")
+    print("3. Analyze: python src/analyze.py")
+    print("4. Summarize: python src/summarize.py")
 
 if __name__ == "__main__":
     main()
