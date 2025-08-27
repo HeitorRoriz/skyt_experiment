@@ -1,61 +1,44 @@
-{
-  "templates": [
-    {
-      "name": "fibonacci_anchor",
-      "prompt": "Write a Python function called fibonacci that takes an integer n and returns the nth Fibonacci number.",
-      "expected_function": "fibonacci",
-      "oracle": "fibonacci20",
-      "description": "Anchor task with oracle for validation"
-    },
-    {
-      "name": "fibonacci_recursive", 
-      "prompt": "Write a recursive Python function called fibonacci that takes an integer n and returns the nth Fibonacci number.",
-      "expected_function": "fibonacci",
-      "oracle": null,
-      "description": "Recursive implementation variant"
-    },
-    {
-      "name": "fibonacci_iterative",
-      "prompt": "Write an iterative Python function called fibonacci that takes an integer n and returns the nth Fibonacci number using a loop.",
-      "expected_function": "fibonacci", 
-      "oracle": null,
-      "description": "Iterative implementation variant"
-    },
-    {
-      "name": "fibonacci_list",
-      "prompt": "Write a Python function called fibonacci that takes an integer n and returns a list of the first n Fibonacci numbers.",
-      "expected_function": "fibonacci",
-      "oracle": null,
-      "description": "List output variant"
-    },
-    {
-      "name": "merge_sort",
-      "prompt": "Write a Python function called merge_sort that takes a list of integers and returns a sorted list using the merge sort algorithm.",
-      "expected_function": "merge_sort",
-      "oracle": null,
-      "description": "Merge sort algorithm"
-    },
-    {
-      "name": "binary_search",
-      "prompt": "Write a Python function called binary_search that takes a sorted list and a target value, returning the index of the target or -1 if not found.",
-      "expected_function": "binary_search", 
-      "oracle": null,
-      "description": "Binary search algorithm"
-    }
-  ],
-  "oracles": {
-    "fibonacci20": {
-      "type": "golden_output",
-      "description": "Expected output for fibonacci(20)",
-      "test_input": 20,
-      "expected_output": 6765,
-      "validation": "assert fibonacci(20) == 6765"
-    }
+[
+  {
+    "id": "anchor_fib_v1",
+    "prompt": "Generate a Python function named fibonacci() that returns a list of the first 20 Fibonacci numbers using recursion. Output only code.",
+    "enforce_function_name": "fibonacci",
+    "oracle": "fibonacci20"
   },
-  "config": {
-    "default_runs": 50,
-    "default_temperatures": [0.0, 0.3],
-    "default_model": "gpt-3.5-turbo",
-    "max_tokens": 500
+  {
+    "id": "slugify_v1",
+    "prompt": "Write a Python function slugify(texts) that receives a list of strings and returns a new list where each string is converted to a URL slug: remove accents, trim, collapse internal whitespace to single spaces, lowercase, replace spaces with '-', keep letters, numbers, and '-' only. Return code only.",
+    "enforce_function_name": "slugify",
+    "oracle": "slugify_basic"
+  },
+  {
+    "id": "slugify_v2",
+    "prompt": "Python code only. Implement slugify(texts) -> list[str] with the exact behavior: normalize accents (NFKD), remove diacritics, strip, collapse spaces, lower, space->'-', delete characters not in [a-z0-9-].",
+    "enforce_function_name": "slugify",
+    "oracle": "slugify_basic"
+  },
+  {
+    "id": "csvjson_v1",
+    "prompt": "Create a Python function csv_to_json(csv_text) that parses a small CSV (first row is header) and returns a list of dicts with string values. Do not import external libraries. Return only the code.",
+    "enforce_function_name": "csv_to_json",
+    "oracle": "csv_to_json_basic"
+  },
+  {
+    "id": "csvjson_v2",
+    "prompt": "Python code only. Implement csv_to_json(csv_text)->list[dict[str,str]] using built-ins. Preserve row order. Header defines keys.",
+    "enforce_function_name": "csv_to_json",
+    "oracle": "csv_to_json_basic"
+  },
+  {
+    "id": "brackets_v1",
+    "prompt": "Implement is_balanced(s) that returns True if (), [], {} are balanced using a stack; otherwise False. Code only.",
+    "enforce_function_name": "is_balanced",
+    "oracle": "balanced_brackets_basic"
+  },
+  {
+    "id": "brackets_v2",
+    "prompt": "Python only code. Provide is_balanced(s) using a stack. Parentheses (), [], {} must be properly nested.",
+    "enforce_function_name": "is_balanced",
+    "oracle": "balanced_brackets_basic"
   }
-}
+]

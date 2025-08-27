@@ -1,186 +1,97 @@
-# src/contract_checker.py
-"""
-Contract checker that combines:
-- Structural lint (determinism checking)
-- Canonicalization
-- Oracle execution (plug-in model)
-- Includes anchor oracle for fibonacci20
-- Defaults to pass-through when oracle is null
-"""
+from typing import Dict, Any, Optional, Tuple, List
+from .determinism_lint import check_determinism_rules
+from .canonicalizer import canonicalize_python
 
-import ast
-import sys
-from io import StringIO
-from typing import Optional, List, Any, Callable
-from dataclasses import dataclass
+_EXPECTED_FIB20 = [0,1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181]
 
-from .determinism_lint import lint_code, DeterminismViolation
-from .canonicalizer import canonicalize_with_signature
-from .config import FIBONACCI_20_EXPECTED
+def _safe_exec(py_source: str, ns: Dict[str, Any]) -> None:
+    ns["__builtins__"] = {
+        "range": range, "len": len, "print": print, "list": list, "dict": dict,
+        "tuple": tuple, "set": set, "abs": abs, "min": min, "max": max, "sum": sum, "ord": ord, "chr": chr
+    }
+    exec(py_source, ns, ns)
 
-
-@dataclass
-class ContractResult:
-    """Result of contract checking"""
-    passed: bool
-    canonical_code: Optional[str]
-    canonical_signature: Optional[str]
-    determinism_violations: List[DeterminismViolation]
-    structural_ok: bool
-    canonicalization_ok: bool
-    oracle_result: Optional[bool]
-    oracle_output: Optional[Any]
-    contract_pass: bool
-    error_message: Optional[str]
-
-
-def fibonacci_oracle(code: str) -> tuple[bool, Optional[Any]]:
-    """
-    Anchor oracle for fibonacci20 - executes code and checks if it produces
-    the expected first 20 Fibonacci numbers
-    
-    Returns:
-        (success, output) where success indicates if output matches expected
-    """
+def _oracle_fibonacci20(py_source: str, fn_name: str) -> Tuple[bool,str]:
+    ns: Dict[str, Any] = {}
     try:
-        # Create a safe execution environment with restricted builtins
-        safe_builtins = {
-            '__builtins__': {
-                'len': len, 'range': range, 'list': list, 'int': int,
-                'float': float, 'str': str, 'bool': bool, 'tuple': tuple,
-                'dict': dict, 'set': set, 'abs': abs, 'max': max, 'min': min,
-                'sum': sum, 'enumerate': enumerate, 'zip': zip
-            }
-        }
-        namespace = safe_builtins.copy()
-        
-        # Execute the code
-        exec(code, namespace)
-        
-        # Try to find and call the fibonacci function
-        if 'fibonacci' not in namespace:
-            return False, "No fibonacci function found"
-        
-        fibonacci_func = namespace['fibonacci']
-        
-        # Call the function (assume it takes no parameters for fibonacci20)
-        try:
-            result = fibonacci_func()
-        except TypeError:
-            # Maybe it takes a parameter (number of terms)
-            try:
-                result = fibonacci_func(20)
-            except:
-                return False, "Function call failed"
-        except:
-            return False, "Function execution failed"
-        
-        # Check if result matches expected fibonacci sequence
-        if isinstance(result, list) and result == FIBONACCI_20_EXPECTED:
-            return True, result
-        else:
-            return False, result
-            
+        _safe_exec(py_source, ns)
+        if fn_name not in ns or not callable(ns[fn_name]): return False, "Missing required function"
+        out = ns[fn_name]()
+        ok = (out == _EXPECTED_FIB20)
+        return ok, ("ok" if ok else f"Unexpected output: {out}")
     except Exception as e:
-        return False, f"Execution error: {str(e)}"
+        return False, f"Runtime error: {e}"
 
+def _oracle_slugify_basic(py_source: str, fn_name: str) -> Tuple[bool,str]:
+    tests = ["São  Paulo", "  SkYt  Project ", "a_b  c"]
+    expected = ["sao-paulo","skyt-project","a-b-c"]
+    ns: Dict[str, Any] = {}
+    try:
+        _safe_exec(py_source, ns)
+        if fn_name not in ns: return False, "Missing required function"
+        out = ns[fn_name](tests)
+        return (out == expected), ("ok" if out == expected else f"Unexpected: {out}")
+    except Exception as e:
+        return False, f"Runtime error: {e}"
 
-class ContractChecker:
-    """Main contract checker class"""
-    
-    def __init__(self, oracle: Optional[Callable[[str], tuple[bool, Optional[Any]]]] = None):
-        """
-        Initialize contract checker
-        
-        Args:
-            oracle: Optional oracle function for semantic checking
-                   If None, defaults to pass-through (always passes)
-        """
-        self.oracle = oracle
-    
-    def check_contract(self, code: str, target_function_name: str = "fibonacci") -> ContractResult:
-        """
-        Check code against contract requirements
-        
-        Args:
-            code: Python source code to check
-            target_function_name: Expected function name
-            
-        Returns:
-            ContractResult with all check results
-        """
-        # Step 1: Check determinism on raw code
-        violations = lint_code(code)
-        structural_ok = len(violations) == 0
-        
-        # Step 2: Attempt canonicalization (always try, even with violations)
-        canonical_code, canonical_signature = canonicalize_with_signature(code, target_function_name)
-        canonicalization_ok = canonical_code is not None
-        
-        # Step 3: Run oracle only if both structural and canonicalization passed
-        oracle_result = None
-        oracle_output = None
-        
-        if structural_ok and canonicalization_ok:
-            if self.oracle is not None:
-                oracle_result, oracle_output = self.oracle(canonical_code)
-            else:
-                # Pass-through when oracle is null
-                oracle_result = True
-                oracle_output = "Pass-through (no oracle)"
-        
-        # Final contract decision: structural_ok AND canonicalization_ok AND (oracle_pass OR oracle_none)
-        contract_pass = (
-            structural_ok and 
-            canonicalization_ok and 
-            (oracle_result is True or (oracle_result is None and self.oracle is None))
-        )
-        
-        # Generate error message if failed
-        error_message = None
-        if not contract_pass:
-            error_parts = []
-            if not structural_ok:
-                error_parts.append(f"{len(violations)} determinism violations")
-            if not canonicalization_ok:
-                error_parts.append("canonicalization failed")
-            if oracle_result is False:
-                error_parts.append(f"oracle failed: {oracle_output}")
-            error_message = "; ".join(error_parts)
-        
-        return ContractResult(
-            passed=contract_pass,
-            canonical_code=canonical_code,
-            canonical_signature=canonical_signature,
-            determinism_violations=violations,
-            structural_ok=structural_ok,
-            canonicalization_ok=canonicalization_ok,
-            oracle_result=oracle_result,
-            oracle_output=oracle_output,
-            contract_pass=contract_pass,
-            error_message=error_message
-        )
+def _oracle_csv_to_json_basic(py_source: str, fn_name: str) -> Tuple[bool,str]:
+    csv_text = "name,age\nAda,36\nTuring,41\n"
+    expected = [{"age":"36","name":"Ada"},{"age":"41","name":"Turing"}]
+    ns: Dict[str, Any] = {}
+    try:
+        _safe_exec(py_source, ns)
+        if fn_name not in ns: return False, "Missing required function"
+        out = ns[fn_name](csv_text)
+        # compare as sorted-by-keys strings for stability
+        def norm(d): return {k:str(d[k]) for k in sorted(d.keys())}
+        ok = [norm(x) for x in out] == [norm(x) for x in expected]
+        return ok, ("ok" if ok else f"Unexpected: {out}")
+    except Exception as e:
+        return False, f"Runtime error: {e}"
 
+def _oracle_balanced_brackets_basic(py_source: str, fn_name: str) -> Tuple[bool,str]:
+    cases = ["([]){}", "([)]", "{[()()]}", "((("]
+    expected = [True, False, True, False]
+    ns: Dict[str, Any] = {}
+    try:
+        _safe_exec(py_source, ns)
+        if fn_name not in ns: return False, "Missing required function"
+        out = [ns[fn_name](s) for s in cases]
+        return (out == expected), ("ok" if out == expected else f"Unexpected: {out}")
+    except Exception as e:
+        return False, f"Runtime error: {e}"
 
-def create_fibonacci_checker() -> ContractChecker:
-    """Create a contract checker with fibonacci oracle"""
-    return ContractChecker(oracle=fibonacci_oracle)
+def _run_oracle(py_source: str, fn_name: str, oracle: Optional[str]) -> Tuple[bool, str]:
+    if oracle is None:
+        return True, "no_oracle"
+    table = {
+        "fibonacci20": _oracle_fibonacci20,
+        "slugify_basic": _oracle_slugify_basic,
+        "csv_to_json_basic": _oracle_csv_to_json_basic,
+        "balanced_brackets_basic": _oracle_balanced_brackets_basic,
+    }
+    if oracle not in table:
+        return False, f"Unknown oracle: {oracle}"
+    return table[oracle](py_source, fn_name)
 
-
-def create_passthrough_checker() -> ContractChecker:
-    """Create a contract checker with no oracle (pass-through)"""
-    return ContractChecker(oracle=None)
-
-
-def check_fibonacci_contract(code: str) -> ContractResult:
-    """
-    Convenience function to check code against fibonacci contract
-    
-    Args:
-        code: Python source code to check
-        
-    Returns:
-        ContractResult with all check results
-    """
-    checker = create_fibonacci_checker()
-    return checker.check_contract(code, "fibonacci")
+def check_contract(py_source: str, enforce_function_name: Optional[str] = None, oracle: Optional[str] = None) -> Dict[str, Any]:
+    structural_errors = check_determinism_rules(py_source)
+    structural_ok = len(structural_errors) == 0
+    canon_code, canon_signature, canonicalization_ok = canonicalize_python(py_source, enforce_function_name=enforce_function_name)
+    if structural_ok and canonicalization_ok:
+        oracle_pass, oracle_msg = _run_oracle(py_source, enforce_function_name or "", oracle)
+    else:
+        oracle_pass, oracle_msg = False, "skipped_oracle_due_to_structure_or_canon_failure"
+    if oracle is None and structural_ok and canonicalization_ok:
+        oracle_pass, oracle_msg = True, "no_oracle"
+    contract_pass = structural_ok and canonicalization_ok and (oracle is None or oracle_pass)
+    return {
+        "structural_ok": structural_ok,
+        "structural_errors": structural_errors,
+        "canonicalization_ok": canonicalization_ok,
+        "oracle_pass": oracle_pass,
+        "oracle_msg": oracle_msg,
+        "canon_code": canon_code,
+        "canon_signature": canon_signature,
+        "contract_pass": contract_pass,
+    }
