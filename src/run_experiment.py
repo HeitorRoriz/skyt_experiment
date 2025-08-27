@@ -1,5 +1,6 @@
-import argparse, json, time
+import argparse, json, time, os
 from .log import log_row, sha256
+from .config import METRICS_VERSION
 from .contract_checker import check_contract
 from .metrics import r_raw, r_canon, canon_coverage, rescue_delta
 def run_suite(templates, runs, model, temperature, out_csv):
@@ -25,7 +26,7 @@ def run_suite(templates, runs, model, temperature, out_csv):
                 "canonicalization_ok": int(bool(chk["canonicalization_ok"])),
                 "contract_pass": int(bool(chk["contract_pass"])),
                 "notes": ";".join(chk["structural_errors"][:3]),
-                "metrics_version": "2025-08-26"
+                "metrics_version": METRICS_VERSION
             }
             rows.append(row); log_row(out_csv, row)
     return rows
@@ -39,6 +40,9 @@ if __name__ == "__main__":
     ap.add_argument("--temperature", type=float, default=0.0)
     ap.add_argument("--out_csv", default="outputs/results.csv")
     a = ap.parse_args()
+    # Ensure output directory exists
+    out_dir = os.path.dirname(a.out_csv) or "."
+    os.makedirs(out_dir, exist_ok=True)
     templates = json.load(open(a.templates, "r", encoding="utf-8"))
     rows = run_suite(templates, a.runs, a.model, a.temperature, a.out_csv)
     print("[SUMMARY]", summarize(rows))
