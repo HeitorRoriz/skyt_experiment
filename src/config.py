@@ -33,3 +33,8 @@ DISTANCE_WEIGHTS = {
     "w_effect": 0.2,  # Effect signature weight
     "w_env": 0.1      # Environment weight
 }
+
+# Environment enforcement defaults
+DEFAULT_ENV_ENFORCEMENT = "off"  # Options: "off", "if_specified", "strict"
+ENABLE_BEHAVIORAL_MICROFIX = True  # Enable deterministic micro-repair system
+MINIMAL_ENV_KEYS = ["python_version", "platform", "arch"]  # Keys to compare when environment is specified

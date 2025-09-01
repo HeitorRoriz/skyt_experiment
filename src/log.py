@@ -16,7 +16,8 @@ EXECUTION_FIELDS = [
     "raw_output", "code", "canon_code", "raw_hash", "canon_signature",
     "structural_ok", "canonicalization_ok", "contract_pass", "oracle_pass",
     "notes", "attempts", "last_error", "status", "metrics_version", "contract_id",
-    "anchor_hit", "distance", "foundational_signature"
+    "anchor_hit", "distance", "foundational_signature", "rescued", "rescue_steps",
+    "env_signature", "env_ok", "env_enforcement", "env_mismatches"
 ]
 
 

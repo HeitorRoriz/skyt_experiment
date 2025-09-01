@@ -95,6 +95,16 @@ def _compute_temp_metrics(records: List[Dict[str, Any]]) -> Dict[str, Any]:
     oracle_pass_count = sum(1 for r in records if str(r.get("oracle_pass", "")).lower() == "true")
     oracle_pass_rate = oracle_pass_count / len(records) if records else 0.0
     
+    # Rescue and environment metrics
+    rescue_count = sum(1 for r in records if str(r.get("rescued", "")).lower() == "true")
+    rescue_rate = rescue_count / len(records) if records else 0.0
+    
+    env_ok_count = sum(1 for r in records if str(r.get("env_ok", "")).lower() == "true")
+    env_ok_rate = env_ok_count / len(records) if records else 0.0
+    
+    # Environment enforcement mode distribution
+    env_enforcement_modes = Counter(r.get("env_enforcement", "off") for r in records)
+    
     # Monotonicity check: R_anchor <= R_canon always
     monotonicity_check = r_anchor <= r_canon
     
@@ -109,8 +119,11 @@ def _compute_temp_metrics(records: List[Dict[str, Any]]) -> Dict[str, Any]:
         "outlier_rate": round(outlier_rate, 4),
         "contract_pass_rate": round(contract_pass_rate, 4),
         "oracle_pass_rate": round(oracle_pass_rate, 4),
+        "rescue_rate": round(rescue_rate, 4),
+        "env_ok_rate": round(env_ok_rate, 4),
         "unique_raw_hashes": len(raw_counter),
         "unique_canon_signatures": len(canon_counter),
+        "env_enforcement_modes": dict(env_enforcement_modes),
         "monotonicity_check": monotonicity_check
     }
 

@@ -330,3 +330,73 @@ def _compute_env_hash(policy: CanonPolicy) -> str:
     }
     policy_str = json.dumps(policy_dict, sort_keys=True)
     return hashlib.sha256(policy_str.encode('utf-8')).hexdigest()[:16]
+
+
+def compute_minimal_env_signature(env_spec: Optional[Dict[str, Any]] = None) -> str:
+    """
+    Compute minimal environment signature from current environment
+    
+    Args:
+        env_spec: Optional environment specification from contract
+    
+    Returns:
+        Environment signature string
+    """
+    import platform
+    import sys
+    
+    # Minimal environment keys to track
+    env_data = {
+        "python_version": f"{sys.version_info.major}.{sys.version_info.minor}",
+        "platform": platform.system(),
+        "arch": platform.machine()
+    }
+    
+    # Add contract-specified environment keys if provided
+    if env_spec:
+        for key, expected_value in env_spec.items():
+            if key == "python_version":
+                env_data[key] = f"{sys.version_info.major}.{sys.version_info.minor}"
+            elif key == "platform":
+                env_data[key] = platform.system()
+            elif key == "arch":
+                env_data[key] = platform.machine()
+            else:
+                # Custom environment variable
+                import os
+                env_data[key] = os.environ.get(key, "undefined")
+    
+    env_str = json.dumps(env_data, sort_keys=True)
+    return hashlib.sha256(env_str.encode('utf-8')).hexdigest()[:16]
+
+
+def emit_ast_stable(tree: ast.AST) -> str:
+    """
+    Emit AST to code string in a stable, consistent manner
+    
+    Args:
+        tree: AST tree to emit
+    
+    Returns:
+        Stable code string representation
+    """
+    try:
+        # Use ast.unparse for consistent emission
+        code = ast.unparse(tree)
+        
+        # Apply consistent formatting
+        lines = code.split('\n')
+        formatted_lines = []
+        
+        for line in lines:
+            # Normalize indentation to 4 spaces
+            stripped = line.lstrip()
+            if stripped:
+                indent_level = (len(line) - len(stripped)) // 4
+                formatted_lines.append('    ' * indent_level + stripped)
+        
+        return '\n'.join(formatted_lines)
+        
+    except Exception:
+        # Fallback to basic string representation
+        return str(tree)

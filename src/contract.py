@@ -10,7 +10,9 @@ import json
 
 def create_prompt_contract(prompt_id: str, prompt: str, function_name: Optional[str] = None, 
                           oracle: Optional[str] = None, requires_recursion: bool = False,
-                          language: str = "python", signature: Optional[str] = None) -> Dict[str, Any]:
+                          language: str = "python", signature: Optional[str] = None,
+                          environment: Optional[Dict[str, Any]] = None,
+                          env_enforcement: str = "off") -> Dict[str, Any]:
     """
     Create contract specification from prompt parameters
     
@@ -22,6 +24,8 @@ def create_prompt_contract(prompt_id: str, prompt: str, function_name: Optional[
         requires_recursion: Whether recursion is required
         language: Programming language
         signature: Expected function signature
+        environment: Optional environment specification
+        env_enforcement: Environment enforcement mode ("off", "if_specified", "strict")
     
     Returns:
         Contract specification dict
@@ -44,6 +48,14 @@ def create_prompt_contract(prompt_id: str, prompt: str, function_name: Optional[
     
     if signature:
         contract["signature"] = signature
+    
+    if environment:
+        contract["environment"] = environment
+    
+    if env_enforcement in ["off", "if_specified", "strict"]:
+        contract["env_enforcement"] = env_enforcement
+    else:
+        contract["env_enforcement"] = "off"
     
     return contract
 
@@ -96,3 +108,43 @@ def validate_contract(contract: Dict[str, Any]) -> bool:
             return False
     
     return True
+
+
+def is_environment_required(contract: Dict[str, Any]) -> bool:
+    """
+    Check if environment enforcement is required for this contract
+    
+    Args:
+        contract: Contract specification
+    
+    Returns:
+        True if environment checking is required
+    """
+    env_enforcement = contract.get("env_enforcement", "off")
+    return env_enforcement in ["if_specified", "strict"] and "environment" in contract
+
+
+def get_contract_environment(contract: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    """
+    Retrieve environment specification from contract
+    
+    Args:
+        contract: Contract specification
+    
+    Returns:
+        Environment dict or None if not specified
+    """
+    return contract.get("environment")
+
+
+def get_env_enforcement_mode(contract: Dict[str, Any]) -> str:
+    """
+    Get environment enforcement mode from contract
+    
+    Args:
+        contract: Contract specification
+    
+    Returns:
+        Enforcement mode: "off", "if_specified", or "strict"
+    """
+    return contract.get("env_enforcement", "off")

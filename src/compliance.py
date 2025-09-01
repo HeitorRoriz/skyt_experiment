@@ -33,9 +33,10 @@ def check_contract_compliance(code: str, contract: Dict[str, Any], canon: Dict[s
     if not structural_ok:
         reasons.extend(structural_checks["errors"])
     
-    # Oracle check (stub for now)
-    oracle_pass = True
-    oracle_msg = "oracle_not_implemented"
+    # Oracle check - contract-driven oracle
+    oracle_result = _run_contract_oracle(code, contract)
+    oracle_pass = oracle_result["pass"]
+    oracle_msg = oracle_result["message"]
     
     # Overall contract pass
     contract_pass = canonicalization_ok and structural_ok and oracle_pass
@@ -228,3 +229,61 @@ def _has_global_modifications(tree: ast.AST) -> bool:
         elif isinstance(node, ast.Nonlocal):
             return True
     return False
+
+
+def _run_contract_oracle(code: str, contract: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Run contract-driven oracle tests
+    
+    Args:
+        code: Python code string
+        contract: Contract specification
+    
+    Returns:
+        Dict with pass status and message
+    """
+    oracle_examples = contract.get("oracle_examples")
+    if not oracle_examples:
+        return {"pass": True, "message": "no_oracle_examples"}
+    
+    function_name = contract.get("function_name")
+    if not function_name:
+        return {"pass": False, "message": "oracle_requires_function_name"}
+    
+    try:
+        # Execute code in isolated namespace
+        namespace = {}
+        exec(code, namespace)
+        
+        if function_name not in namespace:
+            return {"pass": False, "message": f"function_{function_name}_not_found"}
+        
+        func = namespace[function_name]
+        
+        # Run oracle examples
+        for i, example in enumerate(oracle_examples):
+            inputs = example.get("input", [])
+            expected = example.get("output")
+            
+            try:
+                if isinstance(inputs, list):
+                    actual = func(*inputs)
+                else:
+                    actual = func(inputs)
+                
+                if actual != expected:
+                    return {
+                        "pass": False, 
+                        "message": f"oracle_fail_example_{i}: expected {expected}, got {actual}"
+                    }
+                    
+            except Exception as e:
+                return {
+                    "pass": False,
+                    "message": f"oracle_error_example_{i}: {str(e)}"
+                }
+        
+        return {"pass": True, "message": f"oracle_pass_{len(oracle_examples)}_examples"}
+        
+    except Exception as e:
+        return {"pass": False, "message": f"oracle_exec_error: {str(e)}"}

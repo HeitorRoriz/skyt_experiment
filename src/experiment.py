@@ -9,7 +9,8 @@ import json
 import os
 from typing import Dict, Any, Optional
 from .config import CANON_POLICY, ANCHOR_MODE, DISTANCE_WEIGHTS
-from .canon import FoundationalSignature, compute_distance
+from .canon import FoundationalSignature, compute_distance, compute_minimal_env_signature
+from .contract import is_environment_required, get_contract_environment, get_env_enforcement_mode
 from .intent_capture import extract_and_normalize_intents
 from .contract import create_prompt_contract, load_contract_from_template
 from .transform import build_llm_prompt_for_code, try_repair
@@ -63,6 +64,52 @@ def run_experiment(prompt_id: str, prompt: str, model: str, temperature: float,
     code = extract_code(raw_output)
     reflection = extract_reflection(raw_output) if hasattr(extract_reflection, '__call__') else None
     
+    # Step 5.1: Environment Check - Capture current environment and check enforcement
+    current_env_sig = compute_minimal_env_signature(get_contract_environment(contract))
+    env_enforcement = get_env_enforcement_mode(contract)
+    env_ok = True
+    env_mismatches = []
+    rescue_allowed = True
+    
+    if is_environment_required(contract):
+        contract_env = get_contract_environment(contract)
+        env_check_result = _check_environment_compliance(current_env_sig, contract_env)
+        env_ok = env_check_result["ok"]
+        env_mismatches = env_check_result["mismatches"]
+        
+        if env_enforcement == "strict" and not env_ok:
+            # Early abort for strict environment mismatch
+            return {
+                "prompt_id": prompt_id,
+                "model": model,
+                "temperature": temperature,
+                "raw_output": raw_output,
+                "code": code,
+                "canon_code": "",
+                "raw_hash": hashlib.sha256(code.encode('utf-8')).hexdigest()[:16],
+                "canon_signature": "",
+                "structural_ok": False,
+                "canonicalization_ok": False,
+                "contract_pass": False,
+                "oracle_pass": False,
+                "notes": f"env_strict_abort: {'; '.join(env_mismatches)}",
+                "attempts": 1,
+                "contract_id": contract["id"],
+                "anchor_hit": False,
+                "distance": 1.0,
+                "foundational_signature": None,
+                "rescued": False,
+                "rescue_steps": "",
+                "env_signature": current_env_sig,
+                "env_ok": env_ok,
+                "env_enforcement": env_enforcement,
+                "env_mismatches": "; ".join(env_mismatches)
+            }
+        
+        # For if_specified mode, only allow rescue when environment matches
+        if env_enforcement == "if_specified":
+            rescue_allowed = env_ok
+    
     # Step 5.5: Determinism Lint - Fast-fail on determinism violations
     determinism_result = lint_determinism(code, strict_mode=True)
     if not determinism_result["determinism_pass"]:
@@ -100,13 +147,23 @@ def run_experiment(prompt_id: str, prompt: str, model: str, temperature: float,
     # Step 7: Compliance - Check contract compliance
     compliance_result = check_contract_compliance(code, contract, canon_result)
     
-    # Step 8: Retry - Attempt repair if needed
+    # Step 8: Retry - Attempt repair if needed (gated by environment enforcement)
     attempts = 1
-    while not compliance_result["contract_pass"] and attempts < MAX_ATTEMPTS:
+    rescued = False
+    rescue_steps = []
+    
+    while not compliance_result["contract_pass"] and attempts < MAX_ATTEMPTS and rescue_allowed:
         repaired_code = try_repair(code, contract)
         if repaired_code:
             code = repaired_code
-            canon_result = apply_canon(code, CANON_POLICY)
+            rescued = True
+            rescue_steps.append(f"attempt_{attempts}")
+            
+            # Re-canonicalize and re-run compliance after repair
+            effect_signature = compliance_result.get("effect_signature", "no_effects")
+            canon_result = apply_canon(code, CANON_POLICY, 
+                                      oracle_outputs=None,
+                                      effect_signature=effect_signature)
             compliance_result = check_contract_compliance(code, contract, canon_result)
         attempts += 1
     
@@ -151,7 +208,13 @@ def run_experiment(prompt_id: str, prompt: str, model: str, temperature: float,
         "contract_id": contract["id"],
         "anchor_hit": anchor_hit,
         "distance": distance,
-        "foundational_signature": foundational_sig.to_dict() if foundational_sig else None
+        "foundational_signature": foundational_sig.to_dict() if foundational_sig else None,
+        "rescued": rescued,
+        "rescue_steps": "; ".join(rescue_steps),
+        "env_signature": current_env_sig,
+        "env_ok": env_ok,
+        "env_enforcement": env_enforcement,
+        "env_mismatches": "; ".join(env_mismatches)
     }
     
     write_execution_record(execution_record)
@@ -215,3 +278,41 @@ def reset_anchors():
     if os.path.exists(anchor_dir):
         import shutil
         shutil.rmtree(anchor_dir)
+
+
+def _check_environment_compliance(current_env_sig: str, contract_env: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Check if current environment matches contract requirements
+    
+    Args:
+        current_env_sig: Current environment signature
+        contract_env: Contract environment specification
+    
+    Returns:
+        Dict with ok status and list of mismatches
+    """
+    import platform
+    import sys
+    import os
+    
+    mismatches = []
+    
+    for key, expected_value in contract_env.items():
+        actual_value = None
+        
+        if key == "python_version":
+            actual_value = f"{sys.version_info.major}.{sys.version_info.minor}"
+        elif key == "platform":
+            actual_value = platform.system()
+        elif key == "arch":
+            actual_value = platform.machine()
+        else:
+            actual_value = os.environ.get(key, "undefined")
+        
+        if str(actual_value) != str(expected_value):
+            mismatches.append(f"{key}:expected_{expected_value}_got_{actual_value}")
+    
+    return {
+        "ok": len(mismatches) == 0,
+        "mismatches": mismatches
+    }
