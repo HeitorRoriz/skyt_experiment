@@ -24,3 +24,12 @@ USE_REFLECTION = False
 
 # Experiment configuration
 TARGET_RUNS_PER_PROMPT = 5
+
+# Anchor canonicalization configuration
+ANCHOR_MODE = True  # Enable anchor-based canonicalization
+DISTANCE_WEIGHTS = {
+    "w_struct": 0.4,  # Structural similarity weight
+    "w_sem": 0.3,     # Semantic similarity weight  
+    "w_effect": 0.2,  # Effect signature weight
+    "w_env": 0.1      # Environment weight
+}

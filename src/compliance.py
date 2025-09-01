@@ -40,13 +40,17 @@ def check_contract_compliance(code: str, contract: Dict[str, Any], canon: Dict[s
     # Overall contract pass
     contract_pass = canonicalization_ok and structural_ok and oracle_pass
     
+    # Generate stable effect signature
+    effect_signature = _generate_effect_signature(code, contract)
+    
     return {
         "canonicalization_ok": canonicalization_ok,
         "structural_ok": structural_ok,
         "oracle_pass": oracle_pass,
         "contract_pass": contract_pass,
         "reasons": reasons,
-        "oracle_msg": oracle_msg
+        "oracle_msg": oracle_msg,
+        "effect_signature": effect_signature
     }
 
 
@@ -122,3 +126,105 @@ def _get_function_signature(tree: ast.AST, function_name: str) -> Optional[str]:
             args = [arg.arg for arg in node.args.args]
             return f"{function_name}({', '.join(args)})"
     return None
+
+
+def _generate_effect_signature(code: str, contract: Dict[str, Any]) -> str:
+    """
+    Generate stable effect signature from code analysis
+    
+    Args:
+        code: Python code string
+        contract: Contract specification
+    
+    Returns:
+        Stable effect signature string
+    """
+    effects = []
+    
+    try:
+        tree = ast.parse(code)
+        
+        # Check for I/O operations
+        if _has_io_operations(tree):
+            effects.append("io_operations")
+        
+        # Check for random/non-deterministic operations
+        if _has_random_operations(tree):
+            effects.append("random_ops")
+        
+        # Check for time-dependent operations
+        if _has_time_operations(tree):
+            effects.append("time_ops")
+        
+        # Check for system/OS operations
+        if _has_system_operations(tree):
+            effects.append("system_ops")
+        
+        # Check for global state modifications
+        if _has_global_modifications(tree):
+            effects.append("global_mods")
+            
+    except (SyntaxError, ValueError):
+        effects.append("parse_error")
+    
+    return "|".join(sorted(effects)) if effects else "pure_function"
+
+
+def _has_io_operations(tree: ast.AST) -> bool:
+    """Check for I/O operations in AST"""
+    io_functions = {'print', 'input', 'open', 'read', 'write', 'readline', 'readlines'}
+    
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name):
+            if node.func.id in io_functions:
+                return True
+    return False
+
+
+def _has_random_operations(tree: ast.AST) -> bool:
+    """Check for random/non-deterministic operations"""
+    random_patterns = {'random', 'randint', 'choice', 'shuffle', 'uuid', 'hash'}
+    
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Call):
+            if isinstance(node.func, ast.Name) and node.func.id in random_patterns:
+                return True
+            elif isinstance(node.func, ast.Attribute) and node.func.attr in random_patterns:
+                return True
+    return False
+
+
+def _has_time_operations(tree: ast.AST) -> bool:
+    """Check for time-dependent operations"""
+    time_patterns = {'time', 'datetime', 'now', 'today', 'sleep'}
+    
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Call):
+            if isinstance(node.func, ast.Name) and node.func.id in time_patterns:
+                return True
+            elif isinstance(node.func, ast.Attribute) and node.func.attr in time_patterns:
+                return True
+    return False
+
+
+def _has_system_operations(tree: ast.AST) -> bool:
+    """Check for system/OS operations"""
+    system_patterns = {'os', 'sys', 'subprocess', 'platform', 'environ'}
+    
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Call):
+            if isinstance(node.func, ast.Name) and node.func.id in system_patterns:
+                return True
+            elif isinstance(node.func, ast.Attribute) and node.func.attr in system_patterns:
+                return True
+    return False
+
+
+def _has_global_modifications(tree: ast.AST) -> bool:
+    """Check for global state modifications"""
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Global):
+            return True
+        elif isinstance(node, ast.Nonlocal):
+            return True
+    return False

@@ -9,7 +9,7 @@ import os
 from typing import Optional
 from .config import OUTPUT_DIR_TEMPLATE
 from .matrix import ExperimentMatrix
-from .experiment import run_experiment
+from .experiment import run_experiment, load_anchor_signatures
 from .contract import load_contract_from_template
 
 
@@ -20,10 +20,14 @@ def main(max_experiments: Optional[int] = None):
     Args:
         max_experiments: Maximum number of experiments to run (None for all)
     """
-    matrix = ExperimentMatrix()
+    # Initialize anchor canonicalization system
+    print("SKYT Pipeline Experiment Runner (Anchor Canon Mode)")
+    print("=" * 50)
     
-    print("SKYT Pipeline Experiment Runner")
-    print("=" * 40)
+    print("Loading existing anchor signatures...")
+    load_anchor_signatures()
+    
+    matrix = ExperimentMatrix()
     
     status = matrix.get_status_summary()
     print(f"Experiment Status: {status}")
