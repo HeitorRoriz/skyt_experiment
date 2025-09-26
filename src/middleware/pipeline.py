@@ -237,15 +237,18 @@ def _get_canon_text() -> str:
     Returns:
         Canonical code text
     """
-    from .schema import CANON_SIGNATURE_PATH
     import os
     
-    # For now, we'll need to store the actual canonical text
-    # This is a limitation of the current design
-    # TODO: Store canonical text alongside signature
+    canon_code_path = "outputs/canon/canon_code.txt"
+    
+    if os.path.exists(canon_code_path):
+        try:
+            with open(canon_code_path, 'r', encoding='utf-8') as f:
+                return f.read()
+        except Exception:
+            pass
     
     # Fallback: return empty string if canon text not available
-    # This will result in distance = 1.0 for all comparisons
     return ""
 
 def create_pipeline_context(prompt_id: str, contract: Dict[str, Any], 

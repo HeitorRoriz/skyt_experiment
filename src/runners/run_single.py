@@ -26,7 +26,7 @@ from src.middleware.viz import generate_all_visualizations
 from src.middleware.schema import DEFAULT_TAU
 from src.contract import load_contract_from_template, create_prompt_contract
 from src.llm import query_llm
-from src.transform import build_llm_prompt_for_code
+from src.prompt_builder import build_llm_prompt_for_code
 
 def main():
     """Main entry point for single prompt runner"""
@@ -68,20 +68,18 @@ def main():
                 messages = build_llm_prompt_for_code(contract)
                 return query_llm(messages, args.model, args.temperature)
             
-            # Execute through middleware pipeline
             if args.mode == "contract":
                 result = wrap_contract_run(llm_callable, context)
             else:
                 result = wrap_simple_run(llm_callable, context)
             
-            print("✓")
+            print("OK")  # Success
             success_count += 1
             
         except Exception as e:
-            print(f"✗ Error: {e}")
+            print(f"ERROR: {e}")
     
     print(f"\nCompleted {success_count}/{args.n} samples")
-    
     # Compute metrics
     print("Computing metrics...")
     metrics = compute_metrics(args.prompt_id, args.tau)

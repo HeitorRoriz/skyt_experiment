@@ -188,9 +188,18 @@ def _persist_canon(canon: Canon, normalized_code: str) -> None:
         tmp_sig.write(canon.canon_signature)
         tmp_sig_path = tmp_sig.name
     
+    # Write canonical code to canon_code.txt
+    canon_code_path = "outputs/canon/canon_code.txt"
+    with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8',
+                                     dir=os.path.dirname(canon_code_path),
+                                     delete=False) as tmp_code:
+        tmp_code.write(normalized_code)
+        tmp_code_path = tmp_code.name
+    
     # Atomic rename operations
     os.replace(tmp_json_path, CANON_JSON_PATH)
     os.replace(tmp_sig_path, CANON_SIGNATURE_PATH)
+    os.replace(tmp_code_path, canon_code_path)
 
 def reset_canon() -> None:
     """
