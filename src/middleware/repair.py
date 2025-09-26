@@ -67,6 +67,8 @@ def repair_code(raw_output: str, canon_text: str, contract: Dict[str, Any],
             steps=0,
             success=True,
             reason="no_repair_needed_d_zero",
+            normalization_version=NORMALIZATION_VERSION,
+            oracle_version=ORACLE_VERSION,
             timestamp=datetime.now()
         )
         
@@ -136,6 +138,8 @@ def repair_code(raw_output: str, canon_text: str, contract: Dict[str, Any],
         steps=steps_taken,
         success=success,
         reason=reason,
+        normalization_version=NORMALIZATION_VERSION,
+        oracle_version=ORACLE_VERSION,
         timestamp=datetime.now()
     )
     
