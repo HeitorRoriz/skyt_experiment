@@ -9,7 +9,8 @@ Goal: single oracle entry point. No code.
    - No comments or docstrings.
    - Recursion required when specified.
    - Output only code, no fences.
-3. Version this oracle. Expose ORACLE_VERSION const for logs.
+3. Oracle version for tracking rule changes
+ORACLE_VERSION = "1.1.0"  # Updated with enhanced repair integrationconst for logs.
 4. Acceptance: identical text always yields same pass/fail. No nondeterminism.
 """
 

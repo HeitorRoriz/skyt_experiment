@@ -137,9 +137,11 @@ def _execute_pipeline(llm_callable: Callable[[], str], context: PipelineContext,
         final_output = normalized_output
         repair_performed = False
         
-        if not oracle_pass and canon:
+        if not oracle_pass:
+            # Always attempt repair, even without canon
+            canon_text = _get_canon_text() if canon else ""
             repair_result, repair_record = repair_code(
-                raw_output, canon_text, context.contract,
+                normalized_output, canon_text, context.contract,
                 context.run_id, context.sample_id
             )
             
@@ -148,6 +150,15 @@ def _execute_pipeline(llm_callable: Callable[[], str], context: PipelineContext,
             if repair_result.success:
                 final_output = repair_result.repaired_text
                 repair_performed = True
+                
+                # BOOTSTRAP FIX: If no canon exists and repair succeeded, establish canon now
+                if canon is None:
+                    final_oracle_pass, _ = oracle_check(final_output, context.contract)
+                    if final_oracle_pass:
+                        canon = fix_canon_if_none(
+                            final_output, context.contract, final_oracle_pass,
+                            context.prompt_id, context.model, context.temperature
+                        )
         
         # Step f) Recompute and log post distance
         post_signature = compute_signature(final_output)

@@ -19,7 +19,7 @@ from datetime import datetime
 
 # Version constants
 NORMALIZATION_VERSION = "2025-09-26"
-ORACLE_VERSION = "1.0.0"
+ORACLE_VERSION = "1.1.0"  # Updated with enhanced repair integration
 
 @dataclass
 class RunSpec:
