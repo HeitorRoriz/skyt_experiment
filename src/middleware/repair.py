@@ -18,7 +18,7 @@ import ast
 import re
 from datetime import datetime
 from typing import Dict, Any, Tuple, Optional
-from .schema import RepairRecord, MAX_REPAIR_STEPS
+from .schema import RepairRecord, MAX_REPAIR_STEPS, NORMALIZATION_VERSION, ORACLE_VERSION
 from .distance import compute_signature, compute_distance
 from .contract_enforcer import oracle_check
 
@@ -354,39 +354,40 @@ def _ensure_recursion(code: str, contract: Dict[str, Any]) -> str:
     try:
         tree = ast.parse(code)
         
-        # Look for simple for/while loops that can be converted to recursion
         for node in ast.walk(tree):
             if isinstance(node, ast.FunctionDef) and node.name == function_name:
-                # Check for simple iterative patterns
-                for stmt in node.body:
-                    if isinstance(stmt, (ast.For, ast.While)):
-                        # For fibonacci: convert simple loop to recursive call
-                        if "fibonacci" in function_name.lower():
-                            return _convert_fibonacci_to_recursive(code, function_name)
+                if _looks_like_fibonacci_loop(node):
+                    return _convert_fibonacci_to_recursive(function_name)
         
         return code
     
     except SyntaxError:
         return code
 
-def _convert_fibonacci_to_recursive(code: str, function_name: str) -> str:
-    """Convert simple fibonacci loop to recursive implementation"""
-    # Simple template replacement for fibonacci
-    recursive_template = f"""def {function_name}(n, a=0, b=1, result=None):
+
+def _looks_like_fibonacci_loop(func_node: ast.FunctionDef) -> bool:
+    """Detect simple iterative fibonacci implementations."""
+    for stmt in func_node.body:
+        if isinstance(stmt, (ast.For, ast.While)):
+            # Look for assignments to result[i-1] + result[i-2]
+            for inner in ast.walk(stmt):
+                if isinstance(inner, ast.BinOp) and isinstance(inner.op, ast.Add):
+                    left = inner.left
+                    right = inner.right
+                    if (
+                        isinstance(left, ast.Subscript)
+                        and isinstance(right, ast.Subscript)
+                    ):
+                        return True
+    return False
+
+
+def _convert_fibonacci_to_recursive(function_name: str) -> str:
+    """Return recursive fibonacci implementation template."""
+    return f"""def {function_name}(n, a=0, b=1, result=None):
     if result is None:
         result = []
     if n > 0:
         result.append(a)
         return {function_name}(n - 1, b, a + b, result)
     return result"""
-    
-    try:
-        # Parse to validate it's a function
-        ast.parse(code)
-        # If original code has fibonacci function, replace with recursive version
-        if f"def {function_name}" in code:
-            return recursive_template
-    except:
-        pass
-    
-    return code

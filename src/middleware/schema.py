@@ -13,8 +13,9 @@ Goal: define data contracts, CSV column schemas, and stable field names. No code
 8. Acceptance: all other modules import these names only; schema centralizes truth.
 """
 
+import os
 from dataclasses import dataclass
-from typing import Optional, List
+from typing import Optional, List, Dict
 from datetime import datetime
 
 # Version constants
@@ -59,6 +60,7 @@ class DistanceRecord:
     signature: str
     d: float  # Distance [0,1]
     compliant: bool
+    oracle_version: str
     normalization_version: str
     timestamp: datetime
 
@@ -74,6 +76,8 @@ class RepairRecord:
     steps: int
     success: bool
     reason: str
+    normalization_version: str
+    oracle_version: str
     timestamp: datetime
 
 @dataclass
@@ -101,12 +105,13 @@ RUNS_CSV_HEADERS = [
 
 DISTANCES_CSV_HEADERS = [
     "run_id", "sample_id", "prompt_id", "stage", "signature", "d", 
-    "compliant", "normalization_version", "timestamp"
+    "compliant", "oracle_version", "normalization_version", "timestamp"
 ]
 
 REPAIRS_CSV_HEADERS = [
     "run_id", "sample_id", "before_signature", "after_signature", 
-    "d_before", "d_after", "steps", "success", "reason", "timestamp"
+    "d_before", "d_after", "steps", "success", "reason", 
+    "normalization_version", "oracle_version", "timestamp"
 ]
 
 METRICS_CSV_HEADERS = [
@@ -127,8 +132,22 @@ DISTANCES_PRE_CSV_PATH = "outputs/logs/distances_pre.csv"
 DISTANCES_POST_CSV_PATH = "outputs/logs/distances_post.csv"
 REPAIRS_CSV_PATH = "outputs/logs/repairs.csv"
 METRICS_CSV_PATH = "outputs/logs/metrics_summary.csv"
-CANON_JSON_PATH = "outputs/canon/canon.json"
-CANON_SIGNATURE_PATH = "outputs/canon/canon_signature.txt"
+CANON_BASE_DIR = "outputs/canon"
+CANON_JSON_PATH = "outputs/canon/canon.json"  # Deprecated: use get_canon_paths()
+CANON_SIGNATURE_PATH = "outputs/canon/canon_signature.txt"  # Deprecated
+CANON_CODE_FILENAME = "canon_code.txt"
+CANON_DIR_TEMPLATE = os.path.join(CANON_BASE_DIR, "{prompt_id}")
+
+
+def get_canon_paths(prompt_id: str) -> Dict[str, str]:
+    """Return canonical file paths for a given prompt."""
+    canon_dir = CANON_DIR_TEMPLATE.format(prompt_id=prompt_id)
+    return {
+        "dir": canon_dir,
+        "json": os.path.join(canon_dir, "canon.json"),
+        "signature": os.path.join(canon_dir, "canon_signature.txt"),
+        "code": os.path.join(canon_dir, CANON_CODE_FILENAME),
+    }
 
 # Configuration constants
 MAX_REPAIR_STEPS = 5

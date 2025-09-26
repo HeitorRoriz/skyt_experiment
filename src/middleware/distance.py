@@ -20,7 +20,7 @@ from datetime import datetime
 from typing import Optional
 from .schema import (
     DistanceRecord, DISTANCES_PRE_CSV_PATH, DISTANCES_POST_CSV_PATH,
-    NORMALIZATION_VERSION
+    NORMALIZATION_VERSION, ORACLE_VERSION
 )
 
 def compute_signature(normalized_text: str) -> str:
@@ -99,6 +99,7 @@ def record_pre_distance(run_id: str, sample_id: str, prompt_id: str,
         signature=signature,
         d=d,
         compliant=compliant,
+        oracle_version=ORACLE_VERSION,
         normalization_version=NORMALIZATION_VERSION,
         timestamp=datetime.now()
     )
@@ -128,6 +129,7 @@ def record_post_distance(run_id: str, sample_id: str, prompt_id: str,
         signature=signature,
         d=d,
         compliant=compliant,
+        oracle_version=ORACLE_VERSION,
         normalization_version=NORMALIZATION_VERSION,
         timestamp=datetime.now()
     )

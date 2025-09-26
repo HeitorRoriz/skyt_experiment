@@ -24,7 +24,13 @@ import uuid
 from datetime import datetime
 from typing import Callable, Dict, Any, Tuple
 from .schema import RunSpec, ORACLE_VERSION, NORMALIZATION_VERSION
-from .canon_anchor import fix_canon_if_none, get_canon, assert_canon_immutable, CanonImmutabilityError
+from .canon_anchor import (
+    fix_canon_if_none,
+    get_canon,
+    assert_canon_immutable,
+    CanonImmutabilityError,
+    get_canon_paths,
+)
 from .distance import compute_signature, compute_distance, record_pre_distance, record_post_distance
 from .contract_enforcer import oracle_check
 from .repair import repair_code
@@ -103,7 +109,7 @@ def _execute_pipeline(llm_callable: Callable[[], str], context: PipelineContext,
         pre_signature = compute_signature(normalized_output)
         
         # Step c) Canon management
-        canon = get_canon()
+        canon = get_canon(context.prompt_id)
         if canon is None:
             # Check if we can establish canon
             oracle_pass, _ = oracle_check(normalized_output, context.contract)
@@ -115,14 +121,14 @@ def _execute_pipeline(llm_callable: Callable[[], str], context: PipelineContext,
         else:
             # Assert canon immutability
             try:
-                assert_canon_immutable(pre_signature)
+                assert_canon_immutable(context.prompt_id, pre_signature)
             except CanonImmutabilityError as e:
                 # Log the violation but continue processing
                 print(f"WARNING: Canon immutability violation: {e}")
         
         # Step d) Compute and log pre distance
-        if canon:
-            canon_text = _get_canon_text()  # Load canonical text
+        canon_text = _get_canon_text(context.prompt_id)
+        if canon_text:
             pre_distance = compute_distance(normalized_output, canon_text)
         else:
             pre_distance = 1.0  # No canon available, maximum distance
@@ -133,13 +139,12 @@ def _execute_pipeline(llm_callable: Callable[[], str], context: PipelineContext,
             pre_signature, pre_distance, oracle_pass
         )
         
-        # Step e) Repair if non-compliant
         final_output = normalized_output
         repair_performed = False
         
         if not oracle_pass:
             # Always attempt repair, even without canon
-            canon_text = _get_canon_text() if canon else ""
+            canon_text = canon_text if canon_text else ""
             repair_result, repair_record = repair_code(
                 normalized_output, canon_text, context.contract,
                 context.run_id, context.sample_id
@@ -162,7 +167,7 @@ def _execute_pipeline(llm_callable: Callable[[], str], context: PipelineContext,
         
         # Step f) Recompute and log post distance
         post_signature = compute_signature(final_output)
-        if canon:
+        if canon_text:
             post_distance = compute_distance(final_output, canon_text)
         else:
             post_distance = 1.0
@@ -186,6 +191,8 @@ def _execute_pipeline(llm_callable: Callable[[], str], context: PipelineContext,
                 steps=0,
                 success=oracle_pass,
                 reason="no_repair_attempted" if oracle_pass else "repair_not_performed",
+                normalization_version=NORMALIZATION_VERSION,
+                oracle_version=ORACLE_VERSION,
                 timestamp=datetime.now()
             )
             log_repair(no_repair_record)
@@ -241,24 +248,28 @@ def _simple_normalize(text: str) -> str:
     
     return text
 
-def _get_canon_text() -> str:
+def _get_canon_text(prompt_id: str) -> str:
     """
     Get canonical text for distance computation
+    
+    Args:
+        prompt_id: Prompt identifier
     
     Returns:
         Canonical code text
     """
     import os
-    
-    canon_code_path = "outputs/canon/canon_code.txt"
-    
+
+    paths = get_canon_paths(prompt_id)
+    canon_code_path = paths["code"]
+
     if os.path.exists(canon_code_path):
         try:
             with open(canon_code_path, 'r', encoding='utf-8') as f:
                 return f.read()
         except Exception:
             pass
-    
+
     # Fallback: return empty string if canon text not available
     return ""
 

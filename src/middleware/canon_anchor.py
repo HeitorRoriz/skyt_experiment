@@ -18,19 +18,21 @@ Goal: lifecycle for a single immutable canon. No code.
 
 import json
 import os
+import shutil
 import tempfile
 from datetime import datetime
 from typing import Optional, Dict, Any
 from .schema import (
-    Canon, CANON_JSON_PATH, CANON_SIGNATURE_PATH, CANON_JSON_FIELDS,
-    NORMALIZATION_VERSION, ORACLE_VERSION
+    Canon, CANON_JSON_FIELDS,
+    NORMALIZATION_VERSION, ORACLE_VERSION,
+    get_canon_paths, CANON_BASE_DIR, CANON_JSON_PATH, CANON_SIGNATURE_PATH
 )
 
 class CanonImmutabilityError(Exception):
     """Raised when attempting to modify an existing canon"""
     pass
 
-def fix_canon_if_none(output: str, contract: Dict[str, Any], oracle_pass: bool, 
+def fix_canon_if_none(output: str, contract: Dict[str, Any], oracle_pass: bool,
                       prompt_id: str, model: str, temperature: float) -> Optional[Canon]:
     """
     Fix canon if none exists and oracle passes
@@ -49,9 +51,15 @@ def fix_canon_if_none(output: str, contract: Dict[str, Any], oracle_pass: bool,
     Raises:
         CanonImmutabilityError: If canon already exists
     """
-    # Check if canon already exists
-    if os.path.exists(CANON_JSON_PATH):
-        return None
+    paths = get_canon_paths(prompt_id)
+
+    # Legacy support: if old global canon exists and per-prompt does not, migrate
+    if not os.path.exists(paths["json"]) and os.path.exists(CANON_JSON_PATH):
+        _migrate_legacy_canon(prompt_id, paths)
+
+    # Check if canon already exists for this prompt
+    if os.path.exists(paths["json"]):
+        return get_canon(prompt_id)
     
     # Only fix canon if oracle passes
     if not oracle_pass:
@@ -68,8 +76,9 @@ def fix_canon_if_none(output: str, contract: Dict[str, Any], oracle_pass: bool,
     constraints_snapshot = json.dumps(contract, sort_keys=True)
     
     # Create canon object
+    contract_id = contract.get("id", prompt_id)
     canon = Canon(
-        contract_id=contract.get("id", prompt_id),
+        contract_id=contract_id,
         canon_signature=canon_signature,
         oracle_version=ORACLE_VERSION,
         normalization_version=NORMALIZATION_VERSION,
@@ -83,21 +92,27 @@ def fix_canon_if_none(output: str, contract: Dict[str, Any], oracle_pass: bool,
     
     # Persist canon atomically
     _persist_canon(canon, output)
-    
+
     return canon
 
-def get_canon() -> Optional[Canon]:
+def get_canon(prompt_id: str) -> Optional[Canon]:
     """
     Read-only accessor for current canon
     
     Returns:
         Canon object if exists, None otherwise
     """
-    if not os.path.exists(CANON_JSON_PATH):
+    paths = get_canon_paths(prompt_id)
+
+    # Legacy fallback: migrate global canon if present
+    if not os.path.exists(paths["json"]) and os.path.exists(CANON_JSON_PATH):
+        _migrate_legacy_canon(prompt_id, paths)
+
+    if not os.path.exists(paths["json"]):
         return None
     
     try:
-        with open(CANON_JSON_PATH, 'r', encoding='utf-8') as f:
+        with open(paths["json"], 'r', encoding='utf-8') as f:
             data = json.load(f)
         
         # Convert timestamp string back to datetime
@@ -108,7 +123,7 @@ def get_canon() -> Optional[Canon]:
     except (json.JSONDecodeError, KeyError, ValueError) as e:
         raise RuntimeError(f"Corrupted canon file: {e}")
 
-def assert_canon_immutable(new_signature: str) -> None:
+def assert_canon_immutable(prompt_id: str, new_signature: str) -> None:
     """
     Assert that canon remains immutable
     
@@ -118,7 +133,7 @@ def assert_canon_immutable(new_signature: str) -> None:
     Raises:
         CanonImmutabilityError: If canon exists and differs from candidate
     """
-    canon = get_canon()
+    canon = get_canon(prompt_id)
     if canon is None:
         return  # No canon exists, nothing to check
     
@@ -164,8 +179,10 @@ def _persist_canon(canon: Canon, normalized_code: str) -> None:
         canon: Canon object to persist
         normalized_code: Normalized code content
     """
+    paths = get_canon_paths(canon.prompt_id)
+
     # Ensure output directory exists
-    os.makedirs(os.path.dirname(CANON_JSON_PATH), exist_ok=True)
+    os.makedirs(paths["dir"], exist_ok=True)
     
     # Convert canon to dict for JSON serialization
     canon_dict = {
@@ -175,38 +192,58 @@ def _persist_canon(canon: Canon, normalized_code: str) -> None:
     canon_dict['fixed_at_timestamp'] = canon.fixed_at_timestamp.isoformat()
     
     # Write canon.json atomically
-    with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8', 
-                                     dir=os.path.dirname(CANON_JSON_PATH),
+    with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8',
+                                     dir=paths["dir"],
                                      delete=False) as tmp_json:
         json.dump(canon_dict, tmp_json, indent=2, sort_keys=True)
         tmp_json_path = tmp_json.name
-    
+
     # Write canon_signature.txt atomically
     with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8',
-                                     dir=os.path.dirname(CANON_SIGNATURE_PATH),
+                                     dir=paths["dir"],
                                      delete=False) as tmp_sig:
         tmp_sig.write(canon.canon_signature)
         tmp_sig_path = tmp_sig.name
-    
+
     # Write canonical code to canon_code.txt
-    canon_code_path = "outputs/canon/canon_code.txt"
     with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8',
-                                     dir=os.path.dirname(canon_code_path),
+                                     dir=paths["dir"],
                                      delete=False) as tmp_code:
         tmp_code.write(normalized_code)
         tmp_code_path = tmp_code.name
-    
-    # Atomic rename operations
-    os.replace(tmp_json_path, CANON_JSON_PATH)
-    os.replace(tmp_sig_path, CANON_SIGNATURE_PATH)
-    os.replace(tmp_code_path, canon_code_path)
 
-def reset_canon() -> None:
+    # Atomic rename operations
+    os.replace(tmp_json_path, paths["json"])
+    os.replace(tmp_sig_path, paths["signature"])
+    os.replace(tmp_code_path, paths["code"])
+
+def reset_canon(prompt_id: Optional[str] = None) -> None:
     """
-    Reset canon (for testing only)
+    Reset canon data (for testing only)
     
-    Removes canon files to allow fresh canon establishment
+    Args:
+        prompt_id: Specific prompt to reset. If None, clears all canons.
     """
-    for path in [CANON_JSON_PATH, CANON_SIGNATURE_PATH]:
-        if os.path.exists(path):
-            os.remove(path)
+    if prompt_id is not None:
+        paths = get_canon_paths(prompt_id)
+        if os.path.isdir(paths["dir"]):
+            shutil.rmtree(paths["dir"])
+        return
+
+    if os.path.isdir(CANON_BASE_DIR):
+        shutil.rmtree(CANON_BASE_DIR)
+
+
+def _migrate_legacy_canon(prompt_id: str, paths: Dict[str, str]) -> None:
+    """Move legacy single-canon files into per-prompt directory."""
+    os.makedirs(paths["dir"], exist_ok=True)
+
+    if os.path.exists(CANON_JSON_PATH):
+        shutil.move(CANON_JSON_PATH, paths["json"])
+
+    if os.path.exists(CANON_SIGNATURE_PATH):
+        shutil.move(CANON_SIGNATURE_PATH, paths["signature"])
+
+    legacy_code_path = os.path.join(CANON_BASE_DIR, "canon_code.txt")
+    if os.path.exists(legacy_code_path):
+        shutil.move(legacy_code_path, paths["code"])
