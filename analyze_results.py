@@ -1,7 +1,7 @@
 import json
 
 # Load the latest merge_sort results
-with open('outputs/merge_sort_temp1.5_20250929_164224.json', 'r') as f:
+with open('outputs/merge_sort_temp1.5_20250929_164613.json', 'r') as f:
     data = json.load(f)
 
 metrics = data['metrics']

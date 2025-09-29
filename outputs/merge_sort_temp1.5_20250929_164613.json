@@ -1,0 +1,5109 @@
+{
+  "experiment_id": "merge_sort_temp1.5_20250929_164613",
+  "contract_id": "merge_sort",
+  "temperature": 1.5,
+  "timestamp": "2025-09-29T16:46:13.362872",
+  "num_runs": 10,
+  "successful_runs": 10,
+  "contract": {
+    "id": "merge_sort",
+    "task_intent": "Sort array using merge sort algorithm",
+    "prompt": "Write a Python function called 'merge_sort' that takes a list of integers and returns a sorted list using the merge sort algorithm.",
+    "constraints": {
+      "function_name": "merge_sort",
+      "algorithm": "merge_sort"
+    },
+    "language": "python",
+    "environment": {},
+    "output_format": "raw_code",
+    "oracle_requirements": {
+      "test_cases": [
+        {
+          "input": [],
+          "expected": [],
+          "description": "Empty array"
+        },
+        {
+          "input": [
+            1
+          ],
+          "expected": [
+            1
+          ],
+          "description": "Single element"
+        },
+        {
+          "input": [
+            3,
+            1,
+            4,
+            1,
+            5
+          ],
+          "expected": [
+            1,
+            1,
+            3,
+            4,
+            5
+          ],
+          "description": "Random array"
+        },
+        {
+          "input": [
+            5,
+            4,
+            3,
+            2,
+            1
+          ],
+          "expected": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "description": "Reverse sorted"
+        }
+      ],
+      "correctness_threshold": 1.0,
+      "required_pass_rate": 0.8
+    },
+    "normalization_rules": {},
+    "anchor_signature": null,
+    "compliance_flag": false,
+    "distance_metric": "foundational_properties",
+    "rescue_bounds": {},
+    "model_specification": {},
+    "contract_version": "2.0",
+    "oracle_version": "1.0",
+    "normalization_version": "1.0",
+    "created_timestamp": "2025-09-29T16:45:32.439854",
+    "run_id": null,
+    "prompt_id": "merge_sort",
+    "sample_id": null
+  },
+  "canon_data": {
+    "contract_id": "merge_sort",
+    "canonical_code": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    \n    mid = len(arr) // 2\n    left = merge_sort(arr[:mid])\n    right = merge_sort(arr[mid:])\n    \n    return merge(left, right)\n\ndef merge(left, right):\n    result = []\n    i = j = 0\n    \n    while i < len(left) and j < len(right):\n        if left[i] <= right[j]:\n            result.append(left[i])\n            i += 1\n        else:\n            result.append(right[j])\n            j += 1\n    \n    result.extend(left[i:])\n    result.extend(right[j:])\n    \n    return result\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 2,
+        "for_loops": 0,
+        "while_loops": 1,
+        "function_calls": [
+          "len",
+          "len",
+          "merge_sort",
+          "merge_sort",
+          "merge",
+          "len",
+          "len"
+        ],
+        "nested_depth": 2,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_1"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "mid": [
+            "arr"
+          ],
+          "left": [],
+          "right": [],
+          "result": [],
+          "i": [],
+          "j": []
+        },
+        "assignments": {
+          "mid": "BinOp(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='arr', ctx=Load())]), op=FloorDiv(), right=Constant(value=2))",
+          "left": "Call(func=Name(id='merge_sort', ctx=Load()), args=[Subscript(value=Name(id='arr', ctx=Load()), slice=Slice(upper=Name(id='mid', ctx=Load())), ctx=Load())])",
+          "right": "Call(func=Name(id='merge_sort', ctx=Load()), args=[Subscript(value=Name(id='arr', ctx=Load()), slice=Slice(lower=Name(id='mid', ctx=Load())), ctx=Load())])",
+          "result": "List(ctx=Load())",
+          "i": "Constant(value=0)",
+          "j": "Constant(value=0)"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_merge_sort"
+          ],
+          [
+            "function_merge_sort",
+            "branch"
+          ],
+          [
+            "function_merge"
+          ],
+          [
+            "function_merge",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "merge_sort": {
+          "name": "merge_sort",
+          "args": [
+            "arr"
+          ],
+          "returns": null,
+          "has_return": true
+        },
+        "merge": {
+          "name": "merge",
+          "args": [
+            "left",
+            "right"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 2,
+        "estimated_complexity": "O(2^n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": [
+          "FloorDiv"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          1,
+          2,
+          0,
+          1,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [
+          "And"
+        ],
+        "comparisons": [
+          "LtE",
+          "Lt",
+          "Lt",
+          "LtE"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "If",
+          "Compare",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "LtE",
+          "Constant",
+          "Return",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "FloorDiv",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Slice",
+          "Name",
+          "Load",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Slice",
+          "Name",
+          "Load",
+          "Load",
+          "Return",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "List",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Name",
+          "Store",
+          "Constant",
+          "While",
+          "BoolOp",
+          "And",
+          "Compare",
+          "Name",
+          "Load",
+          "Lt",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Compare",
+          "Name",
+          "Load",
+          "Lt",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "LtE",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Add",
+          "Constant",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Add",
+          "Constant",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Slice",
+          "Name",
+          "Load",
+          "Load",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Slice",
+          "Name",
+          "Load",
+          "Load",
+          "Return",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 8,
+        "ast_hash": "c4ad141d4026c0d9dd334ac60127f891",
+        "alpha_renamed_hash": "a30037c751e27acc64bcfc5d0a7d9b26"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "FloorDiv"
+        ],
+        "precedence_levels": {
+          "FloorDiv": 4
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Return",
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "While",
+          "If",
+          "Expr",
+          "AugAssign",
+          "Expr",
+          "AugAssign",
+          "Expr",
+          "Expr",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "Assign_3",
+          "Assign_4",
+          "Assign_5",
+          "Return_6",
+          "FunctionDef_7",
+          "Assign_8",
+          "Assign_9",
+          "While_10",
+          "If_11",
+          "Expr_12",
+          "AugAssign_13",
+          "Expr_14",
+          "AugAssign_15",
+          "Expr_16",
+          "Expr_17",
+          "Return_18"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "FunctionDef",
+          "While",
+          "If"
+        ]
+      },
+      "behavioral_signature": {
+        "can_execute": true,
+        "io_signature_hash": "ca377392ba27f5bdaf360e84f2bd61ab",
+        "side_effects_detected": [],
+        "test_results": [
+          [
+            0,
+            "Exception:TypeError",
+            false
+          ],
+          [
+            1,
+            "Exception:TypeError",
+            false
+          ],
+          [
+            2,
+            "Exception:TypeError",
+            false
+          ]
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": true,
+        "base_cases": [
+          {
+            "condition": "len(arr) <= 1",
+            "return_type": "expression"
+          }
+        ],
+        "recursive_calls": [
+          {
+            "num_args": 1,
+            "arg_patterns": [
+              "Subscript"
+            ]
+          },
+          {
+            "num_args": 1,
+            "arg_patterns": [
+              "Subscript"
+            ]
+          }
+        ],
+        "recursion_pattern": "divide_and_conquer",
+        "termination_guards": [
+          "len(arr) <= 1"
+        ]
+      }
+    },
+    "created_timestamp": "2025-09-29T14:47:00",
+    "canon_version": "1.0",
+    "oracle_validated": true,
+    "oracle_pass_rate": 1.0,
+    "source": "curated_golden_implementation"
+  },
+  "canon_created": true,
+  "llm_results": [
+    {
+      "run_id": 1,
+      "raw_output": "def merge_sort(arr):\n    if len(arr) > 1:\n        mid = len(arr) // 2\n        L = arr[:mid]\n        R = arr[mid:]\n\n        merge_sort(L)\n        merge_sort(R)\n\n        i = j = k = 0\n\n        while i < len(L) and j < len(R):\n            if L[i] < R[j]:\n                arr[k] = L[i]\n                i += 1\n            else:\n                arr[k] = R[j]\n                j += 1\n            k += 1\n\n        while i < len(L):\n            arr[k] = L[i]\n            i += 1\n            k += 1\n\n        while j < len(R):\n            arr[k] = R[j]\n            j += 1\n            k += 1\n    return arr",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'merge_sort' that takes a list of integers and returns a sorted list using the merge sort algorithm.\n\nIMPORTANT: The function must be named 'merge_sort'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 2,
+      "raw_output": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = merge_sort(arr[:mid])\n    right_half = merge_sort(arr[mid:])\n\n    merged = []\n    i = j = 0\n\n    while i < len(left_half) and j < len(right_half):\n        if left_half[i] < right_half[j]:\n            merged.append(left_half[i])\n            i += 1\n        else:\n            merged.append(right_half[j])\n            j += 1\n\n    merged.extend(left_half[i:])\n    merged.extend(right_half[j:])\n\n    return merged",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'merge_sort' that takes a list of integers and returns a sorted list using the merge sort algorithm.\n\nIMPORTANT: The function must be named 'merge_sort'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 3,
+      "raw_output": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    \n    middle = len(arr) // 2\n    left_half = merge_sort(arr[:middle])\n    right_half = merge_sort(arr[middle:])\n    \n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    sorted_array = []\n    left_index, right_index = 0, 0\n    \n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            sorted_array.append(left[left_index])\n            left_index += 1\n        else:\n            sorted_array.append(right[right_index])\n            right_index += 1\n            \n    sorted_array.extend(left[left_index:])\n    sorted_array.extend(right[right_index:])\n    \n    return sorted_array",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'merge_sort' that takes a list of integers and returns a sorted list using the merge sort algorithm.\n\nIMPORTANT: The function must be named 'merge_sort'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 4,
+      "raw_output": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    def merge(left, right):\n        sorted_list = []\n        while left and right:\n            if left[0] < right[0]:\n                sorted_list.append(left.pop(0))\n            else:\n                sorted_list.append(right.pop(0))\n        sorted_list.extend(left)\n        sorted_list.extend(right)\n        return sorted_list\n\n    midpoint = len(arr) // 2\n    left_half = merge_sort(arr[:midpoint])\n    right_half = merge_sort(arr[midpoint:])\n    \n    return merge(left_half, right_half)",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'merge_sort' that takes a list of integers and returns a sorted list using the merge sort algorithm.\n\nIMPORTANT: The function must be named 'merge_sort'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 5,
+      "raw_output": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = merge_sort(arr[:mid])\n    right_half = merge_sort(arr[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    sorted_list = []\n    left_index, right_index = 0, 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            sorted_list.append(left[left_index])\n            left_index += 1\n        else:\n            sorted_list.append(right[right_index])\n            right_index += 1\n\n    sorted_list.extend(left[left_index:])\n    sorted_list.extend(right[right_index:])\n    \n    return sorted_list",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'merge_sort' that takes a list of integers and returns a sorted list using the merge sort algorithm.\n\nIMPORTANT: The function must be named 'merge_sort'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 6,
+      "raw_output": "def merge_sort(arr):\n    if len(arr) > 1:\n        mid = len(arr) // 2\n        L = arr[:mid]\n        R = arr[mid:]\n\n        merge_sort(L)\n        merge_sort(R)\n\n        i = j = k = 0\n\n        while i < len(L) and j < len(R):\n            if L[i] < R[j]:\n                arr[k] = L[i]\n                i += 1\n            else:\n                arr[k] = R[j]\n                j += 1\n            k += 1\n\n        while i < len(L):\n            arr[k] = L[i]\n            i += 1\n            k += 1\n\n        while j < len(R):\n            arr[k] = R[j]\n            j += 1\n            k += 1\n\n    return arr",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'merge_sort' that takes a list of integers and returns a sorted list using the merge sort algorithm.\n\nIMPORTANT: The function must be named 'merge_sort'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 7,
+      "raw_output": "def merge_sort(array):\n    if len(array) <= 1:\n        return array\n\n    mid = len(array) // 2\n    left_half = merge_sort(array[:mid])\n    right_half = merge_sort(array[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    sorted_array = []\n    i = j = 0\n\n    while i < len(left) and j < len(right):\n        if left[i] < right[j]:\n            sorted_array.append(left[i])\n            i += 1\n        else:\n            sorted_array.append(right[j])\n            j += 1\n            \n    sorted_array.extend(left[i:])\n    sorted_array.extend(right[j:])\n    \n    return sorted_array",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'merge_sort' that takes a list of integers and returns a sorted list using the merge sort algorithm.\n\nIMPORTANT: The function must be named 'merge_sort'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 8,
+      "raw_output": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = merge_sort(arr[:mid])\n    right_half = merge_sort(arr[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    sorted_array = []\n    left_index, right_index = 0, 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            sorted_array.append(left[left_index])\n            left_index += 1\n        else:\n            sorted_array.append(right[right_index])\n            right_index += 1\n\n    sorted_array.extend(left[left_index:])\n    sorted_array.extend(right[right_index:])\n    \n    return sorted_array",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'merge_sort' that takes a list of integers and returns a sorted list using the merge sort algorithm.\n\nIMPORTANT: The function must be named 'merge_sort'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 9,
+      "raw_output": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = merge_sort(arr[:mid])\n    right_half = merge_sort(arr[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    sorted_array = []\n    left_index, right_index = 0, 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            sorted_array.append(left[left_index])\n            left_index += 1\n        else:\n            sorted_array.append(right[right_index])\n            right_index += 1\n\n    sorted_array.extend(left[left_index:])\n    sorted_array.extend(right[right_index:])\n\n    return sorted_array",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'merge_sort' that takes a list of integers and returns a sorted list using the merge sort algorithm.\n\nIMPORTANT: The function must be named 'merge_sort'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 10,
+      "raw_output": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = merge_sort(arr[:mid])\n    right_half = merge_sort(arr[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    sorted_arr = []\n    left_index, right_index = 0, 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            sorted_arr.append(left[left_index])\n            left_index += 1\n        else:\n            sorted_arr.append(right[right_index])\n            right_index += 1\n\n    sorted_arr.extend(left[left_index:])\n    sorted_arr.extend(right[right_index:])\n\n    return sorted_arr",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'merge_sort' that takes a list of integers and returns a sorted list using the merge sort algorithm.\n\nIMPORTANT: The function must be named 'merge_sort'.\n\nProvide only the Python code, no explanations or markdown."
+    }
+  ],
+  "raw_outputs": [
+    "def merge_sort(arr):\n    if len(arr) > 1:\n        mid = len(arr) // 2\n        L = arr[:mid]\n        R = arr[mid:]\n\n        merge_sort(L)\n        merge_sort(R)\n\n        i = j = k = 0\n\n        while i < len(L) and j < len(R):\n            if L[i] < R[j]:\n                arr[k] = L[i]\n                i += 1\n            else:\n                arr[k] = R[j]\n                j += 1\n            k += 1\n\n        while i < len(L):\n            arr[k] = L[i]\n            i += 1\n            k += 1\n\n        while j < len(R):\n            arr[k] = R[j]\n            j += 1\n            k += 1\n    return arr",
+    "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = merge_sort(arr[:mid])\n    right_half = merge_sort(arr[mid:])\n\n    merged = []\n    i = j = 0\n\n    while i < len(left_half) and j < len(right_half):\n        if left_half[i] < right_half[j]:\n            merged.append(left_half[i])\n            i += 1\n        else:\n            merged.append(right_half[j])\n            j += 1\n\n    merged.extend(left_half[i:])\n    merged.extend(right_half[j:])\n\n    return merged",
+    "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    \n    middle = len(arr) // 2\n    left_half = merge_sort(arr[:middle])\n    right_half = merge_sort(arr[middle:])\n    \n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    sorted_array = []\n    left_index, right_index = 0, 0\n    \n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            sorted_array.append(left[left_index])\n            left_index += 1\n        else:\n            sorted_array.append(right[right_index])\n            right_index += 1\n            \n    sorted_array.extend(left[left_index:])\n    sorted_array.extend(right[right_index:])\n    \n    return sorted_array",
+    "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    def merge(left, right):\n        sorted_list = []\n        while left and right:\n            if left[0] < right[0]:\n                sorted_list.append(left.pop(0))\n            else:\n                sorted_list.append(right.pop(0))\n        sorted_list.extend(left)\n        sorted_list.extend(right)\n        return sorted_list\n\n    midpoint = len(arr) // 2\n    left_half = merge_sort(arr[:midpoint])\n    right_half = merge_sort(arr[midpoint:])\n    \n    return merge(left_half, right_half)",
+    "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = merge_sort(arr[:mid])\n    right_half = merge_sort(arr[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    sorted_list = []\n    left_index, right_index = 0, 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            sorted_list.append(left[left_index])\n            left_index += 1\n        else:\n            sorted_list.append(right[right_index])\n            right_index += 1\n\n    sorted_list.extend(left[left_index:])\n    sorted_list.extend(right[right_index:])\n    \n    return sorted_list",
+    "def merge_sort(arr):\n    if len(arr) > 1:\n        mid = len(arr) // 2\n        L = arr[:mid]\n        R = arr[mid:]\n\n        merge_sort(L)\n        merge_sort(R)\n\n        i = j = k = 0\n\n        while i < len(L) and j < len(R):\n            if L[i] < R[j]:\n                arr[k] = L[i]\n                i += 1\n            else:\n                arr[k] = R[j]\n                j += 1\n            k += 1\n\n        while i < len(L):\n            arr[k] = L[i]\n            i += 1\n            k += 1\n\n        while j < len(R):\n            arr[k] = R[j]\n            j += 1\n            k += 1\n\n    return arr",
+    "def merge_sort(array):\n    if len(array) <= 1:\n        return array\n\n    mid = len(array) // 2\n    left_half = merge_sort(array[:mid])\n    right_half = merge_sort(array[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    sorted_array = []\n    i = j = 0\n\n    while i < len(left) and j < len(right):\n        if left[i] < right[j]:\n            sorted_array.append(left[i])\n            i += 1\n        else:\n            sorted_array.append(right[j])\n            j += 1\n            \n    sorted_array.extend(left[i:])\n    sorted_array.extend(right[j:])\n    \n    return sorted_array",
+    "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = merge_sort(arr[:mid])\n    right_half = merge_sort(arr[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    sorted_array = []\n    left_index, right_index = 0, 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            sorted_array.append(left[left_index])\n            left_index += 1\n        else:\n            sorted_array.append(right[right_index])\n            right_index += 1\n\n    sorted_array.extend(left[left_index:])\n    sorted_array.extend(right[right_index:])\n    \n    return sorted_array",
+    "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = merge_sort(arr[:mid])\n    right_half = merge_sort(arr[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    sorted_array = []\n    left_index, right_index = 0, 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            sorted_array.append(left[left_index])\n            left_index += 1\n        else:\n            sorted_array.append(right[right_index])\n            right_index += 1\n\n    sorted_array.extend(left[left_index:])\n    sorted_array.extend(right[right_index:])\n\n    return sorted_array",
+    "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = merge_sort(arr[:mid])\n    right_half = merge_sort(arr[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    sorted_arr = []\n    left_index, right_index = 0, 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            sorted_arr.append(left[left_index])\n            left_index += 1\n        else:\n            sorted_arr.append(right[right_index])\n            right_index += 1\n\n    sorted_arr.extend(left[left_index:])\n    sorted_arr.extend(right[right_index:])\n\n    return sorted_arr"
+  ],
+  "transformation_results": [
+    {
+      "run_id": 1,
+      "original_code": "def merge_sort(arr):\n    if len(arr) > 1:\n        mid = len(arr) // 2\n        L = arr[:mid]\n        R = arr[mid:]\n\n        merge_sort(L)\n        merge_sort(R)\n\n        i = j = k = 0\n\n        while i < len(L) and j < len(R):\n            if L[i] < R[j]:\n                arr[k] = L[i]\n                i += 1\n            else:\n                arr[k] = R[j]\n                j += 1\n            k += 1\n\n        while i < len(L):\n            arr[k] = L[i]\n            i += 1\n            k += 1\n\n        while j < len(R):\n            arr[k] = R[j]\n            j += 1\n            k += 1\n    return arr",
+      "transformed_code": "def merge_sort(arr):\n    if len(arr) > 1:\n        mid = len(arr) // 2\n        left = arr[:mid]\n        right = arr[mid:]\n        merge_sort(left)\n        merge_sort(right)\n        result = i = j = 0\n        while result < len(left) and i < len(right):\n            if left[result] < right[i]:\n                arr[j] = left[result]\n                result += 1\n            else:\n                arr[j] = right[i]\n                i += 1\n            j += 1\n        while result < len(left):\n            arr[j] = left[result]\n            result += 1\n            j += 1\n        while i < len(right):\n            arr[j] = right[i]\n            i += 1\n            j += 1\n    return arr\n    return arr\n    return arr\n    return arr\n    return arr",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.38888888888888895,
+      "transformations_applied": [
+        "VariableRenamer",
+        "InPlaceReturnConverter",
+        "InPlaceReturnConverter",
+        "InPlaceReturnConverter",
+        "InPlaceReturnConverter"
+      ]
+    },
+    {
+      "run_id": 2,
+      "original_code": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = merge_sort(arr[:mid])\n    right_half = merge_sort(arr[mid:])\n\n    merged = []\n    i = j = 0\n\n    while i < len(left_half) and j < len(right_half):\n        if left_half[i] < right_half[j]:\n            merged.append(left_half[i])\n            i += 1\n        else:\n            merged.append(right_half[j])\n            j += 1\n\n    merged.extend(left_half[i:])\n    merged.extend(right_half[j:])\n\n    return merged",
+      "transformed_code": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    mid = len(arr) // 2\n    left = merge_sort(arr[:mid])\n    right = merge_sort(arr[mid:])\n    result = []\n    i = j = 0\n    while i < len(left) and j < len(right):\n        if left[i] < right[j]:\n            result.append(left[i])\n            i += 1\n        else:\n            result.append(right[j])\n            j += 1\n    result.extend(left[i:])\n    result.extend(right[j:])\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.25555555555555554,
+      "transformations_applied": [
+        "VariableRenamer"
+      ]
+    },
+    {
+      "run_id": 3,
+      "original_code": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    \n    middle = len(arr) // 2\n    left_half = merge_sort(arr[:middle])\n    right_half = merge_sort(arr[middle:])\n    \n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    sorted_array = []\n    left_index, right_index = 0, 0\n    \n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            sorted_array.append(left[left_index])\n            left_index += 1\n        else:\n            sorted_array.append(right[right_index])\n            right_index += 1\n            \n    sorted_array.extend(left[left_index:])\n    sorted_array.extend(right[right_index:])\n    \n    return sorted_array",
+      "transformed_code": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    mid = len(arr) // 2\n    left = merge_sort(arr[:mid])\n    right = merge_sort(arr[mid:])\n    return merge(left, right)\n\ndef merge(left, right):\n    result = []\n    i, j = (0, 0)\n    while i < len(left) and j < len(right):\n        if left[i] < right[j]:\n            result.append(left[i])\n            i += 1\n        else:\n            result.append(right[j])\n            j += 1\n    result.extend(left[i:])\n    result.extend(right[j:])\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.1722222222222222,
+      "transformations_applied": [
+        "VariableRenamer"
+      ]
+    },
+    {
+      "run_id": 4,
+      "original_code": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    def merge(left, right):\n        sorted_list = []\n        while left and right:\n            if left[0] < right[0]:\n                sorted_list.append(left.pop(0))\n            else:\n                sorted_list.append(right.pop(0))\n        sorted_list.extend(left)\n        sorted_list.extend(right)\n        return sorted_list\n\n    midpoint = len(arr) // 2\n    left_half = merge_sort(arr[:midpoint])\n    right_half = merge_sort(arr[midpoint:])\n    \n    return merge(left_half, right_half)",
+      "transformed_code": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    def merge(left, right):\n        mid = []\n        while left and right:\n            if left[0] < right[0]:\n                mid.append(left.pop(0))\n            else:\n                mid.append(right.pop(0))\n        mid.extend(left)\n        mid.extend(right)\n        return mid\n    midpoint = len(arr) // 2\n    left_half = merge_sort(arr[:midpoint])\n    right_half = merge_sort(arr[midpoint:])\n    return merge(left_half, right_half)",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.3055555555555556,
+      "transformations_applied": [
+        "VariableRenamer"
+      ]
+    },
+    {
+      "run_id": 5,
+      "original_code": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = merge_sort(arr[:mid])\n    right_half = merge_sort(arr[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    sorted_list = []\n    left_index, right_index = 0, 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            sorted_list.append(left[left_index])\n            left_index += 1\n        else:\n            sorted_list.append(right[right_index])\n            right_index += 1\n\n    sorted_list.extend(left[left_index:])\n    sorted_list.extend(right[right_index:])\n    \n    return sorted_list",
+      "transformed_code": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    mid = len(arr) // 2\n    left = merge_sort(arr[:mid])\n    right = merge_sort(arr[mid:])\n    return merge(left, right)\n\ndef merge(left, right):\n    result = []\n    i, j = (0, 0)\n    while i < len(left) and j < len(right):\n        if left[i] < right[j]:\n            result.append(left[i])\n            i += 1\n        else:\n            result.append(right[j])\n            j += 1\n    result.extend(left[i:])\n    result.extend(right[j:])\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.1722222222222222,
+      "transformations_applied": [
+        "VariableRenamer"
+      ]
+    },
+    {
+      "run_id": 6,
+      "original_code": "def merge_sort(arr):\n    if len(arr) > 1:\n        mid = len(arr) // 2\n        L = arr[:mid]\n        R = arr[mid:]\n\n        merge_sort(L)\n        merge_sort(R)\n\n        i = j = k = 0\n\n        while i < len(L) and j < len(R):\n            if L[i] < R[j]:\n                arr[k] = L[i]\n                i += 1\n            else:\n                arr[k] = R[j]\n                j += 1\n            k += 1\n\n        while i < len(L):\n            arr[k] = L[i]\n            i += 1\n            k += 1\n\n        while j < len(R):\n            arr[k] = R[j]\n            j += 1\n            k += 1\n\n    return arr",
+      "transformed_code": "def merge_sort(arr):\n    if len(arr) > 1:\n        mid = len(arr) // 2\n        left = arr[:mid]\n        right = arr[mid:]\n        merge_sort(left)\n        merge_sort(right)\n        result = i = j = 0\n        while result < len(left) and i < len(right):\n            if left[result] < right[i]:\n                arr[j] = left[result]\n                result += 1\n            else:\n                arr[j] = right[i]\n                i += 1\n            j += 1\n        while result < len(left):\n            arr[j] = left[result]\n            result += 1\n            j += 1\n        while i < len(right):\n            arr[j] = right[i]\n            i += 1\n            j += 1\n    return arr\n    return arr\n    return arr\n    return arr\n    return arr",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.38888888888888895,
+      "transformations_applied": [
+        "VariableRenamer",
+        "InPlaceReturnConverter",
+        "InPlaceReturnConverter",
+        "InPlaceReturnConverter",
+        "InPlaceReturnConverter"
+      ]
+    },
+    {
+      "run_id": 7,
+      "original_code": "def merge_sort(array):\n    if len(array) <= 1:\n        return array\n\n    mid = len(array) // 2\n    left_half = merge_sort(array[:mid])\n    right_half = merge_sort(array[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    sorted_array = []\n    i = j = 0\n\n    while i < len(left) and j < len(right):\n        if left[i] < right[j]:\n            sorted_array.append(left[i])\n            i += 1\n        else:\n            sorted_array.append(right[j])\n            j += 1\n            \n    sorted_array.extend(left[i:])\n    sorted_array.extend(right[j:])\n    \n    return sorted_array",
+      "transformed_code": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    mid = len(arr) // 2\n    left = merge_sort(arr[:mid])\n    right = merge_sort(arr[mid:])\n    return merge(left, right)\n\ndef merge(left, right):\n    result = []\n    i = j = 0\n    while i < len(left) and j < len(right):\n        if left[i] < right[j]:\n            result.append(left[i])\n            i += 1\n        else:\n            result.append(right[j])\n            j += 1\n    result.extend(left[i:])\n    result.extend(right[j:])\n    return result",
+      "transformation_needed": true,
+      "transformation_success": true,
+      "final_distance": 0.08888888888888888,
+      "transformations_applied": [
+        "VariableRenamer"
+      ]
+    },
+    {
+      "run_id": 8,
+      "original_code": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = merge_sort(arr[:mid])\n    right_half = merge_sort(arr[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    sorted_array = []\n    left_index, right_index = 0, 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            sorted_array.append(left[left_index])\n            left_index += 1\n        else:\n            sorted_array.append(right[right_index])\n            right_index += 1\n\n    sorted_array.extend(left[left_index:])\n    sorted_array.extend(right[right_index:])\n    \n    return sorted_array",
+      "transformed_code": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    mid = len(arr) // 2\n    left = merge_sort(arr[:mid])\n    right = merge_sort(arr[mid:])\n    return merge(left, right)\n\ndef merge(left, right):\n    result = []\n    i, j = (0, 0)\n    while i < len(left) and j < len(right):\n        if left[i] < right[j]:\n            result.append(left[i])\n            i += 1\n        else:\n            result.append(right[j])\n            j += 1\n    result.extend(left[i:])\n    result.extend(right[j:])\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.1722222222222222,
+      "transformations_applied": [
+        "VariableRenamer"
+      ]
+    },
+    {
+      "run_id": 9,
+      "original_code": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = merge_sort(arr[:mid])\n    right_half = merge_sort(arr[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    sorted_array = []\n    left_index, right_index = 0, 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            sorted_array.append(left[left_index])\n            left_index += 1\n        else:\n            sorted_array.append(right[right_index])\n            right_index += 1\n\n    sorted_array.extend(left[left_index:])\n    sorted_array.extend(right[right_index:])\n\n    return sorted_array",
+      "transformed_code": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    mid = len(arr) // 2\n    left = merge_sort(arr[:mid])\n    right = merge_sort(arr[mid:])\n    return merge(left, right)\n\ndef merge(left, right):\n    result = []\n    i, j = (0, 0)\n    while i < len(left) and j < len(right):\n        if left[i] < right[j]:\n            result.append(left[i])\n            i += 1\n        else:\n            result.append(right[j])\n            j += 1\n    result.extend(left[i:])\n    result.extend(right[j:])\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.1722222222222222,
+      "transformations_applied": [
+        "VariableRenamer"
+      ]
+    },
+    {
+      "run_id": 10,
+      "original_code": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = merge_sort(arr[:mid])\n    right_half = merge_sort(arr[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    sorted_arr = []\n    left_index, right_index = 0, 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            sorted_arr.append(left[left_index])\n            left_index += 1\n        else:\n            sorted_arr.append(right[right_index])\n            right_index += 1\n\n    sorted_arr.extend(left[left_index:])\n    sorted_arr.extend(right[right_index:])\n\n    return sorted_arr",
+      "transformed_code": "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    mid = len(arr) // 2\n    left = merge_sort(arr[:mid])\n    right = merge_sort(arr[mid:])\n    return merge(left, right)\n\ndef merge(left, right):\n    result = []\n    i, j = (0, 0)\n    while i < len(left) and j < len(right):\n        if left[i] < right[j]:\n            result.append(left[i])\n            i += 1\n        else:\n            result.append(right[j])\n            j += 1\n    result.extend(left[i:])\n    result.extend(right[j:])\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.1722222222222222,
+      "transformations_applied": [
+        "VariableRenamer"
+      ]
+    }
+  ],
+  "metrics": {
+    "R_raw": 0.1,
+    "R_behavioral": 0.1,
+    "R_structural": 0.2,
+    "R_canon": 0.2,
+    "total_runs": 10,
+    "raw_stats": {
+      "unique_outputs": 10,
+      "most_common_count": 1,
+      "distribution": {
+        "def merge_sort(arr):\n    if len(arr) > 1:\n        mid = len(arr) // 2\n        L = arr[:mid]\n        R = arr[mid:]\n\n        merge_sort(L)\n        merge_sort(R)\n\n        i = j = k = 0\n\n        while i < len(L) and j < len(R):\n            if L[i] < R[j]:\n                arr[k] = L[i]\n                i += 1\n            else:\n                arr[k] = R[j]\n                j += 1\n            k += 1\n\n        while i < len(L):\n            arr[k] = L[i]\n            i += 1\n            k += 1\n\n        while j < len(R):\n            arr[k] = R[j]\n            j += 1\n            k += 1\n    return arr": 1,
+        "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = merge_sort(arr[:mid])\n    right_half = merge_sort(arr[mid:])\n\n    merged = []\n    i = j = 0\n\n    while i < len(left_half) and j < len(right_half):\n        if left_half[i] < right_half[j]:\n            merged.append(left_half[i])\n            i += 1\n        else:\n            merged.append(right_half[j])\n            j += 1\n\n    merged.extend(left_half[i:])\n    merged.extend(right_half[j:])\n\n    return merged": 1,
+        "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n    \n    middle = len(arr) // 2\n    left_half = merge_sort(arr[:middle])\n    right_half = merge_sort(arr[middle:])\n    \n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    sorted_array = []\n    left_index, right_index = 0, 0\n    \n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            sorted_array.append(left[left_index])\n            left_index += 1\n        else:\n            sorted_array.append(right[right_index])\n            right_index += 1\n            \n    sorted_array.extend(left[left_index:])\n    sorted_array.extend(right[right_index:])\n    \n    return sorted_array": 1,
+        "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    def merge(left, right):\n        sorted_list = []\n        while left and right:\n            if left[0] < right[0]:\n                sorted_list.append(left.pop(0))\n            else:\n                sorted_list.append(right.pop(0))\n        sorted_list.extend(left)\n        sorted_list.extend(right)\n        return sorted_list\n\n    midpoint = len(arr) // 2\n    left_half = merge_sort(arr[:midpoint])\n    right_half = merge_sort(arr[midpoint:])\n    \n    return merge(left_half, right_half)": 1,
+        "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = merge_sort(arr[:mid])\n    right_half = merge_sort(arr[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    sorted_list = []\n    left_index, right_index = 0, 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            sorted_list.append(left[left_index])\n            left_index += 1\n        else:\n            sorted_list.append(right[right_index])\n            right_index += 1\n\n    sorted_list.extend(left[left_index:])\n    sorted_list.extend(right[right_index:])\n    \n    return sorted_list": 1,
+        "def merge_sort(arr):\n    if len(arr) > 1:\n        mid = len(arr) // 2\n        L = arr[:mid]\n        R = arr[mid:]\n\n        merge_sort(L)\n        merge_sort(R)\n\n        i = j = k = 0\n\n        while i < len(L) and j < len(R):\n            if L[i] < R[j]:\n                arr[k] = L[i]\n                i += 1\n            else:\n                arr[k] = R[j]\n                j += 1\n            k += 1\n\n        while i < len(L):\n            arr[k] = L[i]\n            i += 1\n            k += 1\n\n        while j < len(R):\n            arr[k] = R[j]\n            j += 1\n            k += 1\n\n    return arr": 1,
+        "def merge_sort(array):\n    if len(array) <= 1:\n        return array\n\n    mid = len(array) // 2\n    left_half = merge_sort(array[:mid])\n    right_half = merge_sort(array[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    sorted_array = []\n    i = j = 0\n\n    while i < len(left) and j < len(right):\n        if left[i] < right[j]:\n            sorted_array.append(left[i])\n            i += 1\n        else:\n            sorted_array.append(right[j])\n            j += 1\n            \n    sorted_array.extend(left[i:])\n    sorted_array.extend(right[j:])\n    \n    return sorted_array": 1,
+        "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = merge_sort(arr[:mid])\n    right_half = merge_sort(arr[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    sorted_array = []\n    left_index, right_index = 0, 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            sorted_array.append(left[left_index])\n            left_index += 1\n        else:\n            sorted_array.append(right[right_index])\n            right_index += 1\n\n    sorted_array.extend(left[left_index:])\n    sorted_array.extend(right[right_index:])\n    \n    return sorted_array": 1,
+        "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = merge_sort(arr[:mid])\n    right_half = merge_sort(arr[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    sorted_array = []\n    left_index, right_index = 0, 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            sorted_array.append(left[left_index])\n            left_index += 1\n        else:\n            sorted_array.append(right[right_index])\n            right_index += 1\n\n    sorted_array.extend(left[left_index:])\n    sorted_array.extend(right[right_index:])\n\n    return sorted_array": 1,
+        "def merge_sort(arr):\n    if len(arr) <= 1:\n        return arr\n\n    mid = len(arr) // 2\n    left_half = merge_sort(arr[:mid])\n    right_half = merge_sort(arr[mid:])\n\n    return merge(left_half, right_half)\n\ndef merge(left, right):\n    sorted_arr = []\n    left_index, right_index = 0, 0\n\n    while left_index < len(left) and right_index < len(right):\n        if left[left_index] < right[right_index]:\n            sorted_arr.append(left[left_index])\n            left_index += 1\n        else:\n            sorted_arr.append(right[right_index])\n            right_index += 1\n\n    sorted_arr.extend(left[left_index:])\n    sorted_arr.extend(right[right_index:])\n\n    return sorted_arr": 1
+      },
+      "entropy": 3.321928094887362
+    },
+    "behavioral_stats": {
+      "unique_behaviors": 10,
+      "oracle_results": [
+        {
+          "passed": false,
+          "error": "No fibonacci function found",
+          "test_results": []
+        },
+        {
+          "passed": false,
+          "error": "No fibonacci function found",
+          "test_results": []
+        },
+        {
+          "passed": false,
+          "error": "No fibonacci function found",
+          "test_results": []
+        },
+        {
+          "passed": false,
+          "error": "No fibonacci function found",
+          "test_results": []
+        },
+        {
+          "passed": false,
+          "error": "No fibonacci function found",
+          "test_results": []
+        },
+        {
+          "passed": false,
+          "error": "No fibonacci function found",
+          "test_results": []
+        },
+        {
+          "passed": false,
+          "error": "No fibonacci function found",
+          "test_results": []
+        },
+        {
+          "passed": false,
+          "error": "No fibonacci function found",
+          "test_results": []
+        },
+        {
+          "passed": false,
+          "error": "No fibonacci function found",
+          "test_results": []
+        },
+        {
+          "passed": false,
+          "error": "No fibonacci function found",
+          "test_results": []
+        }
+      ],
+      "behavioral_groups": {
+        "failed_0": [
+          0
+        ],
+        "failed_1": [
+          1
+        ],
+        "failed_2": [
+          2
+        ],
+        "failed_3": [
+          3
+        ],
+        "failed_4": [
+          4
+        ],
+        "failed_5": [
+          5
+        ],
+        "failed_6": [
+          6
+        ],
+        "failed_7": [
+          7
+        ],
+        "failed_8": [
+          8
+        ],
+        "failed_9": [
+          9
+        ]
+      },
+      "pass_rate": 0.0
+    },
+    "structural_stats": {
+      "unique_structures": 8,
+      "property_results": [
+        {
+          "control_flow_signature": {
+            "if_statements": 2,
+            "for_loops": 0,
+            "while_loops": 3,
+            "function_calls": [
+              "len",
+              "len",
+              "merge_sort",
+              "merge_sort",
+              "len",
+              "len",
+              "len",
+              "len"
+            ],
+            "nested_depth": 3,
+            "branch_patterns": [
+              "if_at_depth_0",
+              "if_at_depth_2"
+            ]
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "mid": [
+                "arr"
+              ],
+              "L": [],
+              "R": [],
+              "i": [],
+              "j": [],
+              "k": []
+            },
+            "assignments": {
+              "mid": "BinOp(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='arr', ctx=Load())]), op=FloorDiv(), right=Constant(value=2))",
+              "L": "Subscript(value=Name(id='arr', ctx=Load()), slice=Slice(upper=Name(id='mid', ctx=Load())), ctx=Load())",
+              "R": "Subscript(value=Name(id='arr', ctx=Load()), slice=Slice(lower=Name(id='mid', ctx=Load())), ctx=Load())",
+              "i": "Constant(value=0)",
+              "j": "Constant(value=0)",
+              "k": "Constant(value=0)"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_merge_sort"
+              ],
+              [
+                "function_merge_sort",
+                "branch"
+              ],
+              [
+                "function_merge_sort",
+                "branch",
+                "branch"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "merge_sort": {
+              "name": "merge_sort",
+              "args": [
+                "arr"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 2,
+            "estimated_complexity": "O(2^n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "FloorDiv"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [
+              "And"
+            ],
+            "comparisons": [
+              "Gt",
+              "Lt",
+              "Lt",
+              "Lt",
+              "Lt",
+              "Lt"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "If",
+              "Compare",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Gt",
+              "Constant",
+              "Assign",
+              "Name",
+              "Store",
+              "BinOp",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "FloorDiv",
+              "Constant",
+              "Assign",
+              "Name",
+              "Store",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Expr",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Constant",
+              "While",
+              "BoolOp",
+              "And",
+              "Compare",
+              "Name",
+              "Load",
+              "Lt",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Compare",
+              "Name",
+              "Load",
+              "Lt",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Lt",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Store",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "Assign",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Store",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "While",
+              "Compare",
+              "Name",
+              "Load",
+              "Lt",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Assign",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Store",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "While",
+              "Compare",
+              "Name",
+              "Load",
+              "Lt",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Assign",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Store",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 8,
+            "ast_hash": "388c6b4e97f4c8d2c7e0963867e6bbf8",
+            "alpha_renamed_hash": "bd56b14837ceab784a7f549f7f54fe5f"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "FloorDiv"
+            ],
+            "precedence_levels": {
+              "FloorDiv": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "If",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Expr",
+              "Expr",
+              "Assign",
+              "While",
+              "If",
+              "Assign",
+              "AugAssign",
+              "Assign",
+              "AugAssign",
+              "AugAssign",
+              "While",
+              "Assign",
+              "AugAssign",
+              "AugAssign",
+              "While",
+              "Assign",
+              "AugAssign",
+              "AugAssign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "If_1",
+              "Assign_2",
+              "Assign_3",
+              "Assign_4",
+              "Expr_5",
+              "Expr_6",
+              "Assign_7",
+              "While_8",
+              "If_9",
+              "Assign_10",
+              "AugAssign_11",
+              "Assign_12",
+              "AugAssign_13",
+              "AugAssign_14",
+              "While_15",
+              "Assign_16",
+              "AugAssign_17",
+              "AugAssign_18",
+              "While_19",
+              "Assign_20",
+              "AugAssign_21",
+              "AugAssign_22",
+              "Return_23"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "If",
+              "While",
+              "If",
+              "While",
+              "While"
+            ]
+          },
+          "behavioral_signature": {
+            "can_execute": true,
+            "io_signature_hash": "ca377392ba27f5bdaf360e84f2bd61ab",
+            "side_effects_detected": [],
+            "test_results": [
+              [
+                0,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                1,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                2,
+                "Exception:TypeError",
+                false
+              ]
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": true,
+            "base_cases": [],
+            "recursive_calls": [
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "Name"
+                ]
+              },
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "Name"
+                ]
+              }
+            ],
+            "recursion_pattern": "binary",
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 2,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [
+              "len",
+              "len",
+              "merge_sort",
+              "merge_sort",
+              "len",
+              "len"
+            ],
+            "nested_depth": 2,
+            "branch_patterns": [
+              "if_at_depth_0",
+              "if_at_depth_1"
+            ]
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "mid": [
+                "arr"
+              ],
+              "left_half": [],
+              "right_half": [],
+              "merged": [],
+              "i": [],
+              "j": []
+            },
+            "assignments": {
+              "mid": "BinOp(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='arr', ctx=Load())]), op=FloorDiv(), right=Constant(value=2))",
+              "left_half": "Call(func=Name(id='merge_sort', ctx=Load()), args=[Subscript(value=Name(id='arr', ctx=Load()), slice=Slice(upper=Name(id='mid', ctx=Load())), ctx=Load())])",
+              "right_half": "Call(func=Name(id='merge_sort', ctx=Load()), args=[Subscript(value=Name(id='arr', ctx=Load()), slice=Slice(lower=Name(id='mid', ctx=Load())), ctx=Load())])",
+              "merged": "List(ctx=Load())",
+              "i": "Constant(value=0)",
+              "j": "Constant(value=0)"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_merge_sort"
+              ],
+              [
+                "function_merge_sort",
+                "branch"
+              ],
+              [
+                "function_merge_sort",
+                "branch"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "merge_sort": {
+              "name": "merge_sort",
+              "args": [
+                "arr"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 2,
+            "estimated_complexity": "O(2^n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": true,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "FloorDiv"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              0,
+              1,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [
+              "And"
+            ],
+            "comparisons": [
+              "LtE",
+              "Lt",
+              "Lt",
+              "Lt"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "If",
+              "Compare",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "LtE",
+              "Constant",
+              "Return",
+              "Name",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "BinOp",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "FloorDiv",
+              "Constant",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "List",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Constant",
+              "While",
+              "BoolOp",
+              "And",
+              "Compare",
+              "Name",
+              "Load",
+              "Lt",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Compare",
+              "Name",
+              "Load",
+              "Lt",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Lt",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 8,
+            "ast_hash": "118fcee1afd2d9507e87dca67b1cc14f",
+            "alpha_renamed_hash": "229e12367d913975f4ade252d5a5951b"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "FloorDiv"
+            ],
+            "precedence_levels": {
+              "FloorDiv": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "If",
+              "Return",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "While",
+              "If",
+              "Expr",
+              "AugAssign",
+              "Expr",
+              "AugAssign",
+              "Expr",
+              "Expr",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "If_1",
+              "Return_2",
+              "Assign_3",
+              "Assign_4",
+              "Assign_5",
+              "Assign_6",
+              "Assign_7",
+              "While_8",
+              "If_9",
+              "Expr_10",
+              "AugAssign_11",
+              "Expr_12",
+              "AugAssign_13",
+              "Expr_14",
+              "Expr_15",
+              "Return_16"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "If",
+              "While",
+              "If"
+            ]
+          },
+          "behavioral_signature": {
+            "can_execute": true,
+            "io_signature_hash": "ca377392ba27f5bdaf360e84f2bd61ab",
+            "side_effects_detected": [],
+            "test_results": [
+              [
+                0,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                1,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                2,
+                "Exception:TypeError",
+                false
+              ]
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": true,
+            "base_cases": [
+              {
+                "condition": "len(arr) <= 1",
+                "return_type": "expression"
+              }
+            ],
+            "recursive_calls": [
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "Subscript"
+                ]
+              },
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "Subscript"
+                ]
+              }
+            ],
+            "recursion_pattern": "divide_and_conquer",
+            "termination_guards": [
+              "len(arr) <= 1"
+            ]
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 2,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [
+              "len",
+              "len",
+              "merge_sort",
+              "merge_sort",
+              "merge",
+              "len",
+              "len"
+            ],
+            "nested_depth": 2,
+            "branch_patterns": [
+              "if_at_depth_0",
+              "if_at_depth_1"
+            ]
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "middle": [
+                "arr"
+              ],
+              "left_half": [],
+              "right_half": [],
+              "sorted_array": []
+            },
+            "assignments": {
+              "middle": "BinOp(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='arr', ctx=Load())]), op=FloorDiv(), right=Constant(value=2))",
+              "left_half": "Call(func=Name(id='merge_sort', ctx=Load()), args=[Subscript(value=Name(id='arr', ctx=Load()), slice=Slice(upper=Name(id='middle', ctx=Load())), ctx=Load())])",
+              "right_half": "Call(func=Name(id='merge_sort', ctx=Load()), args=[Subscript(value=Name(id='arr', ctx=Load()), slice=Slice(lower=Name(id='middle', ctx=Load())), ctx=Load())])",
+              "sorted_array": "List(ctx=Load())"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_merge_sort"
+              ],
+              [
+                "function_merge_sort",
+                "branch"
+              ],
+              [
+                "function_merge"
+              ],
+              [
+                "function_merge",
+                "branch"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "merge_sort": {
+              "name": "merge_sort",
+              "args": [
+                "arr"
+              ],
+              "returns": null,
+              "has_return": true
+            },
+            "merge": {
+              "name": "merge",
+              "args": [
+                "left",
+                "right"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 2,
+            "estimated_complexity": "O(2^n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": true,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "FloorDiv"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              0,
+              0,
+              1,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [
+              "And"
+            ],
+            "comparisons": [
+              "LtE",
+              "Lt",
+              "Lt",
+              "Lt"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "If",
+              "Compare",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "LtE",
+              "Constant",
+              "Return",
+              "Name",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "BinOp",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "FloorDiv",
+              "Constant",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "List",
+              "Load",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Constant",
+              "Constant",
+              "Load",
+              "While",
+              "BoolOp",
+              "And",
+              "Compare",
+              "Name",
+              "Load",
+              "Lt",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Compare",
+              "Name",
+              "Load",
+              "Lt",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Lt",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 8,
+            "ast_hash": "180d683378f8e338abbe0ef72ed95f71",
+            "alpha_renamed_hash": "fb8b83e2205686d19094b31e1003e54e"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "FloorDiv"
+            ],
+            "precedence_levels": {
+              "FloorDiv": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "If",
+              "Return",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Return",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "While",
+              "If",
+              "Expr",
+              "AugAssign",
+              "Expr",
+              "AugAssign",
+              "Expr",
+              "Expr",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "If_1",
+              "Return_2",
+              "Assign_3",
+              "Assign_4",
+              "Assign_5",
+              "Return_6",
+              "FunctionDef_7",
+              "Assign_8",
+              "Assign_9",
+              "While_10",
+              "If_11",
+              "Expr_12",
+              "AugAssign_13",
+              "Expr_14",
+              "AugAssign_15",
+              "Expr_16",
+              "Expr_17",
+              "Return_18"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "If",
+              "FunctionDef",
+              "While",
+              "If"
+            ]
+          },
+          "behavioral_signature": {
+            "can_execute": true,
+            "io_signature_hash": "ca377392ba27f5bdaf360e84f2bd61ab",
+            "side_effects_detected": [],
+            "test_results": [
+              [
+                0,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                1,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                2,
+                "Exception:TypeError",
+                false
+              ]
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": true,
+            "base_cases": [
+              {
+                "condition": "len(arr) <= 1",
+                "return_type": "expression"
+              }
+            ],
+            "recursive_calls": [
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "Subscript"
+                ]
+              },
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "Subscript"
+                ]
+              }
+            ],
+            "recursion_pattern": "divide_and_conquer",
+            "termination_guards": [
+              "len(arr) <= 1"
+            ]
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 2,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [
+              "len",
+              "len",
+              "merge_sort",
+              "merge_sort",
+              "merge"
+            ],
+            "nested_depth": 2,
+            "branch_patterns": [
+              "if_at_depth_0",
+              "if_at_depth_1"
+            ]
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "sorted_list": [],
+              "midpoint": [
+                "arr"
+              ],
+              "left_half": [],
+              "right_half": []
+            },
+            "assignments": {
+              "sorted_list": "List(ctx=Load())",
+              "midpoint": "BinOp(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='arr', ctx=Load())]), op=FloorDiv(), right=Constant(value=2))",
+              "left_half": "Call(func=Name(id='merge_sort', ctx=Load()), args=[Subscript(value=Name(id='arr', ctx=Load()), slice=Slice(upper=Name(id='midpoint', ctx=Load())), ctx=Load())])",
+              "right_half": "Call(func=Name(id='merge_sort', ctx=Load()), args=[Subscript(value=Name(id='arr', ctx=Load()), slice=Slice(lower=Name(id='midpoint', ctx=Load())), ctx=Load())])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_merge_sort"
+              ],
+              [
+                "function_merge_sort",
+                "branch"
+              ],
+              [
+                "function_merge_sort",
+                "function_merge"
+              ],
+              [
+                "function_merge_sort",
+                "function_merge",
+                "branch"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "merge_sort": {
+              "name": "merge_sort",
+              "args": [
+                "arr"
+              ],
+              "returns": null,
+              "has_return": true
+            },
+            "merge": {
+              "name": "merge",
+              "args": [
+                "left",
+                "right"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 3,
+            "estimated_complexity": "O(2^n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": true,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "FloorDiv"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              2
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [
+              "And"
+            ],
+            "comparisons": [
+              "LtE",
+              "Lt"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "If",
+              "Compare",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "LtE",
+              "Constant",
+              "Return",
+              "Name",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "List",
+              "Load",
+              "While",
+              "BoolOp",
+              "And",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Subscript",
+              "Name",
+              "Load",
+              "Constant",
+              "Load",
+              "Lt",
+              "Subscript",
+              "Name",
+              "Load",
+              "Constant",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Return",
+              "Name",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "BinOp",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "FloorDiv",
+              "Constant",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 10,
+            "ast_hash": "7eb8c45a880de05e70a47afdef253a40",
+            "alpha_renamed_hash": "d3eef8fa26d6a9aa310b3ecf87a0c9f4"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "FloorDiv"
+            ],
+            "precedence_levels": {
+              "FloorDiv": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "If",
+              "Return",
+              "FunctionDef",
+              "Assign",
+              "While",
+              "If",
+              "Expr",
+              "Expr",
+              "Expr",
+              "Expr",
+              "Return",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "If_1",
+              "Return_2",
+              "FunctionDef_3",
+              "Assign_4",
+              "While_5",
+              "If_6",
+              "Expr_7",
+              "Expr_8",
+              "Expr_9",
+              "Expr_10",
+              "Return_11",
+              "Assign_12",
+              "Assign_13",
+              "Assign_14",
+              "Return_15"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "If",
+              "FunctionDef",
+              "While",
+              "If"
+            ]
+          },
+          "behavioral_signature": {
+            "can_execute": true,
+            "io_signature_hash": "ca377392ba27f5bdaf360e84f2bd61ab",
+            "side_effects_detected": [],
+            "test_results": [
+              [
+                0,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                1,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                2,
+                "Exception:TypeError",
+                false
+              ]
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": true,
+            "base_cases": [
+              {
+                "condition": "len(arr) <= 1",
+                "return_type": "expression"
+              }
+            ],
+            "recursive_calls": [
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "Subscript"
+                ]
+              },
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "Subscript"
+                ]
+              }
+            ],
+            "recursion_pattern": "divide_and_conquer",
+            "termination_guards": [
+              "len(arr) <= 1"
+            ]
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 2,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [
+              "len",
+              "len",
+              "merge_sort",
+              "merge_sort",
+              "merge",
+              "len",
+              "len"
+            ],
+            "nested_depth": 2,
+            "branch_patterns": [
+              "if_at_depth_0",
+              "if_at_depth_1"
+            ]
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "mid": [
+                "arr"
+              ],
+              "left_half": [],
+              "right_half": [],
+              "sorted_list": []
+            },
+            "assignments": {
+              "mid": "BinOp(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='arr', ctx=Load())]), op=FloorDiv(), right=Constant(value=2))",
+              "left_half": "Call(func=Name(id='merge_sort', ctx=Load()), args=[Subscript(value=Name(id='arr', ctx=Load()), slice=Slice(upper=Name(id='mid', ctx=Load())), ctx=Load())])",
+              "right_half": "Call(func=Name(id='merge_sort', ctx=Load()), args=[Subscript(value=Name(id='arr', ctx=Load()), slice=Slice(lower=Name(id='mid', ctx=Load())), ctx=Load())])",
+              "sorted_list": "List(ctx=Load())"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_merge_sort"
+              ],
+              [
+                "function_merge_sort",
+                "branch"
+              ],
+              [
+                "function_merge"
+              ],
+              [
+                "function_merge",
+                "branch"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "merge_sort": {
+              "name": "merge_sort",
+              "args": [
+                "arr"
+              ],
+              "returns": null,
+              "has_return": true
+            },
+            "merge": {
+              "name": "merge",
+              "args": [
+                "left",
+                "right"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 2,
+            "estimated_complexity": "O(2^n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": true,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "FloorDiv"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              0,
+              0,
+              1,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [
+              "And"
+            ],
+            "comparisons": [
+              "LtE",
+              "Lt",
+              "Lt",
+              "Lt"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "If",
+              "Compare",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "LtE",
+              "Constant",
+              "Return",
+              "Name",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "BinOp",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "FloorDiv",
+              "Constant",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "List",
+              "Load",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Constant",
+              "Constant",
+              "Load",
+              "While",
+              "BoolOp",
+              "And",
+              "Compare",
+              "Name",
+              "Load",
+              "Lt",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Compare",
+              "Name",
+              "Load",
+              "Lt",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Lt",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 8,
+            "ast_hash": "4a2bdd5b0556df320cf3001b8ca825c0",
+            "alpha_renamed_hash": "fb8b83e2205686d19094b31e1003e54e"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "FloorDiv"
+            ],
+            "precedence_levels": {
+              "FloorDiv": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "If",
+              "Return",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Return",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "While",
+              "If",
+              "Expr",
+              "AugAssign",
+              "Expr",
+              "AugAssign",
+              "Expr",
+              "Expr",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "If_1",
+              "Return_2",
+              "Assign_3",
+              "Assign_4",
+              "Assign_5",
+              "Return_6",
+              "FunctionDef_7",
+              "Assign_8",
+              "Assign_9",
+              "While_10",
+              "If_11",
+              "Expr_12",
+              "AugAssign_13",
+              "Expr_14",
+              "AugAssign_15",
+              "Expr_16",
+              "Expr_17",
+              "Return_18"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "If",
+              "FunctionDef",
+              "While",
+              "If"
+            ]
+          },
+          "behavioral_signature": {
+            "can_execute": true,
+            "io_signature_hash": "ca377392ba27f5bdaf360e84f2bd61ab",
+            "side_effects_detected": [],
+            "test_results": [
+              [
+                0,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                1,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                2,
+                "Exception:TypeError",
+                false
+              ]
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": true,
+            "base_cases": [
+              {
+                "condition": "len(arr) <= 1",
+                "return_type": "expression"
+              }
+            ],
+            "recursive_calls": [
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "Subscript"
+                ]
+              },
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "Subscript"
+                ]
+              }
+            ],
+            "recursion_pattern": "divide_and_conquer",
+            "termination_guards": [
+              "len(arr) <= 1"
+            ]
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 2,
+            "for_loops": 0,
+            "while_loops": 3,
+            "function_calls": [
+              "len",
+              "len",
+              "merge_sort",
+              "merge_sort",
+              "len",
+              "len",
+              "len",
+              "len"
+            ],
+            "nested_depth": 3,
+            "branch_patterns": [
+              "if_at_depth_0",
+              "if_at_depth_2"
+            ]
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "mid": [
+                "arr"
+              ],
+              "L": [],
+              "R": [],
+              "i": [],
+              "j": [],
+              "k": []
+            },
+            "assignments": {
+              "mid": "BinOp(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='arr', ctx=Load())]), op=FloorDiv(), right=Constant(value=2))",
+              "L": "Subscript(value=Name(id='arr', ctx=Load()), slice=Slice(upper=Name(id='mid', ctx=Load())), ctx=Load())",
+              "R": "Subscript(value=Name(id='arr', ctx=Load()), slice=Slice(lower=Name(id='mid', ctx=Load())), ctx=Load())",
+              "i": "Constant(value=0)",
+              "j": "Constant(value=0)",
+              "k": "Constant(value=0)"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_merge_sort"
+              ],
+              [
+                "function_merge_sort",
+                "branch"
+              ],
+              [
+                "function_merge_sort",
+                "branch",
+                "branch"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "merge_sort": {
+              "name": "merge_sort",
+              "args": [
+                "arr"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 2,
+            "estimated_complexity": "O(2^n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "FloorDiv"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              0,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [
+              "And"
+            ],
+            "comparisons": [
+              "Gt",
+              "Lt",
+              "Lt",
+              "Lt",
+              "Lt",
+              "Lt"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "If",
+              "Compare",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Gt",
+              "Constant",
+              "Assign",
+              "Name",
+              "Store",
+              "BinOp",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "FloorDiv",
+              "Constant",
+              "Assign",
+              "Name",
+              "Store",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Expr",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Constant",
+              "While",
+              "BoolOp",
+              "And",
+              "Compare",
+              "Name",
+              "Load",
+              "Lt",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Compare",
+              "Name",
+              "Load",
+              "Lt",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Lt",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Store",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "Assign",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Store",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "While",
+              "Compare",
+              "Name",
+              "Load",
+              "Lt",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Assign",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Store",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "While",
+              "Compare",
+              "Name",
+              "Load",
+              "Lt",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Assign",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Store",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 8,
+            "ast_hash": "388c6b4e97f4c8d2c7e0963867e6bbf8",
+            "alpha_renamed_hash": "bd56b14837ceab784a7f549f7f54fe5f"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "FloorDiv"
+            ],
+            "precedence_levels": {
+              "FloorDiv": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "If",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Expr",
+              "Expr",
+              "Assign",
+              "While",
+              "If",
+              "Assign",
+              "AugAssign",
+              "Assign",
+              "AugAssign",
+              "AugAssign",
+              "While",
+              "Assign",
+              "AugAssign",
+              "AugAssign",
+              "While",
+              "Assign",
+              "AugAssign",
+              "AugAssign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "If_1",
+              "Assign_2",
+              "Assign_3",
+              "Assign_4",
+              "Expr_5",
+              "Expr_6",
+              "Assign_7",
+              "While_8",
+              "If_9",
+              "Assign_10",
+              "AugAssign_11",
+              "Assign_12",
+              "AugAssign_13",
+              "AugAssign_14",
+              "While_15",
+              "Assign_16",
+              "AugAssign_17",
+              "AugAssign_18",
+              "While_19",
+              "Assign_20",
+              "AugAssign_21",
+              "AugAssign_22",
+              "Return_23"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "If",
+              "While",
+              "If",
+              "While",
+              "While"
+            ]
+          },
+          "behavioral_signature": {
+            "can_execute": true,
+            "io_signature_hash": "ca377392ba27f5bdaf360e84f2bd61ab",
+            "side_effects_detected": [],
+            "test_results": [
+              [
+                0,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                1,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                2,
+                "Exception:TypeError",
+                false
+              ]
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": true,
+            "base_cases": [],
+            "recursive_calls": [
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "Name"
+                ]
+              },
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "Name"
+                ]
+              }
+            ],
+            "recursion_pattern": "binary",
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 2,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [
+              "len",
+              "len",
+              "merge_sort",
+              "merge_sort",
+              "merge",
+              "len",
+              "len"
+            ],
+            "nested_depth": 2,
+            "branch_patterns": [
+              "if_at_depth_0",
+              "if_at_depth_1"
+            ]
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "mid": [
+                "array"
+              ],
+              "left_half": [],
+              "right_half": [],
+              "sorted_array": [],
+              "i": [],
+              "j": []
+            },
+            "assignments": {
+              "mid": "BinOp(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='array', ctx=Load())]), op=FloorDiv(), right=Constant(value=2))",
+              "left_half": "Call(func=Name(id='merge_sort', ctx=Load()), args=[Subscript(value=Name(id='array', ctx=Load()), slice=Slice(upper=Name(id='mid', ctx=Load())), ctx=Load())])",
+              "right_half": "Call(func=Name(id='merge_sort', ctx=Load()), args=[Subscript(value=Name(id='array', ctx=Load()), slice=Slice(lower=Name(id='mid', ctx=Load())), ctx=Load())])",
+              "sorted_array": "List(ctx=Load())",
+              "i": "Constant(value=0)",
+              "j": "Constant(value=0)"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_merge_sort"
+              ],
+              [
+                "function_merge_sort",
+                "branch"
+              ],
+              [
+                "function_merge"
+              ],
+              [
+                "function_merge",
+                "branch"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "merge_sort": {
+              "name": "merge_sort",
+              "args": [
+                "array"
+              ],
+              "returns": null,
+              "has_return": true
+            },
+            "merge": {
+              "name": "merge",
+              "args": [
+                "left",
+                "right"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 2,
+            "estimated_complexity": "O(2^n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": true,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "FloorDiv"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              0,
+              1,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [
+              "And"
+            ],
+            "comparisons": [
+              "LtE",
+              "Lt",
+              "Lt",
+              "Lt"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "If",
+              "Compare",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "LtE",
+              "Constant",
+              "Return",
+              "Name",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "BinOp",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "FloorDiv",
+              "Constant",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "List",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Constant",
+              "While",
+              "BoolOp",
+              "And",
+              "Compare",
+              "Name",
+              "Load",
+              "Lt",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Compare",
+              "Name",
+              "Load",
+              "Lt",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Lt",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 8,
+            "ast_hash": "19b8577b90fda186ec9ad1e92574bf34",
+            "alpha_renamed_hash": "c371cc117fb0efc92db5c29e217fc8c6"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "FloorDiv"
+            ],
+            "precedence_levels": {
+              "FloorDiv": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "If",
+              "Return",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Return",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "While",
+              "If",
+              "Expr",
+              "AugAssign",
+              "Expr",
+              "AugAssign",
+              "Expr",
+              "Expr",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "If_1",
+              "Return_2",
+              "Assign_3",
+              "Assign_4",
+              "Assign_5",
+              "Return_6",
+              "FunctionDef_7",
+              "Assign_8",
+              "Assign_9",
+              "While_10",
+              "If_11",
+              "Expr_12",
+              "AugAssign_13",
+              "Expr_14",
+              "AugAssign_15",
+              "Expr_16",
+              "Expr_17",
+              "Return_18"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "If",
+              "FunctionDef",
+              "While",
+              "If"
+            ]
+          },
+          "behavioral_signature": {
+            "can_execute": true,
+            "io_signature_hash": "ca377392ba27f5bdaf360e84f2bd61ab",
+            "side_effects_detected": [],
+            "test_results": [
+              [
+                0,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                1,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                2,
+                "Exception:TypeError",
+                false
+              ]
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": true,
+            "base_cases": [
+              {
+                "condition": "len(array) <= 1",
+                "return_type": "expression"
+              }
+            ],
+            "recursive_calls": [
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "Subscript"
+                ]
+              },
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "Subscript"
+                ]
+              }
+            ],
+            "recursion_pattern": "divide_and_conquer",
+            "termination_guards": [
+              "len(array) <= 1"
+            ]
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 2,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [
+              "len",
+              "len",
+              "merge_sort",
+              "merge_sort",
+              "merge",
+              "len",
+              "len"
+            ],
+            "nested_depth": 2,
+            "branch_patterns": [
+              "if_at_depth_0",
+              "if_at_depth_1"
+            ]
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "mid": [
+                "arr"
+              ],
+              "left_half": [],
+              "right_half": [],
+              "sorted_array": []
+            },
+            "assignments": {
+              "mid": "BinOp(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='arr', ctx=Load())]), op=FloorDiv(), right=Constant(value=2))",
+              "left_half": "Call(func=Name(id='merge_sort', ctx=Load()), args=[Subscript(value=Name(id='arr', ctx=Load()), slice=Slice(upper=Name(id='mid', ctx=Load())), ctx=Load())])",
+              "right_half": "Call(func=Name(id='merge_sort', ctx=Load()), args=[Subscript(value=Name(id='arr', ctx=Load()), slice=Slice(lower=Name(id='mid', ctx=Load())), ctx=Load())])",
+              "sorted_array": "List(ctx=Load())"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_merge_sort"
+              ],
+              [
+                "function_merge_sort",
+                "branch"
+              ],
+              [
+                "function_merge"
+              ],
+              [
+                "function_merge",
+                "branch"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "merge_sort": {
+              "name": "merge_sort",
+              "args": [
+                "arr"
+              ],
+              "returns": null,
+              "has_return": true
+            },
+            "merge": {
+              "name": "merge",
+              "args": [
+                "left",
+                "right"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 2,
+            "estimated_complexity": "O(2^n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": true,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "FloorDiv"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              0,
+              0,
+              1,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [
+              "And"
+            ],
+            "comparisons": [
+              "LtE",
+              "Lt",
+              "Lt",
+              "Lt"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "If",
+              "Compare",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "LtE",
+              "Constant",
+              "Return",
+              "Name",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "BinOp",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "FloorDiv",
+              "Constant",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "List",
+              "Load",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Constant",
+              "Constant",
+              "Load",
+              "While",
+              "BoolOp",
+              "And",
+              "Compare",
+              "Name",
+              "Load",
+              "Lt",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Compare",
+              "Name",
+              "Load",
+              "Lt",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Lt",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 8,
+            "ast_hash": "1900fedeb73b554f340df410f704e377",
+            "alpha_renamed_hash": "fb8b83e2205686d19094b31e1003e54e"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "FloorDiv"
+            ],
+            "precedence_levels": {
+              "FloorDiv": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "If",
+              "Return",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Return",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "While",
+              "If",
+              "Expr",
+              "AugAssign",
+              "Expr",
+              "AugAssign",
+              "Expr",
+              "Expr",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "If_1",
+              "Return_2",
+              "Assign_3",
+              "Assign_4",
+              "Assign_5",
+              "Return_6",
+              "FunctionDef_7",
+              "Assign_8",
+              "Assign_9",
+              "While_10",
+              "If_11",
+              "Expr_12",
+              "AugAssign_13",
+              "Expr_14",
+              "AugAssign_15",
+              "Expr_16",
+              "Expr_17",
+              "Return_18"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "If",
+              "FunctionDef",
+              "While",
+              "If"
+            ]
+          },
+          "behavioral_signature": {
+            "can_execute": true,
+            "io_signature_hash": "ca377392ba27f5bdaf360e84f2bd61ab",
+            "side_effects_detected": [],
+            "test_results": [
+              [
+                0,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                1,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                2,
+                "Exception:TypeError",
+                false
+              ]
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": true,
+            "base_cases": [
+              {
+                "condition": "len(arr) <= 1",
+                "return_type": "expression"
+              }
+            ],
+            "recursive_calls": [
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "Subscript"
+                ]
+              },
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "Subscript"
+                ]
+              }
+            ],
+            "recursion_pattern": "divide_and_conquer",
+            "termination_guards": [
+              "len(arr) <= 1"
+            ]
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 2,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [
+              "len",
+              "len",
+              "merge_sort",
+              "merge_sort",
+              "merge",
+              "len",
+              "len"
+            ],
+            "nested_depth": 2,
+            "branch_patterns": [
+              "if_at_depth_0",
+              "if_at_depth_1"
+            ]
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "mid": [
+                "arr"
+              ],
+              "left_half": [],
+              "right_half": [],
+              "sorted_array": []
+            },
+            "assignments": {
+              "mid": "BinOp(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='arr', ctx=Load())]), op=FloorDiv(), right=Constant(value=2))",
+              "left_half": "Call(func=Name(id='merge_sort', ctx=Load()), args=[Subscript(value=Name(id='arr', ctx=Load()), slice=Slice(upper=Name(id='mid', ctx=Load())), ctx=Load())])",
+              "right_half": "Call(func=Name(id='merge_sort', ctx=Load()), args=[Subscript(value=Name(id='arr', ctx=Load()), slice=Slice(lower=Name(id='mid', ctx=Load())), ctx=Load())])",
+              "sorted_array": "List(ctx=Load())"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_merge_sort"
+              ],
+              [
+                "function_merge_sort",
+                "branch"
+              ],
+              [
+                "function_merge"
+              ],
+              [
+                "function_merge",
+                "branch"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "merge_sort": {
+              "name": "merge_sort",
+              "args": [
+                "arr"
+              ],
+              "returns": null,
+              "has_return": true
+            },
+            "merge": {
+              "name": "merge",
+              "args": [
+                "left",
+                "right"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 2,
+            "estimated_complexity": "O(2^n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": true,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "FloorDiv"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              0,
+              0,
+              1,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [
+              "And"
+            ],
+            "comparisons": [
+              "LtE",
+              "Lt",
+              "Lt",
+              "Lt"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "If",
+              "Compare",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "LtE",
+              "Constant",
+              "Return",
+              "Name",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "BinOp",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "FloorDiv",
+              "Constant",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "List",
+              "Load",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Constant",
+              "Constant",
+              "Load",
+              "While",
+              "BoolOp",
+              "And",
+              "Compare",
+              "Name",
+              "Load",
+              "Lt",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Compare",
+              "Name",
+              "Load",
+              "Lt",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Lt",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 8,
+            "ast_hash": "1900fedeb73b554f340df410f704e377",
+            "alpha_renamed_hash": "fb8b83e2205686d19094b31e1003e54e"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "FloorDiv"
+            ],
+            "precedence_levels": {
+              "FloorDiv": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "If",
+              "Return",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Return",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "While",
+              "If",
+              "Expr",
+              "AugAssign",
+              "Expr",
+              "AugAssign",
+              "Expr",
+              "Expr",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "If_1",
+              "Return_2",
+              "Assign_3",
+              "Assign_4",
+              "Assign_5",
+              "Return_6",
+              "FunctionDef_7",
+              "Assign_8",
+              "Assign_9",
+              "While_10",
+              "If_11",
+              "Expr_12",
+              "AugAssign_13",
+              "Expr_14",
+              "AugAssign_15",
+              "Expr_16",
+              "Expr_17",
+              "Return_18"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "If",
+              "FunctionDef",
+              "While",
+              "If"
+            ]
+          },
+          "behavioral_signature": {
+            "can_execute": true,
+            "io_signature_hash": "ca377392ba27f5bdaf360e84f2bd61ab",
+            "side_effects_detected": [],
+            "test_results": [
+              [
+                0,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                1,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                2,
+                "Exception:TypeError",
+                false
+              ]
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": true,
+            "base_cases": [
+              {
+                "condition": "len(arr) <= 1",
+                "return_type": "expression"
+              }
+            ],
+            "recursive_calls": [
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "Subscript"
+                ]
+              },
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "Subscript"
+                ]
+              }
+            ],
+            "recursion_pattern": "divide_and_conquer",
+            "termination_guards": [
+              "len(arr) <= 1"
+            ]
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 2,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [
+              "len",
+              "len",
+              "merge_sort",
+              "merge_sort",
+              "merge",
+              "len",
+              "len"
+            ],
+            "nested_depth": 2,
+            "branch_patterns": [
+              "if_at_depth_0",
+              "if_at_depth_1"
+            ]
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "mid": [
+                "arr"
+              ],
+              "left_half": [],
+              "right_half": [],
+              "sorted_arr": []
+            },
+            "assignments": {
+              "mid": "BinOp(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='arr', ctx=Load())]), op=FloorDiv(), right=Constant(value=2))",
+              "left_half": "Call(func=Name(id='merge_sort', ctx=Load()), args=[Subscript(value=Name(id='arr', ctx=Load()), slice=Slice(upper=Name(id='mid', ctx=Load())), ctx=Load())])",
+              "right_half": "Call(func=Name(id='merge_sort', ctx=Load()), args=[Subscript(value=Name(id='arr', ctx=Load()), slice=Slice(lower=Name(id='mid', ctx=Load())), ctx=Load())])",
+              "sorted_arr": "List(ctx=Load())"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_merge_sort"
+              ],
+              [
+                "function_merge_sort",
+                "branch"
+              ],
+              [
+                "function_merge"
+              ],
+              [
+                "function_merge",
+                "branch"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "merge_sort": {
+              "name": "merge_sort",
+              "args": [
+                "arr"
+              ],
+              "returns": null,
+              "has_return": true
+            },
+            "merge": {
+              "name": "merge",
+              "args": [
+                "left",
+                "right"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 2,
+            "estimated_complexity": "O(2^n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": true,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "FloorDiv"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              0,
+              0,
+              1,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [
+              "And"
+            ],
+            "comparisons": [
+              "LtE",
+              "Lt",
+              "Lt",
+              "Lt"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "If",
+              "Compare",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "LtE",
+              "Constant",
+              "Return",
+              "Name",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "BinOp",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "FloorDiv",
+              "Constant",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "List",
+              "Load",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Constant",
+              "Constant",
+              "Load",
+              "While",
+              "BoolOp",
+              "And",
+              "Compare",
+              "Name",
+              "Load",
+              "Lt",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Compare",
+              "Name",
+              "Load",
+              "Lt",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Lt",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Add",
+              "Constant",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 8,
+            "ast_hash": "cc8c7a909a1fb82ff60553a1fc9d3ef6",
+            "alpha_renamed_hash": "fb8b83e2205686d19094b31e1003e54e"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "FloorDiv"
+            ],
+            "precedence_levels": {
+              "FloorDiv": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "If",
+              "Return",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Return",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "While",
+              "If",
+              "Expr",
+              "AugAssign",
+              "Expr",
+              "AugAssign",
+              "Expr",
+              "Expr",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "If_1",
+              "Return_2",
+              "Assign_3",
+              "Assign_4",
+              "Assign_5",
+              "Return_6",
+              "FunctionDef_7",
+              "Assign_8",
+              "Assign_9",
+              "While_10",
+              "If_11",
+              "Expr_12",
+              "AugAssign_13",
+              "Expr_14",
+              "AugAssign_15",
+              "Expr_16",
+              "Expr_17",
+              "Return_18"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "If",
+              "FunctionDef",
+              "While",
+              "If"
+            ]
+          },
+          "behavioral_signature": {
+            "can_execute": true,
+            "io_signature_hash": "ca377392ba27f5bdaf360e84f2bd61ab",
+            "side_effects_detected": [],
+            "test_results": [
+              [
+                0,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                1,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                2,
+                "Exception:TypeError",
+                false
+              ]
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": true,
+            "base_cases": [
+              {
+                "condition": "len(arr) <= 1",
+                "return_type": "expression"
+              }
+            ],
+            "recursive_calls": [
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "Subscript"
+                ]
+              },
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "Subscript"
+                ]
+              }
+            ],
+            "recursion_pattern": "divide_and_conquer",
+            "termination_guards": [
+              "len(arr) <= 1"
+            ]
+          }
+        }
+      ],
+      "structural_groups": {
+        "6291780478132982861_6106469080804062802_2720305306732534562_-7703813098170066260": [
+          0,
+          5
+        ],
+        "1720526466538906488_6106469080804062802_2720305306732534562_6642144176837686347": [
+          1
+        ],
+        "470968252140156566_6106469080804062802_2720305306732534562_-5093046142670117206": [
+          2
+        ],
+        "4749988236602306424_-1790325696090957679_2720305306732534562_1688640303761744039": [
+          3
+        ],
+        "470968252140156566_6106469080804062802_2720305306732534562_-5066636619016629476": [
+          4
+        ],
+        "470968252140156566_6106469080804062802_2720305306732534562_-940646983474859944": [
+          6
+        ],
+        "470968252140156566_6106469080804062802_2720305306732534562_-1498773733878774562": [
+          7,
+          8
+        ],
+        "470968252140156566_6106469080804062802_2720305306732534562_5296831045737315234": [
+          9
+        ]
+      },
+      "distances_to_canon": [
+        0.4222222222222223,
+        0.32222222222222224,
+        0.1722222222222222,
+        0.3055555555555556,
+        0.1722222222222222,
+        0.4222222222222223,
+        0.18888888888888886,
+        0.1722222222222222,
+        0.1722222222222222,
+        0.1722222222222222
+      ],
+      "mean_distance": 0.25222222222222224,
+      "std_distance": 0.10077477638553986
+    },
+    "distance_variance": {
+      "distances": [
+        0.4222222222222223,
+        0.32222222222222224,
+        0.1722222222222222,
+        0.3055555555555556,
+        0.1722222222222222,
+        0.4222222222222223,
+        0.18888888888888886,
+        0.1722222222222222,
+        0.1722222222222222,
+        0.1722222222222222
+      ],
+      "mean": 0.25222222222222224,
+      "std": 0.10077477638553986,
+      "min": 0.1722222222222222,
+      "max": 0.4222222222222223,
+      "variance": 0.010155555555555562,
+      "histogram_bins": [
+        6,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        2
+      ],
+      "histogram_edges": [
+        0.1722222222222222,
+        0.19722222222222222,
+        0.2222222222222222,
+        0.24722222222222223,
+        0.27222222222222225,
+        0.2972222222222223,
+        0.3222222222222223,
+        0.34722222222222227,
+        0.3722222222222223,
+        0.3972222222222223,
+        0.4222222222222223
+      ]
+    },
+    "behavioral_improvement": 0.0,
+    "structural_improvement": 0.1,
+    "total_improvement": 0.1
+  },
+  "bell_curve_analysis": {
+    "plot_path": "outputs\\analysis\\bell_curve_merge_sort_temp1.5.png",
+    "statistics": {
+      "mean": 0.25222222222222224,
+      "std": 0.10077477638553986,
+      "median": 0.18055555555555552,
+      "min": 0.1722222222222222,
+      "max": 0.4222222222222223,
+      "variance": 0.010155555555555562,
+      "skewness": 0.7334856168028527,
+      "kurtosis": -1.1350616952918142,
+      "percentiles": {
+        "25th": 0.1722222222222222,
+        "50th": 0.18055555555555552,
+        "75th": 0.3180555555555556,
+        "90th": 0.4222222222222223,
+        "95th": 0.4222222222222223
+      }
+    },
+    "normality_test": {
+      "statistic": 0.7439286936168561,
+      "p_value": 0.003010128489998139,
+      "is_normal": "False"
+    },
+    "sample_size": 10
+  },
+  "hypothesis_evaluation": {
+    "hypothesis": "SKYT improves LLM code repeatability through contract-driven canonicalization",
+    "supported": false,
+    "evidence": {
+      "raw_repeatability": 0.1,
+      "behavioral_improvement": 0.0,
+      "structural_improvement": 0.1,
+      "total_improvement": 0.1
+    },
+    "conclusion": "Hypothesis NOT SUPPORTED: No significant improvement"
+  }
+}
