@@ -23,24 +23,16 @@ class RecursionSchemaAligner(TransformationBase):
             description="Normalizes recursive structure and base cases"
         )
     
-    def can_transform(self, code: str, canon_code: str) -> bool:
-        """Check if recursion schemas differ"""
+    def can_transform(self, code: str, canon_code: str, property_diffs: list = None) -> bool:
+        """Check if recursion schemas differ (PROPERTY-DRIVEN)"""
         
-        # Quick check: both should be recursive or both non-recursive
-        code_has_recursion = self._has_recursion(code)
-        canon_has_recursion = self._has_recursion(canon_code)
+        # Use property differences to detect recursion schema mismatches
+        if property_diffs:
+            for diff in property_diffs:
+                if diff['property'] == 'recursion_schema' and diff['distance'] > 0.1:
+                    return True
         
-        if code_has_recursion != canon_has_recursion:
-            return True  # Mismatch needs fixing
-        
-        if not code_has_recursion:
-            return False  # Both non-recursive, no transformation needed
-        
-        # Check base case differences
-        code_base = self._extract_base_case_pattern(code)
-        canon_base = self._extract_base_case_pattern(canon_code)
-        
-        return code_base != canon_base
+        return False
     
     def _apply_transformation(self, code: str, canon_code: str) -> str:
         """Apply recursion schema alignment"""

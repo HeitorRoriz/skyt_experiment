@@ -22,7 +22,7 @@ class BoundaryConditionAligner(TransformationBase):
             description="Aligns boundary condition logic to match canonical approach"
         )
     
-    def can_transform(self, code: str, canon_code: str) -> bool:
+    def can_transform(self, code: str, canon_code: str, property_diffs: list = None) -> bool:
         """Check if boundary conditions differ from canonical form"""
         
         # Extract boundary conditions from both codes

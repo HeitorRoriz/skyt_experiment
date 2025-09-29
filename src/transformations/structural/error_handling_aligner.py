@@ -21,23 +21,25 @@ class ErrorHandlingAligner(TransformationBase):
             description="Converts error handling to match canonical boundary checks"
         )
     
-    def can_transform(self, code: str, canon_code: str) -> bool:
-        """Check if code has error handling that differs from canon"""
+    def can_transform(self, code: str, canon_code: str, property_diffs: list = None) -> bool:
+        """Check if code has error handling that differs from canon (PROPERTY-DRIVEN)"""
         
-        # Check if code has raise statements
+        # Use property differences instead of hardcoded Fibonacci checks
+        if property_diffs:
+            # Check if side effect profile differs (raise statements are side effects)
+            for diff in property_diffs:
+                if diff['property'] == 'side_effect_profile' and diff['distance'] > 0:
+                    return True
+                
+                # Check if termination properties differ (error handling vs boundary checks)
+                if diff['property'] == 'termination_properties' and diff['distance'] > 0:
+                    return True
+        
+        # Fallback: generic check for raise statement differences
         has_raise = 'raise ' in code
-        
-        # Check if canon has raise statements
         canon_has_raise = 'raise ' in canon_code
         
-        # Check for different boundary conditions
-        has_n_less_than = 'if n < 0' in code or 'if n<0' in code
-        canon_has_n_less_equal = 'if n <= 0' in canon_code or 'if n<=0' in canon_code
-        
-        # Transform if:
-        # 1. Code has raise but canon doesn't
-        # 2. Code has different boundary condition than canon
-        return (has_raise and not canon_has_raise) or (has_n_less_than and canon_has_n_less_equal)
+        return has_raise != canon_has_raise
     
     def _apply_transformation(self, code: str, canon_code: str) -> str:
         """Apply error handling alignment transformation"""

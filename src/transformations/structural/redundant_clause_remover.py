@@ -21,7 +21,7 @@ class RedundantClauseRemover(TransformationBase):
             description="Removes unnecessary else/elif clauses"
         )
     
-    def can_transform(self, code: str, canon_code: str) -> bool:
+    def can_transform(self, code: str, canon_code: str, property_diffs: list = None) -> bool:
         """Check if code has redundant clauses that canon doesn't have"""
         
         # Simple heuristic: check for else clauses

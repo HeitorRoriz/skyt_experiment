@@ -73,9 +73,24 @@ class TransformationPipeline:
         all_results = []
         successful_transformations = []
         
+        # Import property extractor for property-driven transformation
+        import sys
+        import os
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+        from foundational_properties import FoundationalProperties
+        props_extractor = FoundationalProperties()
+        
         for iteration in range(max_iterations):
             if self.debug_mode:
                 print(f"\n--- Iteration {iteration + 1} ---")
+            
+            # Compute property differences for this iteration
+            current_props = props_extractor.extract_all_properties(current_code)
+            canon_props = props_extractor.extract_all_properties(canon_code)
+            property_diffs = self._compute_property_diffs(current_props, canon_props, props_extractor)
+            
+            if self.debug_mode and property_diffs:
+                print(f"Property differences detected: {len([d for d in property_diffs if d['distance'] > 0])}")
             
             iteration_results = []
             code_changed = False
@@ -84,7 +99,8 @@ class TransformationPipeline:
                 if self.debug_mode:
                     print(f"\nTrying {transformer.name}...")
                 
-                result = transformer.transform(current_code, canon_code)
+                # Pass property differences to transformer
+                result = transformer.transform(current_code, canon_code, property_diffs=property_diffs)
                 iteration_results.append(result)
                 
                 if result.success:
@@ -140,3 +156,24 @@ class TransformationPipeline:
         self.debug_mode = False
         for transformer in self.transformations:
             transformer.debug_mode = False
+    
+    def _compute_property_diffs(self, current_props: dict, canon_props: dict, extractor) -> list:
+        """Compute property differences between current code and canon"""
+        diffs = []
+        
+        for prop_name in extractor.properties:
+            if prop_name in current_props and prop_name in canon_props:
+                distance = extractor._calculate_property_distance(
+                    current_props[prop_name],
+                    canon_props[prop_name],
+                    prop_name
+                )
+                
+                diffs.append({
+                    'property': prop_name,
+                    'distance': distance,
+                    'current_value': current_props[prop_name],
+                    'canon_value': canon_props[prop_name]
+                })
+        
+        return diffs

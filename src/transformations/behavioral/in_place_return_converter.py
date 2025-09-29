@@ -22,13 +22,26 @@ class InPlaceReturnConverter(TransformationBase):
             description="Normalizes in-place vs return-based sorting semantics"
         )
     
-    def can_transform(self, code: str, canon_code: str) -> bool:
-        """Check if mutation styles differ"""
+    def can_transform(self, code: str, canon_code: str, property_diffs: list = None) -> bool:
+        """Check if mutation styles differ (PROPERTY-DRIVEN)"""
         
+        # Use property differences to detect style mismatches
+        if property_diffs:
+            for diff in property_diffs:
+                if diff['property'] == 'function_contracts' and diff['distance'] > 0:
+                    # Check if the difference is in return behavior
+                    curr_val = diff.get('current_value', {})
+                    canon_val = diff.get('canon_value', {})
+                    # Only transform if actual return mismatch detected
+                    if curr_val and canon_val and curr_val != canon_val:
+                        return True
+        
+        # Fallback check, but be conservative to avoid infinite loops
         code_style = self._detect_style(code)
         canon_style = self._detect_style(canon_code)
         
-        return code_style != canon_style
+        # CRITICAL: Only transform if styles truly differ AND not both return-based
+        return code_style != canon_style and not (code_style == "return_based" and canon_style == "return_based")
     
     def _apply_transformation(self, code: str, canon_code: str) -> str:
         """Apply style conversion"""

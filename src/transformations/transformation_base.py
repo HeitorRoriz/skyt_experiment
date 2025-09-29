@@ -48,7 +48,7 @@ class TransformationBase(ABC):
             print(f"[{self.name}] {message}")
             
     @abstractmethod
-    def can_transform(self, code: str, canon_code: str) -> bool:
+    def can_transform(self, code: str, canon_code: str, property_diffs: list = None) -> bool:
         """Check if this transformation can be applied to the code"""
         pass
         
@@ -57,13 +57,14 @@ class TransformationBase(ABC):
         """Apply the transformation to the code"""
         pass
         
-    def transform(self, code: str, canon_code: str) -> TransformationResult:
+    def transform(self, code: str, canon_code: str, property_diffs: list = None) -> TransformationResult:
         """
         Main transformation method with error handling and logging
         
         Args:
             code: Code to transform
             canon_code: Canonical reference code
+            property_diffs: List of property differences from pipeline
             
         Returns:
             TransformationResult with success status and transformed code
@@ -72,7 +73,7 @@ class TransformationBase(ABC):
         
         try:
             # Check if transformation is applicable
-            if not self.can_transform(code, canon_code):
+            if not self.can_transform(code, canon_code, property_diffs=property_diffs):
                 self.log_debug("Transformation not applicable")
                 return TransformationResult(
                     transformed_code=code,

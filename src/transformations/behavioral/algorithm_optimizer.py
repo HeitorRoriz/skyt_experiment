@@ -23,20 +23,20 @@ class AlgorithmOptimizer(TransformationBase):
             description="Optimizes algorithmic patterns to match canonical approach"
         )
     
-    def can_transform(self, code: str, canon_code: str) -> bool:
-        """Check if code has algorithmic patterns that differ from canon"""
+    def can_transform(self, code: str, canon_code: str, property_diffs: list = None) -> bool:
+        """Check if code has algorithmic patterns that differ from canon (PROPERTY-DRIVEN)"""
         
-        # Extract variable naming patterns
-        code_vars = self._extract_variable_patterns(code)
-        canon_vars = self._extract_variable_patterns(canon_code)
+        # Use property differences to detect algorithmic mismatches
+        if property_diffs:
+            for diff in property_diffs:
+                # Check data dependency differences (variable patterns)
+                if diff['property'] == 'data_dependency_graph' and diff['distance'] > 0.1:
+                    return True
+                # Check control flow differences (loop patterns)
+                if diff['property'] == 'control_flow_signature' and diff['distance'] > 0.1:
+                    return True
         
-        # Check for different variable naming conventions
-        has_different_vars = code_vars != canon_vars
-        
-        # Check for different loop patterns
-        has_different_loops = self._has_different_loop_patterns(code, canon_code)
-        
-        return has_different_vars or has_different_loops
+        return False
     
     def _apply_transformation(self, code: str, canon_code: str) -> str:
         """Apply algorithmic optimization transformation"""
