@@ -12,6 +12,7 @@ from .behavioral.algorithm_optimizer import AlgorithmOptimizer
 from .behavioral.boundary_condition_aligner import BoundaryConditionAligner
 from .behavioral.recursion_schema_aligner import RecursionSchemaAligner
 from .behavioral.in_place_return_converter import InPlaceReturnConverter
+from .semantic_validator import SemanticValidator
 
 
 class TransformationPipeline:
@@ -21,6 +22,7 @@ class TransformationPipeline:
         self.debug_mode = debug_mode
         self.transformations: List[TransformationBase] = []
         self.results_history: List[TransformationResult] = []
+        self.semantic_validator = SemanticValidator()  # For behavioral validation
         
         # Initialize default transformations
         self._setup_default_transformations()
@@ -109,13 +111,27 @@ class TransformationPipeline:
                 iteration_results.append(result)
                 
                 if result.success:
-                    if self.debug_mode:
-                        print(f"✅ {transformer.name} succeeded")
+                    # CRITICAL: Validate transformation didn't break the code
+                    is_valid = self._validate_transformation(
+                        original_code=current_code,
+                        transformed_code=result.transformed_code,
+                        transformer_name=transformer.name
+                    )
                     
-                    current_code = result.transformed_code
-                    successful_transformations.append(transformer.name)
-                    code_changed = True
-                    break  # Apply one transformation per iteration
+                    if is_valid:
+                        if self.debug_mode:
+                            print(f"✅ {transformer.name} succeeded and validated")
+                        
+                        current_code = result.transformed_code
+                        successful_transformations.append(transformer.name)
+                        code_changed = True
+                        break  # Apply one transformation per iteration
+                    else:
+                        # ROLLBACK: Reject transformation that breaks code
+                        if self.debug_mode:
+                            print(f"⚠️ {transformer.name} broke code - rolling back")
+                        # Don't update current_code, continue to next transformer
+                        continue
                 else:
                     if self.debug_mode:
                         print(f"❌ {transformer.name} failed: {result.error_message}")
@@ -182,3 +198,93 @@ class TransformationPipeline:
                 })
         
         return diffs
+    
+    def _validate_transformation(self, original_code: str, transformed_code: str, 
+                                 transformer_name: str) -> bool:
+        """
+        Validate that transformation didn't break the code
+        
+        Checks:
+        1. Code is still parseable (valid Python syntax)
+        2. No undefined variables introduced
+        3. Function still exists
+        
+        Returns True if transformation is valid, False if it broke code
+        """
+        try:
+            import ast
+            
+            # Check 1: Can we parse it?
+            try:
+                tree = ast.parse(transformed_code)
+            except SyntaxError:
+                if self.debug_mode:
+                    print(f"  REJECT: {transformer_name} produced syntax error")
+                return False
+            
+            # Check 2: Look for undefined variable references
+            # Extract all variable names used vs defined
+            class VariableChecker(ast.NodeVisitor):
+                def __init__(self):
+                    self.defined = set()
+                    self.used = set()
+                    self.current_scope = set()
+                    
+                def visit_FunctionDef(self, node):
+                    # Add function name and parameters to defined
+                    self.defined.add(node.name)
+                    for arg in node.args.args:
+                        self.defined.add(arg.arg)
+                        self.current_scope.add(arg.arg)
+                    self.generic_visit(node)
+                
+                def visit_Assign(self, node):
+                    # Add assigned variables to defined
+                    for target in node.targets:
+                        if isinstance(target, ast.Name):
+                            self.defined.add(target.id)
+                            self.current_scope.add(target.id)
+                    self.generic_visit(node)
+                
+                def visit_Name(self, node):
+                    if isinstance(node.ctx, ast.Load):
+                        # Variable is being read
+                        self.used.add(node.id)
+                    self.generic_visit(node)
+            
+            checker = VariableChecker()
+            checker.visit(tree)
+            
+            # Filter out builtins
+            builtins = {'range', 'len', 'print', 'max', 'min', 'sum', 'abs', 'sorted', 'enumerate', 'zip'}
+            undefined = (checker.used - checker.defined) - builtins
+            
+            if undefined:
+                if self.debug_mode:
+                    print(f"  REJECT: {transformer_name} introduced undefined variables: {undefined}")
+                return False
+            
+            # Check 3: Does the code still have at least one function?
+            has_function = any(isinstance(node, ast.FunctionDef) for node in ast.walk(tree))
+            if not has_function:
+                if self.debug_mode:
+                    print(f"  REJECT: {transformer_name} removed all functions")
+                return False
+            
+            # Check 4: SEMANTIC EQUIVALENCE - Does transformed code behave the same?
+            if not self.semantic_validator.are_semantically_equivalent(original_code, transformed_code):
+                if self.debug_mode:
+                    behavioral_dist = self.semantic_validator.calculate_behavioral_distance(
+                        original_code, transformed_code
+                    )
+                    print(f"  REJECT: {transformer_name} changed behavior (distance={behavioral_dist:.3f})")
+                return False
+            
+            # All checks passed
+            return True
+            
+        except Exception as e:
+            # If validation itself fails, be conservative and reject
+            if self.debug_mode:
+                print(f"  REJECT: Validation failed with error: {e}")
+            return False

@@ -67,7 +67,10 @@ class VariableRenamer(TransformationBase):
         overlap = len(code_vars & canon_vars)
         total = len(code_vars | canon_vars)
         
-        return total > 0 and (overlap / total) < 0.7  # Less than 70% overlap
+        # LOWERED THRESHOLD: 50% (was 70%) - more aggressive for small functions
+        # Even 1-2 variable differences in a 5-variable function = 60-80% overlap
+        # Need to fire in those cases!
+        return total > 0 and (overlap / total) < 0.5  # Less than 50% overlap
     
     def _apply_transformation(self, code: str, canon_code: str) -> str:
         """Apply variable renaming transformation"""
