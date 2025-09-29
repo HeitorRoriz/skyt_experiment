@@ -7,6 +7,7 @@ from typing import List, Dict, Any, Optional
 from .transformation_base import TransformationBase, TransformationResult
 from .structural.error_handling_aligner import ErrorHandlingAligner
 from .structural.redundant_clause_remover import RedundantClauseRemover
+from .structural.variable_renamer import VariableRenamer
 from .behavioral.algorithm_optimizer import AlgorithmOptimizer
 from .behavioral.boundary_condition_aligner import BoundaryConditionAligner
 from .behavioral.recursion_schema_aligner import RecursionSchemaAligner
@@ -32,10 +33,11 @@ class TransformationPipeline:
             # Structural transformations (syntax-focused)
             ErrorHandlingAligner(),
             RedundantClauseRemover(),
+            VariableRenamer(),              # CRITICAL: Handles variable name differences
             
             # Behavioral transformations (logic-focused)
-            RecursionSchemaAligner(),      # NEW: For recursive algorithms
-            InPlaceReturnConverter(),       # NEW: For sorting return semantics
+            RecursionSchemaAligner(),      # For recursive algorithms
+            InPlaceReturnConverter(),       # For sorting return semantics
             AlgorithmOptimizer(),
             BoundaryConditionAligner(),
         ]
