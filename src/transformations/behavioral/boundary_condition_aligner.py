@@ -82,54 +82,20 @@ class BoundaryConditionAligner(TransformationBase):
         return conditions
     
     def _align_boundary_conditions(self, code: str, canon_conditions: List[Dict[str, str]]) -> str:
-        """Align boundary conditions to match canonical patterns"""
+        """
+        Align boundary conditions to match canonical patterns
+        
+        CRITICAL: Only aligns OPERATORS and CONSTANTS, never variable names
+        Variable renaming is VariableRenamer's responsibility
+        """
         
         if not canon_conditions:
             return code
         
-        lines = code.split('\n')
-        current_conditions = self._extract_boundary_conditions(code)
+        # CONSERVATIVE APPROACH: Only align very specific boundary patterns
+        # DO NOT copy canonical conditions verbatim (that includes variable names!)
         
-        # Create a mapping of what needs to be changed
-        changes = []
-        
-        for i, current_cond in enumerate(current_conditions):
-            if i < len(canon_conditions):
-                canon_cond = canon_conditions[i]
-                
-                # Check if condition needs alignment
-                if (current_cond['condition'] != canon_cond['condition'] or
-                    current_cond['return_value'] != canon_cond['return_value']):
-                    
-                    changes.append({
-                        'line': current_cond['line'],
-                        'old_condition': current_cond['condition'],
-                        'new_condition': canon_cond['condition'],
-                        'old_return': current_cond['return_value'],
-                        'new_return': canon_cond['return_value'],
-                        'type': canon_cond['type']
-                    })
-        
-        # Apply changes (in reverse order to maintain line numbers)
-        for change in reversed(changes):
-            line_idx = change['line']
-            
-            if line_idx < len(lines):
-                # Get current indentation
-                indent = len(lines[line_idx]) - len(lines[line_idx].lstrip())
-                
-                # Replace the condition line
-                new_condition_line = ' ' * indent + f"{change['type']} {change['new_condition']}:"
-                lines[line_idx] = new_condition_line
-                
-                # Find and replace the return line
-                for j in range(line_idx + 1, min(line_idx + 4, len(lines))):
-                    if 'return' in lines[j]:
-                        return_indent = len(lines[j]) - len(lines[j].lstrip())
-                        new_return_line = ' ' * return_indent + f"return {change['new_return']}"
-                        lines[j] = new_return_line
-                        break
-                
-                self.log_debug(f"Aligned boundary condition: {change['old_condition']} → {change['new_condition']}")
-        
-        return '\n'.join(lines)
+        # For now, disable this transformer to prevent corruption
+        # It needs a complete rewrite to handle boundary logic without touching variables
+        self.log_debug("BoundaryConditionAligner disabled to prevent variable name corruption")
+        return code

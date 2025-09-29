@@ -28,18 +28,21 @@ class TransformationPipeline:
     def _setup_default_transformations(self):
         """Setup the default transformation pipeline"""
         
-        # Order matters - structural transformations first, then behavioral
+        # CRITICAL ORDER: VariableRenamer MUST run first to prevent other
+        # transformers from corrupting code by mixing variable names
         transformations = [
+            # FIRST: Variable renaming (prevents name conflicts)
+            VariableRenamer(),              # Must run before ANY other transformer!
+            
             # Structural transformations (syntax-focused)
             ErrorHandlingAligner(),
             RedundantClauseRemover(),
-            VariableRenamer(),              # CRITICAL: Handles variable name differences
             
             # Behavioral transformations (logic-focused)
             RecursionSchemaAligner(),      # For recursive algorithms
             InPlaceReturnConverter(),       # For sorting return semantics
             AlgorithmOptimizer(),
-            BoundaryConditionAligner(),
+            BoundaryConditionAligner(),     # Disabled to prevent corruption
         ]
         
         for transformer in transformations:

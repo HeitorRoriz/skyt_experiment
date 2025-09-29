@@ -24,10 +24,17 @@ class VariableRenamer(TransformationBase):
         )
     
     def can_transform(self, code: str, canon_code: str, property_diffs: list = None) -> bool:
-        """Check if variable names differ (PROPERTY-DRIVEN)"""
+        """Check if variable names differ (PROPERTY-DRIVEN + AGGRESSIVE)"""
         
-        # Use normalized_ast_structure property - if alpha-renamed hashes match but
-        # regular hashes don't, it means only variable names differ
+        # PRIMARY: Check if variable names actually differ
+        has_var_diff = self._has_variable_differences(code, canon_code)
+        
+        if has_var_diff:
+            self.log_debug("Variable name differences detected - triggering renamer")
+            return True
+        
+        # SECONDARY: Use normalized_ast_structure property
+        # If alpha-renamed hashes match but regular hashes don't = only variable names differ
         if property_diffs:
             for diff in property_diffs:
                 if diff['property'] == 'normalized_ast_structure':
@@ -41,11 +48,10 @@ class VariableRenamer(TransformationBase):
                     hash_canon = canon.get('ast_hash')
                     
                     if alpha_curr == alpha_canon and hash_curr != hash_canon:
-                        self.log_debug("Variable names differ but structure matches!")
+                        self.log_debug("Variable names differ (detected via alpha-renaming)")
                         return True
         
-        # Fallback: simple check for common variable pattern differences
-        return self._has_variable_differences(code, canon_code)
+        return False
     
     def _has_variable_differences(self, code: str, canon_code: str) -> bool:
         """Simple heuristic check for variable differences"""
