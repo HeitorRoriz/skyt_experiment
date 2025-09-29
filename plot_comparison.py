@@ -41,7 +41,8 @@ def plot_raw_vs_canonical(skyt_results_file):
     with open(skyt_results_file, 'r') as f:
         data = json.load(f)
     
-    # Get canonical code for distance calculation
+    # Get contract name and canonical code for distance calculation
+    contract_name = data.get("contract_id", "unknown")
     canon_code = data.get("canon_data", {}).get("canonical_code", "")
     
     # Extract distances
@@ -62,6 +63,7 @@ def plot_raw_vs_canonical(skyt_results_file):
     
     # Create clearer comparison plot
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
+    fig.suptitle(f'SKYT vs. Raw for contract {contract_name}', fontsize=16, fontweight='bold')
     
     # Plot 1: Distance from Canon (showing canon as reference point)
     ax1.axvline(x=0, color='green', linewidth=3, alpha=0.8, label='Canon (Perfect Match)')
