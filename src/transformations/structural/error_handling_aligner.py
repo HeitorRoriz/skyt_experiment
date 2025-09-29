@@ -88,17 +88,14 @@ class ErrorHandlingAligner(TransformationBase):
         
         lines = code.split('\n')
         result_lines = []
-        skip_next = 0
+        i = 0
         
-        for i, line in enumerate(lines):
-            if skip_next > 0:
-                skip_next -= 1
-                continue
-                
+        while i < len(lines):
+            line = lines[i]
             stripped = line.strip()
             indent = len(line) - len(line.lstrip())
             
-            # Pattern 1: if n < 0: raise ValueError(...)
+            # Pattern 1: if n < 0: raise ValueError(...) or similar error conditions
             if self._is_error_condition_line(stripped):
                 self.log_debug(f"Found error condition: {stripped}")
                 
@@ -111,29 +108,39 @@ class ErrorHandlingAligner(TransformationBase):
                     result_lines.append(' ' * indent + f'if {canon_condition}:')
                     result_lines.append(' ' * (indent + 4) + canon_return)
                     
-                    # Skip the raise statement that might follow
-                    skip_next = self._count_lines_to_skip(lines, i)
-                    self.log_debug(f"Skipping {skip_next} lines")
-                else:
-                    result_lines.append(line)
-            
-            # Skip raise ValueError lines that are part of error handling
-            elif 'raise ValueError' in stripped or 'raise Exception' in stripped:
-                # Check if this is part of an error condition we're replacing
-                if self._is_part_of_error_handling(result_lines):
-                    self.log_debug(f"Skipping raise statement: {stripped}")
+                    # Skip all lines that are part of this error handling block
+                    i += 1
+                    while i < len(lines):
+                        next_line = lines[i].strip()
+                        next_indent = len(lines[i]) - len(lines[i].lstrip()) if lines[i].strip() else 0
+                        
+                        # Skip lines that are part of the error handling (indented more or raise statements)
+                        if (next_indent > indent and next_line) or 'raise ' in next_line:
+                            self.log_debug(f"Skipping error handling line: {next_line}")
+                            i += 1
+                        # Skip elif n == 0 if we converted to n <= 0
+                        elif next_line.startswith('elif n == 0:') and 'n <= 0' in canon_condition:
+                            self.log_debug(f"Skipping redundant elif n == 0")
+                            i += 1
+                            # Also skip the return statement that follows
+                            if i < len(lines) and 'return 0' in lines[i].strip():
+                                i += 1
+                        else:
+                            break
                     continue
                 else:
                     result_lines.append(line)
             
-            # Skip redundant elif n == 0 if we already converted to if n <= 0
-            elif stripped.startswith('elif n == 0:') and self._has_n_less_equal_condition(result_lines):
-                self.log_debug(f"Skipping redundant elif: {stripped}")
-                skip_next = 1  # Skip the return 0 that follows
+            # Skip standalone raise statements (shouldn't happen after above logic)
+            elif 'raise ValueError' in stripped or 'raise Exception' in stripped:
+                self.log_debug(f"Skipping standalone raise statement: {stripped}")
+                i += 1
                 continue
             
             else:
                 result_lines.append(line)
+            
+            i += 1
         
         return '\n'.join(result_lines)
     
