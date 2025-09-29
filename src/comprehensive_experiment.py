@@ -403,14 +403,25 @@ class ComprehensiveExperiment:
             )
         }
     
+    def _json_serializer(self, obj):
+        """Custom JSON serializer for non-serializable objects"""
+        if isinstance(obj, (bool, int, float, str, type(None))):
+            return obj
+        elif isinstance(obj, (list, tuple)):
+            return list(obj)
+        elif isinstance(obj, dict):
+            return dict(obj)
+        else:
+            return str(obj)
+    
     def _save_experiment_results(self, result: Dict[str, Any]):
         """Save experiment results to multiple formats"""
         experiment_id = result["experiment_id"]
         
-        # Save detailed JSON
+        # Save detailed JSON with custom encoder for non-serializable objects
         json_path = os.path.join(self.output_dir, f"{experiment_id}.json")
         with open(json_path, 'w') as f:
-            json.dump(result, f, indent=2)
+            json.dump(result, f, indent=2, default=self._json_serializer)
         
         # Save summary CSV
         csv_path = os.path.join(self.output_dir, "experiment_summary.csv")

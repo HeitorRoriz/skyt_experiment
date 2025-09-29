@@ -249,7 +249,17 @@ class ComprehensiveMetrics:
             prop_value = properties.get(prop_name)
             if prop_value:
                 if isinstance(prop_value, dict):
-                    signature_parts.append(str(hash(frozenset(prop_value.items()))))
+                    # Convert dict to hashable form, handling nested lists/dicts
+                    try:
+                        hashable_items = []
+                        for k, v in prop_value.items():
+                            if isinstance(v, (list, dict)):
+                                hashable_items.append((k, str(v)))
+                            else:
+                                hashable_items.append((k, v))
+                        signature_parts.append(str(hash(frozenset(hashable_items))))
+                    except:
+                        signature_parts.append(str(hash(str(prop_value))))
                 else:
                     signature_parts.append(str(hash(str(prop_value))))
             else:
