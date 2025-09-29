@@ -1,94 +1,104 @@
 # src/contract.py
 """
-Contract specification module for SKYT pipeline
-Handles contract creation from prompts and templates
+Comprehensive contract system for SKYT experiments
+Implements full contract specification with all required properties
 """
 
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 import json
+import hashlib
+from datetime import datetime
 
 
-def create_prompt_contract(prompt_id: str, prompt: str, function_name: Optional[str] = None, 
-                          oracle: Optional[str] = None, requires_recursion: bool = False,
-                          language: str = "python", signature: Optional[str] = None,
-                          environment: Optional[Dict[str, Any]] = None,
-                          env_enforcement: str = "off") -> Dict[str, Any]:
+class Contract:
     """
-    Create contract specification from prompt parameters
-    
-    Args:
-        prompt_id: Unique identifier for the prompt
-        prompt: The actual prompt text
-        function_name: Required function name
-        oracle: Oracle test identifier
-        requires_recursion: Whether recursion is required
-        language: Programming language
-        signature: Expected function signature
-        environment: Optional environment specification
-        env_enforcement: Environment enforcement mode ("off", "if_specified", "strict")
-    
-    Returns:
-        Contract specification dict
+    Comprehensive contract specification for SKYT experiments
+    Encodes task intent, constraints, oracle requirements, and repeatability anchoring
     """
-    contract = {
-        "id": prompt_id,
-        "prompt": prompt,
-        "language": language,
-        "version": "1.0"
-    }
     
-    if function_name:
-        contract["function_name"] = function_name
+    def __init__(self, contract_data: Dict[str, Any]):
+        self.data = contract_data
+        self.validate()
     
-    if oracle:
-        contract["oracle"] = oracle
-    
-    if requires_recursion:
-        contract["requires_recursion"] = True
-    
-    if signature:
-        contract["signature"] = signature
-    
-    if environment:
-        contract["environment"] = environment
-    
-    if env_enforcement in ["off", "if_specified", "strict"]:
-        contract["env_enforcement"] = env_enforcement
-    else:
-        contract["env_enforcement"] = "off"
-    
-    return contract
-
-
-def load_contract_from_template(template_path: str, template_id: str) -> Dict[str, Any]:
-    """
-    Load contract from template file
-    
-    Args:
-        template_path: Path to templates.json file
-        template_id: ID of template to load
-    
-    Returns:
-        Contract specification dict
-    """
-    try:
+    @classmethod
+    def from_template(cls, template_path: str, contract_id: str) -> 'Contract':
+        """Create contract from JSON template"""
         with open(template_path, 'r') as f:
             templates = json.load(f)
         
-        for template in templates:
-            if template.get("id") == template_id:
-                return create_prompt_contract(
-                    prompt_id=template["id"],
-                    prompt=template["prompt"],
-                    function_name=template.get("enforce_function_name"),
-                    oracle=template.get("oracle"),
-                    requires_recursion=template.get("requires_recursion", False)
-                )
+        if contract_id not in templates:
+            raise ValueError(f"Contract template '{contract_id}' not found")
         
-        raise ValueError(f"Template {template_id} not found")
+        template = templates[contract_id]
         
-    except Exception as e:
-        raise RuntimeError(f"Failed to load contract template: {str(e)}")
+        # Build full contract from template
+        contract_data = {
+            # Core Properties
+            "id": contract_id,
+            "task_intent": template.get("task_intent", template.get("description", "")),
+            "prompt": template["prompt"],
+            "constraints": template.get("constraints", {}),
+            "language": template.get("language", "python"),
+            "environment": template.get("environment", {}),
+            "output_format": template.get("output_format", "raw_code"),
+            "oracle_requirements": template.get("oracle_requirements", {}),
+            "normalization_rules": template.get("normalization_rules", {}),
+            
+            # Repeatability-anchoring Properties
+            "anchor_signature": None,  # Set when first compliant output is found
+            "compliance_flag": False,
+            "distance_metric": "foundational_properties",
+            "rescue_bounds": template.get("rescue_bounds", {}),
+            
+            # Meta Properties
+            "model_specification": template.get("model_specification", {}),
+            "contract_version": "2.0",
+            "oracle_version": "1.0",
+            "normalization_version": "1.0",
+            "created_timestamp": datetime.now().isoformat(),
+            "run_id": None,
+            "prompt_id": contract_id,
+            "sample_id": None
+        }
+        
+        return cls(contract_data)
+    
+    def validate(self):
+        """Validate contract has required properties"""
+        required_fields = [
+            "id", "task_intent", "prompt", "language", 
+            "contract_version", "created_timestamp"
+        ]
+        
+        for field in required_fields:
+            if field not in self.data:
+                raise ValueError(f"Contract missing required field: {field}")
+    
+    def set_anchor(self, canonical_code: str, foundational_properties: Dict[str, Any]):
+        """Set the canonical anchor for this contract"""
+        # Create signature from foundational properties
+        properties_str = json.dumps(foundational_properties, sort_keys=True)
+        self.data["anchor_signature"] = hashlib.sha256(properties_str.encode()).hexdigest()
+        self.data["canonical_code"] = canonical_code
+        self.data["foundational_properties"] = foundational_properties
+        self.data["compliance_flag"] = True
+    
+    def get_oracle_tests(self) -> List[Dict[str, Any]]:
+        """Get oracle test cases for this contract"""
+        return self.data.get("oracle_requirements", {}).get("test_cases", [])
+    
+    def get_constraints(self) -> Dict[str, Any]:
+        """Get contract constraints"""
+        return self.data.get("constraints", {})
+    
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert contract to dictionary"""
+        return self.data.copy()
+    
+    def save(self, filepath: str):
+        """Save contract to JSON file"""
+        with open(filepath, 'w') as f:
+            json.dump(self.data, f, indent=2)
 
 
 def validate_contract(contract: Dict[str, Any]) -> bool:
