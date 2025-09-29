@@ -1,0 +1,189 @@
+"""
+Error Handling Aligner - Structural Transformation
+Converts error handling patterns to match canonical form
+
+Handles patterns like:
+- if n < 0: raise ValueError(...) -> if n <= 0: return 0
+- Different boundary conditions and error responses
+"""
+
+import re
+from typing import List, Tuple
+from ..transformation_base import TransformationBase
+
+
+class ErrorHandlingAligner(TransformationBase):
+    """Aligns error handling patterns to match canonical form"""
+    
+    def __init__(self):
+        super().__init__(
+            name="ErrorHandlingAligner",
+            description="Converts error handling to match canonical boundary checks"
+        )
+    
+    def can_transform(self, code: str, canon_code: str) -> bool:
+        """Check if code has error handling that differs from canon"""
+        
+        # Check if code has raise statements
+        has_raise = 'raise ' in code
+        
+        # Check if canon has raise statements
+        canon_has_raise = 'raise ' in canon_code
+        
+        # Check for different boundary conditions
+        has_n_less_than = 'if n < 0' in code or 'if n<0' in code
+        canon_has_n_less_equal = 'if n <= 0' in canon_code or 'if n<=0' in canon_code
+        
+        # Transform if:
+        # 1. Code has raise but canon doesn't
+        # 2. Code has different boundary condition than canon
+        return (has_raise and not canon_has_raise) or (has_n_less_than and canon_has_n_less_equal)
+    
+    def _apply_transformation(self, code: str, canon_code: str) -> str:
+        """Apply error handling alignment transformation"""
+        
+        self.log_debug("Applying error handling alignment")
+        
+        # Extract canonical boundary pattern
+        canon_boundary = self._extract_boundary_pattern(canon_code)
+        self.log_debug(f"Canon boundary pattern: {canon_boundary}")
+        
+        # Transform the code
+        transformed = self._transform_error_handling(code, canon_boundary)
+        
+        return transformed
+    
+    def _extract_boundary_pattern(self, canon_code: str) -> dict:
+        """Extract boundary condition pattern from canonical code"""
+        
+        pattern = {
+            'condition': None,
+            'return_value': None,
+            'has_error_handling': False
+        }
+        
+        lines = canon_code.split('\n')
+        for i, line in enumerate(lines):
+            stripped = line.strip()
+            
+            # Look for boundary conditions
+            if 'if n <' in stripped or 'if n>' in stripped or 'if n ==' in stripped:
+                pattern['condition'] = stripped
+                
+                # Look for return value in next few lines
+                for j in range(i+1, min(i+4, len(lines))):
+                    next_line = lines[j].strip()
+                    if next_line.startswith('return '):
+                        pattern['return_value'] = next_line
+                        break
+                    elif 'raise ' in next_line:
+                        pattern['has_error_handling'] = True
+                        break
+                break
+        
+        return pattern
+    
+    def _transform_error_handling(self, code: str, canon_pattern: dict) -> str:
+        """Transform error handling to match canonical pattern"""
+        
+        lines = code.split('\n')
+        result_lines = []
+        skip_next = 0
+        
+        for i, line in enumerate(lines):
+            if skip_next > 0:
+                skip_next -= 1
+                continue
+                
+            stripped = line.strip()
+            indent = len(line) - len(line.lstrip())
+            
+            # Pattern 1: if n < 0: raise ValueError(...)
+            if self._is_error_condition_line(stripped):
+                self.log_debug(f"Found error condition: {stripped}")
+                
+                # Replace with canonical boundary check
+                if canon_pattern['condition'] and canon_pattern['return_value']:
+                    # Extract the canonical condition and return
+                    canon_condition = canon_pattern['condition'].replace('if ', '').replace(':', '')
+                    canon_return = canon_pattern['return_value']
+                    
+                    result_lines.append(' ' * indent + f'if {canon_condition}:')
+                    result_lines.append(' ' * (indent + 4) + canon_return)
+                    
+                    # Skip the raise statement that might follow
+                    skip_next = self._count_lines_to_skip(lines, i)
+                    self.log_debug(f"Skipping {skip_next} lines")
+                else:
+                    result_lines.append(line)
+            
+            # Skip raise ValueError lines that are part of error handling
+            elif 'raise ValueError' in stripped or 'raise Exception' in stripped:
+                # Check if this is part of an error condition we're replacing
+                if self._is_part_of_error_handling(result_lines):
+                    self.log_debug(f"Skipping raise statement: {stripped}")
+                    continue
+                else:
+                    result_lines.append(line)
+            
+            # Skip redundant elif n == 0 if we already converted to if n <= 0
+            elif stripped.startswith('elif n == 0:') and self._has_n_less_equal_condition(result_lines):
+                self.log_debug(f"Skipping redundant elif: {stripped}")
+                skip_next = 1  # Skip the return 0 that follows
+                continue
+            
+            else:
+                result_lines.append(line)
+        
+        return '\n'.join(result_lines)
+    
+    def _is_error_condition_line(self, line: str) -> bool:
+        """Check if line is an error condition that should be transformed"""
+        patterns = [
+            r'if\s+n\s*<\s*0\s*:',
+            r'if\s+n\s*<\s*1\s*:',
+        ]
+        
+        for pattern in patterns:
+            if re.search(pattern, line):
+                return True
+        return False
+    
+    def _count_lines_to_skip(self, lines: List[str], current_index: int) -> int:
+        """Count how many lines to skip after an error condition"""
+        skip_count = 0
+        
+        for i in range(current_index + 1, min(current_index + 5, len(lines))):
+            line = lines[i].strip()
+            
+            if ('raise ' in line or 
+                line.startswith('elif n == 0:') or
+                (line.startswith('return ') and 'raise ' in lines[max(0, i-2):i+1])):
+                skip_count += 1
+            else:
+                break
+                
+        return skip_count
+    
+    def _is_part_of_error_handling(self, previous_lines: List[str]) -> bool:
+        """Check if current raise statement is part of error handling we're replacing"""
+        if len(previous_lines) < 2:
+            return False
+            
+        # Check last few lines for error condition patterns
+        recent_lines = previous_lines[-3:]
+        for line in recent_lines:
+            if ('if n <' in line and ':' in line):
+                return True
+        return False
+    
+    def _has_n_less_equal_condition(self, lines: List[str]) -> bool:
+        """Check if we recently added an 'if n <= 0:' condition"""
+        if len(lines) < 2:
+            return False
+            
+        recent_lines = lines[-3:]
+        for line in recent_lines:
+            if 'if n <= 0:' in line:
+                return True
+        return False

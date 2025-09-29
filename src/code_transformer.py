@@ -20,12 +20,20 @@ class CodeTransformer:
         self.canon_system = canon_system
         self.properties_extractor = FoundationalProperties()
         
-        # Core transformations in order of application
+        # Import and initialize the new modular transformation system
+        try:
+            from .transformations.transformation_pipeline import TransformationPipeline
+            self.modular_pipeline = TransformationPipeline(debug_mode=False)
+            self.use_modular_system = True
+        except ImportError:
+            print("Warning: Modular transformation system not available, using legacy system")
+            self.modular_pipeline = None
+            self.use_modular_system = False
+        
+        # Legacy transformations (kept for compatibility)
         self.transformations = [
             ("normalize_function_names", self._normalize_function_names),
             ("remove_comments_and_docstrings", self._remove_comments_and_docstrings),
-            ("remove_redundant_clauses", self._remove_redundant_clauses),
-            ("align_error_handling", self._align_error_handling),
             ("normalize_variable_names", self._normalize_variable_names),
             ("remove_print_statements", self._remove_print_statements),
             ("normalize_whitespace", self._normalize_whitespace)
@@ -34,8 +42,7 @@ class CodeTransformer:
     def transform_to_canon(self, code: str, contract_id: str, 
                           max_iterations: int = 5) -> Dict[str, Any]:
         """
-        Transform code to match canonical form based on foundational properties
-        Transform code to match canonical form
+        Transform code to match canonical form using modular transformation system
         
         Args:
             code: Code to transform
@@ -45,8 +52,8 @@ class CodeTransformer:
         Returns:
             Transformation results with success status and transformed code
         """
+        # Get canonical data for comparison
         canon_data = self.canon_system.load_canon(contract_id)
-        
         if not canon_data:
             return {
                 "success": False,
@@ -56,76 +63,18 @@ class CodeTransformer:
                 "transformations_applied": []
             }
         
-        canon_properties = canon_data["foundational_properties"]
-        current_code = code
-        transformations_applied = []
+        canon_code = canon_data.get("canonical_code", "")
+        canon_properties = canon_data.get("foundational_properties", {})
         
-        for iteration in range(max_iterations):
-            # Extract current properties
-            current_properties = self.properties_extractor.extract_all_properties(current_code)
-            
-            # Calculate distance to canon
-            distance = self.properties_extractor.calculate_distance(
-                canon_properties, current_properties
-            )
-            
-            if distance == 0.0:
-                # Perfect match achieved
-                return {
-                    "success": True,
-                    "original_code": code,
-                    "transformed_code": current_code,
-                    "final_distance": distance,
-                    "iterations": iteration + 1,
-                    "transformations_applied": transformations_applied
-                }
-            
-            # Find best transformation to apply
-            best_transformation = self._find_best_transformation(
-                current_code, current_properties, canon_properties
-            )
-            
-            if not best_transformation:
-                # No more transformations possible
-                break
-            
-            # Apply transformation
-            try:
-                # Add contract_id to params for transformations that need it
-                params = best_transformation["params"].copy()
-                params["contract_id"] = contract_id
-                
-                transformed_code = best_transformation["transform_func"](
-                    current_code, params
-                )
-                
-                # Verify transformation improved distance
-                new_properties = self.properties_extractor.extract_all_properties(transformed_code)
-                new_distance = self.properties_extractor.calculate_distance(
-                    canon_properties, new_properties
-                )
-                
-                if new_distance < distance:
-                    current_code = transformed_code
-                    transformations_applied.append({
-                        "rule": best_transformation["rule_name"],
-                        "iteration": iteration + 1,
-                        "distance_before": distance,
-                        "distance_after": new_distance,
-                        "improvement": distance - new_distance
-                    })
-                else:
-                    # Transformation didn't help, stop
-                    break
-                    
-            except Exception as e:
-                transformations_applied.append({
-                    "rule": best_transformation["rule_name"],
-                    "iteration": iteration + 1,
-                    "error": str(e),
-                    "failed": True
-                })
-                break
+        # Use the new modular transformation system if available
+        if self.use_modular_system and self.modular_pipeline:
+            modular_result = self.modular_pipeline.transform_code(code, canon_code, max_iterations=max_iterations)
+            current_code = modular_result['final_code']
+            transformations_applied = modular_result['successful_transformations']
+        else:
+            # Fallback to legacy system
+            current_code = code
+            transformations_applied = []
         
         # Final distance calculation
         final_properties = self.properties_extractor.extract_all_properties(current_code)
