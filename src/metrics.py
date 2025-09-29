@@ -7,7 +7,6 @@ Implements three-tier repeatability: raw, behavioral, and structural
 from typing import List, Dict, Any, Optional
 from collections import Counter
 import numpy as np
-from .simple_canonicalizer import SimpleCanonicalizer
 from .oracle_system import OracleSystem
 from .foundational_properties import FoundationalProperties
 from .canon_system import CanonSystem
@@ -17,7 +16,6 @@ class ComprehensiveMetrics:
     """Calculate comprehensive SKYT repeatability metrics"""
     
     def __init__(self, canon_system: Optional[CanonSystem] = None):
-        self.canonicalizer = SimpleCanonicalizer()
         self.oracle_system = OracleSystem()
         self.properties_extractor = FoundationalProperties()
         self.canon_system = canon_system
@@ -339,37 +337,3 @@ class ComprehensiveMetrics:
         }
 
 
-# Legacy compatibility
-class MetricsCalculator(ComprehensiveMetrics):
-    """Legacy metrics calculator for backward compatibility"""
-    
-    def calculate_metrics(self, raw_outputs: List[str]) -> Dict[str, Any]:
-        """Legacy method - returns simplified metrics"""
-        if not raw_outputs:
-            return {"R_raw": 0.0, "R_canon": 0.0, "total_runs": 0}
-        
-        # Use simple canonicalizer for R_canon
-        total_runs = len(raw_outputs)
-        
-        # Calculate R_raw
-        raw_counter = Counter(raw_outputs)
-        most_common_raw = raw_counter.most_common(1)[0]
-        r_raw = most_common_raw[1] / total_runs
-        
-        # Calculate R_canon using simple canonicalizer
-        canonical_outputs = [self.canonicalizer.canonicalize(code) for code in raw_outputs]
-        canon_counter = Counter(canonical_outputs)
-        most_common_canon = canon_counter.most_common(1)[0]
-        r_canon = most_common_canon[1] / total_runs
-        
-        return {
-            "R_raw": r_raw,
-            "R_canon": r_canon,
-            "total_runs": total_runs,
-            "unique_raw": len(raw_counter),
-            "unique_canon": len(canon_counter),
-            "most_common_raw_count": most_common_raw[1],
-            "most_common_canon_count": most_common_canon[1],
-            "raw_distribution": dict(raw_counter),
-            "canon_distribution": dict(canon_counter)
-        }
