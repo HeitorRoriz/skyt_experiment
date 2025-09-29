@@ -22,41 +22,48 @@ from .schema import (
     DistanceRecord, DISTANCES_PRE_CSV_PATH, DISTANCES_POST_CSV_PATH,
     NORMALIZATION_VERSION, ORACLE_VERSION
 )
+from .code_properties import extract_code_properties, properties_match, compute_property_signature
 
-def compute_signature(normalized_text: str) -> str:
+def compute_signature(normalized_text: str, function_name: Optional[str] = None) -> str:
     """
-    Compute SHA-256 signature over normalized code bytes
+    Compute property-based signature over foundational code properties
     
     Args:
         normalized_text: Normalized Python code string
+        function_name: Target function name for property extraction
     
     Returns:
-        Hex-encoded SHA-256 hash (deterministic)
+        Hex-encoded SHA-256 hash of foundational properties (deterministic)
     
     Note:
-        This function MUST be deterministic. Equal normalized text
-        always produces identical signatures.
+        This function MUST be deterministic. Equal foundational properties
+        always produce identical signatures.
     """
-    # Ensure consistent encoding and normalization
-    text_bytes = normalized_text.encode('utf-8')
-    hash_obj = hashlib.sha256(text_bytes)
-    return hash_obj.hexdigest()
+    # Extract foundational properties and compute property-based signature
+    try:
+        properties = extract_code_properties(normalized_text, function_name)
+        return compute_property_signature(properties)
+    except:
+        # Fallback to text-based signature if property extraction fails
+        text_bytes = normalized_text.encode('utf-8')
+        hash_obj = hashlib.sha256(text_bytes)
+        return hash_obj.hexdigest()
 
-def compute_distance(output_text: str, canon_text: str) -> float:
+def compute_distance(output_text: str, canon_text: str, function_name: Optional[str] = None) -> float:
     """
-    Compute normalized Levenshtein distance between texts
+    Compute property-based distance between code using foundational properties
     
     Args:
         output_text: Normalized output text
         canon_text: Canonical reference text
+        function_name: Target function name for property extraction
     
     Returns:
-        Distance d in [0,1] where d=0 iff texts are identical
+        Distance d in [0,1] where d=0 iff foundational properties match
     
     Note:
-        Uses Levenshtein distance normalized by max length.
-        This is a proxy metric; AST distance may replace it later
-        without changing CSV schema.
+        Uses property mismatch count normalized by total properties.
+        This measures true semantic distance rather than text similarity.
     """
     # Handle edge cases
     if output_text == canon_text:
@@ -68,15 +75,34 @@ def compute_distance(output_text: str, canon_text: str) -> float:
     if not output_text or not canon_text:
         return 1.0
     
-    # Compute Levenshtein distance
-    edit_distance = _levenshtein_distance(output_text, canon_text)
+    try:
+        # Extract properties for both texts
+        output_properties = extract_code_properties(output_text, function_name)
+        canon_properties = extract_code_properties(canon_text, function_name)
+        
+        # Check property matches
+        properties_equal, mismatches = properties_match(output_properties, canon_properties)
+        
+        if properties_equal:
+            return 0.0
+        
+        # Compute distance based on property mismatches
+        # Total of 13 foundational properties
+        total_properties = 13
+        mismatch_count = len(mismatches)
+        
+        # Normalize by total properties
+        property_distance = mismatch_count / total_properties
+        
+        # Clamp to [0,1] range
+        return min(1.0, max(0.0, property_distance))
     
-    # Normalize by maximum length
-    max_len = max(len(output_text), len(canon_text))
-    normalized_distance = edit_distance / max_len
-    
-    # Clamp to [0,1] range
-    return min(1.0, max(0.0, normalized_distance))
+    except:
+        # Fallback to Levenshtein distance if property extraction fails
+        edit_distance = _levenshtein_distance(output_text, canon_text)
+        max_len = max(len(output_text), len(canon_text))
+        normalized_distance = edit_distance / max_len
+        return min(1.0, max(0.0, normalized_distance))
 
 def record_pre_distance(run_id: str, sample_id: str, prompt_id: str, 
                        signature: str, d: float, compliant: bool) -> None:

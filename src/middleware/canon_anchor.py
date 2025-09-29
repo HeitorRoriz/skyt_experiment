@@ -27,6 +27,7 @@ from .schema import (
     NORMALIZATION_VERSION, ORACLE_VERSION,
     get_canon_paths, CANON_BASE_DIR, CANON_JSON_PATH, CANON_SIGNATURE_PATH
 )
+from .code_properties import extract_code_properties, compute_property_signature, CodeProperties
 
 class CanonImmutabilityError(Exception):
     """Raised when attempting to modify an existing canon"""
@@ -68,8 +69,10 @@ def fix_canon_if_none(output: str, contract: Dict[str, Any], oracle_pass: bool,
     # Import here to avoid circular dependency
     from .distance import compute_signature
     
-    # Compute canonical signature
-    canon_signature = compute_signature(output)
+    # Extract foundational properties and compute property-based signature
+    function_name = contract.get("enforce_function_name")
+    canon_properties = extract_code_properties(output, function_name)
+    canon_signature = compute_property_signature(canon_properties)
     
     # Extract function signatures and constraints from contract
     function_signatures = _extract_function_signatures(output)
@@ -90,8 +93,8 @@ def fix_canon_if_none(output: str, contract: Dict[str, Any], oracle_pass: bool,
         constraints_snapshot=constraints_snapshot
     )
     
-    # Persist canon atomically
-    _persist_canon(canon, output)
+    # Persist canon atomically with properties
+    _persist_canon(canon, output, canon_properties)
 
     return canon
 
@@ -171,7 +174,7 @@ def _extract_function_signatures(code: str) -> str:
     except SyntaxError:
         return "[]"  # Invalid code, no signatures
 
-def _persist_canon(canon: Canon, normalized_code: str) -> None:
+def _persist_canon(canon: Canon, normalized_code: str, properties: Optional[CodeProperties] = None) -> None:
     """
     Atomically persist canon to disk
     
@@ -212,10 +215,78 @@ def _persist_canon(canon: Canon, normalized_code: str) -> None:
         tmp_code.write(normalized_code)
         tmp_code_path = tmp_code.name
 
+    # Write canonical properties to canon_properties.json
+    tmp_props_path = None
+    if properties:
+        import json
+        with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8',
+                                         dir=paths["dir"],
+                                         delete=False) as tmp_props:
+            props_dict = {
+                'control_flow_signature': properties.control_flow_signature,
+                'data_dependency_graph': properties.data_dependency_graph,
+                'execution_paths': properties.execution_paths,
+                'function_contracts': properties.function_contracts,
+                'complexity_class': properties.complexity_class,
+                'side_effect_profile': properties.side_effect_profile,
+                'termination_properties': properties.termination_properties,
+                'algebraic_structure': properties.algebraic_structure,
+                'numerical_behavior': properties.numerical_behavior,
+                'logical_equivalence': properties.logical_equivalence,
+                'normalized_ast_structure': properties.normalized_ast_structure,
+                'operator_precedence': properties.operator_precedence,
+                'statement_ordering': properties.statement_ordering
+            }
+            json.dump(props_dict, tmp_props, indent=2, sort_keys=True)
+            tmp_props_path = tmp_props.name
+
     # Atomic rename operations
     os.replace(tmp_json_path, paths["json"])
     os.replace(tmp_sig_path, paths["signature"])
     os.replace(tmp_code_path, paths["code"])
+    if tmp_props_path:
+        props_path = os.path.join(paths["dir"], "canon_properties.json")
+        os.replace(tmp_props_path, props_path)
+
+def get_canon_properties(prompt_id: str) -> Optional[CodeProperties]:
+    """
+    Get canonical properties for a prompt
+    
+    Args:
+        prompt_id: Prompt identifier
+    
+    Returns:
+        CodeProperties object if exists, None otherwise
+    """
+    paths = get_canon_paths(prompt_id)
+    props_path = os.path.join(paths["dir"], "canon_properties.json")
+    
+    if not os.path.exists(props_path):
+        return None
+    
+    try:
+        with open(props_path, 'r', encoding='utf-8') as f:
+            props_dict = json.load(f)
+        
+        return CodeProperties(
+            control_flow_signature=props_dict['control_flow_signature'],
+            data_dependency_graph=props_dict['data_dependency_graph'],
+            execution_paths=props_dict['execution_paths'],
+            function_contracts=props_dict['function_contracts'],
+            complexity_class=props_dict['complexity_class'],
+            side_effect_profile=props_dict['side_effect_profile'],
+            termination_properties=props_dict['termination_properties'],
+            algebraic_structure=props_dict['algebraic_structure'],
+            numerical_behavior=props_dict['numerical_behavior'],
+            logical_equivalence=props_dict['logical_equivalence'],
+            normalized_ast_structure=props_dict['normalized_ast_structure'],
+            operator_precedence=props_dict['operator_precedence'],
+            statement_ordering=props_dict['statement_ordering']
+        )
+    
+    except (json.JSONDecodeError, KeyError) as e:
+        print(f"Warning: Corrupted canon properties file: {e}")
+        return None
 
 def reset_canon(prompt_id: Optional[str] = None) -> None:
     """

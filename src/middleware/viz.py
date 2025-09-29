@@ -25,8 +25,7 @@ def generate_all_visualizations() -> None:
     
     Creates:
     - pre_vs_post_overlay.png
-    - violin_pre.png  
-    - violin_post.png
+    - bell_curve_{prompt_id}.png (SPC-style analysis)
     - bar_pairs_R_anchor.png
     - bar_pairs_P_tau.png
     """
@@ -41,7 +40,7 @@ def generate_all_visualizations() -> None:
     
     # Generate visualizations
     generate_overlay_histogram(pre_distances, post_distances)
-    generate_violin_plots(pre_distances, post_distances)
+    generate_bell_curve_plots(pre_distances, post_distances)
     generate_bar_pairs(metrics)
     
     print("All visualizations generated in outputs/figs/")
@@ -93,9 +92,9 @@ def generate_overlay_histogram(pre_distances: List[Dict], post_distances: List[D
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
     plt.close()
 
-def generate_violin_plots(pre_distances: List[Dict], post_distances: List[Dict]) -> None:
+def generate_bell_curve_plots(pre_distances: List[Dict], post_distances: List[Dict]) -> None:
     """
-    Generate violin plots by prompt for pre and post distances
+    Generate bell-shaped curve plots for SPC-style analysis of distances
     
     Args:
         pre_distances: Pre-repair distance records
@@ -118,51 +117,94 @@ def generate_violin_plots(pre_distances: List[Dict], post_distances: List[Dict])
             post_by_prompt[prompt_id] = []
         post_by_prompt[prompt_id].append(float(r["d"]))
     
-    # Generate pre violin plot
-    if pre_by_prompt:
-        _create_violin_plot(pre_by_prompt, "Pre-Repair Distance by Prompt", 
-                           "outputs/figs/violin_pre.png")
-    
-    # Generate post violin plot
-    if post_by_prompt:
-        _create_violin_plot(post_by_prompt, "Post-Repair Distance by Prompt", 
-                           "outputs/figs/violin_post.png")
+    # Generate bell curve plots for each prompt
+    for prompt_id in set(list(pre_by_prompt.keys()) + list(post_by_prompt.keys())):
+        pre_data = pre_by_prompt.get(prompt_id, [])
+        post_data = post_by_prompt.get(prompt_id, [])
+        
+        if pre_data or post_data:
+            _create_bell_curve_plot(
+                pre_data, post_data, prompt_id,
+                f"outputs/figs/bell_curve_{prompt_id}.png"
+            )
 
-def _create_violin_plot(data_by_prompt: Dict[str, List[float]], title: str, output_path: str) -> None:
+def _create_bell_curve_plot(pre_data: List[float], post_data: List[float], 
+                           prompt_id: str, output_path: str) -> None:
     """
-    Create violin plot for distance data grouped by prompt
+    Create bell-shaped curve plot for SPC-style statistical analysis
     
     Args:
-        data_by_prompt: Dict mapping prompt_id to list of distances
-        title: Plot title
+        pre_data: Pre-repair distance data
+        post_data: Post-repair distance data
+        prompt_id: Prompt identifier
         output_path: Output file path
     """
     import os
+    from scipy import stats
     
-    if len(data_by_prompt) < 2:
-        # Skip violin plot if only one prompt
+    if not pre_data and not post_data:
         return
     
-    # Prepare data for seaborn
-    plot_data = []
-    for prompt_id, distances in data_by_prompt.items():
-        for d in distances:
-            plot_data.append({"prompt_id": prompt_id, "distance": d})
+    plt.figure(figsize=(12, 8))
     
-    if not plot_data:
-        return
+    # Create bell curves using kernel density estimation
+    x_range = np.linspace(0, 1, 1000)
     
-    df = pd.DataFrame(plot_data)
+    if pre_data:
+        # Fit normal distribution to pre-repair data
+        pre_mean = np.mean(pre_data)
+        pre_std = np.std(pre_data) if len(pre_data) > 1 else 0.1
+        
+        # Create theoretical normal curve
+        pre_curve = stats.norm.pdf(x_range, pre_mean, pre_std)
+        plt.plot(x_range, pre_curve, 'r-', linewidth=2, alpha=0.8, 
+                label=f'Pre-repair (μ={pre_mean:.3f}, σ={pre_std:.3f})')
+        
+        # Add actual data points as histogram
+        plt.hist(pre_data, bins=20, density=True, alpha=0.3, color='red', 
+                label=f'Pre-repair data (n={len(pre_data)})')
+        
+        # Add control limits (±3σ)
+        plt.axvline(pre_mean, color='red', linestyle='--', alpha=0.7, label='Pre μ')
+        plt.axvline(pre_mean + 3*pre_std, color='red', linestyle=':', alpha=0.5, label='Pre +3σ')
+        plt.axvline(pre_mean - 3*pre_std, color='red', linestyle=':', alpha=0.5, label='Pre -3σ')
     
-    # Create violin plot
-    plt.figure(figsize=(12, 6))
-    sns.violinplot(data=df, x="prompt_id", y="distance")
-    plt.title(title)
-    plt.xlabel("Prompt ID")
-    plt.ylabel("Distance to Canon")
-    plt.xticks(rotation=45)
-    plt.ylim(0, 1)
+    if post_data:
+        # Fit normal distribution to post-repair data
+        post_mean = np.mean(post_data)
+        post_std = np.std(post_data) if len(post_data) > 1 else 0.1
+        
+        # Create theoretical normal curve
+        post_curve = stats.norm.pdf(x_range, post_mean, post_std)
+        plt.plot(x_range, post_curve, 'b-', linewidth=2, alpha=0.8,
+                label=f'Post-repair (μ={post_mean:.3f}, σ={post_std:.3f})')
+        
+        # Add actual data points as histogram
+        plt.hist(post_data, bins=20, density=True, alpha=0.3, color='blue',
+                label=f'Post-repair data (n={len(post_data)})')
+        
+        # Add control limits (±3σ)
+        plt.axvline(post_mean, color='blue', linestyle='--', alpha=0.7, label='Post μ')
+        plt.axvline(post_mean + 3*post_std, color='blue', linestyle=':', alpha=0.5, label='Post +3σ')
+        plt.axvline(post_mean - 3*post_std, color='blue', linestyle=':', alpha=0.5, label='Post -3σ')
+    
+    # Formatting for SPC-style analysis
+    plt.xlabel('Distance to Canon')
+    plt.ylabel('Probability Density')
+    plt.title(f'SPC Bell Curve Analysis: {prompt_id}')
+    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.grid(True, alpha=0.3)
+    plt.xlim(0, 1)
+    
+    # Add statistical annotations
+    if pre_data and post_data:
+        # Calculate improvement metrics
+        improvement = (np.mean(pre_data) - np.mean(post_data)) / np.mean(pre_data) * 100
+        variance_reduction = (np.var(pre_data) - np.var(post_data)) / np.var(pre_data) * 100
+        
+        plt.text(0.02, 0.98, f'Improvement: {improvement:.1f}%\nVariance Reduction: {variance_reduction:.1f}%',
+                transform=plt.gca().transAxes, verticalalignment='top',
+                bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.8))
     
     # Save
     os.makedirs(os.path.dirname(output_path), exist_ok=True)

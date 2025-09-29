@@ -33,7 +33,8 @@ from .canon_anchor import (
 )
 from .distance import compute_signature, compute_distance, record_pre_distance, record_post_distance
 from .contract_enforcer import oracle_check
-from .repair import repair_code
+from .property_repair import repair_code_by_properties
+from .canon_anchor import get_canon_properties
 from .logger import log_run, log_repair
 
 class PipelineContext:
@@ -106,7 +107,8 @@ def _execute_pipeline(llm_callable: Callable[[], str], context: PipelineContext,
         
         # Step b) Normalize and compute signature
         normalized_output = _normalize_output(raw_output)
-        pre_signature = compute_signature(normalized_output)
+        function_name = context.contract.get("enforce_function_name")
+        pre_signature = compute_signature(normalized_output, function_name)
         
         # Step c) Canon management
         canon = get_canon(context.prompt_id)
@@ -129,7 +131,7 @@ def _execute_pipeline(llm_callable: Callable[[], str], context: PipelineContext,
         # Step d) Compute and log pre distance
         canon_text = _get_canon_text(context.prompt_id)
         if canon_text:
-            pre_distance = compute_distance(normalized_output, canon_text)
+            pre_distance = compute_distance(normalized_output, canon_text, function_name)
         else:
             pre_distance = 1.0  # No canon available, maximum distance
         
@@ -143,12 +145,20 @@ def _execute_pipeline(llm_callable: Callable[[], str], context: PipelineContext,
         repair_performed = False
         
         if not oracle_pass:
-            # Always attempt repair, even without canon
-            canon_text = canon_text if canon_text else ""
-            repair_result, repair_record = repair_code(
-                normalized_output, canon_text, context.contract,
-                context.run_id, context.sample_id
-            )
+            # Attempt property-based repair using canonical properties
+            canon_properties = get_canon_properties(context.prompt_id)
+            if canon_properties:
+                repair_result, repair_record = repair_code_by_properties(
+                    normalized_output, canon_properties, context.contract,
+                    context.run_id, context.sample_id
+                )
+            else:
+                # Fallback: no canonical properties available yet
+                from .repair import repair_code
+                repair_result, repair_record = repair_code(
+                    normalized_output, canon_text, context.contract,
+                    context.run_id, context.sample_id
+                )
             
             log_repair(repair_record)
             
@@ -166,9 +176,9 @@ def _execute_pipeline(llm_callable: Callable[[], str], context: PipelineContext,
                         )
         
         # Step f) Recompute and log post distance
-        post_signature = compute_signature(final_output)
+        post_signature = compute_signature(final_output, function_name)
         if canon_text:
-            post_distance = compute_distance(final_output, canon_text)
+            post_distance = compute_distance(final_output, canon_text, function_name)
         else:
             post_distance = 1.0
         
@@ -180,7 +190,7 @@ def _execute_pipeline(llm_callable: Callable[[], str], context: PipelineContext,
         
         # Log repair record even if no repair was attempted
         if not repair_performed:
-            from .repair import RepairRecord
+            from .schema import RepairRecord
             no_repair_record = RepairRecord(
                 run_id=context.run_id,
                 sample_id=context.sample_id,
