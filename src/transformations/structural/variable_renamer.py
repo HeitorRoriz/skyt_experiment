@@ -54,7 +54,14 @@ class VariableRenamer(TransformationBase):
         return False
     
     def _has_variable_differences(self, code: str, canon_code: str) -> bool:
-        """Simple heuristic check for variable differences"""
+        """
+        Enhanced heuristic check for variable differences
+        
+        Multi-tier trigger system (NON-BREAKING improvements):
+        1. Parameter name differences (highest priority)
+        2. Absolute count of differences (any difference matters)
+        3. Percentage-based threshold (fallback for complex cases)
+        """
         code_vars = set(re.findall(r'\b[a-z_][a-z0-9_]*\b', code))
         canon_vars = set(re.findall(r'\b[a-z_][a-z0-9_]*\b', canon_code))
         
@@ -63,14 +70,47 @@ class VariableRenamer(TransformationBase):
         code_vars -= keywords
         canon_vars -= keywords
         
-        # If there's significant difference in variable names
+        # TIER 1: Check parameter names specifically (NEW - highest priority)
+        code_params = self._extract_parameter_names(code)
+        canon_params = self._extract_parameter_names(canon_code)
+        
+        if code_params != canon_params:
+            self.log_debug(f"Parameter mismatch: {code_params} vs {canon_params}")
+            return True  # ALWAYS trigger on parameter differences
+        
+        # TIER 2: Absolute count trigger (NEW - any difference matters)
+        different_vars = (code_vars - canon_vars) | (canon_vars - code_vars)
+        
+        if len(different_vars) > 0 and len(different_vars) <= 3:
+            # If 1-3 variables differ, trigger regardless of percentage
+            self.log_debug(f"Small difference count: {len(different_vars)} variables differ")
+            return True
+        
+        # TIER 3: Percentage-based threshold (EXISTING - kept for complex cases)
         overlap = len(code_vars & canon_vars)
         total = len(code_vars | canon_vars)
         
-        # LOWERED THRESHOLD: 50% (was 70%) - more aggressive for small functions
-        # Even 1-2 variable differences in a 5-variable function = 60-80% overlap
-        # Need to fire in those cases!
-        return total > 0 and (overlap / total) < 0.5  # Less than 50% overlap
+        if total > 0 and (overlap / total) < 0.5:
+            self.log_debug(f"Percentage trigger: {overlap}/{total} < 50%")
+            return True  # Less than 50% overlap
+        
+        return False
+    
+    def _extract_parameter_names(self, code: str) -> set:
+        """Extract function parameter names from code"""
+        try:
+            import ast
+            tree = ast.parse(code)
+            params = set()
+            
+            for node in ast.walk(tree):
+                if isinstance(node, ast.FunctionDef):
+                    for arg in node.args.args:
+                        params.add(arg.arg)
+            
+            return params
+        except:
+            return set()
     
     def _apply_transformation(self, code: str, canon_code: str) -> str:
         """Apply variable renaming transformation"""

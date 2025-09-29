@@ -105,36 +105,60 @@ def test_rollback_on_corruption():
 
 
 def test_variable_renamer_threshold():
-    """Test that VariableRenamer has correct threshold"""
+    """Test that VariableRenamer has correct multi-tier triggers"""
     
     from transformations.structural.variable_renamer import VariableRenamer
     
     renamer = VariableRenamer()
     
-    # Code with 80% overlap (4/5 variables match)
-    code = """
+    # Test 1: Parameter difference (TIER 1 - should ALWAYS trigger)
+    code_param_diff = """
 def binary_search(sorted_list, target):
     left, right, mid = 0, 0, 0
 """
     
-    canon = """
+    canon_param_diff = """
 def binary_search(arr, target):
     left, right, mid = 0, 0, 0
 """
     
-    # With 50% threshold, this should trigger (80% overlap > 50% threshold = should trigger)
-    # Actually, the logic is: trigger if overlap < 50%, so 80% overlap = DON'T trigger
-    # Let's test that it correctly identifies when to trigger
+    should_trigger_param = renamer._has_variable_differences(code_param_diff, canon_param_diff)
+    assert should_trigger_param, "TIER 1: Parameter difference should ALWAYS trigger"
+    print("✅ TIER 1: Parameter difference triggers correctly")
     
-    should_trigger = renamer._has_variable_differences(code, canon)
+    # Test 2: Small count difference (TIER 2 - should trigger for 1-3 vars)
+    code_small_diff = """
+def test():
+    x, y, z = 1, 2, 3
+    special_var = 4
+"""
     
-    # 80% overlap means only 1/5 variables differ
-    # With 50% threshold: 80% > 50%, so DON'T trigger
-    # But we want it TO trigger for even 1 variable difference!
+    canon_small_diff = """
+def test():
+    x, y, z = 1, 2, 3
+    other_var = 4
+"""
     
-    # This test exposes that 50% might still be too lenient
-    print(f"Variable renamer trigger check: {should_trigger}")
-    print("✅ test_variable_renamer_threshold passed (threshold verified)")
+    should_trigger_small = renamer._has_variable_differences(code_small_diff, canon_small_diff)
+    assert should_trigger_small, "TIER 2: 1-3 variable differences should trigger"
+    print("✅ TIER 2: Small count differences trigger correctly")
+    
+    # Test 3: Percentage threshold (TIER 3 - existing logic)
+    code_many_diff = """
+def test():
+    a, b, c, d, e, f = 1, 2, 3, 4, 5, 6
+"""
+    
+    canon_many_diff = """
+def test():
+    x, y, z, d, e, f = 1, 2, 3, 4, 5, 6
+"""
+    
+    should_trigger_pct = renamer._has_variable_differences(code_many_diff, canon_many_diff)
+    assert should_trigger_pct, "TIER 3: <50% overlap should trigger"
+    print("✅ TIER 3: Percentage threshold works correctly")
+    
+    print("✅ test_variable_renamer_threshold passed (all tiers validated)")
 
 
 def test_syntax_error_detection():
