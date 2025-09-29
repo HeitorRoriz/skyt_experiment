@@ -118,17 +118,28 @@ class ComprehensiveExperiment:
                 oracle_result = self.oracle_system.run_oracle_tests(code, contract.data)
                 
                 if oracle_result["passed"]:
-                    print(f"✅ Creating canon from run {i + 1} (first compliant output)")
-                    canon_data = self.canon_system.create_canon(contract, code)
-                    canon_created = True
-                    break
+                    print(f"✅ Creating canon from run {i + 1} (first oracle-passing output)")
+                    try:
+                        # CRITICAL FIX: Pass oracle result and require validation
+                        canon_data = self.canon_system.create_canon(
+                            contract, code, 
+                            oracle_result=oracle_result,
+                            require_oracle_pass=True
+                        )
+                        canon_created = True
+                        break
+                    except ValueError as e:
+                        print(f"  ⚠️  Failed to create canon: {e}")
                 else:
                     print(f"  ❌ Run {i + 1} failed oracle tests")
             
             if not canon_created:
-                print("⚠️  No compliant outputs found, using first output as canon")
-                canon_data = self.canon_system.create_canon(contract, successful_outputs[0])
-                canon_created = True
+                print("❌ CRITICAL: No oracle-passing outputs found!")
+                print("   Cannot create valid canon. Consider:")
+                print("   1. Adjusting temperature/prompt")
+                print("   2. Using curated golden implementation")
+                print("   3. Relaxing oracle requirements")
+                return {"error": "No oracle-passing outputs to anchor canon"}
         
         # Step 4: Transform subsequent outputs to match canon
         print(f"\n🔧 Step 4: Transforming outputs to canon...")

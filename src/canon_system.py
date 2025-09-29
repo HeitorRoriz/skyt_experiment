@@ -21,17 +21,37 @@ class CanonSystem:
         self.canon_storage_dir = canon_storage_dir
         os.makedirs(canon_storage_dir, exist_ok=True)
     
-    def create_canon(self, contract: Contract, code: str) -> Dict[str, Any]:
+    def create_canon(self, contract: Contract, code: str, 
+                    oracle_result: Optional[Dict[str, Any]] = None,
+                    require_oracle_pass: bool = True) -> Dict[str, Any]:
         """
         Create canonical anchor from first compliant code output
         
         Args:
             contract: Contract specification
             code: First compliant code output
+            oracle_result: Optional oracle test results for validation
+            require_oracle_pass: If True, only create canon from oracle-passing code
             
         Returns:
             Canon data with foundational properties
+            
+        Raises:
+            ValueError: If require_oracle_pass is True and code fails oracle
         """
+        # CRITICAL: Validate code passes oracle tests before anchoring
+        if require_oracle_pass:
+            if oracle_result is None:
+                raise ValueError("Oracle result required when require_oracle_pass=True")
+            
+            if not oracle_result.get("passed", False):
+                error_msg = oracle_result.get("error", "Unknown error")
+                pass_rate = oracle_result.get("pass_rate", 0.0)
+                raise ValueError(
+                    f"Cannot create canon from failing code. "
+                    f"Oracle pass rate: {pass_rate:.1%}. Error: {error_msg}"
+                )
+        
         # Extract foundational properties
         properties = self.properties_extractor.extract_all_properties(code)
         
@@ -41,7 +61,9 @@ class CanonSystem:
             "canonical_code": code,
             "foundational_properties": properties,
             "created_timestamp": contract.data.get("created_timestamp"),
-            "canon_version": "1.0"
+            "canon_version": "1.0",
+            "oracle_validated": oracle_result is not None and oracle_result.get("passed", False),
+            "oracle_pass_rate": oracle_result.get("pass_rate", None) if oracle_result else None
         }
         
         # Set anchor in contract

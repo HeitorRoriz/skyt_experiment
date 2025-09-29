@@ -9,6 +9,8 @@ from .structural.error_handling_aligner import ErrorHandlingAligner
 from .structural.redundant_clause_remover import RedundantClauseRemover
 from .behavioral.algorithm_optimizer import AlgorithmOptimizer
 from .behavioral.boundary_condition_aligner import BoundaryConditionAligner
+from .behavioral.recursion_schema_aligner import RecursionSchemaAligner
+from .behavioral.in_place_return_converter import InPlaceReturnConverter
 
 
 class TransformationPipeline:
@@ -32,6 +34,8 @@ class TransformationPipeline:
             RedundantClauseRemover(),
             
             # Behavioral transformations (logic-focused)
+            RecursionSchemaAligner(),      # NEW: For recursive algorithms
+            InPlaceReturnConverter(),       # NEW: For sorting return semantics
             AlgorithmOptimizer(),
             BoundaryConditionAligner(),
         ]

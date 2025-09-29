@@ -30,7 +30,9 @@ class FoundationalProperties:
             "logical_equivalence",
             "normalized_ast_structure",
             "operator_precedence",
-            "statement_ordering"
+            "statement_ordering",
+            "behavioral_signature",  # NEW: I/O behavior
+            "recursion_schema"       # NEW: Recursive structure
         ]
     
     def extract_all_properties(self, code: str) -> Dict[str, Any]:
@@ -388,11 +390,12 @@ class FoundationalProperties:
         return equivalence
     
     def _extract_normalized_ast_structure(self, tree: ast.AST, code: str) -> Dict[str, Any]:
-        """Extract canonical AST representation"""
+        """Extract canonical AST representation with α-renaming"""
         structure = {
             "node_types": [],
             "ast_depth": 0,
-            "ast_hash": ""
+            "ast_hash": "",
+            "alpha_renamed_hash": ""
         }
         
         def get_ast_info(node, depth=0):
@@ -404,11 +407,65 @@ class FoundationalProperties:
         
         get_ast_info(tree)
         
-        # Create normalized AST hash
+        # Create normalized AST hash (original, variable-name-sensitive)
         ast_dump = ast.dump(tree, annotate_fields=False)
         structure["ast_hash"] = hashlib.md5(ast_dump.encode()).hexdigest()
         
+        # Create α-renamed AST hash (variable-name-agnostic)
+        try:
+            alpha_renamed_tree = self._alpha_rename_ast(tree)
+            alpha_dump = ast.dump(alpha_renamed_tree, annotate_fields=False)
+            structure["alpha_renamed_hash"] = hashlib.md5(alpha_dump.encode()).hexdigest()
+        except Exception:
+            # Fallback to original hash if α-renaming fails
+            structure["alpha_renamed_hash"] = structure["ast_hash"]
+        
         return structure
+    
+    def _alpha_rename_ast(self, tree: ast.AST) -> ast.AST:
+        """
+        Apply α-renaming to AST: systematically rename variables to v0, v1, v2...
+        This makes structural comparison variable-name-agnostic
+        """
+        import copy
+        tree = copy.deepcopy(tree)
+        
+        class AlphaRenamer(ast.NodeTransformer):
+            def __init__(self):
+                self.var_map = {}
+                self.counter = 0
+                self.param_names = set()  # Track parameter names to rename consistently
+                
+            def visit_FunctionDef(self, node):
+                # First pass: collect parameter names
+                for arg in node.args.args:
+                    if arg.arg not in self.var_map:
+                        # Keep param names as p0, p1, p2... for clarity
+                        self.var_map[arg.arg] = f"p{len(self.param_names)}"
+                        self.param_names.add(arg.arg)
+                
+                # Process function body
+                self.generic_visit(node)
+                
+                # Rename parameters
+                for arg in node.args.args:
+                    if arg.arg in self.var_map:
+                        arg.arg = self.var_map[arg.arg]
+                
+                # Don't rename function names (they're part of the contract)
+                return node
+            
+            def visit_Name(self, node):
+                # Rename variable references
+                if node.id not in ['range', 'len', 'print', 'max', 'min', 'sum', 'abs']:  # Built-ins
+                    if node.id not in self.var_map:
+                        self.var_map[node.id] = f"v{self.counter}"
+                        self.counter += 1
+                    node.id = self.var_map[node.id]
+                return node
+        
+        renamer = AlphaRenamer()
+        return renamer.visit(tree)
     
     def _extract_operator_precedence(self, tree: ast.AST, code: str) -> Dict[str, Any]:
         """Extract explicit precedence normalization"""
@@ -464,6 +521,150 @@ class FoundationalProperties:
         
         return ordering
     
+    def _extract_behavioral_signature(self, tree: ast.AST, code: str) -> Dict[str, Any]:
+        """
+        Extract behavioral signature from code execution on canonical test cases
+        This captures actual I/O behavior to detect semantic differences
+        """
+        signature = {
+            "can_execute": False,
+            "io_signature_hash": None,
+            "side_effects_detected": [],
+            "test_results": []
+        }
+        
+        try:
+            # Execute code safely in isolated namespace
+            namespace = {}
+            exec(code, namespace)
+            
+            # Find the main function
+            main_func = None
+            for name, obj in namespace.items():
+                if callable(obj) and not name.startswith('_'):
+                    main_func = obj
+                    break
+            
+            if main_func:
+                signature["can_execute"] = True
+                
+                # Run on canonical seed inputs (algorithm-agnostic)
+                test_inputs = [0, 1, 2, 5, 10]
+                io_pairs = []
+                
+                for inp in test_inputs:
+                    try:
+                        # Capture stdout for side-effect detection
+                        import io as io_module
+                        import sys
+                        old_stdout = sys.stdout
+                        sys.stdout = captured_output = io_module.StringIO()
+                        
+                        result = main_func(inp)
+                        
+                        sys.stdout = old_stdout
+                        output_text = captured_output.getvalue()
+                        
+                        # Record I/O pair
+                        io_pairs.append((inp, result, bool(output_text)))
+                        
+                        if output_text:
+                            signature["side_effects_detected"].append("stdout")
+                        
+                    except Exception as e:
+                        # Record exception type as part of behavior
+                        io_pairs.append((inp, f"Exception:{type(e).__name__}", False))
+                
+                # Create hash of I/O behavior
+                io_str = str(sorted(io_pairs))
+                signature["io_signature_hash"] = hashlib.md5(io_str.encode()).hexdigest()
+                signature["test_results"] = io_pairs[:3]  # Store first 3 for debugging
+                
+        except Exception:
+            # Can't execute code safely
+            signature["can_execute"] = False
+        
+        return signature
+    
+    def _extract_recursion_schema(self, tree: ast.AST, code: str) -> Dict[str, Any]:
+        """
+        Extract recursion schema: base cases, recursive structure, termination patterns
+        Critical for algorithms like merge_sort, quicksort, binary_search
+        """
+        schema = {
+            "is_recursive": False,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": None,
+            "termination_guards": []
+        }
+        
+        class RecursionVisitor(ast.NodeVisitor):
+            def __init__(self):
+                self.function_name = None
+                self.in_function = False
+                
+            def visit_FunctionDef(self, node):
+                # Track function name for recursion detection
+                old_name = self.function_name
+                old_in_function = self.in_function
+                
+                self.function_name = node.name
+                self.in_function = True
+                
+                # Extract base case patterns (early returns)
+                for stmt in node.body:
+                    if isinstance(stmt, ast.If):
+                        # Check if this if has a return in its body
+                        for child in stmt.body:
+                            if isinstance(child, ast.Return):
+                                # This is a potential base case
+                                base_case = {
+                                    "condition": ast.unparse(stmt.test) if hasattr(ast, 'unparse') else ast.dump(stmt.test),
+                                    "return_type": "constant" if isinstance(child.value, ast.Constant) else "expression"
+                                }
+                                schema["base_cases"].append(base_case)
+                                schema["termination_guards"].append(base_case["condition"])
+                
+                self.generic_visit(node)
+                
+                self.function_name = old_name
+                self.in_function = old_in_function
+                
+            def visit_Call(self, node):
+                # Detect recursive calls
+                if self.in_function and isinstance(node.func, ast.Name):
+                    if node.func.id == self.function_name:
+                        schema["is_recursive"] = True
+                        
+                        # Record recursion pattern
+                        call_info = {
+                            "num_args": len(node.args),
+                            "arg_patterns": [type(arg).__name__ for arg in node.args]
+                        }
+                        schema["recursive_calls"].append(call_info)
+                
+                self.generic_visit(node)
+        
+        visitor = RecursionVisitor()
+        visitor.visit(tree)
+        
+        # Classify recursion pattern
+        if schema["is_recursive"]:
+            num_recursive_calls = len(schema["recursive_calls"])
+            if num_recursive_calls == 1:
+                schema["recursion_pattern"] = "linear"
+            elif num_recursive_calls == 2:
+                schema["recursion_pattern"] = "binary"  # Like merge_sort
+            elif num_recursive_calls > 2:
+                schema["recursion_pattern"] = "multi-way"
+            
+            # Check for divide-and-conquer pattern
+            if num_recursive_calls == 2 and len(schema["base_cases"]) >= 1:
+                schema["recursion_pattern"] = "divide_and_conquer"
+        
+        return schema
+    
     def calculate_distance(self, props1: Dict[str, Any], props2: Dict[str, Any]) -> float:
         """
         Calculate distance between two sets of foundational properties
@@ -499,7 +700,19 @@ class FoundationalProperties:
         if prop_name == "control_flow_signature":
             return self._distance_control_flow(prop1, prop2)
         elif prop_name == "normalized_ast_structure":
-            return 0.0 if prop1.get("ast_hash") == prop2.get("ast_hash") else 1.0
+            # Use α-renamed hash for variable-name-agnostic comparison
+            alpha_hash1 = prop1.get("alpha_renamed_hash", prop1.get("ast_hash"))
+            alpha_hash2 = prop2.get("alpha_renamed_hash", prop2.get("ast_hash"))
+            return 0.0 if alpha_hash1 == alpha_hash2 else 1.0
+        elif prop_name == "behavioral_signature":
+            # Behavioral signatures must match exactly for semantic equivalence
+            hash1 = prop1.get("io_signature_hash")
+            hash2 = prop2.get("io_signature_hash")
+            if hash1 is None or hash2 is None:
+                return 0.5  # Partial penalty if can't execute
+            return 0.0 if hash1 == hash2 else 1.0
+        elif prop_name == "recursion_schema":
+            return self._distance_recursion_schema(prop1, prop2)
         elif isinstance(prop1, dict) and isinstance(prop2, dict):
             return self._distance_dict(prop1, prop2)
         elif isinstance(prop1, list) and isinstance(prop2, list):
@@ -541,3 +754,33 @@ class FoundationalProperties:
         common = len(set(l1) & set(l2))
         
         return 1.0 - (common / max_len)
+    
+    def _distance_recursion_schema(self, rs1: Dict, rs2: Dict) -> float:
+        """Calculate distance between recursion schemas"""
+        distances = []
+        
+        # Recursion type match (critical)
+        if rs1.get("is_recursive") != rs2.get("is_recursive"):
+            return 1.0  # Completely different if one recursive, one not
+        
+        if not rs1.get("is_recursive"):
+            return 0.0  # Both non-recursive
+        
+        # Recursion pattern match (critical for algorithm type)
+        pattern1 = rs1.get("recursion_pattern")
+        pattern2 = rs2.get("recursion_pattern")
+        distances.append(0.0 if pattern1 == pattern2 else 1.0)
+        
+        # Number of base cases
+        bc1 = len(rs1.get("base_cases", []))
+        bc2 = len(rs2.get("base_cases", []))
+        max_bc = max(bc1, bc2, 1)
+        distances.append(abs(bc1 - bc2) / max_bc)
+        
+        # Number of recursive calls
+        rc1 = len(rs1.get("recursive_calls", []))
+        rc2 = len(rs2.get("recursive_calls", []))
+        max_rc = max(rc1, rc2, 1)
+        distances.append(abs(rc1 - rc2) / max_rc)
+        
+        return sum(distances) / len(distances) if distances else 0.0
