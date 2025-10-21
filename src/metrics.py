@@ -1,10 +1,13 @@
 # src/metrics.py
 """
 Comprehensive repeatability metrics for SKYT experiments
-Implements three-tier repeatability: raw, behavioral, and structural
+Implements all metrics required for the paper:
+- Core: R_raw, R_anchor (pre/post), Δ_rescue, R_repair@k
+- Distributional: Distance distributions, Δμ, ΔPτ
+- Complementary: Canon coverage, rescue rate, structural/behavioral breakdown
 """
 
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Tuple
 from collections import Counter
 import numpy as np
 from .oracle_system import OracleSystem
@@ -13,70 +16,135 @@ from .canon_system import CanonSystem
 
 
 class ComprehensiveMetrics:
-    """Calculate comprehensive SKYT repeatability metrics"""
+    """Calculate comprehensive SKYT repeatability metrics for paper"""
     
     def __init__(self, canon_system: Optional[CanonSystem] = None):
         self.oracle_system = OracleSystem()
         self.properties_extractor = FoundationalProperties()
         self.canon_system = canon_system
+        
+        # Default thresholds for R_repair@k
+        self.repair_thresholds = [0.05, 0.1, 0.15, 0.2]
     
-    def calculate_three_tier_metrics(self, raw_outputs: List[str], 
-                                   contract: Dict[str, Any],
-                                   contract_id: str) -> Dict[str, Any]:
+    def calculate_comprehensive_metrics(self, raw_outputs: List[str],
+                                        repaired_outputs: List[str],
+                                        contract: Dict[str, Any],
+                                        contract_id: str) -> Dict[str, Any]:
         """
-        Calculate three-tier repeatability metrics
+        Calculate ALL metrics required for the paper
         
         Args:
-            raw_outputs: List of raw LLM code outputs
+            raw_outputs: List of raw LLM code outputs (pre-repair)
+            repaired_outputs: List of repaired/canonicalized outputs (post-repair)
             contract: Contract specification
             contract_id: Contract identifier for canon lookup
             
         Returns:
-            Dictionary with all three repeatability metrics
+            Dictionary with all required metrics
         """
         if not raw_outputs:
             return self._empty_metrics()
         
         total_runs = len(raw_outputs)
         
-        # Tier 1: Raw Repeatability (R_raw)
+        # === CORE REPEATABILITY METRICS ===
+        
+        # R_raw: Raw repeatability (byte-identical outputs)
         r_raw, raw_stats = self._calculate_raw_repeatability(raw_outputs)
         
-        # Tier 2: Behavioral Repeatability (R_behavioral)
+        # R_anchor: Pre and post repair anchor repeatability
+        r_anchor_pre, anchor_pre_stats = self._calculate_anchor_repeatability(
+            raw_outputs, contract_id
+        )
+        r_anchor_post, anchor_post_stats = self._calculate_anchor_repeatability(
+            repaired_outputs, contract_id
+        )
+        
+        # Δ_rescue: Improvement in exact canon matches after repair
+        delta_rescue = r_anchor_post - r_anchor_pre
+        
+        # R_repair@k: Tolerance-based repeatability at different thresholds
+        r_repair_at_k_pre = self._calculate_repair_at_k(
+            raw_outputs, contract_id, self.repair_thresholds
+        )
+        r_repair_at_k_post = self._calculate_repair_at_k(
+            repaired_outputs, contract_id, self.repair_thresholds
+        )
+        
+        # === DISTRIBUTIONAL / STATISTICAL METRICS ===
+        
+        # Distance distributions (pre vs post)
+        distances_pre = self._get_distances_to_canon(raw_outputs, contract_id)
+        distances_post = self._get_distances_to_canon(repaired_outputs, contract_id)
+        
+        # Δμ: Mean distance delta
+        mean_distance_pre = np.mean(distances_pre) if distances_pre else 0.0
+        mean_distance_post = np.mean(distances_post) if distances_post else 0.0
+        delta_mu = mean_distance_pre - mean_distance_post
+        
+        # ΔPτ: Partial repeatability delta at thresholds
+        delta_p_tau = self._calculate_delta_p_tau(
+            distances_pre, distances_post, self.repair_thresholds
+        )
+        
+        # === COMPLEMENTARY METRICS ===
+        
+        # Canon coverage: Fraction passing oracle tests
+        canon_coverage = self._calculate_canon_coverage(raw_outputs, contract)
+        
+        # Rescue rate: Fraction of non-canonical outputs successfully repaired
+        rescue_rate = self._calculate_rescue_rate(
+            raw_outputs, repaired_outputs, contract_id
+        )
+        
+        # Structural & Behavioral breakdown
         r_behavioral, behavioral_stats = self._calculate_behavioral_repeatability(
             raw_outputs, contract
         )
-        
-        # Tier 3: Structural Repeatability (R_structural)
         r_structural, structural_stats = self._calculate_structural_repeatability(
             raw_outputs, contract_id
         )
         
-        # Distance variance calculations
-        distances = self._calculate_distance_variance(raw_outputs, contract_id)
+        # === LEGACY COMPATIBILITY ===
+        r_canon = r_anchor_post  # Canonical repeatability = post-repair anchor
         
         return {
-            # Core metrics
+            # === CORE REPEATABILITY METRICS ===
             "R_raw": r_raw,
+            "R_anchor_pre": r_anchor_pre,
+            "R_anchor_post": r_anchor_post,
+            "Delta_rescue": delta_rescue,
+            "R_repair_at_k_pre": r_repair_at_k_pre,
+            "R_repair_at_k_post": r_repair_at_k_post,
+            
+            # === DISTRIBUTIONAL METRICS ===
+            "distances_pre": distances_pre,
+            "distances_post": distances_post,
+            "mean_distance_pre": mean_distance_pre,
+            "mean_distance_post": mean_distance_post,
+            "std_distance_pre": np.std(distances_pre) if distances_pre else 0.0,
+            "std_distance_post": np.std(distances_post) if distances_post else 0.0,
+            "Delta_mu": delta_mu,
+            "Delta_P_tau": delta_p_tau,
+            
+            # === COMPLEMENTARY METRICS ===
+            "canon_coverage": canon_coverage,
+            "rescue_rate": rescue_rate,
             "R_behavioral": r_behavioral,
             "R_structural": r_structural,
             
-            # Legacy compatibility
-            "R_canon": r_structural,  # Structural is the new canonical
-            
-            # Detailed statistics
-            "total_runs": total_runs,
-            "raw_stats": raw_stats,
-            "behavioral_stats": behavioral_stats,
-            "structural_stats": structural_stats,
-            
-            # Distance analysis
-            "distance_variance": distances,
-            
-            # Improvement metrics
+            # === LEGACY COMPATIBILITY ===
+            "R_canon": r_canon,
             "behavioral_improvement": r_behavioral - r_raw,
             "structural_improvement": r_structural - r_raw,
-            "total_improvement": r_structural - r_raw
+            
+            # === METADATA ===
+            "total_runs": total_runs,
+            "raw_stats": raw_stats,
+            "anchor_pre_stats": anchor_pre_stats,
+            "anchor_post_stats": anchor_post_stats,
+            "behavioral_stats": behavioral_stats,
+            "structural_stats": structural_stats
         }
     
     def _calculate_raw_repeatability(self, raw_outputs: List[str]) -> tuple[float, Dict[str, Any]]:
@@ -280,13 +348,195 @@ class ComprehensiveMetrics:
         
         return entropy
     
+    def _calculate_anchor_repeatability(self, outputs: List[str], 
+                                        contract_id: str) -> Tuple[float, Dict[str, Any]]:
+        """
+        Calculate R_anchor: Probability mass of outputs with distance d=0 to canon
+        
+        Args:
+            outputs: List of code outputs
+            contract_id: Contract identifier for canon lookup
+            
+        Returns:
+            Tuple of (R_anchor, statistics)
+        """
+        if not self.canon_system:
+            return 0.0, {"error": "No canon system available"}
+        
+        canon_data = self.canon_system.load_canon(contract_id)
+        if not canon_data:
+            return 0.0, {"error": "No canon found"}
+        
+        exact_matches = 0
+        distances = []
+        
+        for code in outputs:
+            comparison = self.canon_system.compare_to_canon(contract_id, code)
+            distance = comparison.get("distance", float('inf'))
+            distances.append(distance)
+            
+            if distance == 0.0 or comparison.get("is_identical", False):
+                exact_matches += 1
+        
+        r_anchor = exact_matches / len(outputs) if outputs else 0.0
+        
+        stats = {
+            "exact_matches": exact_matches,
+            "total_outputs": len(outputs),
+            "distances": distances,
+            "mean_distance": np.mean(distances) if distances else 0.0,
+            "min_distance": np.min(distances) if distances else 0.0
+        }
+        
+        return r_anchor, stats
+    
+    def _calculate_repair_at_k(self, outputs: List[str], contract_id: str,
+                              thresholds: List[float]) -> Dict[str, float]:
+        """
+        Calculate R_repair@k: Probability mass within distance ≤ k
+        
+        Args:
+            outputs: List of code outputs
+            contract_id: Contract identifier
+            thresholds: List of distance thresholds
+            
+        Returns:
+            Dictionary mapping threshold to repeatability score
+        """
+        if not self.canon_system:
+            return {f"k={k}": 0.0 for k in thresholds}
+        
+        distances = self._get_distances_to_canon(outputs, contract_id)
+        if not distances:
+            return {f"k={k}": 0.0 for k in thresholds}
+        
+        results = {}
+        for k in thresholds:
+            within_threshold = sum(1 for d in distances if d <= k)
+            results[f"k={k}"] = within_threshold / len(distances)
+        
+        return results
+    
+    def _get_distances_to_canon(self, outputs: List[str], 
+                               contract_id: str) -> List[float]:
+        """
+        Get list of distances from each output to canon
+        
+        Args:
+            outputs: List of code outputs
+            contract_id: Contract identifier
+            
+        Returns:
+            List of distance values
+        """
+        if not self.canon_system:
+            return []
+        
+        canon_data = self.canon_system.load_canon(contract_id)
+        if not canon_data:
+            return []
+        
+        distances = []
+        for code in outputs:
+            comparison = self.canon_system.compare_to_canon(contract_id, code)
+            distances.append(comparison.get("distance", float('inf')))
+        
+        return distances
+    
+    def _calculate_delta_p_tau(self, distances_pre: List[float],
+                               distances_post: List[float],
+                               thresholds: List[float]) -> Dict[str, float]:
+        """
+        Calculate ΔPτ: Difference in probability mass within threshold τ
+        
+        Args:
+            distances_pre: Pre-repair distances
+            distances_post: Post-repair distances
+            thresholds: Distance thresholds
+            
+        Returns:
+            Dictionary mapping threshold to delta value
+        """
+        if not distances_pre or not distances_post:
+            return {f"tau={tau}": 0.0 for tau in thresholds}
+        
+        results = {}
+        for tau in thresholds:
+            p_pre = sum(1 for d in distances_pre if d <= tau) / len(distances_pre)
+            p_post = sum(1 for d in distances_post if d <= tau) / len(distances_post)
+            results[f"tau={tau}"] = p_post - p_pre
+        
+        return results
+    
+    def _calculate_canon_coverage(self, outputs: List[str], 
+                                 contract: Dict[str, Any]) -> float:
+        """
+        Calculate canon coverage: Fraction of outputs passing oracle tests
+        
+        Args:
+            outputs: List of code outputs
+            contract: Contract specification
+            
+        Returns:
+            Coverage fraction (0.0 to 1.0)
+        """
+        if not outputs:
+            return 0.0
+        
+        passing = 0
+        for code in outputs:
+            oracle_result = self.oracle_system.run_oracle_tests(code, contract)
+            if oracle_result.get("passed", False):
+                passing += 1
+        
+        return passing / len(outputs)
+    
+    def _calculate_rescue_rate(self, raw_outputs: List[str],
+                              repaired_outputs: List[str],
+                              contract_id: str) -> float:
+        """
+        Calculate rescue rate: Fraction of non-canonical outputs successfully repaired
+        
+        Args:
+            raw_outputs: Pre-repair outputs
+            repaired_outputs: Post-repair outputs
+            contract_id: Contract identifier
+            
+        Returns:
+            Rescue rate (0.0 to 1.0)
+        """
+        if not self.canon_system or len(raw_outputs) != len(repaired_outputs):
+            return 0.0
+        
+        non_canonical_count = 0
+        rescued_count = 0
+        
+        for raw, repaired in zip(raw_outputs, repaired_outputs):
+            raw_comparison = self.canon_system.compare_to_canon(contract_id, raw)
+            
+            # Check if originally non-canonical
+            if not raw_comparison.get("is_identical", False):
+                non_canonical_count += 1
+                
+                # Check if repair made it canonical
+                repaired_comparison = self.canon_system.compare_to_canon(contract_id, repaired)
+                if repaired_comparison.get("is_identical", False):
+                    rescued_count += 1
+        
+        return rescued_count / non_canonical_count if non_canonical_count > 0 else 0.0
+    
     def _empty_metrics(self) -> Dict[str, Any]:
         """Return empty metrics structure"""
         return {
             "R_raw": 0.0,
+            "R_anchor_pre": 0.0,
+            "R_anchor_post": 0.0,
+            "Delta_rescue": 0.0,
             "R_behavioral": 0.0,
             "R_structural": 0.0,
             "R_canon": 0.0,
+            "canon_coverage": 0.0,
+            "rescue_rate": 0.0,
             "total_runs": 0,
             "error": "No outputs provided"
         }

@@ -38,6 +38,7 @@ class Contract:
             "task_intent": template.get("task_intent", template.get("description", "")),
             "prompt": template["prompt"],
             "constraints": template.get("constraints", {}),
+            "algorithm_family": template.get("algorithm_family", "fibonacci"),
             "language": template.get("language", "python"),
             "environment": template.get("environment", {}),
             "output_format": template.get("output_format", "raw_code"),

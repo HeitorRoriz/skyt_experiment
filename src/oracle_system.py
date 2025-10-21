@@ -22,7 +22,9 @@ class OracleSystem:
             "merge_sort": self._merge_sort_oracle,
             "binary_search": self._binary_search_oracle,
             "sieve_eratosthenes": self._sieve_oracle,
-            "dijkstra": self._dijkstra_oracle
+            "dijkstra": self._dijkstra_oracle,
+            "slugify": self._slugify_oracle,
+            "balanced_brackets": self._balanced_brackets_oracle
         }
     
     def run_oracle_tests(self, code: str, contract: Dict[str, Any]) -> Dict[str, Any]:
@@ -400,4 +402,144 @@ class OracleSystem:
                     "passed": True
                 }
             ]
+        }
+    
+    def _slugify_oracle(self, namespace: Dict, requirements: Dict) -> Dict[str, Any]:
+        """Oracle tests for slugify implementations"""
+        test_results = []
+        
+        # Find the slugify function
+        slugify_func = None
+        for name, obj in namespace.items():
+            if callable(obj) and 'slugify' in name.lower():
+                slugify_func = obj
+                break
+        
+        if not slugify_func:
+            # Debug: show what's in namespace
+            available_names = [name for name in namespace.keys() if not name.startswith('__')]
+            return {
+                "passed": False,
+                "error": f"No slugify function found. Available: {available_names}",
+                "test_results": []
+            }
+        
+        # Get test cases from requirements or use defaults
+        test_cases = requirements.get("test_cases", [])
+        
+        # Debug: check if test_cases is empty
+        if not test_cases:
+            return {
+                "passed": False,
+                "error": f"No test cases found in requirements. Keys: {list(requirements.keys())}",
+                "test_results": []
+            }
+        
+        passed_tests = 0
+        total_tests = len(test_cases)
+        
+        for test_case in test_cases:
+            input_str = test_case.get("input", "")
+            expected = test_case.get("expected", "")
+            description = test_case.get("description", "")
+            
+            try:
+                result = slugify_func(input_str)
+                passed = (result == expected)
+                
+                test_results.append({
+                    "input": input_str,
+                    "expected": expected,
+                    "actual": result,
+                    "passed": passed,
+                    "description": description
+                })
+                
+                if passed:
+                    passed_tests += 1
+                    
+            except Exception as e:
+                test_results.append({
+                    "input": input_str,
+                    "expected": expected,
+                    "actual": None,
+                    "passed": False,
+                    "error": str(e),
+                    "description": description
+                })
+        
+        pass_rate = passed_tests / total_tests if total_tests > 0 else 0.0
+        required_pass_rate = requirements.get("required_pass_rate", 0.8)
+        
+        return {
+            "passed": pass_rate >= required_pass_rate,
+            "pass_rate": pass_rate,
+            "passed_tests": passed_tests,
+            "total_tests": total_tests,
+            "test_results": test_results
+        }
+    
+    def _balanced_brackets_oracle(self, namespace: Dict, requirements: Dict) -> Dict[str, Any]:
+        """Oracle tests for balanced brackets implementations"""
+        test_results = []
+        
+        # Find the is_balanced function
+        is_balanced_func = None
+        for name, obj in namespace.items():
+            if callable(obj) and 'balanced' in name.lower():
+                is_balanced_func = obj
+                break
+        
+        if not is_balanced_func:
+            return {
+                "passed": False,
+                "error": "No is_balanced function found",
+                "test_results": []
+            }
+        
+        # Get test cases from requirements or use defaults
+        test_cases = requirements.get("test_cases", [])
+        
+        passed_tests = 0
+        total_tests = len(test_cases)
+        
+        for test_case in test_cases:
+            input_str = test_case.get("input", "")
+            expected = test_case.get("expected", False)
+            description = test_case.get("description", "")
+            
+            try:
+                result = is_balanced_func(input_str)
+                passed = (result == expected)
+                
+                test_results.append({
+                    "input": input_str,
+                    "expected": expected,
+                    "actual": result,
+                    "passed": passed,
+                    "description": description
+                })
+                
+                if passed:
+                    passed_tests += 1
+                    
+            except Exception as e:
+                test_results.append({
+                    "input": input_str,
+                    "expected": expected,
+                    "actual": None,
+                    "passed": False,
+                    "error": str(e),
+                    "description": description
+                })
+        
+        pass_rate = passed_tests / total_tests if total_tests > 0 else 0.0
+        required_pass_rate = requirements.get("required_pass_rate", 0.8)
+        
+        return {
+            "passed": pass_rate >= required_pass_rate,
+            "pass_rate": pass_rate,
+            "passed_tests": passed_tests,
+            "total_tests": total_tests,
+            "test_results": test_results
         }

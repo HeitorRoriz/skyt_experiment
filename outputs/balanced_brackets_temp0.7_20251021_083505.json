@@ -1,0 +1,2203 @@
+{
+  "experiment_id": "balanced_brackets_temp0.7_20251021_083505",
+  "contract_id": "balanced_brackets",
+  "temperature": 0.7,
+  "timestamp": "2025-10-21T08:35:05.815964",
+  "num_runs": 5,
+  "successful_runs": 5,
+  "contract": {
+    "id": "balanced_brackets",
+    "task_intent": "Check if brackets in string are balanced",
+    "prompt": "Write a Python function called 'is_balanced' that takes a string containing brackets (parentheses, square brackets, curly braces) and returns True if all brackets are properly balanced and nested, False otherwise.",
+    "constraints": {
+      "function_name": "is_balanced",
+      "output_type": "boolean"
+    },
+    "algorithm_family": "balanced_brackets",
+    "language": "python",
+    "environment": {},
+    "output_format": "raw_code",
+    "oracle_requirements": {
+      "test_cases": [
+        {
+          "input": "()",
+          "expected": true,
+          "description": "Simple balanced"
+        },
+        {
+          "input": "()[]{}",
+          "expected": true,
+          "description": "Multiple types balanced"
+        },
+        {
+          "input": "({[]})",
+          "expected": true,
+          "description": "Nested balanced"
+        },
+        {
+          "input": "(]",
+          "expected": false,
+          "description": "Mismatched brackets"
+        },
+        {
+          "input": "(()",
+          "expected": false,
+          "description": "Unclosed bracket"
+        },
+        {
+          "input": ")(",
+          "expected": false,
+          "description": "Wrong order"
+        },
+        {
+          "input": "",
+          "expected": true,
+          "description": "Empty string"
+        },
+        {
+          "input": "({[()]})",
+          "expected": true,
+          "description": "Complex nested"
+        }
+      ],
+      "correctness_threshold": 1.0,
+      "required_pass_rate": 0.8
+    },
+    "normalization_rules": {
+      "remove_comments": true,
+      "normalize_whitespace": true,
+      "enforce_function_name": true
+    },
+    "anchor_signature": null,
+    "compliance_flag": false,
+    "distance_metric": "foundational_properties",
+    "rescue_bounds": {
+      "allow_function_rename": true,
+      "allow_print_removal": true,
+      "max_transformations": 5
+    },
+    "model_specification": {},
+    "contract_version": "2.0",
+    "oracle_version": "1.0",
+    "normalization_version": "1.0",
+    "created_timestamp": "2025-10-21T08:34:56.014286",
+    "run_id": null,
+    "prompt_id": "balanced_brackets",
+    "sample_id": null
+  },
+  "canon_data": {
+    "contract_id": "balanced_brackets",
+    "canonical_code": "def is_balanced(s):\n    stack = []\n    bracket_map = {')': '(', '}': '{', ']': '['}\n    \n    for char in s:\n        if char in bracket_map.values():\n            stack.append(char)\n        elif char in bracket_map.keys():\n            if not stack or stack.pop() != bracket_map[char]:\n                return False\n    \n    return not stack",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 3,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [],
+        "nested_depth": 4,
+        "branch_patterns": [
+          "if_at_depth_1",
+          "if_at_depth_2",
+          "if_at_depth_3"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "stack": [],
+          "bracket_map": []
+        },
+        "assignments": {
+          "stack": "List(ctx=Load())",
+          "bracket_map": "Dict(keys=[Constant(value=')'), Constant(value='}'), Constant(value=']')], values=[Constant(value='('), Constant(value='{'), Constant(value='[')])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_is_balanced"
+          ],
+          [
+            "function_is_balanced",
+            "loop"
+          ],
+          [
+            "function_is_balanced",
+            "loop",
+            "branch"
+          ],
+          [
+            "function_is_balanced",
+            "loop",
+            "branch",
+            "branch"
+          ],
+          [
+            "function_is_balanced",
+            "loop",
+            "branch",
+            "branch",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "is_balanced": {
+          "name": "is_balanced",
+          "args": [
+            "s"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": [
+          false
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [
+          "Or"
+        ],
+        "comparisons": [
+          "In",
+          "In",
+          "NotEq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "List",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Dict",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "In",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "In",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "If",
+          "BoolOp",
+          "Or",
+          "UnaryOp",
+          "Not",
+          "Name",
+          "Load",
+          "Compare",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "NotEq",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Return",
+          "Constant",
+          "Return",
+          "UnaryOp",
+          "Not",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 11,
+        "ast_hash": "93465b11cb6366eed5c0843b442f76af",
+        "alpha_renamed_hash": "e6c3edad12fd58ef8115add39d2607a2"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "For",
+          "If",
+          "Expr",
+          "If",
+          "If",
+          "Return",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "Assign_2",
+          "For_3",
+          "If_4",
+          "Expr_5",
+          "If_6",
+          "If_7",
+          "Return_8",
+          "Return_9"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "For",
+          "If",
+          "If",
+          "If"
+        ]
+      },
+      "behavioral_signature": {
+        "can_execute": true,
+        "io_signature_hash": "ca377392ba27f5bdaf360e84f2bd61ab",
+        "side_effects_detected": [],
+        "test_results": [
+          [
+            0,
+            "Exception:TypeError",
+            false
+          ],
+          [
+            1,
+            "Exception:TypeError",
+            false
+          ],
+          [
+            2,
+            "Exception:TypeError",
+            false
+          ]
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "created_timestamp": "2025-10-21T08:33:09.539550",
+    "canon_version": "1.0",
+    "oracle_validated": true,
+    "oracle_pass_rate": 1.0
+  },
+  "canon_created": true,
+  "llm_results": [
+    {
+      "run_id": 1,
+      "raw_output": "def is_balanced(s):\n    stack = []\n    bracket_map = {')': '(', ']': '[', '}': '{'}\n    \n    for char in s:\n        if char in bracket_map.values():\n            stack.append(char)\n        elif char in bracket_map.keys():\n            if not stack or stack.pop() != bracket_map[char]:\n                return False\n                \n    return not stack",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_balanced' that takes a string containing brackets (parentheses, square brackets, curly braces) and returns True if all brackets are properly balanced and nested, False otherwise.\n\nIMPORTANT: The function must be named 'is_balanced'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 2,
+      "raw_output": "def is_balanced(s):\n    stack = []\n    brackets = {')': '(', '}': '{', ']': '['}\n    \n    for char in s:\n        if char in brackets.values():\n            stack.append(char)\n        elif char in brackets.keys():\n            if not stack or stack.pop() != brackets[char]:\n                return False\n                \n    return len(stack) == 0",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_balanced' that takes a string containing brackets (parentheses, square brackets, curly braces) and returns True if all brackets are properly balanced and nested, False otherwise.\n\nIMPORTANT: The function must be named 'is_balanced'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 3,
+      "raw_output": "def is_balanced(s):\n    stack = []\n    brackets = {')': '(', '}': '{', ']': '['}\n    \n    for char in s:\n        if char in brackets.values():\n            stack.append(char)\n        elif char in brackets.keys():\n            if stack == [] or stack.pop() != brackets[char]:\n                return False\n    \n    return stack == []",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_balanced' that takes a string containing brackets (parentheses, square brackets, curly braces) and returns True if all brackets are properly balanced and nested, False otherwise.\n\nIMPORTANT: The function must be named 'is_balanced'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 4,
+      "raw_output": "def is_balanced(s):\n    stack = []\n    bracket_map = {')': '(', ']': '[', '}': '{'}\n    \n    for char in s:\n        if char in bracket_map.values():\n            stack.append(char)\n        elif char in bracket_map.keys():\n            if not stack or stack.pop() != bracket_map[char]:\n                return False\n    \n    return len(stack) == 0",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_balanced' that takes a string containing brackets (parentheses, square brackets, curly braces) and returns True if all brackets are properly balanced and nested, False otherwise.\n\nIMPORTANT: The function must be named 'is_balanced'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 5,
+      "raw_output": "def is_balanced(s):\n    stack = []\n    bracket_map = {')': '(', ']': '[', '}': '{'}\n    \n    for char in s:\n        if char in bracket_map.values():\n            stack.append(char)\n        elif char in bracket_map.keys():\n            if not stack or stack.pop() != bracket_map[char]:\n                return False\n    \n    return not stack",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_balanced' that takes a string containing brackets (parentheses, square brackets, curly braces) and returns True if all brackets are properly balanced and nested, False otherwise.\n\nIMPORTANT: The function must be named 'is_balanced'.\n\nProvide only the Python code, no explanations or markdown."
+    }
+  ],
+  "raw_outputs": [
+    "def is_balanced(s):\n    stack = []\n    bracket_map = {')': '(', ']': '[', '}': '{'}\n    \n    for char in s:\n        if char in bracket_map.values():\n            stack.append(char)\n        elif char in bracket_map.keys():\n            if not stack or stack.pop() != bracket_map[char]:\n                return False\n                \n    return not stack",
+    "def is_balanced(s):\n    stack = []\n    brackets = {')': '(', '}': '{', ']': '['}\n    \n    for char in s:\n        if char in brackets.values():\n            stack.append(char)\n        elif char in brackets.keys():\n            if not stack or stack.pop() != brackets[char]:\n                return False\n                \n    return len(stack) == 0",
+    "def is_balanced(s):\n    stack = []\n    brackets = {')': '(', '}': '{', ']': '['}\n    \n    for char in s:\n        if char in brackets.values():\n            stack.append(char)\n        elif char in brackets.keys():\n            if stack == [] or stack.pop() != brackets[char]:\n                return False\n    \n    return stack == []",
+    "def is_balanced(s):\n    stack = []\n    bracket_map = {')': '(', ']': '[', '}': '{'}\n    \n    for char in s:\n        if char in bracket_map.values():\n            stack.append(char)\n        elif char in bracket_map.keys():\n            if not stack or stack.pop() != bracket_map[char]:\n                return False\n    \n    return len(stack) == 0",
+    "def is_balanced(s):\n    stack = []\n    bracket_map = {')': '(', ']': '[', '}': '{'}\n    \n    for char in s:\n        if char in bracket_map.values():\n            stack.append(char)\n        elif char in bracket_map.keys():\n            if not stack or stack.pop() != bracket_map[char]:\n                return False\n    \n    return not stack"
+  ],
+  "transformation_results": [
+    {
+      "run_id": 1,
+      "original_code": "def is_balanced(s):\n    stack = []\n    bracket_map = {')': '(', ']': '[', '}': '{'}\n    \n    for char in s:\n        if char in bracket_map.values():\n            stack.append(char)\n        elif char in bracket_map.keys():\n            if not stack or stack.pop() != bracket_map[char]:\n                return False\n                \n    return not stack",
+      "transformed_code": "def is_balanced(s):\n    stack = []\n    bracket_map = {')': '(', ']': '[', '}': '{'}\n    \n    for char in s:\n        if char in bracket_map.values():\n            stack.append(char)\n        elif char in bracket_map.keys():\n            if not stack or stack.pop() != bracket_map[char]:\n                return False\n                \n    return not stack",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.1,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 2,
+      "original_code": "def is_balanced(s):\n    stack = []\n    brackets = {')': '(', '}': '{', ']': '['}\n    \n    for char in s:\n        if char in brackets.values():\n            stack.append(char)\n        elif char in brackets.keys():\n            if not stack or stack.pop() != brackets[char]:\n                return False\n                \n    return len(stack) == 0",
+      "transformed_code": "def is_balanced(s):\n    stack = []\n    brackets = {')': '(', '}': '{', ']': '['}\n    \n    for char in s:\n        if char in brackets.values():\n            stack.append(char)\n        elif char in brackets.keys():\n            if not stack or stack.pop() != brackets[char]:\n                return False\n                \n    return len(stack) == 0",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.1722222222222222,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 3,
+      "original_code": "def is_balanced(s):\n    stack = []\n    brackets = {')': '(', '}': '{', ']': '['}\n    \n    for char in s:\n        if char in brackets.values():\n            stack.append(char)\n        elif char in brackets.keys():\n            if stack == [] or stack.pop() != brackets[char]:\n                return False\n    \n    return stack == []",
+      "transformed_code": "def is_balanced(s):\n    stack = []\n    brackets = {')': '(', '}': '{', ']': '['}\n    \n    for char in s:\n        if char in brackets.values():\n            stack.append(char)\n        elif char in brackets.keys():\n            if stack == [] or stack.pop() != brackets[char]:\n                return False\n    \n    return stack == []",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.15555555555555553,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 4,
+      "original_code": "def is_balanced(s):\n    stack = []\n    bracket_map = {')': '(', ']': '[', '}': '{'}\n    \n    for char in s:\n        if char in bracket_map.values():\n            stack.append(char)\n        elif char in bracket_map.keys():\n            if not stack or stack.pop() != bracket_map[char]:\n                return False\n    \n    return len(stack) == 0",
+      "transformed_code": "def is_balanced(s):\n    stack = []\n    bracket_map = {')': '(', ']': '[', '}': '{'}\n    \n    for char in s:\n        if char in bracket_map.values():\n            stack.append(char)\n        elif char in bracket_map.keys():\n            if not stack or stack.pop() != bracket_map[char]:\n                return False\n    \n    return len(stack) == 0",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.13888888888888887,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 5,
+      "original_code": "def is_balanced(s):\n    stack = []\n    bracket_map = {')': '(', ']': '[', '}': '{'}\n    \n    for char in s:\n        if char in bracket_map.values():\n            stack.append(char)\n        elif char in bracket_map.keys():\n            if not stack or stack.pop() != bracket_map[char]:\n                return False\n    \n    return not stack",
+      "transformed_code": "def is_balanced(s):\n    stack = []\n    bracket_map = {')': '(', ']': '[', '}': '{'}\n    \n    for char in s:\n        if char in bracket_map.values():\n            stack.append(char)\n        elif char in bracket_map.keys():\n            if not stack or stack.pop() != bracket_map[char]:\n                return False\n    \n    return not stack",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.1,
+      "transformations_applied": []
+    }
+  ],
+  "metrics": {
+    "R_raw": 0.2,
+    "R_behavioral": 1.0,
+    "R_structural": 0.4,
+    "R_canon": 0.4,
+    "total_runs": 5,
+    "raw_stats": {
+      "unique_outputs": 5,
+      "most_common_count": 1,
+      "distribution": {
+        "def is_balanced(s):\n    stack = []\n    bracket_map = {')': '(', ']': '[', '}': '{'}\n    \n    for char in s:\n        if char in bracket_map.values():\n            stack.append(char)\n        elif char in bracket_map.keys():\n            if not stack or stack.pop() != bracket_map[char]:\n                return False\n                \n    return not stack": 1,
+        "def is_balanced(s):\n    stack = []\n    brackets = {')': '(', '}': '{', ']': '['}\n    \n    for char in s:\n        if char in brackets.values():\n            stack.append(char)\n        elif char in brackets.keys():\n            if not stack or stack.pop() != brackets[char]:\n                return False\n                \n    return len(stack) == 0": 1,
+        "def is_balanced(s):\n    stack = []\n    brackets = {')': '(', '}': '{', ']': '['}\n    \n    for char in s:\n        if char in brackets.values():\n            stack.append(char)\n        elif char in brackets.keys():\n            if stack == [] or stack.pop() != brackets[char]:\n                return False\n    \n    return stack == []": 1,
+        "def is_balanced(s):\n    stack = []\n    bracket_map = {')': '(', ']': '[', '}': '{'}\n    \n    for char in s:\n        if char in bracket_map.values():\n            stack.append(char)\n        elif char in bracket_map.keys():\n            if not stack or stack.pop() != bracket_map[char]:\n                return False\n    \n    return len(stack) == 0": 1,
+        "def is_balanced(s):\n    stack = []\n    bracket_map = {')': '(', ']': '[', '}': '{'}\n    \n    for char in s:\n        if char in bracket_map.values():\n            stack.append(char)\n        elif char in bracket_map.keys():\n            if not stack or stack.pop() != bracket_map[char]:\n                return False\n    \n    return not stack": 1
+      },
+      "entropy": 2.321928094887362
+    },
+    "behavioral_stats": {
+      "unique_behaviors": 1,
+      "oracle_results": [
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "()",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple balanced"
+            },
+            {
+              "input": "()[]{}",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Multiple types balanced"
+            },
+            {
+              "input": "({[]})",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Nested balanced"
+            },
+            {
+              "input": "(]",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Mismatched brackets"
+            },
+            {
+              "input": "(()",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Unclosed bracket"
+            },
+            {
+              "input": ")(",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Wrong order"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "({[()]})",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Complex nested"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "()",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple balanced"
+            },
+            {
+              "input": "()[]{}",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Multiple types balanced"
+            },
+            {
+              "input": "({[]})",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Nested balanced"
+            },
+            {
+              "input": "(]",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Mismatched brackets"
+            },
+            {
+              "input": "(()",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Unclosed bracket"
+            },
+            {
+              "input": ")(",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Wrong order"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "({[()]})",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Complex nested"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "()",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple balanced"
+            },
+            {
+              "input": "()[]{}",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Multiple types balanced"
+            },
+            {
+              "input": "({[]})",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Nested balanced"
+            },
+            {
+              "input": "(]",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Mismatched brackets"
+            },
+            {
+              "input": "(()",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Unclosed bracket"
+            },
+            {
+              "input": ")(",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Wrong order"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "({[()]})",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Complex nested"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "()",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple balanced"
+            },
+            {
+              "input": "()[]{}",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Multiple types balanced"
+            },
+            {
+              "input": "({[]})",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Nested balanced"
+            },
+            {
+              "input": "(]",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Mismatched brackets"
+            },
+            {
+              "input": "(()",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Unclosed bracket"
+            },
+            {
+              "input": ")(",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Wrong order"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "({[()]})",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Complex nested"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "()",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple balanced"
+            },
+            {
+              "input": "()[]{}",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Multiple types balanced"
+            },
+            {
+              "input": "({[]})",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Nested balanced"
+            },
+            {
+              "input": "(]",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Mismatched brackets"
+            },
+            {
+              "input": "(()",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Unclosed bracket"
+            },
+            {
+              "input": ")(",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Wrong order"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "({[()]})",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Complex nested"
+            }
+          ]
+        }
+      ],
+      "behavioral_groups": {
+        "PPPPPPPP": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "pass_rate": 1.0
+    },
+    "structural_stats": {
+      "unique_structures": 4,
+      "property_results": [
+        {
+          "control_flow_signature": {
+            "if_statements": 3,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 4,
+            "branch_patterns": [
+              "if_at_depth_1",
+              "if_at_depth_2",
+              "if_at_depth_3"
+            ]
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "stack": [],
+              "bracket_map": []
+            },
+            "assignments": {
+              "stack": "List(ctx=Load())",
+              "bracket_map": "Dict(keys=[Constant(value=')'), Constant(value=']'), Constant(value='}')], values=[Constant(value='('), Constant(value='['), Constant(value='{')])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_balanced"
+              ],
+              [
+                "function_is_balanced",
+                "loop"
+              ],
+              [
+                "function_is_balanced",
+                "loop",
+                "branch"
+              ],
+              [
+                "function_is_balanced",
+                "loop",
+                "branch",
+                "branch"
+              ],
+              [
+                "function_is_balanced",
+                "loop",
+                "branch",
+                "branch",
+                "branch"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_balanced": {
+              "name": "is_balanced",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": true,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              false
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [
+              "Or"
+            ],
+            "comparisons": [
+              "In",
+              "In",
+              "NotEq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "List",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Dict",
+              "Constant",
+              "Constant",
+              "Constant",
+              "Constant",
+              "Constant",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Name",
+              "Load",
+              "In",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Name",
+              "Load",
+              "In",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "If",
+              "BoolOp",
+              "Or",
+              "UnaryOp",
+              "Not",
+              "Name",
+              "Load",
+              "Compare",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "NotEq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Constant",
+              "Return",
+              "UnaryOp",
+              "Not",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 11,
+            "ast_hash": "6f9c32933fee0f1df4d2966c371da5b3",
+            "alpha_renamed_hash": "5cdfc3d7977780f6a8e70e8910bfbcec"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "For",
+              "If",
+              "Expr",
+              "If",
+              "If",
+              "Return",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Assign_2",
+              "For_3",
+              "If_4",
+              "Expr_5",
+              "If_6",
+              "If_7",
+              "Return_8",
+              "Return_9"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For",
+              "If",
+              "If",
+              "If"
+            ]
+          },
+          "behavioral_signature": {
+            "can_execute": true,
+            "io_signature_hash": "ca377392ba27f5bdaf360e84f2bd61ab",
+            "side_effects_detected": [],
+            "test_results": [
+              [
+                0,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                1,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                2,
+                "Exception:TypeError",
+                false
+              ]
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 3,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [
+              "len"
+            ],
+            "nested_depth": 4,
+            "branch_patterns": [
+              "if_at_depth_1",
+              "if_at_depth_2",
+              "if_at_depth_3"
+            ]
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "stack": [],
+              "brackets": []
+            },
+            "assignments": {
+              "stack": "List(ctx=Load())",
+              "brackets": "Dict(keys=[Constant(value=')'), Constant(value='}'), Constant(value=']')], values=[Constant(value='('), Constant(value='{'), Constant(value='[')])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_balanced"
+              ],
+              [
+                "function_is_balanced",
+                "loop"
+              ],
+              [
+                "function_is_balanced",
+                "loop",
+                "branch"
+              ],
+              [
+                "function_is_balanced",
+                "loop",
+                "branch",
+                "branch"
+              ],
+              [
+                "function_is_balanced",
+                "loop",
+                "branch",
+                "branch",
+                "branch"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_balanced": {
+              "name": "is_balanced",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": true,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              false,
+              0
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [
+              "Or"
+            ],
+            "comparisons": [
+              "In",
+              "In",
+              "NotEq",
+              "Eq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "List",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Dict",
+              "Constant",
+              "Constant",
+              "Constant",
+              "Constant",
+              "Constant",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Name",
+              "Load",
+              "In",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Name",
+              "Load",
+              "In",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "If",
+              "BoolOp",
+              "Or",
+              "UnaryOp",
+              "Not",
+              "Name",
+              "Load",
+              "Compare",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "NotEq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Constant",
+              "Return",
+              "Compare",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Eq",
+              "Constant"
+            ],
+            "ast_depth": 11,
+            "ast_hash": "6f59cd376ab44e23866d4a800176baac",
+            "alpha_renamed_hash": "11c4add17810f5669eb8e31e779f901c"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "For",
+              "If",
+              "Expr",
+              "If",
+              "If",
+              "Return",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Assign_2",
+              "For_3",
+              "If_4",
+              "Expr_5",
+              "If_6",
+              "If_7",
+              "Return_8",
+              "Return_9"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For",
+              "If",
+              "If",
+              "If"
+            ]
+          },
+          "behavioral_signature": {
+            "can_execute": true,
+            "io_signature_hash": "ca377392ba27f5bdaf360e84f2bd61ab",
+            "side_effects_detected": [],
+            "test_results": [
+              [
+                0,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                1,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                2,
+                "Exception:TypeError",
+                false
+              ]
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 3,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 4,
+            "branch_patterns": [
+              "if_at_depth_1",
+              "if_at_depth_2",
+              "if_at_depth_3"
+            ]
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "stack": [],
+              "brackets": []
+            },
+            "assignments": {
+              "stack": "List(ctx=Load())",
+              "brackets": "Dict(keys=[Constant(value=')'), Constant(value='}'), Constant(value=']')], values=[Constant(value='('), Constant(value='{'), Constant(value='[')])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_balanced"
+              ],
+              [
+                "function_is_balanced",
+                "loop"
+              ],
+              [
+                "function_is_balanced",
+                "loop",
+                "branch"
+              ],
+              [
+                "function_is_balanced",
+                "loop",
+                "branch",
+                "branch"
+              ],
+              [
+                "function_is_balanced",
+                "loop",
+                "branch",
+                "branch",
+                "branch"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_balanced": {
+              "name": "is_balanced",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": true,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              false
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [
+              "Or"
+            ],
+            "comparisons": [
+              "In",
+              "In",
+              "Eq",
+              "NotEq",
+              "Eq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "List",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Dict",
+              "Constant",
+              "Constant",
+              "Constant",
+              "Constant",
+              "Constant",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Name",
+              "Load",
+              "In",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Name",
+              "Load",
+              "In",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "If",
+              "BoolOp",
+              "Or",
+              "Compare",
+              "Name",
+              "Load",
+              "Eq",
+              "List",
+              "Load",
+              "Compare",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "NotEq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Constant",
+              "Return",
+              "Compare",
+              "Name",
+              "Load",
+              "Eq",
+              "List",
+              "Load"
+            ],
+            "ast_depth": 11,
+            "ast_hash": "33237536f5cb84c8199c107cd7b34529",
+            "alpha_renamed_hash": "9a37c4598e627cf45d81328603d86b49"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "For",
+              "If",
+              "Expr",
+              "If",
+              "If",
+              "Return",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Assign_2",
+              "For_3",
+              "If_4",
+              "Expr_5",
+              "If_6",
+              "If_7",
+              "Return_8",
+              "Return_9"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For",
+              "If",
+              "If",
+              "If"
+            ]
+          },
+          "behavioral_signature": {
+            "can_execute": true,
+            "io_signature_hash": "ca377392ba27f5bdaf360e84f2bd61ab",
+            "side_effects_detected": [],
+            "test_results": [
+              [
+                0,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                1,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                2,
+                "Exception:TypeError",
+                false
+              ]
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 3,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [
+              "len"
+            ],
+            "nested_depth": 4,
+            "branch_patterns": [
+              "if_at_depth_1",
+              "if_at_depth_2",
+              "if_at_depth_3"
+            ]
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "stack": [],
+              "bracket_map": []
+            },
+            "assignments": {
+              "stack": "List(ctx=Load())",
+              "bracket_map": "Dict(keys=[Constant(value=')'), Constant(value=']'), Constant(value='}')], values=[Constant(value='('), Constant(value='['), Constant(value='{')])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_balanced"
+              ],
+              [
+                "function_is_balanced",
+                "loop"
+              ],
+              [
+                "function_is_balanced",
+                "loop",
+                "branch"
+              ],
+              [
+                "function_is_balanced",
+                "loop",
+                "branch",
+                "branch"
+              ],
+              [
+                "function_is_balanced",
+                "loop",
+                "branch",
+                "branch",
+                "branch"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_balanced": {
+              "name": "is_balanced",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": true,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              false,
+              0
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [
+              "Or"
+            ],
+            "comparisons": [
+              "In",
+              "In",
+              "NotEq",
+              "Eq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "List",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Dict",
+              "Constant",
+              "Constant",
+              "Constant",
+              "Constant",
+              "Constant",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Name",
+              "Load",
+              "In",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Name",
+              "Load",
+              "In",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "If",
+              "BoolOp",
+              "Or",
+              "UnaryOp",
+              "Not",
+              "Name",
+              "Load",
+              "Compare",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "NotEq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Constant",
+              "Return",
+              "Compare",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Eq",
+              "Constant"
+            ],
+            "ast_depth": 11,
+            "ast_hash": "fa18cb25887d3804e27872cc4fe4ec43",
+            "alpha_renamed_hash": "af8b5ff4ce7fbdb2d23dc33319934e3c"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "For",
+              "If",
+              "Expr",
+              "If",
+              "If",
+              "Return",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Assign_2",
+              "For_3",
+              "If_4",
+              "Expr_5",
+              "If_6",
+              "If_7",
+              "Return_8",
+              "Return_9"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For",
+              "If",
+              "If",
+              "If"
+            ]
+          },
+          "behavioral_signature": {
+            "can_execute": true,
+            "io_signature_hash": "ca377392ba27f5bdaf360e84f2bd61ab",
+            "side_effects_detected": [],
+            "test_results": [
+              [
+                0,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                1,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                2,
+                "Exception:TypeError",
+                false
+              ]
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 3,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 4,
+            "branch_patterns": [
+              "if_at_depth_1",
+              "if_at_depth_2",
+              "if_at_depth_3"
+            ]
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "stack": [],
+              "bracket_map": []
+            },
+            "assignments": {
+              "stack": "List(ctx=Load())",
+              "bracket_map": "Dict(keys=[Constant(value=')'), Constant(value=']'), Constant(value='}')], values=[Constant(value='('), Constant(value='['), Constant(value='{')])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_balanced"
+              ],
+              [
+                "function_is_balanced",
+                "loop"
+              ],
+              [
+                "function_is_balanced",
+                "loop",
+                "branch"
+              ],
+              [
+                "function_is_balanced",
+                "loop",
+                "branch",
+                "branch"
+              ],
+              [
+                "function_is_balanced",
+                "loop",
+                "branch",
+                "branch",
+                "branch"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_balanced": {
+              "name": "is_balanced",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": true,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              false
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [
+              "Or"
+            ],
+            "comparisons": [
+              "In",
+              "In",
+              "NotEq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "List",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Dict",
+              "Constant",
+              "Constant",
+              "Constant",
+              "Constant",
+              "Constant",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Name",
+              "Load",
+              "In",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Name",
+              "Load",
+              "In",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "If",
+              "BoolOp",
+              "Or",
+              "UnaryOp",
+              "Not",
+              "Name",
+              "Load",
+              "Compare",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "NotEq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Constant",
+              "Return",
+              "UnaryOp",
+              "Not",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 11,
+            "ast_hash": "6f9c32933fee0f1df4d2966c371da5b3",
+            "alpha_renamed_hash": "5cdfc3d7977780f6a8e70e8910bfbcec"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "For",
+              "If",
+              "Expr",
+              "If",
+              "If",
+              "Return",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Assign_2",
+              "For_3",
+              "If_4",
+              "Expr_5",
+              "If_6",
+              "If_7",
+              "Return_8",
+              "Return_9"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For",
+              "If",
+              "If",
+              "If"
+            ]
+          },
+          "behavioral_signature": {
+            "can_execute": true,
+            "io_signature_hash": "ca377392ba27f5bdaf360e84f2bd61ab",
+            "side_effects_detected": [],
+            "test_results": [
+              [
+                0,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                1,
+                "Exception:TypeError",
+                false
+              ],
+              [
+                2,
+                "Exception:TypeError",
+                false
+              ]
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        }
+      ],
+      "structural_groups": {
+        "3278748828035367477_-5818589656400154183_-6812896308691970500_8555172079966742264": [
+          0,
+          4
+        ],
+        "-4486964067455104761_-5818589656400154183_-6812896308691970500_8808220846884461187": [
+          1
+        ],
+        "3278748828035367477_-5818589656400154183_-6812896308691970500_3982951987005641782": [
+          2
+        ],
+        "-4486964067455104761_-5818589656400154183_-6812896308691970500_6217502007911939328": [
+          3
+        ]
+      },
+      "distances_to_canon": [
+        0.1,
+        0.1722222222222222,
+        0.15555555555555553,
+        0.13888888888888887,
+        0.1
+      ],
+      "mean_distance": 0.1333333333333333,
+      "std_distance": 0.029186501192363754
+    },
+    "distance_variance": {
+      "distances": [
+        0.1,
+        0.1722222222222222,
+        0.15555555555555553,
+        0.13888888888888887,
+        0.1
+      ],
+      "mean": 0.1333333333333333,
+      "std": 0.029186501192363754,
+      "min": 0.1,
+      "max": 0.1722222222222222,
+      "variance": 0.0008518518518518508,
+      "histogram_bins": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1
+      ],
+      "histogram_edges": [
+        0.1,
+        0.10722222222222222,
+        0.11444444444444445,
+        0.12166666666666666,
+        0.1288888888888889,
+        0.1361111111111111,
+        0.1433333333333333,
+        0.15055555555555553,
+        0.15777777777777774,
+        0.16499999999999998,
+        0.1722222222222222
+      ]
+    },
+    "behavioral_improvement": 0.8,
+    "structural_improvement": 0.2,
+    "total_improvement": 0.2
+  },
+  "bell_curve_analysis": {
+    "plot_path": "outputs\\analysis\\bell_curve_balanced_brackets_temp0.7.png",
+    "statistics": {
+      "mean": 0.1333333333333333,
+      "std": 0.029186501192363754,
+      "median": 0.13888888888888887,
+      "min": 0.1,
+      "max": 0.1722222222222222,
+      "variance": 0.0008518518518518508,
+      "skewness": -0.033103782070732085,
+      "kurtosis": -1.6216131064902326,
+      "percentiles": {
+        "25th": 0.1,
+        "50th": 0.13888888888888887,
+        "75th": 0.15555555555555553,
+        "90th": 0.16555555555555554,
+        "95th": 0.16888888888888887
+      }
+    },
+    "normality_test": {
+      "statistic": 0.8854270762677774,
+      "p_value": 0.3346311118743732,
+      "is_normal": "True"
+    },
+    "sample_size": 5
+  },
+  "hypothesis_evaluation": {
+    "hypothesis": "SKYT improves LLM code repeatability through contract-driven canonicalization",
+    "supported": true,
+    "evidence": {
+      "raw_repeatability": 0.2,
+      "behavioral_improvement": 0.8,
+      "structural_improvement": 0.2,
+      "total_improvement": 0.2
+    },
+    "conclusion": "Hypothesis SUPPORTED: Significant improvement detected"
+  }
+}

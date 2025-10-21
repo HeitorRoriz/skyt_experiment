@@ -144,6 +144,7 @@ class ComprehensiveExperiment:
         # Step 4: Transform subsequent outputs to match canon
         print(f"\n🔧 Step 4: Transforming outputs to canon...")
         transformation_results = []
+        repaired_outputs = []  # Collect repaired/canonicalized outputs
         
         for i, code in enumerate(successful_outputs):
             print(f"  🔄 Transforming output {i + 1}...")
@@ -153,6 +154,7 @@ class ComprehensiveExperiment:
             
             if comparison["is_identical"]:
                 print(f"    ✅ Already matches canon (distance: {comparison['distance']:.3f})")
+                repaired_outputs.append(code)  # No repair needed
                 transformation_results.append({
                     "run_id": i + 1,
                     "original_code": code,
@@ -164,6 +166,7 @@ class ComprehensiveExperiment:
                 print(f"    🔧 Transforming (distance: {comparison['distance']:.3f})")
                 transform_result = self.code_transformer.transform_to_canon(code, contract_id)
                 
+                repaired_outputs.append(transform_result["transformed_code"])  # Add repaired version
                 transformation_results.append({
                     "run_id": i + 1,
                     "original_code": code,
@@ -179,28 +182,38 @@ class ComprehensiveExperiment:
                 else:
                     print(f"    ⚠️  Transformation incomplete (final distance: {transform_result['final_distance']:.3f})")
         
-        # Step 5: Calculate comprehensive metrics
-        print(f"\n📊 Step 5: Calculating Three-Tier Metrics...")
-        metrics_result = self.metrics_calculator.calculate_three_tier_metrics(
-            successful_outputs, contract.data, contract_id
+        # Step 5: Calculate comprehensive metrics (pre and post repair)
+        print(f"\n📊 Step 5: Calculating Comprehensive Metrics...")
+        metrics_result = self.metrics_calculator.calculate_comprehensive_metrics(
+            successful_outputs,  # Pre-repair (raw LLM outputs)
+            repaired_outputs,    # Post-repair (canonicalized outputs)
+            contract.data, 
+            contract_id
         )
         
         print(f"✅ Metrics calculated:")
         print(f"  📈 R_raw: {metrics_result['R_raw']:.3f}")
-        print(f"  🎯 R_behavioral: {metrics_result['R_behavioral']:.3f}")
-        print(f"  🏗️  R_structural: {metrics_result['R_structural']:.3f}")
+        print(f"  ⚓ R_anchor (pre): {metrics_result['R_anchor_pre']:.3f}")
+        print(f"  ⚓ R_anchor (post): {metrics_result['R_anchor_post']:.3f}")
+        print(f"  🚀 Δ_rescue: {metrics_result['Delta_rescue']:.3f}")
+        print(f"  📏 Mean distance (pre→post): {metrics_result['mean_distance_pre']:.3f} → {metrics_result['mean_distance_post']:.3f}")
+        print(f"  🎯 Canon coverage: {metrics_result['canon_coverage']:.3f}")
+        print(f"  🔧 Rescue rate: {metrics_result['rescue_rate']:.3f}")
         
-        # Step 6: Generate bell curve analysis
+        # Step 6: Generate bell curve analysis (pre vs post)
         print(f"\n📈 Step 6: Generating Bell Curve Analysis...")
-        distance_data = metrics_result.get("distance_variance", {})
+        distances_pre = metrics_result.get("distances_pre", [])
+        distances_post = metrics_result.get("distances_post", [])
         
-        if "distances" in distance_data:
-            bell_curve_result = self.bell_curve_analyzer.plot_distance_distribution(
-                distance_data["distances"], 
+        if distances_pre and distances_post:
+            # Compare pre vs post distributions
+            bell_curve_result = self.bell_curve_analyzer.plot_pre_post_comparison(
+                distances_pre,
+                distances_post,
                 f"{contract_id}_temp{temperature}",
-                f"Distance Distribution - {contract_id}"
+                f"Pre vs Post Repair - {contract_id}"
             )
-            print(f"✅ Bell curve plot saved: {bell_curve_result.get('plot_path', 'N/A')}")
+            print(f"✅ Bell curve comparison saved: {bell_curve_result.get('plot_path', 'N/A')}")
         else:
             bell_curve_result = {"error": "No distance data available"}
             print("⚠️  No distance data for bell curve analysis")
@@ -223,6 +236,7 @@ class ComprehensiveExperiment:
             # LLM outputs
             "llm_results": llm_results,
             "raw_outputs": successful_outputs,
+            "repaired_outputs": repaired_outputs,
             
             # Transformations
             "transformation_results": transformation_results,
@@ -426,7 +440,7 @@ class ComprehensiveExperiment:
             return str(obj)
     
     def _save_experiment_results(self, result: Dict[str, Any]):
-        """Save experiment results to multiple formats"""
+        """Save experiment results to multiple formats including comprehensive metrics CSV"""
         experiment_id = result["experiment_id"]
         
         # Save detailed JSON with custom encoder for non-serializable objects
@@ -434,28 +448,77 @@ class ComprehensiveExperiment:
         with open(json_path, 'w') as f:
             json.dump(result, f, indent=2, default=self._json_serializer)
         
-        # Save summary CSV
-        csv_path = os.path.join(self.output_dir, "experiment_summary.csv")
+        # Save to comprehensive metrics summary CSV
+        metrics_csv_path = os.path.join(self.output_dir, "metrics_summary.csv")
         
         # Check if CSV exists to write header
-        write_header = not os.path.exists(csv_path)
+        write_header = not os.path.exists(metrics_csv_path)
         
-        with open(csv_path, 'a') as f:
+        with open(metrics_csv_path, 'a') as f:
             if write_header:
-                f.write("experiment_id,contract_id,temperature,total_runs,successful_runs,"
-                       "R_raw,R_behavioral,R_structural,behavioral_improvement,structural_improvement,"
-                       "hypothesis_supported,timestamp\n")
+                f.write("experiment_id,repo_commit,contract_id,canon_id,model,decoding_temperature,runs,timestamp,"
+                       "R_raw,R_anchor_pre,R_anchor_post,Delta_rescue,"
+                       "R_repair_at_0.05_pre,R_repair_at_0.1_pre,R_repair_at_0.15_pre,R_repair_at_0.2_pre,"
+                       "R_repair_at_0.05_post,R_repair_at_0.1_post,R_repair_at_0.15_post,R_repair_at_0.2_post,"
+                       "mean_distance_pre,std_distance_pre,mean_distance_post,std_distance_post,Delta_mu,"
+                       "Delta_P_tau_0.05,Delta_P_tau_0.1,Delta_P_tau_0.15,Delta_P_tau_0.2,"
+                       "canon_coverage,rescue_rate,R_behavioral,R_structural,sweep_id,notes\n")
             
             metrics = result["metrics"]
-            hypothesis = result["hypothesis_evaluation"]
             
-            f.write(f"{experiment_id},{result['contract_id']},{result['temperature']},"
-                   f"{result['num_runs']},{result['successful_runs']},"
-                   f"{metrics['R_raw']:.3f},{metrics['R_behavioral']:.3f},{metrics['R_structural']:.3f},"
-                   f"{metrics.get('behavioral_improvement', 0.0):.3f},"
-                   f"{metrics.get('structural_improvement', 0.0):.3f},"
-                   f"{hypothesis['supported']},{result['timestamp']}\n")
+            # Extract R_repair@k values
+            r_repair_pre = metrics.get("R_repair_at_k_pre", {})
+            r_repair_post = metrics.get("R_repair_at_k_post", {})
+            
+            # Extract Delta_P_tau values
+            delta_p_tau = metrics.get("Delta_P_tau", {})
+            
+            # Get canon_id from canon_data
+            canon_id = result.get("canon_data", {}).get("canon_id", "unknown")
+            
+            f.write(f"{experiment_id},"
+                   f"unknown,"  # repo_commit - can be added via git integration
+                   f"{result['contract_id']},"
+                   f"{canon_id},"
+                   f"gpt-4,"  # model - hardcoded for now, can be made configurable
+                   f"{result['temperature']},"
+                   f"{result['successful_runs']},"
+                   f"{result['timestamp']},"
+                   # Core metrics
+                   f"{metrics['R_raw']:.3f},"
+                   f"{metrics['R_anchor_pre']:.3f},"
+                   f"{metrics['R_anchor_post']:.3f},"
+                   f"{metrics['Delta_rescue']:.3f},"
+                   # R_repair@k pre
+                   f"{r_repair_pre.get('k=0.05', 0.0):.3f},"
+                   f"{r_repair_pre.get('k=0.1', 0.0):.3f},"
+                   f"{r_repair_pre.get('k=0.15', 0.0):.3f},"
+                   f"{r_repair_pre.get('k=0.2', 0.0):.3f},"
+                   # R_repair@k post
+                   f"{r_repair_post.get('k=0.05', 0.0):.3f},"
+                   f"{r_repair_post.get('k=0.1', 0.0):.3f},"
+                   f"{r_repair_post.get('k=0.15', 0.0):.3f},"
+                   f"{r_repair_post.get('k=0.2', 0.0):.3f},"
+                   # Distributional metrics
+                   f"{metrics['mean_distance_pre']:.3f},"
+                   f"{metrics['std_distance_pre']:.3f},"
+                   f"{metrics['mean_distance_post']:.3f},"
+                   f"{metrics['std_distance_post']:.3f},"
+                   f"{metrics['Delta_mu']:.3f},"
+                   # Delta_P_tau
+                   f"{delta_p_tau.get('tau=0.05', 0.0):.3f},"
+                   f"{delta_p_tau.get('tau=0.1', 0.0):.3f},"
+                   f"{delta_p_tau.get('tau=0.15', 0.0):.3f},"
+                   f"{delta_p_tau.get('tau=0.2', 0.0):.3f},"
+                   # Complementary metrics
+                   f"{metrics['canon_coverage']:.3f},"
+                   f"{metrics['rescue_rate']:.3f},"
+                   f"{metrics['R_behavioral']:.3f},"
+                   f"{metrics['R_structural']:.3f},"
+                   # Sweep info
+                   f","  # sweep_id - empty for individual experiments
+                   f"\n")  # notes - empty
         
         print(f"💾 Results saved:")
         print(f"  📄 Detailed: {json_path}")
-        print(f"  📊 Summary: {csv_path}")
+        print(f"  📊 Metrics CSV: {metrics_csv_path}")
