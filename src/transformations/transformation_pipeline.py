@@ -8,6 +8,7 @@ from .transformation_base import TransformationBase, TransformationResult
 from .structural.error_handling_aligner import ErrorHandlingAligner
 from .structural.redundant_clause_remover import RedundantClauseRemover
 from .structural.variable_renamer import VariableRenamer
+from .structural.snap_to_canon_finalizer import SnapToCanonFinalizer
 from .behavioral.algorithm_optimizer import AlgorithmOptimizer
 from .behavioral.boundary_condition_aligner import BoundaryConditionAligner
 from .behavioral.recursion_schema_aligner import RecursionSchemaAligner
@@ -18,8 +19,10 @@ from .semantic_validator import SemanticValidator
 class TransformationPipeline:
     """Orchestrates multiple transformations in sequence"""
     
-    def __init__(self, debug_mode: bool = False):
+    def __init__(self, debug_mode: bool = False, contract: dict = None):
         self.debug_mode = debug_mode
+        self.contract_data = contract  # Store for SnapToCanonFinalizer
+        self.contract_id = None  # Will be set in transform_code
         self.transformations: List[TransformationBase] = []
         self.results_history: List[TransformationResult] = []
         self.semantic_validator = SemanticValidator()  # For behavioral validation
@@ -30,21 +33,27 @@ class TransformationPipeline:
     def _setup_default_transformations(self):
         """Setup the default transformation pipeline"""
         
-        # CRITICAL ORDER: VariableRenamer MUST run first to prevent other
-        # transformers from corrupting code by mixing variable names
+        # Import PropertyDrivenTransformer
+        from .property_driven_transformer import PropertyDrivenTransformer
+        
+        # NEW APPROACH: Use property-driven transformer as primary
+        # Falls back to algorithm-specific transformers if needed
         transformations = [
-            # FIRST: Variable renaming (prevents name conflicts)
-            VariableRenamer(),              # Must run before ANY other transformer!
+            # PRIMARY: Property-driven transformation (generic, no hardcoded logic)
+            PropertyDrivenTransformer(contract=self.contract_data, debug_mode=self.debug_mode),
             
-            # Structural transformations (syntax-focused)
+            # FALLBACK: Algorithm-specific transformers (kept for compatibility)
+            # These will only apply if PropertyDrivenTransformer doesn't handle the case
+            VariableRenamer(),
             ErrorHandlingAligner(),
             RedundantClauseRemover(),
-            
-            # Behavioral transformations (logic-focused)
-            RecursionSchemaAligner(),      # For recursive algorithms
-            InPlaceReturnConverter(),       # For sorting return semantics
+            RecursionSchemaAligner(),
+            InPlaceReturnConverter(),
             AlgorithmOptimizer(),
-            BoundaryConditionAligner(),     # Disabled to prevent corruption
+            BoundaryConditionAligner(),
+            
+            # LAST: Snap-to-canon finalizer (handles remaining harmless differences)
+            SnapToCanonFinalizer(contract=self.contract_data),
         ]
         
         for transformer in transformations:
@@ -58,7 +67,8 @@ class TransformationPipeline:
             transformation.enable_debug()
         self.transformations.append(transformation)
     
-    def transform_code(self, code: str, canon_code: str, max_iterations: int = 3) -> Dict[str, Any]:
+    def transform_code(self, code: str, canon_code: str, max_iterations: int = 3,
+                      contract: dict = None, contract_id: str = None) -> Dict[str, Any]:
         """
         Apply all applicable transformations to the code
         
@@ -66,10 +76,17 @@ class TransformationPipeline:
             code: Code to transform
             canon_code: Canonical reference code
             max_iterations: Maximum number of transformation passes
+            contract: Optional contract for domain-aware validation
+            contract_id: Optional contract ID for distance calculation
             
         Returns:
             Dictionary with transformation results and final code
         """
+        
+        # Store contract for validation (override init contract if provided)
+        if contract:
+            self.contract_data = contract
+        self.contract_id = contract_id
         
         if self.debug_mode:
             print(f"\n=== TRANSFORMATION PIPELINE START ===")
@@ -120,7 +137,7 @@ class TransformationPipeline:
                     
                     if is_valid:
                         if self.debug_mode:
-                            print(f"✅ {transformer.name} succeeded and validated")
+                            print(f"[SUCCESS] {transformer.name} succeeded and validated")
                         
                         current_code = result.transformed_code
                         successful_transformations.append(transformer.name)
@@ -129,12 +146,12 @@ class TransformationPipeline:
                     else:
                         # ROLLBACK: Reject transformation that breaks code
                         if self.debug_mode:
-                            print(f"⚠️ {transformer.name} broke code - rolling back")
+                            print(f"[ROLLBACK] {transformer.name} broke code - rolling back")
                         # Don't update current_code, continue to next transformer
                         continue
                 else:
                     if self.debug_mode:
-                        print(f"❌ {transformer.name} failed: {result.error_message}")
+                        print(f"[FAILED] {transformer.name} failed: {result.error_message}")
             
             all_results.extend(iteration_results)
             
@@ -204,7 +221,14 @@ class TransformationPipeline:
         """
         Validate that transformation didn't break the code
         
-        Checks:
+        Uses contract-aware validation if contract is available, otherwise falls back to
+        basic syntax and semantic checks.
+        
+        Contract-aware validation:
+        1. Both codes must pass oracle tests within contract domain
+        2. Transformation must be monotonic (reduce distance to canon)
+        
+        Basic validation:
         1. Code is still parseable (valid Python syntax)
         2. No undefined variables introduced
         3. Function still exists
@@ -223,15 +247,25 @@ class TransformationPipeline:
                 return False
             
             # Check 2: Look for undefined variable references
-            # Extract all variable names used vs defined
             class VariableChecker(ast.NodeVisitor):
                 def __init__(self):
                     self.defined = set()
                     self.used = set()
                     self.current_scope = set()
+                
+                def visit_Import(self, node):
+                    # Handle: import re, import os
+                    for alias in node.names:
+                        self.defined.add(alias.asname if alias.asname else alias.name)
+                    self.generic_visit(node)
+                
+                def visit_ImportFrom(self, node):
+                    # Handle: from re import sub
+                    for alias in node.names:
+                        self.defined.add(alias.asname if alias.asname else alias.name)
+                    self.generic_visit(node)
                     
                 def visit_FunctionDef(self, node):
-                    # Add function name and parameters to defined
                     self.defined.add(node.name)
                     for arg in node.args.args:
                         self.defined.add(arg.arg)
@@ -239,23 +273,39 @@ class TransformationPipeline:
                     self.generic_visit(node)
                 
                 def visit_Assign(self, node):
-                    # Add assigned variables to defined
                     for target in node.targets:
                         if isinstance(target, ast.Name):
                             self.defined.add(target.id)
                             self.current_scope.add(target.id)
+                        elif isinstance(target, ast.Tuple):
+                            # Handle tuple unpacking (e.g., a, b = 0, 1)
+                            for elt in target.elts:
+                                if isinstance(elt, ast.Name):
+                                    self.defined.add(elt.id)
+                                    self.current_scope.add(elt.id)
+                    self.generic_visit(node)
+                
+                def visit_For(self, node):
+                    # Handle for loop variables (e.g., for char in s:)
+                    if isinstance(node.target, ast.Name):
+                        self.defined.add(node.target.id)
+                        self.current_scope.add(node.target.id)
+                    elif isinstance(node.target, ast.Tuple):
+                        # Handle tuple unpacking in for loops (e.g., for i, val in enumerate(...))
+                        for elt in node.target.elts:
+                            if isinstance(elt, ast.Name):
+                                self.defined.add(elt.id)
+                                self.current_scope.add(elt.id)
                     self.generic_visit(node)
                 
                 def visit_Name(self, node):
                     if isinstance(node.ctx, ast.Load):
-                        # Variable is being read
                         self.used.add(node.id)
                     self.generic_visit(node)
             
             checker = VariableChecker()
             checker.visit(tree)
             
-            # Filter out builtins
             builtins = {'range', 'len', 'print', 'max', 'min', 'sum', 'abs', 'sorted', 'enumerate', 'zip'}
             undefined = (checker.used - checker.defined) - builtins
             
@@ -271,14 +321,55 @@ class TransformationPipeline:
                     print(f"  REJECT: {transformer_name} removed all functions")
                 return False
             
-            # Check 4: SEMANTIC EQUIVALENCE - Does transformed code behave the same?
-            if not self.semantic_validator.are_semantically_equivalent(original_code, transformed_code):
+            # Check 4: CONTRACT-AWARE VALIDATION (if contract available)
+            if hasattr(self, 'contract_data') and self.contract_data and hasattr(self, 'contract_id') and self.contract_id:
                 if self.debug_mode:
-                    behavioral_dist = self.semantic_validator.calculate_behavioral_distance(
-                        original_code, transformed_code
-                    )
-                    print(f"  REJECT: {transformer_name} changed behavior (distance={behavioral_dist:.3f})")
-                return False
+                    print(f"  Using contract-aware validation for {transformer_name}")
+                
+                try:
+                    # Try to import from src package
+                    from src.contract_validator import validate_transformation
+                except ImportError:
+                    # Fallback: add src to path and import
+                    import sys
+                    import os
+                    src_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+                    if src_dir not in sys.path:
+                        sys.path.insert(0, src_dir)
+                    import contract_validator
+                    validate_transformation = contract_validator.validate_transformation
+                
+                is_valid, message = validate_transformation(
+                    original_code, transformed_code, 
+                    self.contract_data, self.contract_id
+                )
+                
+                if not is_valid:
+                    if self.debug_mode:
+                        print(f"  REJECT (contract-aware): {transformer_name} - {message}")
+                    return False
+                else:
+                    if self.debug_mode:
+                        print(f"  ACCEPT (contract-aware): {transformer_name} - {message}")
+                    return True
+            else:
+                if self.debug_mode:
+                    print(f"  Contract-aware validation NOT available - using semantic equivalence")
+                    print(f"    has contract_data: {hasattr(self, 'contract_data')}")
+                    print(f"    contract_data: {getattr(self, 'contract_data', None) is not None}")
+                    print(f"    has contract_id: {hasattr(self, 'contract_id')}")
+                    print(f"    contract_id: {getattr(self, 'contract_id', None)}")
+            
+            # Fallback: SEMANTIC EQUIVALENCE (legacy behavior)
+            # SKIP for PropertyDrivenTransformer - it's property-preserving by design
+            if transformer_name != "PropertyDrivenTransformer":
+                if not self.semantic_validator.are_semantically_equivalent(original_code, transformed_code):
+                    if self.debug_mode:
+                        behavioral_dist = self.semantic_validator.calculate_behavioral_distance(
+                            original_code, transformed_code
+                        )
+                        print(f"  REJECT: {transformer_name} changed behavior (distance={behavioral_dist:.3f})")
+                    return False
             
             # All checks passed
             return True

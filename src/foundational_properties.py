@@ -17,6 +17,7 @@ class FoundationalProperties:
     """
     
     def __init__(self):
+        # Define the 13 foundational properties
         self.properties = [
             "control_flow_signature",
             "data_dependency_graph", 
@@ -31,7 +32,7 @@ class FoundationalProperties:
             "normalized_ast_structure",
             "operator_precedence",
             "statement_ordering",
-            "behavioral_signature",  # NEW: I/O behavior
+            # "behavioral_signature",  # DISABLED: Executes arbitrary code, causes hangs
             "recursion_schema"       # NEW: Recursive structure
         ]
     

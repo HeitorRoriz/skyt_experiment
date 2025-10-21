@@ -1,6 +1,6 @@
 {
   "contract_id": "balanced_brackets",
-  "canonical_code": "def is_balanced(s):\n    stack = []\n    bracket_map = {')': '(', '}': '{', ']': '['}\n    \n    for char in s:\n        if char in bracket_map.values():\n            stack.append(char)\n        elif char in bracket_map.keys():\n            if not stack or stack.pop() != bracket_map[char]:\n                return False\n    \n    return not stack",
+  "canonical_code": "def is_balanced(s):\n    stack = []\n    bracket_map = {')': '(', '}': '{', ']': '['}\n    \n    for char in s:\n        if char in bracket_map.values():\n            stack.append(char)\n        elif char in bracket_map.keys():\n            if not stack or stack.pop() != bracket_map[char]:\n                return False\n                \n    return not stack",
   "foundational_properties": {
     "control_flow_signature": {
       "if_statements": 3,
@@ -227,28 +227,6 @@
         "If"
       ]
     },
-    "behavioral_signature": {
-      "can_execute": true,
-      "io_signature_hash": "ca377392ba27f5bdaf360e84f2bd61ab",
-      "side_effects_detected": [],
-      "test_results": [
-        [
-          0,
-          "Exception:TypeError",
-          false
-        ],
-        [
-          1,
-          "Exception:TypeError",
-          false
-        ],
-        [
-          2,
-          "Exception:TypeError",
-          false
-        ]
-      ]
-    },
     "recursion_schema": {
       "is_recursive": false,
       "base_cases": [],
@@ -257,7 +235,7 @@
       "termination_guards": []
     }
   },
-  "created_timestamp": "2025-10-21T08:33:09.539550",
+  "created_timestamp": "2025-10-21T16:36:37.356908",
   "canon_version": "1.0",
   "oracle_validated": true,
   "oracle_pass_rate": 1.0

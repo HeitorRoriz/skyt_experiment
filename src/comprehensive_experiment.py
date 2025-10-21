@@ -164,7 +164,9 @@ class ComprehensiveExperiment:
                 })
             else:
                 print(f"    🔧 Transforming (distance: {comparison['distance']:.3f})")
-                transform_result = self.code_transformer.transform_to_canon(code, contract_id)
+                transform_result = self.code_transformer.transform_to_canon(
+                    code, contract_id, contract=contract.data
+                )
                 
                 repaired_outputs.append(transform_result["transformed_code"])  # Add repaired version
                 transformation_results.append({

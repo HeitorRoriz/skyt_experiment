@@ -23,8 +23,9 @@ class CodeTransformer:
         # Import and initialize the new modular transformation system
         try:
             from .transformations.transformation_pipeline import TransformationPipeline
-            self.modular_pipeline = TransformationPipeline(debug_mode=False)
+            # Pipeline will be created per-transform with contract
             self.use_modular_system = True
+            self.modular_pipeline = None  # Created on-demand with contract
         except ImportError:
             print("Warning: Modular transformation system not available, using legacy system")
             self.modular_pipeline = None
@@ -40,7 +41,7 @@ class CodeTransformer:
         ]
     
     def transform_to_canon(self, code: str, contract_id: str, 
-                          max_iterations: int = 5) -> Dict[str, Any]:
+                          max_iterations: int = 5, contract: Dict[str, Any] = None) -> Dict[str, Any]:
         """
         Transform code to match canonical form using modular transformation system
         
@@ -48,6 +49,7 @@ class CodeTransformer:
             code: Code to transform
             contract_id: Contract identifier for canon lookup
             max_iterations: Maximum transformation iterations
+            contract: Optional contract data for validation
             
         Returns:
             Transformation results with success status and transformed code
@@ -67,8 +69,17 @@ class CodeTransformer:
         canon_properties = canon_data.get("foundational_properties", {})
         
         # Use the new modular transformation system if available
-        if self.use_modular_system and self.modular_pipeline:
-            modular_result = self.modular_pipeline.transform_code(code, canon_code, max_iterations=max_iterations)
+        if self.use_modular_system:
+            # Create pipeline with contract
+            from .transformations.transformation_pipeline import TransformationPipeline
+            pipeline = TransformationPipeline(debug_mode=False, contract=contract)
+            
+            modular_result = pipeline.transform_code(
+                code, canon_code, 
+                max_iterations=max_iterations,
+                contract=contract,
+                contract_id=contract_id
+            )
             current_code = modular_result['final_code']
             transformations_applied = modular_result['successful_transformations']
         else:

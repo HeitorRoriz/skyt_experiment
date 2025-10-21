@@ -8,7 +8,17 @@
     "constraints": {
       "function_name": "fibonacci",
       "requires_recursion": false,
-      "implementation_style": "iterative"
+      "implementation_style": "iterative",
+      "variable_naming": {
+        "fixed_variables": ["n"],
+        "flexible_variables": ["a", "b", "i", "prev", "curr", "next"],
+        "naming_policy": "flexible"
+      }
+    },
+    "domain": {
+      "inputs": [
+        {"name": "n", "type": "int", "constraint": "n >= 0"}
+      ]
     },
     "oracle_requirements": {
       "test_cases": [
@@ -66,7 +76,17 @@
     "algorithm_family": "slugify",
     "constraints": {
       "function_name": "slugify",
-      "output_type": "string"
+      "output_type": "string",
+      "variable_naming": {
+        "fixed_variables": ["text"],
+        "flexible_variables": ["result", "slug", "char", "c", "output"],
+        "naming_policy": "flexible"
+      }
+    },
+    "domain": {
+      "inputs": [
+        {"name": "text", "type": "str", "constraint": "any"}
+      ]
     },
     "oracle_requirements": {
       "test_cases": [
@@ -99,7 +119,17 @@
     "algorithm_family": "balanced_brackets",
     "constraints": {
       "function_name": "is_balanced",
-      "output_type": "boolean"
+      "output_type": "boolean",
+      "variable_naming": {
+        "fixed_variables": ["s"],
+        "flexible_variables": ["stack", "bracket_map", "brackets", "char"],
+        "naming_policy": "flexible"
+      }
+    },
+    "domain": {
+      "inputs": [
+        {"name": "s", "type": "str", "constraint": "any"}
+      ]
     },
     "oracle_requirements": {
       "test_cases": [

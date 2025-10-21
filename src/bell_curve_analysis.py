@@ -10,6 +10,12 @@ import seaborn as sns
 from typing import List, Dict, Any, Optional
 from scipy import stats
 import os
+import warnings
+
+# Suppress scipy warnings for zero variance distributions
+warnings.filterwarnings('ignore', category=RuntimeWarning, module='scipy.stats')
+# Suppress matplotlib tight_layout warnings
+warnings.filterwarnings('ignore', category=UserWarning, message='.*tight_layout.*')
 
 
 class BellCurveAnalyzer:
