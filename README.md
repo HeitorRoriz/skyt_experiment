@@ -1,258 +1,150 @@
-# SKYT: Comprehensive LLM Code Repeatability Experiment System
+# Skyt: Prompt Contracts for Software Repeatability in LLM-Assisted Development
 
-## Research Question
-**"Can prompt contracts and SKYT improve LLM-generated code repeatability?"**
+> **Anonymized artifact submission for MSR 2026 (Data & Tool Showcase)**  
+> Repository link anonymized using [anonymous.4open.science](https://anonymous.4open.science/).  
+> All organization names and author identifiers have been removed.
 
-This system implements a comprehensive pipeline to test whether contract-driven canonicalization can improve the repeatability of LLM-generated code through:
-- **Contract-driven prompting** with explicit constraints and oracle tests
-- **13 foundational properties** for semantic code equivalence
-- **Three-tier repeatability metrics** (raw, behavioral, structural)
-- **Canonical anchoring** and code transformation
-- **Bell curve analysis** of distance variance from canonical forms
+---
 
-## System Architecture
+## Overview
 
-### Core Pipeline
+**Skyt** is a lightweight middleware that measures **software repeatability** in LLM-assisted code generation.  
+It treats repeatability as a **pinned-pipeline property**, defined by fixed model parameters and a schema-bound prompt contract.
+
+The tool executes tasks under *pinned environments*, normalizes outputs, and computes:
+
+- **R_raw** — raw repeatability (byte-identical outputs)  
+- **R_canon** — canonical repeatability (contract-valid outputs sharing a canonical signature)  
+- **Δ_rescue = R_canon − R_raw** — gain from canonization  
+- **R_repair@k** — repeatability after up to *k* bounded repair attempts  
+
+Skyt also reports coverage, Wilson 95 % confidence intervals, and a short-term Sigma proxy (Φ⁻¹(R_canon)).
+
+---
+
+## Repository Structure
+
 ```
-Contract → LLM → Canon → Transform → Metrics → Analysis
-    ↓        ↓      ↓        ↓         ↓        ↓
-Templates → Code → Anchor → Repair → R_raw → Bell Curve
-                                   → R_behavioral
-                                   → R_structural
+skyt-msr-2026/
+├── README.md
+├── LICENSE
+├── environment.yml        # or requirements.txt
+├── configs/
+│   ├── pins.json          # model, temp, decoding, runtime, seeds
+│   ├── contract_basic.json
+│   └── contract_enhanced.json
+├── tasks/
+│   ├── fibonacci20/
+│   │   ├── oracle.py
+│   │   └── prompts/
+│   ├── slugify/
+│   └── brackets/
+├── runs/                  # sample outputs (anonymized)
+│   ├── outputs.jsonl
+│   ├── canon.jsonl
+│   └── metrics.csv
+├── skyt/
+│   ├── cli.py
+│   ├── metrics.py
+│   └── canon.py
+├── scripts/
+│   ├── run_all.sh
+│   └── plot_tables.py
+└── results/
+    ├── table_repeatability.csv
+    └── table_repair.csv
 ```
 
-### Key Components
+---
 
-#### 1. **Contract System** (`contract.py`)
-- **Core Properties**: Task intent, constraints, language/environment
-- **Oracle Requirements**: Acceptance test definitions and thresholds  
-- **Normalization Rules**: Canonicalization policies
-- **Repeatability Anchoring**: Canon signatures and distance metrics
-- **Meta Properties**: Model specs, versioning, timestamps
+## How to Reproduce the Results
 
-#### 2. **13 Foundational Properties** (`foundational_properties.py`)
-Defines code sameness through comprehensive semantic analysis:
-1. **Control Flow Signature** - Topology of branches, loops, function calls
-2. **Data Dependency Graph** - Variable dependency relationships
-3. **Execution Paths** - Canonical execution path representation
-4. **Function Contracts** - Input/output type relationships
-5. **Complexity Class** - Algorithmic complexity (O-notation)
-6. **Side Effect Profile** - Pure vs stateful operations
-7. **Termination Properties** - Base cases, loop bounds
-8. **Algebraic Structure** - Commutativity, associativity
-9. **Numerical Behavior** - Precision, overflow handling
-10. **Logical Equivalence** - Boolean expression normalization
-11. **Normalized AST Structure** - Canonical AST representation
-12. **Operator Precedence** - Explicit precedence normalization
-13. **Statement Ordering** - Canonical statement sequence
-
-#### 3. **Canon System** (`canon_system.py`)
-- Creates canonical anchors from first compliant output
-- Stores foundational properties alongside code
-- Calculates distance metrics for variance analysis
-- Provides persistent canon storage across experiments
-
-#### 4. **Oracle System** (`oracle_system.py`)
-- Algorithm-specific behavioral testing (Fibonacci, Merge Sort, Binary Search, etc.)
-- Comprehensive test coverage: unit tests, edge cases, property tests
-- Pass/fail determination for behavioral equivalence
-- Quality gate enforcement with configurable thresholds
-
-#### 5. **Code Transformer** (`code_transformer.py`)
-- Transforms code to match canonical form using foundational properties
-- Iterative repair with monotonic convergence
-- Bounded transformations to preserve algorithmic intent
-- Success/failure metrics for transformation attempts
-
-#### 6. **Three-Tier Metrics** (`metrics.py`)
-- **R_raw**: Raw LLM repeatability (identical string outputs)
-- **R_behavioral**: Behavioral equivalence (oracle test results)
-- **R_structural**: Structural equivalence (foundational properties)
-- Distance variance calculations for bell curve analysis
-- Entropy and diversity metrics
-
-#### 7. **Bell Curve Analysis** (`bell_curve_analysis.py`)
-- Plots distance distributions from canonical anchors
-- Statistical analysis: normality tests, percentiles, variance
-- Temperature comparison across experiments
-- Research hypothesis evaluation with visual summaries
-
-## Usage
-
-### Quick Start
+### 1 – Environment Setup
 ```bash
-# Install dependencies
+conda env create -f environment.yml
+conda activate skyt
+# or:
 pip install -r requirements.txt
-
-# Set OpenAI API key
-export OPENAI_API_KEY="your-api-key-here"
-
-# Run single experiment
-python main.py --contract fibonacci_basic --runs 5 --temperature 0.0
-
-# Run temperature sweep
-python main.py --contract fibonacci_basic --sweep --temperatures 0.0 0.5 1.0
-
-# Run multiple contracts
-python main.py --contract fibonacci_basic fibonacci_recursive merge_sort --runs 10
 ```
 
-### Command Line Options
-```
---contract        Contract ID(s) to test (default: fibonacci_basic)
---runs           Number of LLM runs per experiment (default: 5)
---temperature    LLM sampling temperature (default: 0.0)
---sweep          Run temperature sweep experiment
---temperatures   Temperatures for sweep (default: 0.0 0.5 1.0)
---templates      Path to contract templates (default: contracts/templates.json)
---output-dir     Output directory (default: outputs)
-```
-
-### Available Contracts
-- **fibonacci_basic**: Iterative Fibonacci implementation
-- **fibonacci_recursive**: Recursive Fibonacci implementation  
-- **fibonacci_list**: Fibonacci sequence as list output
-- **merge_sort**: Merge sort algorithm implementation
-- **binary_search**: Binary search algorithm implementation
-
-## Output Structure
-
-### Generated Files
-```
-outputs/
-├── experiment_summary.csv           # Aggregate results across all experiments
-├── {experiment_id}.json            # Detailed experiment results
-├── canon/                          # Canonical anchors storage
-│   └── {contract_id}_canon.json    
-├── analysis/                       # Plots and visualizations
-│   ├── bell_curve_{experiment}.png # Distance distribution plots
-│   ├── distribution_comparison.png # Temperature comparisons
-│   ├── variance_trends.png         # Trend analysis
-│   └── research_summary.png        # Comprehensive research summary
-└── {sweep_id}_sweep.json          # Temperature sweep results
-```
-
-### Key Metrics in Results
-- **R_raw**: Raw repeatability score (0.0-1.0)
-- **R_behavioral**: Behavioral repeatability score (0.0-1.0)  
-- **R_structural**: Structural repeatability score (0.0-1.0)
-- **Distance Statistics**: Mean, std, variance of distances from canon
-- **Transformation Success**: Rate of successful code repairs
-- **Hypothesis Evaluation**: Whether SKYT improves repeatability
-
-## Research Hypothesis Evaluation
-
-The system automatically evaluates the research hypothesis:
-> "SKYT improves LLM code repeatability through contract-driven canonicalization"
-
-### Success Criteria
-- **Structural Improvement > 10%**: R_structural - R_raw > 0.1
-- **Consistent Improvement**: Improvement across multiple temperatures
-- **Statistical Significance**: Bell curve analysis shows reduced variance
-
-### Interpretation
-- ✅ **HYPOTHESIS SUPPORTED**: Significant and consistent improvement
-- ⚠️ **PARTIAL SUPPORT**: Some improvement but not consistent
-- ❌ **NOT SUPPORTED**: No significant improvement detected
-
-## Configuration
-
-### Environment Variables
+### 2 – Run All Experiments
 ```bash
-export OPENAI_API_KEY="your-api-key"           # Required: OpenAI API key
-export SKYT_MODEL="gpt-4o-mini"               # Optional: Model to use
-export SKYT_TEMPERATURE="0.0"                 # Optional: Default temperature
+bash scripts/run_all.sh
 ```
+This executes all tasks (Fibonacci-20, Slugify, Balanced-Brackets) across contract types and temperature grid,  
+logs results to `runs/`, and regenerates Tables 1–2 as CSVs under `results/`.
 
-### Contract Templates
-Contracts are defined in `contracts/templates.json` with:
-- **Task Intent**: What the user wants (e.g., "generate Fibonacci numbers")
-- **Constraints**: Implementation requirements (recursion, function names, etc.)
-- **Oracle Requirements**: Acceptance tests and pass thresholds
-- **Normalization Rules**: Canonicalization policies
+### 3 – Generate Tables and Plots
+```bash
+python scripts/plot_tables.py
+```
+The script produces compact tables summarizing:
 
-## System Requirements
+- R_raw, R_canon, Δ_rescue (Table 1)  
+- R_repair@1, ΔR, and monotonicity M (Table 2)
 
-### Dependencies
-- Python 3.8+
-- OpenAI API access
-- Required packages (see `requirements.txt`):
-  - `openai>=1.0.0`
-  - `numpy>=1.21.0`
-  - `matplotlib>=3.5.0`
-  - `seaborn>=0.11.0`
-  - `scipy>=1.7.0`
-  - `astor>=0.8.1`
+---
 
-### Hardware
-- Minimal: Any system capable of running Python
-- Recommended: Multi-core CPU for faster analysis
-- Storage: ~100MB for results and plots per experiment
+## Data Description
 
-## Key Research Contributions
+Each row in `metrics.csv` contains:
 
-### 1. **Contract-Driven Canonicalization**
-- First system to use explicit contracts for LLM code generation
-- Deterministic canonical reference points instead of arbitrary first runs
-- Comprehensive constraint specification and validation
+| Field | Description |
+|--------|-------------|
+| task | task identifier (`fib20`, `slugify`, `brackets`) |
+| contract | `basic` or `enhanced` |
+| temperature | decoding temperature |
+| run_id | 1–20 |
+| r_raw | raw repeatability indicator (0/1) |
+| r_canon | canonical repeatability indicator (0/1) |
+| r_repair1 | post-repair indicator |
+| delta_rescue | R_canon − R_raw |
+| monotonicity | boolean monotonicity per run |
+| timestamp | UTC ISO-8601 time of run |
 
-### 2. **13 Foundational Properties Framework**
-- Novel semantic equivalence definition beyond syntax matching
-- Comprehensive coverage of all aspects of code sameness
-- Property-based distance metrics for precise variance measurement
+All generations are normalized, deterministic post-processing; no personal or proprietary data included.
 
-### 3. **Three-Tier Repeatability Metrics**
-- **R_raw**: Measures pure LLM consistency
-- **R_behavioral**: Measures functional correctness consistency  
-- **R_structural**: Measures semantic structure consistency
-- Eliminates artificial inflation from rescue systems
+---
 
-### 4. **Bell Curve Variance Analysis**
-- Statistical analysis of code distance distributions
-- Normality testing and variance characterization
-- Visual research hypothesis evaluation
+## Reproducibility Statement
 
-## Troubleshooting
+This artifact includes all configuration pins (model, temperature, decoding, runtime, seeds),  
+plus a one-click script to recompute every table in the paper.  
+Running `bash scripts/run_all.sh` regenerates the dataset, metrics, and plots within one hour  
+on a standard workstation (e.g., 8 GB RAM, 4 vCPUs).
 
-### Common Issues
-1. **Missing API Key**: Set `OPENAI_API_KEY` environment variable
-2. **Import Errors**: Install requirements with `pip install -r requirements.txt`
-3. **Empty Results**: Check contract templates exist and are valid JSON
-4. **Transformation Failures**: Review contract constraints for feasibility
+---
 
-### Debug Mode
-Add `--verbose` flag (if implemented) or check detailed JSON outputs for:
-- LLM generation errors
-- Oracle test failures  
-- Transformation step details
-- Distance calculation breakdowns
+## Limitations
 
-## License
+- v1 evaluates three tasks and one model family.  
+- Repair loop bounded to *k ≤ 2* iterations.  
+- Schema authoring overhead not yet measured quantitatively.  
+- Future work will extend to multi-language and multi-model settings.
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+---
+
+## License and Data Availability
+
+- **Code:** MIT License  
+- **Data:** CC-BY-4.0 (anonymized synthetic code generations)  
+- **Archive:** versioned artifact snapshot (Zenodo/OSF link redacted for review)
+
+---
 
 ## Citation
 
-If you use this system in your research, please cite:
-```bibtex
-@software{skyt_repeatability_2025,
-  title={SKYT: Comprehensive LLM Code Repeatability Experiment System},
-  author={[Your Name]},
-  year={2025},
-  url={https://github.com/[your-repo]/skyt_experiment}
+```
+@inproceedings{skyt2026,
+  title     = {Skyt: Prompt Contracts for Software Repeatability in LLM-Assisted Development},
+  booktitle = {MSR 2026 Data & Tool Showcase},
+  year      = {2026},
+  note      = {Anonymized submission; authors withheld for double-anonymous review.}
 }
 ```
 
-## Contributing
+---
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+## Contact
 
-## Acknowledgments
-
-- OpenAI for providing the LLM API
-- The research community for foundational work on code similarity and canonicalization
-- Contributors to the AST manipulation and analysis libraries
+Questions will be addressed after the review period, once anonymity is lifted.
