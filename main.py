@@ -82,6 +82,19 @@ Examples:
         help=f"Output directory (default: {OUTPUTS_DIR})"
     )
     
+    parser.add_argument(
+        "--enforce-ood-policy",
+        action="store_true",
+        help="Enforce out-of-domain policy checks (default: auto-detect from contract)"
+    )
+    
+    parser.add_argument(
+        "--max-ood-checks",
+        type=int,
+        default=3,
+        help="Maximum out-of-domain examples to check (default: 3)"
+    )
+    
     args = parser.parse_args()
     
     # Validate inputs

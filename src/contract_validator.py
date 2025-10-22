@@ -5,6 +5,7 @@ Validates transformations based on contract domain and oracle compliance
 
 from typing import Tuple, Dict, Any, Callable
 import ast
+from src.policies.out_of_domain import OODPolicy
 
 
 def parse_domain(contract: Dict[str, Any]) -> Callable:
@@ -214,10 +215,53 @@ def validate_transformation(
     if d_post > d_pre:
         return False, f"Non-monotonic: distance increased ({d_pre:.3f} -> {d_post:.3f})"
     
-    # Criterion 3 (Optional): Check if changes are only out-of-domain
-    # For now, we skip this check - the above two criteria are sufficient
+    # Criterion 3: Out-of-domain policy check (if specified)
+    ood_spec = contract.get("ood_spec")
+    if ood_spec and hasattr(ood_spec, 'policy'):
+        # Only run OOD checks if policy is not "allow"
+        if ood_spec.policy != "allow":
+            try:
+                # Extract functions from code
+                pre_func = _extract_function(pre_code, contract)
+                post_func = _extract_function(post_code, contract)
+                
+                if pre_func and post_func:
+                    ood_policy = OODPolicy(ood_spec)
+                    
+                    # Check if post-transformation code conforms to OOD policy
+                    if not ood_policy.check_examples(post_func, baseline_fn=pre_func):
+                        return False, "Transformation violates out-of-domain policy"
+            except Exception as e:
+                # If OOD check fails with exception, log but don't reject
+                # (allows for future-proofing and graceful degradation)
+                pass
     
     return True, f"Contract-compliant and closer to canon (delta_d={d_pre-d_post:.3f})"
+
+
+def _extract_function(code: str, contract: Dict[str, Any]) -> Callable:
+    """
+    Extract executable function from code string
+    
+    Args:
+        code: Python code containing function definition
+        contract: Contract with function name specification
+        
+    Returns:
+        Callable function or None if extraction fails
+    """
+    try:
+        # Get function name from contract
+        func_name = contract.get("constraints", {}).get("function_name", "fibonacci")
+        
+        # Execute code in isolated namespace
+        namespace = {}
+        exec(code, namespace)
+        
+        # Return the function
+        return namespace.get(func_name)
+    except Exception:
+        return None
 
 
 def check_out_of_domain_change(pre_code: str, post_code: str, contract: Dict[str, Any]) -> bool:

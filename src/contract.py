@@ -8,6 +8,7 @@ from typing import Dict, Any, Optional, List
 import json
 import hashlib
 from datetime import datetime
+from src.policies.out_of_domain import OODSpec
 
 
 class Contract:
@@ -18,6 +19,8 @@ class Contract:
     
     def __init__(self, contract_data: Dict[str, Any]):
         self.data = contract_data
+        # Parse out-of-domain policy if present
+        self.ood_spec = parse_ood(contract_data.get("out_of_domain"))
         self.validate()
     
     @classmethod
@@ -94,7 +97,10 @@ class Contract:
     
     def to_dict(self) -> Dict[str, Any]:
         """Convert contract to dictionary"""
-        return self.data.copy()
+        result = self.data.copy()
+        # Include OOD spec for use by validators
+        result["ood_spec"] = self.ood_spec
+        return result
     
     def save(self, filepath: str):
         """Save contract to JSON file"""
@@ -159,3 +165,25 @@ def get_env_enforcement_mode(contract: Dict[str, Any]) -> str:
         Enforcement mode: "off", "if_specified", or "strict"
     """
     return contract.get("env_enforcement", "off")
+
+
+def parse_ood(spec_dict: Optional[Dict[str, Any]]) -> OODSpec:
+    """
+    Parse out-of-domain policy specification from contract
+    
+    Args:
+        spec_dict: Optional out_of_domain block from contract
+    
+    Returns:
+        OODSpec with parsed policy or default "allow" policy
+    """
+    if not spec_dict:
+        return OODSpec()
+    
+    return OODSpec(
+        policy=spec_dict.get("policy", "allow"),
+        exception=spec_dict.get("exception"),
+        return_value=spec_dict.get("return_value"),
+        examples=spec_dict.get("examples", []),
+        max_checks=spec_dict.get("max_checks", 3),
+    )

@@ -346,11 +346,15 @@ class TransformationPipeline:
                 
                 if not is_valid:
                     if self.debug_mode:
-                        print(f"  REJECT (contract-aware): {transformer_name} - {message}")
+                        # Highlight OOD policy violations
+                        if "out-of-domain policy" in message.lower():
+                            print(f"  REJECT (OOD Policy): {transformer_name} - {message}")
+                        else:
+                            print(f"  REJECT: {transformer_name} - {message}")
                     return False
                 else:
                     if self.debug_mode:
-                        print(f"  ACCEPT (contract-aware): {transformer_name} - {message}")
+                        print(f"  ACCEPT: {transformer_name} - {message}")
                     return True
             else:
                 if self.debug_mode:
