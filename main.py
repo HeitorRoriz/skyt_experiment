@@ -103,7 +103,8 @@ Examples:
                 result = experiment.run_temperature_sweep(
                     args.templates, 
                     contract_id, 
-                    args.temperatures
+                    args.temperatures,
+                    args.runs
                 )
                 
                 if "error" in result:

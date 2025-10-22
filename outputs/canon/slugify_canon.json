@@ -1,6 +1,6 @@
 {
   "contract_id": "slugify",
-  "canonical_code": "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    return text.strip('-')",
+  "canonical_code": "def slugify(string):\n    import re\n    string = string.lower()\n    string = re.sub(r'[^a-z0-9\\s-]', '', string)\n    string = re.sub(r'[\\s]+', '-', string)\n    return string.strip('-')",
   "foundational_properties": {
     "control_flow_signature": {
       "if_statements": 0,
@@ -12,12 +12,12 @@
     },
     "data_dependency_graph": {
       "dependencies": {
-        "text": [
-          "text"
+        "string": [
+          "string"
         ]
       },
       "assignments": {
-        "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[\\\\s]+'), Constant(value='-'), Name(id='text', ctx=Load())])"
+        "string": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[\\\\s]+'), Constant(value='-'), Name(id='string', ctx=Load())])"
       }
     },
     "execution_paths": {
@@ -31,7 +31,7 @@
       "slugify": {
         "name": "slugify",
         "args": [
-          "text"
+          "string"
         ],
         "returns": null,
         "has_return": true
@@ -119,7 +119,7 @@
         "Constant"
       ],
       "ast_depth": 6,
-      "ast_hash": "07685106fd2c3d5263423123f643ac70",
+      "ast_hash": "cbf9e1030ccabef70065b94cc281ac43",
       "alpha_renamed_hash": "845e19d4c837f3d9206a64134d0e2c76"
     },
     "operator_precedence": {
@@ -155,7 +155,245 @@
       "termination_guards": []
     }
   },
-  "created_timestamp": "2025-10-21T15:53:30.354153",
+  "contract_data": {
+    "id": "slugify",
+    "task_intent": "Convert string to URL-friendly slug format",
+    "prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.",
+    "constraints": {
+      "function_name": "slugify",
+      "output_type": "string",
+      "variable_naming": {
+        "fixed_variables": [
+          "text"
+        ],
+        "flexible_variables": [
+          "result",
+          "slug",
+          "char",
+          "c",
+          "output"
+        ],
+        "naming_policy": "strict"
+      }
+    },
+    "algorithm_family": "slugify",
+    "language": "python",
+    "environment": {},
+    "output_format": "raw_code",
+    "oracle_requirements": {
+      "test_cases": [
+        {
+          "input": "Hello World",
+          "expected": "hello-world",
+          "description": "Basic slugification"
+        },
+        {
+          "input": "Hello  World!",
+          "expected": "hello-world",
+          "description": "Multiple spaces and punctuation"
+        },
+        {
+          "input": "Python 3.9 Release",
+          "expected": "python-3-9-release",
+          "description": "Numbers and dots"
+        },
+        {
+          "input": "  Trim Spaces  ",
+          "expected": "trim-spaces",
+          "description": "Leading/trailing spaces"
+        },
+        {
+          "input": "CamelCaseString",
+          "expected": "camelcasestring",
+          "description": "CamelCase to lowercase"
+        },
+        {
+          "input": "",
+          "expected": "",
+          "description": "Empty string"
+        }
+      ],
+      "correctness_threshold": 1.0,
+      "required_pass_rate": 0.8
+    },
+    "normalization_rules": {
+      "remove_comments": true,
+      "normalize_whitespace": true,
+      "enforce_function_name": true
+    },
+    "anchor_signature": "985327ef31c2c98247525607593c581f66b3c032dcc7dd3cbe49f1cd65e730de",
+    "compliance_flag": true,
+    "distance_metric": "foundational_properties",
+    "rescue_bounds": {
+      "allow_function_rename": true,
+      "allow_print_removal": true,
+      "max_transformations": 5
+    },
+    "model_specification": {},
+    "contract_version": "2.0",
+    "oracle_version": "1.0",
+    "normalization_version": "1.0",
+    "created_timestamp": "2025-10-21T19:21:12.042956",
+    "run_id": null,
+    "prompt_id": "slugify",
+    "sample_id": null,
+    "canonical_code": "def slugify(string):\n    import re\n    string = string.lower()\n    string = re.sub(r'[^a-z0-9\\s-]', '', string)\n    string = re.sub(r'[\\s]+', '-', string)\n    return string.strip('-')",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 0,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [],
+        "nested_depth": 0,
+        "branch_patterns": []
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "string": [
+            "string"
+          ]
+        },
+        "assignments": {
+          "string": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[\\\\s]+'), Constant(value='-'), Name(id='string', ctx=Load())])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_slugify"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "slugify": {
+          "name": "slugify",
+          "args": [
+            "string"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": false,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": []
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Import",
+          "alias",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Constant",
+          "Constant",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Constant",
+          "Constant",
+          "Name",
+          "Load",
+          "Return",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Constant"
+        ],
+        "ast_depth": 6,
+        "ast_hash": "cbf9e1030ccabef70065b94cc281ac43",
+        "alpha_renamed_hash": "845e19d4c837f3d9206a64134d0e2c76"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Import",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Import_1",
+          "Assign_2",
+          "Assign_3",
+          "Assign_4",
+          "Return_5"
+        ],
+        "control_flow_order": [
+          "FunctionDef"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    }
+  },
+  "created_timestamp": "2025-10-21T19:21:12.042956",
   "canon_version": "1.0",
   "oracle_validated": true,
   "oracle_pass_rate": 0.8333333333333334

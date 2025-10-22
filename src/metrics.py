@@ -102,7 +102,7 @@ class ComprehensiveMetrics:
             raw_outputs, contract
         )
         r_structural, structural_stats = self._calculate_structural_repeatability(
-            raw_outputs, contract_id
+            repaired_outputs, contract_id  # Use repaired outputs for structural repeatability
         )
         
         # === LEGACY COMPATIBILITY ===

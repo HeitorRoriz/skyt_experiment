@@ -55,11 +55,12 @@ class CanonSystem:
         # Extract foundational properties
         properties = self.properties_extractor.extract_all_properties(code)
         
-        # Create canon data
+        # Create canon data (store contract for variable naming enforcement)
         canon_data = {
             "contract_id": contract.data["id"],
             "canonical_code": code,
             "foundational_properties": properties,
+            "contract_data": contract.data,  # Store full contract for variable naming
             "created_timestamp": contract.data.get("created_timestamp"),
             "canon_version": "1.0",
             "oracle_validated": oracle_result is not None and oracle_result.get("passed", False),
@@ -92,13 +93,15 @@ class CanonSystem:
         
         return None
     
-    def compare_to_canon(self, contract_id: str, code: str) -> Dict[str, Any]:
+    def compare_to_canon(self, contract_id: str, code: str,
+                        contract: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """
         Compare code to canonical anchor
         
         Args:
             contract_id: Contract identifier
             code: Code to compare
+            contract: Optional contract data for variable naming constraints
             
         Returns:
             Comparison results with distance and property differences
@@ -116,9 +119,13 @@ class CanonSystem:
         new_properties = self.properties_extractor.extract_all_properties(code)
         canon_properties = canon_data["foundational_properties"]
         
-        # Calculate distance
+        # Get contract from canon data if not provided
+        if contract is None and "contract_data" in canon_data:
+            contract = canon_data["contract_data"]
+        
+        # Calculate distance (pass contract for variable naming enforcement)
         distance = self.properties_extractor.calculate_distance(
-            canon_properties, new_properties
+            canon_properties, new_properties, contract
         )
         
         # Check if identical

@@ -16,8 +16,9 @@ class FoundationalProperties:
     Extracts and compares the 13 foundational properties that define code sameness
     """
     
-    def __init__(self):
+    def __init__(self, contract: Optional[Dict[str, Any]] = None):
         # Define the 13 foundational properties
+        self.contract = contract
         self.properties = [
             "control_flow_signature",
             "data_dependency_graph", 
@@ -666,17 +667,21 @@ class FoundationalProperties:
         
         return schema
     
-    def calculate_distance(self, props1: Dict[str, Any], props2: Dict[str, Any]) -> float:
+    def calculate_distance(self, props1: Dict[str, Any], props2: Dict[str, Any],
+                          contract: Optional[Dict[str, Any]] = None) -> float:
         """
         Calculate distance between two sets of foundational properties
         
         Args:
             props1: First set of properties
             props2: Second set of properties
+            contract: Optional contract with variable naming constraints
             
         Returns:
             Distance score (0.0 = identical, 1.0 = completely different)
         """
+        # Use instance contract if not provided
+        contract = contract or self.contract
         if not props1 or not props2:
             return 1.0
         
@@ -686,14 +691,15 @@ class FoundationalProperties:
         for prop_name in self.properties:
             if prop_name in props1 and prop_name in props2:
                 prop_distance = self._calculate_property_distance(
-                    props1[prop_name], props2[prop_name], prop_name
+                    props1[prop_name], props2[prop_name], prop_name, contract
                 )
                 total_distance += prop_distance
                 property_count += 1
         
         return total_distance / property_count if property_count > 0 else 1.0
     
-    def _calculate_property_distance(self, prop1: Any, prop2: Any, prop_name: str) -> float:
+    def _calculate_property_distance(self, prop1: Any, prop2: Any, prop_name: str,
+                                    contract: Optional[Dict[str, Any]] = None) -> float:
         """Calculate distance for a specific property"""
         if prop1 is None or prop2 is None:
             return 1.0 if prop1 != prop2 else 0.0
@@ -701,9 +707,18 @@ class FoundationalProperties:
         if prop_name == "control_flow_signature":
             return self._distance_control_flow(prop1, prop2)
         elif prop_name == "normalized_ast_structure":
-            # Use α-renamed hash for variable-name-agnostic comparison
-            alpha_hash1 = prop1.get("alpha_renamed_hash", prop1.get("ast_hash"))
-            alpha_hash2 = prop2.get("alpha_renamed_hash", prop2.get("ast_hash"))
+            # Check contract variable naming policy
+            use_alpha_renaming = self._should_use_alpha_renaming(contract)
+            
+            if use_alpha_renaming:
+                # Use α-renamed hash for variable-name-agnostic comparison
+                alpha_hash1 = prop1.get("alpha_renamed_hash", prop1.get("ast_hash"))
+                alpha_hash2 = prop2.get("alpha_renamed_hash", prop2.get("ast_hash"))
+            else:
+                # Use actual AST hash (variable names matter)
+                alpha_hash1 = prop1.get("ast_hash")
+                alpha_hash2 = prop2.get("ast_hash")
+            
             return 0.0 if alpha_hash1 == alpha_hash2 else 1.0
         elif prop_name == "behavioral_signature":
             # Behavioral signatures must match exactly for semantic equivalence
@@ -785,3 +800,33 @@ class FoundationalProperties:
         distances.append(abs(rc1 - rc2) / max_rc)
         
         return sum(distances) / len(distances) if distances else 0.0
+    
+    def _should_use_alpha_renaming(self, contract: Optional[Dict[str, Any]]) -> bool:
+        """
+        Determine if α-renaming should be used based on contract variable naming policy
+        
+        Args:
+            contract: Contract with variable_naming constraints
+            
+        Returns:
+            True if α-renaming should be used (variable names don't matter)
+            False if variable names must be preserved
+        """
+        if not contract:
+            # No contract: default to alpha renaming (backward compatibility)
+            return True
+        
+        # Check if contract specifies variable_naming
+        constraints = contract.get("constraints", {})
+        var_naming = constraints.get("variable_naming", {})
+        
+        naming_policy = var_naming.get("naming_policy", "flexible")
+        
+        # If policy is "strict", variable names matter - don't use alpha renaming
+        if naming_policy == "strict":
+            return False
+        
+        # If policy is "flexible" but there are fixed_variables, 
+        # we still need to respect those, but this is handled elsewhere
+        # For now, flexible means we can use alpha renaming
+        return True

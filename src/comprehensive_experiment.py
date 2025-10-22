@@ -6,6 +6,7 @@ Implements the complete pipeline: contracts → LLM → canon → transform → 
 
 import os
 import json
+import numpy as np
 from typing import Dict, Any, List, Optional
 from datetime import datetime
 from .contract import Contract
@@ -16,6 +17,20 @@ from .code_transformer import CodeTransformer
 from .metrics import ComprehensiveMetrics
 from .bell_curve_analysis import BellCurveAnalyzer
 from .config import TARGET_RUNS_PER_PROMPT, OUTPUTS_DIR
+
+
+class NumpyEncoder(json.JSONEncoder):
+    """Custom JSON encoder for numpy types"""
+    def default(self, obj):
+        if isinstance(obj, np.integer):
+            return int(obj)
+        elif isinstance(obj, np.floating):
+            return float(obj)
+        elif isinstance(obj, np.ndarray):
+            return obj.tolist()
+        elif isinstance(obj, np.bool_):
+            return bool(obj)
+        return super().default(obj)
 
 
 class ComprehensiveExperiment:
@@ -262,7 +277,8 @@ class ComprehensiveExperiment:
         return experiment_result
     
     def run_temperature_sweep(self, contract_template_path: str, contract_id: str,
-                            temperatures: List[float] = [0.0, 0.5, 1.0]) -> Dict[str, Any]:
+                            temperatures: List[float] = [0.0, 0.5, 1.0],
+                            num_runs: int = TARGET_RUNS_PER_PROMPT) -> Dict[str, Any]:
         """
         Run experiment across multiple temperatures for comprehensive analysis
         
@@ -270,6 +286,7 @@ class ComprehensiveExperiment:
             contract_template_path: Path to contract templates
             contract_id: Contract to test
             temperatures: List of temperatures to test
+            num_runs: Number of LLM runs per temperature
             
         Returns:
             Comprehensive temperature sweep results
@@ -286,7 +303,8 @@ class ComprehensiveExperiment:
             print(f"{'='*60}")
             
             result = self.run_full_experiment(
-                contract_template_path, contract_id, 
+                contract_template_path, contract_id,
+                num_runs=num_runs,
                 temperature=temp
             )
             
@@ -346,7 +364,7 @@ class ComprehensiveExperiment:
         # Save sweep results
         sweep_path = os.path.join(self.output_dir, f"{sweep_result['sweep_id']}_sweep.json")
         with open(sweep_path, 'w') as f:
-            json.dump(sweep_result, f, indent=2)
+            json.dump(sweep_result, f, indent=2, cls=NumpyEncoder)
         
         print(f"\n🎉 Temperature Sweep Complete!")
         print(f"📊 Research summary: {summary_plot_path}")
@@ -430,17 +448,6 @@ class ComprehensiveExperiment:
             )
         }
     
-    def _json_serializer(self, obj):
-        """Custom JSON serializer for non-serializable objects"""
-        if isinstance(obj, (bool, int, float, str, type(None))):
-            return obj
-        elif isinstance(obj, (list, tuple)):
-            return list(obj)
-        elif isinstance(obj, dict):
-            return dict(obj)
-        else:
-            return str(obj)
-    
     def _save_experiment_results(self, result: Dict[str, Any]):
         """Save experiment results to multiple formats including comprehensive metrics CSV"""
         experiment_id = result["experiment_id"]
@@ -448,7 +455,7 @@ class ComprehensiveExperiment:
         # Save detailed JSON with custom encoder for non-serializable objects
         json_path = os.path.join(self.output_dir, f"{experiment_id}.json")
         with open(json_path, 'w') as f:
-            json.dump(result, f, indent=2, default=self._json_serializer)
+            json.dump(result, f, indent=2, cls=NumpyEncoder)
         
         # Save to comprehensive metrics summary CSV
         metrics_csv_path = os.path.join(self.output_dir, "metrics_summary.csv")
