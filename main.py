@@ -72,7 +72,7 @@ Examples:
     
     parser.add_argument(
         "--templates",
-        default="contracts/templates.json",
+        default='contracts/templates.json',
         help="Path to contract templates (default: contracts/templates.json)"
     )
     
@@ -104,6 +104,11 @@ Examples:
     
     # Initialize experiment system
     experiment = ComprehensiveExperiment(args.output_dir)
+    
+    # Enable debug mode for transformation pipeline
+    debug_mode = True  
+    if debug_mode:
+        print("🛠️ Debug Mode Enabled for Transformation Pipeline")
     
     # Run experiments
     try:

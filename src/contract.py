@@ -8,6 +8,7 @@ from typing import Dict, Any, Optional, List
 import json
 import hashlib
 from datetime import datetime
+from dataclasses import asdict, is_dataclass
 from src.policies.out_of_domain import OODSpec
 
 
@@ -99,7 +100,10 @@ class Contract:
         """Convert contract to dictionary"""
         result = self.data.copy()
         # Include OOD spec for use by validators
-        result["ood_spec"] = self.ood_spec
+        if self.ood_spec is not None:
+            result["ood_spec"] = asdict(self.ood_spec) if is_dataclass(self.ood_spec) else self.ood_spec
+        else:
+            result["ood_spec"] = None
         return result
     
     def save(self, filepath: str):

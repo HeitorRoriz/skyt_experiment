@@ -21,7 +21,8 @@
       ]
     },
     "out_of_domain": {
-      "policy": "allow",
+      "policy": "must_return",
+      "return_value": 0,
       "examples": [
         {"n": -1},
         {"n": -5}
@@ -69,6 +70,15 @@
       "inputs": [
         {"name": "n", "type": "int", "constraint": "n >= 0"}
       ]
+    },
+    "out_of_domain": {
+      "policy": "must_return",
+      "return_value": 0,
+      "examples": [
+        {"n": -1},
+        {"n": -3}
+      ],
+      "max_checks": 2
     },
     "oracle_requirements": {
       "test_cases": [

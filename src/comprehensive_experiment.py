@@ -38,7 +38,7 @@ class ComprehensiveExperiment:
     Complete SKYT experiment pipeline implementation
     """
     
-    def __init__(self, output_dir: str = OUTPUTS_DIR):
+    def __init__(self, output_dir: str = OUTPUTS_DIR, debug_mode: bool = True):
         self.output_dir = output_dir
         os.makedirs(output_dir, exist_ok=True)
         

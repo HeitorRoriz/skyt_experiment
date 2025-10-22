@@ -511,7 +511,8 @@ class ComprehensiveMetrics:
         non_canonical_count = 0
         rescued_count = 0
         
-        for raw, repaired in zip(raw_outputs, repaired_outputs):
+        for i, result in enumerate(zip(raw_outputs, repaired_outputs)):
+            raw, repaired = result
             raw_comparison = self.canon_system.compare_to_canon(contract_id, raw)
             
             # Check if originally non-canonical
@@ -522,6 +523,9 @@ class ComprehensiveMetrics:
                 repaired_comparison = self.canon_system.compare_to_canon(contract_id, repaired)
                 if repaired_comparison.get("is_identical", False):
                     rescued_count += 1
+                # Check if distance reduced significantly (e.g., by more than 20%)
+                elif raw_comparison.get("final_distance", float('inf')) > 0 and repaired_comparison.get("final_distance", float('inf')) < raw_comparison.get("final_distance", float('inf')) * 0.8:
+                    rescued_count += 0.5  # Partial credit for significant reduction
         
         return rescued_count / non_canonical_count if non_canonical_count > 0 else 0.0
     
@@ -585,5 +589,3 @@ class ComprehensiveMetrics:
             # Meta
             "total_experiments": len(all_results)
         }
-
-

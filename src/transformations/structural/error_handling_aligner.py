@@ -1,6 +1,6 @@
 """
 Error Handling Aligner - Structural Transformation
-Converts error handling patterns to match canonical form
+Converts error handling patterns to match canonical form or contract OOD policy
 
 Handles patterns like:
 - if n < 0: raise ValueError(...) -> if n <= 0: return 0
@@ -8,21 +8,22 @@ Handles patterns like:
 """
 
 import re
-from typing import List, Tuple
+from typing import List, Tuple, Dict, Any, Optional
 from ..transformation_base import TransformationBase
 
 
 class ErrorHandlingAligner(TransformationBase):
-    """Aligns error handling patterns to match canonical form"""
+    """Aligns error handling patterns to match canonical form or contract OOD policy"""
     
-    def __init__(self):
+    def __init__(self, contract: Dict[str, Any] = None):
         super().__init__(
             name="ErrorHandlingAligner",
-            description="Converts error handling to match canonical boundary checks"
+            description="Converts error handling to match canonical boundary checks or OOD policy"
         )
+        self.contract = contract
     
     def can_transform(self, code: str, canon_code: str, property_diffs: list = None) -> bool:
-        """Check if code has error handling that differs from canon (PROPERTY-DRIVEN)"""
+        """Check if code has error handling that differs from canon or violates OOD policy"""
         
         # Use property differences instead of hardcoded Fibonacci checks
         if property_diffs:
@@ -35,6 +36,16 @@ class ErrorHandlingAligner(TransformationBase):
                 if diff['property'] == 'termination_properties' and diff['distance'] > 0:
                     return True
         
+        # Check if contract has OOD policy that code might violate
+        if self.contract:
+            ood_spec = self.contract.get("ood_spec", None)
+            if ood_spec and ood_spec.get("policy", "allow") != "allow":
+                policy = ood_spec.get("policy", "allow")
+                if policy == "must_return" and "raise " in code:
+                    return True  # Code raises but policy requires return
+                elif policy == "must_raise" and "raise " not in code and any(ex in code for ex in ["if n < 0", "if n <= 0", "if n >", "if n =="]):
+                    return True  # Code returns but policy requires raise
+        
         # Fallback: generic check for raise statement differences
         has_raise = 'raise ' in code
         canon_has_raise = 'raise ' in canon_code
@@ -46,12 +57,38 @@ class ErrorHandlingAligner(TransformationBase):
         
         self.log_debug("Applying error handling alignment")
         
-        # Extract canonical boundary pattern
-        canon_boundary = self._extract_boundary_pattern(canon_code)
-        self.log_debug(f"Canon boundary pattern: {canon_boundary}")
+        # If contract has OOD policy, use it to guide transformation
+        target_pattern = None
+        if self.contract:
+            ood_spec = self.contract.get("ood_spec", None)
+            if ood_spec and ood_spec.get("policy", "allow") != "allow":
+                policy = ood_spec.get("policy")
+                if policy == "must_return":
+                    return_value = ood_spec.get("return_value", 0)
+                    target_pattern = {
+                        'condition': 'n <= 0',  # Default condition for common cases
+                        'return_value': f'return {return_value}',
+                        'has_error_handling': False
+                    }
+                    self.log_debug(f"Using OOD policy must_return: {return_value}")
+                elif policy == "must_raise":
+                    exception = ood_spec.get("exception", "ValueError")
+                    target_pattern = {
+                        'condition': 'n <= 0',
+                        'return_value': f'raise {exception}("Input out of domain")',
+                        'has_error_handling': True
+                    }
+                    self.log_debug(f"Using OOD policy must_raise: {exception}")
+        
+        # If no OOD policy or not applicable, extract from canon
+        if not target_pattern:
+            # Extract canonical boundary pattern
+            canon_boundary = self._extract_boundary_pattern(canon_code)
+            self.log_debug(f"Canon boundary pattern: {canon_boundary}")
+            target_pattern = canon_boundary
         
         # Transform the code
-        transformed = self._transform_error_handling(code, canon_boundary)
+        transformed = self._transform_error_handling(code, target_pattern)
         
         return transformed
     
