@@ -183,5 +183,203 @@
       "allow_print_removal": true,
       "max_transformations": 5
     }
+  },
+  "gcd": {
+    "id": "gcd",
+    "task_intent": "Compute greatest common divisor using Euclidean algorithm",
+    "prompt": "Write a Python function called 'gcd' that takes two positive integers a and b and returns their greatest common divisor using the Euclidean algorithm.",
+    "description": "GCD computation with algebraic properties and loop invariants",
+    "algorithm_family": "gcd",
+    "constraints": {
+      "function_name": "gcd",
+      "output_type": "integer",
+      "implementation_style": "iterative",
+      "variable_naming": {
+        "fixed_variables": ["a", "b"],
+        "flexible_variables": ["temp", "remainder", "r"],
+        "naming_policy": "strict"
+      }
+    },
+    "domain": {
+      "inputs": [
+        {"name": "a", "type": "int", "constraint": "a > 0"},
+        {"name": "b", "type": "int", "constraint": "b > 0"}
+      ]
+    },
+    "oracle_requirements": {
+      "test_cases": [
+        {"input": [48, 18], "expected": 6, "description": "Standard case"},
+        {"input": [100, 50], "expected": 50, "description": "One divides the other"},
+        {"input": [17, 19], "expected": 1, "description": "Coprime numbers"},
+        {"input": [1071, 462], "expected": 21, "description": "Large numbers"},
+        {"input": [12, 12], "expected": 12, "description": "Equal numbers"},
+        {"input": [1, 5], "expected": 1, "description": "GCD with 1"}
+      ],
+      "correctness_threshold": 1.0,
+      "required_pass_rate": 0.8
+    },
+    "normalization_rules": {
+      "remove_comments": true,
+      "normalize_whitespace": true,
+      "enforce_function_name": true
+    },
+    "rescue_bounds": {
+      "allow_function_rename": true,
+      "allow_print_removal": true,
+      "max_transformations": 5
+    }
+  },
+  "binary_search": {
+    "id": "binary_search",
+    "task_intent": "Search for target in sorted array using binary search",
+    "prompt": "Write a Python function called 'binary_search' that takes a sorted list of integers and a target value, and returns the index of the target if found, or -1 if not found. Use binary search algorithm.",
+    "description": "Binary search with boundary conditions and termination variants",
+    "algorithm_family": "binary_search",
+    "constraints": {
+      "function_name": "binary_search",
+      "output_type": "integer",
+      "variable_naming": {
+        "fixed_variables": ["arr", "target"],
+        "flexible_variables": ["left", "right", "mid", "l", "r", "m", "low", "high"],
+        "naming_policy": "strict"
+      }
+    },
+    "domain": {
+      "inputs": [
+        {"name": "arr", "type": "list[int]", "constraint": "sorted ascending"},
+        {"name": "target", "type": "int", "constraint": "any"}
+      ]
+    },
+    "oracle_requirements": {
+      "test_cases": [
+        {"input": [[1, 2, 3, 4, 5], 3], "expected": 2, "description": "Target in middle"},
+        {"input": [[1, 2, 3, 4, 5], 1], "expected": 0, "description": "Target at start"},
+        {"input": [[1, 2, 3, 4, 5], 5], "expected": 4, "description": "Target at end"},
+        {"input": [[1, 2, 3, 4, 5], 6], "expected": -1, "description": "Target not found (too large)"},
+        {"input": [[1, 2, 3, 4, 5], 0], "expected": -1, "description": "Target not found (too small)"},
+        {"input": [[], 1], "expected": -1, "description": "Empty array"},
+        {"input": [[5], 5], "expected": 0, "description": "Single element found"},
+        {"input": [[5], 3], "expected": -1, "description": "Single element not found"},
+        {"input": [[1, 3, 5, 7, 9, 11, 13], 7], "expected": 3, "description": "Odd length array"}
+      ],
+      "correctness_threshold": 1.0,
+      "required_pass_rate": 0.8
+    },
+    "normalization_rules": {
+      "remove_comments": true,
+      "normalize_whitespace": true,
+      "enforce_function_name": true
+    },
+    "rescue_bounds": {
+      "allow_function_rename": true,
+      "allow_print_removal": true,
+      "max_transformations": 5
+    }
+  },
+  "lru_cache": {
+    "id": "lru_cache",
+    "task_intent": "Implement LRU cache with get and put operations",
+    "prompt": "Write a Python class called 'LRUCache' with a constructor that takes capacity, a get(key) method that returns the value if key exists (or -1 if not), and a put(key, value) method. The cache should evict the least recently used item when capacity is exceeded.",
+    "description": "LRU cache with stateful operations and mutable data structures",
+    "algorithm_family": "lru_cache",
+    "constraints": {
+      "class_name": "LRUCache",
+      "methods": ["__init__", "get", "put"],
+      "variable_naming": {
+        "fixed_variables": ["capacity", "key", "value"],
+        "flexible_variables": ["cache", "order", "keys", "data"],
+        "naming_policy": "strict"
+      }
+    },
+    "domain": {
+      "inputs": [
+        {"name": "capacity", "type": "int", "constraint": "capacity > 0"}
+      ]
+    },
+    "oracle_requirements": {
+      "test_cases": [
+        {
+          "description": "Basic LRU operations",
+          "operations": [
+            {"op": "init", "args": [2]},
+            {"op": "put", "args": [1, 1], "expected": null},
+            {"op": "put", "args": [2, 2], "expected": null},
+            {"op": "get", "args": [1], "expected": 1},
+            {"op": "put", "args": [3, 3], "expected": null},
+            {"op": "get", "args": [2], "expected": -1},
+            {"op": "get", "args": [3], "expected": 3}
+          ]
+        },
+        {
+          "description": "Update existing key",
+          "operations": [
+            {"op": "init", "args": [2]},
+            {"op": "put", "args": [1, 1], "expected": null},
+            {"op": "put", "args": [2, 2], "expected": null},
+            {"op": "put", "args": [1, 10], "expected": null},
+            {"op": "get", "args": [1], "expected": 10},
+            {"op": "get", "args": [2], "expected": 2}
+          ]
+        }
+      ],
+      "correctness_threshold": 1.0,
+      "required_pass_rate": 0.8
+    },
+    "normalization_rules": {
+      "remove_comments": true,
+      "normalize_whitespace": true,
+      "enforce_function_name": true
+    },
+    "rescue_bounds": {
+      "allow_function_rename": true,
+      "allow_print_removal": true,
+      "max_transformations": 5
+    }
+  },
+  "merge_sort": {
+    "id": "merge_sort",
+    "task_intent": "Sort array using merge sort algorithm",
+    "prompt": "Write a Python function called 'merge_sort' that takes a list of integers and returns a new sorted list using the merge sort algorithm. Implement it recursively.",
+    "description": "Merge sort with divide-and-conquer recursion schema",
+    "algorithm_family": "merge_sort",
+    "constraints": {
+      "function_name": "merge_sort",
+      "output_type": "list",
+      "requires_recursion": true,
+      "variable_naming": {
+        "fixed_variables": ["arr"],
+        "flexible_variables": ["left", "right", "mid", "result", "merged", "i", "j", "k"],
+        "naming_policy": "strict"
+      }
+    },
+    "domain": {
+      "inputs": [
+        {"name": "arr", "type": "list[int]", "constraint": "any"}
+      ]
+    },
+    "oracle_requirements": {
+      "test_cases": [
+        {"input": [[3, 1, 4, 1, 5, 9, 2, 6]], "expected": [1, 1, 2, 3, 4, 5, 6, 9], "description": "Random array"},
+        {"input": [[5, 4, 3, 2, 1]], "expected": [1, 2, 3, 4, 5], "description": "Reverse sorted"},
+        {"input": [[1, 2, 3, 4, 5]], "expected": [1, 2, 3, 4, 5], "description": "Already sorted"},
+        {"input": [[1]], "expected": [1], "description": "Single element"},
+        {"input": [[]], "expected": [], "description": "Empty array"},
+        {"input": [[2, 1]], "expected": [1, 2], "description": "Two elements"},
+        {"input": [[3, 3, 3]], "expected": [3, 3, 3], "description": "All same"},
+        {"input": [[-5, -1, -3, 0, 2]], "expected": [-5, -3, -1, 0, 2], "description": "Negative numbers"}
+      ],
+      "correctness_threshold": 1.0,
+      "required_pass_rate": 0.8
+    },
+    "normalization_rules": {
+      "remove_comments": true,
+      "normalize_whitespace": true,
+      "enforce_function_name": true
+    },
+    "rescue_bounds": {
+      "allow_function_rename": true,
+      "allow_print_removal": true,
+      "max_transformations": 5
+    }
   }
 }

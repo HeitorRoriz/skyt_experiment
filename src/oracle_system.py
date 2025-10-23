@@ -24,7 +24,9 @@ class OracleSystem:
             "sieve_eratosthenes": self._sieve_oracle,
             "dijkstra": self._dijkstra_oracle,
             "slugify": self._slugify_oracle,
-            "balanced_brackets": self._balanced_brackets_oracle
+            "balanced_brackets": self._balanced_brackets_oracle,
+            "gcd": self._gcd_oracle,
+            "lru_cache": self._lru_cache_oracle
         }
     
     def run_oracle_tests(self, code: str, contract: Dict[str, Any]) -> Dict[str, Any]:
@@ -479,6 +481,176 @@ class OracleSystem:
             "test_results": test_results
         }
     
+    def _gcd_oracle(self, namespace: Dict, requirements: Dict) -> Dict[str, Any]:
+        """Oracle tests for GCD implementations"""
+        test_results = []
+        
+        # Find the gcd function
+        gcd_func = None
+        for name, obj in namespace.items():
+            if callable(obj) and 'gcd' in name.lower():
+                gcd_func = obj
+                break
+        
+        if not gcd_func:
+            return {
+                "passed": False,
+                "error": "No gcd function found",
+                "test_results": []
+            }
+        
+        # Get test cases from requirements
+        test_cases = requirements.get("test_cases", [])
+        
+        if not test_cases:
+            return {
+                "passed": False,
+                "error": "No test cases found in requirements",
+                "test_results": []
+            }
+        
+        passed_tests = 0
+        total_tests = len(test_cases)
+        
+        for test_case in test_cases:
+            input_vals = test_case.get("input", [])
+            expected = test_case.get("expected", 0)
+            description = test_case.get("description", "")
+            
+            try:
+                # GCD takes two parameters
+                if isinstance(input_vals, list) and len(input_vals) == 2:
+                    result = gcd_func(input_vals[0], input_vals[1])
+                else:
+                    result = gcd_func(*input_vals) if isinstance(input_vals, (list, tuple)) else gcd_func(input_vals)
+                
+                passed = (result == expected)
+                
+                test_results.append({
+                    "input": input_vals,
+                    "expected": expected,
+                    "actual": result,
+                    "passed": passed,
+                    "description": description
+                })
+                
+                if passed:
+                    passed_tests += 1
+                    
+            except Exception as e:
+                test_results.append({
+                    "input": input_vals,
+                    "expected": expected,
+                    "actual": None,
+                    "passed": False,
+                    "error": str(e),
+                    "description": description
+                })
+        
+        pass_rate = passed_tests / total_tests if total_tests > 0 else 0.0
+        required_pass_rate = requirements.get("required_pass_rate", 0.8)
+        
+        return {
+            "passed": pass_rate >= required_pass_rate,
+            "pass_rate": pass_rate,
+            "passed_tests": passed_tests,
+            "total_tests": total_tests,
+            "test_results": test_results
+        }
+    
+    def _lru_cache_oracle(self, namespace: Dict, requirements: Dict) -> Dict[str, Any]:
+        """Oracle tests for LRU Cache implementations"""
+        test_results = []
+        
+        # Find the LRUCache class
+        lru_cache_class = None
+        for name, obj in namespace.items():
+            if isinstance(obj, type) and 'lru' in name.lower():
+                lru_cache_class = obj
+                break
+        
+        if not lru_cache_class:
+            return {
+                "passed": False,
+                "error": "No LRUCache class found",
+                "test_results": []
+            }
+        
+        # Get test cases from requirements
+        test_cases = requirements.get("test_cases", [])
+        
+        if not test_cases:
+            return {
+                "passed": False,
+                "error": "No test cases found in requirements",
+                "test_results": []
+            }
+        
+        passed_tests = 0
+        total_tests = 0
+        
+        for test_case in test_cases:
+            description = test_case.get("description", "")
+            operations = test_case.get("operations", [])
+            
+            try:
+                cache = None
+                
+                for op in operations:
+                    op_type = op.get("op")
+                    args = op.get("args", [])
+                    expected = op.get("expected")
+                    
+                    if op_type == "init":
+                        cache = lru_cache_class(*args)
+                        total_tests += 1
+                        test_results.append({
+                            "description": f"{description} - init({args})",
+                            "passed": True
+                        })
+                        passed_tests += 1
+                    elif op_type == "put":
+                        if cache:
+                            cache.put(*args)
+                            total_tests += 1
+                            test_results.append({
+                                "description": f"{description} - put({args})",
+                                "passed": True
+                            })
+                            passed_tests += 1
+                    elif op_type == "get":
+                        if cache:
+                            result = cache.get(*args)
+                            passed = (result == expected)
+                            total_tests += 1
+                            test_results.append({
+                                "description": f"{description} - get({args})",
+                                "expected": expected,
+                                "actual": result,
+                                "passed": passed
+                            })
+                            if passed:
+                                passed_tests += 1
+                    
+            except Exception as e:
+                total_tests += 1
+                test_results.append({
+                    "description": description,
+                    "passed": False,
+                    "error": str(e)
+                })
+        
+        pass_rate = passed_tests / total_tests if total_tests > 0 else 0.0
+        required_pass_rate = requirements.get("required_pass_rate", 0.8)
+        
+        return {
+            "passed": pass_rate >= required_pass_rate,
+            "pass_rate": pass_rate,
+            "passed_tests": passed_tests,
+            "total_tests": total_tests,
+            "test_results": test_results
+        }
+    
     def _balanced_brackets_oracle(self, namespace: Dict, requirements: Dict) -> Dict[str, Any]:
         """Oracle tests for balanced brackets implementations"""
         test_results = []
@@ -531,6 +703,176 @@ class OracleSystem:
                     "passed": False,
                     "error": str(e),
                     "description": description
+                })
+        
+        pass_rate = passed_tests / total_tests if total_tests > 0 else 0.0
+        required_pass_rate = requirements.get("required_pass_rate", 0.8)
+        
+        return {
+            "passed": pass_rate >= required_pass_rate,
+            "pass_rate": pass_rate,
+            "passed_tests": passed_tests,
+            "total_tests": total_tests,
+            "test_results": test_results
+        }
+    
+    def _gcd_oracle(self, namespace: Dict, requirements: Dict) -> Dict[str, Any]:
+        """Oracle tests for GCD implementations"""
+        test_results = []
+        
+        # Find the gcd function
+        gcd_func = None
+        for name, obj in namespace.items():
+            if callable(obj) and 'gcd' in name.lower():
+                gcd_func = obj
+                break
+        
+        if not gcd_func:
+            return {
+                "passed": False,
+                "error": "No gcd function found",
+                "test_results": []
+            }
+        
+        # Get test cases from requirements
+        test_cases = requirements.get("test_cases", [])
+        
+        if not test_cases:
+            return {
+                "passed": False,
+                "error": "No test cases found in requirements",
+                "test_results": []
+            }
+        
+        passed_tests = 0
+        total_tests = len(test_cases)
+        
+        for test_case in test_cases:
+            input_vals = test_case.get("input", [])
+            expected = test_case.get("expected", 0)
+            description = test_case.get("description", "")
+            
+            try:
+                # GCD takes two parameters
+                if isinstance(input_vals, list) and len(input_vals) == 2:
+                    result = gcd_func(input_vals[0], input_vals[1])
+                else:
+                    result = gcd_func(*input_vals) if isinstance(input_vals, (list, tuple)) else gcd_func(input_vals)
+                
+                passed = (result == expected)
+                
+                test_results.append({
+                    "input": input_vals,
+                    "expected": expected,
+                    "actual": result,
+                    "passed": passed,
+                    "description": description
+                })
+                
+                if passed:
+                    passed_tests += 1
+                    
+            except Exception as e:
+                test_results.append({
+                    "input": input_vals,
+                    "expected": expected,
+                    "actual": None,
+                    "passed": False,
+                    "error": str(e),
+                    "description": description
+                })
+        
+        pass_rate = passed_tests / total_tests if total_tests > 0 else 0.0
+        required_pass_rate = requirements.get("required_pass_rate", 0.8)
+        
+        return {
+            "passed": pass_rate >= required_pass_rate,
+            "pass_rate": pass_rate,
+            "passed_tests": passed_tests,
+            "total_tests": total_tests,
+            "test_results": test_results
+        }
+    
+    def _lru_cache_oracle(self, namespace: Dict, requirements: Dict) -> Dict[str, Any]:
+        """Oracle tests for LRU Cache implementations"""
+        test_results = []
+        
+        # Find the LRUCache class
+        lru_cache_class = None
+        for name, obj in namespace.items():
+            if isinstance(obj, type) and 'lru' in name.lower():
+                lru_cache_class = obj
+                break
+        
+        if not lru_cache_class:
+            return {
+                "passed": False,
+                "error": "No LRUCache class found",
+                "test_results": []
+            }
+        
+        # Get test cases from requirements
+        test_cases = requirements.get("test_cases", [])
+        
+        if not test_cases:
+            return {
+                "passed": False,
+                "error": "No test cases found in requirements",
+                "test_results": []
+            }
+        
+        passed_tests = 0
+        total_tests = 0
+        
+        for test_case in test_cases:
+            description = test_case.get("description", "")
+            operations = test_case.get("operations", [])
+            
+            try:
+                cache = None
+                
+                for op in operations:
+                    op_type = op.get("op")
+                    args = op.get("args", [])
+                    expected = op.get("expected")
+                    
+                    if op_type == "init":
+                        cache = lru_cache_class(*args)
+                        total_tests += 1
+                        test_results.append({
+                            "description": f"{description} - init({args})",
+                            "passed": True
+                        })
+                        passed_tests += 1
+                    elif op_type == "put":
+                        if cache:
+                            cache.put(*args)
+                            total_tests += 1
+                            test_results.append({
+                                "description": f"{description} - put({args})",
+                                "passed": True
+                            })
+                            passed_tests += 1
+                    elif op_type == "get":
+                        if cache:
+                            result = cache.get(*args)
+                            passed = (result == expected)
+                            total_tests += 1
+                            test_results.append({
+                                "description": f"{description} - get({args})",
+                                "expected": expected,
+                                "actual": result,
+                                "passed": passed
+                            })
+                            if passed:
+                                passed_tests += 1
+                    
+            except Exception as e:
+                total_tests += 1
+                test_results.append({
+                    "description": description,
+                    "passed": False,
+                    "error": str(e)
                 })
         
         pass_rate = passed_tests / total_tests if total_tests > 0 else 0.0
