@@ -17,11 +17,29 @@ from ..transformation_base import TransformationBase
 class VariableRenamer(TransformationBase):
     """Renames variables to match canonical form"""
     
-    def __init__(self):
+    def __init__(self, contract: dict = None):
         super().__init__(
             name="VariableRenamer",
             description="Systematically renames variables to match canonical naming"
         )
+        self.contract = contract
+        self.fixed_variables = self._extract_fixed_variables(contract)
+    
+    def _extract_fixed_variables(self, contract: dict) -> Set[str]:
+        """Extract fixed variables from contract that should NEVER be renamed"""
+        if not contract:
+            return set()
+        
+        fixed_vars = set()
+        
+        # Get fixed_variables from variable_naming constraints
+        constraints = contract.get('constraints', {})
+        var_naming = constraints.get('variable_naming', {})
+        fixed_list = var_naming.get('fixed_variables', [])
+        
+        fixed_vars.update(fixed_list)
+        
+        return fixed_vars
     
     def can_transform(self, code: str, canon_code: str, property_diffs: list = None) -> bool:
         """Check if variable names differ (PROPERTY-DRIVEN + AGGRESSIVE)"""
@@ -207,6 +225,10 @@ class VariableRenamer(TransformationBase):
             if i < len(canon_vars.get('parameters', [])):
                 canon_param = canon_vars['parameters'][i]
                 if code_param != canon_param:
+                    # CRITICAL: Never rename fixed variables from contract
+                    if code_param in self.fixed_variables or canon_param in self.fixed_variables:
+                        self.log_debug(f"Skipping rename {code_param} → {canon_param} (fixed variable)")
+                        continue
                     mapping[code_param] = canon_param
         
         # Map local variables by position (heuristic)
@@ -214,6 +236,10 @@ class VariableRenamer(TransformationBase):
             if i < len(canon_vars.get('local_vars', [])):
                 canon_var = canon_vars['local_vars'][i]
                 if code_var != canon_var and code_var not in mapping:
+                    # CRITICAL: Never rename fixed variables from contract
+                    if code_var in self.fixed_variables or canon_var in self.fixed_variables:
+                        self.log_debug(f"Skipping rename {code_var} → {canon_var} (fixed variable)")
+                        continue
                     mapping[code_var] = canon_var
         
         # Map loop variables by position
@@ -221,6 +247,10 @@ class VariableRenamer(TransformationBase):
             if i < len(canon_vars.get('loop_vars', [])):
                 canon_var = canon_vars['loop_vars'][i]
                 if code_var != canon_var and code_var not in mapping:
+                    # CRITICAL: Never rename fixed variables from contract
+                    if code_var in self.fixed_variables or canon_var in self.fixed_variables:
+                        self.log_debug(f"Skipping rename {code_var} → {canon_var} (fixed variable)")
+                        continue
                     mapping[code_var] = canon_var
         
         return mapping

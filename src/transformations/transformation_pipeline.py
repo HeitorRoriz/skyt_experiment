@@ -8,6 +8,9 @@ from .transformation_base import TransformationBase, TransformationResult
 from .structural.error_handling_aligner import ErrorHandlingAligner
 from .structural.redundant_clause_remover import RedundantClauseRemover
 from .structural.variable_renamer import VariableRenamer
+from .structural.arithmetic_expression_normalizer import ArithmeticExpressionNormalizer
+from .structural.class_method_reorderer import ClassMethodReorderer
+from .structural.import_normalizer import ImportNormalizer
 from .structural.snap_to_canon_finalizer import SnapToCanonFinalizer
 from .behavioral.algorithm_optimizer import AlgorithmOptimizer
 from .behavioral.boundary_condition_aligner import BoundaryConditionAligner
@@ -47,7 +50,9 @@ class TransformationPipeline:
             
             # FALLBACK: Algorithm-specific transformers (kept for compatibility)
             # These will only apply if PropertyDrivenTransformer doesn't handle the case
-            VariableRenamer(),
+            ImportNormalizer(),  # NEW: Add missing imports (should be first)
+            VariableRenamer(contract=self.contract_data),  # Pass contract to respect fixed_variables
+            ArithmeticExpressionNormalizer(),  # NEW: Handle algebraic equivalences
             ErrorHandlingAligner(contract=self.contract_data),
             RedundantClauseRemover(),
             RecursionSchemaAligner(),
@@ -59,6 +64,7 @@ class TransformationPipeline:
             DictionaryNormalizer(),  # Dictionary key ordering
             RegexPatternNormalizer(),  # Regex pattern normalization
             StatementChainNormalizer(),  # Chained vs separate statements
+            ClassMethodReorderer(),  # NEW: Class method ordering
             
             # LAST: Snap-to-canon finalizer (handles remaining harmless differences)
             SnapToCanonFinalizer(contract=self.contract_data),
