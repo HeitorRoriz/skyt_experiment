@@ -15,6 +15,7 @@ import logging
 try:
     from .analyzers.complexity_analyzer import ComplexityAnalyzer
     from .analyzers.type_checker import TypeChecker
+    from .analyzers.security_analyzer import SecurityAnalyzer
     ANALYZERS_AVAILABLE = True
 except ImportError:
     ANALYZERS_AVAILABLE = False
@@ -34,6 +35,7 @@ class FoundationalProperties:
         # Lazy-loaded analyzers (Dependency Injection pattern)
         self._complexity_analyzer = None
         self._type_checker = None
+        self._security_analyzer = None
         
         self.properties = [
             "control_flow_signature",
@@ -71,15 +73,142 @@ class FoundationalProperties:
             self._type_checker = TypeChecker()
         return self._type_checker
     
-    def extract_all_properties(self, code: str) -> Dict[str, Any]:
+    @property
+    def security_analyzer(self) -> Optional['SecurityAnalyzer']:
+        """Lazy-load security analyzer (avoids import if not needed)"""
+        if not ANALYZERS_AVAILABLE:
+            return None
+        if self._security_analyzer is None:
+            self._security_analyzer = SecurityAnalyzer()
+        return self._security_analyzer
+    
+    def extract_transformation_properties(self, code: str) -> Dict[str, Any]:
         """
-        Extract all 13 foundational properties from code
+        Extract TRANSFORMATION properties - used for distance calculation.
+        
+        These are properties that transformations can actually modify:
+        - Control flow structure (can be simplified)
+        - Variable names (can be renamed)
+        - Redundant constructs (can be removed)
+        - AST structure (can be normalized)
+        
+        Does NOT include enhanced properties (radon, mypy, bandit) as those
+        are immutable from the transformation perspective.
         
         Args:
             code: Python code string
             
         Returns:
-            Dictionary with all foundational properties
+            Dictionary with transformation-relevant properties only
+        """
+        try:
+            tree = ast.parse(code)
+            
+            # Only extract baseline AST properties (transformable)
+            baseline_properties = [
+                "control_flow_signature",
+                "data_dependency_graph",
+                "execution_paths",
+                "function_contracts",
+                "complexity_class",
+                "side_effect_profile",
+                "termination_properties",
+                "algebraic_structure",
+                "numerical_behavior",
+                "logical_equivalence",
+                "normalized_ast_structure",
+                "operator_precedence",
+                "statement_ordering",
+                "recursion_schema"
+            ]
+            
+            properties = {}
+            for prop_name in baseline_properties:
+                method_name = f"_extract_{prop_name}"
+                if hasattr(self, method_name):
+                    # Extract property WITHOUT enhanced analysis
+                    # Temporarily disable analyzers for baseline extraction
+                    saved_complexity = self._complexity_analyzer
+                    saved_type_checker = self._type_checker
+                    saved_security = self._security_analyzer
+                    
+                    self._complexity_analyzer = None
+                    self._type_checker = None
+                    self._security_analyzer = None
+                    
+                    try:
+                        properties[prop_name] = getattr(self, method_name)(tree, code)
+                    finally:
+                        self._complexity_analyzer = saved_complexity
+                        self._type_checker = saved_type_checker
+                        self._security_analyzer = saved_security
+                else:
+                    properties[prop_name] = None
+            
+            return properties
+            
+        except SyntaxError:
+            return {prop: None for prop in self.properties}
+    
+    def extract_validation_properties(self, code: str) -> Dict[str, Any]:
+        """
+        Extract VALIDATION properties - used for semantic analysis.
+        
+        These are enhanced properties that provide semantic insights:
+        - radon metrics (complexity, maintainability, Halstead)
+        - mypy analysis (type checking, errors, coverage)
+        - bandit scanning (security, side effects, I/O)
+        
+        These are NOT used in distance calculation because transformations
+        cannot modify them without changing algorithm semantics.
+        
+        Args:
+            code: Python code string
+            
+        Returns:
+            Dictionary with validation-relevant enhanced properties
+        """
+        validation = {}
+        
+        # Extract enhanced metrics (if analyzers available)
+        if self.complexity_analyzer is not None:
+            try:
+                validation['radon_metrics'] = self.complexity_analyzer.analyze(code)
+            except Exception as e:
+                logger.warning(f"Radon analysis failed: {e}")
+                validation['radon_metrics'] = {'error': str(e)}
+        
+        if self.type_checker is not None:
+            try:
+                validation['type_analysis'] = self.type_checker.analyze(code)
+            except Exception as e:
+                logger.warning(f"Type checking failed: {e}")
+                validation['type_analysis'] = {'error': str(e)}
+        
+        if self.security_analyzer is not None:
+            try:
+                validation['security_analysis'] = self.security_analyzer.analyze(code)
+            except Exception as e:
+                logger.warning(f"Security analysis failed: {e}")
+                validation['security_analysis'] = {'error': str(e)}
+        
+        return validation
+    
+    def extract_all_properties(self, code: str) -> Dict[str, Any]:
+        """
+        Extract all 13 foundational properties from code (WITH enhancements).
+        
+        ⚠️  WARNING: This includes enhanced properties (radon, mypy, bandit)
+        which should NOT be used for distance calculation in transformations!
+        
+        For transformation distance, use: extract_transformation_properties()
+        For validation analysis, use: extract_validation_properties()
+        
+        Args:
+            code: Python code string
+            
+        Returns:
+            Dictionary with all foundational properties (baseline + enhanced)
         """
         try:
             tree = ast.parse(code)
@@ -347,7 +476,15 @@ class FoundationalProperties:
         return complexity
     
     def _extract_side_effect_profile(self, tree: ast.AST, code: str) -> Dict[str, Any]:
-        """Extract pure vs stateful operations"""
+        """
+        Extract pure vs stateful operations.
+        
+        BASELINE: AST-based side effect detection (existing logic, always runs)
+        ENHANCED: bandit security analysis if available (comprehensive detection)
+        
+        Design: Extend, don't replace - maintains backward compatibility
+        """
+        # BASELINE: AST-based side effect detection (existing logic preserved)
         profile = {
             "has_print": False,
             "has_global_access": False,
@@ -374,6 +511,32 @@ class FoundationalProperties:
         
         visitor = SideEffectVisitor()
         visitor.visit(tree)
+        
+        # ENHANCEMENT: Add security analysis if analyzer available
+        # This extends the baseline without replacing it
+        if self.security_analyzer is not None:
+            try:
+                security_analysis = self.security_analyzer.analyze(code)
+                
+                # Merge security findings into profile
+                profile.update({
+                    "io_operations": security_analysis.get("io_operations", []),
+                    "network_calls": security_analysis.get("network_calls", []),
+                    "system_calls": security_analysis.get("system_calls", []),
+                    "unsafe_operations": security_analysis.get("unsafe_operations", []),
+                    "security_risks": security_analysis.get("security_risks", []),
+                    "security_score": security_analysis.get("security_score", None),
+                    "purity_level": security_analysis.get("purity_level", None),
+                })
+                
+                # Update purity based on comprehensive analysis
+                if security_analysis.get("has_side_effects", False):
+                    profile["is_pure"] = False
+                    
+            except Exception as e:
+                # Graceful degradation: log error but keep baseline
+                logger.warning(f"Security analysis failed: {e}")
+                profile["security_analysis_error"] = str(e)
         
         return profile
     
