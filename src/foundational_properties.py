@@ -9,6 +9,17 @@ import hashlib
 from typing import Dict, Any, List, Set, Tuple, Optional
 from collections import defaultdict
 import json
+import logging
+
+# Import enhanced analyzers (lazy-loaded to avoid dependency issues)
+try:
+    from .analyzers.complexity_analyzer import ComplexityAnalyzer
+    from .analyzers.type_checker import TypeChecker
+    ANALYZERS_AVAILABLE = True
+except ImportError:
+    ANALYZERS_AVAILABLE = False
+
+logger = logging.getLogger(__name__)
 
 
 class FoundationalProperties:
@@ -19,6 +30,11 @@ class FoundationalProperties:
     def __init__(self, contract: Optional[Dict[str, Any]] = None):
         # Define the 13 foundational properties
         self.contract = contract
+        
+        # Lazy-loaded analyzers (Dependency Injection pattern)
+        self._complexity_analyzer = None
+        self._type_checker = None
+        
         self.properties = [
             "control_flow_signature",
             "data_dependency_graph", 
@@ -36,6 +52,24 @@ class FoundationalProperties:
             # "behavioral_signature",  # DISABLED: Executes arbitrary code, causes hangs
             "recursion_schema"       # NEW: Recursive structure
         ]
+    
+    @property
+    def complexity_analyzer(self) -> Optional['ComplexityAnalyzer']:
+        """Lazy-load complexity analyzer (avoids import if not needed)"""
+        if not ANALYZERS_AVAILABLE:
+            return None
+        if self._complexity_analyzer is None:
+            self._complexity_analyzer = ComplexityAnalyzer()
+        return self._complexity_analyzer
+    
+    @property
+    def type_checker(self) -> Optional['TypeChecker']:
+        """Lazy-load type checker (avoids import if not needed)"""
+        if not ANALYZERS_AVAILABLE:
+            return None
+        if self._type_checker is None:
+            self._type_checker = TypeChecker()
+        return self._type_checker
     
     def extract_all_properties(self, code: str) -> Dict[str, Any]:
         """
@@ -182,7 +216,15 @@ class FoundationalProperties:
         return {"execution_paths": paths}
     
     def _extract_function_contracts(self, tree: ast.AST, code: str) -> Dict[str, Any]:
-        """Extract input/output type relationships"""
+        """
+        Extract input/output type relationships.
+        
+        BASELINE: AST-based contract extraction (existing logic, always runs)
+        ENHANCED: mypy type checking and inference if available
+        
+        Design: Extend, don't replace - maintains backward compatibility
+        """
+        # BASELINE: AST-based contract extraction (existing logic preserved)
         contracts = {}
         
         class ContractVisitor(ast.NodeVisitor):
@@ -206,10 +248,44 @@ class FoundationalProperties:
         visitor = ContractVisitor()
         visitor.visit(tree)
         
+        # ENHANCEMENT: Add type checking if analyzer available
+        # This extends the baseline without replacing it
+        if self.type_checker is not None:
+            try:
+                type_analysis = self.type_checker.analyze(code)
+                
+                # Merge type information into contracts
+                for func_name in contracts:
+                    if func_name in type_analysis.get("function_signatures", {}):
+                        sig = type_analysis["function_signatures"][func_name]
+                        # Add type-specific fields
+                        contracts[func_name]["type_signature"] = sig
+                        contracts[func_name]["has_type_annotations"] = sig.get("has_annotations", False)
+                
+                # Add global type analysis results
+                contracts["_type_analysis"] = {
+                    "type_errors": type_analysis.get("type_errors", []),
+                    "total_type_errors": type_analysis.get("total_type_errors", 0),
+                    "type_safe": type_analysis.get("type_safe", None),
+                    "annotation_coverage": type_analysis.get("annotation_coverage", 0.0),
+                }
+            except Exception as e:
+                # Graceful degradation: log error but keep baseline
+                logger.warning(f"Type checking failed: {e}")
+                contracts["_type_analysis"] = {"error": str(e)}
+        
         return contracts
     
     def _extract_complexity_class(self, tree: ast.AST, code: str) -> Dict[str, Any]:
-        """Extract algorithmic complexity (O-notation)"""
+        """
+        Extract algorithmic complexity (O-notation).
+        
+        BASELINE: AST-based heuristic (existing logic, always runs)
+        ENHANCED: Radon metrics if available (compiler-grade analysis)
+        
+        Design: Extend, don't replace - maintains backward compatibility
+        """
+        # BASELINE: AST-based complexity analysis (existing logic preserved)
         complexity = {
             "nested_loops": 0,
             "recursive_calls": 0,
@@ -248,13 +324,25 @@ class FoundationalProperties:
         
         complexity["nested_loops"] = visitor.max_loop_depth
         
-        # Estimate complexity
+        # Estimate complexity (heuristic)
         if complexity["recursive_calls"] > 0:
             complexity["estimated_complexity"] = "O(2^n)"
         elif complexity["nested_loops"] >= 2:
             complexity["estimated_complexity"] = "O(n^2)"
         elif complexity["nested_loops"] == 1:
             complexity["estimated_complexity"] = "O(n)"
+        
+        # ENHANCEMENT: Add radon metrics if analyzer available
+        # This extends the baseline without replacing it
+        if self.complexity_analyzer is not None:
+            try:
+                radon_metrics = self.complexity_analyzer.analyze(code)
+                # Merge radon metrics into result (keeps all baseline fields)
+                complexity.update(radon_metrics)
+            except Exception as e:
+                # Graceful degradation: log error but keep baseline
+                logger.warning(f"Radon analysis failed: {e}")
+                complexity["radon_error"] = str(e)
         
         return complexity
     
