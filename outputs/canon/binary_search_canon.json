@@ -1,6 +1,6 @@
 {
   "contract_id": "binary_search",
-  "canonical_code": "def binary_search(sorted_list, target):\n    left, right = 0, len(sorted_list) - 1\n    \n    while left <= right:\n        mid = left + (right - left) // 2\n        \n        if sorted_list[mid] == target:\n            return mid\n        elif sorted_list[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n            \n    return -1",
+  "canonical_code": "def binary_search(sorted_list, target):\n    left, right = 0, len(sorted_list) - 1\n    while left <= right:\n        mid = (left + right) // 2\n        if sorted_list[mid] == target:\n            return mid\n        elif sorted_list[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n    return -1",
   "foundational_properties": {
     "control_flow_signature": {
       "if_statements": 2,
@@ -29,7 +29,7 @@
         ]
       },
       "assignments": {
-        "mid": "BinOp(left=Name(id='left', ctx=Load()), op=Add(), right=BinOp(left=BinOp(left=Name(id='right', ctx=Load()), op=Sub(), right=Name(id='left', ctx=Load())), op=FloorDiv(), right=Constant(value=2)))",
+        "mid": "BinOp(left=BinOp(left=Name(id='left', ctx=Load()), op=Add(), right=Name(id='right', ctx=Load())), op=FloorDiv(), right=Constant(value=2))",
         "left": "BinOp(left=Name(id='mid', ctx=Load()), op=Add(), right=Constant(value=1))",
         "right": "BinOp(left=Name(id='mid', ctx=Load()), op=Sub(), right=Constant(value=1))"
       }
@@ -89,9 +89,8 @@
       ],
       "binary_operations": [
         "Sub",
-        "Add",
         "FloorDiv",
-        "Sub",
+        "Add",
         "Add",
         "Sub"
       ]
@@ -154,14 +153,10 @@
         "Name",
         "Store",
         "BinOp",
+        "BinOp",
         "Name",
         "Load",
         "Add",
-        "BinOp",
-        "BinOp",
-        "Name",
-        "Load",
-        "Sub",
         "Name",
         "Load",
         "FloorDiv",
@@ -213,22 +208,21 @@
         "Constant"
       ],
       "ast_depth": 8,
-      "ast_hash": "cc9a78bee99010845b8c21c16b9dd7ac",
-      "alpha_renamed_hash": "0fbab2f8e335f1820a3c37404f4e8710"
+      "ast_hash": "1bc24f109a26cd93e357b4e2e4203159",
+      "alpha_renamed_hash": "be261a4450505295910dc4ee9a9a40c3"
     },
     "operator_precedence": {
       "operator_sequence": [
         "Sub",
-        "Add",
         "FloorDiv",
-        "Sub",
+        "Add",
         "Add",
         "Sub"
       ],
       "precedence_levels": {
         "Sub": 3,
-        "Add": 3,
-        "FloorDiv": 4
+        "FloorDiv": 4,
+        "Add": 3
       }
     },
     "statement_ordering": {
@@ -269,6 +263,61 @@
       "recursive_calls": [],
       "recursion_pattern": null,
       "termination_guards": []
+    }
+  },
+  "validation_properties": {
+    "radon_metrics": {
+      "cyclomatic_complexity": 4,
+      "complexity_rank": "A",
+      "average_complexity": 4.0,
+      "maintainability_index": 62.55601606263227,
+      "halstead_difficulty": 5.95,
+      "halstead_effort": 632.3305015414276,
+      "halstead_volume": 106.27403387250884,
+      "halstead_bugs": 0.03542467795750295
+    },
+    "type_analysis": {
+      "type_errors": [],
+      "total_type_errors": 0,
+      "has_type_errors": false,
+      "type_safe": true,
+      "function_signatures": {
+        "binary_search": {
+          "parameters": [
+            {
+              "name": "sorted_list",
+              "annotation": null,
+              "has_annotation": false
+            },
+            {
+              "name": "target",
+              "annotation": null,
+              "has_annotation": false
+            }
+          ],
+          "return_annotation": null,
+          "has_annotations": false,
+          "total_params": 2,
+          "annotated_params": 0
+        }
+      },
+      "total_functions": 1,
+      "annotated_functions": 0,
+      "annotation_coverage": 0.0
+    },
+    "security_analysis": {
+      "io_operations": [],
+      "network_calls": [],
+      "system_calls": [],
+      "unsafe_operations": [],
+      "security_risks": [],
+      "total_issues": 0,
+      "high_severity_count": 0,
+      "medium_severity_count": 0,
+      "low_severity_count": 0,
+      "has_side_effects": false,
+      "purity_level": "pure",
+      "security_score": 1.0
     }
   },
   "contract_data": {
@@ -425,7 +474,7 @@
       "normalize_whitespace": true,
       "enforce_function_name": true
     },
-    "anchor_signature": "c053deb2946ce40082b8063bdef87ddcf871a2a36550b17eb0d09d89d8caef23",
+    "anchor_signature": "8e6519088ee3b1b9d3661d6fda67f63184522f78504327c6a5e5d195cec7f370",
     "compliance_flag": true,
     "distance_metric": "foundational_properties",
     "rescue_bounds": {
@@ -437,11 +486,11 @@
     "contract_version": "2.0",
     "oracle_version": "1.0",
     "normalization_version": "1.0",
-    "created_timestamp": "2025-10-22T13:34:27.843401",
+    "created_timestamp": "2025-11-19T16:42:13.426614",
     "run_id": null,
     "prompt_id": "binary_search",
     "sample_id": null,
-    "canonical_code": "def binary_search(sorted_list, target):\n    left, right = 0, len(sorted_list) - 1\n    \n    while left <= right:\n        mid = left + (right - left) // 2\n        \n        if sorted_list[mid] == target:\n            return mid\n        elif sorted_list[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n            \n    return -1",
+    "canonical_code": "def binary_search(sorted_list, target):\n    left, right = 0, len(sorted_list) - 1\n    while left <= right:\n        mid = (left + right) // 2\n        if sorted_list[mid] == target:\n            return mid\n        elif sorted_list[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n    return -1",
     "foundational_properties": {
       "control_flow_signature": {
         "if_statements": 2,
@@ -470,7 +519,7 @@
           ]
         },
         "assignments": {
-          "mid": "BinOp(left=Name(id='left', ctx=Load()), op=Add(), right=BinOp(left=BinOp(left=Name(id='right', ctx=Load()), op=Sub(), right=Name(id='left', ctx=Load())), op=FloorDiv(), right=Constant(value=2)))",
+          "mid": "BinOp(left=BinOp(left=Name(id='left', ctx=Load()), op=Add(), right=Name(id='right', ctx=Load())), op=FloorDiv(), right=Constant(value=2))",
           "left": "BinOp(left=Name(id='mid', ctx=Load()), op=Add(), right=Constant(value=1))",
           "right": "BinOp(left=Name(id='mid', ctx=Load()), op=Sub(), right=Constant(value=1))"
         }
@@ -530,9 +579,8 @@
         ],
         "binary_operations": [
           "Sub",
-          "Add",
           "FloorDiv",
-          "Sub",
+          "Add",
           "Add",
           "Sub"
         ]
@@ -595,14 +643,10 @@
           "Name",
           "Store",
           "BinOp",
+          "BinOp",
           "Name",
           "Load",
           "Add",
-          "BinOp",
-          "BinOp",
-          "Name",
-          "Load",
-          "Sub",
           "Name",
           "Load",
           "FloorDiv",
@@ -654,22 +698,21 @@
           "Constant"
         ],
         "ast_depth": 8,
-        "ast_hash": "cc9a78bee99010845b8c21c16b9dd7ac",
-        "alpha_renamed_hash": "0fbab2f8e335f1820a3c37404f4e8710"
+        "ast_hash": "1bc24f109a26cd93e357b4e2e4203159",
+        "alpha_renamed_hash": "be261a4450505295910dc4ee9a9a40c3"
       },
       "operator_precedence": {
         "operator_sequence": [
           "Sub",
-          "Add",
           "FloorDiv",
-          "Sub",
+          "Add",
           "Add",
           "Sub"
         ],
         "precedence_levels": {
           "Sub": 3,
-          "Add": 3,
-          "FloorDiv": 4
+          "FloorDiv": 4,
+          "Add": 3
         }
       },
       "statement_ordering": {
@@ -713,8 +756,8 @@
       }
     }
   },
-  "created_timestamp": "2025-10-22T13:34:27.843401",
-  "canon_version": "1.0",
+  "created_timestamp": "2025-11-19T16:42:13.426614",
+  "canon_version": "1.1",
   "oracle_validated": true,
   "oracle_pass_rate": 1.0
 }

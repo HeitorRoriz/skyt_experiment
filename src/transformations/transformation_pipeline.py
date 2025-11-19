@@ -12,10 +12,12 @@ from .structural.arithmetic_expression_normalizer import ArithmeticExpressionNor
 from .structural.class_method_reorderer import ClassMethodReorderer
 from .structural.import_normalizer import ImportNormalizer
 from .structural.snap_to_canon_finalizer import SnapToCanonFinalizer
+from .structural.phase16_canonicalizer import Phase16Canonicalizer  # Phase 1.6 enhancements
 from .behavioral.algorithm_optimizer import AlgorithmOptimizer
 from .behavioral.boundary_condition_aligner import BoundaryConditionAligner
 from .behavioral.recursion_schema_aligner import RecursionSchemaAligner
 from .behavioral.in_place_return_converter import InPlaceReturnConverter
+from .behavioral.oracle_guided_transformer import OracleGuidedTransformer  # Phase 1.7
 from .semantic_validator import SemanticValidator
 from .dictionary_normalizer import DictionaryNormalizer  # Import the new transformer
 from .regex_pattern_normalizer import RegexPatternNormalizer  # Import regex normalizer
@@ -45,6 +47,9 @@ class TransformationPipeline:
         # NEW APPROACH: Use property-driven transformer as primary
         # Falls back to algorithm-specific transformers if needed
         transformations = [
+            # PHASE 1.6: General-purpose canonicalization (FIRST - reduces noise)
+            Phase16Canonicalizer(),  # Expression canon + Dead code + Commutative norm
+            
             # PRIMARY: Property-driven transformation (generic, no hardcoded logic)
             PropertyDrivenTransformer(contract=self.contract_data, debug_mode=self.debug_mode),
             
@@ -68,6 +73,10 @@ class TransformationPipeline:
             
             # LAST: Snap-to-canon finalizer (handles remaining harmless differences)
             SnapToCanonFinalizer(contract=self.contract_data),
+            
+            # PHASE 1.7: Oracle-guided template transformation (algorithmic diversity)
+            # This goes LAST as a final resort for when syntactic transforms aren't enough
+            OracleGuidedTransformer(contract=self.contract_data, distance_threshold=0.15),
         ]
         
         for transformer in transformations:
@@ -96,8 +105,17 @@ class TransformationPipeline:
         
         current_code = code
         successful_transformations = []
+        seen_code_hashes = set()  # Cycle detection for idempotency
         
         for iteration in range(max_iterations):
+            # Check for cycles (idempotency violation)
+            code_hash = hash(current_code)
+            if code_hash in seen_code_hashes:
+                if self.debug_mode:
+                    print(f"Cycle detected at iteration {iteration} - stopping")
+                break
+            seen_code_hashes.add(code_hash)
+            
             transformed_this_iteration = False
             
             for transformer in self.transformations:

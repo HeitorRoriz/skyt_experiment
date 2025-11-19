@@ -87,9 +87,9 @@ class CodeTransformer:
             current_code = code
             transformations_applied = []
         
-        # Final distance calculation
-        final_properties = self.properties_extractor.extract_all_properties(current_code)
-        final_distance = self.properties_extractor.calculate_distance(
+        # Final distance calculation (using transformation properties only)
+        final_properties = self.properties_extractor.extract_transformation_properties(current_code)
+        final_distance = self.properties_extractor.calculate_transformation_distance(
             canon_properties, final_properties
         )
         

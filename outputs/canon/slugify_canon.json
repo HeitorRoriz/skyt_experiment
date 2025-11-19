@@ -1,6 +1,6 @@
 {
   "contract_id": "slugify",
-  "canonical_code": "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    return text.strip('-')",
+  "canonical_code": "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    text = text.strip('-')\n    return text",
   "foundational_properties": {
     "control_flow_signature": {
       "if_statements": 0,
@@ -17,7 +17,7 @@
         ]
       },
       "assignments": {
-        "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[\\\\s]+'), Constant(value='-'), Name(id='text', ctx=Load())])"
+        "text": "Call(func=Attribute(value=Name(id='text', ctx=Load()), attr='strip', ctx=Load()), args=[Constant(value='-')])"
       }
     },
     "execution_paths": {
@@ -110,17 +110,22 @@
         "Constant",
         "Name",
         "Load",
-        "Return",
+        "Assign",
+        "Name",
+        "Store",
         "Call",
         "Attribute",
         "Name",
         "Load",
         "Load",
-        "Constant"
+        "Constant",
+        "Return",
+        "Name",
+        "Load"
       ],
       "ast_depth": 6,
-      "ast_hash": "07685106fd2c3d5263423123f643ac70",
-      "alpha_renamed_hash": "845e19d4c837f3d9206a64134d0e2c76"
+      "ast_hash": "d774144c7d690544351d9e4649769447",
+      "alpha_renamed_hash": "2738d7614d6a4a09fe920aacc1a4a71e"
     },
     "operator_precedence": {
       "operator_sequence": [],
@@ -133,6 +138,7 @@
         "Assign",
         "Assign",
         "Assign",
+        "Assign",
         "Return"
       ],
       "statement_sequence": [
@@ -141,7 +147,8 @@
         "Assign_2",
         "Assign_3",
         "Assign_4",
-        "Return_5"
+        "Assign_5",
+        "Return_6"
       ],
       "control_flow_order": [
         "FunctionDef"
@@ -153,6 +160,56 @@
       "recursive_calls": [],
       "recursion_pattern": null,
       "termination_guards": []
+    }
+  },
+  "validation_properties": {
+    "radon_metrics": {
+      "cyclomatic_complexity": 1,
+      "complexity_rank": "A",
+      "average_complexity": 1.0,
+      "maintainability_index": 100.0,
+      "halstead_difficulty": 0,
+      "halstead_effort": 0,
+      "halstead_volume": 0,
+      "halstead_bugs": 0.0
+    },
+    "type_analysis": {
+      "type_errors": [],
+      "total_type_errors": 0,
+      "has_type_errors": false,
+      "type_safe": true,
+      "function_signatures": {
+        "slugify": {
+          "parameters": [
+            {
+              "name": "text",
+              "annotation": null,
+              "has_annotation": false
+            }
+          ],
+          "return_annotation": null,
+          "has_annotations": false,
+          "total_params": 1,
+          "annotated_params": 0
+        }
+      },
+      "total_functions": 1,
+      "annotated_functions": 0,
+      "annotation_coverage": 0.0
+    },
+    "security_analysis": {
+      "io_operations": [],
+      "network_calls": [],
+      "system_calls": [],
+      "unsafe_operations": [],
+      "security_risks": [],
+      "total_issues": 0,
+      "high_severity_count": 0,
+      "medium_severity_count": 0,
+      "low_severity_count": 0,
+      "has_side_effects": false,
+      "purity_level": "pure",
+      "security_score": 1.0
     }
   },
   "contract_data": {
@@ -221,7 +278,7 @@
       "normalize_whitespace": true,
       "enforce_function_name": true
     },
-    "anchor_signature": "e407d0b63a848b64d275546f6affd69a167d06bc9cd1d8f19ae34e39f72d2cda",
+    "anchor_signature": "4e7bb2caef7cdd94028d5adf948e844b60b232a31833fba5217ba9f7ca02cfe9",
     "compliance_flag": true,
     "distance_metric": "foundational_properties",
     "rescue_bounds": {
@@ -233,11 +290,11 @@
     "contract_version": "2.0",
     "oracle_version": "1.0",
     "normalization_version": "1.0",
-    "created_timestamp": "2025-10-22T12:43:18.453991",
+    "created_timestamp": "2025-11-19T16:39:35.643103",
     "run_id": null,
     "prompt_id": "slugify",
     "sample_id": null,
-    "canonical_code": "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    return text.strip('-')",
+    "canonical_code": "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    text = text.strip('-')\n    return text",
     "foundational_properties": {
       "control_flow_signature": {
         "if_statements": 0,
@@ -254,7 +311,7 @@
           ]
         },
         "assignments": {
-          "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[\\\\s]+'), Constant(value='-'), Name(id='text', ctx=Load())])"
+          "text": "Call(func=Attribute(value=Name(id='text', ctx=Load()), attr='strip', ctx=Load()), args=[Constant(value='-')])"
         }
       },
       "execution_paths": {
@@ -347,17 +404,22 @@
           "Constant",
           "Name",
           "Load",
-          "Return",
+          "Assign",
+          "Name",
+          "Store",
           "Call",
           "Attribute",
           "Name",
           "Load",
           "Load",
-          "Constant"
+          "Constant",
+          "Return",
+          "Name",
+          "Load"
         ],
         "ast_depth": 6,
-        "ast_hash": "07685106fd2c3d5263423123f643ac70",
-        "alpha_renamed_hash": "845e19d4c837f3d9206a64134d0e2c76"
+        "ast_hash": "d774144c7d690544351d9e4649769447",
+        "alpha_renamed_hash": "2738d7614d6a4a09fe920aacc1a4a71e"
       },
       "operator_precedence": {
         "operator_sequence": [],
@@ -370,6 +432,7 @@
           "Assign",
           "Assign",
           "Assign",
+          "Assign",
           "Return"
         ],
         "statement_sequence": [
@@ -378,7 +441,8 @@
           "Assign_2",
           "Assign_3",
           "Assign_4",
-          "Return_5"
+          "Assign_5",
+          "Return_6"
         ],
         "control_flow_order": [
           "FunctionDef"
@@ -393,8 +457,8 @@
       }
     }
   },
-  "created_timestamp": "2025-10-22T12:43:18.453991",
-  "canon_version": "1.0",
+  "created_timestamp": "2025-11-19T16:39:35.643103",
+  "canon_version": "1.1",
   "oracle_validated": true,
   "oracle_pass_rate": 0.8333333333333334
 }

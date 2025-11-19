@@ -52,23 +52,28 @@ class CanonSystem:
                     f"Oracle pass rate: {pass_rate:.1%}. Error: {error_msg}"
                 )
         
-        # Extract foundational properties
-        properties = self.properties_extractor.extract_all_properties(code)
+        # Extract transformation properties (baseline AST only)
+        # These are used for distance calculation during transformations
+        transformation_properties = self.properties_extractor.extract_transformation_properties(code)
+        
+        # Also extract validation properties (enhanced analysis) for reporting
+        validation_properties = self.properties_extractor.extract_validation_properties(code)
         
         # Create canon data (store contract for variable naming enforcement)
         canon_data = {
             "contract_id": contract.data["id"],
             "canonical_code": code,
-            "foundational_properties": properties,
+            "foundational_properties": transformation_properties,  # Used for transformations
+            "validation_properties": validation_properties,  # Enhanced analysis for reporting
             "contract_data": contract.data,  # Store full contract for variable naming
             "created_timestamp": contract.data.get("created_timestamp"),
-            "canon_version": "1.0",
+            "canon_version": "1.1",  # Bumped version for Phase 1.5
             "oracle_validated": oracle_result is not None and oracle_result.get("passed", False),
             "oracle_pass_rate": oracle_result.get("pass_rate", None) if oracle_result else None
         }
         
-        # Set anchor in contract
-        contract.set_anchor(code, properties)
+        # Set anchor in contract (using transformation properties)
+        contract.set_anchor(code, transformation_properties)
         
         # Save canon to disk
         self._save_canon(contract.data["id"], canon_data)
@@ -115,16 +120,16 @@ class CanonSystem:
                 "is_identical": False
             }
         
-        # Extract properties from new code
-        new_properties = self.properties_extractor.extract_all_properties(code)
+        # Extract transformation properties from new code (baseline AST only)
+        new_properties = self.properties_extractor.extract_transformation_properties(code)
         canon_properties = canon_data["foundational_properties"]
         
         # Get contract from canon data if not provided
         if contract is None and "contract_data" in canon_data:
             contract = canon_data["contract_data"]
         
-        # Calculate distance (pass contract for variable naming enforcement)
-        distance = self.properties_extractor.calculate_distance(
+        # Calculate transformation distance (pass contract for variable naming enforcement)
+        distance = self.properties_extractor.calculate_transformation_distance(
             canon_properties, new_properties, contract
         )
         

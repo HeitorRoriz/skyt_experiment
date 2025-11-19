@@ -37,6 +37,9 @@ class FoundationalProperties:
         self._type_checker = None
         self._security_analyzer = None
         
+        # Flag to disable enhancements (for transformation properties)
+        self._disable_enhancements = False
+        
         self.properties = [
             "control_flow_signature",
             "data_dependency_graph", 
@@ -58,7 +61,7 @@ class FoundationalProperties:
     @property
     def complexity_analyzer(self) -> Optional['ComplexityAnalyzer']:
         """Lazy-load complexity analyzer (avoids import if not needed)"""
-        if not ANALYZERS_AVAILABLE:
+        if self._disable_enhancements or not ANALYZERS_AVAILABLE:
             return None
         if self._complexity_analyzer is None:
             self._complexity_analyzer = ComplexityAnalyzer()
@@ -67,7 +70,7 @@ class FoundationalProperties:
     @property
     def type_checker(self) -> Optional['TypeChecker']:
         """Lazy-load type checker (avoids import if not needed)"""
-        if not ANALYZERS_AVAILABLE:
+        if self._disable_enhancements or not ANALYZERS_AVAILABLE:
             return None
         if self._type_checker is None:
             self._type_checker = TypeChecker()
@@ -76,7 +79,7 @@ class FoundationalProperties:
     @property
     def security_analyzer(self) -> Optional['SecurityAnalyzer']:
         """Lazy-load security analyzer (avoids import if not needed)"""
-        if not ANALYZERS_AVAILABLE:
+        if self._disable_enhancements or not ANALYZERS_AVAILABLE:
             return None
         if self._security_analyzer is None:
             self._security_analyzer = SecurityAnalyzer()
@@ -123,27 +126,20 @@ class FoundationalProperties:
             ]
             
             properties = {}
-            for prop_name in baseline_properties:
-                method_name = f"_extract_{prop_name}"
-                if hasattr(self, method_name):
-                    # Extract property WITHOUT enhanced analysis
-                    # Temporarily disable analyzers for baseline extraction
-                    saved_complexity = self._complexity_analyzer
-                    saved_type_checker = self._type_checker
-                    saved_security = self._security_analyzer
-                    
-                    self._complexity_analyzer = None
-                    self._type_checker = None
-                    self._security_analyzer = None
-                    
-                    try:
+            
+            # Temporarily disable enhancements for baseline extraction
+            saved_flag = self._disable_enhancements
+            self._disable_enhancements = True
+            
+            try:
+                for prop_name in baseline_properties:
+                    method_name = f"_extract_{prop_name}"
+                    if hasattr(self, method_name):
                         properties[prop_name] = getattr(self, method_name)(tree, code)
-                    finally:
-                        self._complexity_analyzer = saved_complexity
-                        self._type_checker = saved_type_checker
-                        self._security_analyzer = saved_security
-                else:
-                    properties[prop_name] = None
+                    else:
+                        properties[prop_name] = None
+            finally:
+                self._disable_enhancements = saved_flag
             
             return properties
             
@@ -918,10 +914,71 @@ class FoundationalProperties:
         
         return schema
     
+    def calculate_transformation_distance(self, props1: Dict[str, Any], props2: Dict[str, Any],
+                                         contract: Optional[Dict[str, Any]] = None) -> float:
+        """
+        Calculate distance for TRANSFORMATION purposes.
+        
+        Only considers baseline AST properties that transformations can actually modify.
+        Does NOT include enhanced properties (radon, mypy, bandit) as those are immutable.
+        
+        This is the distance metric used by the transformation system to determine
+        if code has successfully converged to canon.
+        
+        Args:
+            props1: First set of properties (from extract_transformation_properties)
+            props2: Second set of properties (from extract_transformation_properties)
+            contract: Optional contract with variable naming constraints
+            
+        Returns:
+            Distance score (0.0 = identical, 1.0 = completely different)
+        """
+        # Use instance contract if not provided
+        contract = contract or self.contract
+        if not props1 or not props2:
+            return 1.0
+        
+        # Only baseline properties (transformable)
+        baseline_properties = [
+            "control_flow_signature",
+            "data_dependency_graph",
+            "execution_paths",
+            "function_contracts",
+            "complexity_class",
+            "side_effect_profile",
+            "termination_properties",
+            "algebraic_structure",
+            "numerical_behavior",
+            "logical_equivalence",
+            "normalized_ast_structure",
+            "operator_precedence",
+            "statement_ordering",
+            "recursion_schema"
+        ]
+        
+        total_distance = 0.0
+        property_count = 0
+        
+        for prop_name in baseline_properties:
+            if prop_name in props1 and prop_name in props2:
+                prop_distance = self._calculate_property_distance(
+                    props1[prop_name], props2[prop_name], prop_name, contract
+                )
+                total_distance += prop_distance
+                property_count += 1
+        
+        return total_distance / property_count if property_count > 0 else 1.0
+    
     def calculate_distance(self, props1: Dict[str, Any], props2: Dict[str, Any],
                           contract: Optional[Dict[str, Any]] = None) -> float:
         """
-        Calculate distance between two sets of foundational properties
+        Calculate distance between two sets of foundational properties.
+        
+        ⚠️  WARNING: If props include enhanced properties (radon, mypy, bandit),
+        this will include them in distance calculation, which breaks transformations!
+        
+        For transformation distance, use: calculate_transformation_distance()
+        For full analysis, use this method.
         
         Args:
             props1: First set of properties

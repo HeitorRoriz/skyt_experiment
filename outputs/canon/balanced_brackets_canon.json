@@ -1,12 +1,14 @@
 {
   "contract_id": "balanced_brackets",
-  "canonical_code": "def is_balanced(s):\n    stack = []\n    bracket_map = {')': '(', '}': '{', ']': '['}\n    \n    for char in s:\n        if char in bracket_map.values():\n            stack.append(char)\n        elif char in bracket_map.keys():\n            if not stack or stack.pop() != bracket_map[char]:\n                return False\n    \n    return not stack",
+  "canonical_code": "def is_balanced(s):\n    stack = []\n    bracket_map = {')': '(', '}': '{', ']': '['}\n    \n    for char in s:\n        if char in bracket_map.values():\n            stack.append(char)\n        elif char in bracket_map.keys():\n            if not stack or stack.pop() != bracket_map[char]:\n                return False\n                \n    return len(stack) == 0",
   "foundational_properties": {
     "control_flow_signature": {
       "if_statements": 3,
       "for_loops": 1,
       "while_loops": 0,
-      "function_calls": [],
+      "function_calls": [
+        "len"
+      ],
       "nested_depth": 4,
       "branch_patterns": [
         "if_at_depth_1",
@@ -90,7 +92,8 @@
       "uses_floats": false,
       "has_arithmetic": false,
       "numeric_constants": [
-        false
+        false,
+        0
       ]
     },
     "logical_equivalence": {
@@ -100,7 +103,8 @@
       "comparisons": [
         "In",
         "In",
-        "NotEq"
+        "NotEq",
+        "Eq"
       ],
       "logical_patterns": []
     },
@@ -181,14 +185,18 @@
         "Return",
         "Constant",
         "Return",
-        "UnaryOp",
-        "Not",
+        "Compare",
+        "Call",
         "Name",
-        "Load"
+        "Load",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant"
       ],
       "ast_depth": 11,
-      "ast_hash": "93465b11cb6366eed5c0843b442f76af",
-      "alpha_renamed_hash": "e6c3edad12fd58ef8115add39d2607a2"
+      "ast_hash": "c401a6e853809e539018ff3be7e493ea",
+      "alpha_renamed_hash": "11c4add17810f5669eb8e31e779f901c"
     },
     "operator_precedence": {
       "operator_sequence": [],
@@ -233,6 +241,56 @@
       "recursive_calls": [],
       "recursion_pattern": null,
       "termination_guards": []
+    }
+  },
+  "validation_properties": {
+    "radon_metrics": {
+      "cyclomatic_complexity": 6,
+      "complexity_rank": "B",
+      "average_complexity": 6.0,
+      "maintainability_index": 63.71645015274979,
+      "halstead_difficulty": 2.75,
+      "halstead_effort": 182.64713534469826,
+      "halstead_volume": 66.41714012534482,
+      "halstead_bugs": 0.02213904670844827
+    },
+    "type_analysis": {
+      "type_errors": [],
+      "total_type_errors": 0,
+      "has_type_errors": false,
+      "type_safe": true,
+      "function_signatures": {
+        "is_balanced": {
+          "parameters": [
+            {
+              "name": "s",
+              "annotation": null,
+              "has_annotation": false
+            }
+          ],
+          "return_annotation": null,
+          "has_annotations": false,
+          "total_params": 1,
+          "annotated_params": 0
+        }
+      },
+      "total_functions": 1,
+      "annotated_functions": 0,
+      "annotation_coverage": 0.0
+    },
+    "security_analysis": {
+      "io_operations": [],
+      "network_calls": [],
+      "system_calls": [],
+      "unsafe_operations": [],
+      "security_risks": [],
+      "total_issues": 0,
+      "high_severity_count": 0,
+      "medium_severity_count": 0,
+      "low_severity_count": 0,
+      "has_side_effects": false,
+      "purity_level": "pure",
+      "security_score": 1.0
     }
   },
   "contract_data": {
@@ -310,7 +368,7 @@
       "normalize_whitespace": true,
       "enforce_function_name": true
     },
-    "anchor_signature": "ebdb42b83af77fdbe0f8f0c022eb0e1eb1784846bdd39697334f96081102917a",
+    "anchor_signature": "ecf27419cac1c3bbaf261bdc47c05fb91d5b16dcdd7d1513e78ef4a290934eb3",
     "compliance_flag": true,
     "distance_metric": "foundational_properties",
     "rescue_bounds": {
@@ -322,17 +380,19 @@
     "contract_version": "2.0",
     "oracle_version": "1.0",
     "normalization_version": "1.0",
-    "created_timestamp": "2025-10-22T12:45:11.972411",
+    "created_timestamp": "2025-11-19T16:40:43.492693",
     "run_id": null,
     "prompt_id": "balanced_brackets",
     "sample_id": null,
-    "canonical_code": "def is_balanced(s):\n    stack = []\n    bracket_map = {')': '(', '}': '{', ']': '['}\n    \n    for char in s:\n        if char in bracket_map.values():\n            stack.append(char)\n        elif char in bracket_map.keys():\n            if not stack or stack.pop() != bracket_map[char]:\n                return False\n    \n    return not stack",
+    "canonical_code": "def is_balanced(s):\n    stack = []\n    bracket_map = {')': '(', '}': '{', ']': '['}\n    \n    for char in s:\n        if char in bracket_map.values():\n            stack.append(char)\n        elif char in bracket_map.keys():\n            if not stack or stack.pop() != bracket_map[char]:\n                return False\n                \n    return len(stack) == 0",
     "foundational_properties": {
       "control_flow_signature": {
         "if_statements": 3,
         "for_loops": 1,
         "while_loops": 0,
-        "function_calls": [],
+        "function_calls": [
+          "len"
+        ],
         "nested_depth": 4,
         "branch_patterns": [
           "if_at_depth_1",
@@ -416,7 +476,8 @@
         "uses_floats": false,
         "has_arithmetic": false,
         "numeric_constants": [
-          false
+          false,
+          0
         ]
       },
       "logical_equivalence": {
@@ -426,7 +487,8 @@
         "comparisons": [
           "In",
           "In",
-          "NotEq"
+          "NotEq",
+          "Eq"
         ],
         "logical_patterns": []
       },
@@ -507,14 +569,18 @@
           "Return",
           "Constant",
           "Return",
-          "UnaryOp",
-          "Not",
+          "Compare",
+          "Call",
           "Name",
-          "Load"
+          "Load",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant"
         ],
         "ast_depth": 11,
-        "ast_hash": "93465b11cb6366eed5c0843b442f76af",
-        "alpha_renamed_hash": "e6c3edad12fd58ef8115add39d2607a2"
+        "ast_hash": "c401a6e853809e539018ff3be7e493ea",
+        "alpha_renamed_hash": "11c4add17810f5669eb8e31e779f901c"
       },
       "operator_precedence": {
         "operator_sequence": [],
@@ -562,8 +628,8 @@
       }
     }
   },
-  "created_timestamp": "2025-10-22T12:45:11.972411",
-  "canon_version": "1.0",
+  "created_timestamp": "2025-11-19T16:40:43.492693",
+  "canon_version": "1.1",
   "oracle_validated": true,
   "oracle_pass_rate": 1.0
 }
