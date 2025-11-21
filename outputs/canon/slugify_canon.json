@@ -1,6 +1,6 @@
 {
   "contract_id": "slugify",
-  "canonical_code": "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    text = text.strip('-')\n    return text",
+  "canonical_code": "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    return text.strip('-')",
   "foundational_properties": {
     "control_flow_signature": {
       "if_statements": 0,
@@ -17,7 +17,7 @@
         ]
       },
       "assignments": {
-        "text": "Call(func=Attribute(value=Name(id='text', ctx=Load()), attr='strip', ctx=Load()), args=[Constant(value='-')])"
+        "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[\\\\s]+'), Constant(value='-'), Name(id='text', ctx=Load())])"
       }
     },
     "execution_paths": {
@@ -110,22 +110,17 @@
         "Constant",
         "Name",
         "Load",
-        "Assign",
-        "Name",
-        "Store",
+        "Return",
         "Call",
         "Attribute",
         "Name",
         "Load",
         "Load",
-        "Constant",
-        "Return",
-        "Name",
-        "Load"
+        "Constant"
       ],
       "ast_depth": 6,
-      "ast_hash": "d774144c7d690544351d9e4649769447",
-      "alpha_renamed_hash": "2738d7614d6a4a09fe920aacc1a4a71e"
+      "ast_hash": "07685106fd2c3d5263423123f643ac70",
+      "alpha_renamed_hash": "845e19d4c837f3d9206a64134d0e2c76"
     },
     "operator_precedence": {
       "operator_sequence": [],
@@ -138,7 +133,6 @@
         "Assign",
         "Assign",
         "Assign",
-        "Assign",
         "Return"
       ],
       "statement_sequence": [
@@ -147,8 +141,7 @@
         "Assign_2",
         "Assign_3",
         "Assign_4",
-        "Assign_5",
-        "Return_6"
+        "Return_5"
       ],
       "control_flow_order": [
         "FunctionDef"
@@ -218,6 +211,8 @@
     "prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.",
     "constraints": {
       "function_name": "slugify",
+      "algorithm": "string transformation",
+      "implementation_style": "iterative",
       "output_type": "string",
       "variable_naming": {
         "fixed_variables": [
@@ -278,7 +273,7 @@
       "normalize_whitespace": true,
       "enforce_function_name": true
     },
-    "anchor_signature": "4e7bb2caef7cdd94028d5adf948e844b60b232a31833fba5217ba9f7ca02cfe9",
+    "anchor_signature": "e407d0b63a848b64d275546f6affd69a167d06bc9cd1d8f19ae34e39f72d2cda",
     "compliance_flag": true,
     "distance_metric": "foundational_properties",
     "rescue_bounds": {
@@ -290,11 +285,11 @@
     "contract_version": "2.0",
     "oracle_version": "1.0",
     "normalization_version": "1.0",
-    "created_timestamp": "2025-11-19T16:39:35.643103",
+    "created_timestamp": "2025-11-21T10:23:02.675711",
     "run_id": null,
     "prompt_id": "slugify",
     "sample_id": null,
-    "canonical_code": "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    text = text.strip('-')\n    return text",
+    "canonical_code": "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    return text.strip('-')",
     "foundational_properties": {
       "control_flow_signature": {
         "if_statements": 0,
@@ -311,7 +306,7 @@
           ]
         },
         "assignments": {
-          "text": "Call(func=Attribute(value=Name(id='text', ctx=Load()), attr='strip', ctx=Load()), args=[Constant(value='-')])"
+          "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[\\\\s]+'), Constant(value='-'), Name(id='text', ctx=Load())])"
         }
       },
       "execution_paths": {
@@ -404,22 +399,17 @@
           "Constant",
           "Name",
           "Load",
-          "Assign",
-          "Name",
-          "Store",
+          "Return",
           "Call",
           "Attribute",
           "Name",
           "Load",
           "Load",
-          "Constant",
-          "Return",
-          "Name",
-          "Load"
+          "Constant"
         ],
         "ast_depth": 6,
-        "ast_hash": "d774144c7d690544351d9e4649769447",
-        "alpha_renamed_hash": "2738d7614d6a4a09fe920aacc1a4a71e"
+        "ast_hash": "07685106fd2c3d5263423123f643ac70",
+        "alpha_renamed_hash": "845e19d4c837f3d9206a64134d0e2c76"
       },
       "operator_precedence": {
         "operator_sequence": [],
@@ -432,7 +422,6 @@
           "Assign",
           "Assign",
           "Assign",
-          "Assign",
           "Return"
         ],
         "statement_sequence": [
@@ -441,8 +430,7 @@
           "Assign_2",
           "Assign_3",
           "Assign_4",
-          "Assign_5",
-          "Return_6"
+          "Return_5"
         ],
         "control_flow_order": [
           "FunctionDef"
@@ -457,7 +445,7 @@
       }
     }
   },
-  "created_timestamp": "2025-11-19T16:39:35.643103",
+  "created_timestamp": "2025-11-21T10:23:02.675711",
   "canon_version": "1.1",
   "oracle_validated": true,
   "oracle_pass_rate": 0.8333333333333334

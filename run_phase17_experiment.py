@@ -9,6 +9,12 @@ import sys
 import json
 from pathlib import Path
 from datetime import datetime
+import io
+
+# Fix encoding for Windows console
+if sys.platform == 'win32':
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
 sys.path.insert(0, str(Path(__file__).parent))
 

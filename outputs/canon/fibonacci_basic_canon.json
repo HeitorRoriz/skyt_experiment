@@ -1,6 +1,6 @@
 {
   "contract_id": "fibonacci_basic",
-  "canonical_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+  "canonical_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
   "foundational_properties": {
     "control_flow_signature": {
       "if_statements": 2,
@@ -283,8 +283,11 @@
     "prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use iteration, not recursion.",
     "constraints": {
       "function_name": "fibonacci",
+      "algorithm": "fibonacci sequence",
+      "algorithm_variant": "iterative",
       "requires_recursion": false,
       "implementation_style": "iterative",
+      "output_type": "integer",
       "variable_naming": {
         "fixed_variables": [
           "n"
@@ -347,11 +350,11 @@
     "contract_version": "2.0",
     "oracle_version": "1.0",
     "normalization_version": "1.0",
-    "created_timestamp": "2025-11-19T16:38:42.838872",
+    "created_timestamp": "2025-11-21T10:22:09.799838",
     "run_id": null,
     "prompt_id": "fibonacci_basic",
     "sample_id": null,
-    "canonical_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+    "canonical_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
     "foundational_properties": {
       "control_flow_signature": {
         "if_statements": 2,
@@ -579,7 +582,7 @@
       }
     }
   },
-  "created_timestamp": "2025-11-19T16:38:42.838872",
+  "created_timestamp": "2025-11-21T10:22:09.799838",
   "canon_version": "1.1",
   "oracle_validated": true,
   "oracle_pass_rate": 1.0

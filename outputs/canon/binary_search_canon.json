@@ -1,6 +1,6 @@
 {
   "contract_id": "binary_search",
-  "canonical_code": "def binary_search(sorted_list, target):\n    left, right = 0, len(sorted_list) - 1\n    while left <= right:\n        mid = (left + right) // 2\n        if sorted_list[mid] == target:\n            return mid\n        elif sorted_list[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n    return -1",
+  "canonical_code": "def binary_search(sorted_list, target):\n    left, right = 0, len(sorted_list) - 1\n    \n    while left <= right:\n        mid = (left + right) // 2\n        \n        if sorted_list[mid] == target:\n            return mid\n        elif sorted_list[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n            \n    return -1",
   "foundational_properties": {
     "control_flow_signature": {
       "if_statements": 2,
@@ -18,8 +18,8 @@
     "data_dependency_graph": {
       "dependencies": {
         "mid": [
-          "right",
-          "left"
+          "left",
+          "right"
         ],
         "left": [
           "mid"
@@ -326,6 +326,8 @@
     "prompt": "Write a Python function called 'binary_search' that takes a sorted list of integers and a target value, and returns the index of the target if found, or -1 if not found. Use binary search algorithm.",
     "constraints": {
       "function_name": "binary_search",
+      "algorithm": "binary search",
+      "implementation_style": "iterative",
       "output_type": "integer",
       "variable_naming": {
         "fixed_variables": [
@@ -474,7 +476,7 @@
       "normalize_whitespace": true,
       "enforce_function_name": true
     },
-    "anchor_signature": "8e6519088ee3b1b9d3661d6fda67f63184522f78504327c6a5e5d195cec7f370",
+    "anchor_signature": "cd5e2382e8e63f0eeffa77b37b5dbd48a294b582ff670be67772c7847f0c0a13",
     "compliance_flag": true,
     "distance_metric": "foundational_properties",
     "rescue_bounds": {
@@ -486,11 +488,11 @@
     "contract_version": "2.0",
     "oracle_version": "1.0",
     "normalization_version": "1.0",
-    "created_timestamp": "2025-11-19T16:42:13.426614",
+    "created_timestamp": "2025-11-21T10:25:28.935431",
     "run_id": null,
     "prompt_id": "binary_search",
     "sample_id": null,
-    "canonical_code": "def binary_search(sorted_list, target):\n    left, right = 0, len(sorted_list) - 1\n    while left <= right:\n        mid = (left + right) // 2\n        if sorted_list[mid] == target:\n            return mid\n        elif sorted_list[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n    return -1",
+    "canonical_code": "def binary_search(sorted_list, target):\n    left, right = 0, len(sorted_list) - 1\n    \n    while left <= right:\n        mid = (left + right) // 2\n        \n        if sorted_list[mid] == target:\n            return mid\n        elif sorted_list[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n            \n    return -1",
     "foundational_properties": {
       "control_flow_signature": {
         "if_statements": 2,
@@ -508,8 +510,8 @@
       "data_dependency_graph": {
         "dependencies": {
           "mid": [
-            "right",
-            "left"
+            "left",
+            "right"
           ],
           "left": [
             "mid"
@@ -756,7 +758,7 @@
       }
     }
   },
-  "created_timestamp": "2025-11-19T16:42:13.426614",
+  "created_timestamp": "2025-11-21T10:25:28.935431",
   "canon_version": "1.1",
   "oracle_validated": true,
   "oracle_pass_rate": 1.0

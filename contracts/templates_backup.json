@@ -7,11 +7,8 @@
     "algorithm_family": "fibonacci",
     "constraints": {
       "function_name": "fibonacci",
-      "algorithm": "fibonacci sequence",
-      "algorithm_variant": "iterative",
       "requires_recursion": false,
       "implementation_style": "iterative",
-      "output_type": "integer",
       "variable_naming": {
         "fixed_variables": ["n"],
         "flexible_variables": ["a", "b", "i", "prev", "curr", "next"],
@@ -61,11 +58,8 @@
     "algorithm_family": "fibonacci",
     "constraints": {
       "function_name": "fibonacci",
-      "algorithm": "fibonacci sequence",
-      "algorithm_variant": "recursive",
       "requires_recursion": true,
       "implementation_style": "recursive",
-      "output_type": "integer",
       "variable_naming": {
         "fixed_variables": ["n"],
         "flexible_variables": [],
@@ -100,14 +94,9 @@
       "remove_comments": true,
       "normalize_whitespace": true,
       "enforce_function_name": true
-    },
-    "rescue_bounds": {
-      "allow_function_rename": true,
-      "allow_print_removal": true,
-      "max_transformations": 5
     }
   },
-  "slugify": {
+    "slugify": {
     "id": "slugify",
     "task_intent": "Convert string to URL-friendly slug format",
     "prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.",
@@ -115,8 +104,6 @@
     "algorithm_family": "slugify",
     "constraints": {
       "function_name": "slugify",
-      "algorithm": "string transformation",
-      "implementation_style": "iterative",
       "output_type": "string",
       "variable_naming": {
         "fixed_variables": ["text"],
@@ -128,14 +115,6 @@
       "inputs": [
         {"name": "text", "type": "str", "constraint": "any"}
       ]
-    },
-    "out_of_domain": {
-      "policy": "must_return",
-      "return_value": "",
-      "examples": [
-        {"text": null}
-      ],
-      "max_checks": 1
     },
     "oracle_requirements": {
       "test_cases": [
@@ -168,8 +147,6 @@
     "algorithm_family": "balanced_brackets",
     "constraints": {
       "function_name": "is_balanced",
-      "algorithm": "stack-based matching",
-      "implementation_style": "iterative",
       "output_type": "boolean",
       "variable_naming": {
         "fixed_variables": ["s"],
@@ -181,14 +158,6 @@
       "inputs": [
         {"name": "s", "type": "str", "constraint": "any"}
       ]
-    },
-    "out_of_domain": {
-      "policy": "must_return",
-      "return_value": false,
-      "examples": [
-        {"s": null}
-      ],
-      "max_checks": 1
     },
     "oracle_requirements": {
       "test_cases": [
@@ -223,10 +192,8 @@
     "algorithm_family": "gcd",
     "constraints": {
       "function_name": "gcd",
-      "algorithm": "euclidean algorithm",
-      "algorithm_variant": "iterative",
-      "implementation_style": "iterative",
       "output_type": "integer",
+      "implementation_style": "iterative",
       "variable_naming": {
         "fixed_variables": ["a", "b"],
         "flexible_variables": ["temp", "remainder", "r"],
@@ -238,15 +205,6 @@
         {"name": "a", "type": "int", "constraint": "a > 0"},
         {"name": "b", "type": "int", "constraint": "b > 0"}
       ]
-    },
-    "out_of_domain": {
-      "policy": "must_return",
-      "return_value": 0,
-      "examples": [
-        {"a": 0, "b": 5},
-        {"a": -10, "b": 5}
-      ],
-      "max_checks": 3
     },
     "oracle_requirements": {
       "test_cases": [
@@ -279,8 +237,6 @@
     "algorithm_family": "binary_search",
     "constraints": {
       "function_name": "binary_search",
-      "algorithm": "binary search",
-      "implementation_style": "iterative",
       "output_type": "integer",
       "variable_naming": {
         "fixed_variables": ["arr", "target"],
@@ -293,15 +249,6 @@
         {"name": "arr", "type": "list[int]", "constraint": "sorted ascending"},
         {"name": "target", "type": "int", "constraint": "any"}
       ]
-    },
-    "out_of_domain": {
-      "policy": "must_return",
-      "return_value": -1,
-      "examples": [
-        {"arr": null, "target": 1},
-        {"arr": [2, 1], "target": 1}
-      ],
-      "max_checks": 2
     },
     "oracle_requirements": {
       "test_cases": [
@@ -332,23 +279,15 @@
   "lru_cache": {
     "id": "lru_cache",
     "task_intent": "Implement LRU cache with get and put operations",
-    "prompt": "Write a Python class called 'LRUCache' with a constructor that takes capacity, a get(key) method that returns the value if key exists (or -1 if not), and a put(key, value) method. The cache should evict the least recently used item when capacity is exceeded. Use a doubly-linked list with a hash map for O(1) operations.",
-    "description": "LRU cache using doubly-linked list and hash map for O(1) get/put",
+    "prompt": "Write a Python class called 'LRUCache' with a constructor that takes capacity, a get(key) method that returns the value if key exists (or -1 if not), and a put(key, value) method. The cache should evict the least recently used item when capacity is exceeded.",
+    "description": "LRU cache with stateful operations and mutable data structures",
     "algorithm_family": "lru_cache",
     "constraints": {
       "class_name": "LRUCache",
       "methods": ["__init__", "get", "put"],
-      "required_classes": ["Node", "LRUCache"],
-      "required_attributes": {
-        "Node": ["key", "value", "prev", "next"],
-        "LRUCache": ["capacity", "cache", "head", "tail"]
-      },
-      "algorithm": "doubly-linked list with hash map",
-      "implementation_style": "iterative",
-      "output_type": "integer",
       "variable_naming": {
         "fixed_variables": ["capacity", "key", "value"],
-        "flexible_variables": ["cache", "node", "head", "tail", "lru", "prev", "next"],
+        "flexible_variables": ["cache", "order", "keys", "data"],
         "naming_policy": "strict"
       }
     },
@@ -356,15 +295,6 @@
       "inputs": [
         {"name": "capacity", "type": "int", "constraint": "capacity > 0"}
       ]
-    },
-    "out_of_domain": {
-      "policy": "must_return",
-      "return_value": -1,
-      "examples": [
-        {"capacity": 0},
-        {"capacity": -1}
-      ],
-      "max_checks": 2
     },
     "oracle_requirements": {
       "test_cases": [
@@ -401,8 +331,53 @@
       "enforce_function_name": true
     },
     "rescue_bounds": {
-      "allow_function_rename": false,
-      "allow_class_rename": false,
+      "allow_function_rename": true,
+      "allow_print_removal": true,
+      "max_transformations": 5
+    }
+  },
+  "merge_sort": {
+    "id": "merge_sort",
+    "task_intent": "Sort array using merge sort algorithm",
+    "prompt": "Write a Python function called 'merge_sort' that takes a list of integers and returns a new sorted list using the merge sort algorithm. Implement it recursively.",
+    "description": "Merge sort with divide-and-conquer recursion schema",
+    "algorithm_family": "merge_sort",
+    "constraints": {
+      "function_name": "merge_sort",
+      "output_type": "list",
+      "requires_recursion": true,
+      "variable_naming": {
+        "fixed_variables": ["arr"],
+        "flexible_variables": ["left", "right", "mid", "result", "merged", "i", "j", "k"],
+        "naming_policy": "strict"
+      }
+    },
+    "domain": {
+      "inputs": [
+        {"name": "arr", "type": "list[int]", "constraint": "any"}
+      ]
+    },
+    "oracle_requirements": {
+      "test_cases": [
+        {"input": [[3, 1, 4, 1, 5, 9, 2, 6]], "expected": [1, 1, 2, 3, 4, 5, 6, 9], "description": "Random array"},
+        {"input": [[5, 4, 3, 2, 1]], "expected": [1, 2, 3, 4, 5], "description": "Reverse sorted"},
+        {"input": [[1, 2, 3, 4, 5]], "expected": [1, 2, 3, 4, 5], "description": "Already sorted"},
+        {"input": [[1]], "expected": [1], "description": "Single element"},
+        {"input": [[]], "expected": [], "description": "Empty array"},
+        {"input": [[2, 1]], "expected": [1, 2], "description": "Two elements"},
+        {"input": [[3, 3, 3]], "expected": [3, 3, 3], "description": "All same"},
+        {"input": [[-5, -1, -3, 0, 2]], "expected": [-5, -3, -1, 0, 2], "description": "Negative numbers"}
+      ],
+      "correctness_threshold": 1.0,
+      "required_pass_rate": 0.8
+    },
+    "normalization_rules": {
+      "remove_comments": true,
+      "normalize_whitespace": true,
+      "enforce_function_name": true
+    },
+    "rescue_bounds": {
+      "allow_function_rename": true,
       "allow_print_removal": true,
       "max_transformations": 5
     }

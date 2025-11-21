@@ -16,6 +16,7 @@ from .oracle_system import OracleSystem
 from .code_transformer import CodeTransformer
 from .metrics import ComprehensiveMetrics
 from .bell_curve_analysis import BellCurveAnalyzer
+from .contract_compliance_checker import ContractComplianceChecker
 from .config import TARGET_RUNS_PER_PROMPT, OUTPUTS_DIR
 
 
@@ -48,6 +49,7 @@ class ComprehensiveExperiment:
         self.oracle_system = OracleSystem()
         self.code_transformer = CodeTransformer(self.canon_system)
         self.metrics_calculator = ComprehensiveMetrics(self.canon_system)
+        self.compliance_checker = ContractComplianceChecker(debug=debug_mode)
         self.bell_curve_analyzer = BellCurveAnalyzer(os.path.join(output_dir, "analysis"))
         
         print("🚀 SKYT Comprehensive Experiment System Initialized")
@@ -116,45 +118,21 @@ class ComprehensiveExperiment:
         if not successful_outputs:
             return {"error": "No successful LLM outputs generated"}
         
-        # Step 3: Create canon from first compliant output
+        # Step 3: Create canon with compliance checking
         print(f"\n⚓ Step 3: Creating Canon...")
-        canon_created = False
-        canon_data = None
         
-        # Check if canon already exists
-        existing_canon = self.canon_system.load_canon(contract_id)
-        if existing_canon:
+        # Use existing canon or select new one with compliance checking
+        canon_result = self._select_canon_with_compliance(successful_outputs, contract, contract_id)
+        
+        if "error" in canon_result:
+            return canon_result
+        
+        canon_data = canon_result['canon_data']
+        canon_created = canon_result['canon_created']
+        
+        # Print status if reusing existing canon
+        if canon_result.get('reused'):
             print("✅ Using existing canon")
-            canon_data = existing_canon
-            canon_created = True
-        else:
-            # Find first compliant output to create canon
-            for i, code in enumerate(successful_outputs):
-                oracle_result = self.oracle_system.run_oracle_tests(code, contract.data)
-                
-                if oracle_result["passed"]:
-                    print(f"✅ Creating canon from run {i + 1} (first oracle-passing output)")
-                    try:
-                        # CRITICAL FIX: Pass oracle result and require validation
-                        canon_data = self.canon_system.create_canon(
-                            contract, code, 
-                            oracle_result=oracle_result,
-                            require_oracle_pass=True
-                        )
-                        canon_created = True
-                        break
-                    except ValueError as e:
-                        print(f"  ⚠️  Failed to create canon: {e}")
-                else:
-                    print(f"  ❌ Run {i + 1} failed oracle tests")
-            
-            if not canon_created:
-                print("❌ CRITICAL: No oracle-passing outputs found!")
-                print("   Cannot create valid canon. Consider:")
-                print("   1. Adjusting temperature/prompt")
-                print("   2. Using curated golden implementation")
-                print("   3. Relaxing oracle requirements")
-                return {"error": "No oracle-passing outputs to anchor canon"}
         
         # Step 4: Transform subsequent outputs to match canon
         print(f"\n🔧 Step 4: Transforming outputs to canon...")
@@ -531,3 +509,109 @@ class ComprehensiveExperiment:
         print(f"💾 Results saved:")
         print(f"  📄 Detailed: {json_path}")
         print(f"  📊 Metrics CSV: {metrics_csv_path}")
+    
+    def _select_canon_with_compliance(self, successful_outputs: List[str], 
+                                     contract: Contract, contract_id: str) -> Dict[str, Any]:
+        """
+        Select canon using oracle + contract compliance.
+        
+        Selection criteria (in order):
+        1. Check for existing canon (reuse if available)
+        2. Filter by oracle (behavioral correctness)
+        3. Filter by contract compliance (algorithm/structure requirements)
+        4. Select first fully compliant output
+        
+        Returns:
+            Dict with 'canon_data', 'canon_created', or 'error'
+        """
+        # Step 1: Check for existing canon
+        existing_canon = self.canon_system.load_canon(contract_id)
+        if existing_canon:
+            return {
+                'canon_data': existing_canon,
+                'canon_created': True,
+                'reused': True
+            }
+        
+        # Step 2: Filter by oracle (behavioral correctness)
+        oracle_passing = []
+        for i, code in enumerate(successful_outputs):
+            oracle_result = self.oracle_system.run_oracle_tests(code, contract.data)
+            
+            if oracle_result["passed"]:
+                oracle_passing.append({
+                    'code': code,
+                    'index': i,
+                    'oracle_result': oracle_result
+                })
+            else:
+                print(f"  ❌ Run {i + 1} failed oracle tests")
+        
+        if not oracle_passing:
+            print("❌ CRITICAL: No oracle-passing outputs found!")
+            print("   Cannot create valid canon. Consider:")
+            print("   1. Adjusting temperature/prompt")
+            print("   2. Using curated golden implementation")
+            print("   3. Relaxing oracle requirements")
+            return {"error": "No oracle-passing outputs to anchor canon"}
+        
+        # Step 3: Check contract compliance for oracle-passing outputs
+        candidates = []
+        for item in oracle_passing:
+            compliance = self.compliance_checker.check_compliance(item['code'], contract.data)
+            candidates.append({
+                'code': item['code'],
+                'index': item['index'],
+                'oracle_result': item['oracle_result'],
+                'compliance': compliance
+            })
+        
+        # Step 4: Select canon
+        # Prefer fully compliant outputs
+        fully_compliant = [c for c in candidates if c['compliance'].fully_compliant]
+        
+        if fully_compliant:
+            # Use first fully compliant output
+            selected = fully_compliant[0]
+            print(f"✅ Creating canon from run {selected['index'] + 1} (first oracle-passing output)")
+            
+            try:
+                canon_data = self.canon_system.create_canon(
+                    contract, selected['code'],
+                    oracle_result=selected['oracle_result'],
+                    require_oracle_pass=True
+                )
+                return {
+                    'canon_data': canon_data,
+                    'canon_created': True,
+                    'compliance_score': selected['compliance'].score
+                }
+            except ValueError as e:
+                print(f"  ⚠️  Failed to create canon: {e}")
+                return {"error": f"Failed to create canon: {e}"}
+        
+        else:
+            # No fully compliant outputs - use best partial compliance
+            best = max(candidates, key=lambda x: x['compliance'].score)
+            print(f"✅ Creating canon from run {best['index'] + 1} (first oracle-passing output)")
+            
+            if best['compliance'].score < 1.0 and best['compliance'].violations:
+                print(f"  ⚠️  Partial compliance (score: {best['compliance'].score:.2f})")
+                for violation in best['compliance'].violations[:3]:  # Show first 3
+                    print(f"     - {violation}")
+            
+            try:
+                canon_data = self.canon_system.create_canon(
+                    contract, best['code'],
+                    oracle_result=best['oracle_result'],
+                    require_oracle_pass=True
+                )
+                return {
+                    'canon_data': canon_data,
+                    'canon_created': True,
+                    'compliance_score': best['compliance'].score,
+                    'partial_compliance': True
+                }
+            except ValueError as e:
+                print(f"  ⚠️  Failed to create canon: {e}")
+                return {"error": f"Failed to create canon: {e}"}

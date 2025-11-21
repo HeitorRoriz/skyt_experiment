@@ -1,30 +1,26 @@
 {
-  "experiment_id": "fibonacci_basic_temp0.7_20251119_163911",
-  "contract_id": "fibonacci_basic",
+  "experiment_id": "fibonacci_recursive_temp0.7_20251121_102302",
+  "contract_id": "fibonacci_recursive",
   "temperature": 0.7,
-  "timestamp": "2025-11-19T16:39:11.624567",
+  "timestamp": "2025-11-21T10:23:02.342872",
   "num_runs": 10,
   "successful_runs": 10,
   "contract": {
-    "id": "fibonacci_basic",
-    "task_intent": "Generate nth Fibonacci number using iteration",
-    "prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use iteration, not recursion.",
+    "id": "fibonacci_recursive",
+    "task_intent": "Generate nth Fibonacci number using recursion",
+    "prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use recursion.",
     "constraints": {
       "function_name": "fibonacci",
-      "requires_recursion": false,
-      "implementation_style": "iterative",
+      "algorithm": "fibonacci sequence",
+      "algorithm_variant": "recursive",
+      "requires_recursion": true,
+      "implementation_style": "recursive",
+      "output_type": "integer",
       "variable_naming": {
         "fixed_variables": [
           "n"
         ],
-        "flexible_variables": [
-          "a",
-          "b",
-          "i",
-          "prev",
-          "curr",
-          "next"
-        ],
+        "flexible_variables": [],
         "naming_policy": "strict"
       }
     },
@@ -50,9 +46,9 @@
           "description": "F(5)"
         },
         {
-          "input": 10,
-          "expected": 55,
-          "description": "F(10)"
+          "input": 8,
+          "expected": 21,
+          "description": "F(8)"
         }
       ],
       "correctness_threshold": 1.0,
@@ -63,7 +59,7 @@
       "normalize_whitespace": true,
       "enforce_function_name": true
     },
-    "anchor_signature": "22def44d0e7b8730492be5b404c1e3ba5f7e4d018059259ef7e44733a8404870",
+    "anchor_signature": "b67128d5e650acd3603de101af05bc54553d44eebccb7f76f8f5fb012524e53c",
     "compliance_flag": true,
     "distance_metric": "foundational_properties",
     "rescue_bounds": {
@@ -75,18 +71,19 @@
     "contract_version": "2.0",
     "oracle_version": "1.0",
     "normalization_version": "1.0",
-    "created_timestamp": "2025-11-19T16:38:42.838872",
+    "created_timestamp": "2025-11-21T10:22:40.049800",
     "run_id": null,
-    "prompt_id": "fibonacci_basic",
+    "prompt_id": "fibonacci_recursive",
     "sample_id": null,
-    "canonical_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+    "canonical_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
     "foundational_properties": {
       "control_flow_signature": {
         "if_statements": 2,
-        "for_loops": 1,
+        "for_loops": 0,
         "while_loops": 0,
         "function_calls": [
-          "range"
+          "fibonacci",
+          "fibonacci"
         ],
         "nested_depth": 2,
         "branch_patterns": [
@@ -111,10 +108,6 @@
             "function_fibonacci",
             "branch",
             "branch"
-          ],
-          [
-            "function_fibonacci",
-            "loop"
           ]
         ]
       },
@@ -129,9 +122,9 @@
         }
       },
       "complexity_class": {
-        "nested_loops": 1,
-        "recursive_calls": 0,
-        "estimated_complexity": "O(n)"
+        "nested_loops": 0,
+        "recursive_calls": 2,
+        "estimated_complexity": "O(2^n)"
       },
       "side_effect_profile": {
         "has_print": false,
@@ -142,21 +135,20 @@
       },
       "termination_properties": {
         "has_base_case": true,
-        "has_bounded_loops": true,
+        "has_bounded_loops": false,
         "recursive_depth": 0
       },
       "algebraic_structure": {
         "commutative_ops": [
-          "Add",
           "Add"
         ],
         "associative_ops": [
-          "Add",
           "Add"
         ],
         "binary_operations": [
           "Add",
-          "Add"
+          "Sub",
+          "Sub"
         ]
       },
       "numerical_behavior": {
@@ -168,10 +160,8 @@
           0,
           1,
           1,
-          0,
           1,
-          2,
-          1
+          2
         ]
       },
       "logical_equivalence": {
@@ -204,61 +194,39 @@
           "Constant",
           "Return",
           "Constant",
-          "Assign",
-          "Tuple",
-          "Name",
-          "Store",
-          "Name",
-          "Store",
-          "Store",
-          "Tuple",
-          "Constant",
-          "Constant",
-          "Load",
-          "For",
-          "Name",
-          "Store",
+          "Return",
+          "BinOp",
           "Call",
           "Name",
           "Load",
-          "Constant",
           "BinOp",
           "Name",
           "Load",
-          "Add",
+          "Sub",
           "Constant",
-          "Assign",
-          "Tuple",
-          "Name",
-          "Store",
-          "Name",
-          "Store",
-          "Store",
-          "Tuple",
+          "Add",
+          "Call",
           "Name",
           "Load",
           "BinOp",
           "Name",
           "Load",
-          "Add",
-          "Name",
-          "Load",
-          "Load",
-          "Return",
-          "Name",
-          "Load"
+          "Sub",
+          "Constant"
         ],
-        "ast_depth": 7,
-        "ast_hash": "9ab064e3ea8e7729ca5332b33258c4f7",
-        "alpha_renamed_hash": "df84d2329aa847078fb576b402ccf95c"
+        "ast_depth": 9,
+        "ast_hash": "18b9310321239cad4282b20aed2708f3",
+        "alpha_renamed_hash": "228838af78d47844a7b650f68909d4a2"
       },
       "operator_precedence": {
         "operator_sequence": [
           "Add",
-          "Add"
+          "Sub",
+          "Sub"
         ],
         "precedence_levels": {
-          "Add": 3
+          "Add": 3,
+          "Sub": 3
         }
       },
       "statement_ordering": {
@@ -268,9 +236,6 @@
           "Return",
           "If",
           "Return",
-          "Assign",
-          "For",
-          "Assign",
           "Return"
         ],
         "statement_sequence": [
@@ -279,28 +244,37 @@
           "Return_2",
           "If_3",
           "Return_4",
-          "Assign_5",
-          "For_6",
-          "Assign_7",
-          "Return_8"
+          "Return_5"
         ],
         "control_flow_order": [
           "FunctionDef",
           "If",
-          "If",
-          "For"
+          "If"
         ]
       },
       "recursion_schema": {
-        "is_recursive": false,
+        "is_recursive": true,
         "base_cases": [
           {
             "condition": "n <= 0",
             "return_type": "constant"
           }
         ],
-        "recursive_calls": [],
-        "recursion_pattern": null,
+        "recursive_calls": [
+          {
+            "num_args": 1,
+            "arg_patterns": [
+              "BinOp"
+            ]
+          },
+          {
+            "num_args": 1,
+            "arg_patterns": [
+              "BinOp"
+            ]
+          }
+        ],
+        "recursion_pattern": "divide_and_conquer",
         "termination_guards": [
           "n <= 0"
         ]
@@ -315,15 +289,16 @@
     }
   },
   "canon_data": {
-    "contract_id": "fibonacci_basic",
-    "canonical_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+    "contract_id": "fibonacci_recursive",
+    "canonical_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
     "foundational_properties": {
       "control_flow_signature": {
         "if_statements": 2,
-        "for_loops": 1,
+        "for_loops": 0,
         "while_loops": 0,
         "function_calls": [
-          "range"
+          "fibonacci",
+          "fibonacci"
         ],
         "nested_depth": 2,
         "branch_patterns": [
@@ -348,10 +323,6 @@
             "function_fibonacci",
             "branch",
             "branch"
-          ],
-          [
-            "function_fibonacci",
-            "loop"
           ]
         ]
       },
@@ -366,9 +337,9 @@
         }
       },
       "complexity_class": {
-        "nested_loops": 1,
-        "recursive_calls": 0,
-        "estimated_complexity": "O(n)"
+        "nested_loops": 0,
+        "recursive_calls": 2,
+        "estimated_complexity": "O(2^n)"
       },
       "side_effect_profile": {
         "has_print": false,
@@ -379,21 +350,20 @@
       },
       "termination_properties": {
         "has_base_case": true,
-        "has_bounded_loops": true,
+        "has_bounded_loops": false,
         "recursive_depth": 0
       },
       "algebraic_structure": {
         "commutative_ops": [
-          "Add",
           "Add"
         ],
         "associative_ops": [
-          "Add",
           "Add"
         ],
         "binary_operations": [
           "Add",
-          "Add"
+          "Sub",
+          "Sub"
         ]
       },
       "numerical_behavior": {
@@ -405,10 +375,8 @@
           0,
           1,
           1,
-          0,
           1,
-          2,
-          1
+          2
         ]
       },
       "logical_equivalence": {
@@ -441,61 +409,39 @@
           "Constant",
           "Return",
           "Constant",
-          "Assign",
-          "Tuple",
-          "Name",
-          "Store",
-          "Name",
-          "Store",
-          "Store",
-          "Tuple",
-          "Constant",
-          "Constant",
-          "Load",
-          "For",
-          "Name",
-          "Store",
+          "Return",
+          "BinOp",
           "Call",
           "Name",
           "Load",
-          "Constant",
           "BinOp",
           "Name",
           "Load",
-          "Add",
+          "Sub",
           "Constant",
-          "Assign",
-          "Tuple",
-          "Name",
-          "Store",
-          "Name",
-          "Store",
-          "Store",
-          "Tuple",
+          "Add",
+          "Call",
           "Name",
           "Load",
           "BinOp",
           "Name",
           "Load",
-          "Add",
-          "Name",
-          "Load",
-          "Load",
-          "Return",
-          "Name",
-          "Load"
+          "Sub",
+          "Constant"
         ],
-        "ast_depth": 7,
-        "ast_hash": "9ab064e3ea8e7729ca5332b33258c4f7",
-        "alpha_renamed_hash": "df84d2329aa847078fb576b402ccf95c"
+        "ast_depth": 9,
+        "ast_hash": "18b9310321239cad4282b20aed2708f3",
+        "alpha_renamed_hash": "228838af78d47844a7b650f68909d4a2"
       },
       "operator_precedence": {
         "operator_sequence": [
           "Add",
-          "Add"
+          "Sub",
+          "Sub"
         ],
         "precedence_levels": {
-          "Add": 3
+          "Add": 3,
+          "Sub": 3
         }
       },
       "statement_ordering": {
@@ -505,9 +451,6 @@
           "Return",
           "If",
           "Return",
-          "Assign",
-          "For",
-          "Assign",
           "Return"
         ],
         "statement_sequence": [
@@ -516,28 +459,37 @@
           "Return_2",
           "If_3",
           "Return_4",
-          "Assign_5",
-          "For_6",
-          "Assign_7",
-          "Return_8"
+          "Return_5"
         ],
         "control_flow_order": [
           "FunctionDef",
           "If",
-          "If",
-          "For"
+          "If"
         ]
       },
       "recursion_schema": {
-        "is_recursive": false,
+        "is_recursive": true,
         "base_cases": [
           {
             "condition": "n <= 0",
             "return_type": "constant"
           }
         ],
-        "recursive_calls": [],
-        "recursion_pattern": null,
+        "recursive_calls": [
+          {
+            "num_args": 1,
+            "arg_patterns": [
+              "BinOp"
+            ]
+          },
+          {
+            "num_args": 1,
+            "arg_patterns": [
+              "BinOp"
+            ]
+          }
+        ],
+        "recursion_pattern": "divide_and_conquer",
         "termination_guards": [
           "n <= 0"
         ]
@@ -545,14 +497,14 @@
     },
     "validation_properties": {
       "radon_metrics": {
-        "cyclomatic_complexity": 4,
+        "cyclomatic_complexity": 3,
         "complexity_rank": "A",
-        "average_complexity": 4.0,
-        "maintainability_index": 67.74892594572017,
-        "halstead_difficulty": 2.4,
-        "halstead_effort": 86.39999999999999,
-        "halstead_volume": 36.0,
-        "halstead_bugs": 0.012
+        "average_complexity": 3.0,
+        "maintainability_index": 69.27576528494643,
+        "halstead_difficulty": 3.3333333333333335,
+        "halstead_effort": 166.09640474436813,
+        "halstead_volume": 49.82892142331044,
+        "halstead_bugs": 0.016609640474436815
       },
       "type_analysis": {
         "type_errors": [],
@@ -594,25 +546,21 @@
       }
     },
     "contract_data": {
-      "id": "fibonacci_basic",
-      "task_intent": "Generate nth Fibonacci number using iteration",
-      "prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use iteration, not recursion.",
+      "id": "fibonacci_recursive",
+      "task_intent": "Generate nth Fibonacci number using recursion",
+      "prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use recursion.",
       "constraints": {
         "function_name": "fibonacci",
-        "requires_recursion": false,
-        "implementation_style": "iterative",
+        "algorithm": "fibonacci sequence",
+        "algorithm_variant": "recursive",
+        "requires_recursion": true,
+        "implementation_style": "recursive",
+        "output_type": "integer",
         "variable_naming": {
           "fixed_variables": [
             "n"
           ],
-          "flexible_variables": [
-            "a",
-            "b",
-            "i",
-            "prev",
-            "curr",
-            "next"
-          ],
+          "flexible_variables": [],
           "naming_policy": "strict"
         }
       },
@@ -638,9 +586,9 @@
             "description": "F(5)"
           },
           {
-            "input": 10,
-            "expected": 55,
-            "description": "F(10)"
+            "input": 8,
+            "expected": 21,
+            "description": "F(8)"
           }
         ],
         "correctness_threshold": 1.0,
@@ -651,7 +599,7 @@
         "normalize_whitespace": true,
         "enforce_function_name": true
       },
-      "anchor_signature": "22def44d0e7b8730492be5b404c1e3ba5f7e4d018059259ef7e44733a8404870",
+      "anchor_signature": "b67128d5e650acd3603de101af05bc54553d44eebccb7f76f8f5fb012524e53c",
       "compliance_flag": true,
       "distance_metric": "foundational_properties",
       "rescue_bounds": {
@@ -663,18 +611,19 @@
       "contract_version": "2.0",
       "oracle_version": "1.0",
       "normalization_version": "1.0",
-      "created_timestamp": "2025-11-19T16:38:42.838872",
+      "created_timestamp": "2025-11-21T10:22:40.049800",
       "run_id": null,
-      "prompt_id": "fibonacci_basic",
+      "prompt_id": "fibonacci_recursive",
       "sample_id": null,
-      "canonical_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+      "canonical_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
       "foundational_properties": {
         "control_flow_signature": {
           "if_statements": 2,
-          "for_loops": 1,
+          "for_loops": 0,
           "while_loops": 0,
           "function_calls": [
-            "range"
+            "fibonacci",
+            "fibonacci"
           ],
           "nested_depth": 2,
           "branch_patterns": [
@@ -699,10 +648,6 @@
               "function_fibonacci",
               "branch",
               "branch"
-            ],
-            [
-              "function_fibonacci",
-              "loop"
             ]
           ]
         },
@@ -717,9 +662,9 @@
           }
         },
         "complexity_class": {
-          "nested_loops": 1,
-          "recursive_calls": 0,
-          "estimated_complexity": "O(n)"
+          "nested_loops": 0,
+          "recursive_calls": 2,
+          "estimated_complexity": "O(2^n)"
         },
         "side_effect_profile": {
           "has_print": false,
@@ -730,21 +675,20 @@
         },
         "termination_properties": {
           "has_base_case": true,
-          "has_bounded_loops": true,
+          "has_bounded_loops": false,
           "recursive_depth": 0
         },
         "algebraic_structure": {
           "commutative_ops": [
-            "Add",
             "Add"
           ],
           "associative_ops": [
-            "Add",
             "Add"
           ],
           "binary_operations": [
             "Add",
-            "Add"
+            "Sub",
+            "Sub"
           ]
         },
         "numerical_behavior": {
@@ -756,10 +700,8 @@
             0,
             1,
             1,
-            0,
             1,
-            2,
-            1
+            2
           ]
         },
         "logical_equivalence": {
@@ -792,61 +734,39 @@
             "Constant",
             "Return",
             "Constant",
-            "Assign",
-            "Tuple",
-            "Name",
-            "Store",
-            "Name",
-            "Store",
-            "Store",
-            "Tuple",
-            "Constant",
-            "Constant",
-            "Load",
-            "For",
-            "Name",
-            "Store",
+            "Return",
+            "BinOp",
             "Call",
             "Name",
             "Load",
-            "Constant",
             "BinOp",
             "Name",
             "Load",
-            "Add",
+            "Sub",
             "Constant",
-            "Assign",
-            "Tuple",
-            "Name",
-            "Store",
-            "Name",
-            "Store",
-            "Store",
-            "Tuple",
+            "Add",
+            "Call",
             "Name",
             "Load",
             "BinOp",
             "Name",
             "Load",
-            "Add",
-            "Name",
-            "Load",
-            "Load",
-            "Return",
-            "Name",
-            "Load"
+            "Sub",
+            "Constant"
           ],
-          "ast_depth": 7,
-          "ast_hash": "9ab064e3ea8e7729ca5332b33258c4f7",
-          "alpha_renamed_hash": "df84d2329aa847078fb576b402ccf95c"
+          "ast_depth": 9,
+          "ast_hash": "18b9310321239cad4282b20aed2708f3",
+          "alpha_renamed_hash": "228838af78d47844a7b650f68909d4a2"
         },
         "operator_precedence": {
           "operator_sequence": [
             "Add",
-            "Add"
+            "Sub",
+            "Sub"
           ],
           "precedence_levels": {
-            "Add": 3
+            "Add": 3,
+            "Sub": 3
           }
         },
         "statement_ordering": {
@@ -856,9 +776,6 @@
             "Return",
             "If",
             "Return",
-            "Assign",
-            "For",
-            "Assign",
             "Return"
           ],
           "statement_sequence": [
@@ -867,35 +784,44 @@
             "Return_2",
             "If_3",
             "Return_4",
-            "Assign_5",
-            "For_6",
-            "Assign_7",
-            "Return_8"
+            "Return_5"
           ],
           "control_flow_order": [
             "FunctionDef",
             "If",
-            "If",
-            "For"
+            "If"
           ]
         },
         "recursion_schema": {
-          "is_recursive": false,
+          "is_recursive": true,
           "base_cases": [
             {
               "condition": "n <= 0",
               "return_type": "constant"
             }
           ],
-          "recursive_calls": [],
-          "recursion_pattern": null,
+          "recursive_calls": [
+            {
+              "num_args": 1,
+              "arg_patterns": [
+                "BinOp"
+              ]
+            },
+            {
+              "num_args": 1,
+              "arg_patterns": [
+                "BinOp"
+              ]
+            }
+          ],
+          "recursion_pattern": "divide_and_conquer",
           "termination_guards": [
             "n <= 0"
           ]
         }
       }
     },
-    "created_timestamp": "2025-11-19T16:38:42.838872",
+    "created_timestamp": "2025-11-21T10:22:40.049800",
     "canon_version": "1.1",
     "oracle_validated": true,
     "oracle_pass_rate": 1.0
@@ -904,163 +830,163 @@
   "llm_results": [
     {
       "run_id": 1,
-      "raw_output": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+      "raw_output": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
       "success": true,
-      "enhanced_prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'fibonacci'.\n\nProvide only the Python code, no explanations or markdown."
+      "enhanced_prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use recursion.\n\nIMPORTANT: The function must be named 'fibonacci'.\nUse a recursive implementation.\n\nProvide only the Python code, no explanations or markdown."
     },
     {
       "run_id": 2,
-      "raw_output": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+      "raw_output": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
       "success": true,
-      "enhanced_prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'fibonacci'.\n\nProvide only the Python code, no explanations or markdown."
+      "enhanced_prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use recursion.\n\nIMPORTANT: The function must be named 'fibonacci'.\nUse a recursive implementation.\n\nProvide only the Python code, no explanations or markdown."
     },
     {
       "run_id": 3,
-      "raw_output": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+      "raw_output": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
       "success": true,
-      "enhanced_prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'fibonacci'.\n\nProvide only the Python code, no explanations or markdown."
+      "enhanced_prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use recursion.\n\nIMPORTANT: The function must be named 'fibonacci'.\nUse a recursive implementation.\n\nProvide only the Python code, no explanations or markdown."
     },
     {
       "run_id": 4,
-      "raw_output": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+      "raw_output": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
       "success": true,
-      "enhanced_prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'fibonacci'.\n\nProvide only the Python code, no explanations or markdown."
+      "enhanced_prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use recursion.\n\nIMPORTANT: The function must be named 'fibonacci'.\nUse a recursive implementation.\n\nProvide only the Python code, no explanations or markdown."
     },
     {
       "run_id": 5,
-      "raw_output": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+      "raw_output": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
       "success": true,
-      "enhanced_prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'fibonacci'.\n\nProvide only the Python code, no explanations or markdown."
+      "enhanced_prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use recursion.\n\nIMPORTANT: The function must be named 'fibonacci'.\nUse a recursive implementation.\n\nProvide only the Python code, no explanations or markdown."
     },
     {
       "run_id": 6,
-      "raw_output": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+      "raw_output": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
       "success": true,
-      "enhanced_prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'fibonacci'.\n\nProvide only the Python code, no explanations or markdown."
+      "enhanced_prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use recursion.\n\nIMPORTANT: The function must be named 'fibonacci'.\nUse a recursive implementation.\n\nProvide only the Python code, no explanations or markdown."
     },
     {
       "run_id": 7,
-      "raw_output": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+      "raw_output": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
       "success": true,
-      "enhanced_prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'fibonacci'.\n\nProvide only the Python code, no explanations or markdown."
+      "enhanced_prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use recursion.\n\nIMPORTANT: The function must be named 'fibonacci'.\nUse a recursive implementation.\n\nProvide only the Python code, no explanations or markdown."
     },
     {
       "run_id": 8,
-      "raw_output": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+      "raw_output": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
       "success": true,
-      "enhanced_prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'fibonacci'.\n\nProvide only the Python code, no explanations or markdown."
+      "enhanced_prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use recursion.\n\nIMPORTANT: The function must be named 'fibonacci'.\nUse a recursive implementation.\n\nProvide only the Python code, no explanations or markdown."
     },
     {
       "run_id": 9,
-      "raw_output": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+      "raw_output": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
       "success": true,
-      "enhanced_prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'fibonacci'.\n\nProvide only the Python code, no explanations or markdown."
+      "enhanced_prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use recursion.\n\nIMPORTANT: The function must be named 'fibonacci'.\nUse a recursive implementation.\n\nProvide only the Python code, no explanations or markdown."
     },
     {
       "run_id": 10,
-      "raw_output": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+      "raw_output": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
       "success": true,
-      "enhanced_prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'fibonacci'.\n\nProvide only the Python code, no explanations or markdown."
+      "enhanced_prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use recursion.\n\nIMPORTANT: The function must be named 'fibonacci'.\nUse a recursive implementation.\n\nProvide only the Python code, no explanations or markdown."
     }
   ],
   "raw_outputs": [
-    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b"
+    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)"
   ],
   "repaired_outputs": [
-    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b"
+    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+    "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)"
   ],
   "transformation_results": [
     {
       "run_id": 1,
-      "original_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-      "transformed_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+      "original_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+      "transformed_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
       "transformation_needed": false,
       "final_distance": 0.0
     },
     {
       "run_id": 2,
-      "original_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-      "transformed_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+      "original_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+      "transformed_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
       "transformation_needed": false,
       "final_distance": 0.0
     },
     {
       "run_id": 3,
-      "original_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-      "transformed_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+      "original_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+      "transformed_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
       "transformation_needed": false,
       "final_distance": 0.0
     },
     {
       "run_id": 4,
-      "original_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-      "transformed_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+      "original_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+      "transformed_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
       "transformation_needed": false,
       "final_distance": 0.0
     },
     {
       "run_id": 5,
-      "original_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-      "transformed_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+      "original_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+      "transformed_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
       "transformation_needed": false,
       "final_distance": 0.0
     },
     {
       "run_id": 6,
-      "original_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-      "transformed_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+      "original_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+      "transformed_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
       "transformation_needed": false,
       "final_distance": 0.0
     },
     {
       "run_id": 7,
-      "original_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-      "transformed_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+      "original_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+      "transformed_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
       "transformation_needed": false,
       "final_distance": 0.0
     },
     {
       "run_id": 8,
-      "original_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-      "transformed_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+      "original_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+      "transformed_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
       "transformation_needed": false,
       "final_distance": 0.0
     },
     {
       "run_id": 9,
-      "original_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-      "transformed_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+      "original_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+      "transformed_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
       "transformation_needed": false,
       "final_distance": 0.0
     },
     {
       "run_id": 10,
-      "original_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
-      "transformed_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b",
+      "original_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
+      "transformed_code": "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)",
       "transformation_needed": false,
       "final_distance": 0.0
     }
   ],
   "metrics": {
-    "R_raw": 0.6,
+    "R_raw": 1.0,
     "R_anchor_pre": 1.0,
     "R_anchor_post": 1.0,
     "Delta_rescue": 0.0,
@@ -1116,17 +1042,16 @@
     "R_behavioral": 1.0,
     "R_structural": 1.0,
     "R_canon": 1.0,
-    "behavioral_improvement": 0.4,
-    "structural_improvement": 0.4,
+    "behavioral_improvement": 0.0,
+    "structural_improvement": 0.0,
     "total_runs": 10,
     "raw_stats": {
-      "unique_outputs": 2,
-      "most_common_count": 6,
+      "unique_outputs": 1,
+      "most_common_count": 10,
       "distribution": {
-        "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b": 6,
-        "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    \n    a, b = 0, 1\n    for _ in range(2, n + 1):\n        a, b = b, a + b\n    return b": 4
+        "def fibonacci(n):\n    if n <= 0:\n        return 0\n    elif n == 1:\n        return 1\n    else:\n        return fibonacci(n - 1) + fibonacci(n - 2)": 10
       },
-      "entropy": 0.9709505944546686
+      "entropy": 0.0
     },
     "anchor_pre_stats": {
       "exact_matches": 10,
@@ -1970,10 +1895,11 @@
         {
           "control_flow_signature": {
             "if_statements": 2,
-            "for_loops": 1,
+            "for_loops": 0,
             "while_loops": 0,
             "function_calls": [
-              "range"
+              "fibonacci",
+              "fibonacci"
             ],
             "nested_depth": 2,
             "branch_patterns": [
@@ -1998,10 +1924,6 @@
                 "function_fibonacci",
                 "branch",
                 "branch"
-              ],
-              [
-                "function_fibonacci",
-                "loop"
               ]
             ]
           },
@@ -2036,17 +1958,17 @@
             }
           },
           "complexity_class": {
-            "nested_loops": 1,
-            "recursive_calls": 0,
-            "estimated_complexity": "O(n)",
-            "cyclomatic_complexity": 4,
+            "nested_loops": 0,
+            "recursive_calls": 2,
+            "estimated_complexity": "O(2^n)",
+            "cyclomatic_complexity": 3,
             "complexity_rank": "A",
-            "average_complexity": 4.0,
-            "maintainability_index": 67.74892594572017,
-            "halstead_difficulty": 2.4,
-            "halstead_effort": 86.39999999999999,
-            "halstead_volume": 36.0,
-            "halstead_bugs": 0.012
+            "average_complexity": 3.0,
+            "maintainability_index": 69.27576528494643,
+            "halstead_difficulty": 3.3333333333333335,
+            "halstead_effort": 166.09640474436813,
+            "halstead_volume": 49.82892142331044,
+            "halstead_bugs": 0.016609640474436815
           },
           "side_effect_profile": {
             "has_print": false,
@@ -2064,21 +1986,20 @@
           },
           "termination_properties": {
             "has_base_case": true,
-            "has_bounded_loops": true,
+            "has_bounded_loops": false,
             "recursive_depth": 0
           },
           "algebraic_structure": {
             "commutative_ops": [
-              "Add",
               "Add"
             ],
             "associative_ops": [
-              "Add",
               "Add"
             ],
             "binary_operations": [
               "Add",
-              "Add"
+              "Sub",
+              "Sub"
             ]
           },
           "numerical_behavior": {
@@ -2090,10 +2011,8 @@
               0,
               1,
               1,
-              0,
               1,
-              2,
-              1
+              2
             ]
           },
           "logical_equivalence": {
@@ -2126,61 +2045,39 @@
               "Constant",
               "Return",
               "Constant",
-              "Assign",
-              "Tuple",
-              "Name",
-              "Store",
-              "Name",
-              "Store",
-              "Store",
-              "Tuple",
-              "Constant",
-              "Constant",
-              "Load",
-              "For",
-              "Name",
-              "Store",
+              "Return",
+              "BinOp",
               "Call",
               "Name",
               "Load",
-              "Constant",
               "BinOp",
               "Name",
               "Load",
-              "Add",
+              "Sub",
               "Constant",
-              "Assign",
-              "Tuple",
-              "Name",
-              "Store",
-              "Name",
-              "Store",
-              "Store",
-              "Tuple",
+              "Add",
+              "Call",
               "Name",
               "Load",
               "BinOp",
               "Name",
               "Load",
-              "Add",
-              "Name",
-              "Load",
-              "Load",
-              "Return",
-              "Name",
-              "Load"
+              "Sub",
+              "Constant"
             ],
-            "ast_depth": 7,
-            "ast_hash": "9ab064e3ea8e7729ca5332b33258c4f7",
-            "alpha_renamed_hash": "df84d2329aa847078fb576b402ccf95c"
+            "ast_depth": 9,
+            "ast_hash": "18b9310321239cad4282b20aed2708f3",
+            "alpha_renamed_hash": "228838af78d47844a7b650f68909d4a2"
           },
           "operator_precedence": {
             "operator_sequence": [
               "Add",
-              "Add"
+              "Sub",
+              "Sub"
             ],
             "precedence_levels": {
-              "Add": 3
+              "Add": 3,
+              "Sub": 3
             }
           },
           "statement_ordering": {
@@ -2190,9 +2087,6 @@
               "Return",
               "If",
               "Return",
-              "Assign",
-              "For",
-              "Assign",
               "Return"
             ],
             "statement_sequence": [
@@ -2201,28 +2095,37 @@
               "Return_2",
               "If_3",
               "Return_4",
-              "Assign_5",
-              "For_6",
-              "Assign_7",
-              "Return_8"
+              "Return_5"
             ],
             "control_flow_order": [
               "FunctionDef",
               "If",
-              "If",
-              "For"
+              "If"
             ]
           },
           "recursion_schema": {
-            "is_recursive": false,
+            "is_recursive": true,
             "base_cases": [
               {
                 "condition": "n <= 0",
                 "return_type": "constant"
               }
             ],
-            "recursive_calls": [],
-            "recursion_pattern": null,
+            "recursive_calls": [
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "BinOp"
+                ]
+              },
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "BinOp"
+                ]
+              }
+            ],
+            "recursion_pattern": "divide_and_conquer",
             "termination_guards": [
               "n <= 0"
             ]
@@ -2231,10 +2134,11 @@
         {
           "control_flow_signature": {
             "if_statements": 2,
-            "for_loops": 1,
+            "for_loops": 0,
             "while_loops": 0,
             "function_calls": [
-              "range"
+              "fibonacci",
+              "fibonacci"
             ],
             "nested_depth": 2,
             "branch_patterns": [
@@ -2259,10 +2163,6 @@
                 "function_fibonacci",
                 "branch",
                 "branch"
-              ],
-              [
-                "function_fibonacci",
-                "loop"
               ]
             ]
           },
@@ -2297,17 +2197,17 @@
             }
           },
           "complexity_class": {
-            "nested_loops": 1,
-            "recursive_calls": 0,
-            "estimated_complexity": "O(n)",
-            "cyclomatic_complexity": 4,
+            "nested_loops": 0,
+            "recursive_calls": 2,
+            "estimated_complexity": "O(2^n)",
+            "cyclomatic_complexity": 3,
             "complexity_rank": "A",
-            "average_complexity": 4.0,
-            "maintainability_index": 67.74892594572017,
-            "halstead_difficulty": 2.4,
-            "halstead_effort": 86.39999999999999,
-            "halstead_volume": 36.0,
-            "halstead_bugs": 0.012
+            "average_complexity": 3.0,
+            "maintainability_index": 69.27576528494643,
+            "halstead_difficulty": 3.3333333333333335,
+            "halstead_effort": 166.09640474436813,
+            "halstead_volume": 49.82892142331044,
+            "halstead_bugs": 0.016609640474436815
           },
           "side_effect_profile": {
             "has_print": false,
@@ -2325,21 +2225,20 @@
           },
           "termination_properties": {
             "has_base_case": true,
-            "has_bounded_loops": true,
+            "has_bounded_loops": false,
             "recursive_depth": 0
           },
           "algebraic_structure": {
             "commutative_ops": [
-              "Add",
               "Add"
             ],
             "associative_ops": [
-              "Add",
               "Add"
             ],
             "binary_operations": [
               "Add",
-              "Add"
+              "Sub",
+              "Sub"
             ]
           },
           "numerical_behavior": {
@@ -2351,10 +2250,8 @@
               0,
               1,
               1,
-              0,
               1,
-              2,
-              1
+              2
             ]
           },
           "logical_equivalence": {
@@ -2387,61 +2284,39 @@
               "Constant",
               "Return",
               "Constant",
-              "Assign",
-              "Tuple",
-              "Name",
-              "Store",
-              "Name",
-              "Store",
-              "Store",
-              "Tuple",
-              "Constant",
-              "Constant",
-              "Load",
-              "For",
-              "Name",
-              "Store",
+              "Return",
+              "BinOp",
               "Call",
               "Name",
               "Load",
-              "Constant",
               "BinOp",
               "Name",
               "Load",
-              "Add",
+              "Sub",
               "Constant",
-              "Assign",
-              "Tuple",
-              "Name",
-              "Store",
-              "Name",
-              "Store",
-              "Store",
-              "Tuple",
+              "Add",
+              "Call",
               "Name",
               "Load",
               "BinOp",
               "Name",
               "Load",
-              "Add",
-              "Name",
-              "Load",
-              "Load",
-              "Return",
-              "Name",
-              "Load"
+              "Sub",
+              "Constant"
             ],
-            "ast_depth": 7,
-            "ast_hash": "9ab064e3ea8e7729ca5332b33258c4f7",
-            "alpha_renamed_hash": "df84d2329aa847078fb576b402ccf95c"
+            "ast_depth": 9,
+            "ast_hash": "18b9310321239cad4282b20aed2708f3",
+            "alpha_renamed_hash": "228838af78d47844a7b650f68909d4a2"
           },
           "operator_precedence": {
             "operator_sequence": [
               "Add",
-              "Add"
+              "Sub",
+              "Sub"
             ],
             "precedence_levels": {
-              "Add": 3
+              "Add": 3,
+              "Sub": 3
             }
           },
           "statement_ordering": {
@@ -2451,9 +2326,6 @@
               "Return",
               "If",
               "Return",
-              "Assign",
-              "For",
-              "Assign",
               "Return"
             ],
             "statement_sequence": [
@@ -2462,28 +2334,37 @@
               "Return_2",
               "If_3",
               "Return_4",
-              "Assign_5",
-              "For_6",
-              "Assign_7",
-              "Return_8"
+              "Return_5"
             ],
             "control_flow_order": [
               "FunctionDef",
               "If",
-              "If",
-              "For"
+              "If"
             ]
           },
           "recursion_schema": {
-            "is_recursive": false,
+            "is_recursive": true,
             "base_cases": [
               {
                 "condition": "n <= 0",
                 "return_type": "constant"
               }
             ],
-            "recursive_calls": [],
-            "recursion_pattern": null,
+            "recursive_calls": [
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "BinOp"
+                ]
+              },
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "BinOp"
+                ]
+              }
+            ],
+            "recursion_pattern": "divide_and_conquer",
             "termination_guards": [
               "n <= 0"
             ]
@@ -2492,10 +2373,11 @@
         {
           "control_flow_signature": {
             "if_statements": 2,
-            "for_loops": 1,
+            "for_loops": 0,
             "while_loops": 0,
             "function_calls": [
-              "range"
+              "fibonacci",
+              "fibonacci"
             ],
             "nested_depth": 2,
             "branch_patterns": [
@@ -2520,10 +2402,6 @@
                 "function_fibonacci",
                 "branch",
                 "branch"
-              ],
-              [
-                "function_fibonacci",
-                "loop"
               ]
             ]
           },
@@ -2558,17 +2436,17 @@
             }
           },
           "complexity_class": {
-            "nested_loops": 1,
-            "recursive_calls": 0,
-            "estimated_complexity": "O(n)",
-            "cyclomatic_complexity": 4,
+            "nested_loops": 0,
+            "recursive_calls": 2,
+            "estimated_complexity": "O(2^n)",
+            "cyclomatic_complexity": 3,
             "complexity_rank": "A",
-            "average_complexity": 4.0,
-            "maintainability_index": 67.74892594572017,
-            "halstead_difficulty": 2.4,
-            "halstead_effort": 86.39999999999999,
-            "halstead_volume": 36.0,
-            "halstead_bugs": 0.012
+            "average_complexity": 3.0,
+            "maintainability_index": 69.27576528494643,
+            "halstead_difficulty": 3.3333333333333335,
+            "halstead_effort": 166.09640474436813,
+            "halstead_volume": 49.82892142331044,
+            "halstead_bugs": 0.016609640474436815
           },
           "side_effect_profile": {
             "has_print": false,
@@ -2586,21 +2464,20 @@
           },
           "termination_properties": {
             "has_base_case": true,
-            "has_bounded_loops": true,
+            "has_bounded_loops": false,
             "recursive_depth": 0
           },
           "algebraic_structure": {
             "commutative_ops": [
-              "Add",
               "Add"
             ],
             "associative_ops": [
-              "Add",
               "Add"
             ],
             "binary_operations": [
               "Add",
-              "Add"
+              "Sub",
+              "Sub"
             ]
           },
           "numerical_behavior": {
@@ -2612,10 +2489,8 @@
               0,
               1,
               1,
-              0,
               1,
-              2,
-              1
+              2
             ]
           },
           "logical_equivalence": {
@@ -2648,61 +2523,39 @@
               "Constant",
               "Return",
               "Constant",
-              "Assign",
-              "Tuple",
-              "Name",
-              "Store",
-              "Name",
-              "Store",
-              "Store",
-              "Tuple",
-              "Constant",
-              "Constant",
-              "Load",
-              "For",
-              "Name",
-              "Store",
+              "Return",
+              "BinOp",
               "Call",
               "Name",
               "Load",
-              "Constant",
               "BinOp",
               "Name",
               "Load",
-              "Add",
+              "Sub",
               "Constant",
-              "Assign",
-              "Tuple",
-              "Name",
-              "Store",
-              "Name",
-              "Store",
-              "Store",
-              "Tuple",
+              "Add",
+              "Call",
               "Name",
               "Load",
               "BinOp",
               "Name",
               "Load",
-              "Add",
-              "Name",
-              "Load",
-              "Load",
-              "Return",
-              "Name",
-              "Load"
+              "Sub",
+              "Constant"
             ],
-            "ast_depth": 7,
-            "ast_hash": "9ab064e3ea8e7729ca5332b33258c4f7",
-            "alpha_renamed_hash": "df84d2329aa847078fb576b402ccf95c"
+            "ast_depth": 9,
+            "ast_hash": "18b9310321239cad4282b20aed2708f3",
+            "alpha_renamed_hash": "228838af78d47844a7b650f68909d4a2"
           },
           "operator_precedence": {
             "operator_sequence": [
               "Add",
-              "Add"
+              "Sub",
+              "Sub"
             ],
             "precedence_levels": {
-              "Add": 3
+              "Add": 3,
+              "Sub": 3
             }
           },
           "statement_ordering": {
@@ -2712,9 +2565,6 @@
               "Return",
               "If",
               "Return",
-              "Assign",
-              "For",
-              "Assign",
               "Return"
             ],
             "statement_sequence": [
@@ -2723,28 +2573,37 @@
               "Return_2",
               "If_3",
               "Return_4",
-              "Assign_5",
-              "For_6",
-              "Assign_7",
-              "Return_8"
+              "Return_5"
             ],
             "control_flow_order": [
               "FunctionDef",
               "If",
-              "If",
-              "For"
+              "If"
             ]
           },
           "recursion_schema": {
-            "is_recursive": false,
+            "is_recursive": true,
             "base_cases": [
               {
                 "condition": "n <= 0",
                 "return_type": "constant"
               }
             ],
-            "recursive_calls": [],
-            "recursion_pattern": null,
+            "recursive_calls": [
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "BinOp"
+                ]
+              },
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "BinOp"
+                ]
+              }
+            ],
+            "recursion_pattern": "divide_and_conquer",
             "termination_guards": [
               "n <= 0"
             ]
@@ -2753,10 +2612,11 @@
         {
           "control_flow_signature": {
             "if_statements": 2,
-            "for_loops": 1,
+            "for_loops": 0,
             "while_loops": 0,
             "function_calls": [
-              "range"
+              "fibonacci",
+              "fibonacci"
             ],
             "nested_depth": 2,
             "branch_patterns": [
@@ -2781,10 +2641,6 @@
                 "function_fibonacci",
                 "branch",
                 "branch"
-              ],
-              [
-                "function_fibonacci",
-                "loop"
               ]
             ]
           },
@@ -2819,17 +2675,17 @@
             }
           },
           "complexity_class": {
-            "nested_loops": 1,
-            "recursive_calls": 0,
-            "estimated_complexity": "O(n)",
-            "cyclomatic_complexity": 4,
+            "nested_loops": 0,
+            "recursive_calls": 2,
+            "estimated_complexity": "O(2^n)",
+            "cyclomatic_complexity": 3,
             "complexity_rank": "A",
-            "average_complexity": 4.0,
-            "maintainability_index": 67.74892594572017,
-            "halstead_difficulty": 2.4,
-            "halstead_effort": 86.39999999999999,
-            "halstead_volume": 36.0,
-            "halstead_bugs": 0.012
+            "average_complexity": 3.0,
+            "maintainability_index": 69.27576528494643,
+            "halstead_difficulty": 3.3333333333333335,
+            "halstead_effort": 166.09640474436813,
+            "halstead_volume": 49.82892142331044,
+            "halstead_bugs": 0.016609640474436815
           },
           "side_effect_profile": {
             "has_print": false,
@@ -2847,21 +2703,20 @@
           },
           "termination_properties": {
             "has_base_case": true,
-            "has_bounded_loops": true,
+            "has_bounded_loops": false,
             "recursive_depth": 0
           },
           "algebraic_structure": {
             "commutative_ops": [
-              "Add",
               "Add"
             ],
             "associative_ops": [
-              "Add",
               "Add"
             ],
             "binary_operations": [
               "Add",
-              "Add"
+              "Sub",
+              "Sub"
             ]
           },
           "numerical_behavior": {
@@ -2873,10 +2728,8 @@
               0,
               1,
               1,
-              0,
               1,
-              2,
-              1
+              2
             ]
           },
           "logical_equivalence": {
@@ -2909,61 +2762,39 @@
               "Constant",
               "Return",
               "Constant",
-              "Assign",
-              "Tuple",
-              "Name",
-              "Store",
-              "Name",
-              "Store",
-              "Store",
-              "Tuple",
-              "Constant",
-              "Constant",
-              "Load",
-              "For",
-              "Name",
-              "Store",
+              "Return",
+              "BinOp",
               "Call",
               "Name",
               "Load",
-              "Constant",
               "BinOp",
               "Name",
               "Load",
-              "Add",
+              "Sub",
               "Constant",
-              "Assign",
-              "Tuple",
-              "Name",
-              "Store",
-              "Name",
-              "Store",
-              "Store",
-              "Tuple",
+              "Add",
+              "Call",
               "Name",
               "Load",
               "BinOp",
               "Name",
               "Load",
-              "Add",
-              "Name",
-              "Load",
-              "Load",
-              "Return",
-              "Name",
-              "Load"
+              "Sub",
+              "Constant"
             ],
-            "ast_depth": 7,
-            "ast_hash": "9ab064e3ea8e7729ca5332b33258c4f7",
-            "alpha_renamed_hash": "df84d2329aa847078fb576b402ccf95c"
+            "ast_depth": 9,
+            "ast_hash": "18b9310321239cad4282b20aed2708f3",
+            "alpha_renamed_hash": "228838af78d47844a7b650f68909d4a2"
           },
           "operator_precedence": {
             "operator_sequence": [
               "Add",
-              "Add"
+              "Sub",
+              "Sub"
             ],
             "precedence_levels": {
-              "Add": 3
+              "Add": 3,
+              "Sub": 3
             }
           },
           "statement_ordering": {
@@ -2973,9 +2804,6 @@
               "Return",
               "If",
               "Return",
-              "Assign",
-              "For",
-              "Assign",
               "Return"
             ],
             "statement_sequence": [
@@ -2984,28 +2812,37 @@
               "Return_2",
               "If_3",
               "Return_4",
-              "Assign_5",
-              "For_6",
-              "Assign_7",
-              "Return_8"
+              "Return_5"
             ],
             "control_flow_order": [
               "FunctionDef",
               "If",
-              "If",
-              "For"
+              "If"
             ]
           },
           "recursion_schema": {
-            "is_recursive": false,
+            "is_recursive": true,
             "base_cases": [
               {
                 "condition": "n <= 0",
                 "return_type": "constant"
               }
             ],
-            "recursive_calls": [],
-            "recursion_pattern": null,
+            "recursive_calls": [
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "BinOp"
+                ]
+              },
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "BinOp"
+                ]
+              }
+            ],
+            "recursion_pattern": "divide_and_conquer",
             "termination_guards": [
               "n <= 0"
             ]
@@ -3014,10 +2851,11 @@
         {
           "control_flow_signature": {
             "if_statements": 2,
-            "for_loops": 1,
+            "for_loops": 0,
             "while_loops": 0,
             "function_calls": [
-              "range"
+              "fibonacci",
+              "fibonacci"
             ],
             "nested_depth": 2,
             "branch_patterns": [
@@ -3042,10 +2880,6 @@
                 "function_fibonacci",
                 "branch",
                 "branch"
-              ],
-              [
-                "function_fibonacci",
-                "loop"
               ]
             ]
           },
@@ -3080,17 +2914,17 @@
             }
           },
           "complexity_class": {
-            "nested_loops": 1,
-            "recursive_calls": 0,
-            "estimated_complexity": "O(n)",
-            "cyclomatic_complexity": 4,
+            "nested_loops": 0,
+            "recursive_calls": 2,
+            "estimated_complexity": "O(2^n)",
+            "cyclomatic_complexity": 3,
             "complexity_rank": "A",
-            "average_complexity": 4.0,
-            "maintainability_index": 67.74892594572017,
-            "halstead_difficulty": 2.4,
-            "halstead_effort": 86.39999999999999,
-            "halstead_volume": 36.0,
-            "halstead_bugs": 0.012
+            "average_complexity": 3.0,
+            "maintainability_index": 69.27576528494643,
+            "halstead_difficulty": 3.3333333333333335,
+            "halstead_effort": 166.09640474436813,
+            "halstead_volume": 49.82892142331044,
+            "halstead_bugs": 0.016609640474436815
           },
           "side_effect_profile": {
             "has_print": false,
@@ -3108,21 +2942,20 @@
           },
           "termination_properties": {
             "has_base_case": true,
-            "has_bounded_loops": true,
+            "has_bounded_loops": false,
             "recursive_depth": 0
           },
           "algebraic_structure": {
             "commutative_ops": [
-              "Add",
               "Add"
             ],
             "associative_ops": [
-              "Add",
               "Add"
             ],
             "binary_operations": [
               "Add",
-              "Add"
+              "Sub",
+              "Sub"
             ]
           },
           "numerical_behavior": {
@@ -3134,10 +2967,8 @@
               0,
               1,
               1,
-              0,
               1,
-              2,
-              1
+              2
             ]
           },
           "logical_equivalence": {
@@ -3170,61 +3001,39 @@
               "Constant",
               "Return",
               "Constant",
-              "Assign",
-              "Tuple",
-              "Name",
-              "Store",
-              "Name",
-              "Store",
-              "Store",
-              "Tuple",
-              "Constant",
-              "Constant",
-              "Load",
-              "For",
-              "Name",
-              "Store",
+              "Return",
+              "BinOp",
               "Call",
               "Name",
               "Load",
-              "Constant",
               "BinOp",
               "Name",
               "Load",
-              "Add",
+              "Sub",
               "Constant",
-              "Assign",
-              "Tuple",
-              "Name",
-              "Store",
-              "Name",
-              "Store",
-              "Store",
-              "Tuple",
+              "Add",
+              "Call",
               "Name",
               "Load",
               "BinOp",
               "Name",
               "Load",
-              "Add",
-              "Name",
-              "Load",
-              "Load",
-              "Return",
-              "Name",
-              "Load"
+              "Sub",
+              "Constant"
             ],
-            "ast_depth": 7,
-            "ast_hash": "9ab064e3ea8e7729ca5332b33258c4f7",
-            "alpha_renamed_hash": "df84d2329aa847078fb576b402ccf95c"
+            "ast_depth": 9,
+            "ast_hash": "18b9310321239cad4282b20aed2708f3",
+            "alpha_renamed_hash": "228838af78d47844a7b650f68909d4a2"
           },
           "operator_precedence": {
             "operator_sequence": [
               "Add",
-              "Add"
+              "Sub",
+              "Sub"
             ],
             "precedence_levels": {
-              "Add": 3
+              "Add": 3,
+              "Sub": 3
             }
           },
           "statement_ordering": {
@@ -3234,9 +3043,6 @@
               "Return",
               "If",
               "Return",
-              "Assign",
-              "For",
-              "Assign",
               "Return"
             ],
             "statement_sequence": [
@@ -3245,28 +3051,37 @@
               "Return_2",
               "If_3",
               "Return_4",
-              "Assign_5",
-              "For_6",
-              "Assign_7",
-              "Return_8"
+              "Return_5"
             ],
             "control_flow_order": [
               "FunctionDef",
               "If",
-              "If",
-              "For"
+              "If"
             ]
           },
           "recursion_schema": {
-            "is_recursive": false,
+            "is_recursive": true,
             "base_cases": [
               {
                 "condition": "n <= 0",
                 "return_type": "constant"
               }
             ],
-            "recursive_calls": [],
-            "recursion_pattern": null,
+            "recursive_calls": [
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "BinOp"
+                ]
+              },
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "BinOp"
+                ]
+              }
+            ],
+            "recursion_pattern": "divide_and_conquer",
             "termination_guards": [
               "n <= 0"
             ]
@@ -3275,10 +3090,11 @@
         {
           "control_flow_signature": {
             "if_statements": 2,
-            "for_loops": 1,
+            "for_loops": 0,
             "while_loops": 0,
             "function_calls": [
-              "range"
+              "fibonacci",
+              "fibonacci"
             ],
             "nested_depth": 2,
             "branch_patterns": [
@@ -3303,10 +3119,6 @@
                 "function_fibonacci",
                 "branch",
                 "branch"
-              ],
-              [
-                "function_fibonacci",
-                "loop"
               ]
             ]
           },
@@ -3341,17 +3153,17 @@
             }
           },
           "complexity_class": {
-            "nested_loops": 1,
-            "recursive_calls": 0,
-            "estimated_complexity": "O(n)",
-            "cyclomatic_complexity": 4,
+            "nested_loops": 0,
+            "recursive_calls": 2,
+            "estimated_complexity": "O(2^n)",
+            "cyclomatic_complexity": 3,
             "complexity_rank": "A",
-            "average_complexity": 4.0,
-            "maintainability_index": 67.74892594572017,
-            "halstead_difficulty": 2.4,
-            "halstead_effort": 86.39999999999999,
-            "halstead_volume": 36.0,
-            "halstead_bugs": 0.012
+            "average_complexity": 3.0,
+            "maintainability_index": 69.27576528494643,
+            "halstead_difficulty": 3.3333333333333335,
+            "halstead_effort": 166.09640474436813,
+            "halstead_volume": 49.82892142331044,
+            "halstead_bugs": 0.016609640474436815
           },
           "side_effect_profile": {
             "has_print": false,
@@ -3369,21 +3181,20 @@
           },
           "termination_properties": {
             "has_base_case": true,
-            "has_bounded_loops": true,
+            "has_bounded_loops": false,
             "recursive_depth": 0
           },
           "algebraic_structure": {
             "commutative_ops": [
-              "Add",
               "Add"
             ],
             "associative_ops": [
-              "Add",
               "Add"
             ],
             "binary_operations": [
               "Add",
-              "Add"
+              "Sub",
+              "Sub"
             ]
           },
           "numerical_behavior": {
@@ -3395,10 +3206,8 @@
               0,
               1,
               1,
-              0,
               1,
-              2,
-              1
+              2
             ]
           },
           "logical_equivalence": {
@@ -3431,61 +3240,39 @@
               "Constant",
               "Return",
               "Constant",
-              "Assign",
-              "Tuple",
-              "Name",
-              "Store",
-              "Name",
-              "Store",
-              "Store",
-              "Tuple",
-              "Constant",
-              "Constant",
-              "Load",
-              "For",
-              "Name",
-              "Store",
+              "Return",
+              "BinOp",
               "Call",
               "Name",
               "Load",
-              "Constant",
               "BinOp",
               "Name",
               "Load",
-              "Add",
+              "Sub",
               "Constant",
-              "Assign",
-              "Tuple",
-              "Name",
-              "Store",
-              "Name",
-              "Store",
-              "Store",
-              "Tuple",
+              "Add",
+              "Call",
               "Name",
               "Load",
               "BinOp",
               "Name",
               "Load",
-              "Add",
-              "Name",
-              "Load",
-              "Load",
-              "Return",
-              "Name",
-              "Load"
+              "Sub",
+              "Constant"
             ],
-            "ast_depth": 7,
-            "ast_hash": "9ab064e3ea8e7729ca5332b33258c4f7",
-            "alpha_renamed_hash": "df84d2329aa847078fb576b402ccf95c"
+            "ast_depth": 9,
+            "ast_hash": "18b9310321239cad4282b20aed2708f3",
+            "alpha_renamed_hash": "228838af78d47844a7b650f68909d4a2"
           },
           "operator_precedence": {
             "operator_sequence": [
               "Add",
-              "Add"
+              "Sub",
+              "Sub"
             ],
             "precedence_levels": {
-              "Add": 3
+              "Add": 3,
+              "Sub": 3
             }
           },
           "statement_ordering": {
@@ -3495,9 +3282,6 @@
               "Return",
               "If",
               "Return",
-              "Assign",
-              "For",
-              "Assign",
               "Return"
             ],
             "statement_sequence": [
@@ -3506,28 +3290,37 @@
               "Return_2",
               "If_3",
               "Return_4",
-              "Assign_5",
-              "For_6",
-              "Assign_7",
-              "Return_8"
+              "Return_5"
             ],
             "control_flow_order": [
               "FunctionDef",
               "If",
-              "If",
-              "For"
+              "If"
             ]
           },
           "recursion_schema": {
-            "is_recursive": false,
+            "is_recursive": true,
             "base_cases": [
               {
                 "condition": "n <= 0",
                 "return_type": "constant"
               }
             ],
-            "recursive_calls": [],
-            "recursion_pattern": null,
+            "recursive_calls": [
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "BinOp"
+                ]
+              },
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "BinOp"
+                ]
+              }
+            ],
+            "recursion_pattern": "divide_and_conquer",
             "termination_guards": [
               "n <= 0"
             ]
@@ -3536,10 +3329,11 @@
         {
           "control_flow_signature": {
             "if_statements": 2,
-            "for_loops": 1,
+            "for_loops": 0,
             "while_loops": 0,
             "function_calls": [
-              "range"
+              "fibonacci",
+              "fibonacci"
             ],
             "nested_depth": 2,
             "branch_patterns": [
@@ -3564,10 +3358,6 @@
                 "function_fibonacci",
                 "branch",
                 "branch"
-              ],
-              [
-                "function_fibonacci",
-                "loop"
               ]
             ]
           },
@@ -3602,17 +3392,17 @@
             }
           },
           "complexity_class": {
-            "nested_loops": 1,
-            "recursive_calls": 0,
-            "estimated_complexity": "O(n)",
-            "cyclomatic_complexity": 4,
+            "nested_loops": 0,
+            "recursive_calls": 2,
+            "estimated_complexity": "O(2^n)",
+            "cyclomatic_complexity": 3,
             "complexity_rank": "A",
-            "average_complexity": 4.0,
-            "maintainability_index": 67.74892594572017,
-            "halstead_difficulty": 2.4,
-            "halstead_effort": 86.39999999999999,
-            "halstead_volume": 36.0,
-            "halstead_bugs": 0.012
+            "average_complexity": 3.0,
+            "maintainability_index": 69.27576528494643,
+            "halstead_difficulty": 3.3333333333333335,
+            "halstead_effort": 166.09640474436813,
+            "halstead_volume": 49.82892142331044,
+            "halstead_bugs": 0.016609640474436815
           },
           "side_effect_profile": {
             "has_print": false,
@@ -3630,21 +3420,20 @@
           },
           "termination_properties": {
             "has_base_case": true,
-            "has_bounded_loops": true,
+            "has_bounded_loops": false,
             "recursive_depth": 0
           },
           "algebraic_structure": {
             "commutative_ops": [
-              "Add",
               "Add"
             ],
             "associative_ops": [
-              "Add",
               "Add"
             ],
             "binary_operations": [
               "Add",
-              "Add"
+              "Sub",
+              "Sub"
             ]
           },
           "numerical_behavior": {
@@ -3656,10 +3445,8 @@
               0,
               1,
               1,
-              0,
               1,
-              2,
-              1
+              2
             ]
           },
           "logical_equivalence": {
@@ -3692,61 +3479,39 @@
               "Constant",
               "Return",
               "Constant",
-              "Assign",
-              "Tuple",
-              "Name",
-              "Store",
-              "Name",
-              "Store",
-              "Store",
-              "Tuple",
-              "Constant",
-              "Constant",
-              "Load",
-              "For",
-              "Name",
-              "Store",
+              "Return",
+              "BinOp",
               "Call",
               "Name",
               "Load",
-              "Constant",
               "BinOp",
               "Name",
               "Load",
-              "Add",
+              "Sub",
               "Constant",
-              "Assign",
-              "Tuple",
-              "Name",
-              "Store",
-              "Name",
-              "Store",
-              "Store",
-              "Tuple",
+              "Add",
+              "Call",
               "Name",
               "Load",
               "BinOp",
               "Name",
               "Load",
-              "Add",
-              "Name",
-              "Load",
-              "Load",
-              "Return",
-              "Name",
-              "Load"
+              "Sub",
+              "Constant"
             ],
-            "ast_depth": 7,
-            "ast_hash": "9ab064e3ea8e7729ca5332b33258c4f7",
-            "alpha_renamed_hash": "df84d2329aa847078fb576b402ccf95c"
+            "ast_depth": 9,
+            "ast_hash": "18b9310321239cad4282b20aed2708f3",
+            "alpha_renamed_hash": "228838af78d47844a7b650f68909d4a2"
           },
           "operator_precedence": {
             "operator_sequence": [
               "Add",
-              "Add"
+              "Sub",
+              "Sub"
             ],
             "precedence_levels": {
-              "Add": 3
+              "Add": 3,
+              "Sub": 3
             }
           },
           "statement_ordering": {
@@ -3756,9 +3521,6 @@
               "Return",
               "If",
               "Return",
-              "Assign",
-              "For",
-              "Assign",
               "Return"
             ],
             "statement_sequence": [
@@ -3767,28 +3529,37 @@
               "Return_2",
               "If_3",
               "Return_4",
-              "Assign_5",
-              "For_6",
-              "Assign_7",
-              "Return_8"
+              "Return_5"
             ],
             "control_flow_order": [
               "FunctionDef",
               "If",
-              "If",
-              "For"
+              "If"
             ]
           },
           "recursion_schema": {
-            "is_recursive": false,
+            "is_recursive": true,
             "base_cases": [
               {
                 "condition": "n <= 0",
                 "return_type": "constant"
               }
             ],
-            "recursive_calls": [],
-            "recursion_pattern": null,
+            "recursive_calls": [
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "BinOp"
+                ]
+              },
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "BinOp"
+                ]
+              }
+            ],
+            "recursion_pattern": "divide_and_conquer",
             "termination_guards": [
               "n <= 0"
             ]
@@ -3797,10 +3568,11 @@
         {
           "control_flow_signature": {
             "if_statements": 2,
-            "for_loops": 1,
+            "for_loops": 0,
             "while_loops": 0,
             "function_calls": [
-              "range"
+              "fibonacci",
+              "fibonacci"
             ],
             "nested_depth": 2,
             "branch_patterns": [
@@ -3825,10 +3597,6 @@
                 "function_fibonacci",
                 "branch",
                 "branch"
-              ],
-              [
-                "function_fibonacci",
-                "loop"
               ]
             ]
           },
@@ -3863,17 +3631,17 @@
             }
           },
           "complexity_class": {
-            "nested_loops": 1,
-            "recursive_calls": 0,
-            "estimated_complexity": "O(n)",
-            "cyclomatic_complexity": 4,
+            "nested_loops": 0,
+            "recursive_calls": 2,
+            "estimated_complexity": "O(2^n)",
+            "cyclomatic_complexity": 3,
             "complexity_rank": "A",
-            "average_complexity": 4.0,
-            "maintainability_index": 67.74892594572017,
-            "halstead_difficulty": 2.4,
-            "halstead_effort": 86.39999999999999,
-            "halstead_volume": 36.0,
-            "halstead_bugs": 0.012
+            "average_complexity": 3.0,
+            "maintainability_index": 69.27576528494643,
+            "halstead_difficulty": 3.3333333333333335,
+            "halstead_effort": 166.09640474436813,
+            "halstead_volume": 49.82892142331044,
+            "halstead_bugs": 0.016609640474436815
           },
           "side_effect_profile": {
             "has_print": false,
@@ -3891,21 +3659,20 @@
           },
           "termination_properties": {
             "has_base_case": true,
-            "has_bounded_loops": true,
+            "has_bounded_loops": false,
             "recursive_depth": 0
           },
           "algebraic_structure": {
             "commutative_ops": [
-              "Add",
               "Add"
             ],
             "associative_ops": [
-              "Add",
               "Add"
             ],
             "binary_operations": [
               "Add",
-              "Add"
+              "Sub",
+              "Sub"
             ]
           },
           "numerical_behavior": {
@@ -3917,10 +3684,8 @@
               0,
               1,
               1,
-              0,
               1,
-              2,
-              1
+              2
             ]
           },
           "logical_equivalence": {
@@ -3953,61 +3718,39 @@
               "Constant",
               "Return",
               "Constant",
-              "Assign",
-              "Tuple",
-              "Name",
-              "Store",
-              "Name",
-              "Store",
-              "Store",
-              "Tuple",
-              "Constant",
-              "Constant",
-              "Load",
-              "For",
-              "Name",
-              "Store",
+              "Return",
+              "BinOp",
               "Call",
               "Name",
               "Load",
-              "Constant",
               "BinOp",
               "Name",
               "Load",
-              "Add",
+              "Sub",
               "Constant",
-              "Assign",
-              "Tuple",
-              "Name",
-              "Store",
-              "Name",
-              "Store",
-              "Store",
-              "Tuple",
+              "Add",
+              "Call",
               "Name",
               "Load",
               "BinOp",
               "Name",
               "Load",
-              "Add",
-              "Name",
-              "Load",
-              "Load",
-              "Return",
-              "Name",
-              "Load"
+              "Sub",
+              "Constant"
             ],
-            "ast_depth": 7,
-            "ast_hash": "9ab064e3ea8e7729ca5332b33258c4f7",
-            "alpha_renamed_hash": "df84d2329aa847078fb576b402ccf95c"
+            "ast_depth": 9,
+            "ast_hash": "18b9310321239cad4282b20aed2708f3",
+            "alpha_renamed_hash": "228838af78d47844a7b650f68909d4a2"
           },
           "operator_precedence": {
             "operator_sequence": [
               "Add",
-              "Add"
+              "Sub",
+              "Sub"
             ],
             "precedence_levels": {
-              "Add": 3
+              "Add": 3,
+              "Sub": 3
             }
           },
           "statement_ordering": {
@@ -4017,9 +3760,6 @@
               "Return",
               "If",
               "Return",
-              "Assign",
-              "For",
-              "Assign",
               "Return"
             ],
             "statement_sequence": [
@@ -4028,28 +3768,37 @@
               "Return_2",
               "If_3",
               "Return_4",
-              "Assign_5",
-              "For_6",
-              "Assign_7",
-              "Return_8"
+              "Return_5"
             ],
             "control_flow_order": [
               "FunctionDef",
               "If",
-              "If",
-              "For"
+              "If"
             ]
           },
           "recursion_schema": {
-            "is_recursive": false,
+            "is_recursive": true,
             "base_cases": [
               {
                 "condition": "n <= 0",
                 "return_type": "constant"
               }
             ],
-            "recursive_calls": [],
-            "recursion_pattern": null,
+            "recursive_calls": [
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "BinOp"
+                ]
+              },
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "BinOp"
+                ]
+              }
+            ],
+            "recursion_pattern": "divide_and_conquer",
             "termination_guards": [
               "n <= 0"
             ]
@@ -4058,10 +3807,11 @@
         {
           "control_flow_signature": {
             "if_statements": 2,
-            "for_loops": 1,
+            "for_loops": 0,
             "while_loops": 0,
             "function_calls": [
-              "range"
+              "fibonacci",
+              "fibonacci"
             ],
             "nested_depth": 2,
             "branch_patterns": [
@@ -4086,10 +3836,6 @@
                 "function_fibonacci",
                 "branch",
                 "branch"
-              ],
-              [
-                "function_fibonacci",
-                "loop"
               ]
             ]
           },
@@ -4124,17 +3870,17 @@
             }
           },
           "complexity_class": {
-            "nested_loops": 1,
-            "recursive_calls": 0,
-            "estimated_complexity": "O(n)",
-            "cyclomatic_complexity": 4,
+            "nested_loops": 0,
+            "recursive_calls": 2,
+            "estimated_complexity": "O(2^n)",
+            "cyclomatic_complexity": 3,
             "complexity_rank": "A",
-            "average_complexity": 4.0,
-            "maintainability_index": 67.74892594572017,
-            "halstead_difficulty": 2.4,
-            "halstead_effort": 86.39999999999999,
-            "halstead_volume": 36.0,
-            "halstead_bugs": 0.012
+            "average_complexity": 3.0,
+            "maintainability_index": 69.27576528494643,
+            "halstead_difficulty": 3.3333333333333335,
+            "halstead_effort": 166.09640474436813,
+            "halstead_volume": 49.82892142331044,
+            "halstead_bugs": 0.016609640474436815
           },
           "side_effect_profile": {
             "has_print": false,
@@ -4152,21 +3898,20 @@
           },
           "termination_properties": {
             "has_base_case": true,
-            "has_bounded_loops": true,
+            "has_bounded_loops": false,
             "recursive_depth": 0
           },
           "algebraic_structure": {
             "commutative_ops": [
-              "Add",
               "Add"
             ],
             "associative_ops": [
-              "Add",
               "Add"
             ],
             "binary_operations": [
               "Add",
-              "Add"
+              "Sub",
+              "Sub"
             ]
           },
           "numerical_behavior": {
@@ -4178,10 +3923,8 @@
               0,
               1,
               1,
-              0,
               1,
-              2,
-              1
+              2
             ]
           },
           "logical_equivalence": {
@@ -4214,61 +3957,39 @@
               "Constant",
               "Return",
               "Constant",
-              "Assign",
-              "Tuple",
-              "Name",
-              "Store",
-              "Name",
-              "Store",
-              "Store",
-              "Tuple",
-              "Constant",
-              "Constant",
-              "Load",
-              "For",
-              "Name",
-              "Store",
+              "Return",
+              "BinOp",
               "Call",
               "Name",
               "Load",
-              "Constant",
               "BinOp",
               "Name",
               "Load",
-              "Add",
+              "Sub",
               "Constant",
-              "Assign",
-              "Tuple",
-              "Name",
-              "Store",
-              "Name",
-              "Store",
-              "Store",
-              "Tuple",
+              "Add",
+              "Call",
               "Name",
               "Load",
               "BinOp",
               "Name",
               "Load",
-              "Add",
-              "Name",
-              "Load",
-              "Load",
-              "Return",
-              "Name",
-              "Load"
+              "Sub",
+              "Constant"
             ],
-            "ast_depth": 7,
-            "ast_hash": "9ab064e3ea8e7729ca5332b33258c4f7",
-            "alpha_renamed_hash": "df84d2329aa847078fb576b402ccf95c"
+            "ast_depth": 9,
+            "ast_hash": "18b9310321239cad4282b20aed2708f3",
+            "alpha_renamed_hash": "228838af78d47844a7b650f68909d4a2"
           },
           "operator_precedence": {
             "operator_sequence": [
               "Add",
-              "Add"
+              "Sub",
+              "Sub"
             ],
             "precedence_levels": {
-              "Add": 3
+              "Add": 3,
+              "Sub": 3
             }
           },
           "statement_ordering": {
@@ -4278,9 +3999,6 @@
               "Return",
               "If",
               "Return",
-              "Assign",
-              "For",
-              "Assign",
               "Return"
             ],
             "statement_sequence": [
@@ -4289,28 +4007,37 @@
               "Return_2",
               "If_3",
               "Return_4",
-              "Assign_5",
-              "For_6",
-              "Assign_7",
-              "Return_8"
+              "Return_5"
             ],
             "control_flow_order": [
               "FunctionDef",
               "If",
-              "If",
-              "For"
+              "If"
             ]
           },
           "recursion_schema": {
-            "is_recursive": false,
+            "is_recursive": true,
             "base_cases": [
               {
                 "condition": "n <= 0",
                 "return_type": "constant"
               }
             ],
-            "recursive_calls": [],
-            "recursion_pattern": null,
+            "recursive_calls": [
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "BinOp"
+                ]
+              },
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "BinOp"
+                ]
+              }
+            ],
+            "recursion_pattern": "divide_and_conquer",
             "termination_guards": [
               "n <= 0"
             ]
@@ -4319,10 +4046,11 @@
         {
           "control_flow_signature": {
             "if_statements": 2,
-            "for_loops": 1,
+            "for_loops": 0,
             "while_loops": 0,
             "function_calls": [
-              "range"
+              "fibonacci",
+              "fibonacci"
             ],
             "nested_depth": 2,
             "branch_patterns": [
@@ -4347,10 +4075,6 @@
                 "function_fibonacci",
                 "branch",
                 "branch"
-              ],
-              [
-                "function_fibonacci",
-                "loop"
               ]
             ]
           },
@@ -4385,17 +4109,17 @@
             }
           },
           "complexity_class": {
-            "nested_loops": 1,
-            "recursive_calls": 0,
-            "estimated_complexity": "O(n)",
-            "cyclomatic_complexity": 4,
+            "nested_loops": 0,
+            "recursive_calls": 2,
+            "estimated_complexity": "O(2^n)",
+            "cyclomatic_complexity": 3,
             "complexity_rank": "A",
-            "average_complexity": 4.0,
-            "maintainability_index": 67.74892594572017,
-            "halstead_difficulty": 2.4,
-            "halstead_effort": 86.39999999999999,
-            "halstead_volume": 36.0,
-            "halstead_bugs": 0.012
+            "average_complexity": 3.0,
+            "maintainability_index": 69.27576528494643,
+            "halstead_difficulty": 3.3333333333333335,
+            "halstead_effort": 166.09640474436813,
+            "halstead_volume": 49.82892142331044,
+            "halstead_bugs": 0.016609640474436815
           },
           "side_effect_profile": {
             "has_print": false,
@@ -4413,21 +4137,20 @@
           },
           "termination_properties": {
             "has_base_case": true,
-            "has_bounded_loops": true,
+            "has_bounded_loops": false,
             "recursive_depth": 0
           },
           "algebraic_structure": {
             "commutative_ops": [
-              "Add",
               "Add"
             ],
             "associative_ops": [
-              "Add",
               "Add"
             ],
             "binary_operations": [
               "Add",
-              "Add"
+              "Sub",
+              "Sub"
             ]
           },
           "numerical_behavior": {
@@ -4439,10 +4162,8 @@
               0,
               1,
               1,
-              0,
               1,
-              2,
-              1
+              2
             ]
           },
           "logical_equivalence": {
@@ -4475,61 +4196,39 @@
               "Constant",
               "Return",
               "Constant",
-              "Assign",
-              "Tuple",
-              "Name",
-              "Store",
-              "Name",
-              "Store",
-              "Store",
-              "Tuple",
-              "Constant",
-              "Constant",
-              "Load",
-              "For",
-              "Name",
-              "Store",
+              "Return",
+              "BinOp",
               "Call",
               "Name",
               "Load",
-              "Constant",
               "BinOp",
               "Name",
               "Load",
-              "Add",
+              "Sub",
               "Constant",
-              "Assign",
-              "Tuple",
-              "Name",
-              "Store",
-              "Name",
-              "Store",
-              "Store",
-              "Tuple",
+              "Add",
+              "Call",
               "Name",
               "Load",
               "BinOp",
               "Name",
               "Load",
-              "Add",
-              "Name",
-              "Load",
-              "Load",
-              "Return",
-              "Name",
-              "Load"
+              "Sub",
+              "Constant"
             ],
-            "ast_depth": 7,
-            "ast_hash": "9ab064e3ea8e7729ca5332b33258c4f7",
-            "alpha_renamed_hash": "df84d2329aa847078fb576b402ccf95c"
+            "ast_depth": 9,
+            "ast_hash": "18b9310321239cad4282b20aed2708f3",
+            "alpha_renamed_hash": "228838af78d47844a7b650f68909d4a2"
           },
           "operator_precedence": {
             "operator_sequence": [
               "Add",
-              "Add"
+              "Sub",
+              "Sub"
             ],
             "precedence_levels": {
-              "Add": 3
+              "Add": 3,
+              "Sub": 3
             }
           },
           "statement_ordering": {
@@ -4539,9 +4238,6 @@
               "Return",
               "If",
               "Return",
-              "Assign",
-              "For",
-              "Assign",
               "Return"
             ],
             "statement_sequence": [
@@ -4550,28 +4246,37 @@
               "Return_2",
               "If_3",
               "Return_4",
-              "Assign_5",
-              "For_6",
-              "Assign_7",
-              "Return_8"
+              "Return_5"
             ],
             "control_flow_order": [
               "FunctionDef",
               "If",
-              "If",
-              "For"
+              "If"
             ]
           },
           "recursion_schema": {
-            "is_recursive": false,
+            "is_recursive": true,
             "base_cases": [
               {
                 "condition": "n <= 0",
                 "return_type": "constant"
               }
             ],
-            "recursive_calls": [],
-            "recursion_pattern": null,
+            "recursive_calls": [
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "BinOp"
+                ]
+              },
+              {
+                "num_args": 1,
+                "arg_patterns": [
+                  "BinOp"
+                ]
+              }
+            ],
+            "recursion_pattern": "divide_and_conquer",
             "termination_guards": [
               "n <= 0"
             ]
@@ -4579,7 +4284,7 @@
         }
       ],
       "structural_groups": {
-        "-2204003478902294318_-8311443755310329695_889948787118519192_-7236603688267696821": [
+        "-8544028461588116384_3802113000248188158_-2091235413526323924_-5579812699372695135": [
           0,
           1,
           2,
@@ -4609,7 +4314,7 @@
     }
   },
   "bell_curve_analysis": {
-    "plot_path": "outputs\\analysis\\pre_post_comparison_fibonacci_basic_temp0.7.png",
+    "plot_path": "outputs\\analysis\\pre_post_comparison_fibonacci_recursive_temp0.7.png",
     "statistics": {
       "pre_repair": {
         "mean": 0.0,
@@ -4673,13 +4378,13 @@
   },
   "hypothesis_evaluation": {
     "hypothesis": "SKYT improves LLM code repeatability through contract-driven canonicalization",
-    "supported": true,
+    "supported": false,
     "evidence": {
-      "raw_repeatability": 0.6,
-      "behavioral_improvement": 0.4,
-      "structural_improvement": 0.4,
-      "total_improvement": 0.4
+      "raw_repeatability": 1.0,
+      "behavioral_improvement": 0.0,
+      "structural_improvement": 0.0,
+      "total_improvement": 0.0
     },
-    "conclusion": "Hypothesis SUPPORTED: Significant improvement detected"
+    "conclusion": "Hypothesis NOT SUPPORTED: No significant improvement"
   }
 }
