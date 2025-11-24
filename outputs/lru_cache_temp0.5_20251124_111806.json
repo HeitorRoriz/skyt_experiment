@@ -1,0 +1,5536 @@
+{
+  "experiment_id": "lru_cache_temp0.5_20251124_111806",
+  "contract_id": "lru_cache",
+  "temperature": 0.5,
+  "timestamp": "2025-11-24T11:18:06.603743",
+  "num_runs": 5,
+  "successful_runs": 5,
+  "contract": {
+    "id": "lru_cache",
+    "task_intent": "Implement LRU cache with get and put operations",
+    "prompt": "Write a Python class called 'LRUCache' with a constructor that takes capacity, a get(key) method that returns the value if key exists (or -1 if not), and a put(key, value) method. The cache should evict the least recently used item when capacity is exceeded. Use a doubly-linked list with a hash map for O(1) operations.",
+    "constraints": {
+      "class_name": "LRUCache",
+      "methods": [
+        "__init__",
+        "get",
+        "put"
+      ],
+      "required_classes": [
+        "Node",
+        "LRUCache"
+      ],
+      "required_attributes": {
+        "Node": [
+          "key",
+          "value",
+          "prev",
+          "next"
+        ],
+        "LRUCache": [
+          "capacity",
+          "cache",
+          "head",
+          "tail"
+        ]
+      },
+      "algorithm": "doubly-linked list with hash map",
+      "implementation_style": "iterative",
+      "output_type": "integer",
+      "variable_naming": {
+        "fixed_variables": [
+          "capacity",
+          "key",
+          "value"
+        ],
+        "flexible_variables": [
+          "cache",
+          "node",
+          "head",
+          "tail",
+          "lru",
+          "prev",
+          "next"
+        ],
+        "naming_policy": "strict"
+      }
+    },
+    "algorithm_family": "lru_cache",
+    "language": "python",
+    "environment": {},
+    "output_format": "raw_code",
+    "oracle_requirements": {
+      "test_cases": [
+        {
+          "description": "Basic LRU operations",
+          "operations": [
+            {
+              "op": "init",
+              "args": [
+                2
+              ]
+            },
+            {
+              "op": "put",
+              "args": [
+                1,
+                1
+              ],
+              "expected": null
+            },
+            {
+              "op": "put",
+              "args": [
+                2,
+                2
+              ],
+              "expected": null
+            },
+            {
+              "op": "get",
+              "args": [
+                1
+              ],
+              "expected": 1
+            },
+            {
+              "op": "put",
+              "args": [
+                3,
+                3
+              ],
+              "expected": null
+            },
+            {
+              "op": "get",
+              "args": [
+                2
+              ],
+              "expected": -1
+            },
+            {
+              "op": "get",
+              "args": [
+                3
+              ],
+              "expected": 3
+            }
+          ]
+        },
+        {
+          "description": "Update existing key",
+          "operations": [
+            {
+              "op": "init",
+              "args": [
+                2
+              ]
+            },
+            {
+              "op": "put",
+              "args": [
+                1,
+                1
+              ],
+              "expected": null
+            },
+            {
+              "op": "put",
+              "args": [
+                2,
+                2
+              ],
+              "expected": null
+            },
+            {
+              "op": "put",
+              "args": [
+                1,
+                10
+              ],
+              "expected": null
+            },
+            {
+              "op": "get",
+              "args": [
+                1
+              ],
+              "expected": 10
+            },
+            {
+              "op": "get",
+              "args": [
+                2
+              ],
+              "expected": 2
+            }
+          ]
+        }
+      ],
+      "correctness_threshold": 1.0,
+      "required_pass_rate": 0.8
+    },
+    "normalization_rules": {
+      "remove_comments": true,
+      "normalize_whitespace": true,
+      "enforce_function_name": true
+    },
+    "anchor_signature": null,
+    "compliance_flag": false,
+    "distance_metric": "foundational_properties",
+    "rescue_bounds": {
+      "allow_function_rename": false,
+      "allow_class_rename": false,
+      "allow_print_removal": true,
+      "max_transformations": 5
+    },
+    "model_specification": {},
+    "contract_version": "2.0",
+    "oracle_version": "1.0",
+    "normalization_version": "1.0",
+    "created_timestamp": "2025-11-24T11:17:31.070244",
+    "run_id": null,
+    "prompt_id": "lru_cache",
+    "sample_id": null,
+    "ood_spec": {
+      "policy": "allow",
+      "exception": null,
+      "return_value": null,
+      "examples": [],
+      "max_checks": 3
+    }
+  },
+  "canon_data": {
+    "contract_id": "lru_cache",
+    "canonical_code": "class Node:\n    def __init__(self, key, value):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node(0, 0)\n        self.tail = Node(0, 0)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        node.prev.next = node.next\n        node.next.prev = node.prev\n\n    def _add(self, node: Node):\n        node.prev = self.tail.prev\n        node.next = self.tail\n        self.tail.prev.next = node\n        self.tail.prev = node\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add(node)\n        if len(self.cache) > self.capacity:\n            lru = self.head.next\n            self._remove(lru)\n            del self.cache[lru.key]",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 3,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "Node",
+          "Node",
+          "Node",
+          "len"
+        ],
+        "nested_depth": 1,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_0",
+          "if_at_depth_0"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "node": [
+            "key",
+            "value"
+          ],
+          "lru": []
+        },
+        "assignments": {
+          "node": "Call(func=Name(id='Node', ctx=Load()), args=[Name(id='key', ctx=Load()), Name(id='value', ctx=Load())])",
+          "lru": "Attribute(value=Attribute(value=Name(id='self', ctx=Load()), attr='head', ctx=Load()), attr='next', ctx=Load())"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function___init__"
+          ],
+          [
+            "function___init__"
+          ],
+          [
+            "function__remove"
+          ],
+          [
+            "function__add"
+          ],
+          [
+            "function_get"
+          ],
+          [
+            "function_get",
+            "branch"
+          ],
+          [
+            "function_put"
+          ],
+          [
+            "function_put",
+            "branch"
+          ],
+          [
+            "function_put",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "__init__": {
+          "name": "__init__",
+          "args": [
+            "self",
+            "capacity"
+          ],
+          "returns": null,
+          "has_return": false
+        },
+        "_remove": {
+          "name": "_remove",
+          "args": [
+            "self",
+            "node"
+          ],
+          "returns": null,
+          "has_return": false
+        },
+        "_add": {
+          "name": "_add",
+          "args": [
+            "self",
+            "node"
+          ],
+          "returns": null,
+          "has_return": false
+        },
+        "get": {
+          "name": "get",
+          "args": [
+            "self",
+            "key"
+          ],
+          "returns": null,
+          "has_return": true
+        },
+        "put": {
+          "name": "put",
+          "args": [
+            "self",
+            "key",
+            "value"
+          ],
+          "returns": null,
+          "has_return": false
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": [
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "In",
+          "In",
+          "Gt"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "ClassDef",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "arg",
+          "Assign",
+          "Attribute",
+          "Name",
+          "Load",
+          "Store",
+          "Name",
+          "Load",
+          "Assign",
+          "Attribute",
+          "Name",
+          "Load",
+          "Store",
+          "Name",
+          "Load",
+          "Assign",
+          "Attribute",
+          "Name",
+          "Load",
+          "Store",
+          "Constant",
+          "Assign",
+          "Attribute",
+          "Name",
+          "Load",
+          "Store",
+          "Constant",
+          "ClassDef",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "Name",
+          "Load",
+          "Assign",
+          "Attribute",
+          "Name",
+          "Load",
+          "Store",
+          "Name",
+          "Load",
+          "Assign",
+          "Attribute",
+          "Name",
+          "Load",
+          "Store",
+          "Dict",
+          "Assign",
+          "Attribute",
+          "Name",
+          "Load",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "Constant",
+          "Assign",
+          "Attribute",
+          "Name",
+          "Load",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "Constant",
+          "Assign",
+          "Attribute",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Store",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Assign",
+          "Attribute",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Store",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "Name",
+          "Load",
+          "Assign",
+          "Attribute",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Store",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Assign",
+          "Attribute",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Store",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "Name",
+          "Load",
+          "Assign",
+          "Attribute",
+          "Name",
+          "Load",
+          "Store",
+          "Attribute",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Load",
+          "Assign",
+          "Attribute",
+          "Name",
+          "Load",
+          "Store",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Assign",
+          "Attribute",
+          "Attribute",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Load",
+          "Store",
+          "Name",
+          "Load",
+          "Assign",
+          "Attribute",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Store",
+          "Name",
+          "Load",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "In",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Subscript",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Name",
+          "Load",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Name",
+          "Load",
+          "Return",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Return",
+          "UnaryOp",
+          "USub",
+          "Constant",
+          "Name",
+          "Load",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "Name",
+          "Load",
+          "arg",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "In",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Subscript",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Assign",
+          "Subscript",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Name",
+          "Load",
+          "Store",
+          "Name",
+          "Load",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Call",
+          "Name",
+          "Load",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Gt",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Attribute",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Load",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Name",
+          "Load",
+          "Delete",
+          "Subscript",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Del",
+          "Constant"
+        ],
+        "ast_depth": 9,
+        "ast_hash": "36f44cf57cf0fd7b5b46b33489d0c62b",
+        "alpha_renamed_hash": "41a05ee0ec405f0ad6f770730949b00d"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "ClassDef",
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Assign",
+          "ClassDef",
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Assign",
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Assign",
+          "FunctionDef",
+          "If",
+          "Assign",
+          "Expr",
+          "Expr",
+          "Return",
+          "Return",
+          "FunctionDef",
+          "If",
+          "Expr",
+          "Assign",
+          "Assign",
+          "Expr",
+          "If",
+          "Assign",
+          "Expr",
+          "Delete"
+        ],
+        "statement_sequence": [
+          "ClassDef_0",
+          "FunctionDef_1",
+          "Assign_2",
+          "Assign_3",
+          "Assign_4",
+          "Assign_5",
+          "ClassDef_6",
+          "FunctionDef_7",
+          "Assign_8",
+          "Assign_9",
+          "Assign_10",
+          "Assign_11",
+          "Assign_12",
+          "Assign_13",
+          "FunctionDef_14",
+          "Assign_15",
+          "Assign_16",
+          "FunctionDef_17",
+          "Assign_18",
+          "Assign_19",
+          "Assign_20",
+          "Assign_21",
+          "FunctionDef_22",
+          "If_23",
+          "Assign_24",
+          "Expr_25",
+          "Expr_26",
+          "Return_27",
+          "Return_28",
+          "FunctionDef_29",
+          "If_30",
+          "Expr_31",
+          "Assign_32",
+          "Assign_33",
+          "Expr_34",
+          "If_35",
+          "Assign_36",
+          "Expr_37",
+          "Delete_38"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "FunctionDef",
+          "FunctionDef",
+          "FunctionDef",
+          "FunctionDef",
+          "If",
+          "FunctionDef",
+          "If",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "key in self.cache",
+            "return_type": "expression"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "key in self.cache"
+        ]
+      }
+    },
+    "validation_properties": {
+      "radon_metrics": {
+        "cyclomatic_complexity": 2,
+        "complexity_rank": "A",
+        "average_complexity": 1.625,
+        "maintainability_index": 53.00491813557554,
+        "halstead_difficulty": 1.5,
+        "halstead_effort": 54.81181356564148,
+        "halstead_volume": 36.541209043760986,
+        "halstead_bugs": 0.012180403014586996
+      },
+      "type_analysis": {
+        "type_errors": [
+          {
+            "line": null,
+            "column": 11,
+            "message": "9: error: Need type annotation for \"cache\" (hint: \"cache: dict[<type>, <type>] = ...\")",
+            "error_code": "var-annotated",
+            "severity": "error"
+          }
+        ],
+        "total_type_errors": 1,
+        "has_type_errors": true,
+        "type_safe": false,
+        "function_signatures": {
+          "__init__": {
+            "parameters": [
+              {
+                "name": "self",
+                "annotation": null,
+                "has_annotation": false
+              },
+              {
+                "name": "capacity",
+                "annotation": "int",
+                "has_annotation": true
+              }
+            ],
+            "return_annotation": null,
+            "has_annotations": true,
+            "total_params": 2,
+            "annotated_params": 1
+          },
+          "_remove": {
+            "parameters": [
+              {
+                "name": "self",
+                "annotation": null,
+                "has_annotation": false
+              },
+              {
+                "name": "node",
+                "annotation": "Node",
+                "has_annotation": true
+              }
+            ],
+            "return_annotation": null,
+            "has_annotations": true,
+            "total_params": 2,
+            "annotated_params": 1
+          },
+          "_add": {
+            "parameters": [
+              {
+                "name": "self",
+                "annotation": null,
+                "has_annotation": false
+              },
+              {
+                "name": "node",
+                "annotation": "Node",
+                "has_annotation": true
+              }
+            ],
+            "return_annotation": null,
+            "has_annotations": true,
+            "total_params": 2,
+            "annotated_params": 1
+          },
+          "get": {
+            "parameters": [
+              {
+                "name": "self",
+                "annotation": null,
+                "has_annotation": false
+              },
+              {
+                "name": "key",
+                "annotation": "int",
+                "has_annotation": true
+              }
+            ],
+            "return_annotation": "int",
+            "has_annotations": true,
+            "total_params": 2,
+            "annotated_params": 1
+          },
+          "put": {
+            "parameters": [
+              {
+                "name": "self",
+                "annotation": null,
+                "has_annotation": false
+              },
+              {
+                "name": "key",
+                "annotation": "int",
+                "has_annotation": true
+              },
+              {
+                "name": "value",
+                "annotation": "int",
+                "has_annotation": true
+              }
+            ],
+            "return_annotation": "None",
+            "has_annotations": true,
+            "total_params": 3,
+            "annotated_params": 2
+          }
+        },
+        "total_functions": 5,
+        "annotated_functions": 5,
+        "annotation_coverage": 1.0
+      },
+      "security_analysis": {
+        "io_operations": [],
+        "network_calls": [],
+        "system_calls": [],
+        "unsafe_operations": [],
+        "security_risks": [],
+        "total_issues": 0,
+        "high_severity_count": 0,
+        "medium_severity_count": 0,
+        "low_severity_count": 0,
+        "has_side_effects": false,
+        "purity_level": "pure",
+        "security_score": 1.0
+      }
+    },
+    "contract_data": {
+      "id": "lru_cache",
+      "task_intent": "Implement LRU cache with get and put operations",
+      "prompt": "Write a Python class called 'LRUCache' with a constructor that takes capacity, a get(key) method that returns the value if key exists (or -1 if not), and a put(key, value) method. The cache should evict the least recently used item when capacity is exceeded. Use a doubly-linked list with a hash map for O(1) operations.",
+      "constraints": {
+        "class_name": "LRUCache",
+        "methods": [
+          "__init__",
+          "get",
+          "put"
+        ],
+        "required_classes": [
+          "Node",
+          "LRUCache"
+        ],
+        "required_attributes": {
+          "Node": [
+            "key",
+            "value",
+            "prev",
+            "next"
+          ],
+          "LRUCache": [
+            "capacity",
+            "cache",
+            "head",
+            "tail"
+          ]
+        },
+        "algorithm": "doubly-linked list with hash map",
+        "implementation_style": "iterative",
+        "output_type": "integer",
+        "variable_naming": {
+          "fixed_variables": [
+            "capacity",
+            "key",
+            "value"
+          ],
+          "flexible_variables": [
+            "cache",
+            "node",
+            "head",
+            "tail",
+            "lru",
+            "prev",
+            "next"
+          ],
+          "naming_policy": "strict"
+        }
+      },
+      "algorithm_family": "lru_cache",
+      "language": "python",
+      "environment": {},
+      "output_format": "raw_code",
+      "oracle_requirements": {
+        "test_cases": [
+          {
+            "description": "Basic LRU operations",
+            "operations": [
+              {
+                "op": "init",
+                "args": [
+                  2
+                ]
+              },
+              {
+                "op": "put",
+                "args": [
+                  1,
+                  1
+                ],
+                "expected": null
+              },
+              {
+                "op": "put",
+                "args": [
+                  2,
+                  2
+                ],
+                "expected": null
+              },
+              {
+                "op": "get",
+                "args": [
+                  1
+                ],
+                "expected": 1
+              },
+              {
+                "op": "put",
+                "args": [
+                  3,
+                  3
+                ],
+                "expected": null
+              },
+              {
+                "op": "get",
+                "args": [
+                  2
+                ],
+                "expected": -1
+              },
+              {
+                "op": "get",
+                "args": [
+                  3
+                ],
+                "expected": 3
+              }
+            ]
+          },
+          {
+            "description": "Update existing key",
+            "operations": [
+              {
+                "op": "init",
+                "args": [
+                  2
+                ]
+              },
+              {
+                "op": "put",
+                "args": [
+                  1,
+                  1
+                ],
+                "expected": null
+              },
+              {
+                "op": "put",
+                "args": [
+                  2,
+                  2
+                ],
+                "expected": null
+              },
+              {
+                "op": "put",
+                "args": [
+                  1,
+                  10
+                ],
+                "expected": null
+              },
+              {
+                "op": "get",
+                "args": [
+                  1
+                ],
+                "expected": 10
+              },
+              {
+                "op": "get",
+                "args": [
+                  2
+                ],
+                "expected": 2
+              }
+            ]
+          }
+        ],
+        "correctness_threshold": 1.0,
+        "required_pass_rate": 0.8
+      },
+      "normalization_rules": {
+        "remove_comments": true,
+        "normalize_whitespace": true,
+        "enforce_function_name": true
+      },
+      "anchor_signature": "b15d2bbb5e56677d653a8a5e2b053d0f4617adde41e395cab41d95c786e2c486",
+      "compliance_flag": true,
+      "distance_metric": "foundational_properties",
+      "rescue_bounds": {
+        "allow_function_rename": false,
+        "allow_class_rename": false,
+        "allow_print_removal": true,
+        "max_transformations": 5
+      },
+      "model_specification": {},
+      "contract_version": "2.0",
+      "oracle_version": "1.0",
+      "normalization_version": "1.0",
+      "created_timestamp": "2025-11-21T10:26:10.895170",
+      "run_id": null,
+      "prompt_id": "lru_cache",
+      "sample_id": null,
+      "canonical_code": "class Node:\n    def __init__(self, key, value):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node(0, 0)\n        self.tail = Node(0, 0)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        node.prev.next = node.next\n        node.next.prev = node.prev\n\n    def _add(self, node: Node):\n        node.prev = self.tail.prev\n        node.next = self.tail\n        self.tail.prev.next = node\n        self.tail.prev = node\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add(node)\n        if len(self.cache) > self.capacity:\n            lru = self.head.next\n            self._remove(lru)\n            del self.cache[lru.key]",
+      "foundational_properties": {
+        "control_flow_signature": {
+          "if_statements": 3,
+          "for_loops": 0,
+          "while_loops": 0,
+          "function_calls": [
+            "Node",
+            "Node",
+            "Node",
+            "len"
+          ],
+          "nested_depth": 1,
+          "branch_patterns": [
+            "if_at_depth_0",
+            "if_at_depth_0",
+            "if_at_depth_0"
+          ]
+        },
+        "data_dependency_graph": {
+          "dependencies": {
+            "node": [
+              "key",
+              "value"
+            ],
+            "lru": []
+          },
+          "assignments": {
+            "node": "Call(func=Name(id='Node', ctx=Load()), args=[Name(id='key', ctx=Load()), Name(id='value', ctx=Load())])",
+            "lru": "Attribute(value=Attribute(value=Name(id='self', ctx=Load()), attr='head', ctx=Load()), attr='next', ctx=Load())"
+          }
+        },
+        "execution_paths": {
+          "execution_paths": [
+            [
+              "function___init__"
+            ],
+            [
+              "function___init__"
+            ],
+            [
+              "function__remove"
+            ],
+            [
+              "function__add"
+            ],
+            [
+              "function_get"
+            ],
+            [
+              "function_get",
+              "branch"
+            ],
+            [
+              "function_put"
+            ],
+            [
+              "function_put",
+              "branch"
+            ],
+            [
+              "function_put",
+              "branch"
+            ]
+          ]
+        },
+        "function_contracts": {
+          "__init__": {
+            "name": "__init__",
+            "args": [
+              "self",
+              "capacity"
+            ],
+            "returns": null,
+            "has_return": false
+          },
+          "_remove": {
+            "name": "_remove",
+            "args": [
+              "self",
+              "node"
+            ],
+            "returns": null,
+            "has_return": false
+          },
+          "_add": {
+            "name": "_add",
+            "args": [
+              "self",
+              "node"
+            ],
+            "returns": null,
+            "has_return": false
+          },
+          "get": {
+            "name": "get",
+            "args": [
+              "self",
+              "key"
+            ],
+            "returns": null,
+            "has_return": true
+          },
+          "put": {
+            "name": "put",
+            "args": [
+              "self",
+              "key",
+              "value"
+            ],
+            "returns": null,
+            "has_return": false
+          }
+        },
+        "complexity_class": {
+          "nested_loops": 0,
+          "recursive_calls": 0,
+          "estimated_complexity": "O(1)"
+        },
+        "side_effect_profile": {
+          "has_print": false,
+          "has_global_access": false,
+          "has_file_io": false,
+          "modifies_arguments": false,
+          "is_pure": true
+        },
+        "termination_properties": {
+          "has_base_case": true,
+          "has_bounded_loops": false,
+          "recursive_depth": 0
+        },
+        "algebraic_structure": {
+          "commutative_ops": [],
+          "associative_ops": [],
+          "binary_operations": []
+        },
+        "numerical_behavior": {
+          "uses_integers": true,
+          "uses_floats": false,
+          "has_arithmetic": false,
+          "numeric_constants": [
+            0,
+            0,
+            0,
+            0,
+            1
+          ]
+        },
+        "logical_equivalence": {
+          "boolean_ops": [],
+          "comparisons": [
+            "In",
+            "In",
+            "Gt"
+          ],
+          "logical_patterns": []
+        },
+        "normalized_ast_structure": {
+          "node_types": [
+            "Module",
+            "ClassDef",
+            "FunctionDef",
+            "arguments",
+            "arg",
+            "arg",
+            "arg",
+            "Assign",
+            "Attribute",
+            "Name",
+            "Load",
+            "Store",
+            "Name",
+            "Load",
+            "Assign",
+            "Attribute",
+            "Name",
+            "Load",
+            "Store",
+            "Name",
+            "Load",
+            "Assign",
+            "Attribute",
+            "Name",
+            "Load",
+            "Store",
+            "Constant",
+            "Assign",
+            "Attribute",
+            "Name",
+            "Load",
+            "Store",
+            "Constant",
+            "ClassDef",
+            "FunctionDef",
+            "arguments",
+            "arg",
+            "arg",
+            "Name",
+            "Load",
+            "Assign",
+            "Attribute",
+            "Name",
+            "Load",
+            "Store",
+            "Name",
+            "Load",
+            "Assign",
+            "Attribute",
+            "Name",
+            "Load",
+            "Store",
+            "Dict",
+            "Assign",
+            "Attribute",
+            "Name",
+            "Load",
+            "Store",
+            "Call",
+            "Name",
+            "Load",
+            "Constant",
+            "Constant",
+            "Assign",
+            "Attribute",
+            "Name",
+            "Load",
+            "Store",
+            "Call",
+            "Name",
+            "Load",
+            "Constant",
+            "Constant",
+            "Assign",
+            "Attribute",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Store",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Assign",
+            "Attribute",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Store",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "FunctionDef",
+            "arguments",
+            "arg",
+            "arg",
+            "Name",
+            "Load",
+            "Assign",
+            "Attribute",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Store",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Assign",
+            "Attribute",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Store",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "FunctionDef",
+            "arguments",
+            "arg",
+            "arg",
+            "Name",
+            "Load",
+            "Assign",
+            "Attribute",
+            "Name",
+            "Load",
+            "Store",
+            "Attribute",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Load",
+            "Assign",
+            "Attribute",
+            "Name",
+            "Load",
+            "Store",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Assign",
+            "Attribute",
+            "Attribute",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Load",
+            "Store",
+            "Name",
+            "Load",
+            "Assign",
+            "Attribute",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Store",
+            "Name",
+            "Load",
+            "FunctionDef",
+            "arguments",
+            "arg",
+            "arg",
+            "Name",
+            "Load",
+            "If",
+            "Compare",
+            "Name",
+            "Load",
+            "In",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Assign",
+            "Name",
+            "Store",
+            "Subscript",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Name",
+            "Load",
+            "Load",
+            "Expr",
+            "Call",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Name",
+            "Load",
+            "Expr",
+            "Call",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Name",
+            "Load",
+            "Return",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Return",
+            "UnaryOp",
+            "USub",
+            "Constant",
+            "Name",
+            "Load",
+            "FunctionDef",
+            "arguments",
+            "arg",
+            "arg",
+            "Name",
+            "Load",
+            "arg",
+            "Name",
+            "Load",
+            "If",
+            "Compare",
+            "Name",
+            "Load",
+            "In",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Expr",
+            "Call",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Subscript",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Name",
+            "Load",
+            "Load",
+            "Assign",
+            "Name",
+            "Store",
+            "Call",
+            "Name",
+            "Load",
+            "Name",
+            "Load",
+            "Name",
+            "Load",
+            "Assign",
+            "Subscript",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Name",
+            "Load",
+            "Store",
+            "Name",
+            "Load",
+            "Expr",
+            "Call",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Name",
+            "Load",
+            "If",
+            "Compare",
+            "Call",
+            "Name",
+            "Load",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Gt",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Assign",
+            "Name",
+            "Store",
+            "Attribute",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Load",
+            "Expr",
+            "Call",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Name",
+            "Load",
+            "Delete",
+            "Subscript",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Del",
+            "Constant"
+          ],
+          "ast_depth": 9,
+          "ast_hash": "36f44cf57cf0fd7b5b46b33489d0c62b",
+          "alpha_renamed_hash": "41a05ee0ec405f0ad6f770730949b00d"
+        },
+        "operator_precedence": {
+          "operator_sequence": [],
+          "precedence_levels": {}
+        },
+        "statement_ordering": {
+          "statement_types": [
+            "ClassDef",
+            "FunctionDef",
+            "Assign",
+            "Assign",
+            "Assign",
+            "Assign",
+            "ClassDef",
+            "FunctionDef",
+            "Assign",
+            "Assign",
+            "Assign",
+            "Assign",
+            "Assign",
+            "Assign",
+            "FunctionDef",
+            "Assign",
+            "Assign",
+            "FunctionDef",
+            "Assign",
+            "Assign",
+            "Assign",
+            "Assign",
+            "FunctionDef",
+            "If",
+            "Assign",
+            "Expr",
+            "Expr",
+            "Return",
+            "Return",
+            "FunctionDef",
+            "If",
+            "Expr",
+            "Assign",
+            "Assign",
+            "Expr",
+            "If",
+            "Assign",
+            "Expr",
+            "Delete"
+          ],
+          "statement_sequence": [
+            "ClassDef_0",
+            "FunctionDef_1",
+            "Assign_2",
+            "Assign_3",
+            "Assign_4",
+            "Assign_5",
+            "ClassDef_6",
+            "FunctionDef_7",
+            "Assign_8",
+            "Assign_9",
+            "Assign_10",
+            "Assign_11",
+            "Assign_12",
+            "Assign_13",
+            "FunctionDef_14",
+            "Assign_15",
+            "Assign_16",
+            "FunctionDef_17",
+            "Assign_18",
+            "Assign_19",
+            "Assign_20",
+            "Assign_21",
+            "FunctionDef_22",
+            "If_23",
+            "Assign_24",
+            "Expr_25",
+            "Expr_26",
+            "Return_27",
+            "Return_28",
+            "FunctionDef_29",
+            "If_30",
+            "Expr_31",
+            "Assign_32",
+            "Assign_33",
+            "Expr_34",
+            "If_35",
+            "Assign_36",
+            "Expr_37",
+            "Delete_38"
+          ],
+          "control_flow_order": [
+            "FunctionDef",
+            "FunctionDef",
+            "FunctionDef",
+            "FunctionDef",
+            "FunctionDef",
+            "If",
+            "FunctionDef",
+            "If",
+            "If"
+          ]
+        },
+        "recursion_schema": {
+          "is_recursive": false,
+          "base_cases": [
+            {
+              "condition": "key in self.cache",
+              "return_type": "expression"
+            }
+          ],
+          "recursive_calls": [],
+          "recursion_pattern": null,
+          "termination_guards": [
+            "key in self.cache"
+          ]
+        }
+      }
+    },
+    "created_timestamp": "2025-11-21T10:26:10.895170",
+    "canon_version": "1.1",
+    "oracle_validated": true,
+    "oracle_pass_rate": 1.0
+  },
+  "canon_created": true,
+  "llm_results": [
+    {
+      "run_id": 1,
+      "raw_output": "class Node:\n    def __init__(self, key=0, value=0):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node()\n        self.tail = Node()\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        node.prev.next = node.next\n        node.next.prev = node.prev\n\n    def _add(self, node: Node):\n        node.prev = self.head\n        node.next = self.head.next\n        self.head.next.prev = node\n        self.head.next = node\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add(node)\n        if len(self.cache) > self.capacity:\n            lru = self.tail.prev\n            self._remove(lru)\n            del self.cache[lru.key]",
+      "success": true,
+      "enhanced_prompt": "Write a Python class called 'LRUCache' with a constructor that takes capacity, a get(key) method that returns the value if key exists (or -1 if not), and a put(key, value) method. The cache should evict the least recently used item when capacity is exceeded. Use a doubly-linked list with a hash map for O(1) operations.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 2,
+      "raw_output": "class Node:\n    def __init__(self, key, value):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node(0, 0)\n        self.tail = Node(0, 0)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        prev_node = node.prev\n        next_node = node.next\n        prev_node.next = next_node\n        next_node.prev = prev_node\n\n    def _add_to_head(self, node: Node):\n        node.prev = self.head\n        node.next = self.head.next\n        self.head.next.prev = node\n        self.head.next = node\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add_to_head(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add_to_head(node)\n        if len(self.cache) > self.capacity:\n            lru = self.tail.prev\n            self._remove(lru)\n            del self.cache[lru.key]",
+      "success": true,
+      "enhanced_prompt": "Write a Python class called 'LRUCache' with a constructor that takes capacity, a get(key) method that returns the value if key exists (or -1 if not), and a put(key, value) method. The cache should evict the least recently used item when capacity is exceeded. Use a doubly-linked list with a hash map for O(1) operations.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 3,
+      "raw_output": "class Node:\n    def __init__(self, key, value):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node(0, 0)\n        self.tail = Node(0, 0)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        prev_node = node.prev\n        next_node = node.next\n        prev_node.next = next_node\n        next_node.prev = prev_node\n\n    def _add_to_head(self, node: Node):\n        node.prev = self.head\n        node.next = self.head.next\n        self.head.next.prev = node\n        self.head.next = node\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add_to_head(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add_to_head(node)\n        if len(self.cache) > self.capacity:\n            lru_node = self.tail.prev\n            self._remove(lru_node)\n            del self.cache[lru_node.key]",
+      "success": true,
+      "enhanced_prompt": "Write a Python class called 'LRUCache' with a constructor that takes capacity, a get(key) method that returns the value if key exists (or -1 if not), and a put(key, value) method. The cache should evict the least recently used item when capacity is exceeded. Use a doubly-linked list with a hash map for O(1) operations.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 4,
+      "raw_output": "class Node:\n    def __init__(self, key, value):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node(0, 0)\n        self.tail = Node(0, 0)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        node.prev.next = node.next\n        node.next.prev = node.prev\n\n    def _add(self, node: Node):\n        node.prev = self.tail.prev\n        node.next = self.tail\n        self.tail.prev.next = node\n        self.tail.prev = node\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add(node)\n        if len(self.cache) > self.capacity:\n            lru = self.head.next\n            self._remove(lru)\n            del self.cache[lru.key]",
+      "success": true,
+      "enhanced_prompt": "Write a Python class called 'LRUCache' with a constructor that takes capacity, a get(key) method that returns the value if key exists (or -1 if not), and a put(key, value) method. The cache should evict the least recently used item when capacity is exceeded. Use a doubly-linked list with a hash map for O(1) operations.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 5,
+      "raw_output": "class Node:\n    def __init__(self, key=0, value=0):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node()\n        self.tail = Node()\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        prev_node = node.prev\n        next_node = node.next\n        prev_node.next = next_node\n        next_node.prev = prev_node\n\n    def _add_to_head(self, node: Node):\n        node.prev = self.head\n        node.next = self.head.next\n        self.head.next.prev = node\n        self.head.next = node\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add_to_head(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add_to_head(node)\n\n        if len(self.cache) > self.capacity:\n            lru = self.tail.prev\n            self._remove(lru)\n            del self.cache[lru.key]",
+      "success": true,
+      "enhanced_prompt": "Write a Python class called 'LRUCache' with a constructor that takes capacity, a get(key) method that returns the value if key exists (or -1 if not), and a put(key, value) method. The cache should evict the least recently used item when capacity is exceeded. Use a doubly-linked list with a hash map for O(1) operations.\n\nProvide only the Python code, no explanations or markdown."
+    }
+  ],
+  "raw_outputs": [
+    "class Node:\n    def __init__(self, key=0, value=0):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node()\n        self.tail = Node()\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        node.prev.next = node.next\n        node.next.prev = node.prev\n\n    def _add(self, node: Node):\n        node.prev = self.head\n        node.next = self.head.next\n        self.head.next.prev = node\n        self.head.next = node\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add(node)\n        if len(self.cache) > self.capacity:\n            lru = self.tail.prev\n            self._remove(lru)\n            del self.cache[lru.key]",
+    "class Node:\n    def __init__(self, key, value):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node(0, 0)\n        self.tail = Node(0, 0)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        prev_node = node.prev\n        next_node = node.next\n        prev_node.next = next_node\n        next_node.prev = prev_node\n\n    def _add_to_head(self, node: Node):\n        node.prev = self.head\n        node.next = self.head.next\n        self.head.next.prev = node\n        self.head.next = node\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add_to_head(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add_to_head(node)\n        if len(self.cache) > self.capacity:\n            lru = self.tail.prev\n            self._remove(lru)\n            del self.cache[lru.key]",
+    "class Node:\n    def __init__(self, key, value):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node(0, 0)\n        self.tail = Node(0, 0)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        prev_node = node.prev\n        next_node = node.next\n        prev_node.next = next_node\n        next_node.prev = prev_node\n\n    def _add_to_head(self, node: Node):\n        node.prev = self.head\n        node.next = self.head.next\n        self.head.next.prev = node\n        self.head.next = node\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add_to_head(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add_to_head(node)\n        if len(self.cache) > self.capacity:\n            lru_node = self.tail.prev\n            self._remove(lru_node)\n            del self.cache[lru_node.key]",
+    "class Node:\n    def __init__(self, key, value):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node(0, 0)\n        self.tail = Node(0, 0)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        node.prev.next = node.next\n        node.next.prev = node.prev\n\n    def _add(self, node: Node):\n        node.prev = self.tail.prev\n        node.next = self.tail\n        self.tail.prev.next = node\n        self.tail.prev = node\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add(node)\n        if len(self.cache) > self.capacity:\n            lru = self.head.next\n            self._remove(lru)\n            del self.cache[lru.key]",
+    "class Node:\n    def __init__(self, key=0, value=0):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node()\n        self.tail = Node()\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        prev_node = node.prev\n        next_node = node.next\n        prev_node.next = next_node\n        next_node.prev = prev_node\n\n    def _add_to_head(self, node: Node):\n        node.prev = self.head\n        node.next = self.head.next\n        self.head.next.prev = node\n        self.head.next = node\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add_to_head(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add_to_head(node)\n\n        if len(self.cache) > self.capacity:\n            lru = self.tail.prev\n            self._remove(lru)\n            del self.cache[lru.key]"
+  ],
+  "repaired_outputs": [
+    "class Node:\n\n    def __init__(self, key=0, value=0):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node()\n        self.tail = Node()\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        node.prev.next = node.next\n        node.next.prev = node.prev\n\n    def _add(self, node: Node):\n        node.prev = self.head\n        node.next = self.head.next\n        self.head.next.prev = node\n        self.head.next = node\n\n    def get(self, key: int) ->int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) ->None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add(node)\n        if len(self.cache) > self.capacity:\n            lru = self.tail.prev\n            self._remove(lru)\n            del self.cache[lru.key]\n",
+    "class Node:\n\n    def __init__(self, key, value):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node(0, 0)\n        self.tail = Node(0, 0)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        node.prev.next = node.next\n        node.next.prev = node.prev\n\n    def _add(self, node: Node):\n        node.prev = self.tail.prev\n        node.next = self.tail\n        self.tail.prev.next = node\n        self.tail.prev = node\n\n    def get(self, key: int) ->int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) ->None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add(node)\n        if len(self.cache) > self.capacity:\n            lru = self.head.next\n            self._remove(lru)\n            del self.cache[lru.key]\n",
+    "class Node:\n\n    def __init__(self, key, value):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node(0, 0)\n        self.tail = Node(0, 0)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        node.prev.next = node.next\n        node.next.prev = node.prev\n\n    def _add(self, node: Node):\n        node.prev = self.tail.prev\n        node.next = self.tail\n        self.tail.prev.next = node\n        self.tail.prev = node\n\n    def get(self, key: int) ->int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) ->None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add(node)\n        if len(self.cache) > self.capacity:\n            lru = self.head.next\n            self._remove(lru)\n            del self.cache[lru.key]\n",
+    "class Node:\n    def __init__(self, key, value):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node(0, 0)\n        self.tail = Node(0, 0)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        node.prev.next = node.next\n        node.next.prev = node.prev\n\n    def _add(self, node: Node):\n        node.prev = self.tail.prev\n        node.next = self.tail\n        self.tail.prev.next = node\n        self.tail.prev = node\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add(node)\n        if len(self.cache) > self.capacity:\n            lru = self.head.next\n            self._remove(lru)\n            del self.cache[lru.key]",
+    "class Node:\n\n    def __init__(self, key, value):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node(0, 0)\n        self.tail = Node(0, 0)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        node.prev.next = node.next\n        node.next.prev = node.prev\n\n    def _add(self, node: Node):\n        node.prev = self.tail.prev\n        node.next = self.tail\n        self.tail.prev.next = node\n        self.tail.prev = node\n\n    def get(self, key: int) ->int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) ->None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add(node)\n        if len(self.cache) > self.capacity:\n            lru = self.head.next\n            self._remove(lru)\n            del self.cache[lru.key]\n"
+  ],
+  "transformation_results": [
+    {
+      "run_id": 1,
+      "original_code": "class Node:\n    def __init__(self, key=0, value=0):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node()\n        self.tail = Node()\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        node.prev.next = node.next\n        node.next.prev = node.prev\n\n    def _add(self, node: Node):\n        node.prev = self.head\n        node.next = self.head.next\n        self.head.next.prev = node\n        self.head.next = node\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add(node)\n        if len(self.cache) > self.capacity:\n            lru = self.tail.prev\n            self._remove(lru)\n            del self.cache[lru.key]",
+      "transformed_code": "class Node:\n\n    def __init__(self, key=0, value=0):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node()\n        self.tail = Node()\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        node.prev.next = node.next\n        node.next.prev = node.prev\n\n    def _add(self, node: Node):\n        node.prev = self.head\n        node.next = self.head.next\n        self.head.next.prev = node\n        self.head.next = node\n\n    def get(self, key: int) ->int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) ->None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add(node)\n        if len(self.cache) > self.capacity:\n            lru = self.tail.prev\n            self._remove(lru)\n            del self.cache[lru.key]\n",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.125,
+      "transformations_applied": [
+        "Phase16Canonicalizer",
+        "SnapToCanonFinalizer",
+        "Phase16Canonicalizer",
+        "SnapToCanonFinalizer"
+      ]
+    },
+    {
+      "run_id": 2,
+      "original_code": "class Node:\n    def __init__(self, key, value):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node(0, 0)\n        self.tail = Node(0, 0)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        prev_node = node.prev\n        next_node = node.next\n        prev_node.next = next_node\n        next_node.prev = prev_node\n\n    def _add_to_head(self, node: Node):\n        node.prev = self.head\n        node.next = self.head.next\n        self.head.next.prev = node\n        self.head.next = node\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add_to_head(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add_to_head(node)\n        if len(self.cache) > self.capacity:\n            lru = self.tail.prev\n            self._remove(lru)\n            del self.cache[lru.key]",
+      "transformed_code": "class Node:\n\n    def __init__(self, key, value):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node(0, 0)\n        self.tail = Node(0, 0)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        node.prev.next = node.next\n        node.next.prev = node.prev\n\n    def _add(self, node: Node):\n        node.prev = self.tail.prev\n        node.next = self.tail\n        self.tail.prev.next = node\n        self.tail.prev = node\n\n    def get(self, key: int) ->int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) ->None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add(node)\n        if len(self.cache) > self.capacity:\n            lru = self.head.next\n            self._remove(lru)\n            del self.cache[lru.key]\n",
+      "transformation_needed": true,
+      "transformation_success": true,
+      "final_distance": 0.0,
+      "transformations_applied": [
+        "Phase16Canonicalizer",
+        "ClassMethodReorderer",
+        "OracleGuidedTransformer",
+        "Phase16Canonicalizer",
+        "SnapToCanonFinalizer",
+        "Phase16Canonicalizer",
+        "SnapToCanonFinalizer"
+      ]
+    },
+    {
+      "run_id": 3,
+      "original_code": "class Node:\n    def __init__(self, key, value):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node(0, 0)\n        self.tail = Node(0, 0)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        prev_node = node.prev\n        next_node = node.next\n        prev_node.next = next_node\n        next_node.prev = prev_node\n\n    def _add_to_head(self, node: Node):\n        node.prev = self.head\n        node.next = self.head.next\n        self.head.next.prev = node\n        self.head.next = node\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add_to_head(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add_to_head(node)\n        if len(self.cache) > self.capacity:\n            lru_node = self.tail.prev\n            self._remove(lru_node)\n            del self.cache[lru_node.key]",
+      "transformed_code": "class Node:\n\n    def __init__(self, key, value):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node(0, 0)\n        self.tail = Node(0, 0)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        node.prev.next = node.next\n        node.next.prev = node.prev\n\n    def _add(self, node: Node):\n        node.prev = self.tail.prev\n        node.next = self.tail\n        self.tail.prev.next = node\n        self.tail.prev = node\n\n    def get(self, key: int) ->int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) ->None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add(node)\n        if len(self.cache) > self.capacity:\n            lru = self.head.next\n            self._remove(lru)\n            del self.cache[lru.key]\n",
+      "transformation_needed": true,
+      "transformation_success": true,
+      "final_distance": 0.0,
+      "transformations_applied": [
+        "Phase16Canonicalizer",
+        "ClassMethodReorderer",
+        "OracleGuidedTransformer",
+        "Phase16Canonicalizer",
+        "SnapToCanonFinalizer",
+        "Phase16Canonicalizer",
+        "SnapToCanonFinalizer"
+      ]
+    },
+    {
+      "run_id": 4,
+      "original_code": "class Node:\n    def __init__(self, key, value):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node(0, 0)\n        self.tail = Node(0, 0)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        node.prev.next = node.next\n        node.next.prev = node.prev\n\n    def _add(self, node: Node):\n        node.prev = self.tail.prev\n        node.next = self.tail\n        self.tail.prev.next = node\n        self.tail.prev = node\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add(node)\n        if len(self.cache) > self.capacity:\n            lru = self.head.next\n            self._remove(lru)\n            del self.cache[lru.key]",
+      "transformed_code": "class Node:\n    def __init__(self, key, value):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node(0, 0)\n        self.tail = Node(0, 0)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        node.prev.next = node.next\n        node.next.prev = node.prev\n\n    def _add(self, node: Node):\n        node.prev = self.tail.prev\n        node.next = self.tail\n        self.tail.prev.next = node\n        self.tail.prev = node\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add(node)\n        if len(self.cache) > self.capacity:\n            lru = self.head.next\n            self._remove(lru)\n            del self.cache[lru.key]",
+      "transformation_needed": false,
+      "final_distance": 0.0
+    },
+    {
+      "run_id": 5,
+      "original_code": "class Node:\n    def __init__(self, key=0, value=0):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node()\n        self.tail = Node()\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        prev_node = node.prev\n        next_node = node.next\n        prev_node.next = next_node\n        next_node.prev = prev_node\n\n    def _add_to_head(self, node: Node):\n        node.prev = self.head\n        node.next = self.head.next\n        self.head.next.prev = node\n        self.head.next = node\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add_to_head(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add_to_head(node)\n\n        if len(self.cache) > self.capacity:\n            lru = self.tail.prev\n            self._remove(lru)\n            del self.cache[lru.key]",
+      "transformed_code": "class Node:\n\n    def __init__(self, key, value):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node(0, 0)\n        self.tail = Node(0, 0)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        node.prev.next = node.next\n        node.next.prev = node.prev\n\n    def _add(self, node: Node):\n        node.prev = self.tail.prev\n        node.next = self.tail\n        self.tail.prev.next = node\n        self.tail.prev = node\n\n    def get(self, key: int) ->int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) ->None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add(node)\n        if len(self.cache) > self.capacity:\n            lru = self.head.next\n            self._remove(lru)\n            del self.cache[lru.key]\n",
+      "transformation_needed": true,
+      "transformation_success": true,
+      "final_distance": 0.0,
+      "transformations_applied": [
+        "Phase16Canonicalizer",
+        "ClassMethodReorderer",
+        "OracleGuidedTransformer",
+        "Phase16Canonicalizer",
+        "SnapToCanonFinalizer",
+        "Phase16Canonicalizer",
+        "SnapToCanonFinalizer"
+      ]
+    }
+  ],
+  "metrics": {
+    "R_raw": 0.2,
+    "R_anchor_pre": 0.2,
+    "R_anchor_post": 0.8,
+    "Delta_rescue": 0.6000000000000001,
+    "R_repair_at_k_pre": {
+      "k=0.05": 0.2,
+      "k=0.1": 0.2,
+      "k=0.15": 0.4,
+      "k=0.2": 0.4
+    },
+    "R_repair_at_k_post": {
+      "k=0.05": 0.8,
+      "k=0.1": 0.8,
+      "k=0.15": 1.0,
+      "k=0.2": 1.0
+    },
+    "distances_pre": [
+      0.125,
+      0.2857142857142857,
+      0.2857142857142857,
+      0.0,
+      0.30357142857142855
+    ],
+    "distances_post": [
+      0.125,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "mean_distance_pre": 0.2,
+    "mean_distance_post": 0.025,
+    "std_distance_pre": 0.11920228048770454,
+    "std_distance_post": 0.05000000000000001,
+    "Delta_mu": 0.17500000000000002,
+    "Delta_P_tau": {
+      "tau=0.05": 0.6000000000000001,
+      "tau=0.1": 0.6000000000000001,
+      "tau=0.15": 0.6,
+      "tau=0.2": 0.6
+    },
+    "canon_coverage": 1.0,
+    "rescue_rate": 0.75,
+    "R_behavioral": 1.0,
+    "R_structural": 0.8,
+    "R_canon": 0.8,
+    "behavioral_improvement": 0.8,
+    "structural_improvement": 0.6000000000000001,
+    "total_runs": 5,
+    "raw_stats": {
+      "unique_outputs": 5,
+      "most_common_count": 1,
+      "distribution": {
+        "class Node:\n    def __init__(self, key=0, value=0):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node()\n        self.tail = Node()\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        node.prev.next = node.next\n        node.next.prev = node.prev\n\n    def _add(self, node: Node):\n        node.prev = self.head\n        node.next = self.head.next\n        self.head.next.prev = node\n        self.head.next = node\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add(node)\n        if len(self.cache) > self.capacity:\n            lru = self.tail.prev\n            self._remove(lru)\n            del self.cache[lru.key]": 1,
+        "class Node:\n    def __init__(self, key, value):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node(0, 0)\n        self.tail = Node(0, 0)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        prev_node = node.prev\n        next_node = node.next\n        prev_node.next = next_node\n        next_node.prev = prev_node\n\n    def _add_to_head(self, node: Node):\n        node.prev = self.head\n        node.next = self.head.next\n        self.head.next.prev = node\n        self.head.next = node\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add_to_head(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add_to_head(node)\n        if len(self.cache) > self.capacity:\n            lru = self.tail.prev\n            self._remove(lru)\n            del self.cache[lru.key]": 1,
+        "class Node:\n    def __init__(self, key, value):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node(0, 0)\n        self.tail = Node(0, 0)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        prev_node = node.prev\n        next_node = node.next\n        prev_node.next = next_node\n        next_node.prev = prev_node\n\n    def _add_to_head(self, node: Node):\n        node.prev = self.head\n        node.next = self.head.next\n        self.head.next.prev = node\n        self.head.next = node\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add_to_head(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add_to_head(node)\n        if len(self.cache) > self.capacity:\n            lru_node = self.tail.prev\n            self._remove(lru_node)\n            del self.cache[lru_node.key]": 1,
+        "class Node:\n    def __init__(self, key, value):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node(0, 0)\n        self.tail = Node(0, 0)\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        node.prev.next = node.next\n        node.next.prev = node.prev\n\n    def _add(self, node: Node):\n        node.prev = self.tail.prev\n        node.next = self.tail\n        self.tail.prev.next = node\n        self.tail.prev = node\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add(node)\n        if len(self.cache) > self.capacity:\n            lru = self.head.next\n            self._remove(lru)\n            del self.cache[lru.key]": 1,
+        "class Node:\n    def __init__(self, key=0, value=0):\n        self.key = key\n        self.value = value\n        self.prev = None\n        self.next = None\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = {}\n        self.head = Node()\n        self.tail = Node()\n        self.head.next = self.tail\n        self.tail.prev = self.head\n\n    def _remove(self, node: Node):\n        prev_node = node.prev\n        next_node = node.next\n        prev_node.next = next_node\n        next_node.prev = prev_node\n\n    def _add_to_head(self, node: Node):\n        node.prev = self.head\n        node.next = self.head.next\n        self.head.next.prev = node\n        self.head.next = node\n\n    def get(self, key: int) -> int:\n        if key in self.cache:\n            node = self.cache[key]\n            self._remove(node)\n            self._add_to_head(node)\n            return node.value\n        return -1\n\n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            self._remove(self.cache[key])\n        node = Node(key, value)\n        self.cache[key] = node\n        self._add_to_head(node)\n\n        if len(self.cache) > self.capacity:\n            lru = self.tail.prev\n            self._remove(lru)\n            del self.cache[lru.key]": 1
+      },
+      "entropy": 2.321928094887362
+    },
+    "anchor_pre_stats": {
+      "exact_matches": 1,
+      "total_outputs": 5,
+      "distances": [
+        0.125,
+        0.2857142857142857,
+        0.2857142857142857,
+        0.0,
+        0.30357142857142855
+      ],
+      "mean_distance": 0.2,
+      "min_distance": 0.0
+    },
+    "anchor_post_stats": {
+      "exact_matches": 4,
+      "total_outputs": 5,
+      "distances": [
+        0.125,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "mean_distance": 0.025,
+      "min_distance": 0.0
+    },
+    "behavioral_stats": {
+      "unique_behaviors": 1,
+      "oracle_results": [
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 13,
+          "total_tests": 13,
+          "test_results": [
+            {
+              "description": "Basic LRU operations - init([2])",
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - put([1, 1])",
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - put([2, 2])",
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - get([1])",
+              "expected": 1,
+              "actual": 1,
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - put([3, 3])",
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - get([2])",
+              "expected": -1,
+              "actual": -1,
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - get([3])",
+              "expected": 3,
+              "actual": 3,
+              "passed": true
+            },
+            {
+              "description": "Update existing key - init([2])",
+              "passed": true
+            },
+            {
+              "description": "Update existing key - put([1, 1])",
+              "passed": true
+            },
+            {
+              "description": "Update existing key - put([2, 2])",
+              "passed": true
+            },
+            {
+              "description": "Update existing key - put([1, 10])",
+              "passed": true
+            },
+            {
+              "description": "Update existing key - get([1])",
+              "expected": 10,
+              "actual": 10,
+              "passed": true
+            },
+            {
+              "description": "Update existing key - get([2])",
+              "expected": 2,
+              "actual": 2,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 13,
+          "total_tests": 13,
+          "test_results": [
+            {
+              "description": "Basic LRU operations - init([2])",
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - put([1, 1])",
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - put([2, 2])",
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - get([1])",
+              "expected": 1,
+              "actual": 1,
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - put([3, 3])",
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - get([2])",
+              "expected": -1,
+              "actual": -1,
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - get([3])",
+              "expected": 3,
+              "actual": 3,
+              "passed": true
+            },
+            {
+              "description": "Update existing key - init([2])",
+              "passed": true
+            },
+            {
+              "description": "Update existing key - put([1, 1])",
+              "passed": true
+            },
+            {
+              "description": "Update existing key - put([2, 2])",
+              "passed": true
+            },
+            {
+              "description": "Update existing key - put([1, 10])",
+              "passed": true
+            },
+            {
+              "description": "Update existing key - get([1])",
+              "expected": 10,
+              "actual": 10,
+              "passed": true
+            },
+            {
+              "description": "Update existing key - get([2])",
+              "expected": 2,
+              "actual": 2,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 13,
+          "total_tests": 13,
+          "test_results": [
+            {
+              "description": "Basic LRU operations - init([2])",
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - put([1, 1])",
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - put([2, 2])",
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - get([1])",
+              "expected": 1,
+              "actual": 1,
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - put([3, 3])",
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - get([2])",
+              "expected": -1,
+              "actual": -1,
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - get([3])",
+              "expected": 3,
+              "actual": 3,
+              "passed": true
+            },
+            {
+              "description": "Update existing key - init([2])",
+              "passed": true
+            },
+            {
+              "description": "Update existing key - put([1, 1])",
+              "passed": true
+            },
+            {
+              "description": "Update existing key - put([2, 2])",
+              "passed": true
+            },
+            {
+              "description": "Update existing key - put([1, 10])",
+              "passed": true
+            },
+            {
+              "description": "Update existing key - get([1])",
+              "expected": 10,
+              "actual": 10,
+              "passed": true
+            },
+            {
+              "description": "Update existing key - get([2])",
+              "expected": 2,
+              "actual": 2,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 13,
+          "total_tests": 13,
+          "test_results": [
+            {
+              "description": "Basic LRU operations - init([2])",
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - put([1, 1])",
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - put([2, 2])",
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - get([1])",
+              "expected": 1,
+              "actual": 1,
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - put([3, 3])",
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - get([2])",
+              "expected": -1,
+              "actual": -1,
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - get([3])",
+              "expected": 3,
+              "actual": 3,
+              "passed": true
+            },
+            {
+              "description": "Update existing key - init([2])",
+              "passed": true
+            },
+            {
+              "description": "Update existing key - put([1, 1])",
+              "passed": true
+            },
+            {
+              "description": "Update existing key - put([2, 2])",
+              "passed": true
+            },
+            {
+              "description": "Update existing key - put([1, 10])",
+              "passed": true
+            },
+            {
+              "description": "Update existing key - get([1])",
+              "expected": 10,
+              "actual": 10,
+              "passed": true
+            },
+            {
+              "description": "Update existing key - get([2])",
+              "expected": 2,
+              "actual": 2,
+              "passed": true
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 13,
+          "total_tests": 13,
+          "test_results": [
+            {
+              "description": "Basic LRU operations - init([2])",
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - put([1, 1])",
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - put([2, 2])",
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - get([1])",
+              "expected": 1,
+              "actual": 1,
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - put([3, 3])",
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - get([2])",
+              "expected": -1,
+              "actual": -1,
+              "passed": true
+            },
+            {
+              "description": "Basic LRU operations - get([3])",
+              "expected": 3,
+              "actual": 3,
+              "passed": true
+            },
+            {
+              "description": "Update existing key - init([2])",
+              "passed": true
+            },
+            {
+              "description": "Update existing key - put([1, 1])",
+              "passed": true
+            },
+            {
+              "description": "Update existing key - put([2, 2])",
+              "passed": true
+            },
+            {
+              "description": "Update existing key - put([1, 10])",
+              "passed": true
+            },
+            {
+              "description": "Update existing key - get([1])",
+              "expected": 10,
+              "actual": 10,
+              "passed": true
+            },
+            {
+              "description": "Update existing key - get([2])",
+              "expected": 2,
+              "actual": 2,
+              "passed": true
+            }
+          ]
+        }
+      ],
+      "behavioral_groups": {
+        "PPPPPPPPPPPPP": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "pass_rate": 1.0
+    },
+    "structural_stats": {
+      "unique_structures": 2,
+      "property_results": [
+        {
+          "control_flow_signature": {
+            "if_statements": 3,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [
+              "Node",
+              "Node",
+              "Node",
+              "len"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": [
+              "if_at_depth_0",
+              "if_at_depth_0",
+              "if_at_depth_0"
+            ]
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "node": [
+                "key",
+                "value"
+              ],
+              "lru": []
+            },
+            "assignments": {
+              "node": "Call(func=Name(id='Node', ctx=Load()), args=[Name(id='key', ctx=Load()), Name(id='value', ctx=Load())])",
+              "lru": "Attribute(value=Attribute(value=Name(id='self', ctx=Load()), attr='tail', ctx=Load()), attr='prev', ctx=Load())"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function___init__"
+              ],
+              [
+                "function___init__"
+              ],
+              [
+                "function__remove"
+              ],
+              [
+                "function__add"
+              ],
+              [
+                "function_get"
+              ],
+              [
+                "function_get",
+                "branch"
+              ],
+              [
+                "function_put"
+              ],
+              [
+                "function_put",
+                "branch"
+              ],
+              [
+                "function_put",
+                "branch"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "__init__": {
+              "name": "__init__",
+              "args": [
+                "self",
+                "capacity"
+              ],
+              "returns": null,
+              "has_return": false
+            },
+            "_remove": {
+              "name": "_remove",
+              "args": [
+                "self",
+                "node"
+              ],
+              "returns": null,
+              "has_return": false
+            },
+            "_add": {
+              "name": "_add",
+              "args": [
+                "self",
+                "node"
+              ],
+              "returns": null,
+              "has_return": false
+            },
+            "get": {
+              "name": "get",
+              "args": [
+                "self",
+                "key"
+              ],
+              "returns": null,
+              "has_return": true
+            },
+            "put": {
+              "name": "put",
+              "args": [
+                "self",
+                "key",
+                "value"
+              ],
+              "returns": null,
+              "has_return": false
+            },
+            "_type_analysis": {
+              "type_errors": [],
+              "total_type_errors": 0,
+              "type_safe": null,
+              "annotation_coverage": 0.0
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)",
+            "cyclomatic_complexity": 2,
+            "complexity_rank": "A",
+            "average_complexity": 1.625,
+            "maintainability_index": 53.00491813557554,
+            "halstead_difficulty": 1.5,
+            "halstead_effort": 54.81181356564148,
+            "halstead_volume": 36.541209043760986,
+            "halstead_bugs": 0.012180403014586996
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true,
+            "io_operations": [],
+            "network_calls": [],
+            "system_calls": [],
+            "unsafe_operations": [],
+            "security_risks": [],
+            "security_score": null,
+            "purity_level": null
+          },
+          "termination_properties": {
+            "has_base_case": true,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              0,
+              0,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "In",
+              "In",
+              "Gt"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "ClassDef",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "arg",
+              "Constant",
+              "Constant",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Constant",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Constant",
+              "ClassDef",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Dict",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Name",
+              "Load",
+              "In",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Subscript",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Return",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Name",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "arg",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Name",
+              "Load",
+              "In",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Assign",
+              "Subscript",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Call",
+              "Name",
+              "Load",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Gt",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Delete",
+              "Subscript",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Del",
+              "Constant"
+            ],
+            "ast_depth": 9,
+            "ast_hash": "912cb9635c738b650b191f36e81bf83c",
+            "alpha_renamed_hash": "572779866f302d6b77cdda3591846ec8"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "ClassDef",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "ClassDef",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "FunctionDef",
+              "If",
+              "Assign",
+              "Expr",
+              "Expr",
+              "Return",
+              "Return",
+              "FunctionDef",
+              "If",
+              "Expr",
+              "Assign",
+              "Assign",
+              "Expr",
+              "If",
+              "Assign",
+              "Expr",
+              "Delete"
+            ],
+            "statement_sequence": [
+              "ClassDef_0",
+              "FunctionDef_1",
+              "Assign_2",
+              "Assign_3",
+              "Assign_4",
+              "Assign_5",
+              "ClassDef_6",
+              "FunctionDef_7",
+              "Assign_8",
+              "Assign_9",
+              "Assign_10",
+              "Assign_11",
+              "Assign_12",
+              "Assign_13",
+              "FunctionDef_14",
+              "Assign_15",
+              "Assign_16",
+              "FunctionDef_17",
+              "Assign_18",
+              "Assign_19",
+              "Assign_20",
+              "Assign_21",
+              "FunctionDef_22",
+              "If_23",
+              "Assign_24",
+              "Expr_25",
+              "Expr_26",
+              "Return_27",
+              "Return_28",
+              "FunctionDef_29",
+              "If_30",
+              "Expr_31",
+              "Assign_32",
+              "Assign_33",
+              "Expr_34",
+              "If_35",
+              "Assign_36",
+              "Expr_37",
+              "Delete_38"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "FunctionDef",
+              "FunctionDef",
+              "FunctionDef",
+              "FunctionDef",
+              "If",
+              "FunctionDef",
+              "If",
+              "If"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [
+              {
+                "condition": "key in self.cache",
+                "return_type": "expression"
+              }
+            ],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": [
+              "key in self.cache"
+            ]
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 3,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [
+              "Node",
+              "Node",
+              "Node",
+              "len"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": [
+              "if_at_depth_0",
+              "if_at_depth_0",
+              "if_at_depth_0"
+            ]
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "node": [
+                "key",
+                "value"
+              ],
+              "lru": []
+            },
+            "assignments": {
+              "node": "Call(func=Name(id='Node', ctx=Load()), args=[Name(id='key', ctx=Load()), Name(id='value', ctx=Load())])",
+              "lru": "Attribute(value=Attribute(value=Name(id='self', ctx=Load()), attr='head', ctx=Load()), attr='next', ctx=Load())"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function___init__"
+              ],
+              [
+                "function___init__"
+              ],
+              [
+                "function__remove"
+              ],
+              [
+                "function__add"
+              ],
+              [
+                "function_get"
+              ],
+              [
+                "function_get",
+                "branch"
+              ],
+              [
+                "function_put"
+              ],
+              [
+                "function_put",
+                "branch"
+              ],
+              [
+                "function_put",
+                "branch"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "__init__": {
+              "name": "__init__",
+              "args": [
+                "self",
+                "capacity"
+              ],
+              "returns": null,
+              "has_return": false
+            },
+            "_remove": {
+              "name": "_remove",
+              "args": [
+                "self",
+                "node"
+              ],
+              "returns": null,
+              "has_return": false
+            },
+            "_add": {
+              "name": "_add",
+              "args": [
+                "self",
+                "node"
+              ],
+              "returns": null,
+              "has_return": false
+            },
+            "get": {
+              "name": "get",
+              "args": [
+                "self",
+                "key"
+              ],
+              "returns": null,
+              "has_return": true
+            },
+            "put": {
+              "name": "put",
+              "args": [
+                "self",
+                "key",
+                "value"
+              ],
+              "returns": null,
+              "has_return": false
+            },
+            "_type_analysis": {
+              "type_errors": [],
+              "total_type_errors": 0,
+              "type_safe": null,
+              "annotation_coverage": 0.0
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)",
+            "cyclomatic_complexity": 2,
+            "complexity_rank": "A",
+            "average_complexity": 1.625,
+            "maintainability_index": 53.00491813557554,
+            "halstead_difficulty": 1.5,
+            "halstead_effort": 54.81181356564148,
+            "halstead_volume": 36.541209043760986,
+            "halstead_bugs": 0.012180403014586996
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true,
+            "io_operations": [],
+            "network_calls": [],
+            "system_calls": [],
+            "unsafe_operations": [],
+            "security_risks": [],
+            "security_score": null,
+            "purity_level": null
+          },
+          "termination_properties": {
+            "has_base_case": true,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              0,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "In",
+              "In",
+              "Gt"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "ClassDef",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "arg",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Constant",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Constant",
+              "ClassDef",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Dict",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "Constant",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "Constant",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Name",
+              "Load",
+              "In",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Subscript",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Return",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Name",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "arg",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Name",
+              "Load",
+              "In",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Assign",
+              "Subscript",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Call",
+              "Name",
+              "Load",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Gt",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Delete",
+              "Subscript",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Del",
+              "Constant"
+            ],
+            "ast_depth": 9,
+            "ast_hash": "36f44cf57cf0fd7b5b46b33489d0c62b",
+            "alpha_renamed_hash": "41a05ee0ec405f0ad6f770730949b00d"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "ClassDef",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "ClassDef",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "FunctionDef",
+              "If",
+              "Assign",
+              "Expr",
+              "Expr",
+              "Return",
+              "Return",
+              "FunctionDef",
+              "If",
+              "Expr",
+              "Assign",
+              "Assign",
+              "Expr",
+              "If",
+              "Assign",
+              "Expr",
+              "Delete"
+            ],
+            "statement_sequence": [
+              "ClassDef_0",
+              "FunctionDef_1",
+              "Assign_2",
+              "Assign_3",
+              "Assign_4",
+              "Assign_5",
+              "ClassDef_6",
+              "FunctionDef_7",
+              "Assign_8",
+              "Assign_9",
+              "Assign_10",
+              "Assign_11",
+              "Assign_12",
+              "Assign_13",
+              "FunctionDef_14",
+              "Assign_15",
+              "Assign_16",
+              "FunctionDef_17",
+              "Assign_18",
+              "Assign_19",
+              "Assign_20",
+              "Assign_21",
+              "FunctionDef_22",
+              "If_23",
+              "Assign_24",
+              "Expr_25",
+              "Expr_26",
+              "Return_27",
+              "Return_28",
+              "FunctionDef_29",
+              "If_30",
+              "Expr_31",
+              "Assign_32",
+              "Assign_33",
+              "Expr_34",
+              "If_35",
+              "Assign_36",
+              "Expr_37",
+              "Delete_38"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "FunctionDef",
+              "FunctionDef",
+              "FunctionDef",
+              "FunctionDef",
+              "If",
+              "FunctionDef",
+              "If",
+              "If"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [
+              {
+                "condition": "key in self.cache",
+                "return_type": "expression"
+              }
+            ],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": [
+              "key in self.cache"
+            ]
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 3,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [
+              "Node",
+              "Node",
+              "Node",
+              "len"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": [
+              "if_at_depth_0",
+              "if_at_depth_0",
+              "if_at_depth_0"
+            ]
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "node": [
+                "key",
+                "value"
+              ],
+              "lru": []
+            },
+            "assignments": {
+              "node": "Call(func=Name(id='Node', ctx=Load()), args=[Name(id='key', ctx=Load()), Name(id='value', ctx=Load())])",
+              "lru": "Attribute(value=Attribute(value=Name(id='self', ctx=Load()), attr='head', ctx=Load()), attr='next', ctx=Load())"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function___init__"
+              ],
+              [
+                "function___init__"
+              ],
+              [
+                "function__remove"
+              ],
+              [
+                "function__add"
+              ],
+              [
+                "function_get"
+              ],
+              [
+                "function_get",
+                "branch"
+              ],
+              [
+                "function_put"
+              ],
+              [
+                "function_put",
+                "branch"
+              ],
+              [
+                "function_put",
+                "branch"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "__init__": {
+              "name": "__init__",
+              "args": [
+                "self",
+                "capacity"
+              ],
+              "returns": null,
+              "has_return": false
+            },
+            "_remove": {
+              "name": "_remove",
+              "args": [
+                "self",
+                "node"
+              ],
+              "returns": null,
+              "has_return": false
+            },
+            "_add": {
+              "name": "_add",
+              "args": [
+                "self",
+                "node"
+              ],
+              "returns": null,
+              "has_return": false
+            },
+            "get": {
+              "name": "get",
+              "args": [
+                "self",
+                "key"
+              ],
+              "returns": null,
+              "has_return": true
+            },
+            "put": {
+              "name": "put",
+              "args": [
+                "self",
+                "key",
+                "value"
+              ],
+              "returns": null,
+              "has_return": false
+            },
+            "_type_analysis": {
+              "type_errors": [],
+              "total_type_errors": 0,
+              "type_safe": null,
+              "annotation_coverage": 0.0
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)",
+            "cyclomatic_complexity": 2,
+            "complexity_rank": "A",
+            "average_complexity": 1.625,
+            "maintainability_index": 53.00491813557554,
+            "halstead_difficulty": 1.5,
+            "halstead_effort": 54.81181356564148,
+            "halstead_volume": 36.541209043760986,
+            "halstead_bugs": 0.012180403014586996
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true,
+            "io_operations": [],
+            "network_calls": [],
+            "system_calls": [],
+            "unsafe_operations": [],
+            "security_risks": [],
+            "security_score": null,
+            "purity_level": null
+          },
+          "termination_properties": {
+            "has_base_case": true,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              0,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "In",
+              "In",
+              "Gt"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "ClassDef",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "arg",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Constant",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Constant",
+              "ClassDef",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Dict",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "Constant",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "Constant",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Name",
+              "Load",
+              "In",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Subscript",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Return",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Name",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "arg",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Name",
+              "Load",
+              "In",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Assign",
+              "Subscript",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Call",
+              "Name",
+              "Load",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Gt",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Delete",
+              "Subscript",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Del",
+              "Constant"
+            ],
+            "ast_depth": 9,
+            "ast_hash": "36f44cf57cf0fd7b5b46b33489d0c62b",
+            "alpha_renamed_hash": "41a05ee0ec405f0ad6f770730949b00d"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "ClassDef",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "ClassDef",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "FunctionDef",
+              "If",
+              "Assign",
+              "Expr",
+              "Expr",
+              "Return",
+              "Return",
+              "FunctionDef",
+              "If",
+              "Expr",
+              "Assign",
+              "Assign",
+              "Expr",
+              "If",
+              "Assign",
+              "Expr",
+              "Delete"
+            ],
+            "statement_sequence": [
+              "ClassDef_0",
+              "FunctionDef_1",
+              "Assign_2",
+              "Assign_3",
+              "Assign_4",
+              "Assign_5",
+              "ClassDef_6",
+              "FunctionDef_7",
+              "Assign_8",
+              "Assign_9",
+              "Assign_10",
+              "Assign_11",
+              "Assign_12",
+              "Assign_13",
+              "FunctionDef_14",
+              "Assign_15",
+              "Assign_16",
+              "FunctionDef_17",
+              "Assign_18",
+              "Assign_19",
+              "Assign_20",
+              "Assign_21",
+              "FunctionDef_22",
+              "If_23",
+              "Assign_24",
+              "Expr_25",
+              "Expr_26",
+              "Return_27",
+              "Return_28",
+              "FunctionDef_29",
+              "If_30",
+              "Expr_31",
+              "Assign_32",
+              "Assign_33",
+              "Expr_34",
+              "If_35",
+              "Assign_36",
+              "Expr_37",
+              "Delete_38"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "FunctionDef",
+              "FunctionDef",
+              "FunctionDef",
+              "FunctionDef",
+              "If",
+              "FunctionDef",
+              "If",
+              "If"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [
+              {
+                "condition": "key in self.cache",
+                "return_type": "expression"
+              }
+            ],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": [
+              "key in self.cache"
+            ]
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 3,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [
+              "Node",
+              "Node",
+              "Node",
+              "len"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": [
+              "if_at_depth_0",
+              "if_at_depth_0",
+              "if_at_depth_0"
+            ]
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "node": [
+                "key",
+                "value"
+              ],
+              "lru": []
+            },
+            "assignments": {
+              "node": "Call(func=Name(id='Node', ctx=Load()), args=[Name(id='key', ctx=Load()), Name(id='value', ctx=Load())])",
+              "lru": "Attribute(value=Attribute(value=Name(id='self', ctx=Load()), attr='head', ctx=Load()), attr='next', ctx=Load())"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function___init__"
+              ],
+              [
+                "function___init__"
+              ],
+              [
+                "function__remove"
+              ],
+              [
+                "function__add"
+              ],
+              [
+                "function_get"
+              ],
+              [
+                "function_get",
+                "branch"
+              ],
+              [
+                "function_put"
+              ],
+              [
+                "function_put",
+                "branch"
+              ],
+              [
+                "function_put",
+                "branch"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "__init__": {
+              "name": "__init__",
+              "args": [
+                "self",
+                "capacity"
+              ],
+              "returns": null,
+              "has_return": false
+            },
+            "_remove": {
+              "name": "_remove",
+              "args": [
+                "self",
+                "node"
+              ],
+              "returns": null,
+              "has_return": false
+            },
+            "_add": {
+              "name": "_add",
+              "args": [
+                "self",
+                "node"
+              ],
+              "returns": null,
+              "has_return": false
+            },
+            "get": {
+              "name": "get",
+              "args": [
+                "self",
+                "key"
+              ],
+              "returns": null,
+              "has_return": true
+            },
+            "put": {
+              "name": "put",
+              "args": [
+                "self",
+                "key",
+                "value"
+              ],
+              "returns": null,
+              "has_return": false
+            },
+            "_type_analysis": {
+              "type_errors": [],
+              "total_type_errors": 0,
+              "type_safe": null,
+              "annotation_coverage": 0.0
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)",
+            "cyclomatic_complexity": 2,
+            "complexity_rank": "A",
+            "average_complexity": 1.625,
+            "maintainability_index": 53.00491813557554,
+            "halstead_difficulty": 1.5,
+            "halstead_effort": 54.81181356564148,
+            "halstead_volume": 36.541209043760986,
+            "halstead_bugs": 0.012180403014586996
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true,
+            "io_operations": [],
+            "network_calls": [],
+            "system_calls": [],
+            "unsafe_operations": [],
+            "security_risks": [],
+            "security_score": null,
+            "purity_level": null
+          },
+          "termination_properties": {
+            "has_base_case": true,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              0,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "In",
+              "In",
+              "Gt"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "ClassDef",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "arg",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Constant",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Constant",
+              "ClassDef",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Dict",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "Constant",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "Constant",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Name",
+              "Load",
+              "In",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Subscript",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Return",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Name",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "arg",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Name",
+              "Load",
+              "In",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Assign",
+              "Subscript",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Call",
+              "Name",
+              "Load",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Gt",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Delete",
+              "Subscript",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Del",
+              "Constant"
+            ],
+            "ast_depth": 9,
+            "ast_hash": "36f44cf57cf0fd7b5b46b33489d0c62b",
+            "alpha_renamed_hash": "41a05ee0ec405f0ad6f770730949b00d"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "ClassDef",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "ClassDef",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "FunctionDef",
+              "If",
+              "Assign",
+              "Expr",
+              "Expr",
+              "Return",
+              "Return",
+              "FunctionDef",
+              "If",
+              "Expr",
+              "Assign",
+              "Assign",
+              "Expr",
+              "If",
+              "Assign",
+              "Expr",
+              "Delete"
+            ],
+            "statement_sequence": [
+              "ClassDef_0",
+              "FunctionDef_1",
+              "Assign_2",
+              "Assign_3",
+              "Assign_4",
+              "Assign_5",
+              "ClassDef_6",
+              "FunctionDef_7",
+              "Assign_8",
+              "Assign_9",
+              "Assign_10",
+              "Assign_11",
+              "Assign_12",
+              "Assign_13",
+              "FunctionDef_14",
+              "Assign_15",
+              "Assign_16",
+              "FunctionDef_17",
+              "Assign_18",
+              "Assign_19",
+              "Assign_20",
+              "Assign_21",
+              "FunctionDef_22",
+              "If_23",
+              "Assign_24",
+              "Expr_25",
+              "Expr_26",
+              "Return_27",
+              "Return_28",
+              "FunctionDef_29",
+              "If_30",
+              "Expr_31",
+              "Assign_32",
+              "Assign_33",
+              "Expr_34",
+              "If_35",
+              "Assign_36",
+              "Expr_37",
+              "Delete_38"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "FunctionDef",
+              "FunctionDef",
+              "FunctionDef",
+              "FunctionDef",
+              "If",
+              "FunctionDef",
+              "If",
+              "If"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [
+              {
+                "condition": "key in self.cache",
+                "return_type": "expression"
+              }
+            ],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": [
+              "key in self.cache"
+            ]
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 3,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [
+              "Node",
+              "Node",
+              "Node",
+              "len"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": [
+              "if_at_depth_0",
+              "if_at_depth_0",
+              "if_at_depth_0"
+            ]
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "node": [
+                "key",
+                "value"
+              ],
+              "lru": []
+            },
+            "assignments": {
+              "node": "Call(func=Name(id='Node', ctx=Load()), args=[Name(id='key', ctx=Load()), Name(id='value', ctx=Load())])",
+              "lru": "Attribute(value=Attribute(value=Name(id='self', ctx=Load()), attr='head', ctx=Load()), attr='next', ctx=Load())"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function___init__"
+              ],
+              [
+                "function___init__"
+              ],
+              [
+                "function__remove"
+              ],
+              [
+                "function__add"
+              ],
+              [
+                "function_get"
+              ],
+              [
+                "function_get",
+                "branch"
+              ],
+              [
+                "function_put"
+              ],
+              [
+                "function_put",
+                "branch"
+              ],
+              [
+                "function_put",
+                "branch"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "__init__": {
+              "name": "__init__",
+              "args": [
+                "self",
+                "capacity"
+              ],
+              "returns": null,
+              "has_return": false
+            },
+            "_remove": {
+              "name": "_remove",
+              "args": [
+                "self",
+                "node"
+              ],
+              "returns": null,
+              "has_return": false
+            },
+            "_add": {
+              "name": "_add",
+              "args": [
+                "self",
+                "node"
+              ],
+              "returns": null,
+              "has_return": false
+            },
+            "get": {
+              "name": "get",
+              "args": [
+                "self",
+                "key"
+              ],
+              "returns": null,
+              "has_return": true
+            },
+            "put": {
+              "name": "put",
+              "args": [
+                "self",
+                "key",
+                "value"
+              ],
+              "returns": null,
+              "has_return": false
+            },
+            "_type_analysis": {
+              "type_errors": [],
+              "total_type_errors": 0,
+              "type_safe": null,
+              "annotation_coverage": 0.0
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)",
+            "cyclomatic_complexity": 2,
+            "complexity_rank": "A",
+            "average_complexity": 1.625,
+            "maintainability_index": 53.00491813557554,
+            "halstead_difficulty": 1.5,
+            "halstead_effort": 54.81181356564148,
+            "halstead_volume": 36.541209043760986,
+            "halstead_bugs": 0.012180403014586996
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true,
+            "io_operations": [],
+            "network_calls": [],
+            "system_calls": [],
+            "unsafe_operations": [],
+            "security_risks": [],
+            "security_score": null,
+            "purity_level": null
+          },
+          "termination_properties": {
+            "has_base_case": true,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              0,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "In",
+              "In",
+              "Gt"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "ClassDef",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "arg",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Constant",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Constant",
+              "ClassDef",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Dict",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "Constant",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "Constant",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Name",
+              "Load",
+              "Store",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Assign",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Name",
+              "Load",
+              "In",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Subscript",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Return",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Name",
+              "Load",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "Name",
+              "Load",
+              "arg",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Name",
+              "Load",
+              "In",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Subscript",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Name",
+              "Load",
+              "Assign",
+              "Subscript",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Store",
+              "Name",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "If",
+              "Compare",
+              "Call",
+              "Name",
+              "Load",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Gt",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Attribute",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Load",
+              "Expr",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Delete",
+              "Subscript",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Del",
+              "Constant"
+            ],
+            "ast_depth": 9,
+            "ast_hash": "36f44cf57cf0fd7b5b46b33489d0c62b",
+            "alpha_renamed_hash": "41a05ee0ec405f0ad6f770730949b00d"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "ClassDef",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "ClassDef",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "FunctionDef",
+              "If",
+              "Assign",
+              "Expr",
+              "Expr",
+              "Return",
+              "Return",
+              "FunctionDef",
+              "If",
+              "Expr",
+              "Assign",
+              "Assign",
+              "Expr",
+              "If",
+              "Assign",
+              "Expr",
+              "Delete"
+            ],
+            "statement_sequence": [
+              "ClassDef_0",
+              "FunctionDef_1",
+              "Assign_2",
+              "Assign_3",
+              "Assign_4",
+              "Assign_5",
+              "ClassDef_6",
+              "FunctionDef_7",
+              "Assign_8",
+              "Assign_9",
+              "Assign_10",
+              "Assign_11",
+              "Assign_12",
+              "Assign_13",
+              "FunctionDef_14",
+              "Assign_15",
+              "Assign_16",
+              "FunctionDef_17",
+              "Assign_18",
+              "Assign_19",
+              "Assign_20",
+              "Assign_21",
+              "FunctionDef_22",
+              "If_23",
+              "Assign_24",
+              "Expr_25",
+              "Expr_26",
+              "Return_27",
+              "Return_28",
+              "FunctionDef_29",
+              "If_30",
+              "Expr_31",
+              "Assign_32",
+              "Assign_33",
+              "Expr_34",
+              "If_35",
+              "Assign_36",
+              "Expr_37",
+              "Delete_38"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "FunctionDef",
+              "FunctionDef",
+              "FunctionDef",
+              "FunctionDef",
+              "If",
+              "FunctionDef",
+              "If",
+              "If"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [
+              {
+                "condition": "key in self.cache",
+                "return_type": "expression"
+              }
+            ],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": [
+              "key in self.cache"
+            ]
+          }
+        }
+      ],
+      "structural_groups": {
+        "301880815109343548_-393877572365065129_-2623136493760249700_8932742743781835599": [
+          0
+        ],
+        "301880815109343548_-393877572365065129_-2623136493760249700_-8942762543730206241": [
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "distances_to_canon": [
+        0.23051948051948054,
+        0.10551948051948053,
+        0.10551948051948053,
+        0.10551948051948053,
+        0.10551948051948053
+      ],
+      "mean_distance": 0.13051948051948054,
+      "std_distance": 0.05000000000000001
+    }
+  },
+  "bell_curve_analysis": {
+    "plot_path": "outputs\\analysis\\pre_post_comparison_lru_cache_temp0.5.png",
+    "statistics": {
+      "pre_repair": {
+        "mean": 0.2,
+        "std": 0.11920228048770454,
+        "median": 0.2857142857142857,
+        "min": 0.0,
+        "max": 0.30357142857142855,
+        "r_anchor": 0.2
+      },
+      "post_repair": {
+        "mean": 0.025,
+        "std": 0.05000000000000001,
+        "median": 0.0,
+        "min": 0.0,
+        "max": 0.125,
+        "r_anchor": 0.8
+      },
+      "deltas": {
+        "delta_mu": 0.17500000000000002,
+        "delta_sigma": 0.06920228048770452,
+        "delta_rescue": 0.6000000000000001
+      },
+      "statistical_tests": {
+        "mann_whitney_u": {
+          "statistic": 21.5,
+          "p_value": 0.05648280375504712
+        },
+        "kolmogorov_smirnov": {
+          "statistic": 0.6,
+          "p_value": 0.35714285714285715
+        },
+        "significantly_different": false
+      }
+    },
+    "r_repair_at_k": {
+      "thresholds": [
+        0.05,
+        0.1,
+        0.15,
+        0.2,
+        0.25,
+        0.3
+      ],
+      "pre_repair": [
+        0.2,
+        0.2,
+        0.4,
+        0.4,
+        0.4,
+        0.8
+      ],
+      "post_repair": [
+        0.8,
+        0.8,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "hypothesis_evaluation": {
+    "hypothesis": "SKYT improves LLM code repeatability through contract-driven canonicalization",
+    "supported": true,
+    "evidence": {
+      "raw_repeatability": 0.2,
+      "behavioral_improvement": 0.8,
+      "structural_improvement": 0.6000000000000001,
+      "total_improvement": 0.6000000000000001
+    },
+    "conclusion": "Hypothesis SUPPORTED: Significant improvement detected"
+  }
+}
