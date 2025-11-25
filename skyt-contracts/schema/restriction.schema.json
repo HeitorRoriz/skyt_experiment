@@ -1,0 +1,164 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://skyt.works/schema/restriction.schema.json",
+  "title": "SKYT Restriction Set",
+  "description": "Schema for SKYT coding restriction sets (certification standards)",
+  "type": "object",
+  "required": ["id", "name", "version", "source", "rules"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique restriction set identifier",
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable name"
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "source": {
+      "type": "string",
+      "enum": ["preset", "user", "community"],
+      "description": "Origin of the restriction set"
+    },
+    "authority": {
+      "type": "string",
+      "description": "Standards body or organization (e.g., NASA, MISRA)"
+    },
+    "reference_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Link to official standard documentation"
+    },
+    "description": {
+      "type": "string",
+      "description": "Summary of the restriction set"
+    },
+    "applicable_languages": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Programming languages this applies to"
+    },
+    "dal_levels": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["A", "B", "C", "D", "E"]
+      },
+      "description": "DO-178C Design Assurance Levels"
+    },
+    "sil_levels": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["SIL1", "SIL2", "SIL3", "SIL4"]
+      },
+      "description": "IEC 61508 Safety Integrity Levels"
+    },
+    "rules": {
+      "type": "array",
+      "description": "List of rules in this restriction set",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "severity"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Rule identifier (e.g., P10-R1, MISRA-1.1)"
+          },
+          "name": {
+            "type": "string",
+            "description": "Rule name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed rule description"
+          },
+          "rationale": {
+            "type": "string",
+            "description": "Why this rule exists"
+          },
+          "severity": {
+            "type": "string",
+            "enum": ["mandatory", "required", "advisory"],
+            "description": "Rule enforcement level"
+          },
+          "category": {
+            "type": "string",
+            "description": "Rule category (e.g., control_flow, memory, declarations)"
+          },
+          "detector": {
+            "type": "string",
+            "enum": ["ast_pattern", "static_analysis", "regex", "custom"],
+            "description": "Detection mechanism"
+          },
+          "pattern": {
+            "type": "object",
+            "description": "Pattern definition for detection",
+            "properties": {
+              "forbidden": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "Forbidden constructs"
+              },
+              "required": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "Required constructs"
+              },
+              "ast_node_types": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "AST node types to check"
+              }
+            }
+          },
+          "exceptions": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Known exceptions to this rule"
+          },
+          "references": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Cross-references to other standards"
+          }
+        }
+      }
+    },
+    "audit_metadata": {
+      "type": "object",
+      "description": "Audit and certification metadata",
+      "properties": {
+        "last_reviewed": {
+          "type": "string",
+          "format": "date"
+        },
+        "reviewed_by": {
+          "type": "string"
+        },
+        "certification_mapping": {
+          "type": "object",
+          "description": "Mapping to certification objectives",
+          "additionalProperties": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "author": {"type": "string"},
+        "created_at": {"type": "string", "format": "date-time"},
+        "updated_at": {"type": "string", "format": "date-time"},
+        "tags": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

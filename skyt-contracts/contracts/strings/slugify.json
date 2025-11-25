@@ -1,0 +1,64 @@
+{
+  "$schema": "../../schema/contract.schema.json",
+  "id": "slugify",
+  "version": "1.0.0",
+  "task_intent": "Convert string to URL-friendly slug format",
+  "prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.",
+  "description": "String slugification for URLs. Transforms arbitrary text into clean, URL-safe identifiers.",
+  "algorithm_family": "string_transformation",
+  "constraints": {
+    "function_name": "slugify",
+    "algorithm": "string transformation",
+    "implementation_style": "iterative",
+    "output_type": "string",
+    "variable_naming": {
+      "fixed_variables": ["text"],
+      "flexible_variables": ["result", "slug", "char", "c", "output", "s"],
+      "naming_policy": "strict"
+    }
+  },
+  "domain": {
+    "inputs": [
+      {
+        "name": "text",
+        "type": "str",
+        "constraint": "any string"
+      }
+    ]
+  },
+  "out_of_domain": {
+    "policy": "must_return",
+    "return_value": "",
+    "examples": [
+      {"text": null}
+    ]
+  },
+  "oracle_requirements": {
+    "test_cases": [
+      {"input": "Hello World", "expected": "hello-world", "description": "Basic slugification"},
+      {"input": "Hello  World!", "expected": "hello-world", "description": "Multiple spaces and punctuation"},
+      {"input": "Python 3.9 Release", "expected": "python-3-9-release", "description": "Numbers and dots"},
+      {"input": "  Trim Spaces  ", "expected": "trim-spaces", "description": "Leading/trailing spaces"},
+      {"input": "CamelCaseString", "expected": "camelcasestring", "description": "CamelCase to lowercase"},
+      {"input": "", "expected": "", "description": "Empty string"},
+      {"input": "a", "expected": "a", "description": "Single character"}
+    ],
+    "correctness_threshold": 1.0,
+    "required_pass_rate": 0.8
+  },
+  "normalization_rules": {
+    "remove_comments": true,
+    "normalize_whitespace": true,
+    "enforce_function_name": true
+  },
+  "rescue_bounds": {
+    "allow_function_rename": true,
+    "allow_print_removal": true,
+    "max_transformations": 5
+  },
+  "metadata": {
+    "author": "skyt_team",
+    "created_at": "2025-11-25T00:00:00Z",
+    "tags": ["strings", "web", "urls"]
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "../../schema/contract.schema.json",
+  "id": "balanced_brackets",
+  "version": "1.0.0",
+  "task_intent": "Check if brackets in string are balanced",
+  "prompt": "Write a Python function called 'is_balanced' that takes a string containing brackets (parentheses, square brackets, curly braces) and returns True if all brackets are properly balanced and nested, False otherwise.",
+  "description": "Bracket balancing validation using stack. Validates proper nesting of (), [], and {}.",
+  "algorithm_family": "stack",
+  "constraints": {
+    "function_name": "is_balanced",
+    "algorithm": "stack-based matching",
+    "implementation_style": "iterative",
+    "output_type": "boolean",
+    "variable_naming": {
+      "fixed_variables": ["s"],
+      "flexible_variables": ["stack", "bracket_map", "brackets", "char", "c", "opening", "closing"],
+      "naming_policy": "strict"
+    }
+  },
+  "domain": {
+    "inputs": [
+      {
+        "name": "s",
+        "type": "str",
+        "constraint": "any string"
+      }
+    ]
+  },
+  "out_of_domain": {
+    "policy": "must_return",
+    "return_value": false,
+    "examples": [
+      {"s": null}
+    ]
+  },
+  "oracle_requirements": {
+    "test_cases": [
+      {"input": "()", "expected": true, "description": "Simple balanced"},
+      {"input": "()[]{}", "expected": true, "description": "Multiple types balanced"},
+      {"input": "({[]})", "expected": true, "description": "Nested balanced"},
+      {"input": "(]", "expected": false, "description": "Mismatched brackets"},
+      {"input": "(()", "expected": false, "description": "Unclosed bracket"},
+      {"input": ")(", "expected": false, "description": "Wrong order"},
+      {"input": "", "expected": true, "description": "Empty string"},
+      {"input": "({[()]})", "expected": true, "description": "Complex nested"},
+      {"input": "((()))", "expected": true, "description": "Deep nesting"},
+      {"input": "({)}", "expected": false, "description": "Interleaved but wrong"}
+    ],
+    "correctness_threshold": 1.0,
+    "required_pass_rate": 0.8
+  },
+  "normalization_rules": {
+    "remove_comments": true,
+    "normalize_whitespace": true,
+    "enforce_function_name": true
+  },
+  "rescue_bounds": {
+    "allow_function_rename": true,
+    "allow_print_removal": true,
+    "max_transformations": 5
+  },
+  "metadata": {
+    "author": "skyt_team",
+    "created_at": "2025-11-25T00:00:00Z",
+    "tags": ["strings", "stack", "parsing", "validation"]
+  }
+}

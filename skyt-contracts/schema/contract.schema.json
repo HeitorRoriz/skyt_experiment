@@ -1,0 +1,180 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://skyt.works/schema/contract.schema.json",
+  "title": "SKYT Contract",
+  "description": "Schema for SKYT code generation contracts",
+  "type": "object",
+  "required": ["id", "version", "task_intent", "prompt", "constraints", "oracle_requirements"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique contract identifier",
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "task_intent": {
+      "type": "string",
+      "description": "Natural language description of what the code should do"
+    },
+    "prompt": {
+      "type": "string",
+      "description": "The prompt sent to the LLM"
+    },
+    "description": {
+      "type": "string",
+      "description": "Human-readable description of the contract"
+    },
+    "algorithm_family": {
+      "type": "string",
+      "description": "Category of algorithm (e.g., sorting, searching, graph)"
+    },
+    "constraints": {
+      "type": "object",
+      "description": "Code structure constraints",
+      "properties": {
+        "function_name": {
+          "type": "string",
+          "description": "Required function name"
+        },
+        "class_name": {
+          "type": "string",
+          "description": "Required class name (for class-based contracts)"
+        },
+        "algorithm": {
+          "type": "string",
+          "description": "Algorithm description"
+        },
+        "algorithm_variant": {
+          "type": "string",
+          "description": "Specific variant (e.g., iterative, recursive)"
+        },
+        "implementation_style": {
+          "type": "string",
+          "enum": ["iterative", "recursive", "functional", "object-oriented"]
+        },
+        "output_type": {
+          "type": "string",
+          "description": "Expected return type"
+        },
+        "variable_naming": {
+          "type": "object",
+          "properties": {
+            "fixed_variables": {
+              "type": "array",
+              "items": {"type": "string"},
+              "description": "Variables that must not be renamed"
+            },
+            "flexible_variables": {
+              "type": "array",
+              "items": {"type": "string"},
+              "description": "Variables that can be renamed"
+            },
+            "naming_policy": {
+              "type": "string",
+              "enum": ["strict", "flexible"],
+              "description": "Naming enforcement policy"
+            }
+          }
+        }
+      }
+    },
+    "domain": {
+      "type": "object",
+      "description": "Input domain specification",
+      "properties": {
+        "inputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string"},
+              "type": {"type": "string"},
+              "constraint": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "out_of_domain": {
+      "type": "object",
+      "description": "Handling of out-of-domain inputs",
+      "properties": {
+        "policy": {
+          "type": "string",
+          "enum": ["must_return", "may_throw", "undefined"]
+        },
+        "return_value": {
+          "description": "Value to return for out-of-domain inputs"
+        }
+      }
+    },
+    "oracle_requirements": {
+      "type": "object",
+      "description": "Behavioral test requirements",
+      "required": ["test_cases"],
+      "properties": {
+        "test_cases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "input": {
+                "description": "Test input (any JSON type)"
+              },
+              "expected": {
+                "description": "Expected output (any JSON type)"
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "correctness_threshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Minimum pass rate for correctness"
+        },
+        "required_pass_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "normalization_rules": {
+      "type": "object",
+      "description": "Code normalization settings",
+      "properties": {
+        "remove_comments": {"type": "boolean"},
+        "normalize_whitespace": {"type": "boolean"},
+        "enforce_function_name": {"type": "boolean"}
+      }
+    },
+    "rescue_bounds": {
+      "type": "object",
+      "description": "Allowed repair transformations",
+      "properties": {
+        "allow_function_rename": {"type": "boolean"},
+        "allow_class_rename": {"type": "boolean"},
+        "allow_print_removal": {"type": "boolean"},
+        "max_transformations": {"type": "integer", "minimum": 0}
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata",
+      "properties": {
+        "author": {"type": "string"},
+        "created_at": {"type": "string", "format": "date-time"},
+        "updated_at": {"type": "string", "format": "date-time"},
+        "tags": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "$schema": "../../schema/contract.schema.json",
+  "id": "binary_search",
+  "version": "1.0.0",
+  "task_intent": "Search for target in sorted array using binary search",
+  "prompt": "Write a Python function called 'binary_search' that takes a sorted list of integers and a target value, and returns the index of the target if found, or -1 if not found. Use binary search algorithm.",
+  "description": "Binary search implementation with boundary conditions and termination guarantees. Time complexity O(log n).",
+  "algorithm_family": "binary_search",
+  "constraints": {
+    "function_name": "binary_search",
+    "algorithm": "binary search",
+    "implementation_style": "iterative",
+    "output_type": "integer",
+    "variable_naming": {
+      "fixed_variables": ["arr", "target"],
+      "flexible_variables": ["left", "right", "mid", "l", "r", "m", "low", "high"],
+      "naming_policy": "strict"
+    }
+  },
+  "domain": {
+    "inputs": [
+      {
+        "name": "arr",
+        "type": "list[int]",
+        "constraint": "sorted ascending"
+      },
+      {
+        "name": "target",
+        "type": "int",
+        "constraint": "any"
+      }
+    ]
+  },
+  "out_of_domain": {
+    "policy": "must_return",
+    "return_value": -1,
+    "examples": [
+      {"arr": null, "target": 1},
+      {"arr": [2, 1], "target": 1}
+    ]
+  },
+  "oracle_requirements": {
+    "test_cases": [
+      {"input": [[1, 2, 3, 4, 5], 3], "expected": 2, "description": "Target in middle"},
+      {"input": [[1, 2, 3, 4, 5], 1], "expected": 0, "description": "Target at start"},
+      {"input": [[1, 2, 3, 4, 5], 5], "expected": 4, "description": "Target at end"},
+      {"input": [[1, 2, 3, 4, 5], 6], "expected": -1, "description": "Target not found (too large)"},
+      {"input": [[1, 2, 3, 4, 5], 0], "expected": -1, "description": "Target not found (too small)"},
+      {"input": [[], 1], "expected": -1, "description": "Empty array"},
+      {"input": [[5], 5], "expected": 0, "description": "Single element found"},
+      {"input": [[5], 3], "expected": -1, "description": "Single element not found"},
+      {"input": [[1, 3, 5, 7, 9, 11, 13], 7], "expected": 3, "description": "Odd length array"}
+    ],
+    "correctness_threshold": 1.0,
+    "required_pass_rate": 0.8
+  },
+  "normalization_rules": {
+    "remove_comments": true,
+    "normalize_whitespace": true,
+    "enforce_function_name": true
+  },
+  "rescue_bounds": {
+    "allow_function_rename": true,
+    "allow_print_removal": true,
+    "max_transformations": 5
+  },
+  "metadata": {
+    "author": "skyt_team",
+    "created_at": "2025-11-25T00:00:00Z",
+    "tags": ["searching", "divide-and-conquer", "algorithms"]
+  }
+}
