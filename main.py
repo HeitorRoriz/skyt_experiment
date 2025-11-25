@@ -24,14 +24,23 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # Run single experiment
+  # Run single experiment (default OpenAI)
   python main.py --contract fibonacci_basic --runs 5 --temperature 0.0
+  
+  # Run with Claude (requires ANTHROPIC_API_KEY)
+  python main.py --provider anthropic --contract fibonacci_basic --runs 5
+  
+  # Run with specific model
+  python main.py --provider openai --model gpt-4-turbo --contract slugify
   
   # Run temperature sweep
   python main.py --contract fibonacci_basic --sweep --temperatures 0.0 0.5 1.0
   
   # Run multiple contracts
   python main.py --contract fibonacci_basic fibonacci_recursive --runs 10
+  
+  # List available providers
+  python main.py --list-providers
         """
     )
     
@@ -95,11 +104,69 @@ Examples:
         help="Maximum out-of-domain examples to check (default: 3)"
     )
     
+    # LLM Provider options
+    parser.add_argument(
+        "--provider",
+        choices=["openai", "anthropic", "openrouter"],
+        default=None,
+        help="LLM provider (default: from SKYT_PROVIDER env or 'openai')"
+    )
+    
+    parser.add_argument(
+        "--model",
+        default=None,
+        help="Model name (default: provider-specific default)"
+    )
+    
+    parser.add_argument(
+        "--list-providers",
+        action="store_true",
+        help="List available providers and default models, then exit"
+    )
+    
     args = parser.parse_args()
+    
+    # Handle --list-providers
+    if args.list_providers:
+        from src.llm_client import get_available_providers, get_default_model
+        print("\n📋 Available LLM Providers:")
+        print("-" * 50)
+        for provider in get_available_providers():
+            default_model = get_default_model(provider)
+            env_var = f"{provider.upper()}_API_KEY"
+            print(f"  • {provider}")
+            print(f"      Default model: {default_model}")
+            print(f"      API key env:   {env_var}")
+            print()
+        print("Usage:")
+        print("  python main.py --provider anthropic --model claude-3-5-sonnet-20241022")
+        print("  SKYT_PROVIDER=anthropic python main.py --contract fibonacci_basic")
+        sys.exit(0)
+    
+    # Set provider/model via environment if specified via CLI
+    if args.provider:
+        os.environ["SKYT_PROVIDER"] = args.provider
+    if args.model:
+        os.environ["SKYT_MODEL"] = args.model
     
     # Validate inputs
     if not os.path.exists(args.templates):
         print(f"❌ Error: Contract templates file not found: {args.templates}")
+        sys.exit(1)
+    
+    # Show provider info
+    from src.llm_client import LLMClient
+    try:
+        # Quick check - this will fail if API key is missing
+        test_client = LLMClient()
+        info = test_client.get_info()
+        print(f"\n🤖 LLM Configuration:")
+        print(f"   Provider: {info['provider']}")
+        print(f"   Model:    {info['model']}")
+        print()
+    except ValueError as e:
+        print(f"\n❌ LLM Configuration Error: {e}")
+        print("   Use --list-providers to see available options")
         sys.exit(1)
     
     # Initialize experiment system
