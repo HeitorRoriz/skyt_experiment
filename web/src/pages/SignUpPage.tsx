@@ -29,7 +29,7 @@ export default function SignUpPage() {
 
     try {
       // Send to Formspree - replace YOUR_FORM_ID with actual ID after setup
-      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+      const response = await fetch('https://formspree.io/f/xldyrbde', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
