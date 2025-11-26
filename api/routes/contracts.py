@@ -3,18 +3,33 @@
 Contract and restriction endpoints.
 
 Browse available contracts and manage restriction sets.
+Integrates with Supabase for user contracts.
 """
 
+import json
+from pathlib import Path
 from typing import Optional, List
 from uuid import UUID, uuid4
+from datetime import datetime
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel
 
 from .auth import get_current_user, User
+from ..database import (
+    get_contracts as db_get_contracts,
+    get_contract as db_get_contract,
+    create_contract as db_create_contract,
+    update_contract as db_update_contract,
+    delete_contract as db_delete_contract,
+)
 
 
 router = APIRouter()
+
+
+# Path to template contracts
+TEMPLATES_PATH = Path(__file__).parent.parent.parent / "contracts" / "templates.json"
 
 
 # =============================================================================
@@ -66,55 +81,44 @@ class RestrictionDetail(BaseModel):
 
 
 # =============================================================================
-# Mock Data (Replace with repository pattern)
+# Template Contracts (from filesystem)
 # =============================================================================
 
-_mock_contracts = {
-    "fibonacci_basic": {
-        "id": "fibonacci_basic",
-        "version": "1.0.0",
-        "task_intent": "Generate nth Fibonacci number using iteration",
-        "prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use iteration, not recursion.",
-        "description": "Basic iterative Fibonacci implementation",
-        "algorithm_family": "fibonacci",
-        "constraints": {"function_name": "fibonacci", "implementation_style": "iterative"},
-        "oracle_requirements": {"test_cases": [{"input": 0, "expected": 0}, {"input": 10, "expected": 55}]},
-        "rescue_bounds": {"max_transformations": 5},
-    },
-    "binary_search": {
-        "id": "binary_search",
-        "version": "1.0.0",
-        "task_intent": "Search for target in sorted array using binary search",
-        "prompt": "Write a Python function called 'binary_search' that takes a sorted list of integers and a target value...",
-        "description": "Binary search with boundary conditions",
-        "algorithm_family": "searching",
-        "constraints": {"function_name": "binary_search", "implementation_style": "iterative"},
-        "oracle_requirements": {"test_cases": [{"input": [[1,2,3], 2], "expected": 1}]},
-        "rescue_bounds": {"max_transformations": 5},
-    },
-    "slugify": {
-        "id": "slugify",
-        "version": "1.0.0",
-        "task_intent": "Convert string to URL-friendly slug format",
-        "prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug...",
-        "description": "String slugification for URLs",
-        "algorithm_family": "string_transformation",
-        "constraints": {"function_name": "slugify"},
-        "oracle_requirements": {"test_cases": [{"input": "Hello World", "expected": "hello-world"}]},
-        "rescue_bounds": {"max_transformations": 5},
-    },
-    "balanced_brackets": {
-        "id": "balanced_brackets",
-        "version": "1.0.0",
-        "task_intent": "Check if brackets in string are balanced",
-        "prompt": "Write a Python function called 'is_balanced' that takes a string containing brackets...",
-        "description": "Bracket balancing validation using stack",
-        "algorithm_family": "stack",
-        "constraints": {"function_name": "is_balanced"},
-        "oracle_requirements": {"test_cases": [{"input": "()", "expected": True}]},
-        "rescue_bounds": {"max_transformations": 5},
-    },
-}
+def load_template_contracts() -> dict:
+    """Load template contracts from templates.json file."""
+    try:
+        if TEMPLATES_PATH.exists():
+            with open(TEMPLATES_PATH) as f:
+                data = json.load(f)
+                return {c["id"]: c for c in data.get("contracts", [])}
+    except Exception:
+        pass
+    
+    # Fallback to minimal set if file not found
+    return {
+        "fibonacci_basic": {
+            "id": "fibonacci_basic",
+            "version": "1.0.0",
+            "task_intent": "Generate nth Fibonacci number using iteration",
+            "prompt": "Write a Python function called 'fibonacci' that takes an integer n and returns the nth Fibonacci number. Use iteration, not recursion.",
+            "description": "Basic iterative Fibonacci implementation",
+            "algorithm_family": "fibonacci",
+            "constraints": {"function_name": "fibonacci", "implementation_style": "iterative"},
+            "oracle_requirements": {"test_cases": [{"input": 0, "expected": 0}, {"input": 10, "expected": 55}]},
+            "rescue_bounds": {"max_transformations": 5},
+        },
+    }
+
+
+# Cache template contracts
+_template_contracts = None
+
+def get_template_contracts() -> dict:
+    """Get cached template contracts."""
+    global _template_contracts
+    if _template_contracts is None:
+        _template_contracts = load_template_contracts()
+    return _template_contracts
 
 _mock_restrictions = {
     "nasa_power_of_10": {
@@ -145,45 +149,150 @@ _mock_restrictions = {
 # Contract Endpoints
 # =============================================================================
 
-@router.get("/contracts", response_model=List[ContractSummary])
-async def list_contracts(
+@router.get("/contracts/templates", response_model=List[ContractSummary])
+async def list_template_contracts(
     algorithm_family: Optional[str] = None,
 ):
     """
-    List available contracts.
+    List available template contracts (public, no auth required).
     
-    Contracts define code generation requirements including:
-    - Task intent (what the code should do)
-    - Constraints (function names, style)
-    - Oracle requirements (test cases)
-    
-    No authentication required - contracts are public.
+    Templates are pre-built contracts for common algorithms.
     """
-    contracts = list(_mock_contracts.values())
+    contracts = list(get_template_contracts().values())
     
     if algorithm_family:
-        contracts = [c for c in contracts if c["algorithm_family"] == algorithm_family]
+        contracts = [c for c in contracts if c.get("algorithm_family") == algorithm_family]
     
     return [
         ContractSummary(
             id=c["id"],
-            version=c["version"],
-            task_intent=c["task_intent"],
-            algorithm_family=c["algorithm_family"],
-            test_count=len(c["oracle_requirements"].get("test_cases", [])),
+            version=c.get("version", "1.0.0"),
+            task_intent=c.get("task_intent", c.get("description", "")),
+            algorithm_family=c.get("algorithm_family", "general"),
+            test_count=len(c.get("oracle_requirements", {}).get("test_cases", [])),
         )
         for c in contracts
     ]
 
 
-@router.get("/contracts/{contract_id}", response_model=ContractDetail)
-async def get_contract(contract_id: str):
+@router.get("/contracts/templates/{contract_id}", response_model=ContractDetail)
+async def get_template_contract(contract_id: str):
     """
-    Get full contract details.
+    Get template contract details (public, no auth required).
+    """
+    contract = get_template_contracts().get(contract_id)
     
-    Returns complete contract specification including prompt and test cases.
+    if not contract:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Template contract '{contract_id}' not found",
+        )
+    
+    return ContractDetail(
+        id=contract["id"],
+        version=contract.get("version", "1.0.0"),
+        task_intent=contract.get("task_intent", contract.get("description", "")),
+        prompt=contract.get("prompt", ""),
+        description=contract.get("description"),
+        algorithm_family=contract.get("algorithm_family", "general"),
+        constraints=contract.get("constraints", {}),
+        oracle_requirements=contract.get("oracle_requirements", {}),
+        rescue_bounds=contract.get("rescue_bounds", {}),
+    )
+
+
+@router.get("/contracts", response_model=List[ContractSummary])
+async def list_user_contracts(
+    user: User = Depends(get_current_user),
+):
     """
-    contract = _mock_contracts.get(contract_id)
+    List user's contracts.
+    
+    Returns contracts created/owned by the authenticated user.
+    """
+    contracts = db_get_contracts(user.id)
+    
+    return [
+        ContractSummary(
+            id=c["contract_id"],
+            version=c.get("version", "1.0.0"),
+            task_intent=c.get("description", c.get("name", "")),
+            algorithm_family=c.get("constraints", {}).get("algorithm_family", "custom"),
+            test_count=len(c.get("oracle_requirements", {}).get("test_cases", [])),
+        )
+        for c in contracts
+    ]
+
+
+class ContractCreate(BaseModel):
+    """Request body for creating a contract."""
+    contract_id: str
+    name: str
+    description: Optional[str] = None
+    prompt: str
+    constraints: dict = {}
+    oracle_requirements: dict = {}
+    variable_naming: dict = {}
+    restriction_preset: Optional[str] = None
+    from_template: Optional[str] = None  # Copy from template
+
+
+@router.post("/contracts", status_code=status.HTTP_201_CREATED)
+async def create_contract(
+    contract_data: ContractCreate,
+    user: User = Depends(get_current_user),
+):
+    """
+    Create a new contract.
+    
+    Optionally copy from a template using `from_template`.
+    """
+    # Check if contract_id already exists for this user
+    existing = db_get_contract(user.id, contract_data.contract_id)
+    if existing:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Contract '{contract_data.contract_id}' already exists",
+        )
+    
+    # If from_template, copy template data
+    base_data = {}
+    if contract_data.from_template:
+        template = get_template_contracts().get(contract_data.from_template)
+        if template:
+            base_data = {
+                "prompt": template.get("prompt", ""),
+                "constraints": template.get("constraints", {}),
+                "oracle_requirements": template.get("oracle_requirements", {}),
+                "variable_naming": template.get("variable_naming", {}),
+            }
+    
+    # Merge with provided data (provided data takes precedence)
+    create_data = {
+        **base_data,
+        "contract_id": contract_data.contract_id,
+        "name": contract_data.name,
+        "description": contract_data.description,
+        "prompt": contract_data.prompt or base_data.get("prompt", ""),
+        "constraints": contract_data.constraints or base_data.get("constraints", {}),
+        "oracle_requirements": contract_data.oracle_requirements or base_data.get("oracle_requirements", {}),
+        "variable_naming": contract_data.variable_naming or base_data.get("variable_naming", {}),
+        "restriction_preset": contract_data.restriction_preset,
+    }
+    
+    result = db_create_contract(user.id, create_data)
+    return {"id": result.get("id"), "contract_id": result.get("contract_id"), "message": "Contract created"}
+
+
+@router.get("/contracts/{contract_id}")
+async def get_user_contract(
+    contract_id: str,
+    user: User = Depends(get_current_user),
+):
+    """
+    Get a user's contract by contract_id.
+    """
+    contract = db_get_contract(user.id, contract_id)
     
     if not contract:
         raise HTTPException(
@@ -191,7 +300,27 @@ async def get_contract(contract_id: str):
             detail=f"Contract '{contract_id}' not found",
         )
     
-    return ContractDetail(**contract)
+    return contract
+
+
+@router.delete("/contracts/{contract_id}")
+async def delete_user_contract(
+    contract_id: str,
+    user: User = Depends(get_current_user),
+):
+    """
+    Delete a user's contract.
+    """
+    contract = db_get_contract(user.id, contract_id)
+    
+    if not contract:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Contract '{contract_id}' not found",
+        )
+    
+    db_delete_contract(UUID(contract["id"]))
+    return {"message": "Contract deleted"}
 
 
 # =============================================================================
