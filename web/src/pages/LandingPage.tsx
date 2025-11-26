@@ -498,8 +498,8 @@ export default function LandingPage() {
       <footer className="border-t border-border py-12">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-            <div className="space-y-4">
-              <div className="flex items-center">
+            <div className="space-y-4 text-center">
+              <div className="flex items-center justify-center">
                 <img src="/images/sky-logo-2.png" alt="SKYT Logo" className="h-20 w-auto" />
               </div>
               <p className="text-sm text-muted-foreground">Prompt. Verify. Deploy.</p>
