@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { UserPlus, ArrowLeft, CheckCircle } from 'lucide-react'
+import { UserPlus, ArrowLeft, Mail } from 'lucide-react'
 import { Button } from '../components/ui'
+import { supabase } from '../lib/supabase'
 
 export default function SignUpPage() {
   const [formData, setFormData] = useState({
@@ -28,20 +29,33 @@ export default function SignUpPage() {
     setIsSubmitting(true)
 
     try {
-      // Send to Formspree - replace YOUR_FORM_ID with actual ID after setup
-      const response = await fetch('https://formspree.io/f/xldyrbde', {
+      // Sign up with Supabase - sends verification email
+      const { error: signUpError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: crypto.randomUUID(), // Temporary password, user will set real one after verification
+        options: {
+          data: {
+            name: formData.name,
+            company: formData.company,
+            role: formData.role,
+            use_case: formData.useCase
+          },
+          emailRedirectTo: `${window.location.origin}/verify`
+        }
+      })
+
+      if (signUpError) throw signUpError
+
+      // Also save to Formspree for your records
+      await fetch('https://formspree.io/f/xldyrbde', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       })
 
-      if (response.ok) {
-        setIsSubmitted(true)
-      } else {
-        throw new Error('Submission failed')
-      }
-    } catch (err) {
-      setError('Something went wrong. Please try again.')
+      setIsSubmitted(true)
+    } catch (err: any) {
+      setError(err.message || 'Something went wrong. Please try again.')
     } finally {
       setIsSubmitting(false)
     }
@@ -65,11 +79,12 @@ export default function SignUpPage() {
         <div className="flex-1 flex items-center justify-center px-4">
           <div className="text-center max-w-md">
             <div className="mx-auto w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6">
-              <CheckCircle className="w-8 h-8 text-primary" />
+              <Mail className="w-8 h-8 text-primary" />
             </div>
-            <h1 className="text-3xl font-bold mb-4">You're on the list!</h1>
+            <h1 className="text-3xl font-bold mb-4">Check your email!</h1>
             <p className="text-muted-foreground mb-8">
-              Thanks for signing up for early access. We'll be in touch soon with your beta invitation.
+              We've sent a verification link to <strong className="text-foreground">{formData.email}</strong>. 
+              Click the link to verify your email and create your password.
             </p>
             <Link to="/">
               <Button size="lg">Back to Home</Button>

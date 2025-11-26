@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { LogIn, ArrowLeft } from 'lucide-react'
 import { Button } from '../components/ui'
-import { login } from '../services/api'
+import { supabase } from '../lib/supabase'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -17,10 +17,16 @@ export default function LoginPage() {
     setIsLoading(true)
     
     try {
-      await login(email, password)
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      })
+      
+      if (signInError) throw signInError
+      
       navigate('/playground')
-    } catch (err) {
-      setError('Invalid email or password')
+    } catch (err: any) {
+      setError(err.message || 'Invalid email or password')
     } finally {
       setIsLoading(false)
     }
