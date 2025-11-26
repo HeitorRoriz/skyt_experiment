@@ -78,7 +78,7 @@ export default function PricingPage() {
                 </li>
               </ul>
 
-              <Link to="/login" className="block">
+              <Link to="/signup" className="block">
                 <Button
                   size="lg"
                   className="w-full h-12 text-base"
