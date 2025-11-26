@@ -267,8 +267,50 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Industry Standards Section */}
+      <section id="standards" className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Pre-Configured Industry Standards</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Ship with compliance built-in. Skyt comes with ready-to-use restriction presets for safety-critical industries.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
+            <Card className="p-6 text-center hover:border-primary/50 transition-colors">
+              <div className="text-3xl mb-3">🚀</div>
+              <h3 className="font-semibold mb-1">NASA JPL</h3>
+              <p className="text-sm text-muted-foreground">Power of Ten Rules for safety-critical C code</p>
+            </Card>
+            <Card className="p-6 text-center hover:border-primary/50 transition-colors">
+              <div className="text-3xl mb-3">🚗</div>
+              <h3 className="font-semibold mb-1">MISRA C/C++</h3>
+              <p className="text-sm text-muted-foreground">Automotive industry coding guidelines</p>
+            </Card>
+            <Card className="p-6 text-center hover:border-primary/50 transition-colors">
+              <div className="text-3xl mb-3">✈️</div>
+              <h3 className="font-semibold mb-1">DO-178C</h3>
+              <p className="text-sm text-muted-foreground">Aviation software certification standard</p>
+            </Card>
+            <Card className="p-6 text-center hover:border-primary/50 transition-colors">
+              <div className="text-3xl mb-3">⚙️</div>
+              <h3 className="font-semibold mb-1">AUTOSAR</h3>
+              <p className="text-sm text-muted-foreground">Automotive open system architecture</p>
+            </Card>
+            <Card className="p-6 text-center hover:border-primary/50 transition-colors">
+              <div className="text-3xl mb-3">🏥</div>
+              <h3 className="font-semibold mb-1">IEC 62304</h3>
+              <p className="text-sm text-muted-foreground">Medical device software lifecycle</p>
+            </Card>
+          </div>
+          <p className="text-center text-muted-foreground mt-8">
+            Custom presets available for enterprise teams
+          </p>
+        </div>
+      </section>
+
       {/* Use Cases Section */}
-      <section id="use-cases" className="py-20">
+      <section id="use-cases" className="py-20 bg-accent/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Built for AI-First Engineering Teams</h2>
