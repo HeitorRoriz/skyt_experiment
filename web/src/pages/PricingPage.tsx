@@ -35,7 +35,7 @@ export default function PricingPage() {
               <Link to="/pricing" className="text-sm text-foreground font-medium">
                 Pricing
               </Link>
-              <Link to="/playground">
+              <Link to="/login">
                 <Button size="sm">
                   Sign In
                 </Button>
@@ -78,7 +78,7 @@ export default function PricingPage() {
                 </li>
               </ul>
 
-              <Link to="/playground" className="block">
+              <Link to="/login" className="block">
                 <Button
                   size="lg"
                   className="w-full h-12 text-base"

@@ -48,7 +48,7 @@ export default function LandingPage() {
               <Link to="/pricing" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
                 Pricing
               </Link>
-              <Link to="/playground">
+              <Link to="/login">
                 <Button size="sm">
                   Sign In
                 </Button>
