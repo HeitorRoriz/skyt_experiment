@@ -6,6 +6,30 @@ import { Link } from "react-router-dom"
 
 export default function LandingPage() {
   const [activeCode, setActiveCode] = useState(0)
+  const [contactForm, setContactForm] = useState({ name: '', email: '', company: '', message: '' })
+  const [contactStatus, setContactStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
+
+  async function handleContactSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    setContactStatus('sending')
+    
+    try {
+      const response = await fetch('https://formspree.io/f/xldyrbde', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...contactForm, _subject: 'Sales Inquiry from SKYT Website' })
+      })
+      
+      if (response.ok) {
+        setContactStatus('sent')
+        setContactForm({ name: '', email: '', company: '', message: '' })
+      } else {
+        throw new Error('Failed')
+      }
+    } catch {
+      setContactStatus('error')
+    }
+  }
 
   const codeExamples = [
     { label: "Run 1", code: "def fib(n):\n  if n <= 1: return n\n  return fib(n-1) + fib(n-2)", status: "variant" },
@@ -433,62 +457,76 @@ export default function LandingPage() {
               </p>
             </div>
             <Card className="p-8">
-              <form 
-                action="https://formspree.io/f/xldyrbde" 
-                method="POST"
-                className="space-y-4"
-              >
-                <input type="hidden" name="_subject" value="Sales Inquiry from SKYT Website" />
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {contactStatus === 'sent' ? (
+                <div className="text-center py-8">
+                  <CheckCircle className="w-16 h-16 text-primary mx-auto mb-4" />
+                  <h3 className="text-2xl font-bold mb-2">Message Sent!</h3>
+                  <p className="text-muted-foreground">We'll get back to you within 24 hours.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleContactSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label htmlFor="contact-name" className="block text-sm font-medium mb-2">Name</label>
+                      <input
+                        id="contact-name"
+                        type="text"
+                        required
+                        placeholder="Your name"
+                        value={contactForm.name}
+                        onChange={(e) => setContactForm(prev => ({ ...prev, name: e.target.value }))}
+                        className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="contact-email" className="block text-sm font-medium mb-2">Email</label>
+                      <input
+                        id="contact-email"
+                        type="email"
+                        required
+                        placeholder="you@company.com"
+                        value={contactForm.email}
+                        onChange={(e) => setContactForm(prev => ({ ...prev, email: e.target.value }))}
+                        className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                      />
+                    </div>
+                  </div>
                   <div>
-                    <label htmlFor="contact-name" className="block text-sm font-medium mb-2">Name</label>
+                    <label htmlFor="contact-company" className="block text-sm font-medium mb-2">Company</label>
                     <input
-                      id="contact-name"
-                      name="name"
+                      id="contact-company"
                       type="text"
-                      required
-                      placeholder="Your name"
+                      placeholder="Company name"
+                      value={contactForm.company}
+                      onChange={(e) => setContactForm(prev => ({ ...prev, company: e.target.value }))}
                       className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                     />
                   </div>
                   <div>
-                    <label htmlFor="contact-email" className="block text-sm font-medium mb-2">Email</label>
-                    <input
-                      id="contact-email"
-                      name="email"
-                      type="email"
+                    <label htmlFor="contact-message" className="block text-sm font-medium mb-2">Message</label>
+                    <textarea
+                      id="contact-message"
+                      rows={4}
                       required
-                      placeholder="you@company.com"
-                      className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                      placeholder="Tell us about your needs..."
+                      value={contactForm.message}
+                      onChange={(e) => setContactForm(prev => ({ ...prev, message: e.target.value }))}
+                      className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none"
                     />
                   </div>
-                </div>
-                <div>
-                  <label htmlFor="contact-company" className="block text-sm font-medium mb-2">Company</label>
-                  <input
-                    id="contact-company"
-                    name="company"
-                    type="text"
-                    placeholder="Company name"
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="contact-message" className="block text-sm font-medium mb-2">Message</label>
-                  <textarea
-                    id="contact-message"
-                    name="message"
-                    rows={4}
-                    required
-                    placeholder="Tell us about your needs..."
-                    className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none"
-                  />
-                </div>
-                <Button type="submit" size="lg" className="w-full">
-                  Send Message
-                  <ChevronRight className="ml-2 h-5 w-5" />
-                </Button>
-              </form>
+                  {contactStatus === 'error' && (
+                    <p className="text-destructive text-sm text-center">Something went wrong. Please try again.</p>
+                  )}
+                  <Button type="submit" size="lg" className="w-full" disabled={contactStatus === 'sending'}>
+                    {contactStatus === 'sending' ? 'Sending...' : (
+                      <>
+                        Send Message
+                        <ChevronRight className="ml-2 h-5 w-5" />
+                      </>
+                    )}
+                  </Button>
+                </form>
+              )}
             </Card>
           </div>
         </div>
