@@ -16,7 +16,10 @@ export default function LandingPage() {
     try {
       const response = await fetch('https://formspree.io/f/xldyrbde', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
         body: JSON.stringify({ ...contactForm, _subject: 'Sales Inquiry from SKYT Website' })
       })
       
