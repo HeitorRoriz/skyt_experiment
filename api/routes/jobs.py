@@ -3,6 +3,7 @@
 Job management endpoints.
 
 Get job status, results, and manage job lifecycle.
+Integrates with Supabase for persistence.
 """
 
 from datetime import datetime
@@ -13,10 +14,23 @@ from fastapi import APIRouter, Depends, HTTPException, status, WebSocket, WebSoc
 from pydantic import BaseModel
 
 from .auth import get_current_user, User
-from .pipeline import get_job, _mock_jobs
+from ..database import (
+    get_job as db_get_job,
+    update_job as db_update_job,
+    get_job_outputs as db_get_job_outputs,
+    get_job_metrics as db_get_job_metrics,
+)
 
 
 router = APIRouter(prefix="/jobs")
+
+
+def get_job(user_id: UUID, job_id: UUID) -> Optional[dict]:
+    """Get job by ID, scoped to user."""
+    job = db_get_job(job_id)
+    if job and str(job.get("user_id")) == str(user_id):
+        return job
+    return None
 
 
 # =============================================================================
@@ -110,22 +124,25 @@ async def get_job_details(
         delta = job["completed_at"] - job["started_at"]
         duration_ms = delta.total_seconds() * 1000
     
+    # Get contract info
+    contract_info = job.get("contracts", {})
+    
     return JobDetail(
-        job_id=job["job_id"],
-        user_id=job["user_id"],
-        contract_id=job["contract_id"],
+        job_id=UUID(job["id"]),
+        user_id=UUID(job["user_id"]),
+        contract_id=contract_info.get("contract_id", "unknown"),
         status=job["status"],
         num_runs=job["num_runs"],
-        temperature=job["temperature"],
+        temperature=float(job["temperature"]),
         model=job["model"],
-        restriction_ids=job["restriction_ids"],
+        restriction_ids=[],  # TODO: add restriction support
         created_at=job["created_at"],
         started_at=job.get("started_at"),
         completed_at=job.get("completed_at"),
-        metrics=job.get("metrics"),
-        canonical_anchor=job.get("canonical_anchor"),
-        runs=job.get("runs"),
-        error=job.get("error"),
+        metrics=None,  # TODO: fetch from job_metrics table
+        canonical_anchor=None,  # TODO: fetch from canon_anchors table
+        runs=None,  # TODO: fetch from job_outputs table
+        error=job.get("error_message"),
         duration_ms=duration_ms,
     )
 
@@ -204,8 +221,8 @@ async def cancel_job(
     # TODO: Send cancellation signal via Redis
     # redis.set(f"job:{job_id}:cancel", "1", ex=3600)
     
-    # Update job status
-    _mock_jobs[str(job_id)]["status"] = "cancelled"
+    # Update job status in database
+    db_update_job(job_id, {"status": "cancelled"})
     
     return CancelResponse(
         job_id=job_id,

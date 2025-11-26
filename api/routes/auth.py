@@ -7,6 +7,7 @@ Uses Supabase for authentication - verifies Supabase JWT tokens.
 
 import os
 from datetime import datetime
+from pathlib import Path
 from typing import Optional
 from uuid import UUID
 
@@ -21,12 +22,12 @@ from ..database import get_profile, get_profile_by_email
 router = APIRouter(prefix="/auth")
 
 
+# Load .env file if present
+from dotenv import load_dotenv
+load_dotenv(Path(__file__).parent.parent / ".env")
+
 # Supabase JWT settings
-SUPABASE_JWT_SECRET = os.getenv(
-    "SUPABASE_JWT_SECRET",
-    # Default: Get from Supabase Dashboard > Settings > API > JWT Secret
-    "your-supabase-jwt-secret"
-)
+SUPABASE_JWT_SECRET = os.getenv("SUPABASE_JWT_SECRET", "")
 
 
 # Bearer token scheme

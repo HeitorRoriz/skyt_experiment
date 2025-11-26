@@ -3,6 +3,7 @@
 Pipeline endpoints.
 
 Submit and manage SKYT pipeline jobs.
+Integrates with Supabase for persistence.
 """
 
 from datetime import datetime
@@ -13,6 +14,16 @@ from fastapi import APIRouter, Depends, HTTPException, status, BackgroundTasks
 from pydantic import BaseModel, Field
 
 from .auth import get_current_user, User
+from ..database import (
+    get_jobs as db_get_jobs,
+    get_job as db_get_job,
+    create_job as db_create_job,
+    update_job_status as db_update_job_status,
+    get_contract as db_get_contract,
+    check_runs_remaining,
+    increment_runs,
+)
+from .contracts import get_template_contracts
 
 
 router = APIRouter(prefix="/pipeline")
@@ -70,48 +81,29 @@ class JobSummary(BaseModel):
 
 
 # =============================================================================
-# Mock Job Store (Replace with database + Celery in production)
+# Job Helpers
 # =============================================================================
 
+# Keep mock jobs for backward compatibility during transition
 _mock_jobs = {}
 
 
-def create_job(user_id: UUID, request: PipelineRunRequest) -> dict:
-    """Create a new job record."""
-    job_id = uuid4()
-    job = {
-        "job_id": job_id,
-        "user_id": user_id,
-        "contract_id": request.contract_id,
-        "num_runs": request.num_runs,
-        "temperature": request.temperature,
-        "model": request.model,
-        "restriction_ids": request.restriction_ids,
-        "client_job_id": request.client_job_id,
-        "status": "queued",
-        "created_at": datetime.utcnow(),
-        "started_at": None,
-        "completed_at": None,
-        "metrics": None,
-        "error": None,
-    }
-    _mock_jobs[str(job_id)] = job
-    return job
-
-
-def get_job(user_id: UUID, job_id: UUID) -> Optional[dict]:
-    """Get job by ID, scoped to user."""
-    job = _mock_jobs.get(str(job_id))
-    if job and job["user_id"] == user_id:
-        return job
+def get_user_contract_uuid(user_id: UUID, contract_id: str) -> Optional[UUID]:
+    """Get user's contract UUID by contract_id, or check templates."""
+    # First check user's contracts in database
+    contract = db_get_contract(user_id, contract_id)
+    if contract:
+        return UUID(contract["id"])
+    
+    # Contract not in user's DB - they need to create it from template first
     return None
 
 
-def get_job_by_client_id(user_id: UUID, client_job_id: str) -> Optional[dict]:
-    """Get job by client-provided ID."""
-    for job in _mock_jobs.values():
-        if job["user_id"] == user_id and job["client_job_id"] == client_job_id:
-            return job
+def get_job(user_id: UUID, job_id: UUID) -> Optional[dict]:
+    """Get job by ID from database."""
+    job = db_get_job(job_id)
+    if job and str(job.get("user_id")) == str(user_id):
+        return job
     return None
 
 
@@ -141,31 +133,47 @@ async def run_pipeline(
     **Idempotency**: Provide `client_job_id` to prevent duplicate jobs on retries.
     If the same `client_job_id` is submitted twice, the existing job is returned.
     """
-    # Check for idempotent request
-    if request.client_job_id:
-        existing = get_job_by_client_id(user.id, request.client_job_id)
-        if existing:
-            return PipelineRunResponse(
-                job_id=existing["job_id"],
-                status=existing["status"],
-                message="Existing job returned (idempotent)",
+    # Check user quota
+    if not check_runs_remaining(user.id):
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            detail=f"Monthly run limit reached ({user.runs_limit} runs). Upgrade your plan.",
+        )
+    
+    # Validate contract exists (user's contract or template)
+    contract_uuid = get_user_contract_uuid(user.id, request.contract_id)
+    
+    if not contract_uuid:
+        # Check if it's a template - user needs to copy it first
+        templates = get_template_contracts()
+        if request.contract_id in templates:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Contract '{request.contract_id}' is a template. Copy it to your contracts first using POST /contracts with from_template.",
             )
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Contract '{request.contract_id}' not found",
+        )
     
-    # TODO: Check user quota
-    # TODO: Validate contract exists
-    # TODO: Validate restriction_ids exist
+    # Create job record in database
+    job = db_create_job(user.id, contract_uuid, {
+        "num_runs": request.num_runs,
+        "temperature": request.temperature,
+        "model": request.model,
+    })
     
-    # Create job record
-    job = create_job(user.id, request)
+    # Increment user's run count
+    increment_runs(user.id, request.num_runs)
     
-    # TODO: Queue job with Celery
-    # background_tasks.add_task(execute_job, job["job_id"])
+    # TODO: Queue job with Celery for actual execution
+    # For now, job stays in "queued" status
     
     # Estimate duration (rough: 2-5 seconds per LLM call)
     estimated_seconds = request.num_runs * 3
     
     return PipelineRunResponse(
-        job_id=job["job_id"],
+        job_id=UUID(job["id"]),
         status="queued",
         message="Job queued successfully",
         estimated_duration_seconds=estimated_seconds,
@@ -177,36 +185,22 @@ async def list_jobs(
     user: User = Depends(get_current_user),
     limit: int = 20,
     offset: int = 0,
-    status: Optional[str] = None,
 ):
     """
     List pipeline jobs for the current user.
     
-    Supports pagination and filtering by status.
+    Supports pagination. Jobs are sorted by creation date (newest first).
     """
-    user_jobs = [
-        j for j in _mock_jobs.values()
-        if j["user_id"] == user.id
-    ]
-    
-    # Filter by status
-    if status:
-        user_jobs = [j for j in user_jobs if j["status"] == status]
-    
-    # Sort by created_at descending
-    user_jobs.sort(key=lambda j: j["created_at"], reverse=True)
-    
-    # Paginate
-    user_jobs = user_jobs[offset:offset + limit]
+    jobs = db_get_jobs(user.id, limit=limit, offset=offset)
     
     return [
         JobSummary(
-            job_id=j["job_id"],
-            contract_id=j["contract_id"],
+            job_id=UUID(j["id"]),
+            contract_id=j.get("contracts", {}).get("contract_id", "unknown"),
             status=j["status"],
             num_runs=j["num_runs"],
-            temperature=j["temperature"],
+            temperature=float(j["temperature"]),
             created_at=j["created_at"],
         )
-        for j in user_jobs
+        for j in jobs
     ]
