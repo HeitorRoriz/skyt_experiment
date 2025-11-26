@@ -401,25 +401,101 @@ export default function LandingPage() {
                 systems.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-background text-foreground hover:bg-background/90">
-                  Start Free Trial
-                  <ChevronRight className="ml-2 h-5 w-5" />
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
-                >
-                  Talk to Sales
-                </Button>
+                <Link to="/signup">
+                  <Button size="lg" className="bg-background text-foreground hover:bg-background/90">
+                    Start Free Trial
+                    <ChevronRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
+                <a href="#contact">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
+                  >
+                    Talk to Sales
+                  </Button>
+                </a>
               </div>
             </div>
           </Card>
         </div>
       </section>
 
+      {/* Contact Section */}
+      <section id="contact" className="py-20 bg-accent/30">
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">Talk to Sales</h2>
+              <p className="text-lg text-muted-foreground">
+                Have questions about enterprise features, custom integrations, or volume pricing? We'd love to hear from you.
+              </p>
+            </div>
+            <Card className="p-8">
+              <form 
+                action="https://formspree.io/f/xldyrbde" 
+                method="POST"
+                className="space-y-4"
+              >
+                <input type="hidden" name="_subject" value="Sales Inquiry from SKYT Website" />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="contact-name" className="block text-sm font-medium mb-2">Name</label>
+                    <input
+                      id="contact-name"
+                      name="name"
+                      type="text"
+                      required
+                      placeholder="Your name"
+                      className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="contact-email" className="block text-sm font-medium mb-2">Email</label>
+                    <input
+                      id="contact-email"
+                      name="email"
+                      type="email"
+                      required
+                      placeholder="you@company.com"
+                      className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label htmlFor="contact-company" className="block text-sm font-medium mb-2">Company</label>
+                  <input
+                    id="contact-company"
+                    name="company"
+                    type="text"
+                    placeholder="Company name"
+                    className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="contact-message" className="block text-sm font-medium mb-2">Message</label>
+                  <textarea
+                    id="contact-message"
+                    name="message"
+                    rows={4}
+                    required
+                    placeholder="Tell us about your needs..."
+                    className="w-full px-4 py-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+                  />
+                </div>
+                <Button type="submit" size="lg" className="w-full">
+                  Send Message
+                  <ChevronRight className="ml-2 h-5 w-5" />
+                </Button>
+              </form>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer className="border-t border-border py-12 bg-accent/30">
+      <footer className="border-t border-border py-12">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div className="space-y-4">
