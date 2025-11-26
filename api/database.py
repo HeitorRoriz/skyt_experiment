@@ -32,15 +32,21 @@ def get_supabase_client() -> Client:
 def get_profile(user_id: UUID) -> Optional[Dict[str, Any]]:
     """Get user profile by ID."""
     client = get_supabase_client()
-    response = client.table("profiles").select("*").eq("id", str(user_id)).single().execute()
-    return response.data if response.data else None
+    try:
+        response = client.table("profiles").select("*").eq("id", str(user_id)).execute()
+        return response.data[0] if response.data else None
+    except Exception:
+        return None
 
 
 def get_profile_by_email(email: str) -> Optional[Dict[str, Any]]:
     """Get user profile by email."""
     client = get_supabase_client()
-    response = client.table("profiles").select("*").eq("email", email).single().execute()
-    return response.data if response.data else None
+    try:
+        response = client.table("profiles").select("*").eq("email", email).execute()
+        return response.data[0] if response.data else None
+    except Exception:
+        return None
 
 
 def update_profile(user_id: UUID, updates: Dict[str, Any]) -> Optional[Dict[str, Any]]:
@@ -77,22 +83,27 @@ def get_contracts(user_id: UUID) -> List[Dict[str, Any]]:
 def get_contract(user_id: UUID, contract_id: str) -> Optional[Dict[str, Any]]:
     """Get a specific contract by contract_id."""
     client = get_supabase_client()
-    response = (
-        client.table("contracts")
-        .select("*")
-        .eq("user_id", str(user_id))
-        .eq("contract_id", contract_id)
-        .single()
-        .execute()
-    )
-    return response.data if response.data else None
+    try:
+        response = (
+            client.table("contracts")
+            .select("*")
+            .eq("user_id", str(user_id))
+            .eq("contract_id", contract_id)
+            .execute()
+        )
+        return response.data[0] if response.data else None
+    except Exception:
+        return None
 
 
 def get_contract_by_uuid(contract_uuid: UUID) -> Optional[Dict[str, Any]]:
     """Get a contract by its UUID."""
     client = get_supabase_client()
-    response = client.table("contracts").select("*").eq("id", str(contract_uuid)).single().execute()
-    return response.data if response.data else None
+    try:
+        response = client.table("contracts").select("*").eq("id", str(contract_uuid)).execute()
+        return response.data[0] if response.data else None
+    except Exception:
+        return None
 
 
 def create_contract(user_id: UUID, contract_data: Dict[str, Any]) -> Dict[str, Any]:
@@ -138,14 +149,16 @@ def get_jobs(user_id: UUID, limit: int = 50, offset: int = 0) -> List[Dict[str, 
 def get_job(job_id: UUID) -> Optional[Dict[str, Any]]:
     """Get a job by ID."""
     client = get_supabase_client()
-    response = (
-        client.table("jobs")
-        .select("*, contracts(name, contract_id, prompt)")
-        .eq("id", str(job_id))
-        .single()
-        .execute()
-    )
-    return response.data if response.data else None
+    try:
+        response = (
+            client.table("jobs")
+            .select("*, contracts(name, contract_id, prompt)")
+            .eq("id", str(job_id))
+            .execute()
+        )
+        return response.data[0] if response.data else None
+    except Exception:
+        return None
 
 
 def create_job(user_id: UUID, contract_uuid: UUID, config: Dict[str, Any]) -> Dict[str, Any]:
@@ -218,8 +231,11 @@ def create_job_metrics(job_id: UUID, metrics: Dict[str, Any]) -> Dict[str, Any]:
 def get_job_metrics(job_id: UUID) -> Optional[Dict[str, Any]]:
     """Get metrics for a job."""
     client = get_supabase_client()
-    response = client.table("job_metrics").select("*").eq("job_id", str(job_id)).single().execute()
-    return response.data if response.data else None
+    try:
+        response = client.table("job_metrics").select("*").eq("job_id", str(job_id)).execute()
+        return response.data[0] if response.data else None
+    except Exception:
+        return None
 
 
 # =============================================================================
@@ -229,14 +245,16 @@ def get_job_metrics(job_id: UUID) -> Optional[Dict[str, Any]]:
 def get_canon_anchor(contract_uuid: UUID) -> Optional[Dict[str, Any]]:
     """Get canonical anchor for a contract."""
     client = get_supabase_client()
-    response = (
-        client.table("canon_anchors")
-        .select("*")
-        .eq("contract_id", str(contract_uuid))
-        .single()
-        .execute()
-    )
-    return response.data if response.data else None
+    try:
+        response = (
+            client.table("canon_anchors")
+            .select("*")
+            .eq("contract_id", str(contract_uuid))
+            .execute()
+        )
+        return response.data[0] if response.data else None
+    except Exception:
+        return None
 
 
 def create_canon_anchor(contract_uuid: UUID, anchor_data: Dict[str, Any]) -> Dict[str, Any]:

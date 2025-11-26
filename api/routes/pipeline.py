@@ -25,6 +25,13 @@ from ..database import (
 )
 from .contracts import get_template_contracts
 
+# Try to import Celery task (optional - for async execution)
+try:
+    from workers.tasks import execute_skyt_job
+    CELERY_AVAILABLE = True
+except ImportError:
+    CELERY_AVAILABLE = False
+
 
 router = APIRouter(prefix="/pipeline")
 
@@ -166,16 +173,32 @@ async def run_pipeline(
     # Increment user's run count
     increment_runs(user.id, request.num_runs)
     
-    # TODO: Queue job with Celery for actual execution
-    # For now, job stays in "queued" status
-    
     # Estimate duration (rough: 2-5 seconds per LLM call)
     estimated_seconds = request.num_runs * 3
+    
+    # Queue job with Celery for execution
+    if CELERY_AVAILABLE:
+        try:
+            execute_skyt_job.delay(
+                job_id=str(job["id"]),
+                user_id=str(user.id),
+                contract_id=str(contract_uuid),
+                num_runs=request.num_runs,
+                temperature=request.temperature,
+                model=request.model,
+                restriction_ids=[str(r) for r in request.restriction_ids],
+            )
+            message = "Job queued for execution"
+        except Exception as e:
+            # Celery not available or failed - job stays queued
+            message = f"Job created but worker not available: {e}"
+    else:
+        message = "Job created (worker not available - run manually)"
     
     return PipelineRunResponse(
         job_id=UUID(job["id"]),
         status="queued",
-        message="Job queued successfully",
+        message=message,
         estimated_duration_seconds=estimated_seconds,
     )
 

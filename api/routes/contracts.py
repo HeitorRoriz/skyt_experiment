@@ -90,6 +90,10 @@ def load_template_contracts() -> dict:
         if TEMPLATES_PATH.exists():
             with open(TEMPLATES_PATH) as f:
                 data = json.load(f)
+                # templates.json is a dict with contract IDs as keys
+                if isinstance(data, dict) and "contracts" not in data:
+                    return data
+                # Or it could be {"contracts": [...]}
                 return {c["id"]: c for c in data.get("contracts", [])}
     except Exception:
         pass
