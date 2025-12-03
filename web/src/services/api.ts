@@ -1,5 +1,6 @@
 // API Service for SKYT
-const API_BASE = '/api/v1';
+// Uses environment variable for API URL, falls back to relative path for same-origin
+const API_BASE = import.meta.env.VITE_API_URL || '/api/v1';
 
 // Types
 export interface Contract {
@@ -196,7 +197,7 @@ export function subscribeToJob(
     }
   };
   
-  ws.onerror = (event) => {
+  ws.onerror = () => {
     if (onError) {
       onError(new Error('WebSocket error'));
     }
