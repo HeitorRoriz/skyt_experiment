@@ -17,10 +17,15 @@ Usage:
 
 import os
 from celery import Celery
+from dotenv import load_dotenv
 
-# Configuration
-BROKER_URL = os.getenv("CELERY_BROKER_URL", "redis://localhost:6379/1")
-RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND", "redis://localhost:6379/2")
+# Load environment variables
+load_dotenv()
+
+# Configuration - use REDIS_URL for Upstash, fallback to localhost for dev
+REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
+BROKER_URL = os.getenv("CELERY_BROKER_URL", REDIS_URL)
+RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND", REDIS_URL)
 
 # Create Celery app
 app = Celery(

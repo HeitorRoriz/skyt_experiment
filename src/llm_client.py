@@ -28,7 +28,7 @@ import re
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from enum import Enum
-from typing import Optional, Dict, Any, List
+from typing import Optional, Dict, Any, List, Generator, Callable
 
 
 # =============================================================================
@@ -146,6 +146,35 @@ class LLMProvider(ABC):
         """
         pass
     
+    def generate_stream(
+        self,
+        prompt: str,
+        temperature: float = 0.0,
+        max_tokens: Optional[int] = None,
+        system_prompt: Optional[str] = None,
+        cancel_check: Optional[Callable[[], bool]] = None
+    ) -> Generator[str, None, str]:
+        """
+        Generate text with streaming, allowing mid-call cancellation.
+        
+        Args:
+            prompt: User prompt
+            temperature: Sampling temperature
+            max_tokens: Maximum tokens to generate
+            system_prompt: Override system prompt
+            cancel_check: Callable that returns True if generation should stop
+            
+        Yields:
+            Text chunks as they arrive
+            
+        Returns:
+            Complete generated text (or partial if cancelled)
+        """
+        # Default implementation falls back to non-streaming
+        result = self.generate(prompt, temperature, max_tokens, system_prompt)
+        yield result
+        return result
+    
     @property
     @abstractmethod
     def provider_name(self) -> str:
@@ -199,6 +228,45 @@ class OpenAIProvider(LLMProvider):
             return response.choices[0].message.content
         except Exception as e:
             raise LLMError(f"OpenAI generation failed: {e}")
+    
+    def generate_stream(
+        self,
+        prompt: str,
+        temperature: float = 0.0,
+        max_tokens: Optional[int] = None,
+        system_prompt: Optional[str] = None,
+        cancel_check: Optional[Callable[[], bool]] = None
+    ) -> Generator[str, None, str]:
+        """Stream tokens with cancellation support."""
+        try:
+            stream = self.client.chat.completions.create(
+                model=self.model,
+                messages=[
+                    {"role": "system", "content": system_prompt or self.config.system_prompt},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=temperature,
+                max_tokens=max_tokens or self.config.max_tokens,
+                stream=True
+            )
+            
+            collected = []
+            for chunk in stream:
+                # Check for cancellation
+                if cancel_check and cancel_check():
+                    stream.close()
+                    break
+                
+                if chunk.choices and chunk.choices[0].delta.content:
+                    content = chunk.choices[0].delta.content
+                    collected.append(content)
+                    yield content
+            
+            result = "".join(collected)
+            return result
+            
+        except Exception as e:
+            raise LLMError(f"OpenAI streaming failed: {e}")
 
 
 class AnthropicProvider(LLMProvider):
@@ -236,6 +304,36 @@ class AnthropicProvider(LLMProvider):
             return response.content[0].text
         except Exception as e:
             raise LLMError(f"Anthropic generation failed: {e}")
+    
+    def generate_stream(
+        self,
+        prompt: str,
+        temperature: float = 0.0,
+        max_tokens: Optional[int] = None,
+        system_prompt: Optional[str] = None,
+        cancel_check: Optional[Callable[[], bool]] = None
+    ) -> Generator[str, None, str]:
+        """Stream tokens with cancellation support."""
+        try:
+            with self.client.messages.stream(
+                model=self.model,
+                max_tokens=max_tokens or self.config.max_tokens,
+                system=system_prompt or self.config.system_prompt,
+                messages=[{"role": "user", "content": prompt}],
+                temperature=temperature
+            ) as stream:
+                collected = []
+                for text in stream.text_stream:
+                    if cancel_check and cancel_check():
+                        break
+                    collected.append(text)
+                    yield text
+                
+                result = "".join(collected)
+                return result
+                
+        except Exception as e:
+            raise LLMError(f"Anthropic streaming failed: {e}")
 
 
 class OpenRouterProvider(LLMProvider):
@@ -408,6 +506,39 @@ class LLMClient:
             Raw generated text
         """
         return self._provider.generate(prompt, temperature=temperature)
+    
+    def generate_code_stream(
+        self,
+        prompt: str,
+        temperature: float = 0.0,
+        cancel_check: Optional[Callable[[], bool]] = None,
+        on_token: Optional[Callable[[str], None]] = None
+    ) -> str:
+        """
+        Generate code with streaming and cancellation support.
+        
+        Args:
+            prompt: The code generation prompt
+            temperature: Sampling temperature
+            cancel_check: Callable returning True to cancel generation
+            on_token: Callback for each token (for progress updates)
+            
+        Returns:
+            Generated code (may be partial if cancelled)
+        """
+        collected = []
+        
+        for chunk in self._provider.generate_stream(
+            prompt,
+            temperature=temperature,
+            cancel_check=cancel_check
+        ):
+            collected.append(chunk)
+            if on_token:
+                on_token(chunk)
+        
+        raw_output = "".join(collected)
+        return self._extract_python_code(raw_output)
     
     def get_info(self) -> Dict[str, Any]:
         """

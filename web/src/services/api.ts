@@ -148,6 +148,70 @@ export async function getJobs(): Promise<Job[]> {
   return fetchApi<Job[]>('/pipeline/jobs');
 }
 
+// Job Progress
+export interface JobProgress {
+  job_id: string;
+  phase: string;
+  completed_runs: number;
+  total_runs: number;
+  progress_percent: number;
+  current_run_status: string;
+  estimated_completion: string | null;
+}
+
+export async function getJobProgress(jobId: string): Promise<JobProgress> {
+  return fetchApi<JobProgress>(`/jobs/${jobId}/progress`);
+}
+
+// Cancel Job
+export interface CancelResponse {
+  job_id: string;
+  status: string;
+  message: string;
+}
+
+export async function cancelJob(jobId: string): Promise<CancelResponse> {
+  return fetchApi<CancelResponse>(`/jobs/${jobId}/cancel`, {
+    method: 'POST',
+  });
+}
+
+// WebSocket for real-time job updates
+export function subscribeToJob(
+  jobId: string,
+  onProgress: (progress: JobProgress) => void,
+  onError?: (error: Error) => void
+): () => void {
+  const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+  const wsUrl = `${wsProtocol}//${window.location.host}/api/v1/jobs/${jobId}/stream`;
+  
+  const ws = new WebSocket(wsUrl);
+  
+  ws.onmessage = (event) => {
+    try {
+      const data = JSON.parse(event.data);
+      onProgress(data);
+    } catch (e) {
+      console.error('Failed to parse WebSocket message:', e);
+    }
+  };
+  
+  ws.onerror = (event) => {
+    if (onError) {
+      onError(new Error('WebSocket error'));
+    }
+  };
+  
+  ws.onclose = () => {
+    console.log('WebSocket closed');
+  };
+  
+  // Return cleanup function
+  return () => {
+    ws.close();
+  };
+}
+
 // Health
 export async function healthCheck(): Promise<{ status: string }> {
   const response = await fetch('/health');

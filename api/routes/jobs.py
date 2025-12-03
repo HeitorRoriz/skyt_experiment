@@ -3,15 +3,20 @@
 Job management endpoints.
 
 Get job status, results, and manage job lifecycle.
-Integrates with Supabase for persistence.
+Integrates with Supabase for persistence and Redis for real-time state.
 """
 
+import os
+import json
 from datetime import datetime
 from typing import Optional, Dict, Any, List
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException, status, WebSocket, WebSocketDisconnect
 from pydantic import BaseModel
+from dotenv import load_dotenv
+
+load_dotenv()
 
 from .auth import get_current_user, User
 from ..database import (
@@ -20,6 +25,20 @@ from ..database import (
     get_job_outputs as db_get_job_outputs,
     get_job_metrics as db_get_job_metrics,
 )
+
+# Redis client for real-time state
+import redis as redis_lib
+
+REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
+
+def get_redis():
+    """Get Redis client."""
+    try:
+        client = redis_lib.from_url(REDIS_URL, decode_responses=True)
+        client.ping()
+        return client
+    except Exception:
+        return None
 
 
 router = APIRouter(prefix="/jobs")
@@ -201,7 +220,8 @@ async def cancel_job(
     Cancel a running or queued job.
     
     Cancellation is best-effort. Jobs in progress will stop at the next
-    check point (between LLM calls).
+    check point (between LLM calls). With streaming LLM, cancellation
+    can happen mid-generation.
     """
     job = get_job(user.id, job_id)
     
@@ -211,23 +231,34 @@ async def cancel_job(
             detail=f"Job {job_id} not found",
         )
     
-    if job["status"] not in ["queued", "running"]:
+    current_status = job.get("status", "unknown")
+    
+    if current_status not in ["queued", "running", "generating_outputs", "canonicalizing", "computing_metrics"]:
         return CancelResponse(
             job_id=job_id,
-            status=job["status"],
-            message=f"Job cannot be cancelled (status: {job['status']})",
+            status=current_status,
+            message=f"Job cannot be cancelled (status: {current_status})",
         )
     
-    # TODO: Send cancellation signal via Redis
-    # redis.set(f"job:{job_id}:cancel", "1", ex=3600)
+    # Send cancellation signal via Redis (worker checks this)
+    redis_client = get_redis()
+    if redis_client:
+        redis_client.set(f"job:{job_id}:cancel", "1", ex=3600)  # Expires in 1 hour
+        
+        # Publish cancellation event for real-time subscribers
+        redis_client.publish(f"job:{job_id}:events", json.dumps({
+            "type": "cancellation_requested",
+            "job_id": str(job_id),
+            "timestamp": datetime.utcnow().isoformat()
+        }))
     
     # Update job status in database
-    db_update_job(job_id, {"status": "cancelled"})
+    db_update_job(job_id, {"status": "cancelling"})
     
     return CancelResponse(
         job_id=job_id,
-        status="cancelled",
-        message="Cancellation requested",
+        status="cancelling",
+        message="Cancellation requested. Job will stop at next checkpoint.",
     )
 
 
@@ -239,7 +270,8 @@ async def get_job_progress(
     """
     Get current progress for a running job.
     
-    For real-time updates, use the WebSocket endpoint instead.
+    Returns real-time progress from Redis if available, otherwise from database.
+    For live streaming updates, use the WebSocket endpoint instead.
     """
     job = get_job(user.id, job_id)
     
@@ -249,17 +281,43 @@ async def get_job_progress(
             detail=f"Job {job_id} not found",
         )
     
-    # TODO: Get real progress from Redis
-    # For now, return mock progress
-    completed = 0 if job["status"] == "queued" else job["num_runs"] if job["status"] == "completed" else job["num_runs"] // 2
+    # Try to get real-time progress from Redis
+    redis_client = get_redis()
+    if redis_client:
+        try:
+            progress_data = redis_client.hgetall(f"job:{job_id}:state")
+            if progress_data:
+                return JobProgress(
+                    job_id=job_id,
+                    phase=progress_data.get("phase", job["status"]),
+                    completed_runs=int(progress_data.get("completed_runs", 0)),
+                    total_runs=int(progress_data.get("total_runs", job["num_runs"])),
+                    progress_percent=float(progress_data.get("progress_percent", 0)),
+                    current_run_status=progress_data.get("current_run_status", "unknown"),
+                    estimated_completion=None,
+                )
+        except Exception:
+            pass  # Fall back to database
+    
+    # Fallback: estimate from database
+    status_val = job.get("status", "unknown")
+    num_runs = job.get("num_runs", 0)
+    current_run = job.get("current_run", 0)
+    
+    if status_val == "completed":
+        completed = num_runs
+    elif status_val == "queued":
+        completed = 0
+    else:
+        completed = current_run
     
     return JobProgress(
         job_id=job_id,
-        phase=job["status"],
+        phase=status_val,
         completed_runs=completed,
-        total_runs=job["num_runs"],
-        progress_percent=(completed / job["num_runs"]) * 100 if job["num_runs"] > 0 else 0,
-        current_run_status="completed" if job["status"] == "completed" else "in_progress",
+        total_runs=num_runs,
+        progress_percent=(completed / num_runs) * 100 if num_runs > 0 else 0,
+        current_run_status="completed" if status_val == "completed" else "in_progress",
         estimated_completion=None,
     )
 

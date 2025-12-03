@@ -54,11 +54,35 @@ logger = get_task_logger(__name__)
 
 
 # =============================================================================
-# Redis helpers (mock for now)
+# Redis Client
 # =============================================================================
 
+import redis as redis_lib
+from dotenv import load_dotenv
+
+load_dotenv()
+
+REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
+
+def get_redis_client():
+    """Get Redis client, with fallback to mock for testing."""
+    try:
+        client = redis_lib.from_url(
+            REDIS_URL,
+            decode_responses=True,
+            socket_connect_timeout=5,
+        )
+        # Test connection
+        client.ping()
+        logger.info(f"Connected to Redis: {REDIS_URL[:30]}...")
+        return client
+    except Exception as e:
+        logger.warning(f"Redis connection failed: {e}. Using MockRedis.")
+        return MockRedis()
+
+
 class MockRedis:
-    """Mock Redis client for development."""
+    """Mock Redis client for development/testing when Redis unavailable."""
     _data = {}
     _pubsub = {}
     
@@ -69,13 +93,21 @@ class MockRedis:
         self._data[key] = value
     
     def publish(self, channel: str, message: str):
-        logger.info(f"[PUBSUB] {channel}: {message}")
+        logger.info(f"[MOCK PUBSUB] {channel}: {message}")
+        return 0
     
-    def hset(self, name: str, mapping: dict):
-        self._data[name] = mapping
+    def hset(self, name: str, mapping: dict = None, **kwargs):
+        if mapping:
+            self._data[name] = mapping
+        else:
+            self._data[name] = kwargs
+    
+    def ping(self):
+        return True
 
 
-redis = MockRedis()
+# Initialize Redis client
+redis = get_redis_client()
 
 
 def is_cancelled(job_id: str) -> bool:
@@ -84,9 +116,25 @@ def is_cancelled(job_id: str) -> bool:
 
 
 def publish_progress(job_id: str, progress: dict):
-    """Publish job progress update."""
+    """Publish job progress update to Redis pub/sub and store in hash."""
+    # Publish for real-time subscribers (WebSocket)
     redis.publish(f"job:{job_id}:progress", json.dumps(progress))
-    redis.hset(f"job:{job_id}:state", progress)
+    
+    # Store in hash for polling (GET /progress endpoint)
+    # Convert all values to strings for Redis hash
+    flat_progress = {
+        "phase": str(progress.get("phase", "")),
+        "completed_runs": str(progress.get("completed_runs", 0)),
+        "total_runs": str(progress.get("total_runs", 0)),
+        "progress_percent": str(
+            (progress.get("completed_runs", 0) / progress.get("total_runs", 1)) * 100
+            if progress.get("total_runs", 0) > 0 else 0
+        ),
+        "current_run_status": str(progress.get("current_run", {}).get("status", "unknown")
+            if isinstance(progress.get("current_run"), dict) else "unknown"),
+        "updated_at": datetime.utcnow().isoformat(),
+    }
+    redis.hset(f"job:{job_id}:state", mapping=flat_progress)
 
 
 # =============================================================================
@@ -196,19 +244,48 @@ def execute_skyt_job(
                 "current_run": {"index": i, "status": "in_progress"},
             })
             
-            # Generate code
+            # Generate code with streaming (allows mid-call cancellation)
             start_time = time.time()
+            was_cancelled = False
             
             if llm_client:
                 try:
-                    raw_code = llm_client.generate(prompt, temperature=temperature)
+                    # Use streaming generation with cancellation check
+                    def check_cancel():
+                        return is_cancelled(job_id)
+                    
+                    def on_token(token):
+                        # Update progress with token count (optional)
+                        pass
+                    
+                    raw_code = llm_client.generate_code_stream(
+                        prompt,
+                        temperature=temperature,
+                        cancel_check=check_cancel,
+                        on_token=on_token
+                    )
+                    
+                    # Check if cancelled during generation
+                    if is_cancelled(job_id):
+                        was_cancelled = True
+                        logger.info(f"Job {job_id} cancelled mid-generation at run {i}")
+                        
                 except Exception as e:
                     logger.error(f"LLM call failed for run {i}: {e}")
                     raw_code = f"# LLM error: {e}"
             else:
                 # Mock generation for testing without LLM
-                time.sleep(0.5)
+                for _ in range(5):  # Simulate streaming with cancellation checks
+                    time.sleep(0.1)
+                    if is_cancelled(job_id):
+                        was_cancelled = True
+                        break
                 raw_code = f"def fibonacci(n):\n    # Mock run {i}\n    a, b = 0, 1\n    for _ in range(n):\n        a, b = b, a + b\n    return a"
+            
+            # Handle mid-generation cancellation
+            if was_cancelled:
+                update_job_status(UUID(job_id), "cancelled")
+                raise Ignore()
             
             latency_ms = int((time.time() - start_time) * 1000)
             raw_codes.append(raw_code)
