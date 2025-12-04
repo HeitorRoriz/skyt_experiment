@@ -16,16 +16,40 @@ Usage:
 """
 
 import os
+import ssl
+from urllib.parse import urlparse, urlunparse, parse_qs, urlencode
+
 from celery import Celery
 from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
 
+def _ensure_tls_params(url: str) -> str:
+    """Ensure rediss URLs include ssl_cert_reqs parameter for Celery."""
+    if not url or not url.lower().startswith("rediss://"):
+        return url
+
+    parsed = urlparse(url)
+    query = parse_qs(parsed.query)
+
+    if "ssl_cert_reqs" not in query:
+        query["ssl_cert_reqs"] = ["CERT_NONE"]
+
+    new_query = urlencode(query, doseq=True)
+    return urlunparse(parsed._replace(query=new_query))
+
+
 # Configuration - use REDIS_URL for Upstash, fallback to localhost for dev
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
-BROKER_URL = os.getenv("CELERY_BROKER_URL", REDIS_URL)
-RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND", REDIS_URL)
+BROKER_URL = _ensure_tls_params(os.getenv("CELERY_BROKER_URL", REDIS_URL))
+RESULT_BACKEND = _ensure_tls_params(os.getenv("CELERY_RESULT_BACKEND", REDIS_URL))
+
+# SSL options for Redis over TLS (Upstash)
+SSL_OPTIONS = {"ssl_cert_reqs": ssl.CERT_NONE}
+broker_ssl = SSL_OPTIONS if BROKER_URL.startswith("rediss://") else None
+backend_ssl = SSL_OPTIONS if RESULT_BACKEND.startswith("rediss://") else None
+
 
 # Create Celery app
 app = Celery(
@@ -63,6 +87,11 @@ app.conf.update(
     # Retry settings
     task_default_retry_delay=5,  # 5 seconds between retries
     task_max_retries=3,
+
+    # SSL configuration for Redis/Upstash
+    broker_use_ssl=broker_ssl,
+    redis_backend_use_ssl=backend_ssl,
+    result_backend_transport_options={"ssl_cert_reqs": ssl.CERT_NONE} if backend_ssl else {},
     
     # Queue routing
     task_routes={
