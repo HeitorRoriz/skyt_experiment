@@ -53,45 +53,76 @@ distance = levenshtein(ast1, ast2) / max(len(ast1), len(ast2))
 
 ---
 
-## Anchor Selection: First Oracle-Passing Output
+## Anchor Selection: First Contract-Adherent, Oracle-Passing Output
 
 ### What is the Anchor?
 
 The **anchor** (or **canon**) is the reference implementation that all other outputs are compared against.
 
-**SKYT's Rule:** Use the **first LLM output that passes the oracle tests**.
+**SKYT's Rule:** Use the **first LLM output that satisfies BOTH:**
+1. **Contract adherence** - Follows all specified constraints (normalization rules, rescue bounds, domain restrictions)
+2. **Oracle passing** - Passes all behavioral test cases
 
-### Why First Oracle-Passing Output?
+**This is NOT arbitrary** - it's a well-defined, deterministic selection criterion based on correctness.
 
-**1. Deterministic and Reproducible**
-- No arbitrary choices or randomness
-- Same anchor every time you run the experiment
-- Critical for reproducibility in research
+### Why First Contract-Adherent, Oracle-Passing Output?
 
-**2. Behaviorally Correct**
-- Anchor is guaranteed to be functionally correct (passes tests)
-- Ensures we're comparing against a valid implementation
-- Avoids canonicalizing to broken code
+**1. Non-Arbitrary and Deterministic**
+- **Not arbitrary:** Selection based on objective correctness criteria (contract + oracle)
+- **Deterministic:** Same anchor every time you run the experiment
+- **Reproducible:** No subjective judgment or randomness involved
+- **Well-defined:** Clear pass/fail criteria from contract specification
+
+**2. Dual Correctness Guarantee**
+- **Behavioral correctness:** Passes oracle tests (correct functionality)
+- **Structural correctness:** Adheres to contract constraints (proper form)
+- **Complete validation:** Both behavior AND structure verified
+- **Avoids broken code:** Cannot select incorrect or malformed implementations
 
 **3. Unbiased Selection**
-- No cherry-picking "best" or "simplest" implementation
-- Represents natural LLM output distribution
-- First output is representative of model's default behavior
+- **No cherry-picking:** Don't select "best" or "simplest" implementation
+- **No subjective judgment:** Contract and oracle are objective
+- **Representative:** First valid output represents model's natural behavior
+- **Fair:** All outputs evaluated against same criteria
 
-**4. Practical and Simple**
-- No complex selection algorithm needed
-- Fast: O(1) selection (stop at first passing output)
-- Easy to explain and justify in paper
+**4. Practical and Efficient**
+- **Fast:** O(1) selection - stop at first valid output
+- **Simple:** No complex selection algorithm needed
+- **Transparent:** Easy to explain and justify in paper
+
+### Addressing the "Arbitrary Selection" Concern
+
+**Claim:** "Selecting the first output is arbitrary."
+
+**Response:** This is incorrect. Our selection is **non-arbitrary** because:
+
+1. **Objective Criteria:** Selection based on two objective measures:
+   - Contract adherence (structural correctness)
+   - Oracle passing (behavioral correctness)
+   
+2. **Well-Defined:** Contract specifies exact constraints (normalization rules, rescue bounds, domain restrictions). Oracle provides test cases with expected outputs. Both are deterministic pass/fail checks.
+
+3. **No Subjective Judgment:** We don't evaluate "quality," "elegance," or "simplicity." Only: Does it meet the contract? Does it pass tests?
+
+4. **Deterministic:** Given the same LLM outputs in the same order, anchor selection is always identical. No randomness, no human judgment.
+
+5. **First ≠ Arbitrary:** "First" is a well-defined ordering criterion (temporal order of generation). Combined with objective correctness criteria, it's a principled selection strategy.
+
+**Contrast with truly arbitrary selection:**
+- ❌ "Pick whichever output looks best" - subjective
+- ❌ "Randomly select from passing outputs" - non-deterministic
+- ✅ "First output meeting objective correctness criteria" - deterministic and objective
 
 ### Alternative Anchor Selection Strategies
 
 | Strategy | Why Not Used |
 |----------|--------------|
-| **Random passing output** | Non-deterministic, hurts reproducibility |
+| **Random passing output** | Non-deterministic, hurts reproducibility, ACTUALLY arbitrary |
 | **Shortest passing output** | Biases toward terse code, may not be typical |
-| **Most common output** | Requires clustering, adds complexity |
-| **Human-written reference** | Not representative of LLM behavior |
-| **Median complexity output** | Requires defining "complexity", subjective |
+| **Most common output** | Requires clustering, adds complexity, subjective similarity threshold |
+| **Human-written reference** | Not representative of LLM behavior, introduces human bias |
+| **Median complexity output** | Requires defining "complexity", subjective judgment |
+| **"Best" output** | Undefined criteria, subjective, ACTUALLY arbitrary |
 
 ---
 
@@ -156,11 +187,12 @@ R_anchor = 1.0 - mean(distances)
 ✅ **Simple** (no hyperparameters)  
 ✅ **Standard** (proven in SE research)
 
-### Anchor Selection: First Oracle-Passing Output
-✅ **Deterministic** (reproducible)  
-✅ **Correct** (passes oracle tests)  
-✅ **Unbiased** (no cherry-picking)  
-✅ **Simple** (O(1) selection)
+### Anchor Selection: First Contract-Adherent, Oracle-Passing Output
+✅ **Non-Arbitrary** (objective correctness criteria: contract + oracle)  
+✅ **Deterministic** (reproducible, no randomness)  
+✅ **Dual Correctness** (behavioral AND structural validation)  
+✅ **Unbiased** (no cherry-picking or subjective judgment)  
+✅ **Simple** (O(1) selection, transparent)
 
 ### Aggregation: Pairwise Mean
 ✅ **Comprehensive** (all pairs considered)  
@@ -267,11 +299,14 @@ R_anchor = 1.0 - np.mean(distances)
 
 ## For Reviewers
 
+**Q: Isn't selecting the "first" output arbitrary?**  
+A: No. Selection requires **both** contract adherence (structural correctness) **and** oracle passing (behavioral correctness). This is an objective, deterministic criterion, not arbitrary. "First" refers to temporal order among outputs meeting these objective criteria. Truly arbitrary would be "pick whichever looks best" or "randomly select."
+
 **Q: Why not use semantic similarity (e.g., CodeBERT embeddings)?**  
 A: Embeddings are black-box and not reproducible. AST-based distance is transparent, deterministic, and sufficient for measuring structural repeatability.
 
 **Q: Why not use the "best" output as anchor?**  
-A: "Best" is subjective and introduces bias. First oracle-passing output is deterministic, unbiased, and representative of LLM behavior.
+A: "Best" is subjective and introduces bias. First contract-adherent, oracle-passing output is deterministic, objective, and representative of LLM behavior.
 
 **Q: Does anchor choice affect conclusions?**  
-A: We validated that first output is not an outlier. Future work could explore multi-anchor analysis, but deterministic selection is critical for reproducibility.
+A: We validated that first output is not an outlier. The dual correctness requirement (contract + oracle) ensures anchor quality. Future work could explore multi-anchor analysis, but deterministic selection is critical for reproducibility.
