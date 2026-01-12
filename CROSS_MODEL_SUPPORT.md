@@ -15,10 +15,10 @@ SKYT now supports cross-model experiments to address reviewer concerns about "si
 - `o1-mini`
 
 ### Anthropic Models
-- `claude-3-haiku-20240307` (Claude 3 Haiku) ✅ **Tested & Working**
-- `claude-3-5-sonnet-20241022` (Claude 3.5 Sonnet) - Requires higher tier access
-- `claude-3-opus-20240229` (Claude 3 Opus)
-- `claude-3-sonnet-20240229` (Claude 3 Sonnet)
+- `claude-sonnet-4-5-20250929` (Claude Sonnet 4.5) ✅ **Tested & Working** (Latest flagship)
+- `claude-opus-4-5-20251101` (Claude Opus 4.5) - Most capable
+- `claude-haiku-4-5-20251001` (Claude Haiku 4.5) - Fast & efficient
+- `claude-3-haiku-20240307` (Claude 3 Haiku) - Legacy model
 
 ## Installation
 
@@ -42,8 +42,8 @@ export ANTHROPIC_API_KEY="your-anthropic-key"
 # Using GPT-4o-mini (default)
 python main.py --contract fibonacci_basic --runs 20 --temperature 0.5
 
-# Using Claude 3 Haiku
-python main.py --contract fibonacci_basic --runs 20 --temperature 0.5 --model claude-3-haiku-20240307
+# Using Claude Sonnet 4.5
+python main.py --contract fibonacci_basic --runs 20 --temperature 0.5 --model claude-sonnet-4-5-20250929
 ```
 
 ### Cross-Model Comparison
@@ -51,8 +51,8 @@ python main.py --contract fibonacci_basic --runs 20 --temperature 0.5 --model cl
 # Run with GPT-4o-mini
 python main.py --contract fibonacci_basic --runs 20 --temperature 0.5 --model gpt-4o-mini --output-dir outputs/gpt4o-mini
 
-# Run with Claude 3 Haiku
-python main.py --contract fibonacci_basic --runs 20 --temperature 0.5 --model claude-3-haiku-20240307 --output-dir outputs/claude-haiku
+# Run with Claude Sonnet 4.5
+python main.py --contract fibonacci_basic --runs 20 --temperature 0.5 --model claude-sonnet-4-5-20250929 --output-dir outputs/claude-sonnet45
 ```
 
 ### Temperature Sweep with Multiple Models
@@ -60,8 +60,8 @@ python main.py --contract fibonacci_basic --runs 20 --temperature 0.5 --model cl
 # GPT-4o-mini sweep
 python main.py --contract fibonacci_basic --sweep --temperatures 0.0 0.3 0.5 0.7 1.0 --runs 20 --model gpt-4o-mini
 
-# Claude 3 Haiku sweep
-python main.py --contract fibonacci_basic --sweep --temperatures 0.0 0.3 0.5 0.7 1.0 --runs 20 --model claude-3-haiku-20240307
+# Claude Sonnet 4.5 sweep
+python main.py --contract fibonacci_basic --sweep --temperatures 0.0 0.3 0.5 0.7 1.0 --runs 20 --model claude-sonnet-4-5-20250929
 ```
 
 ## Implementation Details
@@ -100,7 +100,7 @@ Both providers return code wrapped in markdown blocks. The `_extract_python_code
 **Models:**
 1. GPT-4o-mini (baseline, cost-effective)
 2. GPT-5.2 (latest OpenAI flagship)
-3. Claude-3-Haiku (cross-provider validation)
+3. Claude-Sonnet-4.5 (latest Anthropic flagship, cross-provider validation)
 
 **Temperatures:**
 - 0.0 (deterministic)
@@ -175,12 +175,12 @@ python -c "from src.llm_client import LLMClient; c = LLMClient(model='claude-3-5
 - Output: $8.00 / 1M tokens (estimated)
 - ~1,200 calls × ~500 tokens = ~$6.00
 
-### Claude 3 Haiku
-- Input: $0.25 / 1M tokens
-- Output: $1.25 / 1M tokens
-- ~1,200 calls × ~500 tokens = ~$1.00
+### Claude Sonnet 4.5
+- Input: $3.00 / 1M tokens (estimated)
+- Output: $15.00 / 1M tokens (estimated)
+- ~1,200 calls × ~500 tokens = ~$10.00
 
-**Total estimated cost: ~$7.50 for full 3-model experiments**
+**Total estimated cost: ~$16.50 for full 3-model experiments**
 
 ## Notes for Paper
 
