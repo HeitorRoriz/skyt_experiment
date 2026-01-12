@@ -381,5 +381,195 @@
       "allow_print_removal": true,
       "max_transformations": 5
     }
+  },
+  "quick_sort": {
+    "id": "quick_sort",
+    "task_intent": "Sort array using quick sort algorithm",
+    "prompt": "Write a Python function called 'quick_sort' that takes a list of integers and returns a new sorted list using the quick sort algorithm. Use the first element as pivot.",
+    "description": "Quick sort with in-place partitioning and recursion",
+    "algorithm_family": "quick_sort",
+    "constraints": {
+      "function_name": "quick_sort",
+      "output_type": "list",
+      "requires_recursion": true,
+      "variable_naming": {
+        "fixed_variables": ["arr"],
+        "flexible_variables": ["pivot", "left", "right", "less", "greater", "equal", "i", "j"],
+        "naming_policy": "strict"
+      }
+    },
+    "domain": {
+      "inputs": [
+        {"name": "arr", "type": "list[int]", "constraint": "any"}
+      ]
+    },
+    "oracle_requirements": {
+      "test_cases": [
+        {"input": [[3, 6, 8, 10, 1, 2, 1]], "expected": [1, 1, 2, 3, 6, 8, 10], "description": "Random array with duplicates"},
+        {"input": [[5, 4, 3, 2, 1]], "expected": [1, 2, 3, 4, 5], "description": "Reverse sorted"},
+        {"input": [[1, 2, 3, 4, 5]], "expected": [1, 2, 3, 4, 5], "description": "Already sorted"},
+        {"input": [[1]], "expected": [1], "description": "Single element"},
+        {"input": [[]], "expected": [], "description": "Empty array"},
+        {"input": [[2, 1]], "expected": [1, 2], "description": "Two elements"},
+        {"input": [[5, 5, 5]], "expected": [5, 5, 5], "description": "All same"},
+        {"input": [[-3, 0, -1, 5, 2]], "expected": [-3, -1, 0, 2, 5], "description": "Mixed positive/negative"}
+      ],
+      "correctness_threshold": 1.0,
+      "required_pass_rate": 0.8
+    },
+    "normalization_rules": {
+      "remove_comments": true,
+      "normalize_whitespace": true,
+      "enforce_function_name": true
+    },
+    "rescue_bounds": {
+      "allow_function_rename": true,
+      "allow_print_removal": true,
+      "max_transformations": 5
+    }
+  },
+  "factorial": {
+    "id": "factorial",
+    "task_intent": "Compute factorial of n using iteration",
+    "prompt": "Write a Python function called 'factorial' that takes a non-negative integer n and returns n! (n factorial). Use iteration, not recursion.",
+    "description": "Iterative factorial computation",
+    "algorithm_family": "factorial",
+    "constraints": {
+      "function_name": "factorial",
+      "output_type": "integer",
+      "requires_recursion": false,
+      "implementation_style": "iterative",
+      "variable_naming": {
+        "fixed_variables": ["n"],
+        "flexible_variables": ["result", "i", "product", "fact"],
+        "naming_policy": "strict"
+      }
+    },
+    "domain": {
+      "inputs": [
+        {"name": "n", "type": "int", "constraint": "n >= 0"}
+      ]
+    },
+    "out_of_domain": {
+      "policy": "must_return",
+      "return_value": 1,
+      "examples": [
+        {"n": -1},
+        {"n": -5}
+      ],
+      "max_checks": 2
+    },
+    "oracle_requirements": {
+      "test_cases": [
+        {"input": 0, "expected": 1, "description": "Base case 0! = 1"},
+        {"input": 1, "expected": 1, "description": "Base case 1! = 1"},
+        {"input": 5, "expected": 120, "description": "5! = 120"},
+        {"input": 10, "expected": 3628800, "description": "10! = 3628800"},
+        {"input": 3, "expected": 6, "description": "3! = 6"},
+        {"input": 7, "expected": 5040, "description": "7! = 5040"}
+      ],
+      "correctness_threshold": 1.0,
+      "required_pass_rate": 0.8
+    },
+    "normalization_rules": {
+      "remove_comments": true,
+      "normalize_whitespace": true,
+      "enforce_function_name": true
+    },
+    "rescue_bounds": {
+      "allow_function_rename": true,
+      "allow_print_removal": true,
+      "max_transformations": 5
+    }
+  },
+  "is_palindrome": {
+    "id": "is_palindrome",
+    "task_intent": "Check if string is a palindrome",
+    "prompt": "Write a Python function called 'is_palindrome' that takes a string and returns True if it reads the same forwards and backwards (ignoring case and spaces), False otherwise.",
+    "description": "Palindrome checking with string manipulation",
+    "algorithm_family": "is_palindrome",
+    "constraints": {
+      "function_name": "is_palindrome",
+      "output_type": "boolean",
+      "variable_naming": {
+        "fixed_variables": ["s"],
+        "flexible_variables": ["cleaned", "text", "left", "right", "i", "j"],
+        "naming_policy": "strict"
+      }
+    },
+    "domain": {
+      "inputs": [
+        {"name": "s", "type": "str", "constraint": "any"}
+      ]
+    },
+    "oracle_requirements": {
+      "test_cases": [
+        {"input": "racecar", "expected": true, "description": "Simple palindrome"},
+        {"input": "A man a plan a canal Panama", "expected": true, "description": "Palindrome with spaces"},
+        {"input": "hello", "expected": false, "description": "Not a palindrome"},
+        {"input": "Madam", "expected": true, "description": "Case insensitive"},
+        {"input": "", "expected": true, "description": "Empty string"},
+        {"input": "a", "expected": true, "description": "Single character"},
+        {"input": "ab", "expected": false, "description": "Two different chars"},
+        {"input": "aa", "expected": true, "description": "Two same chars"}
+      ],
+      "correctness_threshold": 1.0,
+      "required_pass_rate": 0.8
+    },
+    "normalization_rules": {
+      "remove_comments": true,
+      "normalize_whitespace": true,
+      "enforce_function_name": true
+    },
+    "rescue_bounds": {
+      "allow_function_rename": true,
+      "allow_print_removal": true,
+      "max_transformations": 5
+    }
+  },
+  "is_prime": {
+    "id": "is_prime",
+    "task_intent": "Check if number is prime",
+    "prompt": "Write a Python function called 'is_prime' that takes a positive integer n and returns True if n is a prime number, False otherwise. A prime number is only divisible by 1 and itself.",
+    "description": "Prime number checking with optimization opportunities",
+    "algorithm_family": "is_prime",
+    "constraints": {
+      "function_name": "is_prime",
+      "output_type": "boolean",
+      "variable_naming": {
+        "fixed_variables": ["n"],
+        "flexible_variables": ["i", "divisor", "limit", "sqrt_n"],
+        "naming_policy": "strict"
+      }
+    },
+    "domain": {
+      "inputs": [
+        {"name": "n", "type": "int", "constraint": "n > 0"}
+      ]
+    },
+    "oracle_requirements": {
+      "test_cases": [
+        {"input": 2, "expected": true, "description": "Smallest prime"},
+        {"input": 3, "expected": true, "description": "Small prime"},
+        {"input": 4, "expected": false, "description": "Composite (2*2)"},
+        {"input": 17, "expected": true, "description": "Medium prime"},
+        {"input": 1, "expected": false, "description": "1 is not prime"},
+        {"input": 25, "expected": false, "description": "Perfect square"},
+        {"input": 29, "expected": true, "description": "Prime near 30"},
+        {"input": 100, "expected": false, "description": "Large composite"}
+      ],
+      "correctness_threshold": 1.0,
+      "required_pass_rate": 0.8
+    },
+    "normalization_rules": {
+      "remove_comments": true,
+      "normalize_whitespace": true,
+      "enforce_function_name": true
+    },
+    "rescue_bounds": {
+      "allow_function_rename": true,
+      "allow_print_removal": true,
+      "max_transformations": 5
+    }
   }
 }
