@@ -8,6 +8,8 @@ SKYT now supports cross-model experiments to address reviewer concerns about "si
 
 ### OpenAI Models
 - `gpt-4o-mini` (default)
+- `gpt-5.2` ✅ **Tested & Working** (Latest GPT-5 model)
+- `gpt-5.2-pro` (GPT-5.2 Pro variant)
 - `gpt-4o`
 - `o1-preview`
 - `o1-mini`
@@ -93,11 +95,12 @@ Both providers return code wrapped in markdown blocks. The `_extract_python_code
 
 ### Recommended Cross-Model Experiments
 
-**12 contracts × 2 models × 5 temperatures × 20 runs = 2,400 LLM calls**
+**12 contracts × 3 models × 5 temperatures × 20 runs = 3,600 LLM calls**
 
 **Models:**
-1. GPT-4o-mini (baseline)
-2. Claude-3-Haiku (cross-model validation)
+1. GPT-4o-mini (baseline, cost-effective)
+2. GPT-5.2 (latest OpenAI flagship)
+3. Claude-3-Haiku (cross-provider validation)
 
 **Temperatures:**
 - 0.0 (deterministic)
@@ -167,12 +170,17 @@ python -c "from src.llm_client import LLMClient; c = LLMClient(model='claude-3-5
 - Output: $0.600 / 1M tokens
 - ~1,200 calls × ~500 tokens = ~$0.50
 
+### GPT-5.2
+- Input: $2.00 / 1M tokens (estimated)
+- Output: $8.00 / 1M tokens (estimated)
+- ~1,200 calls × ~500 tokens = ~$6.00
+
 ### Claude 3 Haiku
 - Input: $0.25 / 1M tokens
 - Output: $1.25 / 1M tokens
 - ~1,200 calls × ~500 tokens = ~$1.00
 
-**Total estimated cost: ~$1.50 for full cross-model experiments**
+**Total estimated cost: ~$7.50 for full 3-model experiments**
 
 ## Notes for Paper
 

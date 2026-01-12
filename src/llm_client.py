@@ -73,15 +73,27 @@ class LLMClient:
     
     def _generate_openai(self, prompt: str, temperature: float) -> str:
         """Generate code using OpenAI API"""
-        response = self.client.chat.completions.create(
-            model=self.model,
-            messages=[
-                {"role": "system", "content": "You are a Python code generator. Generate only clean, working Python code without explanations."},
-                {"role": "user", "content": prompt}
-            ],
-            temperature=temperature,
-            max_tokens=1000
-        )
+        # GPT-5+ models use max_completion_tokens instead of max_tokens
+        if self.model.startswith("gpt-5") or self.model.startswith("o1"):
+            response = self.client.chat.completions.create(
+                model=self.model,
+                messages=[
+                    {"role": "system", "content": "You are a Python code generator. Generate only clean, working Python code without explanations."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=temperature,
+                max_completion_tokens=1000
+            )
+        else:
+            response = self.client.chat.completions.create(
+                model=self.model,
+                messages=[
+                    {"role": "system", "content": "You are a Python code generator. Generate only clean, working Python code without explanations."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=temperature,
+                max_tokens=1000
+            )
         return response.choices[0].message.content
     
     def _generate_anthropic(self, prompt: str, temperature: float) -> str:
