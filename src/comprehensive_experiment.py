@@ -16,7 +16,7 @@ from .oracle_system import OracleSystem
 from .code_transformer import CodeTransformer
 from .metrics import ComprehensiveMetrics
 from .bell_curve_analysis import BellCurveAnalyzer
-from .statistical_analysis import StatisticalAnalyzer, format_statistical_report
+from .simple_stats import compare_metrics, format_comparison_report
 from .config import TARGET_RUNS_PER_PROMPT, OUTPUTS_DIR
 
 
@@ -50,10 +50,9 @@ class ComprehensiveExperiment:
         self.code_transformer = CodeTransformer(self.canon_system)
         self.metrics_calculator = ComprehensiveMetrics(self.canon_system)
         self.bell_curve_analyzer = BellCurveAnalyzer(os.path.join(output_dir, "analysis"))
-        self.statistical_analyzer = StatisticalAnalyzer(alpha=0.05)
         
         print("🚀 SKYT Comprehensive Experiment System Initialized")
-        print(f"📋 Components: Contract → LLM ({self.llm_client.model}) → Canon → Transform → Metrics → Statistical Analysis")
+        print(f"📋 Components: Contract → LLM ({self.llm_client.model}) → Canon → Transform → Metrics → Analysis")
     
     def run_full_experiment(self, contract_template_path: str, contract_id: str,
                           num_runs: int = TARGET_RUNS_PER_PROMPT,
