@@ -208,7 +208,106 @@ This document outlines the limitations of the SKYT approach and threats to the v
 - Structural repeatability is one lens, not the only lens
 - Future work: user studies on preferred implementations
 
-### 4.2 Canonicalization Success
+### 4.2 Anchor Selection Strategy
+
+**Limitation:** "First contract-adherent, oracle-passing output" is pragmatic but not optimal.
+
+**Description:**
+- Current strategy: Select first output that passes both contract adherence and oracle tests
+- While deterministic and objective, "first" is a pragmatic choice among valid outputs
+- Temporal order has no inherent theoretical superiority over alternatives (last, shortest, median complexity)
+- The anchor quality directly affects all downstream metrics and canonicalization effectiveness
+- A suboptimal anchor may lead to unnecessary transformations or missed canonicalization opportunities
+
+**Why This Matters:**
+- **Anchor quality affects repeatability metrics:** A poorly structured anchor increases distances to other valid implementations
+- **Transformation efficiency:** Better anchors require fewer transformations to reach
+- **Representativeness:** The anchor should ideally represent the "typical" or "best" valid implementation, not just the first one encountered
+
+**Current Justification:**
+- Deterministic and reproducible (same outputs → same anchor)
+- Objective (no subjective judgment in selection)
+- Efficient (O(1) selection, no need to evaluate all outputs)
+- Transparent (easy to explain and implement)
+- Unbiased (no cherry-picking for favorable results)
+
+**Future Work: Quality-Based Anchor Selection**
+
+A more principled approach would select the **best** contract-adherent, oracle-passing output based on a multi-dimensional quality score:
+
+**Proposed Quality Scoring System:**
+
+1. **Structural Simplicity (30% weight)**
+   - Cyclomatic complexity (fewer branches = simpler)
+   - Nesting depth (shallower = more readable)
+   - Lines of code (more concise = better, within reason)
+   - AST node count (smaller tree = simpler structure)
+
+2. **Code Quality Metrics (25% weight)**
+   - Pythonic idioms usage (list comprehensions, generators, context managers)
+   - Standard library usage (prefer built-ins over manual implementations)
+   - Naming clarity (descriptive variable/function names)
+   - Absence of code smells (magic numbers, deep nesting, long functions)
+
+3. **Canonicalization Potential (25% weight)**
+   - Distance to other valid outputs (lower mean distance = more central)
+   - Transformation coverage (how many outputs can reach this anchor)
+   - Property satisfaction (how many foundational properties already satisfied)
+
+4. **Robustness (20% weight)**
+   - Edge case handling (explicit checks vs implicit assumptions)
+   - Error handling (try/except, validation)
+   - Oracle test margin (how "safely" it passes tests)
+
+**Selection Algorithm:**
+```python
+def select_best_anchor(valid_outputs):
+    """Select anchor with highest quality score"""
+    scores = []
+    for output in valid_outputs:
+        score = (
+            0.30 * structural_simplicity(output) +
+            0.25 * code_quality(output) +
+            0.25 * canonicalization_potential(output, valid_outputs) +
+            0.20 * robustness(output)
+        )
+        scores.append((score, output))
+    
+    # Return output with highest score
+    return max(scores, key=lambda x: x[0])[1]
+```
+
+**Benefits of Quality-Based Selection:**
+- **Better anchor quality:** Selects structurally simpler, more canonical implementations
+- **Improved canonicalization:** Better anchor → easier transformations → higher Δ_rescue
+- **More representative:** Anchor reflects "ideal" implementation, not just first valid one
+- **Theoretically justified:** Selection based on measurable quality criteria, not temporal order
+- **Still deterministic:** Same outputs → same scores → same anchor (reproducible)
+
+**Implementation Considerations:**
+- Requires defining and validating quality metrics
+- More computationally expensive (O(n) vs O(1) selection)
+- Weights may need tuning per domain (algorithms vs web vs data processing)
+- Risk of overfitting to specific quality metrics
+
+**Research Questions:**
+- How much does anchor quality affect Δ_rescue and repeatability metrics?
+- What quality dimensions matter most for canonicalization effectiveness?
+- How stable are quality-based selections across different contracts?
+- Does quality-based selection generalize across domains and LLMs?
+
+**Mitigation for Current Work:**
+- Acknowledge "first" is pragmatic, not optimal
+- Validate that first output is not an outlier (report statistics)
+- Emphasize determinism and objectivity over optimality
+- Position quality-based selection as important future work
+
+**Residual Risk:**
+- Current anchor may not be optimal for canonicalization
+- Metrics may underestimate SKYT's potential with better anchors
+- Results are conservative (likely lower bound on effectiveness)
+
+### 4.3 Canonicalization Success
 
 **Threat:** Δ_rescue may not fully capture SKYT's value.
 

@@ -223,19 +223,30 @@ R_anchor = 1.0 - mean(distances)
 
 ### Anchor Selection Limitations
 
-**1. First output may not be "typical"**
+**1. "First" is pragmatic, not optimal**
+- Temporal order has no theoretical superiority over alternatives (last, shortest, median)
+- "First" chosen for simplicity and efficiency (O(1) selection), not optimality
+- A quality-based scoring system could select better anchors
+- Mitigation: Deterministic and objective, though not theoretically optimal
+- Future work: Quality-based anchor selection (see LIMITATIONS.md §4.2)
+
+**2. Anchor quality affects canonicalization effectiveness**
+- Better anchor → easier transformations → higher Δ_rescue
+- Current approach may underestimate SKYT's potential
+- Suboptimal anchor may require more transformations
+- Mitigation: Results represent conservative lower bound
+- Future work: Multi-dimensional quality scoring (structural simplicity, code quality, canonicalization potential, robustness)
+
+**3. First output may not be "typical" or "best"**
 - Could be lucky/unlucky first sample
-- Mitigation: With 20 runs, first passing output is representative
+- May not represent ideal implementation structure
+- Mitigation: With 20 runs, first passing output is generally representative
 - Validation: Experiments show first output is not an outlier
+- Future work: Select anchor based on centrality to other valid outputs
 
-**2. Anchor choice affects all downstream metrics**
-- Different anchor → different distances
-- Mitigation: Deterministic selection ensures consistency
-- Future work: Multi-anchor analysis
-
-**3. Assumes oracle tests are comprehensive**
+**4. Assumes oracle tests are comprehensive**
 - Anchor may pass tests but still be incorrect
-- Mitigation: Contracts include multiple test cases
+- Mitigation: Contracts include multiple test cases covering edge cases
 - Limitation: Acknowledged in paper's threats to validity
 
 ---
