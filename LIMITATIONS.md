@@ -24,6 +24,7 @@ This document outlines the limitations of the SKYT approach and threats to the v
 - Extend to multi-file projects with import resolution
 - Investigate repeatability at module/package level
 - Study cross-file canonicalization strategies
+- **See MULTI_FILE_ROADMAP.md for comprehensive 12-week implementation plan**
 
 ### 1.2 Algorithmic Tasks Only
 
