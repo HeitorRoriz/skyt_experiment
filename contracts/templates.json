@@ -10,31 +10,64 @@
       "requires_recursion": false,
       "implementation_style": "iterative",
       "variable_naming": {
-        "fixed_variables": ["n"],
-        "flexible_variables": ["a", "b", "i", "prev", "curr", "next"],
+        "fixed_variables": [
+          "n"
+        ],
+        "flexible_variables": [
+          "a",
+          "b",
+          "i",
+          "prev",
+          "curr",
+          "next"
+        ],
         "naming_policy": "strict"
       }
     },
     "domain": {
       "inputs": [
-        {"name": "n", "type": "int", "constraint": "n >= 0"}
+        {
+          "name": "n",
+          "type": "int",
+          "constraint": "n >= 0"
+        }
       ]
     },
     "out_of_domain": {
       "policy": "must_return",
       "return_value": 0,
       "examples": [
-        {"n": -1},
-        {"n": -5}
+        {
+          "n": -1
+        },
+        {
+          "n": -5
+        }
       ],
       "max_checks": 3
     },
     "oracle_requirements": {
       "test_cases": [
-        {"input": 0, "expected": 0, "description": "Base case F(0)"},
-        {"input": 1, "expected": 1, "description": "Base case F(1)"},
-        {"input": 5, "expected": 5, "description": "F(5)"},
-        {"input": 10, "expected": 55, "description": "F(10)"}
+        {
+          "input": 0,
+          "expected": 0,
+          "description": "Base case F(0)"
+        },
+        {
+          "input": 1,
+          "expected": 1,
+          "description": "Base case F(1)"
+        },
+        {
+          "input": 5,
+          "expected": 5,
+          "description": "F(5)"
+        },
+        {
+          "input": 10,
+          "expected": 55,
+          "description": "F(10)"
+        }
       ],
       "correctness_threshold": 1.0,
       "required_pass_rate": 0.8
@@ -61,31 +94,57 @@
       "requires_recursion": true,
       "implementation_style": "recursive",
       "variable_naming": {
-        "fixed_variables": ["n"],
+        "fixed_variables": [
+          "n"
+        ],
         "flexible_variables": [],
         "naming_policy": "strict"
       }
     },
     "domain": {
       "inputs": [
-        {"name": "n", "type": "int", "constraint": "n >= 0"}
+        {
+          "name": "n",
+          "type": "int",
+          "constraint": "n >= 0"
+        }
       ]
     },
     "out_of_domain": {
       "policy": "must_return",
       "return_value": 0,
       "examples": [
-        {"n": -1},
-        {"n": -3}
+        {
+          "n": -1
+        },
+        {
+          "n": -3
+        }
       ],
       "max_checks": 2
     },
     "oracle_requirements": {
       "test_cases": [
-        {"input": 0, "expected": 0, "description": "Base case F(0)"},
-        {"input": 1, "expected": 1, "description": "Base case F(1)"},
-        {"input": 5, "expected": 5, "description": "F(5)"},
-        {"input": 8, "expected": 21, "description": "F(8)"}
+        {
+          "input": 0,
+          "expected": 0,
+          "description": "Base case F(0)"
+        },
+        {
+          "input": 1,
+          "expected": 1,
+          "description": "Base case F(1)"
+        },
+        {
+          "input": 5,
+          "expected": 5,
+          "description": "F(5)"
+        },
+        {
+          "input": 8,
+          "expected": 21,
+          "description": "F(8)"
+        }
       ],
       "correctness_threshold": 1.0,
       "required_pass_rate": 0.8
@@ -96,7 +155,7 @@
       "enforce_function_name": true
     }
   },
-    "slugify": {
+  "slugify": {
     "id": "slugify",
     "task_intent": "Convert string to URL-friendly slug format",
     "prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.",
@@ -106,24 +165,60 @@
       "function_name": "slugify",
       "output_type": "string",
       "variable_naming": {
-        "fixed_variables": ["text"],
-        "flexible_variables": ["result", "slug", "char", "c", "output"],
+        "fixed_variables": [
+          "text"
+        ],
+        "flexible_variables": [
+          "result",
+          "slug",
+          "char",
+          "c",
+          "output"
+        ],
         "naming_policy": "strict"
       }
     },
     "domain": {
       "inputs": [
-        {"name": "text", "type": "str", "constraint": "any"}
+        {
+          "name": "text",
+          "type": "str",
+          "constraint": "any"
+        }
       ]
     },
     "oracle_requirements": {
       "test_cases": [
-        {"input": "Hello World", "expected": "hello-world", "description": "Basic slugification"},
-        {"input": "Hello  World!", "expected": "hello-world", "description": "Multiple spaces and punctuation"},
-        {"input": "Python 3.9 Release", "expected": "python-3-9-release", "description": "Numbers and dots"},
-        {"input": "  Trim Spaces  ", "expected": "trim-spaces", "description": "Leading/trailing spaces"},
-        {"input": "CamelCaseString", "expected": "camelcasestring", "description": "CamelCase to lowercase"},
-        {"input": "", "expected": "", "description": "Empty string"}
+        {
+          "input": "Hello World",
+          "expected": "hello-world",
+          "description": "Basic slugification"
+        },
+        {
+          "input": "Hello  World!",
+          "expected": "hello-world",
+          "description": "Multiple spaces and punctuation"
+        },
+        {
+          "input": "Python 3.9 Release",
+          "expected": "python-3-9-release",
+          "description": "Numbers and dots"
+        },
+        {
+          "input": "  Trim Spaces  ",
+          "expected": "trim-spaces",
+          "description": "Leading/trailing spaces"
+        },
+        {
+          "input": "CamelCaseString",
+          "expected": "camelcasestring",
+          "description": "CamelCase to lowercase"
+        },
+        {
+          "input": "",
+          "expected": "",
+          "description": "Empty string"
+        }
       ],
       "correctness_threshold": 1.0,
       "required_pass_rate": 0.8
@@ -149,26 +244,69 @@
       "function_name": "is_balanced",
       "output_type": "boolean",
       "variable_naming": {
-        "fixed_variables": ["s"],
-        "flexible_variables": ["stack", "bracket_map", "brackets", "char"],
+        "fixed_variables": [
+          "s"
+        ],
+        "flexible_variables": [
+          "stack",
+          "bracket_map",
+          "brackets",
+          "char"
+        ],
         "naming_policy": "strict"
       }
     },
     "domain": {
       "inputs": [
-        {"name": "s", "type": "str", "constraint": "any"}
+        {
+          "name": "s",
+          "type": "str",
+          "constraint": "any"
+        }
       ]
     },
     "oracle_requirements": {
       "test_cases": [
-        {"input": "()", "expected": true, "description": "Simple balanced"},
-        {"input": "()[]{}", "expected": true, "description": "Multiple types balanced"},
-        {"input": "({[]})", "expected": true, "description": "Nested balanced"},
-        {"input": "(]", "expected": false, "description": "Mismatched brackets"},
-        {"input": "(()", "expected": false, "description": "Unclosed bracket"},
-        {"input": ")(", "expected": false, "description": "Wrong order"},
-        {"input": "", "expected": true, "description": "Empty string"},
-        {"input": "({[()]})", "expected": true, "description": "Complex nested"}
+        {
+          "input": "()",
+          "expected": true,
+          "description": "Simple balanced"
+        },
+        {
+          "input": "()[]{}",
+          "expected": true,
+          "description": "Multiple types balanced"
+        },
+        {
+          "input": "({[]})",
+          "expected": true,
+          "description": "Nested balanced"
+        },
+        {
+          "input": "(]",
+          "expected": false,
+          "description": "Mismatched brackets"
+        },
+        {
+          "input": "(()",
+          "expected": false,
+          "description": "Unclosed bracket"
+        },
+        {
+          "input": ")(",
+          "expected": false,
+          "description": "Wrong order"
+        },
+        {
+          "input": "",
+          "expected": true,
+          "description": "Empty string"
+        },
+        {
+          "input": "({[()]})",
+          "expected": true,
+          "description": "Complex nested"
+        }
       ],
       "correctness_threshold": 1.0,
       "required_pass_rate": 0.8
@@ -195,25 +333,82 @@
       "output_type": "integer",
       "implementation_style": "iterative",
       "variable_naming": {
-        "fixed_variables": ["a", "b"],
-        "flexible_variables": ["temp", "remainder", "r"],
+        "fixed_variables": [
+          "a",
+          "b"
+        ],
+        "flexible_variables": [
+          "temp",
+          "remainder",
+          "r"
+        ],
         "naming_policy": "strict"
       }
     },
     "domain": {
       "inputs": [
-        {"name": "a", "type": "int", "constraint": "a > 0"},
-        {"name": "b", "type": "int", "constraint": "b > 0"}
+        {
+          "name": "a",
+          "type": "int",
+          "constraint": "a > 0"
+        },
+        {
+          "name": "b",
+          "type": "int",
+          "constraint": "b > 0"
+        }
       ]
     },
     "oracle_requirements": {
       "test_cases": [
-        {"input": [48, 18], "expected": 6, "description": "Standard case"},
-        {"input": [100, 50], "expected": 50, "description": "One divides the other"},
-        {"input": [17, 19], "expected": 1, "description": "Coprime numbers"},
-        {"input": [1071, 462], "expected": 21, "description": "Large numbers"},
-        {"input": [12, 12], "expected": 12, "description": "Equal numbers"},
-        {"input": [1, 5], "expected": 1, "description": "GCD with 1"}
+        {
+          "input": [
+            48,
+            18
+          ],
+          "expected": 6,
+          "description": "Standard case"
+        },
+        {
+          "input": [
+            100,
+            50
+          ],
+          "expected": 50,
+          "description": "One divides the other"
+        },
+        {
+          "input": [
+            17,
+            19
+          ],
+          "expected": 1,
+          "description": "Coprime numbers"
+        },
+        {
+          "input": [
+            1071,
+            462
+          ],
+          "expected": 21,
+          "description": "Large numbers"
+        },
+        {
+          "input": [
+            12,
+            12
+          ],
+          "expected": 12,
+          "description": "Equal numbers"
+        },
+        {
+          "input": [
+            1,
+            5
+          ],
+          "expected": 1,
+          "description": "GCD with 1"
+        }
       ],
       "correctness_threshold": 1.0,
       "required_pass_rate": 0.8
@@ -239,28 +434,153 @@
       "function_name": "binary_search",
       "output_type": "integer",
       "variable_naming": {
-        "fixed_variables": ["arr", "target"],
-        "flexible_variables": ["left", "right", "mid", "l", "r", "m", "low", "high"],
+        "fixed_variables": [
+          "arr",
+          "target"
+        ],
+        "flexible_variables": [
+          "left",
+          "right",
+          "mid",
+          "l",
+          "r",
+          "m",
+          "low",
+          "high"
+        ],
         "naming_policy": "strict"
       }
     },
     "domain": {
       "inputs": [
-        {"name": "arr", "type": "list[int]", "constraint": "sorted ascending"},
-        {"name": "target", "type": "int", "constraint": "any"}
+        {
+          "name": "arr",
+          "type": "list[int]",
+          "constraint": "sorted ascending"
+        },
+        {
+          "name": "target",
+          "type": "int",
+          "constraint": "any"
+        }
       ]
     },
     "oracle_requirements": {
       "test_cases": [
-        {"input": [[1, 2, 3, 4, 5], 3], "expected": 2, "description": "Target in middle"},
-        {"input": [[1, 2, 3, 4, 5], 1], "expected": 0, "description": "Target at start"},
-        {"input": [[1, 2, 3, 4, 5], 5], "expected": 4, "description": "Target at end"},
-        {"input": [[1, 2, 3, 4, 5], 6], "expected": -1, "description": "Target not found (too large)"},
-        {"input": [[1, 2, 3, 4, 5], 0], "expected": -1, "description": "Target not found (too small)"},
-        {"input": [[], 1], "expected": -1, "description": "Empty array"},
-        {"input": [[5], 5], "expected": 0, "description": "Single element found"},
-        {"input": [[5], 3], "expected": -1, "description": "Single element not found"},
-        {"input": [[1, 3, 5, 7, 9, 11, 13], 7], "expected": 3, "description": "Odd length array"}
+        {
+          "input": [
+            [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            3
+          ],
+          "expected": 2,
+          "description": "Target in middle"
+        },
+        {
+          "input": [
+            [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            1
+          ],
+          "expected": 0,
+          "description": "Target at start"
+        },
+        {
+          "input": [
+            [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            5
+          ],
+          "expected": 4,
+          "description": "Target at end"
+        },
+        {
+          "input": [
+            [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            6
+          ],
+          "expected": -1,
+          "description": "Target not found (too large)"
+        },
+        {
+          "input": [
+            [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            0
+          ],
+          "expected": -1,
+          "description": "Target not found (too small)"
+        },
+        {
+          "input": [
+            [],
+            1
+          ],
+          "expected": -1,
+          "description": "Empty array"
+        },
+        {
+          "input": [
+            [
+              5
+            ],
+            5
+          ],
+          "expected": 0,
+          "description": "Single element found"
+        },
+        {
+          "input": [
+            [
+              5
+            ],
+            3
+          ],
+          "expected": -1,
+          "description": "Single element not found"
+        },
+        {
+          "input": [
+            [
+              1,
+              3,
+              5,
+              7,
+              9,
+              11,
+              13
+            ],
+            7
+          ],
+          "expected": 3,
+          "description": "Odd length array"
+        }
       ],
       "correctness_threshold": 1.0,
       "required_pass_rate": 0.8
@@ -284,16 +604,33 @@
     "algorithm_family": "lru_cache",
     "constraints": {
       "class_name": "LRUCache",
-      "methods": ["__init__", "get", "put"],
+      "methods": [
+        "__init__",
+        "get",
+        "put"
+      ],
       "variable_naming": {
-        "fixed_variables": ["capacity", "key", "value"],
-        "flexible_variables": ["cache", "order", "keys", "data"],
+        "fixed_variables": [
+          "capacity",
+          "key",
+          "value"
+        ],
+        "flexible_variables": [
+          "cache",
+          "order",
+          "keys",
+          "data"
+        ],
         "naming_policy": "strict"
       }
     },
     "domain": {
       "inputs": [
-        {"name": "capacity", "type": "int", "constraint": "capacity > 0"}
+        {
+          "name": "capacity",
+          "type": "int",
+          "constraint": "capacity > 0"
+        }
       ]
     },
     "oracle_requirements": {
@@ -301,24 +638,106 @@
         {
           "description": "Basic LRU operations",
           "operations": [
-            {"op": "init", "args": [2]},
-            {"op": "put", "args": [1, 1], "expected": null},
-            {"op": "put", "args": [2, 2], "expected": null},
-            {"op": "get", "args": [1], "expected": 1},
-            {"op": "put", "args": [3, 3], "expected": null},
-            {"op": "get", "args": [2], "expected": -1},
-            {"op": "get", "args": [3], "expected": 3}
+            {
+              "op": "init",
+              "args": [
+                2
+              ]
+            },
+            {
+              "op": "put",
+              "args": [
+                1,
+                1
+              ],
+              "expected": null
+            },
+            {
+              "op": "put",
+              "args": [
+                2,
+                2
+              ],
+              "expected": null
+            },
+            {
+              "op": "get",
+              "args": [
+                1
+              ],
+              "expected": 1
+            },
+            {
+              "op": "put",
+              "args": [
+                3,
+                3
+              ],
+              "expected": null
+            },
+            {
+              "op": "get",
+              "args": [
+                2
+              ],
+              "expected": -1
+            },
+            {
+              "op": "get",
+              "args": [
+                3
+              ],
+              "expected": 3
+            }
           ]
         },
         {
           "description": "Update existing key",
           "operations": [
-            {"op": "init", "args": [2]},
-            {"op": "put", "args": [1, 1], "expected": null},
-            {"op": "put", "args": [2, 2], "expected": null},
-            {"op": "put", "args": [1, 10], "expected": null},
-            {"op": "get", "args": [1], "expected": 10},
-            {"op": "get", "args": [2], "expected": 2}
+            {
+              "op": "init",
+              "args": [
+                2
+              ]
+            },
+            {
+              "op": "put",
+              "args": [
+                1,
+                1
+              ],
+              "expected": null
+            },
+            {
+              "op": "put",
+              "args": [
+                2,
+                2
+              ],
+              "expected": null
+            },
+            {
+              "op": "put",
+              "args": [
+                1,
+                10
+              ],
+              "expected": null
+            },
+            {
+              "op": "get",
+              "args": [
+                1
+              ],
+              "expected": 10
+            },
+            {
+              "op": "get",
+              "args": [
+                2
+              ],
+              "expected": 2
+            }
           ]
         }
       ],
@@ -347,26 +766,161 @@
       "output_type": "list",
       "requires_recursion": true,
       "variable_naming": {
-        "fixed_variables": ["arr"],
-        "flexible_variables": ["left", "right", "mid", "result", "merged", "i", "j", "k"],
+        "fixed_variables": [
+          "arr"
+        ],
+        "flexible_variables": [
+          "left",
+          "right",
+          "mid",
+          "result",
+          "merged",
+          "i",
+          "j",
+          "k"
+        ],
         "naming_policy": "strict"
       }
     },
     "domain": {
       "inputs": [
-        {"name": "arr", "type": "list[int]", "constraint": "any"}
+        {
+          "name": "arr",
+          "type": "list[int]",
+          "constraint": "any"
+        }
       ]
     },
     "oracle_requirements": {
       "test_cases": [
-        {"input": [[3, 1, 4, 1, 5, 9, 2, 6]], "expected": [1, 1, 2, 3, 4, 5, 6, 9], "description": "Random array"},
-        {"input": [[5, 4, 3, 2, 1]], "expected": [1, 2, 3, 4, 5], "description": "Reverse sorted"},
-        {"input": [[1, 2, 3, 4, 5]], "expected": [1, 2, 3, 4, 5], "description": "Already sorted"},
-        {"input": [[1]], "expected": [1], "description": "Single element"},
-        {"input": [[]], "expected": [], "description": "Empty array"},
-        {"input": [[2, 1]], "expected": [1, 2], "description": "Two elements"},
-        {"input": [[3, 3, 3]], "expected": [3, 3, 3], "description": "All same"},
-        {"input": [[-5, -1, -3, 0, 2]], "expected": [-5, -3, -1, 0, 2], "description": "Negative numbers"}
+        {
+          "input": [
+            [
+              3,
+              1,
+              4,
+              1,
+              5,
+              9,
+              2,
+              6
+            ]
+          ],
+          "expected": [
+            1,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            9
+          ],
+          "description": "Random array"
+        },
+        {
+          "input": [
+            [
+              5,
+              4,
+              3,
+              2,
+              1
+            ]
+          ],
+          "expected": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "description": "Reverse sorted"
+        },
+        {
+          "input": [
+            [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          ],
+          "expected": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "description": "Already sorted"
+        },
+        {
+          "input": [
+            [
+              1
+            ]
+          ],
+          "expected": [
+            1
+          ],
+          "description": "Single element"
+        },
+        {
+          "input": [
+            []
+          ],
+          "expected": [],
+          "description": "Empty array"
+        },
+        {
+          "input": [
+            [
+              2,
+              1
+            ]
+          ],
+          "expected": [
+            1,
+            2
+          ],
+          "description": "Two elements"
+        },
+        {
+          "input": [
+            [
+              3,
+              3,
+              3
+            ]
+          ],
+          "expected": [
+            3,
+            3,
+            3
+          ],
+          "description": "All same"
+        },
+        {
+          "input": [
+            [
+              -5,
+              -1,
+              -3,
+              0,
+              2
+            ]
+          ],
+          "expected": [
+            -5,
+            -3,
+            -1,
+            0,
+            2
+          ],
+          "description": "Negative numbers"
+        }
       ],
       "correctness_threshold": 1.0,
       "required_pass_rate": 0.8
@@ -393,26 +947,159 @@
       "output_type": "list",
       "requires_recursion": true,
       "variable_naming": {
-        "fixed_variables": ["arr"],
-        "flexible_variables": ["pivot", "left", "right", "less", "greater", "equal", "i", "j"],
+        "fixed_variables": [
+          "arr"
+        ],
+        "flexible_variables": [
+          "pivot",
+          "left",
+          "right",
+          "less",
+          "greater",
+          "equal",
+          "i",
+          "j"
+        ],
         "naming_policy": "strict"
       }
     },
     "domain": {
       "inputs": [
-        {"name": "arr", "type": "list[int]", "constraint": "any"}
+        {
+          "name": "arr",
+          "type": "list[int]",
+          "constraint": "any"
+        }
       ]
     },
     "oracle_requirements": {
       "test_cases": [
-        {"input": [[3, 6, 8, 10, 1, 2, 1]], "expected": [1, 1, 2, 3, 6, 8, 10], "description": "Random array with duplicates"},
-        {"input": [[5, 4, 3, 2, 1]], "expected": [1, 2, 3, 4, 5], "description": "Reverse sorted"},
-        {"input": [[1, 2, 3, 4, 5]], "expected": [1, 2, 3, 4, 5], "description": "Already sorted"},
-        {"input": [[1]], "expected": [1], "description": "Single element"},
-        {"input": [[]], "expected": [], "description": "Empty array"},
-        {"input": [[2, 1]], "expected": [1, 2], "description": "Two elements"},
-        {"input": [[5, 5, 5]], "expected": [5, 5, 5], "description": "All same"},
-        {"input": [[-3, 0, -1, 5, 2]], "expected": [-3, -1, 0, 2, 5], "description": "Mixed positive/negative"}
+        {
+          "input": [
+            [
+              3,
+              6,
+              8,
+              10,
+              1,
+              2,
+              1
+            ]
+          ],
+          "expected": [
+            1,
+            1,
+            2,
+            3,
+            6,
+            8,
+            10
+          ],
+          "description": "Random array with duplicates"
+        },
+        {
+          "input": [
+            [
+              5,
+              4,
+              3,
+              2,
+              1
+            ]
+          ],
+          "expected": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "description": "Reverse sorted"
+        },
+        {
+          "input": [
+            [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          ],
+          "expected": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "description": "Already sorted"
+        },
+        {
+          "input": [
+            [
+              1
+            ]
+          ],
+          "expected": [
+            1
+          ],
+          "description": "Single element"
+        },
+        {
+          "input": [
+            []
+          ],
+          "expected": [],
+          "description": "Empty array"
+        },
+        {
+          "input": [
+            [
+              2,
+              1
+            ]
+          ],
+          "expected": [
+            1,
+            2
+          ],
+          "description": "Two elements"
+        },
+        {
+          "input": [
+            [
+              5,
+              5,
+              5
+            ]
+          ],
+          "expected": [
+            5,
+            5,
+            5
+          ],
+          "description": "All same"
+        },
+        {
+          "input": [
+            [
+              -3,
+              0,
+              -1,
+              5,
+              2
+            ]
+          ],
+          "expected": [
+            -3,
+            -1,
+            0,
+            2,
+            5
+          ],
+          "description": "Mixed positive/negative"
+        }
       ],
       "correctness_threshold": 1.0,
       "required_pass_rate": 0.8
@@ -440,33 +1127,72 @@
       "requires_recursion": false,
       "implementation_style": "iterative",
       "variable_naming": {
-        "fixed_variables": ["n"],
-        "flexible_variables": ["result", "i", "product", "fact"],
+        "fixed_variables": [
+          "n"
+        ],
+        "flexible_variables": [
+          "result",
+          "i",
+          "product",
+          "fact"
+        ],
         "naming_policy": "strict"
       }
     },
     "domain": {
       "inputs": [
-        {"name": "n", "type": "int", "constraint": "n >= 0"}
+        {
+          "name": "n",
+          "type": "int",
+          "constraint": "n >= 0"
+        }
       ]
     },
     "out_of_domain": {
       "policy": "must_return",
       "return_value": 1,
       "examples": [
-        {"n": -1},
-        {"n": -5}
+        {
+          "n": -1
+        },
+        {
+          "n": -5
+        }
       ],
       "max_checks": 2
     },
     "oracle_requirements": {
       "test_cases": [
-        {"input": 0, "expected": 1, "description": "Base case 0! = 1"},
-        {"input": 1, "expected": 1, "description": "Base case 1! = 1"},
-        {"input": 5, "expected": 120, "description": "5! = 120"},
-        {"input": 10, "expected": 3628800, "description": "10! = 3628800"},
-        {"input": 3, "expected": 6, "description": "3! = 6"},
-        {"input": 7, "expected": 5040, "description": "7! = 5040"}
+        {
+          "input": 0,
+          "expected": 1,
+          "description": "Base case 0! = 1"
+        },
+        {
+          "input": 1,
+          "expected": 1,
+          "description": "Base case 1! = 1"
+        },
+        {
+          "input": 5,
+          "expected": 120,
+          "description": "5! = 120"
+        },
+        {
+          "input": 10,
+          "expected": 3628800,
+          "description": "10! = 3628800"
+        },
+        {
+          "input": 3,
+          "expected": 6,
+          "description": "3! = 6"
+        },
+        {
+          "input": 7,
+          "expected": 5040,
+          "description": "7! = 5040"
+        }
       ],
       "correctness_threshold": 1.0,
       "required_pass_rate": 0.8
@@ -492,26 +1218,71 @@
       "function_name": "is_palindrome",
       "output_type": "boolean",
       "variable_naming": {
-        "fixed_variables": ["s"],
-        "flexible_variables": ["cleaned", "text", "left", "right", "i", "j"],
+        "fixed_variables": [
+          "s"
+        ],
+        "flexible_variables": [
+          "cleaned",
+          "text",
+          "left",
+          "right",
+          "i",
+          "j"
+        ],
         "naming_policy": "strict"
       }
     },
     "domain": {
       "inputs": [
-        {"name": "s", "type": "str", "constraint": "any"}
+        {
+          "name": "s",
+          "type": "str",
+          "constraint": "any"
+        }
       ]
     },
     "oracle_requirements": {
       "test_cases": [
-        {"input": "racecar", "expected": true, "description": "Simple palindrome"},
-        {"input": "A man a plan a canal Panama", "expected": true, "description": "Palindrome with spaces"},
-        {"input": "hello", "expected": false, "description": "Not a palindrome"},
-        {"input": "Madam", "expected": true, "description": "Case insensitive"},
-        {"input": "", "expected": true, "description": "Empty string"},
-        {"input": "a", "expected": true, "description": "Single character"},
-        {"input": "ab", "expected": false, "description": "Two different chars"},
-        {"input": "aa", "expected": true, "description": "Two same chars"}
+        {
+          "input": "racecar",
+          "expected": true,
+          "description": "Simple palindrome"
+        },
+        {
+          "input": "A man a plan a canal Panama",
+          "expected": true,
+          "description": "Palindrome with spaces"
+        },
+        {
+          "input": "hello",
+          "expected": false,
+          "description": "Not a palindrome"
+        },
+        {
+          "input": "Madam",
+          "expected": true,
+          "description": "Case insensitive"
+        },
+        {
+          "input": "",
+          "expected": true,
+          "description": "Empty string"
+        },
+        {
+          "input": "a",
+          "expected": true,
+          "description": "Single character"
+        },
+        {
+          "input": "ab",
+          "expected": false,
+          "description": "Two different chars"
+        },
+        {
+          "input": "aa",
+          "expected": true,
+          "description": "Two same chars"
+        }
       ],
       "correctness_threshold": 1.0,
       "required_pass_rate": 0.8
@@ -537,26 +1308,69 @@
       "function_name": "is_prime",
       "output_type": "boolean",
       "variable_naming": {
-        "fixed_variables": ["n"],
-        "flexible_variables": ["i", "divisor", "limit", "sqrt_n"],
+        "fixed_variables": [
+          "n"
+        ],
+        "flexible_variables": [
+          "i",
+          "divisor",
+          "limit",
+          "sqrt_n"
+        ],
         "naming_policy": "strict"
       }
     },
     "domain": {
       "inputs": [
-        {"name": "n", "type": "int", "constraint": "n > 0"}
+        {
+          "name": "n",
+          "type": "int",
+          "constraint": "n > 0"
+        }
       ]
     },
     "oracle_requirements": {
       "test_cases": [
-        {"input": 2, "expected": true, "description": "Smallest prime"},
-        {"input": 3, "expected": true, "description": "Small prime"},
-        {"input": 4, "expected": false, "description": "Composite (2*2)"},
-        {"input": 17, "expected": true, "description": "Medium prime"},
-        {"input": 1, "expected": false, "description": "1 is not prime"},
-        {"input": 25, "expected": false, "description": "Perfect square"},
-        {"input": 29, "expected": true, "description": "Prime near 30"},
-        {"input": 100, "expected": false, "description": "Large composite"}
+        {
+          "input": 2,
+          "expected": true,
+          "description": "Smallest prime"
+        },
+        {
+          "input": 3,
+          "expected": true,
+          "description": "Small prime"
+        },
+        {
+          "input": 4,
+          "expected": false,
+          "description": "Composite (2*2)"
+        },
+        {
+          "input": 17,
+          "expected": true,
+          "description": "Medium prime"
+        },
+        {
+          "input": 1,
+          "expected": false,
+          "description": "1 is not prime"
+        },
+        {
+          "input": 25,
+          "expected": false,
+          "description": "Perfect square"
+        },
+        {
+          "input": 29,
+          "expected": true,
+          "description": "Prime near 30"
+        },
+        {
+          "input": 100,
+          "expected": false,
+          "description": "Large composite"
+        }
       ],
       "correctness_threshold": 1.0,
       "required_pass_rate": 0.8
@@ -571,5 +1385,387 @@
       "allow_print_removal": true,
       "max_transformations": 5
     }
+  },
+  "is_prime_strict": {
+    "id": "is_prime_strict",
+    "task_intent": "Check if number is prime (MISRA C + NASA Power of 10 compliant)",
+    "prompt": "Write a Python function called 'is_prime' that takes a positive integer n and returns True if n is a prime number, False otherwise.\n\nSTRICT REQUIREMENTS:\n\nMISRA C Rules:\n- Rule 15.4: No continue statements (break is allowed)\n- Rule 14.2: Loop bounds must be fixed at entry\n- Rule 17.2: No recursion\n\nNASA Power of 10 Rules:\n- P10-1: No recursion, no goto\n- P10-2: Use bounded loop: for i in range(2, int(n**0.5) + 1)\n- P10-4: Function under 60 lines\n\nREQUIRED STRUCTURE:\n- Variable names: n (input), i (loop counter)\n- You may use break or return to exit early when divisor found\n- Use natural loop exit strategies",
+    "description": "Prime check with MISRA C (no continue) and NASA P10-2 (bounded loops)",
+    "algorithm_family": "is_prime",
+    "constraints": {
+      "function_name": "is_prime",
+      "output_type": "boolean",
+      "misra_c_rules": {
+        "rule_15_4": "No continue (break is allowed)",
+        "rule_17_2": "No recursion",
+        "rule_14_2": "Loop counter i not modified in body"
+      },
+      "nasa_power_of_10": {
+        "p10_1": "No recursion, no goto",
+        "p10_2": "Bounded loop: for i in range(2, int(n**0.5) + 1)",
+        "p10_4": "Function under 60 lines",
+        "p10_6": "Use result variable at function scope",
+        "p10_7": "Validate input n > 0"
+      },
+      "variable_naming": {
+        "fixed_variables": [
+          "n",
+          "i"
+        ],
+        "flexible_variables": [],
+        "naming_policy": "strict"
+      },
+      "required_patterns": [
+        "for i in range"
+      ],
+      "forbidden_patterns": [
+        "continue",
+        "while"
+      ]
+    },
+    "domain": {
+      "inputs": [
+        {
+          "name": "n",
+          "type": "int",
+          "constraint": "n > 0"
+        }
+      ]
+    },
+    "oracle_requirements": {
+      "test_cases": [
+        {
+          "input": 2,
+          "expected": true,
+          "description": "Smallest prime"
+        },
+        {
+          "input": 3,
+          "expected": true,
+          "description": "Small prime"
+        },
+        {
+          "input": 4,
+          "expected": false,
+          "description": "Composite"
+        },
+        {
+          "input": 17,
+          "expected": true,
+          "description": "Medium prime"
+        },
+        {
+          "input": 1,
+          "expected": false,
+          "description": "1 is not prime"
+        },
+        {
+          "input": 25,
+          "expected": false,
+          "description": "Perfect square"
+        },
+        {
+          "input": 29,
+          "expected": true,
+          "description": "Prime"
+        },
+        {
+          "input": 100,
+          "expected": false,
+          "description": "Large composite"
+        }
+      ],
+      "correctness_threshold": 1.0,
+      "required_pass_rate": 0.8
+    },
+    "normalization_rules": {
+      "remove_comments": true,
+      "normalize_whitespace": true,
+      "enforce_function_name": true
+    },
+    "rescue_bounds": {
+      "allow_function_rename": true,
+      "allow_print_removal": true,
+      "max_transformations": 10
+    },
+    "language": "python",
+    "contract_version": "1.0",
+    "created_timestamp": "2026-01-23"
+  },
+  "binary_search_strict": {
+    "id": "binary_search_strict",
+    "task_intent": "Binary search (MISRA C + NASA Power of 10 compliant)",
+    "prompt": "Write a Python function called 'binary_search' that takes a sorted list arr and target value, returns index if found or -1 if not.\n\nSTRICT REQUIREMENTS:\n\nMISRA C Rules:\n- Rule 15.4: No continue statements (break is allowed)\n- Rule 12.1: Explicit precedence - use parentheses\n- Rule 17.2: No recursion (use iterative)\n\nNASA Power of 10 Rules:\n- P10-2: Bounded loop with explicit termination condition\n- P10-9: Safe arithmetic - use left + (right - left) // 2 to prevent overflow\n\nREQUIRED STRUCTURE:\n- Variables: arr, target (inputs), left, right, mid\n- Initialize: left = 0, right = len(arr) - 1\n- Loop: while left <= right\n- Midpoint: mid = left + (right - left) // 2\n- You may use break or return to exit when target found",
+    "description": "Binary search with MISRA C (no continue) and NASA P10 bounded loops",
+    "algorithm_family": "binary_search",
+    "constraints": {
+      "function_name": "binary_search",
+      "output_type": "integer",
+      "misra_c_rules": {
+        "rule_15_4": "No continue (break is allowed)",
+        "rule_17_2": "No recursion (use iterative)",
+        "rule_12_1": "Explicit precedence with parentheses"
+      },
+      "nasa_power_of_10": {
+        "p10_1": "No recursion, no goto",
+        "p10_2": "Bounded loop: while left <= right (terminates)",
+        "p10_4": "Function under 60 lines",
+        "p10_6": "result variable at smallest scope",
+        "p10_7": "Handle empty array case",
+        "p10_9": "Safe arithmetic: left + (right-left)//2"
+      },
+      "variable_naming": {
+        "fixed_variables": [
+          "arr",
+          "target",
+          "left",
+          "right",
+          "mid"
+        ],
+        "flexible_variables": [],
+        "naming_policy": "strict"
+      },
+      "required_patterns": [
+        "left + (right - left) // 2",
+        "while left <= right"
+      ],
+      "forbidden_patterns": [
+        "continue",
+        "(left + right) // 2",
+        "low",
+        "high"
+      ]
+    },
+    "domain": {
+      "inputs": [
+        {
+          "name": "arr",
+          "type": "list[int]",
+          "constraint": "sorted ascending"
+        },
+        {
+          "name": "target",
+          "type": "int",
+          "constraint": "any"
+        }
+      ]
+    },
+    "oracle_requirements": {
+      "test_cases": [
+        {
+          "input": [
+            [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            3
+          ],
+          "expected": 2,
+          "description": "Middle"
+        },
+        {
+          "input": [
+            [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            1
+          ],
+          "expected": 0,
+          "description": "Start"
+        },
+        {
+          "input": [
+            [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            5
+          ],
+          "expected": 4,
+          "description": "End"
+        },
+        {
+          "input": [
+            [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            6
+          ],
+          "expected": -1,
+          "description": "Not found"
+        },
+        {
+          "input": [
+            [],
+            1
+          ],
+          "expected": -1,
+          "description": "Empty"
+        },
+        {
+          "input": [
+            [
+              5
+            ],
+            5
+          ],
+          "expected": 0,
+          "description": "Single found"
+        }
+      ],
+      "correctness_threshold": 1.0,
+      "required_pass_rate": 0.8
+    },
+    "normalization_rules": {
+      "remove_comments": true,
+      "normalize_whitespace": true,
+      "enforce_function_name": true
+    },
+    "rescue_bounds": {
+      "allow_function_rename": true,
+      "max_transformations": 10
+    },
+    "language": "python",
+    "contract_version": "1.0",
+    "created_timestamp": "2026-01-23"
+  },
+  "lru_cache_strict": {
+    "id": "lru_cache_strict",
+    "task_intent": "LRU Cache (MISRA C + NASA Power of 10 compliant)",
+    "prompt": "Write a Python class called 'LRUCache' with get(key) and put(key, value) methods.\n\nSTRICT REQUIREMENTS:\n\nMISRA C Rules:\n- Rule 21.3: No external libraries (no collections.OrderedDict)\n- Rule 8.7: Data encapsulated in class attributes\n\nNASA Power of 10 Rules:\n- P10-3: No dynamic imports - use only built-in dict and list\n- P10-4: Keep methods short and focused\n- P10-6: Use explicit attribute names: self.cache, self.order, self.capacity\n\nREQUIRED STRUCTURE:\n- Attributes: self.capacity, self.cache (dict), self.order (list)\n- You may use early returns in methods\n- No OrderedDict, no list comprehensions",
+    "description": "LRU cache with MISRA C (no imports) and NASA P10-3 (no dynamic memory)",
+    "algorithm_family": "lru_cache",
+    "constraints": {
+      "class_name": "LRUCache",
+      "methods": [
+        "__init__",
+        "get",
+        "put"
+      ],
+      "misra_c_rules": {
+        "rule_21_3": "No stdlib dynamic memory (no collections)",
+        "rule_8_7": "Encapsulate data in class",
+        "rule_8_9": "Attributes defined in __init__"
+      },
+      "nasa_power_of_10": {
+        "p10_1": "No recursion, no goto",
+        "p10_2": "All loops bounded",
+        "p10_3": "No dynamic memory imports (no OrderedDict)",
+        "p10_4": "Each method under 60 lines",
+        "p10_6": "Use self.cache, self.order, self.capacity",
+        "p10_7": "Check if key in cache before access"
+      },
+      "variable_naming": {
+        "fixed_variables": [
+          "capacity",
+          "key",
+          "value",
+          "cache",
+          "order"
+        ],
+        "flexible_variables": [],
+        "naming_policy": "strict"
+      },
+      "required_patterns": [
+        "self.cache",
+        "self.order",
+        "self.capacity",
+        "if key in self.cache"
+      ],
+      "forbidden_patterns": [
+        "from collections",
+        "import collections",
+        "OrderedDict",
+        "[x for x"
+      ]
+    },
+    "domain": {
+      "inputs": [
+        {
+          "name": "capacity",
+          "type": "int",
+          "constraint": "capacity > 0"
+        }
+      ]
+    },
+    "oracle_requirements": {
+      "test_cases": [
+        {
+          "description": "Basic LRU",
+          "operations": [
+            {
+              "op": "init",
+              "args": [
+                2
+              ]
+            },
+            {
+              "op": "put",
+              "args": [
+                1,
+                1
+              ],
+              "expected": null
+            },
+            {
+              "op": "put",
+              "args": [
+                2,
+                2
+              ],
+              "expected": null
+            },
+            {
+              "op": "get",
+              "args": [
+                1
+              ],
+              "expected": 1
+            },
+            {
+              "op": "put",
+              "args": [
+                3,
+                3
+              ],
+              "expected": null
+            },
+            {
+              "op": "get",
+              "args": [
+                2
+              ],
+              "expected": -1
+            }
+          ]
+        }
+      ],
+      "correctness_threshold": 1.0,
+      "required_pass_rate": 0.8
+    },
+    "normalization_rules": {
+      "remove_comments": true,
+      "normalize_whitespace": true
+    },
+    "rescue_bounds": {
+      "max_transformations": 15
+    },
+    "language": "python",
+    "contract_version": "1.0",
+    "created_timestamp": "2026-01-23"
   }
 }

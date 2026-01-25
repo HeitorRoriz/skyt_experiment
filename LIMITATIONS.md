@@ -45,7 +45,41 @@ This document outlines the limitations of the SKYT approach and threats to the v
 - Study data processing pipelines (ETL, data cleaning)
 - Investigate open-ended tasks without clear oracles
 
-### 1.3 Python Only
+### 1.3 Simple Contracts (Minimal Constraints)
+
+**Limitation:** Current contracts specify minimal constraints (function names, basic types, oracle tests). In embedded/firmware engineering, contracts are significantly stricter.
+
+**Impact:**
+- "Easy" contracts (is_prime, factorial, gcd) show 90%+ baseline repeatability
+- Little room for SKYT improvement when LLMs already produce consistent outputs
+- Results represent a **lower bound** on SKYT's potential benefit
+
+**Rationale:**
+- Simple contracts validate framework correctness
+- Isolates repeatability measurement from constraint complexity
+- Provides baseline for future strict contract evaluation
+
+**Embedded SW Reality:**
+Real-world embedded contracts include:
+- Memory constraints (no heap, max stack depth)
+- Hardware register mappings (fixed variable names → addresses)
+- Forbidden patterns (no recursion, no floating point)
+- Safety-critical patterns (mandatory null checks, bounds checks)
+- Timing constraints (max execution time, ISR requirements)
+
+**Prediction:**
+As contracts become stricter, even simple algorithms will require more transformation:
+- Current: is_prime at 99.3% baseline → +0.7% improvement
+- With strict rules: is_prime at ~60% baseline → +25-35% improvement (predicted)
+
+**Future Work:**
+- Create MISRA-C inspired strict contract suite
+- Evaluate on real embedded firmware patterns
+- Demonstrate SKYT's full industrial potential
+
+**See CONTRACT_DESIGN.md for detailed contract extensibility discussion.**
+
+### 1.4 Python Only
 
 **Limitation:** SKYT is implemented for Python only.
 

@@ -1,0 +1,5255 @@
+{
+  "experiment_id": "slugify_temp0.7_20260119_125530",
+  "contract_id": "slugify",
+  "temperature": 0.7,
+  "timestamp": "2026-01-19T12:55:30.145241",
+  "num_runs": 20,
+  "successful_runs": 20,
+  "contract": {
+    "id": "slugify",
+    "task_intent": "Convert string to URL-friendly slug format",
+    "prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.",
+    "constraints": {
+      "function_name": "slugify",
+      "output_type": "string",
+      "variable_naming": {
+        "fixed_variables": [
+          "text"
+        ],
+        "flexible_variables": [
+          "result",
+          "slug",
+          "char",
+          "c",
+          "output"
+        ],
+        "naming_policy": "strict"
+      }
+    },
+    "algorithm_family": "slugify",
+    "language": "python",
+    "environment": {},
+    "output_format": "raw_code",
+    "oracle_requirements": {
+      "test_cases": [
+        {
+          "input": "Hello World",
+          "expected": "hello-world",
+          "description": "Basic slugification"
+        },
+        {
+          "input": "Hello  World!",
+          "expected": "hello-world",
+          "description": "Multiple spaces and punctuation"
+        },
+        {
+          "input": "Python 3.9 Release",
+          "expected": "python-3-9-release",
+          "description": "Numbers and dots"
+        },
+        {
+          "input": "  Trim Spaces  ",
+          "expected": "trim-spaces",
+          "description": "Leading/trailing spaces"
+        },
+        {
+          "input": "CamelCaseString",
+          "expected": "camelcasestring",
+          "description": "CamelCase to lowercase"
+        },
+        {
+          "input": "",
+          "expected": "",
+          "description": "Empty string"
+        }
+      ],
+      "correctness_threshold": 1.0,
+      "required_pass_rate": 0.8
+    },
+    "normalization_rules": {
+      "remove_comments": true,
+      "normalize_whitespace": true,
+      "enforce_function_name": true
+    },
+    "anchor_signature": null,
+    "compliance_flag": false,
+    "distance_metric": "foundational_properties",
+    "rescue_bounds": {
+      "allow_function_rename": true,
+      "allow_print_removal": true,
+      "max_transformations": 5
+    },
+    "model_specification": {},
+    "contract_version": "2.0",
+    "oracle_version": "1.0",
+    "normalization_version": "1.0",
+    "created_timestamp": "2026-01-19T12:55:02.520783",
+    "run_id": null,
+    "prompt_id": "slugify",
+    "sample_id": null,
+    "ood_spec": {
+      "policy": "allow",
+      "exception": null,
+      "return_value": null,
+      "examples": [],
+      "max_checks": 3
+    }
+  },
+  "canon_data": {
+    "contract_id": "slugify",
+    "canonical_code": "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    return text.strip('-')",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 0,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [],
+        "nested_depth": 0,
+        "branch_patterns": []
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "text": [
+            "text"
+          ]
+        },
+        "assignments": {
+          "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[\\\\s]+'), Constant(value='-'), Name(id='text', ctx=Load())])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_slugify"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "slugify": {
+          "name": "slugify",
+          "args": [
+            "text"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": false,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": []
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Import",
+          "alias",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Constant",
+          "Constant",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Constant",
+          "Constant",
+          "Name",
+          "Load",
+          "Return",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Constant"
+        ],
+        "ast_depth": 6,
+        "ast_hash": "07685106fd2c3d5263423123f643ac70",
+        "alpha_renamed_hash": "845e19d4c837f3d9206a64134d0e2c76"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Import",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Import_1",
+          "Assign_2",
+          "Assign_3",
+          "Assign_4",
+          "Return_5"
+        ],
+        "control_flow_order": [
+          "FunctionDef"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "contract_data": {
+      "id": "slugify",
+      "task_intent": "Convert string to URL-friendly slug format",
+      "prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.",
+      "constraints": {
+        "function_name": "slugify",
+        "output_type": "string",
+        "variable_naming": {
+          "fixed_variables": [
+            "text"
+          ],
+          "flexible_variables": [
+            "result",
+            "slug",
+            "char",
+            "c",
+            "output"
+          ],
+          "naming_policy": "strict"
+        }
+      },
+      "algorithm_family": "slugify",
+      "language": "python",
+      "environment": {},
+      "output_format": "raw_code",
+      "oracle_requirements": {
+        "test_cases": [
+          {
+            "input": "Hello World",
+            "expected": "hello-world",
+            "description": "Basic slugification"
+          },
+          {
+            "input": "Hello  World!",
+            "expected": "hello-world",
+            "description": "Multiple spaces and punctuation"
+          },
+          {
+            "input": "Python 3.9 Release",
+            "expected": "python-3-9-release",
+            "description": "Numbers and dots"
+          },
+          {
+            "input": "  Trim Spaces  ",
+            "expected": "trim-spaces",
+            "description": "Leading/trailing spaces"
+          },
+          {
+            "input": "CamelCaseString",
+            "expected": "camelcasestring",
+            "description": "CamelCase to lowercase"
+          },
+          {
+            "input": "",
+            "expected": "",
+            "description": "Empty string"
+          }
+        ],
+        "correctness_threshold": 1.0,
+        "required_pass_rate": 0.8
+      },
+      "normalization_rules": {
+        "remove_comments": true,
+        "normalize_whitespace": true,
+        "enforce_function_name": true
+      },
+      "anchor_signature": "e407d0b63a848b64d275546f6affd69a167d06bc9cd1d8f19ae34e39f72d2cda",
+      "compliance_flag": true,
+      "distance_metric": "foundational_properties",
+      "rescue_bounds": {
+        "allow_function_rename": true,
+        "allow_print_removal": true,
+        "max_transformations": 5
+      },
+      "model_specification": {},
+      "contract_version": "2.0",
+      "oracle_version": "1.0",
+      "normalization_version": "1.0",
+      "created_timestamp": "2025-10-22T12:43:18.453991",
+      "run_id": null,
+      "prompt_id": "slugify",
+      "sample_id": null,
+      "canonical_code": "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    return text.strip('-')",
+      "foundational_properties": {
+        "control_flow_signature": {
+          "if_statements": 0,
+          "for_loops": 0,
+          "while_loops": 0,
+          "function_calls": [],
+          "nested_depth": 0,
+          "branch_patterns": []
+        },
+        "data_dependency_graph": {
+          "dependencies": {
+            "text": [
+              "text"
+            ]
+          },
+          "assignments": {
+            "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[\\\\s]+'), Constant(value='-'), Name(id='text', ctx=Load())])"
+          }
+        },
+        "execution_paths": {
+          "execution_paths": [
+            [
+              "function_slugify"
+            ]
+          ]
+        },
+        "function_contracts": {
+          "slugify": {
+            "name": "slugify",
+            "args": [
+              "text"
+            ],
+            "returns": null,
+            "has_return": true
+          }
+        },
+        "complexity_class": {
+          "nested_loops": 0,
+          "recursive_calls": 0,
+          "estimated_complexity": "O(1)"
+        },
+        "side_effect_profile": {
+          "has_print": false,
+          "has_global_access": false,
+          "has_file_io": false,
+          "modifies_arguments": false,
+          "is_pure": true
+        },
+        "termination_properties": {
+          "has_base_case": false,
+          "has_bounded_loops": false,
+          "recursive_depth": 0
+        },
+        "algebraic_structure": {
+          "commutative_ops": [],
+          "associative_ops": [],
+          "binary_operations": []
+        },
+        "numerical_behavior": {
+          "uses_integers": false,
+          "uses_floats": false,
+          "has_arithmetic": false,
+          "numeric_constants": []
+        },
+        "logical_equivalence": {
+          "boolean_ops": [],
+          "comparisons": [],
+          "logical_patterns": []
+        },
+        "normalized_ast_structure": {
+          "node_types": [
+            "Module",
+            "FunctionDef",
+            "arguments",
+            "arg",
+            "Import",
+            "alias",
+            "Assign",
+            "Name",
+            "Store",
+            "Call",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Assign",
+            "Name",
+            "Store",
+            "Call",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Constant",
+            "Constant",
+            "Name",
+            "Load",
+            "Assign",
+            "Name",
+            "Store",
+            "Call",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Constant",
+            "Constant",
+            "Name",
+            "Load",
+            "Return",
+            "Call",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Constant"
+          ],
+          "ast_depth": 6,
+          "ast_hash": "07685106fd2c3d5263423123f643ac70",
+          "alpha_renamed_hash": "845e19d4c837f3d9206a64134d0e2c76"
+        },
+        "operator_precedence": {
+          "operator_sequence": [],
+          "precedence_levels": {}
+        },
+        "statement_ordering": {
+          "statement_types": [
+            "FunctionDef",
+            "Import",
+            "Assign",
+            "Assign",
+            "Assign",
+            "Return"
+          ],
+          "statement_sequence": [
+            "FunctionDef_0",
+            "Import_1",
+            "Assign_2",
+            "Assign_3",
+            "Assign_4",
+            "Return_5"
+          ],
+          "control_flow_order": [
+            "FunctionDef"
+          ]
+        },
+        "recursion_schema": {
+          "is_recursive": false,
+          "base_cases": [],
+          "recursive_calls": [],
+          "recursion_pattern": null,
+          "termination_guards": []
+        }
+      }
+    },
+    "created_timestamp": "2025-10-22T12:43:18.453991",
+    "canon_version": "1.0",
+    "oracle_validated": true,
+    "oracle_pass_rate": 0.8333333333333334
+  },
+  "canon_created": true,
+  "llm_results": [
+    {
+      "run_id": 1,
+      "raw_output": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    return text",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.\n\nIMPORTANT: The function must be named 'slugify'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 2,
+      "raw_output": "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'[^a-z0-9\\-]', '', text)\n    text = re.sub(r'-+', '-', text)\n    return text.strip('-')",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.\n\nIMPORTANT: The function must be named 'slugify'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 3,
+      "raw_output": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'[^a-z0-9\\-]', '', text)\n    return text",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.\n\nIMPORTANT: The function must be named 'slugify'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 4,
+      "raw_output": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'\\s+', '-', text).strip('-')\n    return text",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.\n\nIMPORTANT: The function must be named 'slugify'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 5,
+      "raw_output": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'\\s+', '-', text)\n    return text",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.\n\nIMPORTANT: The function must be named 'slugify'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 6,
+      "raw_output": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = text.replace(' ', '-')\n    text = re.sub(r'-+', '-', text)\n    return text.strip('-')",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.\n\nIMPORTANT: The function must be named 'slugify'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 7,
+      "raw_output": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    return text",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.\n\nIMPORTANT: The function must be named 'slugify'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 8,
+      "raw_output": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'\\s+', '-', text)\n    return text.strip('-')",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.\n\nIMPORTANT: The function must be named 'slugify'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 9,
+      "raw_output": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    return text.strip('-')",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.\n\nIMPORTANT: The function must be named 'slugify'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 10,
+      "raw_output": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    return text",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.\n\nIMPORTANT: The function must be named 'slugify'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 11,
+      "raw_output": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'\\s+', '-', text)\n    return text.strip('-')",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.\n\nIMPORTANT: The function must be named 'slugify'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 12,
+      "raw_output": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s-]+', '-', text)\n    return text",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.\n\nIMPORTANT: The function must be named 'slugify'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 13,
+      "raw_output": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'[^a-z0-9\\-]', '', text)\n    return text",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.\n\nIMPORTANT: The function must be named 'slugify'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 14,
+      "raw_output": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'[^a-z0-9\\-]', '', text)\n    return text",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.\n\nIMPORTANT: The function must be named 'slugify'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 15,
+      "raw_output": "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'-+', '-', text)\n    return text.strip('-')",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.\n\nIMPORTANT: The function must be named 'slugify'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 16,
+      "raw_output": "import re\n\ndef slugify(input_string):\n    # Convert to lowercase\n    input_string = input_string.lower()\n    # Replace spaces with hyphens\n    input_string = input_string.replace(' ', '-')\n    # Remove special characters except hyphens\n    input_string = re.sub(r'[^a-z0-9\\-]', '', input_string)\n    return input_string",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.\n\nIMPORTANT: The function must be named 'slugify'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 17,
+      "raw_output": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'\\s+', '-', text)\n    return text.strip('-')",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.\n\nIMPORTANT: The function must be named 'slugify'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 18,
+      "raw_output": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'[^a-z0-9\\-]', '', text)\n    return text",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.\n\nIMPORTANT: The function must be named 'slugify'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 19,
+      "raw_output": "def slugify(s):\n    import re\n    s = s.lower()\n    s = re.sub(r'[^a-z0-9\\s-]', '', s)\n    s = re.sub(r'\\s+', '-', s)\n    return s.strip('-')\n\n# Example usage:\n# print(slugify(\"Hello World! This is a test.\"))  # Output: \"hello-world-this-is-a-test\"",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.\n\nIMPORTANT: The function must be named 'slugify'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 20,
+      "raw_output": "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'[^a-z0-9\\-]', '', text)\n    return text.strip('-')",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'slugify' that takes a string and converts it to a URL-friendly slug. Convert to lowercase, replace spaces with hyphens, and remove special characters except hyphens.\n\nIMPORTANT: The function must be named 'slugify'.\n\nProvide only the Python code, no explanations or markdown."
+    }
+  ],
+  "raw_outputs": [
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    return text",
+    "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'[^a-z0-9\\-]', '', text)\n    text = re.sub(r'-+', '-', text)\n    return text.strip('-')",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'[^a-z0-9\\-]', '', text)\n    return text",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'\\s+', '-', text).strip('-')\n    return text",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'\\s+', '-', text)\n    return text",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = text.replace(' ', '-')\n    text = re.sub(r'-+', '-', text)\n    return text.strip('-')",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    return text",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'\\s+', '-', text)\n    return text.strip('-')",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    return text.strip('-')",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    return text",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'\\s+', '-', text)\n    return text.strip('-')",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s-]+', '-', text)\n    return text",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'[^a-z0-9\\-]', '', text)\n    return text",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'[^a-z0-9\\-]', '', text)\n    return text",
+    "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'-+', '-', text)\n    return text.strip('-')",
+    "import re\n\ndef slugify(input_string):\n    # Convert to lowercase\n    input_string = input_string.lower()\n    # Replace spaces with hyphens\n    input_string = input_string.replace(' ', '-')\n    # Remove special characters except hyphens\n    input_string = re.sub(r'[^a-z0-9\\-]', '', input_string)\n    return input_string",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'\\s+', '-', text)\n    return text.strip('-')",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'[^a-z0-9\\-]', '', text)\n    return text",
+    "def slugify(s):\n    import re\n    s = s.lower()\n    s = re.sub(r'[^a-z0-9\\s-]', '', s)\n    s = re.sub(r'\\s+', '-', s)\n    return s.strip('-')\n\n# Example usage:\n# print(slugify(\"Hello World! This is a test.\"))  # Output: \"hello-world-this-is-a-test\"",
+    "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'[^a-z0-9\\-]', '', text)\n    return text.strip('-')"
+  ],
+  "repaired_outputs": [
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '', text)\n    return re.sub('[\\\\s]+', '-', text)",
+    "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '-', text)\n    text = re.sub('[\\\\s]+', '', text)\n    text = re.sub('-+', '-', text)\n    return text.strip('-')",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '-', text)\n    return re.sub('[\\\\s]+', '', text)",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '', text)\n    return re.sub('[\\\\s]+', '-', text).strip('-')",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '', text)\n    return re.sub('[\\\\s]+', '-', text)",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '', text)\n    text = text.replace(' ', '-')\n    text = re.sub('[\\\\s]+', '-', text)\n    return text.strip('-')",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '', text)\n    return re.sub('[\\\\s]+', '-', text)",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '', text)\n    text = re.sub('[\\\\s]+', '-', text)\n    return text.strip('-')",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    return text.strip('-')",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '', text)\n    return re.sub('[\\\\s]+', '-', text)",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '', text)\n    text = re.sub('[\\\\s]+', '-', text)\n    return text.strip('-')",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '', text)\n    return re.sub('[\\\\s]+', '-', text)",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '-', text)\n    return re.sub('[\\\\s]+', '', text)",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '-', text)\n    return re.sub('[\\\\s]+', '', text)",
+    "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '', text)\n    text = re.sub('[\\\\s]+', '-', text)\n    text = re.sub('-+', '-', text)\n    return text.strip('-')",
+    "import re\n\ndef slugify(input_string):\n    input_string = input_string.lower()\n    input_string = input_string.replace(' ', '-')\n    input_string = re.sub('[^a-z0-9\\\\s-]', '', input_string)\n    return input_string",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '', text)\n    text = re.sub('[\\\\s]+', '-', text)\n    return text.strip('-')",
+    "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '-', text)\n    return re.sub('[\\\\s]+', '', text)",
+    "def slugify(s):\n    import re\n    s = s.lower()\n    s = re.sub('[^a-z0-9\\\\s-]', '', s)\n    s = re.sub('[\\\\s]+', '-', s)\n    return s.strip('-')",
+    "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '-', text)\n    text = re.sub('[\\\\s]+', '', text)\n    return text.strip('-')"
+  ],
+  "transformation_results": [
+    {
+      "run_id": 1,
+      "original_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    return text",
+      "transformed_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '', text)\n    return re.sub('[\\\\s]+', '-', text)",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.15476190476190474,
+      "transformations_applied": [
+        "PropertyDrivenTransformer",
+        "RegexPatternNormalizer"
+      ]
+    },
+    {
+      "run_id": 2,
+      "original_code": "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'[^a-z0-9\\-]', '', text)\n    text = re.sub(r'-+', '-', text)\n    return text.strip('-')",
+      "transformed_code": "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '-', text)\n    text = re.sub('[\\\\s]+', '', text)\n    text = re.sub('-+', '-', text)\n    return text.strip('-')",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.15476190476190474,
+      "transformations_applied": [
+        "RegexPatternNormalizer"
+      ]
+    },
+    {
+      "run_id": 3,
+      "original_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'[^a-z0-9\\-]', '', text)\n    return text",
+      "transformed_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '-', text)\n    return re.sub('[\\\\s]+', '', text)",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.15476190476190474,
+      "transformations_applied": [
+        "PropertyDrivenTransformer",
+        "RegexPatternNormalizer"
+      ]
+    },
+    {
+      "run_id": 4,
+      "original_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'\\s+', '-', text).strip('-')\n    return text",
+      "transformed_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '', text)\n    return re.sub('[\\\\s]+', '-', text).strip('-')",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.15476190476190474,
+      "transformations_applied": [
+        "PropertyDrivenTransformer",
+        "RegexPatternNormalizer"
+      ]
+    },
+    {
+      "run_id": 5,
+      "original_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'\\s+', '-', text)\n    return text",
+      "transformed_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '', text)\n    return re.sub('[\\\\s]+', '-', text)",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.15476190476190474,
+      "transformations_applied": [
+        "PropertyDrivenTransformer",
+        "RegexPatternNormalizer"
+      ]
+    },
+    {
+      "run_id": 6,
+      "original_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = text.replace(' ', '-')\n    text = re.sub(r'-+', '-', text)\n    return text.strip('-')",
+      "transformed_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '', text)\n    text = text.replace(' ', '-')\n    text = re.sub('[\\\\s]+', '-', text)\n    return text.strip('-')",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.11904761904761904,
+      "transformations_applied": [
+        "RegexPatternNormalizer"
+      ]
+    },
+    {
+      "run_id": 7,
+      "original_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    return text",
+      "transformed_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '', text)\n    return re.sub('[\\\\s]+', '-', text)",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.15476190476190474,
+      "transformations_applied": [
+        "PropertyDrivenTransformer",
+        "RegexPatternNormalizer"
+      ]
+    },
+    {
+      "run_id": 8,
+      "original_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'\\s+', '-', text)\n    return text.strip('-')",
+      "transformed_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '', text)\n    text = re.sub('[\\\\s]+', '-', text)\n    return text.strip('-')",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.11904761904761904,
+      "transformations_applied": [
+        "RegexPatternNormalizer"
+      ]
+    },
+    {
+      "run_id": 9,
+      "original_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    return text.strip('-')",
+      "transformed_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    return text.strip('-')",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.11904761904761904,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 10,
+      "original_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    return text",
+      "transformed_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '', text)\n    return re.sub('[\\\\s]+', '-', text)",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.15476190476190474,
+      "transformations_applied": [
+        "PropertyDrivenTransformer",
+        "RegexPatternNormalizer"
+      ]
+    },
+    {
+      "run_id": 11,
+      "original_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'\\s+', '-', text)\n    return text.strip('-')",
+      "transformed_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '', text)\n    text = re.sub('[\\\\s]+', '-', text)\n    return text.strip('-')",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.11904761904761904,
+      "transformations_applied": [
+        "RegexPatternNormalizer"
+      ]
+    },
+    {
+      "run_id": 12,
+      "original_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s-]+', '-', text)\n    return text",
+      "transformed_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '', text)\n    return re.sub('[\\\\s]+', '-', text)",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.15476190476190474,
+      "transformations_applied": [
+        "PropertyDrivenTransformer",
+        "RegexPatternNormalizer"
+      ]
+    },
+    {
+      "run_id": 13,
+      "original_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'[^a-z0-9\\-]', '', text)\n    return text",
+      "transformed_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '-', text)\n    return re.sub('[\\\\s]+', '', text)",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.15476190476190474,
+      "transformations_applied": [
+        "PropertyDrivenTransformer",
+        "RegexPatternNormalizer"
+      ]
+    },
+    {
+      "run_id": 14,
+      "original_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'[^a-z0-9\\-]', '', text)\n    return text",
+      "transformed_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '-', text)\n    return re.sub('[\\\\s]+', '', text)",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.15476190476190474,
+      "transformations_applied": [
+        "PropertyDrivenTransformer",
+        "RegexPatternNormalizer"
+      ]
+    },
+    {
+      "run_id": 15,
+      "original_code": "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'-+', '-', text)\n    return text.strip('-')",
+      "transformed_code": "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '', text)\n    text = re.sub('[\\\\s]+', '-', text)\n    text = re.sub('-+', '-', text)\n    return text.strip('-')",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.15476190476190474,
+      "transformations_applied": [
+        "RegexPatternNormalizer"
+      ]
+    },
+    {
+      "run_id": 16,
+      "original_code": "import re\n\ndef slugify(input_string):\n    # Convert to lowercase\n    input_string = input_string.lower()\n    # Replace spaces with hyphens\n    input_string = input_string.replace(' ', '-')\n    # Remove special characters except hyphens\n    input_string = re.sub(r'[^a-z0-9\\-]', '', input_string)\n    return input_string",
+      "transformed_code": "import re\n\ndef slugify(input_string):\n    input_string = input_string.lower()\n    input_string = input_string.replace(' ', '-')\n    input_string = re.sub('[^a-z0-9\\\\s-]', '', input_string)\n    return input_string",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.2619047619047619,
+      "transformations_applied": [
+        "RegexPatternNormalizer"
+      ]
+    },
+    {
+      "run_id": 17,
+      "original_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'\\s+', '-', text)\n    return text.strip('-')",
+      "transformed_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '', text)\n    text = re.sub('[\\\\s]+', '-', text)\n    return text.strip('-')",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.11904761904761904,
+      "transformations_applied": [
+        "RegexPatternNormalizer"
+      ]
+    },
+    {
+      "run_id": 18,
+      "original_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'[^a-z0-9\\-]', '', text)\n    return text",
+      "transformed_code": "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '-', text)\n    return re.sub('[\\\\s]+', '', text)",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.15476190476190474,
+      "transformations_applied": [
+        "PropertyDrivenTransformer",
+        "RegexPatternNormalizer"
+      ]
+    },
+    {
+      "run_id": 19,
+      "original_code": "def slugify(s):\n    import re\n    s = s.lower()\n    s = re.sub(r'[^a-z0-9\\s-]', '', s)\n    s = re.sub(r'\\s+', '-', s)\n    return s.strip('-')\n\n# Example usage:\n# print(slugify(\"Hello World! This is a test.\"))  # Output: \"hello-world-this-is-a-test\"",
+      "transformed_code": "def slugify(s):\n    import re\n    s = s.lower()\n    s = re.sub('[^a-z0-9\\\\s-]', '', s)\n    s = re.sub('[\\\\s]+', '-', s)\n    return s.strip('-')",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.14285714285714285,
+      "transformations_applied": [
+        "RegexPatternNormalizer"
+      ]
+    },
+    {
+      "run_id": 20,
+      "original_code": "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'[^a-z0-9\\-]', '', text)\n    return text.strip('-')",
+      "transformed_code": "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub('[^a-z0-9\\\\s-]', '-', text)\n    text = re.sub('[\\\\s]+', '', text)\n    return text.strip('-')",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.10714285714285714,
+      "transformations_applied": [
+        "RegexPatternNormalizer"
+      ]
+    }
+  ],
+  "metrics": {
+    "R_raw": 0.2,
+    "R_anchor_pre": 0.0,
+    "R_anchor_post": 0.0,
+    "Delta_rescue": 0.0,
+    "R_repair_at_k_pre": {
+      "k=0.05": 0.0,
+      "k=0.1": 0.0,
+      "k=0.15": 0.25,
+      "k=0.2": 0.9
+    },
+    "R_repair_at_k_post": {
+      "k=0.05": 0.0,
+      "k=0.1": 0.0,
+      "k=0.15": 0.3,
+      "k=0.2": 0.9
+    },
+    "distances_pre": [
+      0.11904761904761904,
+      0.15476190476190474,
+      0.15476190476190474,
+      0.15476190476190474,
+      0.15476190476190474,
+      0.15476190476190474,
+      0.11904761904761904,
+      0.15476190476190474,
+      0.11904761904761904,
+      0.11904761904761904,
+      0.15476190476190474,
+      0.15476190476190474,
+      0.15476190476190474,
+      0.15476190476190474,
+      0.15476190476190474,
+      0.2619047619047619,
+      0.15476190476190474,
+      0.15476190476190474,
+      0.21428571428571427,
+      0.10714285714285714
+    ],
+    "distances_post": [
+      0.15476190476190474,
+      0.15476190476190474,
+      0.15476190476190474,
+      0.15476190476190474,
+      0.15476190476190474,
+      0.11904761904761904,
+      0.15476190476190474,
+      0.11904761904761904,
+      0.11904761904761904,
+      0.15476190476190474,
+      0.11904761904761904,
+      0.15476190476190474,
+      0.15476190476190474,
+      0.15476190476190474,
+      0.15476190476190474,
+      0.2619047619047619,
+      0.11904761904761904,
+      0.15476190476190474,
+      0.21428571428571427,
+      0.10714285714285714
+    ],
+    "mean_distance_pre": 0.15357142857142855,
+    "mean_distance_post": 0.15178571428571427,
+    "std_distance_pre": 0.03343945691711462,
+    "std_distance_post": 0.03427145040591615,
+    "Delta_mu": 0.0017857142857142794,
+    "Delta_P_tau": {
+      "tau=0.05": 0.0,
+      "tau=0.1": 0.0,
+      "tau=0.15": 0.04999999999999999,
+      "tau=0.2": 0.0
+    },
+    "canon_coverage": 0.5,
+    "rescue_rate": 0.0,
+    "R_behavioral": 0.5,
+    "R_structural": 0.25,
+    "R_canon": 0.0,
+    "behavioral_improvement": 0.3,
+    "structural_improvement": 0.04999999999999999,
+    "total_runs": 20,
+    "raw_stats": {
+      "unique_outputs": 13,
+      "most_common_count": 4,
+      "distribution": {
+        "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    return text": 3,
+        "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'[^a-z0-9\\-]', '', text)\n    text = re.sub(r'-+', '-', text)\n    return text.strip('-')": 1,
+        "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'[^a-z0-9\\-]', '', text)\n    return text": 4,
+        "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'\\s+', '-', text).strip('-')\n    return text": 1,
+        "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'\\s+', '-', text)\n    return text": 1,
+        "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = text.replace(' ', '-')\n    text = re.sub(r'-+', '-', text)\n    return text.strip('-')": 1,
+        "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'\\s+', '-', text)\n    return text.strip('-')": 3,
+        "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s]+', '-', text)\n    return text.strip('-')": 1,
+        "import re\n\ndef slugify(text):\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'[\\s-]+', '-', text)\n    return text": 1,
+        "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub(r'[^a-z0-9\\s-]', '', text)\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'-+', '-', text)\n    return text.strip('-')": 1,
+        "import re\n\ndef slugify(input_string):\n    # Convert to lowercase\n    input_string = input_string.lower()\n    # Replace spaces with hyphens\n    input_string = input_string.replace(' ', '-')\n    # Remove special characters except hyphens\n    input_string = re.sub(r'[^a-z0-9\\-]', '', input_string)\n    return input_string": 1,
+        "def slugify(s):\n    import re\n    s = s.lower()\n    s = re.sub(r'[^a-z0-9\\s-]', '', s)\n    s = re.sub(r'\\s+', '-', s)\n    return s.strip('-')\n\n# Example usage:\n# print(slugify(\"Hello World! This is a test.\"))  # Output: \"hello-world-this-is-a-test\"": 1,
+        "def slugify(text):\n    import re\n    text = text.lower()\n    text = re.sub(r'\\s+', '-', text)\n    text = re.sub(r'[^a-z0-9\\-]', '', text)\n    return text.strip('-')": 1
+      },
+      "entropy": 3.446439344671015
+    },
+    "anchor_pre_stats": {
+      "exact_matches": 0,
+      "total_outputs": 20,
+      "distances": [
+        0.11904761904761904,
+        0.15476190476190474,
+        0.15476190476190474,
+        0.15476190476190474,
+        0.15476190476190474,
+        0.15476190476190474,
+        0.11904761904761904,
+        0.15476190476190474,
+        0.11904761904761904,
+        0.11904761904761904,
+        0.15476190476190474,
+        0.15476190476190474,
+        0.15476190476190474,
+        0.15476190476190474,
+        0.15476190476190474,
+        0.2619047619047619,
+        0.15476190476190474,
+        0.15476190476190474,
+        0.21428571428571427,
+        0.10714285714285714
+      ],
+      "mean_distance": 0.15357142857142855,
+      "min_distance": 0.10714285714285714
+    },
+    "anchor_post_stats": {
+      "exact_matches": 0,
+      "total_outputs": 20,
+      "distances": [
+        0.15476190476190474,
+        0.15476190476190474,
+        0.15476190476190474,
+        0.15476190476190474,
+        0.15476190476190474,
+        0.11904761904761904,
+        0.15476190476190474,
+        0.11904761904761904,
+        0.11904761904761904,
+        0.15476190476190474,
+        0.11904761904761904,
+        0.15476190476190474,
+        0.15476190476190474,
+        0.15476190476190474,
+        0.15476190476190474,
+        0.2619047619047619,
+        0.11904761904761904,
+        0.15476190476190474,
+        0.21428571428571427,
+        0.10714285714285714
+      ],
+      "mean_distance": 0.15178571428571427,
+      "min_distance": 0.10714285714285714
+    },
+    "behavioral_stats": {
+      "unique_behaviors": 11,
+      "oracle_results": [
+        {
+          "passed": false,
+          "pass_rate": 0.6666666666666666,
+          "passed_tests": 4,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": "Hello World",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Basic slugification"
+            },
+            {
+              "input": "Hello  World!",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Multiple spaces and punctuation"
+            },
+            {
+              "input": "Python 3.9 Release",
+              "expected": "python-3-9-release",
+              "actual": "python-39-release",
+              "passed": false,
+              "description": "Numbers and dots"
+            },
+            {
+              "input": "  Trim Spaces  ",
+              "expected": "trim-spaces",
+              "actual": "-trim-spaces-",
+              "passed": false,
+              "description": "Leading/trailing spaces"
+            },
+            {
+              "input": "CamelCaseString",
+              "expected": "camelcasestring",
+              "actual": "camelcasestring",
+              "passed": true,
+              "description": "CamelCase to lowercase"
+            },
+            {
+              "input": "",
+              "expected": "",
+              "actual": "",
+              "passed": true,
+              "description": "Empty string"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 0.8333333333333334,
+          "passed_tests": 5,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": "Hello World",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Basic slugification"
+            },
+            {
+              "input": "Hello  World!",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Multiple spaces and punctuation"
+            },
+            {
+              "input": "Python 3.9 Release",
+              "expected": "python-3-9-release",
+              "actual": "python-39-release",
+              "passed": false,
+              "description": "Numbers and dots"
+            },
+            {
+              "input": "  Trim Spaces  ",
+              "expected": "trim-spaces",
+              "actual": "trim-spaces",
+              "passed": true,
+              "description": "Leading/trailing spaces"
+            },
+            {
+              "input": "CamelCaseString",
+              "expected": "camelcasestring",
+              "actual": "camelcasestring",
+              "passed": true,
+              "description": "CamelCase to lowercase"
+            },
+            {
+              "input": "",
+              "expected": "",
+              "actual": "",
+              "passed": true,
+              "description": "Empty string"
+            }
+          ]
+        },
+        {
+          "passed": false,
+          "pass_rate": 0.6666666666666666,
+          "passed_tests": 4,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": "Hello World",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Basic slugification"
+            },
+            {
+              "input": "Hello  World!",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Multiple spaces and punctuation"
+            },
+            {
+              "input": "Python 3.9 Release",
+              "expected": "python-3-9-release",
+              "actual": "python-39-release",
+              "passed": false,
+              "description": "Numbers and dots"
+            },
+            {
+              "input": "  Trim Spaces  ",
+              "expected": "trim-spaces",
+              "actual": "-trim-spaces-",
+              "passed": false,
+              "description": "Leading/trailing spaces"
+            },
+            {
+              "input": "CamelCaseString",
+              "expected": "camelcasestring",
+              "actual": "camelcasestring",
+              "passed": true,
+              "description": "CamelCase to lowercase"
+            },
+            {
+              "input": "",
+              "expected": "",
+              "actual": "",
+              "passed": true,
+              "description": "Empty string"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 0.8333333333333334,
+          "passed_tests": 5,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": "Hello World",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Basic slugification"
+            },
+            {
+              "input": "Hello  World!",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Multiple spaces and punctuation"
+            },
+            {
+              "input": "Python 3.9 Release",
+              "expected": "python-3-9-release",
+              "actual": "python-39-release",
+              "passed": false,
+              "description": "Numbers and dots"
+            },
+            {
+              "input": "  Trim Spaces  ",
+              "expected": "trim-spaces",
+              "actual": "trim-spaces",
+              "passed": true,
+              "description": "Leading/trailing spaces"
+            },
+            {
+              "input": "CamelCaseString",
+              "expected": "camelcasestring",
+              "actual": "camelcasestring",
+              "passed": true,
+              "description": "CamelCase to lowercase"
+            },
+            {
+              "input": "",
+              "expected": "",
+              "actual": "",
+              "passed": true,
+              "description": "Empty string"
+            }
+          ]
+        },
+        {
+          "passed": false,
+          "pass_rate": 0.6666666666666666,
+          "passed_tests": 4,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": "Hello World",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Basic slugification"
+            },
+            {
+              "input": "Hello  World!",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Multiple spaces and punctuation"
+            },
+            {
+              "input": "Python 3.9 Release",
+              "expected": "python-3-9-release",
+              "actual": "python-39-release",
+              "passed": false,
+              "description": "Numbers and dots"
+            },
+            {
+              "input": "  Trim Spaces  ",
+              "expected": "trim-spaces",
+              "actual": "-trim-spaces-",
+              "passed": false,
+              "description": "Leading/trailing spaces"
+            },
+            {
+              "input": "CamelCaseString",
+              "expected": "camelcasestring",
+              "actual": "camelcasestring",
+              "passed": true,
+              "description": "CamelCase to lowercase"
+            },
+            {
+              "input": "",
+              "expected": "",
+              "actual": "",
+              "passed": true,
+              "description": "Empty string"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 0.8333333333333334,
+          "passed_tests": 5,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": "Hello World",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Basic slugification"
+            },
+            {
+              "input": "Hello  World!",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Multiple spaces and punctuation"
+            },
+            {
+              "input": "Python 3.9 Release",
+              "expected": "python-3-9-release",
+              "actual": "python-39-release",
+              "passed": false,
+              "description": "Numbers and dots"
+            },
+            {
+              "input": "  Trim Spaces  ",
+              "expected": "trim-spaces",
+              "actual": "trim-spaces",
+              "passed": true,
+              "description": "Leading/trailing spaces"
+            },
+            {
+              "input": "CamelCaseString",
+              "expected": "camelcasestring",
+              "actual": "camelcasestring",
+              "passed": true,
+              "description": "CamelCase to lowercase"
+            },
+            {
+              "input": "",
+              "expected": "",
+              "actual": "",
+              "passed": true,
+              "description": "Empty string"
+            }
+          ]
+        },
+        {
+          "passed": false,
+          "pass_rate": 0.6666666666666666,
+          "passed_tests": 4,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": "Hello World",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Basic slugification"
+            },
+            {
+              "input": "Hello  World!",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Multiple spaces and punctuation"
+            },
+            {
+              "input": "Python 3.9 Release",
+              "expected": "python-3-9-release",
+              "actual": "python-39-release",
+              "passed": false,
+              "description": "Numbers and dots"
+            },
+            {
+              "input": "  Trim Spaces  ",
+              "expected": "trim-spaces",
+              "actual": "-trim-spaces-",
+              "passed": false,
+              "description": "Leading/trailing spaces"
+            },
+            {
+              "input": "CamelCaseString",
+              "expected": "camelcasestring",
+              "actual": "camelcasestring",
+              "passed": true,
+              "description": "CamelCase to lowercase"
+            },
+            {
+              "input": "",
+              "expected": "",
+              "actual": "",
+              "passed": true,
+              "description": "Empty string"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 0.8333333333333334,
+          "passed_tests": 5,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": "Hello World",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Basic slugification"
+            },
+            {
+              "input": "Hello  World!",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Multiple spaces and punctuation"
+            },
+            {
+              "input": "Python 3.9 Release",
+              "expected": "python-3-9-release",
+              "actual": "python-39-release",
+              "passed": false,
+              "description": "Numbers and dots"
+            },
+            {
+              "input": "  Trim Spaces  ",
+              "expected": "trim-spaces",
+              "actual": "trim-spaces",
+              "passed": true,
+              "description": "Leading/trailing spaces"
+            },
+            {
+              "input": "CamelCaseString",
+              "expected": "camelcasestring",
+              "actual": "camelcasestring",
+              "passed": true,
+              "description": "CamelCase to lowercase"
+            },
+            {
+              "input": "",
+              "expected": "",
+              "actual": "",
+              "passed": true,
+              "description": "Empty string"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 0.8333333333333334,
+          "passed_tests": 5,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": "Hello World",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Basic slugification"
+            },
+            {
+              "input": "Hello  World!",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Multiple spaces and punctuation"
+            },
+            {
+              "input": "Python 3.9 Release",
+              "expected": "python-3-9-release",
+              "actual": "python-39-release",
+              "passed": false,
+              "description": "Numbers and dots"
+            },
+            {
+              "input": "  Trim Spaces  ",
+              "expected": "trim-spaces",
+              "actual": "trim-spaces",
+              "passed": true,
+              "description": "Leading/trailing spaces"
+            },
+            {
+              "input": "CamelCaseString",
+              "expected": "camelcasestring",
+              "actual": "camelcasestring",
+              "passed": true,
+              "description": "CamelCase to lowercase"
+            },
+            {
+              "input": "",
+              "expected": "",
+              "actual": "",
+              "passed": true,
+              "description": "Empty string"
+            }
+          ]
+        },
+        {
+          "passed": false,
+          "pass_rate": 0.6666666666666666,
+          "passed_tests": 4,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": "Hello World",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Basic slugification"
+            },
+            {
+              "input": "Hello  World!",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Multiple spaces and punctuation"
+            },
+            {
+              "input": "Python 3.9 Release",
+              "expected": "python-3-9-release",
+              "actual": "python-39-release",
+              "passed": false,
+              "description": "Numbers and dots"
+            },
+            {
+              "input": "  Trim Spaces  ",
+              "expected": "trim-spaces",
+              "actual": "-trim-spaces-",
+              "passed": false,
+              "description": "Leading/trailing spaces"
+            },
+            {
+              "input": "CamelCaseString",
+              "expected": "camelcasestring",
+              "actual": "camelcasestring",
+              "passed": true,
+              "description": "CamelCase to lowercase"
+            },
+            {
+              "input": "",
+              "expected": "",
+              "actual": "",
+              "passed": true,
+              "description": "Empty string"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 0.8333333333333334,
+          "passed_tests": 5,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": "Hello World",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Basic slugification"
+            },
+            {
+              "input": "Hello  World!",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Multiple spaces and punctuation"
+            },
+            {
+              "input": "Python 3.9 Release",
+              "expected": "python-3-9-release",
+              "actual": "python-39-release",
+              "passed": false,
+              "description": "Numbers and dots"
+            },
+            {
+              "input": "  Trim Spaces  ",
+              "expected": "trim-spaces",
+              "actual": "trim-spaces",
+              "passed": true,
+              "description": "Leading/trailing spaces"
+            },
+            {
+              "input": "CamelCaseString",
+              "expected": "camelcasestring",
+              "actual": "camelcasestring",
+              "passed": true,
+              "description": "CamelCase to lowercase"
+            },
+            {
+              "input": "",
+              "expected": "",
+              "actual": "",
+              "passed": true,
+              "description": "Empty string"
+            }
+          ]
+        },
+        {
+          "passed": false,
+          "pass_rate": 0.6666666666666666,
+          "passed_tests": 4,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": "Hello World",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Basic slugification"
+            },
+            {
+              "input": "Hello  World!",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Multiple spaces and punctuation"
+            },
+            {
+              "input": "Python 3.9 Release",
+              "expected": "python-3-9-release",
+              "actual": "python-39-release",
+              "passed": false,
+              "description": "Numbers and dots"
+            },
+            {
+              "input": "  Trim Spaces  ",
+              "expected": "trim-spaces",
+              "actual": "-trim-spaces-",
+              "passed": false,
+              "description": "Leading/trailing spaces"
+            },
+            {
+              "input": "CamelCaseString",
+              "expected": "camelcasestring",
+              "actual": "camelcasestring",
+              "passed": true,
+              "description": "CamelCase to lowercase"
+            },
+            {
+              "input": "",
+              "expected": "",
+              "actual": "",
+              "passed": true,
+              "description": "Empty string"
+            }
+          ]
+        },
+        {
+          "passed": false,
+          "pass_rate": 0.6666666666666666,
+          "passed_tests": 4,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": "Hello World",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Basic slugification"
+            },
+            {
+              "input": "Hello  World!",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Multiple spaces and punctuation"
+            },
+            {
+              "input": "Python 3.9 Release",
+              "expected": "python-3-9-release",
+              "actual": "python-39-release",
+              "passed": false,
+              "description": "Numbers and dots"
+            },
+            {
+              "input": "  Trim Spaces  ",
+              "expected": "trim-spaces",
+              "actual": "-trim-spaces-",
+              "passed": false,
+              "description": "Leading/trailing spaces"
+            },
+            {
+              "input": "CamelCaseString",
+              "expected": "camelcasestring",
+              "actual": "camelcasestring",
+              "passed": true,
+              "description": "CamelCase to lowercase"
+            },
+            {
+              "input": "",
+              "expected": "",
+              "actual": "",
+              "passed": true,
+              "description": "Empty string"
+            }
+          ]
+        },
+        {
+          "passed": false,
+          "pass_rate": 0.6666666666666666,
+          "passed_tests": 4,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": "Hello World",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Basic slugification"
+            },
+            {
+              "input": "Hello  World!",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Multiple spaces and punctuation"
+            },
+            {
+              "input": "Python 3.9 Release",
+              "expected": "python-3-9-release",
+              "actual": "python-39-release",
+              "passed": false,
+              "description": "Numbers and dots"
+            },
+            {
+              "input": "  Trim Spaces  ",
+              "expected": "trim-spaces",
+              "actual": "-trim-spaces-",
+              "passed": false,
+              "description": "Leading/trailing spaces"
+            },
+            {
+              "input": "CamelCaseString",
+              "expected": "camelcasestring",
+              "actual": "camelcasestring",
+              "passed": true,
+              "description": "CamelCase to lowercase"
+            },
+            {
+              "input": "",
+              "expected": "",
+              "actual": "",
+              "passed": true,
+              "description": "Empty string"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 0.8333333333333334,
+          "passed_tests": 5,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": "Hello World",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Basic slugification"
+            },
+            {
+              "input": "Hello  World!",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Multiple spaces and punctuation"
+            },
+            {
+              "input": "Python 3.9 Release",
+              "expected": "python-3-9-release",
+              "actual": "python-39-release",
+              "passed": false,
+              "description": "Numbers and dots"
+            },
+            {
+              "input": "  Trim Spaces  ",
+              "expected": "trim-spaces",
+              "actual": "trim-spaces",
+              "passed": true,
+              "description": "Leading/trailing spaces"
+            },
+            {
+              "input": "CamelCaseString",
+              "expected": "camelcasestring",
+              "actual": "camelcasestring",
+              "passed": true,
+              "description": "CamelCase to lowercase"
+            },
+            {
+              "input": "",
+              "expected": "",
+              "actual": "",
+              "passed": true,
+              "description": "Empty string"
+            }
+          ]
+        },
+        {
+          "passed": false,
+          "pass_rate": 0.5,
+          "passed_tests": 3,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": "Hello World",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Basic slugification"
+            },
+            {
+              "input": "Hello  World!",
+              "expected": "hello-world",
+              "actual": "hello--world",
+              "passed": false,
+              "description": "Multiple spaces and punctuation"
+            },
+            {
+              "input": "Python 3.9 Release",
+              "expected": "python-3-9-release",
+              "actual": "python-39-release",
+              "passed": false,
+              "description": "Numbers and dots"
+            },
+            {
+              "input": "  Trim Spaces  ",
+              "expected": "trim-spaces",
+              "actual": "--trim-spaces--",
+              "passed": false,
+              "description": "Leading/trailing spaces"
+            },
+            {
+              "input": "CamelCaseString",
+              "expected": "camelcasestring",
+              "actual": "camelcasestring",
+              "passed": true,
+              "description": "CamelCase to lowercase"
+            },
+            {
+              "input": "",
+              "expected": "",
+              "actual": "",
+              "passed": true,
+              "description": "Empty string"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 0.8333333333333334,
+          "passed_tests": 5,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": "Hello World",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Basic slugification"
+            },
+            {
+              "input": "Hello  World!",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Multiple spaces and punctuation"
+            },
+            {
+              "input": "Python 3.9 Release",
+              "expected": "python-3-9-release",
+              "actual": "python-39-release",
+              "passed": false,
+              "description": "Numbers and dots"
+            },
+            {
+              "input": "  Trim Spaces  ",
+              "expected": "trim-spaces",
+              "actual": "trim-spaces",
+              "passed": true,
+              "description": "Leading/trailing spaces"
+            },
+            {
+              "input": "CamelCaseString",
+              "expected": "camelcasestring",
+              "actual": "camelcasestring",
+              "passed": true,
+              "description": "CamelCase to lowercase"
+            },
+            {
+              "input": "",
+              "expected": "",
+              "actual": "",
+              "passed": true,
+              "description": "Empty string"
+            }
+          ]
+        },
+        {
+          "passed": false,
+          "pass_rate": 0.6666666666666666,
+          "passed_tests": 4,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": "Hello World",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Basic slugification"
+            },
+            {
+              "input": "Hello  World!",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Multiple spaces and punctuation"
+            },
+            {
+              "input": "Python 3.9 Release",
+              "expected": "python-3-9-release",
+              "actual": "python-39-release",
+              "passed": false,
+              "description": "Numbers and dots"
+            },
+            {
+              "input": "  Trim Spaces  ",
+              "expected": "trim-spaces",
+              "actual": "-trim-spaces-",
+              "passed": false,
+              "description": "Leading/trailing spaces"
+            },
+            {
+              "input": "CamelCaseString",
+              "expected": "camelcasestring",
+              "actual": "camelcasestring",
+              "passed": true,
+              "description": "CamelCase to lowercase"
+            },
+            {
+              "input": "",
+              "expected": "",
+              "actual": "",
+              "passed": true,
+              "description": "Empty string"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 0.8333333333333334,
+          "passed_tests": 5,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": "Hello World",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Basic slugification"
+            },
+            {
+              "input": "Hello  World!",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Multiple spaces and punctuation"
+            },
+            {
+              "input": "Python 3.9 Release",
+              "expected": "python-3-9-release",
+              "actual": "python-39-release",
+              "passed": false,
+              "description": "Numbers and dots"
+            },
+            {
+              "input": "  Trim Spaces  ",
+              "expected": "trim-spaces",
+              "actual": "trim-spaces",
+              "passed": true,
+              "description": "Leading/trailing spaces"
+            },
+            {
+              "input": "CamelCaseString",
+              "expected": "camelcasestring",
+              "actual": "camelcasestring",
+              "passed": true,
+              "description": "CamelCase to lowercase"
+            },
+            {
+              "input": "",
+              "expected": "",
+              "actual": "",
+              "passed": true,
+              "description": "Empty string"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 0.8333333333333334,
+          "passed_tests": 5,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": "Hello World",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Basic slugification"
+            },
+            {
+              "input": "Hello  World!",
+              "expected": "hello-world",
+              "actual": "hello-world",
+              "passed": true,
+              "description": "Multiple spaces and punctuation"
+            },
+            {
+              "input": "Python 3.9 Release",
+              "expected": "python-3-9-release",
+              "actual": "python-39-release",
+              "passed": false,
+              "description": "Numbers and dots"
+            },
+            {
+              "input": "  Trim Spaces  ",
+              "expected": "trim-spaces",
+              "actual": "trim-spaces",
+              "passed": true,
+              "description": "Leading/trailing spaces"
+            },
+            {
+              "input": "CamelCaseString",
+              "expected": "camelcasestring",
+              "actual": "camelcasestring",
+              "passed": true,
+              "description": "CamelCase to lowercase"
+            },
+            {
+              "input": "",
+              "expected": "",
+              "actual": "",
+              "passed": true,
+              "description": "Empty string"
+            }
+          ]
+        }
+      ],
+      "behavioral_groups": {
+        "failed_0": [
+          0
+        ],
+        "PPFPPP": [
+          1,
+          3,
+          5,
+          7,
+          8,
+          10,
+          14,
+          16,
+          18,
+          19
+        ],
+        "failed_2": [
+          2
+        ],
+        "failed_4": [
+          4
+        ],
+        "failed_6": [
+          6
+        ],
+        "failed_9": [
+          9
+        ],
+        "failed_11": [
+          11
+        ],
+        "failed_12": [
+          12
+        ],
+        "failed_13": [
+          13
+        ],
+        "failed_15": [
+          15
+        ],
+        "failed_17": [
+          17
+        ]
+      },
+      "pass_rate": 0.5
+    },
+    "structural_stats": {
+      "unique_structures": 10,
+      "property_results": [
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "text": [
+                "text"
+              ]
+            },
+            "assignments": {
+              "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[^a-z0-9\\\\s-]'), Constant(value=''), Name(id='text', ctx=Load())])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_slugify"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "slugify": {
+              "name": "slugify",
+              "args": [
+                "text"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": false,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": []
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "Import",
+              "alias",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Return",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "5f49b9df613be0baa19b3207777dbd57",
+            "alpha_renamed_hash": "11b6d9f0027e0cc53ad395aa736a21a5"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "Import",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "Import_0",
+              "FunctionDef_1",
+              "Assign_2",
+              "Assign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "text": [
+                "text"
+              ]
+            },
+            "assignments": {
+              "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='-+'), Constant(value='-'), Name(id='text', ctx=Load())])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_slugify"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "slugify": {
+              "name": "slugify",
+              "args": [
+                "text"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": false,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": []
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Import",
+              "alias",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Return",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "c38a5369aadc889b658ab15f397c475d",
+            "alpha_renamed_hash": "8f140fa8c48b636075d3e54e74e3bdab"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Import",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Import_1",
+              "Assign_2",
+              "Assign_3",
+              "Assign_4",
+              "Assign_5",
+              "Return_6"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "text": [
+                "text"
+              ]
+            },
+            "assignments": {
+              "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[^a-z0-9\\\\s-]'), Constant(value='-'), Name(id='text', ctx=Load())])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_slugify"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "slugify": {
+              "name": "slugify",
+              "args": [
+                "text"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": false,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": []
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "Import",
+              "alias",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Return",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "4485200158a940bc9be115bdfc814c97",
+            "alpha_renamed_hash": "f8abb38d2d08465284e97e86b4947b08"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "Import",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "Import_0",
+              "FunctionDef_1",
+              "Assign_2",
+              "Assign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "text": [
+                "text"
+              ]
+            },
+            "assignments": {
+              "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[^a-z0-9\\\\s-]'), Constant(value=''), Name(id='text', ctx=Load())])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_slugify"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "slugify": {
+              "name": "slugify",
+              "args": [
+                "text"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": false,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": []
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "Import",
+              "alias",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Return",
+              "Call",
+              "Attribute",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Load",
+              "Constant"
+            ],
+            "ast_depth": 8,
+            "ast_hash": "7634785632c93e14012f530be40e8a09",
+            "alpha_renamed_hash": "f33622d0f887a105fee890fb5da76a2e"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "Import",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "Import_0",
+              "FunctionDef_1",
+              "Assign_2",
+              "Assign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "text": [
+                "text"
+              ]
+            },
+            "assignments": {
+              "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[^a-z0-9\\\\s-]'), Constant(value=''), Name(id='text', ctx=Load())])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_slugify"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "slugify": {
+              "name": "slugify",
+              "args": [
+                "text"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": false,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": []
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "Import",
+              "alias",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Return",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "5f49b9df613be0baa19b3207777dbd57",
+            "alpha_renamed_hash": "11b6d9f0027e0cc53ad395aa736a21a5"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "Import",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "Import_0",
+              "FunctionDef_1",
+              "Assign_2",
+              "Assign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "text": [
+                "text"
+              ]
+            },
+            "assignments": {
+              "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[\\\\s]+'), Constant(value='-'), Name(id='text', ctx=Load())])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_slugify"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "slugify": {
+              "name": "slugify",
+              "args": [
+                "text"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": false,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": []
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "Import",
+              "alias",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Return",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "f7e4f92817b6c6e3134b257e577ba5b3",
+            "alpha_renamed_hash": "eb51dab99c356184aca792f9147e53f1"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "Import",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "Import_0",
+              "FunctionDef_1",
+              "Assign_2",
+              "Assign_3",
+              "Assign_4",
+              "Assign_5",
+              "Return_6"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "text": [
+                "text"
+              ]
+            },
+            "assignments": {
+              "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[^a-z0-9\\\\s-]'), Constant(value=''), Name(id='text', ctx=Load())])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_slugify"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "slugify": {
+              "name": "slugify",
+              "args": [
+                "text"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": false,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": []
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "Import",
+              "alias",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Return",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "5f49b9df613be0baa19b3207777dbd57",
+            "alpha_renamed_hash": "11b6d9f0027e0cc53ad395aa736a21a5"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "Import",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "Import_0",
+              "FunctionDef_1",
+              "Assign_2",
+              "Assign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "text": [
+                "text"
+              ]
+            },
+            "assignments": {
+              "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[\\\\s]+'), Constant(value='-'), Name(id='text', ctx=Load())])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_slugify"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "slugify": {
+              "name": "slugify",
+              "args": [
+                "text"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": false,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": []
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "Import",
+              "alias",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Return",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "c1051f71421799567fbba21bde0406ad",
+            "alpha_renamed_hash": "c6d94f3f47b6c307a97d14c85d251fa6"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "Import",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "Import_0",
+              "FunctionDef_1",
+              "Assign_2",
+              "Assign_3",
+              "Assign_4",
+              "Return_5"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "text": [
+                "text"
+              ]
+            },
+            "assignments": {
+              "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[\\\\s]+'), Constant(value='-'), Name(id='text', ctx=Load())])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_slugify"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "slugify": {
+              "name": "slugify",
+              "args": [
+                "text"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": false,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": []
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "Import",
+              "alias",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Return",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "c1051f71421799567fbba21bde0406ad",
+            "alpha_renamed_hash": "c6d94f3f47b6c307a97d14c85d251fa6"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "Import",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "Import_0",
+              "FunctionDef_1",
+              "Assign_2",
+              "Assign_3",
+              "Assign_4",
+              "Return_5"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "text": [
+                "text"
+              ]
+            },
+            "assignments": {
+              "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[^a-z0-9\\\\s-]'), Constant(value=''), Name(id='text', ctx=Load())])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_slugify"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "slugify": {
+              "name": "slugify",
+              "args": [
+                "text"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": false,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": []
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "Import",
+              "alias",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Return",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "5f49b9df613be0baa19b3207777dbd57",
+            "alpha_renamed_hash": "11b6d9f0027e0cc53ad395aa736a21a5"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "Import",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "Import_0",
+              "FunctionDef_1",
+              "Assign_2",
+              "Assign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "text": [
+                "text"
+              ]
+            },
+            "assignments": {
+              "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[\\\\s]+'), Constant(value='-'), Name(id='text', ctx=Load())])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_slugify"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "slugify": {
+              "name": "slugify",
+              "args": [
+                "text"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": false,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": []
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "Import",
+              "alias",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Return",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "c1051f71421799567fbba21bde0406ad",
+            "alpha_renamed_hash": "c6d94f3f47b6c307a97d14c85d251fa6"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "Import",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "Import_0",
+              "FunctionDef_1",
+              "Assign_2",
+              "Assign_3",
+              "Assign_4",
+              "Return_5"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "text": [
+                "text"
+              ]
+            },
+            "assignments": {
+              "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[^a-z0-9\\\\s-]'), Constant(value=''), Name(id='text', ctx=Load())])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_slugify"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "slugify": {
+              "name": "slugify",
+              "args": [
+                "text"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": false,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": []
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "Import",
+              "alias",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Return",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "5f49b9df613be0baa19b3207777dbd57",
+            "alpha_renamed_hash": "11b6d9f0027e0cc53ad395aa736a21a5"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "Import",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "Import_0",
+              "FunctionDef_1",
+              "Assign_2",
+              "Assign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "text": [
+                "text"
+              ]
+            },
+            "assignments": {
+              "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[^a-z0-9\\\\s-]'), Constant(value='-'), Name(id='text', ctx=Load())])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_slugify"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "slugify": {
+              "name": "slugify",
+              "args": [
+                "text"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": false,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": []
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "Import",
+              "alias",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Return",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "4485200158a940bc9be115bdfc814c97",
+            "alpha_renamed_hash": "f8abb38d2d08465284e97e86b4947b08"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "Import",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "Import_0",
+              "FunctionDef_1",
+              "Assign_2",
+              "Assign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "text": [
+                "text"
+              ]
+            },
+            "assignments": {
+              "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[^a-z0-9\\\\s-]'), Constant(value='-'), Name(id='text', ctx=Load())])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_slugify"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "slugify": {
+              "name": "slugify",
+              "args": [
+                "text"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": false,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": []
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "Import",
+              "alias",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Return",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "4485200158a940bc9be115bdfc814c97",
+            "alpha_renamed_hash": "f8abb38d2d08465284e97e86b4947b08"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "Import",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "Import_0",
+              "FunctionDef_1",
+              "Assign_2",
+              "Assign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "text": [
+                "text"
+              ]
+            },
+            "assignments": {
+              "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='-+'), Constant(value='-'), Name(id='text', ctx=Load())])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_slugify"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "slugify": {
+              "name": "slugify",
+              "args": [
+                "text"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": false,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": []
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Import",
+              "alias",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Return",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "369b5552a2f82ed0d7d6ab8cf933bda8",
+            "alpha_renamed_hash": "6ae2189c807a094cc70ea4ba5507d591"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Import",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Import_1",
+              "Assign_2",
+              "Assign_3",
+              "Assign_4",
+              "Assign_5",
+              "Return_6"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "input_string": [
+                "input_string"
+              ]
+            },
+            "assignments": {
+              "input_string": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[^a-z0-9\\\\s-]'), Constant(value=''), Name(id='input_string', ctx=Load())])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_slugify"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "slugify": {
+              "name": "slugify",
+              "args": [
+                "input_string"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": false,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": []
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "Import",
+              "alias",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "4aabfd8aa00d6ab3899b57036fc1759b",
+            "alpha_renamed_hash": "ef7945c54466908efa495ab710e939b8"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "Import",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "Import_0",
+              "FunctionDef_1",
+              "Assign_2",
+              "Assign_3",
+              "Assign_4",
+              "Return_5"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "text": [
+                "text"
+              ]
+            },
+            "assignments": {
+              "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[\\\\s]+'), Constant(value='-'), Name(id='text', ctx=Load())])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_slugify"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "slugify": {
+              "name": "slugify",
+              "args": [
+                "text"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": false,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": []
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "Import",
+              "alias",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Return",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "c1051f71421799567fbba21bde0406ad",
+            "alpha_renamed_hash": "c6d94f3f47b6c307a97d14c85d251fa6"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "Import",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "Import_0",
+              "FunctionDef_1",
+              "Assign_2",
+              "Assign_3",
+              "Assign_4",
+              "Return_5"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "text": [
+                "text"
+              ]
+            },
+            "assignments": {
+              "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[^a-z0-9\\\\s-]'), Constant(value='-'), Name(id='text', ctx=Load())])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_slugify"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "slugify": {
+              "name": "slugify",
+              "args": [
+                "text"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": false,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": []
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "Import",
+              "alias",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Return",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "4485200158a940bc9be115bdfc814c97",
+            "alpha_renamed_hash": "f8abb38d2d08465284e97e86b4947b08"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "Import",
+              "FunctionDef",
+              "Assign",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "Import_0",
+              "FunctionDef_1",
+              "Assign_2",
+              "Assign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "s": [
+                "s"
+              ]
+            },
+            "assignments": {
+              "s": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[\\\\s]+'), Constant(value='-'), Name(id='s', ctx=Load())])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_slugify"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "slugify": {
+              "name": "slugify",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": false,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": []
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Import",
+              "alias",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Return",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "c9d2b1a30931b2e1ad51cbee62acd0c3",
+            "alpha_renamed_hash": "845e19d4c837f3d9206a64134d0e2c76"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Import",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Import_1",
+              "Assign_2",
+              "Assign_3",
+              "Assign_4",
+              "Return_5"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "text": [
+                "text"
+              ]
+            },
+            "assignments": {
+              "text": "Call(func=Attribute(value=Name(id='re', ctx=Load()), attr='sub', ctx=Load()), args=[Constant(value='[\\\\s]+'), Constant(value=''), Name(id='text', ctx=Load())])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_slugify"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "slugify": {
+              "name": "slugify",
+              "args": [
+                "text"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": false,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": []
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Import",
+              "alias",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Name",
+              "Load",
+              "Return",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "b388e6eeda2191e682e642adbe885634",
+            "alpha_renamed_hash": "29334d0ad812d9d16e927b814732ecb0"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Import",
+              "Assign",
+              "Assign",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Import_1",
+              "Assign_2",
+              "Assign_3",
+              "Assign_4",
+              "Return_5"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        }
+      ],
+      "structural_groups": {
+        "-7919767214887210927_-8578203458780060462_750745215830419866_3738468610424393842": [
+          0,
+          4,
+          6,
+          9,
+          11
+        ],
+        "-7919767214887210927_-8578203458780060462_750745215830419866_-4029135346681485894": [
+          1
+        ],
+        "-7919767214887210927_-8578203458780060462_750745215830419866_7497809692591917150": [
+          2,
+          12,
+          13,
+          17
+        ],
+        "-7919767214887210927_-8578203458780060462_750745215830419866_5247724541840576816": [
+          3
+        ],
+        "-7919767214887210927_-8578203458780060462_750745215830419866_-3574979031203545788": [
+          5
+        ],
+        "-7919767214887210927_-8578203458780060462_750745215830419866_8874544238891317735": [
+          7,
+          8,
+          10,
+          16
+        ],
+        "-7919767214887210927_-8578203458780060462_750745215830419866_-4684129528775258933": [
+          14
+        ],
+        "-7919767214887210927_-8578203458780060462_750745215830419866_-6590593457542524441": [
+          15
+        ],
+        "-7919767214887210927_-8578203458780060462_750745215830419866_3622389860663777786": [
+          18
+        ],
+        "-7919767214887210927_-8578203458780060462_750745215830419866_1843360697542095123": [
+          19
+        ]
+      },
+      "distances_to_canon": [
+        0.15476190476190474,
+        0.15476190476190474,
+        0.15476190476190474,
+        0.15476190476190474,
+        0.15476190476190474,
+        0.11904761904761904,
+        0.15476190476190474,
+        0.11904761904761904,
+        0.11904761904761904,
+        0.15476190476190474,
+        0.11904761904761904,
+        0.15476190476190474,
+        0.15476190476190474,
+        0.15476190476190474,
+        0.15476190476190474,
+        0.2619047619047619,
+        0.11904761904761904,
+        0.15476190476190474,
+        0.14285714285714285,
+        0.10714285714285714
+      ],
+      "mean_distance": 0.1482142857142857,
+      "std_distance": 0.031152057400308394
+    }
+  },
+  "bell_curve_analysis": {
+    "plot_path": "outputs\\analysis\\pre_post_comparison_slugify_temp0.7.png",
+    "statistics": {
+      "pre_repair": {
+        "mean": 0.15357142857142855,
+        "std": 0.03343945691711462,
+        "median": 0.15476190476190474,
+        "min": 0.10714285714285714,
+        "max": 0.2619047619047619,
+        "r_anchor": 0.0
+      },
+      "post_repair": {
+        "mean": 0.15178571428571427,
+        "std": 0.03427145040591615,
+        "median": 0.15476190476190474,
+        "min": 0.10714285714285714,
+        "max": 0.2619047619047619,
+        "r_anchor": 0.0
+      },
+      "deltas": {
+        "delta_mu": 0.0017857142857142794,
+        "delta_sigma": -0.0008319934888015301,
+        "delta_rescue": 0.0
+      },
+      "statistical_tests": {
+        "mann_whitney_u": {
+          "statistic": 208.5,
+          "p_value": 0.8019769722409678
+        },
+        "kolmogorov_smirnov": {
+          "statistic": 0.05,
+          "p_value": 0.9999999999999998
+        },
+        "significantly_different": false
+      }
+    },
+    "r_repair_at_k": {
+      "thresholds": [
+        0.05,
+        0.1,
+        0.15,
+        0.2,
+        0.25,
+        0.3
+      ],
+      "pre_repair": [
+        0.0,
+        0.0,
+        0.25,
+        0.9,
+        0.95,
+        1.0
+      ],
+      "post_repair": [
+        0.0,
+        0.0,
+        0.3,
+        0.9,
+        0.95,
+        1.0
+      ]
+    }
+  },
+  "hypothesis_evaluation": {
+    "hypothesis": "SKYT improves LLM code repeatability through contract-driven canonicalization",
+    "supported": false,
+    "evidence": {
+      "raw_repeatability": 0.2,
+      "behavioral_improvement": 0.3,
+      "structural_improvement": 0.04999999999999999,
+      "total_improvement": 0.04999999999999999
+    },
+    "conclusion": "Hypothesis NOT SUPPORTED: No significant improvement"
+  }
+}

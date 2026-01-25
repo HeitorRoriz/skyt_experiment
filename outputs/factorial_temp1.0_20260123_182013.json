@@ -1,0 +1,5313 @@
+{
+  "experiment_id": "factorial_temp1.0_20260123_182013",
+  "contract_id": "factorial",
+  "model": "gpt-4o",
+  "temperature": 1.0,
+  "timestamp": "2026-01-23T18:20:13.881070",
+  "num_runs": 20,
+  "successful_runs": 20,
+  "contract": {
+    "id": "factorial",
+    "task_intent": "Compute factorial of n using iteration",
+    "prompt": "Write a Python function called 'factorial' that takes a non-negative integer n and returns n! (n factorial). Use iteration, not recursion.",
+    "constraints": {
+      "function_name": "factorial",
+      "output_type": "integer",
+      "requires_recursion": false,
+      "implementation_style": "iterative",
+      "variable_naming": {
+        "fixed_variables": [
+          "n"
+        ],
+        "flexible_variables": [
+          "result",
+          "i",
+          "product",
+          "fact"
+        ],
+        "naming_policy": "strict"
+      }
+    },
+    "algorithm_family": "factorial",
+    "language": "python",
+    "environment": {},
+    "output_format": "raw_code",
+    "oracle_requirements": {
+      "test_cases": [
+        {
+          "input": 0,
+          "expected": 1,
+          "description": "Base case 0! = 1"
+        },
+        {
+          "input": 1,
+          "expected": 1,
+          "description": "Base case 1! = 1"
+        },
+        {
+          "input": 5,
+          "expected": 120,
+          "description": "5! = 120"
+        },
+        {
+          "input": 10,
+          "expected": 3628800,
+          "description": "10! = 3628800"
+        },
+        {
+          "input": 3,
+          "expected": 6,
+          "description": "3! = 6"
+        },
+        {
+          "input": 7,
+          "expected": 5040,
+          "description": "7! = 5040"
+        }
+      ],
+      "correctness_threshold": 1.0,
+      "required_pass_rate": 0.8
+    },
+    "normalization_rules": {
+      "remove_comments": true,
+      "normalize_whitespace": true,
+      "enforce_function_name": true
+    },
+    "anchor_signature": null,
+    "compliance_flag": false,
+    "distance_metric": "foundational_properties",
+    "rescue_bounds": {
+      "allow_function_rename": true,
+      "allow_print_removal": true,
+      "max_transformations": 5
+    },
+    "model_specification": {},
+    "contract_version": "2.0",
+    "oracle_version": "1.0",
+    "normalization_version": "1.0",
+    "created_timestamp": "2026-01-23T18:19:53.809163",
+    "run_id": null,
+    "prompt_id": "factorial",
+    "sample_id": null,
+    "ood_spec": {
+      "policy": "allow",
+      "exception": null,
+      "return_value": null,
+      "examples": [],
+      "max_checks": 3
+    }
+  },
+  "canon_data": {
+    "contract_id": "factorial",
+    "canonical_code": "def factorial(n):\n    if n < 0:\n        raise ValueError(\"Input must be a non-negative integer.\")\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 1,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "ValueError",
+          "range"
+        ],
+        "nested_depth": 1,
+        "branch_patterns": [
+          "if_at_depth_0"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "result": []
+        },
+        "assignments": {
+          "result": "Constant(value=1)"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_factorial"
+          ],
+          [
+            "function_factorial",
+            "branch"
+          ],
+          [
+            "function_factorial",
+            "loop"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "factorial": {
+          "name": "factorial",
+          "args": [
+            "n"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add"
+        ],
+        "associative_ops": [
+          "Add"
+        ],
+        "binary_operations": [
+          "Add"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          0,
+          1,
+          2,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Lt"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Lt",
+          "Constant",
+          "Raise",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Constant",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Mult",
+          "Name",
+          "Load",
+          "Return",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 6,
+        "ast_hash": "73275a5b4270a6e26b692d4005f80614",
+        "alpha_renamed_hash": "a92aa5464570e4fc1dfd25ffb4a2b5e1"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Add"
+        ],
+        "precedence_levels": {
+          "Add": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Raise",
+          "Assign",
+          "For",
+          "AugAssign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Raise_2",
+          "Assign_3",
+          "For_4",
+          "AugAssign_5",
+          "Return_6"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "For"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "contract_data": {
+      "id": "factorial",
+      "task_intent": "Compute factorial of n using iteration",
+      "prompt": "Write a Python function called 'factorial' that takes a non-negative integer n and returns n! (n factorial). Use iteration, not recursion.",
+      "constraints": {
+        "function_name": "factorial",
+        "output_type": "integer",
+        "requires_recursion": false,
+        "implementation_style": "iterative",
+        "variable_naming": {
+          "fixed_variables": [
+            "n"
+          ],
+          "flexible_variables": [
+            "result",
+            "i",
+            "product",
+            "fact"
+          ],
+          "naming_policy": "strict"
+        }
+      },
+      "algorithm_family": "factorial",
+      "language": "python",
+      "environment": {},
+      "output_format": "raw_code",
+      "oracle_requirements": {
+        "test_cases": [
+          {
+            "input": 0,
+            "expected": 1,
+            "description": "Base case 0! = 1"
+          },
+          {
+            "input": 1,
+            "expected": 1,
+            "description": "Base case 1! = 1"
+          },
+          {
+            "input": 5,
+            "expected": 120,
+            "description": "5! = 120"
+          },
+          {
+            "input": 10,
+            "expected": 3628800,
+            "description": "10! = 3628800"
+          },
+          {
+            "input": 3,
+            "expected": 6,
+            "description": "3! = 6"
+          },
+          {
+            "input": 7,
+            "expected": 5040,
+            "description": "7! = 5040"
+          }
+        ],
+        "correctness_threshold": 1.0,
+        "required_pass_rate": 0.8
+      },
+      "normalization_rules": {
+        "remove_comments": true,
+        "normalize_whitespace": true,
+        "enforce_function_name": true
+      },
+      "anchor_signature": "f17aecfacbe64b5c1eba137ec51dc2e16bcfa35cd580b0ea01e78c165029c4c6",
+      "compliance_flag": true,
+      "distance_metric": "foundational_properties",
+      "rescue_bounds": {
+        "allow_function_rename": true,
+        "allow_print_removal": true,
+        "max_transformations": 5
+      },
+      "model_specification": {},
+      "contract_version": "2.0",
+      "oracle_version": "1.0",
+      "normalization_version": "1.0",
+      "created_timestamp": "2026-01-23T17:44:24.499593",
+      "run_id": null,
+      "prompt_id": "factorial",
+      "sample_id": null,
+      "canonical_code": "def factorial(n):\n    if n < 0:\n        raise ValueError(\"Input must be a non-negative integer.\")\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "foundational_properties": {
+        "control_flow_signature": {
+          "if_statements": 1,
+          "for_loops": 1,
+          "while_loops": 0,
+          "function_calls": [
+            "ValueError",
+            "range"
+          ],
+          "nested_depth": 1,
+          "branch_patterns": [
+            "if_at_depth_0"
+          ]
+        },
+        "data_dependency_graph": {
+          "dependencies": {
+            "result": []
+          },
+          "assignments": {
+            "result": "Constant(value=1)"
+          }
+        },
+        "execution_paths": {
+          "execution_paths": [
+            [
+              "function_factorial"
+            ],
+            [
+              "function_factorial",
+              "branch"
+            ],
+            [
+              "function_factorial",
+              "loop"
+            ]
+          ]
+        },
+        "function_contracts": {
+          "factorial": {
+            "name": "factorial",
+            "args": [
+              "n"
+            ],
+            "returns": null,
+            "has_return": true
+          }
+        },
+        "complexity_class": {
+          "nested_loops": 1,
+          "recursive_calls": 0,
+          "estimated_complexity": "O(n)"
+        },
+        "side_effect_profile": {
+          "has_print": false,
+          "has_global_access": false,
+          "has_file_io": false,
+          "modifies_arguments": false,
+          "is_pure": true
+        },
+        "termination_properties": {
+          "has_base_case": false,
+          "has_bounded_loops": true,
+          "recursive_depth": 0
+        },
+        "algebraic_structure": {
+          "commutative_ops": [
+            "Add"
+          ],
+          "associative_ops": [
+            "Add"
+          ],
+          "binary_operations": [
+            "Add"
+          ]
+        },
+        "numerical_behavior": {
+          "uses_integers": true,
+          "uses_floats": false,
+          "has_arithmetic": true,
+          "numeric_constants": [
+            0,
+            1,
+            2,
+            1
+          ]
+        },
+        "logical_equivalence": {
+          "boolean_ops": [],
+          "comparisons": [
+            "Lt"
+          ],
+          "logical_patterns": []
+        },
+        "normalized_ast_structure": {
+          "node_types": [
+            "Module",
+            "FunctionDef",
+            "arguments",
+            "arg",
+            "If",
+            "Compare",
+            "Name",
+            "Load",
+            "Lt",
+            "Constant",
+            "Raise",
+            "Call",
+            "Name",
+            "Load",
+            "Constant",
+            "Assign",
+            "Name",
+            "Store",
+            "Constant",
+            "For",
+            "Name",
+            "Store",
+            "Call",
+            "Name",
+            "Load",
+            "Constant",
+            "BinOp",
+            "Name",
+            "Load",
+            "Add",
+            "Constant",
+            "AugAssign",
+            "Name",
+            "Store",
+            "Mult",
+            "Name",
+            "Load",
+            "Return",
+            "Name",
+            "Load"
+          ],
+          "ast_depth": 6,
+          "ast_hash": "73275a5b4270a6e26b692d4005f80614",
+          "alpha_renamed_hash": "a92aa5464570e4fc1dfd25ffb4a2b5e1"
+        },
+        "operator_precedence": {
+          "operator_sequence": [
+            "Add"
+          ],
+          "precedence_levels": {
+            "Add": 3
+          }
+        },
+        "statement_ordering": {
+          "statement_types": [
+            "FunctionDef",
+            "If",
+            "Raise",
+            "Assign",
+            "For",
+            "AugAssign",
+            "Return"
+          ],
+          "statement_sequence": [
+            "FunctionDef_0",
+            "If_1",
+            "Raise_2",
+            "Assign_3",
+            "For_4",
+            "AugAssign_5",
+            "Return_6"
+          ],
+          "control_flow_order": [
+            "FunctionDef",
+            "If",
+            "For"
+          ]
+        },
+        "recursion_schema": {
+          "is_recursive": false,
+          "base_cases": [],
+          "recursive_calls": [],
+          "recursion_pattern": null,
+          "termination_guards": []
+        }
+      }
+    },
+    "created_timestamp": "2026-01-23T17:44:24.499593",
+    "canon_version": "1.0",
+    "oracle_validated": true,
+    "oracle_pass_rate": 1.0
+  },
+  "canon_created": true,
+  "llm_results": [
+    {
+      "run_id": 1,
+      "raw_output": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'factorial' that takes a non-negative integer n and returns n! (n factorial). Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'factorial'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 2,
+      "raw_output": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'factorial' that takes a non-negative integer n and returns n! (n factorial). Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'factorial'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 3,
+      "raw_output": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'factorial' that takes a non-negative integer n and returns n! (n factorial). Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'factorial'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 4,
+      "raw_output": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'factorial' that takes a non-negative integer n and returns n! (n factorial). Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'factorial'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 5,
+      "raw_output": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'factorial' that takes a non-negative integer n and returns n! (n factorial). Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'factorial'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 6,
+      "raw_output": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'factorial' that takes a non-negative integer n and returns n! (n factorial). Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'factorial'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 7,
+      "raw_output": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'factorial' that takes a non-negative integer n and returns n! (n factorial). Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'factorial'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 8,
+      "raw_output": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'factorial' that takes a non-negative integer n and returns n! (n factorial). Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'factorial'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 9,
+      "raw_output": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'factorial' that takes a non-negative integer n and returns n! (n factorial). Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'factorial'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 10,
+      "raw_output": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'factorial' that takes a non-negative integer n and returns n! (n factorial). Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'factorial'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 11,
+      "raw_output": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'factorial' that takes a non-negative integer n and returns n! (n factorial). Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'factorial'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 12,
+      "raw_output": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'factorial' that takes a non-negative integer n and returns n! (n factorial). Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'factorial'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 13,
+      "raw_output": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'factorial' that takes a non-negative integer n and returns n! (n factorial). Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'factorial'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 14,
+      "raw_output": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'factorial' that takes a non-negative integer n and returns n! (n factorial). Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'factorial'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 15,
+      "raw_output": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'factorial' that takes a non-negative integer n and returns n! (n factorial). Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'factorial'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 16,
+      "raw_output": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'factorial' that takes a non-negative integer n and returns n! (n factorial). Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'factorial'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 17,
+      "raw_output": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'factorial' that takes a non-negative integer n and returns n! (n factorial). Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'factorial'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 18,
+      "raw_output": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'factorial' that takes a non-negative integer n and returns n! (n factorial). Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'factorial'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 19,
+      "raw_output": "def factorial(n: int) -> int:\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'factorial' that takes a non-negative integer n and returns n! (n factorial). Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'factorial'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 20,
+      "raw_output": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'factorial' that takes a non-negative integer n and returns n! (n factorial). Use iteration, not recursion.\n\nIMPORTANT: The function must be named 'factorial'.\n\nProvide only the Python code, no explanations or markdown."
+    }
+  ],
+  "raw_outputs": [
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n: int) -> int:\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result"
+  ],
+  "repaired_outputs": [
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n: int) -> int:\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+    "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result"
+  ],
+  "transformation_results": [
+    {
+      "run_id": 1,
+      "original_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformed_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.2738095238095238,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 2,
+      "original_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformed_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.2738095238095238,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 3,
+      "original_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformed_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.2738095238095238,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 4,
+      "original_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformed_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.2738095238095238,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 5,
+      "original_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformed_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.2738095238095238,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 6,
+      "original_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformed_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.2738095238095238,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 7,
+      "original_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformed_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.2738095238095238,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 8,
+      "original_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformed_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.2738095238095238,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 9,
+      "original_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformed_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.2738095238095238,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 10,
+      "original_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformed_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.2738095238095238,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 11,
+      "original_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformed_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.2738095238095238,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 12,
+      "original_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformed_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.2738095238095238,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 13,
+      "original_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformed_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.2738095238095238,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 14,
+      "original_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformed_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.2738095238095238,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 15,
+      "original_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformed_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.2738095238095238,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 16,
+      "original_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformed_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.2738095238095238,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 17,
+      "original_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformed_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.2738095238095238,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 18,
+      "original_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformed_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.2738095238095238,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 19,
+      "original_code": "def factorial(n: int) -> int:\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformed_code": "def factorial(n: int) -> int:\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.2738095238095238,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 20,
+      "original_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformed_code": "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.2738095238095238,
+      "transformations_applied": []
+    }
+  ],
+  "metrics": {
+    "R_raw": 0.95,
+    "R_anchor_pre": 0.0,
+    "R_anchor_post": 0.0,
+    "Delta_rescue": 0.0,
+    "R_repair_at_k_pre": {
+      "k=0.05": 0.0,
+      "k=0.1": 0.0,
+      "k=0.15": 0.0,
+      "k=0.2": 0.0
+    },
+    "R_repair_at_k_post": {
+      "k=0.05": 0.0,
+      "k=0.1": 0.0,
+      "k=0.15": 0.0,
+      "k=0.2": 0.0
+    },
+    "distances_pre": [
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238
+    ],
+    "distances_post": [
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238,
+      0.2738095238095238
+    ],
+    "mean_distance_pre": 0.2738095238095238,
+    "mean_distance_post": 0.2738095238095238,
+    "std_distance_pre": 0.0,
+    "std_distance_post": 0.0,
+    "Delta_mu": 0.0,
+    "Delta_P_tau": {
+      "tau=0.05": 0.0,
+      "tau=0.1": 0.0,
+      "tau=0.15": 0.0,
+      "tau=0.2": 0.0
+    },
+    "canon_coverage": 1.0,
+    "rescue_rate": 0.0,
+    "R_behavioral": 1.0,
+    "R_structural": 0.95,
+    "R_canon": 0.0,
+    "behavioral_improvement": 0.050000000000000044,
+    "structural_improvement": 0.0,
+    "total_runs": 20,
+    "raw_stats": {
+      "unique_outputs": 2,
+      "most_common_count": 19,
+      "distribution": {
+        "def factorial(n):\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result": 19,
+        "def factorial(n: int) -> int:\n    result = 1\n    for i in range(2, n + 1):\n        result *= i\n    return result": 1
+      },
+      "entropy": 0.28639695711595625
+    },
+    "anchor_pre_stats": {
+      "exact_matches": 0,
+      "total_outputs": 20,
+      "distances": [
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238
+      ],
+      "mean_distance": 0.2738095238095238,
+      "min_distance": 0.2738095238095238
+    },
+    "anchor_post_stats": {
+      "exact_matches": 0,
+      "total_outputs": 20,
+      "distances": [
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238
+      ],
+      "mean_distance": 0.2738095238095238,
+      "min_distance": 0.2738095238095238
+    },
+    "behavioral_stats": {
+      "unique_behaviors": 1,
+      "oracle_results": [
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": 0,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 0! = 1"
+            },
+            {
+              "input": 1,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 1! = 1"
+            },
+            {
+              "input": 5,
+              "expected": 120,
+              "actual": 120,
+              "passed": true,
+              "description": "5! = 120"
+            },
+            {
+              "input": 10,
+              "expected": 3628800,
+              "actual": 3628800,
+              "passed": true,
+              "description": "10! = 3628800"
+            },
+            {
+              "input": 3,
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "3! = 6"
+            },
+            {
+              "input": 7,
+              "expected": 5040,
+              "actual": 5040,
+              "passed": true,
+              "description": "7! = 5040"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": 0,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 0! = 1"
+            },
+            {
+              "input": 1,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 1! = 1"
+            },
+            {
+              "input": 5,
+              "expected": 120,
+              "actual": 120,
+              "passed": true,
+              "description": "5! = 120"
+            },
+            {
+              "input": 10,
+              "expected": 3628800,
+              "actual": 3628800,
+              "passed": true,
+              "description": "10! = 3628800"
+            },
+            {
+              "input": 3,
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "3! = 6"
+            },
+            {
+              "input": 7,
+              "expected": 5040,
+              "actual": 5040,
+              "passed": true,
+              "description": "7! = 5040"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": 0,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 0! = 1"
+            },
+            {
+              "input": 1,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 1! = 1"
+            },
+            {
+              "input": 5,
+              "expected": 120,
+              "actual": 120,
+              "passed": true,
+              "description": "5! = 120"
+            },
+            {
+              "input": 10,
+              "expected": 3628800,
+              "actual": 3628800,
+              "passed": true,
+              "description": "10! = 3628800"
+            },
+            {
+              "input": 3,
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "3! = 6"
+            },
+            {
+              "input": 7,
+              "expected": 5040,
+              "actual": 5040,
+              "passed": true,
+              "description": "7! = 5040"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": 0,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 0! = 1"
+            },
+            {
+              "input": 1,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 1! = 1"
+            },
+            {
+              "input": 5,
+              "expected": 120,
+              "actual": 120,
+              "passed": true,
+              "description": "5! = 120"
+            },
+            {
+              "input": 10,
+              "expected": 3628800,
+              "actual": 3628800,
+              "passed": true,
+              "description": "10! = 3628800"
+            },
+            {
+              "input": 3,
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "3! = 6"
+            },
+            {
+              "input": 7,
+              "expected": 5040,
+              "actual": 5040,
+              "passed": true,
+              "description": "7! = 5040"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": 0,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 0! = 1"
+            },
+            {
+              "input": 1,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 1! = 1"
+            },
+            {
+              "input": 5,
+              "expected": 120,
+              "actual": 120,
+              "passed": true,
+              "description": "5! = 120"
+            },
+            {
+              "input": 10,
+              "expected": 3628800,
+              "actual": 3628800,
+              "passed": true,
+              "description": "10! = 3628800"
+            },
+            {
+              "input": 3,
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "3! = 6"
+            },
+            {
+              "input": 7,
+              "expected": 5040,
+              "actual": 5040,
+              "passed": true,
+              "description": "7! = 5040"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": 0,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 0! = 1"
+            },
+            {
+              "input": 1,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 1! = 1"
+            },
+            {
+              "input": 5,
+              "expected": 120,
+              "actual": 120,
+              "passed": true,
+              "description": "5! = 120"
+            },
+            {
+              "input": 10,
+              "expected": 3628800,
+              "actual": 3628800,
+              "passed": true,
+              "description": "10! = 3628800"
+            },
+            {
+              "input": 3,
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "3! = 6"
+            },
+            {
+              "input": 7,
+              "expected": 5040,
+              "actual": 5040,
+              "passed": true,
+              "description": "7! = 5040"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": 0,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 0! = 1"
+            },
+            {
+              "input": 1,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 1! = 1"
+            },
+            {
+              "input": 5,
+              "expected": 120,
+              "actual": 120,
+              "passed": true,
+              "description": "5! = 120"
+            },
+            {
+              "input": 10,
+              "expected": 3628800,
+              "actual": 3628800,
+              "passed": true,
+              "description": "10! = 3628800"
+            },
+            {
+              "input": 3,
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "3! = 6"
+            },
+            {
+              "input": 7,
+              "expected": 5040,
+              "actual": 5040,
+              "passed": true,
+              "description": "7! = 5040"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": 0,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 0! = 1"
+            },
+            {
+              "input": 1,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 1! = 1"
+            },
+            {
+              "input": 5,
+              "expected": 120,
+              "actual": 120,
+              "passed": true,
+              "description": "5! = 120"
+            },
+            {
+              "input": 10,
+              "expected": 3628800,
+              "actual": 3628800,
+              "passed": true,
+              "description": "10! = 3628800"
+            },
+            {
+              "input": 3,
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "3! = 6"
+            },
+            {
+              "input": 7,
+              "expected": 5040,
+              "actual": 5040,
+              "passed": true,
+              "description": "7! = 5040"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": 0,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 0! = 1"
+            },
+            {
+              "input": 1,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 1! = 1"
+            },
+            {
+              "input": 5,
+              "expected": 120,
+              "actual": 120,
+              "passed": true,
+              "description": "5! = 120"
+            },
+            {
+              "input": 10,
+              "expected": 3628800,
+              "actual": 3628800,
+              "passed": true,
+              "description": "10! = 3628800"
+            },
+            {
+              "input": 3,
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "3! = 6"
+            },
+            {
+              "input": 7,
+              "expected": 5040,
+              "actual": 5040,
+              "passed": true,
+              "description": "7! = 5040"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": 0,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 0! = 1"
+            },
+            {
+              "input": 1,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 1! = 1"
+            },
+            {
+              "input": 5,
+              "expected": 120,
+              "actual": 120,
+              "passed": true,
+              "description": "5! = 120"
+            },
+            {
+              "input": 10,
+              "expected": 3628800,
+              "actual": 3628800,
+              "passed": true,
+              "description": "10! = 3628800"
+            },
+            {
+              "input": 3,
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "3! = 6"
+            },
+            {
+              "input": 7,
+              "expected": 5040,
+              "actual": 5040,
+              "passed": true,
+              "description": "7! = 5040"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": 0,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 0! = 1"
+            },
+            {
+              "input": 1,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 1! = 1"
+            },
+            {
+              "input": 5,
+              "expected": 120,
+              "actual": 120,
+              "passed": true,
+              "description": "5! = 120"
+            },
+            {
+              "input": 10,
+              "expected": 3628800,
+              "actual": 3628800,
+              "passed": true,
+              "description": "10! = 3628800"
+            },
+            {
+              "input": 3,
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "3! = 6"
+            },
+            {
+              "input": 7,
+              "expected": 5040,
+              "actual": 5040,
+              "passed": true,
+              "description": "7! = 5040"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": 0,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 0! = 1"
+            },
+            {
+              "input": 1,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 1! = 1"
+            },
+            {
+              "input": 5,
+              "expected": 120,
+              "actual": 120,
+              "passed": true,
+              "description": "5! = 120"
+            },
+            {
+              "input": 10,
+              "expected": 3628800,
+              "actual": 3628800,
+              "passed": true,
+              "description": "10! = 3628800"
+            },
+            {
+              "input": 3,
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "3! = 6"
+            },
+            {
+              "input": 7,
+              "expected": 5040,
+              "actual": 5040,
+              "passed": true,
+              "description": "7! = 5040"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": 0,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 0! = 1"
+            },
+            {
+              "input": 1,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 1! = 1"
+            },
+            {
+              "input": 5,
+              "expected": 120,
+              "actual": 120,
+              "passed": true,
+              "description": "5! = 120"
+            },
+            {
+              "input": 10,
+              "expected": 3628800,
+              "actual": 3628800,
+              "passed": true,
+              "description": "10! = 3628800"
+            },
+            {
+              "input": 3,
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "3! = 6"
+            },
+            {
+              "input": 7,
+              "expected": 5040,
+              "actual": 5040,
+              "passed": true,
+              "description": "7! = 5040"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": 0,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 0! = 1"
+            },
+            {
+              "input": 1,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 1! = 1"
+            },
+            {
+              "input": 5,
+              "expected": 120,
+              "actual": 120,
+              "passed": true,
+              "description": "5! = 120"
+            },
+            {
+              "input": 10,
+              "expected": 3628800,
+              "actual": 3628800,
+              "passed": true,
+              "description": "10! = 3628800"
+            },
+            {
+              "input": 3,
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "3! = 6"
+            },
+            {
+              "input": 7,
+              "expected": 5040,
+              "actual": 5040,
+              "passed": true,
+              "description": "7! = 5040"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": 0,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 0! = 1"
+            },
+            {
+              "input": 1,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 1! = 1"
+            },
+            {
+              "input": 5,
+              "expected": 120,
+              "actual": 120,
+              "passed": true,
+              "description": "5! = 120"
+            },
+            {
+              "input": 10,
+              "expected": 3628800,
+              "actual": 3628800,
+              "passed": true,
+              "description": "10! = 3628800"
+            },
+            {
+              "input": 3,
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "3! = 6"
+            },
+            {
+              "input": 7,
+              "expected": 5040,
+              "actual": 5040,
+              "passed": true,
+              "description": "7! = 5040"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": 0,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 0! = 1"
+            },
+            {
+              "input": 1,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 1! = 1"
+            },
+            {
+              "input": 5,
+              "expected": 120,
+              "actual": 120,
+              "passed": true,
+              "description": "5! = 120"
+            },
+            {
+              "input": 10,
+              "expected": 3628800,
+              "actual": 3628800,
+              "passed": true,
+              "description": "10! = 3628800"
+            },
+            {
+              "input": 3,
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "3! = 6"
+            },
+            {
+              "input": 7,
+              "expected": 5040,
+              "actual": 5040,
+              "passed": true,
+              "description": "7! = 5040"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": 0,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 0! = 1"
+            },
+            {
+              "input": 1,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 1! = 1"
+            },
+            {
+              "input": 5,
+              "expected": 120,
+              "actual": 120,
+              "passed": true,
+              "description": "5! = 120"
+            },
+            {
+              "input": 10,
+              "expected": 3628800,
+              "actual": 3628800,
+              "passed": true,
+              "description": "10! = 3628800"
+            },
+            {
+              "input": 3,
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "3! = 6"
+            },
+            {
+              "input": 7,
+              "expected": 5040,
+              "actual": 5040,
+              "passed": true,
+              "description": "7! = 5040"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": 0,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 0! = 1"
+            },
+            {
+              "input": 1,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 1! = 1"
+            },
+            {
+              "input": 5,
+              "expected": 120,
+              "actual": 120,
+              "passed": true,
+              "description": "5! = 120"
+            },
+            {
+              "input": 10,
+              "expected": 3628800,
+              "actual": 3628800,
+              "passed": true,
+              "description": "10! = 3628800"
+            },
+            {
+              "input": 3,
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "3! = 6"
+            },
+            {
+              "input": 7,
+              "expected": 5040,
+              "actual": 5040,
+              "passed": true,
+              "description": "7! = 5040"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": 0,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 0! = 1"
+            },
+            {
+              "input": 1,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 1! = 1"
+            },
+            {
+              "input": 5,
+              "expected": 120,
+              "actual": 120,
+              "passed": true,
+              "description": "5! = 120"
+            },
+            {
+              "input": 10,
+              "expected": 3628800,
+              "actual": 3628800,
+              "passed": true,
+              "description": "10! = 3628800"
+            },
+            {
+              "input": 3,
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "3! = 6"
+            },
+            {
+              "input": 7,
+              "expected": 5040,
+              "actual": 5040,
+              "passed": true,
+              "description": "7! = 5040"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": 0,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 0! = 1"
+            },
+            {
+              "input": 1,
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Base case 1! = 1"
+            },
+            {
+              "input": 5,
+              "expected": 120,
+              "actual": 120,
+              "passed": true,
+              "description": "5! = 120"
+            },
+            {
+              "input": 10,
+              "expected": 3628800,
+              "actual": 3628800,
+              "passed": true,
+              "description": "10! = 3628800"
+            },
+            {
+              "input": 3,
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "3! = 6"
+            },
+            {
+              "input": 7,
+              "expected": 5040,
+              "actual": 5040,
+              "passed": true,
+              "description": "7! = 5040"
+            }
+          ]
+        }
+      ],
+      "behavioral_groups": {
+        "PPPPPP": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ]
+      },
+      "pass_rate": 1.0
+    },
+    "structural_stats": {
+      "unique_structures": 2,
+      "property_results": [
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [
+              "range"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "result": []
+            },
+            "assignments": {
+              "result": "Constant(value=1)"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_factorial"
+              ],
+              [
+                "function_factorial",
+                "loop"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "factorial": {
+              "name": "factorial",
+              "args": [
+                "n"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [
+              "Add"
+            ],
+            "associative_ops": [
+              "Add"
+            ],
+            "binary_operations": [
+              "Add"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "BinOp",
+              "Name",
+              "Load",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Mult",
+              "Name",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "643cbcd444621bd4b1aef3ffeaa39e18",
+            "alpha_renamed_hash": "68ba61fe6774df5a70b36e7601601160"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Add"
+            ],
+            "precedence_levels": {
+              "Add": 3
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "For",
+              "AugAssign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "For_2",
+              "AugAssign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [
+              "range"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "result": []
+            },
+            "assignments": {
+              "result": "Constant(value=1)"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_factorial"
+              ],
+              [
+                "function_factorial",
+                "loop"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "factorial": {
+              "name": "factorial",
+              "args": [
+                "n"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [
+              "Add"
+            ],
+            "associative_ops": [
+              "Add"
+            ],
+            "binary_operations": [
+              "Add"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "BinOp",
+              "Name",
+              "Load",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Mult",
+              "Name",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "643cbcd444621bd4b1aef3ffeaa39e18",
+            "alpha_renamed_hash": "68ba61fe6774df5a70b36e7601601160"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Add"
+            ],
+            "precedence_levels": {
+              "Add": 3
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "For",
+              "AugAssign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "For_2",
+              "AugAssign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [
+              "range"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "result": []
+            },
+            "assignments": {
+              "result": "Constant(value=1)"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_factorial"
+              ],
+              [
+                "function_factorial",
+                "loop"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "factorial": {
+              "name": "factorial",
+              "args": [
+                "n"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [
+              "Add"
+            ],
+            "associative_ops": [
+              "Add"
+            ],
+            "binary_operations": [
+              "Add"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "BinOp",
+              "Name",
+              "Load",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Mult",
+              "Name",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "643cbcd444621bd4b1aef3ffeaa39e18",
+            "alpha_renamed_hash": "68ba61fe6774df5a70b36e7601601160"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Add"
+            ],
+            "precedence_levels": {
+              "Add": 3
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "For",
+              "AugAssign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "For_2",
+              "AugAssign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [
+              "range"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "result": []
+            },
+            "assignments": {
+              "result": "Constant(value=1)"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_factorial"
+              ],
+              [
+                "function_factorial",
+                "loop"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "factorial": {
+              "name": "factorial",
+              "args": [
+                "n"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [
+              "Add"
+            ],
+            "associative_ops": [
+              "Add"
+            ],
+            "binary_operations": [
+              "Add"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "BinOp",
+              "Name",
+              "Load",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Mult",
+              "Name",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "643cbcd444621bd4b1aef3ffeaa39e18",
+            "alpha_renamed_hash": "68ba61fe6774df5a70b36e7601601160"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Add"
+            ],
+            "precedence_levels": {
+              "Add": 3
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "For",
+              "AugAssign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "For_2",
+              "AugAssign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [
+              "range"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "result": []
+            },
+            "assignments": {
+              "result": "Constant(value=1)"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_factorial"
+              ],
+              [
+                "function_factorial",
+                "loop"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "factorial": {
+              "name": "factorial",
+              "args": [
+                "n"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [
+              "Add"
+            ],
+            "associative_ops": [
+              "Add"
+            ],
+            "binary_operations": [
+              "Add"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "BinOp",
+              "Name",
+              "Load",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Mult",
+              "Name",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "643cbcd444621bd4b1aef3ffeaa39e18",
+            "alpha_renamed_hash": "68ba61fe6774df5a70b36e7601601160"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Add"
+            ],
+            "precedence_levels": {
+              "Add": 3
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "For",
+              "AugAssign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "For_2",
+              "AugAssign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [
+              "range"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "result": []
+            },
+            "assignments": {
+              "result": "Constant(value=1)"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_factorial"
+              ],
+              [
+                "function_factorial",
+                "loop"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "factorial": {
+              "name": "factorial",
+              "args": [
+                "n"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [
+              "Add"
+            ],
+            "associative_ops": [
+              "Add"
+            ],
+            "binary_operations": [
+              "Add"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "BinOp",
+              "Name",
+              "Load",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Mult",
+              "Name",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "643cbcd444621bd4b1aef3ffeaa39e18",
+            "alpha_renamed_hash": "68ba61fe6774df5a70b36e7601601160"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Add"
+            ],
+            "precedence_levels": {
+              "Add": 3
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "For",
+              "AugAssign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "For_2",
+              "AugAssign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [
+              "range"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "result": []
+            },
+            "assignments": {
+              "result": "Constant(value=1)"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_factorial"
+              ],
+              [
+                "function_factorial",
+                "loop"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "factorial": {
+              "name": "factorial",
+              "args": [
+                "n"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [
+              "Add"
+            ],
+            "associative_ops": [
+              "Add"
+            ],
+            "binary_operations": [
+              "Add"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "BinOp",
+              "Name",
+              "Load",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Mult",
+              "Name",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "643cbcd444621bd4b1aef3ffeaa39e18",
+            "alpha_renamed_hash": "68ba61fe6774df5a70b36e7601601160"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Add"
+            ],
+            "precedence_levels": {
+              "Add": 3
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "For",
+              "AugAssign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "For_2",
+              "AugAssign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [
+              "range"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "result": []
+            },
+            "assignments": {
+              "result": "Constant(value=1)"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_factorial"
+              ],
+              [
+                "function_factorial",
+                "loop"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "factorial": {
+              "name": "factorial",
+              "args": [
+                "n"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [
+              "Add"
+            ],
+            "associative_ops": [
+              "Add"
+            ],
+            "binary_operations": [
+              "Add"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "BinOp",
+              "Name",
+              "Load",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Mult",
+              "Name",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "643cbcd444621bd4b1aef3ffeaa39e18",
+            "alpha_renamed_hash": "68ba61fe6774df5a70b36e7601601160"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Add"
+            ],
+            "precedence_levels": {
+              "Add": 3
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "For",
+              "AugAssign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "For_2",
+              "AugAssign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [
+              "range"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "result": []
+            },
+            "assignments": {
+              "result": "Constant(value=1)"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_factorial"
+              ],
+              [
+                "function_factorial",
+                "loop"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "factorial": {
+              "name": "factorial",
+              "args": [
+                "n"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [
+              "Add"
+            ],
+            "associative_ops": [
+              "Add"
+            ],
+            "binary_operations": [
+              "Add"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "BinOp",
+              "Name",
+              "Load",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Mult",
+              "Name",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "643cbcd444621bd4b1aef3ffeaa39e18",
+            "alpha_renamed_hash": "68ba61fe6774df5a70b36e7601601160"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Add"
+            ],
+            "precedence_levels": {
+              "Add": 3
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "For",
+              "AugAssign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "For_2",
+              "AugAssign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [
+              "range"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "result": []
+            },
+            "assignments": {
+              "result": "Constant(value=1)"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_factorial"
+              ],
+              [
+                "function_factorial",
+                "loop"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "factorial": {
+              "name": "factorial",
+              "args": [
+                "n"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [
+              "Add"
+            ],
+            "associative_ops": [
+              "Add"
+            ],
+            "binary_operations": [
+              "Add"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "BinOp",
+              "Name",
+              "Load",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Mult",
+              "Name",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "643cbcd444621bd4b1aef3ffeaa39e18",
+            "alpha_renamed_hash": "68ba61fe6774df5a70b36e7601601160"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Add"
+            ],
+            "precedence_levels": {
+              "Add": 3
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "For",
+              "AugAssign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "For_2",
+              "AugAssign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [
+              "range"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "result": []
+            },
+            "assignments": {
+              "result": "Constant(value=1)"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_factorial"
+              ],
+              [
+                "function_factorial",
+                "loop"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "factorial": {
+              "name": "factorial",
+              "args": [
+                "n"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [
+              "Add"
+            ],
+            "associative_ops": [
+              "Add"
+            ],
+            "binary_operations": [
+              "Add"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "BinOp",
+              "Name",
+              "Load",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Mult",
+              "Name",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "643cbcd444621bd4b1aef3ffeaa39e18",
+            "alpha_renamed_hash": "68ba61fe6774df5a70b36e7601601160"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Add"
+            ],
+            "precedence_levels": {
+              "Add": 3
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "For",
+              "AugAssign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "For_2",
+              "AugAssign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [
+              "range"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "result": []
+            },
+            "assignments": {
+              "result": "Constant(value=1)"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_factorial"
+              ],
+              [
+                "function_factorial",
+                "loop"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "factorial": {
+              "name": "factorial",
+              "args": [
+                "n"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [
+              "Add"
+            ],
+            "associative_ops": [
+              "Add"
+            ],
+            "binary_operations": [
+              "Add"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "BinOp",
+              "Name",
+              "Load",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Mult",
+              "Name",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "643cbcd444621bd4b1aef3ffeaa39e18",
+            "alpha_renamed_hash": "68ba61fe6774df5a70b36e7601601160"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Add"
+            ],
+            "precedence_levels": {
+              "Add": 3
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "For",
+              "AugAssign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "For_2",
+              "AugAssign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [
+              "range"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "result": []
+            },
+            "assignments": {
+              "result": "Constant(value=1)"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_factorial"
+              ],
+              [
+                "function_factorial",
+                "loop"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "factorial": {
+              "name": "factorial",
+              "args": [
+                "n"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [
+              "Add"
+            ],
+            "associative_ops": [
+              "Add"
+            ],
+            "binary_operations": [
+              "Add"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "BinOp",
+              "Name",
+              "Load",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Mult",
+              "Name",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "643cbcd444621bd4b1aef3ffeaa39e18",
+            "alpha_renamed_hash": "68ba61fe6774df5a70b36e7601601160"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Add"
+            ],
+            "precedence_levels": {
+              "Add": 3
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "For",
+              "AugAssign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "For_2",
+              "AugAssign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [
+              "range"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "result": []
+            },
+            "assignments": {
+              "result": "Constant(value=1)"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_factorial"
+              ],
+              [
+                "function_factorial",
+                "loop"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "factorial": {
+              "name": "factorial",
+              "args": [
+                "n"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [
+              "Add"
+            ],
+            "associative_ops": [
+              "Add"
+            ],
+            "binary_operations": [
+              "Add"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "BinOp",
+              "Name",
+              "Load",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Mult",
+              "Name",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "643cbcd444621bd4b1aef3ffeaa39e18",
+            "alpha_renamed_hash": "68ba61fe6774df5a70b36e7601601160"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Add"
+            ],
+            "precedence_levels": {
+              "Add": 3
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "For",
+              "AugAssign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "For_2",
+              "AugAssign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [
+              "range"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "result": []
+            },
+            "assignments": {
+              "result": "Constant(value=1)"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_factorial"
+              ],
+              [
+                "function_factorial",
+                "loop"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "factorial": {
+              "name": "factorial",
+              "args": [
+                "n"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [
+              "Add"
+            ],
+            "associative_ops": [
+              "Add"
+            ],
+            "binary_operations": [
+              "Add"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "BinOp",
+              "Name",
+              "Load",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Mult",
+              "Name",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "643cbcd444621bd4b1aef3ffeaa39e18",
+            "alpha_renamed_hash": "68ba61fe6774df5a70b36e7601601160"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Add"
+            ],
+            "precedence_levels": {
+              "Add": 3
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "For",
+              "AugAssign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "For_2",
+              "AugAssign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [
+              "range"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "result": []
+            },
+            "assignments": {
+              "result": "Constant(value=1)"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_factorial"
+              ],
+              [
+                "function_factorial",
+                "loop"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "factorial": {
+              "name": "factorial",
+              "args": [
+                "n"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [
+              "Add"
+            ],
+            "associative_ops": [
+              "Add"
+            ],
+            "binary_operations": [
+              "Add"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "BinOp",
+              "Name",
+              "Load",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Mult",
+              "Name",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "643cbcd444621bd4b1aef3ffeaa39e18",
+            "alpha_renamed_hash": "68ba61fe6774df5a70b36e7601601160"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Add"
+            ],
+            "precedence_levels": {
+              "Add": 3
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "For",
+              "AugAssign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "For_2",
+              "AugAssign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [
+              "range"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "result": []
+            },
+            "assignments": {
+              "result": "Constant(value=1)"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_factorial"
+              ],
+              [
+                "function_factorial",
+                "loop"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "factorial": {
+              "name": "factorial",
+              "args": [
+                "n"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [
+              "Add"
+            ],
+            "associative_ops": [
+              "Add"
+            ],
+            "binary_operations": [
+              "Add"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "BinOp",
+              "Name",
+              "Load",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Mult",
+              "Name",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "643cbcd444621bd4b1aef3ffeaa39e18",
+            "alpha_renamed_hash": "68ba61fe6774df5a70b36e7601601160"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Add"
+            ],
+            "precedence_levels": {
+              "Add": 3
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "For",
+              "AugAssign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "For_2",
+              "AugAssign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [
+              "range"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "result": []
+            },
+            "assignments": {
+              "result": "Constant(value=1)"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_factorial"
+              ],
+              [
+                "function_factorial",
+                "loop"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "factorial": {
+              "name": "factorial",
+              "args": [
+                "n"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [
+              "Add"
+            ],
+            "associative_ops": [
+              "Add"
+            ],
+            "binary_operations": [
+              "Add"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "BinOp",
+              "Name",
+              "Load",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Mult",
+              "Name",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "643cbcd444621bd4b1aef3ffeaa39e18",
+            "alpha_renamed_hash": "68ba61fe6774df5a70b36e7601601160"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Add"
+            ],
+            "precedence_levels": {
+              "Add": 3
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "For",
+              "AugAssign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "For_2",
+              "AugAssign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [
+              "range"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "result": []
+            },
+            "assignments": {
+              "result": "Constant(value=1)"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_factorial"
+              ],
+              [
+                "function_factorial",
+                "loop"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "factorial": {
+              "name": "factorial",
+              "args": [
+                "n"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [
+              "Add"
+            ],
+            "associative_ops": [
+              "Add"
+            ],
+            "binary_operations": [
+              "Add"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Name",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "BinOp",
+              "Name",
+              "Load",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Mult",
+              "Name",
+              "Load",
+              "Return",
+              "Name",
+              "Load",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "52a93df61c316babc39445662fb747dd",
+            "alpha_renamed_hash": "b643ca740cf94b0725a76773a3609c05"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Add"
+            ],
+            "precedence_levels": {
+              "Add": 3
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "For",
+              "AugAssign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "For_2",
+              "AugAssign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 1,
+            "while_loops": 0,
+            "function_calls": [
+              "range"
+            ],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "result": []
+            },
+            "assignments": {
+              "result": "Constant(value=1)"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_factorial"
+              ],
+              [
+                "function_factorial",
+                "loop"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "factorial": {
+              "name": "factorial",
+              "args": [
+                "n"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": true,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [
+              "Add"
+            ],
+            "associative_ops": [
+              "Add"
+            ],
+            "binary_operations": [
+              "Add"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              1,
+              2,
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Constant",
+              "For",
+              "Name",
+              "Store",
+              "Call",
+              "Name",
+              "Load",
+              "Constant",
+              "BinOp",
+              "Name",
+              "Load",
+              "Add",
+              "Constant",
+              "AugAssign",
+              "Name",
+              "Store",
+              "Mult",
+              "Name",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 6,
+            "ast_hash": "643cbcd444621bd4b1aef3ffeaa39e18",
+            "alpha_renamed_hash": "68ba61fe6774df5a70b36e7601601160"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Add"
+            ],
+            "precedence_levels": {
+              "Add": 3
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "For",
+              "AugAssign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "For_2",
+              "AugAssign_3",
+              "Return_4"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "For"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        }
+      ],
+      "structural_groups": {
+        "7400781287660026255_2501580401563150492_-778160536153995774_6844397289568658271": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          19
+        ],
+        "7400781287660026255_2501580401563150492_-778160536153995774_5845766007216565164": [
+          18
+        ]
+      },
+      "distances_to_canon": [
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238,
+        0.2738095238095238
+      ],
+      "mean_distance": 0.2738095238095238,
+      "std_distance": 0.0
+    }
+  },
+  "bell_curve_analysis": {
+    "plot_path": "outputs\\analysis\\pre_post_comparison_factorial_temp1.0.png",
+    "statistics": {
+      "pre_repair": {
+        "mean": 0.2738095238095238,
+        "std": 0.0,
+        "median": 0.2738095238095238,
+        "min": 0.2738095238095238,
+        "max": 0.2738095238095238,
+        "r_anchor": 0.0
+      },
+      "post_repair": {
+        "mean": 0.2738095238095238,
+        "std": 0.0,
+        "median": 0.2738095238095238,
+        "min": 0.2738095238095238,
+        "max": 0.2738095238095238,
+        "r_anchor": 0.0
+      },
+      "deltas": {
+        "delta_mu": 0.0,
+        "delta_sigma": 0.0,
+        "delta_rescue": 0.0
+      },
+      "statistical_tests": {
+        "mann_whitney_u": {
+          "statistic": 200.0,
+          "p_value": 1.0
+        },
+        "kolmogorov_smirnov": {
+          "statistic": 0.0,
+          "p_value": 1.0
+        },
+        "significantly_different": false
+      }
+    },
+    "r_repair_at_k": {
+      "thresholds": [
+        0.05,
+        0.1,
+        0.15,
+        0.2,
+        0.25,
+        0.3
+      ],
+      "pre_repair": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "post_repair": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "hypothesis_evaluation": {
+    "hypothesis": "SKYT improves LLM code repeatability through contract-driven canonicalization",
+    "supported": false,
+    "evidence": {
+      "raw_repeatability": 0.95,
+      "behavioral_improvement": 0.050000000000000044,
+      "structural_improvement": 0.0,
+      "total_improvement": 0.0
+    },
+    "conclusion": "Hypothesis NOT SUPPORTED: No significant improvement"
+  }
+}

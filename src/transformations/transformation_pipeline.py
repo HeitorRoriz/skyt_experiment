@@ -12,6 +12,9 @@ from .structural.arithmetic_expression_normalizer import ArithmeticExpressionNor
 from .structural.class_method_reorderer import ClassMethodReorderer
 from .structural.import_normalizer import ImportNormalizer
 from .structural.snap_to_canon_finalizer import SnapToCanonFinalizer
+from .structural.single_exit_transformer import SingleExitTransformer
+from .structural.break_remover import BreakRemover
+from .structural.boundary_normalizer import BoundaryNormalizer
 from .behavioral.algorithm_optimizer import AlgorithmOptimizer
 from .behavioral.boundary_condition_aligner import BoundaryConditionAligner
 from .behavioral.recursion_schema_aligner import RecursionSchemaAligner
@@ -47,6 +50,11 @@ class TransformationPipeline:
         transformations = [
             # PRIMARY: Property-driven transformation (generic, no hardcoded logic)
             PropertyDrivenTransformer(contract=self.contract_data, debug_mode=self.debug_mode),
+            
+            # MISRA C / NASA P10 transformers (for strict contracts)
+            SingleExitTransformer(),  # MISRA 15.5: Single exit point
+            BreakRemover(),  # MISRA 15.4: No break/continue
+            BoundaryNormalizer(),  # Normalize equivalent boundary conditions
             
             # FALLBACK: Algorithm-specific transformers (kept for compatibility)
             # These will only apply if PropertyDrivenTransformer doesn't handle the case

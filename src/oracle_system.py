@@ -26,20 +26,28 @@ class OracleSystem:
             "slugify": self._slugify_oracle,
             "balanced_brackets": self._balanced_brackets_oracle,
             "gcd": self._gcd_oracle,
-            "lru_cache": self._lru_cache_oracle
+            "lru_cache": self._lru_cache_oracle,
+            "quick_sort": self._quick_sort_oracle,
+            "factorial": self._factorial_oracle,
+            "is_palindrome": self._is_palindrome_oracle,
+            "is_prime": self._is_prime_oracle
         }
     
-    def run_oracle_tests(self, code: str, contract: Dict[str, Any]) -> Dict[str, Any]:
+    def run_oracle_tests(self, code: str, contract: Dict[str, Any], timeout: int = 5) -> Dict[str, Any]:
         """
-        Run oracle tests for given code and contract
+        Run oracle tests for given code and contract with timeout protection
         
         Args:
             code: Python code to test
             contract: Contract specification with oracle requirements
+            timeout: Maximum seconds to wait for tests (default 5)
             
         Returns:
             Test results with pass/fail status and details
         """
+        import threading
+        import time
+        
         algorithm_family = contract.get("algorithm_family", "fibonacci")
         oracle_requirements = contract.get("oracle_requirements", {})
         
@@ -50,23 +58,41 @@ class OracleSystem:
                 "test_results": []
             }
         
-        try:
-            # Execute the code safely
-            namespace = {}
-            exec(code, namespace)
-            
-            # Run algorithm-specific oracle
-            oracle_func = self.algorithm_oracles[algorithm_family]
-            results = oracle_func(namespace, oracle_requirements)
-            
-            return results
-            
-        except Exception as e:
+        # Use threading to implement timeout
+        result = [None]
+        error = [None]
+        
+        def run_tests():
+            try:
+                # Execute the code safely
+                namespace = {}
+                exec(code, namespace)
+                
+                # Run algorithm-specific oracle
+                oracle_func = self.algorithm_oracles[algorithm_family]
+                result[0] = oracle_func(namespace, oracle_requirements)
+            except Exception as e:
+                error[0] = e
+        
+        thread = threading.Thread(target=run_tests, daemon=True)
+        thread.start()
+        thread.join(timeout=timeout)
+        
+        if thread.is_alive():
+            # Timeout - code is hanging (likely infinite loop)
             return {
                 "passed": False,
-                "error": f"Code execution failed: {str(e)}",
+                "error": f"Oracle tests timed out after {timeout}s (likely infinite loop in code)",
                 "test_results": []
             }
+        elif error[0]:
+            return {
+                "passed": False,
+                "error": f"Code execution failed: {str(error[0])}",
+                "test_results": []
+            }
+        else:
+            return result[0]
     
     def _fibonacci_oracle(self, namespace: Dict, requirements: Dict) -> Dict[str, Any]:
         """Oracle tests for Fibonacci implementations"""
@@ -885,3 +911,146 @@ class OracleSystem:
             "total_tests": total_tests,
             "test_results": test_results
         }
+
+    def _quick_sort_oracle(self, namespace: Dict, requirements: Dict) -> Dict[str, Any]:
+        """Oracle tests for quick sort implementations"""
+        test_results = []
+        
+        sort_func = None
+        for name, obj in namespace.items():
+            if callable(obj) and any(keyword in name.lower() for keyword in ['sort', 'quick']):
+                sort_func = obj
+                break
+        
+        if not sort_func:
+            return {"passed": False, "error": "No quick_sort function found", "test_results": []}
+        
+        test_cases = requirements.get("test_cases", [])
+        if not test_cases:
+            return {"passed": False, "error": "No test cases found", "test_results": []}
+        
+        passed_tests = 0
+        for test_case in test_cases:
+            input_arr = test_case.get("input", [[]])[0] if isinstance(test_case.get("input"), list) else []
+            expected = test_case.get("expected", [])
+            description = test_case.get("description", "")
+            
+            try:
+                input_copy = input_arr.copy() if isinstance(input_arr, list) else []
+                result = sort_func(input_copy)
+                if result is None:
+                    result = input_copy
+                passed = (result == expected)
+                test_results.append({"input": input_arr, "expected": expected, "actual": result, "passed": passed, "description": description})
+                if passed:
+                    passed_tests += 1
+            except Exception as e:
+                test_results.append({"input": input_arr, "expected": expected, "passed": False, "error": str(e), "description": description})
+        
+        pass_rate = passed_tests / len(test_cases) if test_cases else 0.0
+        return {"passed": pass_rate >= requirements.get("required_pass_rate", 0.8), "pass_rate": pass_rate, "passed_tests": passed_tests, "total_tests": len(test_cases), "test_results": test_results}
+    
+    def _factorial_oracle(self, namespace: Dict, requirements: Dict) -> Dict[str, Any]:
+        """Oracle tests for factorial implementations"""
+        test_results = []
+        
+        factorial_func = None
+        for name, obj in namespace.items():
+            if callable(obj) and 'factorial' in name.lower():
+                factorial_func = obj
+                break
+        
+        if not factorial_func:
+            return {"passed": False, "error": "No factorial function found", "test_results": []}
+        
+        test_cases = requirements.get("test_cases", [])
+        if not test_cases:
+            return {"passed": False, "error": "No test cases found", "test_results": []}
+        
+        passed_tests = 0
+        for test_case in test_cases:
+            input_val = test_case.get("input", 0)
+            expected = test_case.get("expected", 1)
+            description = test_case.get("description", "")
+            
+            try:
+                result = factorial_func(input_val)
+                passed = (result == expected)
+                test_results.append({"input": input_val, "expected": expected, "actual": result, "passed": passed, "description": description})
+                if passed:
+                    passed_tests += 1
+            except Exception as e:
+                test_results.append({"input": input_val, "expected": expected, "passed": False, "error": str(e), "description": description})
+        
+        pass_rate = passed_tests / len(test_cases) if test_cases else 0.0
+        return {"passed": pass_rate >= requirements.get("required_pass_rate", 0.8), "pass_rate": pass_rate, "passed_tests": passed_tests, "total_tests": len(test_cases), "test_results": test_results}
+    
+    def _is_palindrome_oracle(self, namespace: Dict, requirements: Dict) -> Dict[str, Any]:
+        """Oracle tests for palindrome checking implementations"""
+        test_results = []
+        
+        palindrome_func = None
+        for name, obj in namespace.items():
+            if callable(obj) and 'palindrome' in name.lower():
+                palindrome_func = obj
+                break
+        
+        if not palindrome_func:
+            return {"passed": False, "error": "No is_palindrome function found", "test_results": []}
+        
+        test_cases = requirements.get("test_cases", [])
+        if not test_cases:
+            return {"passed": False, "error": "No test cases found", "test_results": []}
+        
+        passed_tests = 0
+        for test_case in test_cases:
+            input_str = test_case.get("input", "")
+            expected = test_case.get("expected", False)
+            description = test_case.get("description", "")
+            
+            try:
+                result = palindrome_func(input_str)
+                passed = (result == expected)
+                test_results.append({"input": input_str, "expected": expected, "actual": result, "passed": passed, "description": description})
+                if passed:
+                    passed_tests += 1
+            except Exception as e:
+                test_results.append({"input": input_str, "expected": expected, "passed": False, "error": str(e), "description": description})
+        
+        pass_rate = passed_tests / len(test_cases) if test_cases else 0.0
+        return {"passed": pass_rate >= requirements.get("required_pass_rate", 0.8), "pass_rate": pass_rate, "passed_tests": passed_tests, "total_tests": len(test_cases), "test_results": test_results}
+    
+    def _is_prime_oracle(self, namespace: Dict, requirements: Dict) -> Dict[str, Any]:
+        """Oracle tests for prime checking implementations"""
+        test_results = []
+        
+        prime_func = None
+        for name, obj in namespace.items():
+            if callable(obj) and 'prime' in name.lower():
+                prime_func = obj
+                break
+        
+        if not prime_func:
+            return {"passed": False, "error": "No is_prime function found", "test_results": []}
+        
+        test_cases = requirements.get("test_cases", [])
+        if not test_cases:
+            return {"passed": False, "error": "No test cases found", "test_results": []}
+        
+        passed_tests = 0
+        for test_case in test_cases:
+            input_val = test_case.get("input", 2)
+            expected = test_case.get("expected", False)
+            description = test_case.get("description", "")
+            
+            try:
+                result = prime_func(input_val)
+                passed = (result == expected)
+                test_results.append({"input": input_val, "expected": expected, "actual": result, "passed": passed, "description": description})
+                if passed:
+                    passed_tests += 1
+            except Exception as e:
+                test_results.append({"input": input_val, "expected": expected, "passed": False, "error": str(e), "description": description})
+        
+        pass_rate = passed_tests / len(test_cases) if test_cases else 0.0
+        return {"passed": pass_rate >= requirements.get("required_pass_rate", 0.8), "pass_rate": pass_rate, "passed_tests": passed_tests, "total_tests": len(test_cases), "test_results": test_results}

@@ -41,15 +41,24 @@ class CodeTransformer:
         ]
     
     def transform_to_canon(self, code: str, contract_id: str, 
-                          max_iterations: int = 5, contract: Dict[str, Any] = None) -> Dict[str, Any]:
+                          max_iterations: int = 5, contract: Dict[str, Any] = None,
+                          oracle_system = None) -> Dict[str, Any]:
         """
-        Transform code to match canonical form using modular transformation system
+        Transform code to match canonical form using intelligent transformation system
+        
+        Strategy:
+        1. Calculate initial distance from canon
+        2. If close enough (< 0.1): No transformation needed
+        3. Try Level 2: Intelligent simplification (remove redundant statements)
+        4. If still not matching, try Level 3: Replace with canonical algorithm
+        5. Validate all transformations with oracle tests
         
         Args:
             code: Code to transform
             contract_id: Contract identifier for canon lookup
-            max_iterations: Maximum transformation iterations
-            contract: Optional contract data for validation
+            max_iterations: Maximum transformation iterations (unused in new system)
+            contract: Contract data for validation
+            oracle_system: Oracle system for post-transformation validation
             
         Returns:
             Transformation results with success status and transformed code
@@ -62,44 +71,117 @@ class CodeTransformer:
                 "error": "No canon found for contract",
                 "original_code": code,
                 "transformed_code": code,
-                "transformations_applied": []
+                "transformations_applied": [],
+                "final_distance": 1.0,
+                "transformation_level": 0
             }
         
         canon_code = canon_data.get("canonical_code", "")
         canon_properties = canon_data.get("foundational_properties", {})
         
-        # Use the new modular transformation system if available
-        if self.use_modular_system:
-            # Create pipeline with contract
-            from .transformations.transformation_pipeline import TransformationPipeline
-            pipeline = TransformationPipeline(debug_mode=False, contract=contract)
-            
-            modular_result = pipeline.transform_code(
-                code, canon_code, 
-                max_iterations=max_iterations,
-                contract=contract,
-                contract_id=contract_id
-            )
-            current_code = modular_result['final_code']
-            transformations_applied = modular_result['successful_transformations']
-        else:
-            # Fallback to legacy system
-            current_code = code
-            transformations_applied = []
+        # Calculate initial distance
+        initial_properties = self.properties_extractor.extract_all_properties(code)
+        initial_distance = self.properties_extractor.calculate_distance(
+            canon_properties, initial_properties
+        )
         
-        # Final distance calculation
-        final_properties = self.properties_extractor.extract_all_properties(current_code)
+        # If already close enough, no transformation needed
+        if initial_distance < 0.1:
+            return {
+                "success": True,
+                "original_code": code,
+                "transformed_code": code,
+                "final_distance": initial_distance,
+                "transformation_level": 0,
+                "transformations_applied": [],
+                "iterations": 0
+            }
+        
+        # Try Level 2: Intelligent simplification (pattern-agnostic)
+        try:
+            from .transformations.intelligent_simplifier import intelligent_simplify
+            
+            if oracle_system and contract:
+                level2_result = intelligent_simplify(code, canon_code, contract, oracle_system)
+                
+                if level2_result.get('success'):
+                    # Check if it matches canon now
+                    level2_properties = self.properties_extractor.extract_all_properties(
+                        level2_result['transformed_code']
+                    )
+                    level2_distance = self.properties_extractor.calculate_distance(
+                        canon_properties, level2_properties
+                    )
+                    
+                    if level2_distance < 0.1:
+                        # Success with Level 2!
+                        return {
+                            "success": True,
+                            "original_code": code,
+                            "transformed_code": level2_result['transformed_code'],
+                            "final_distance": level2_distance,
+                            "transformation_level": 2,
+                            "transformations_applied": level2_result.get('removed_statements', []),
+                            "iterations": 1
+                        }
+        except ImportError:
+            pass  # Level 2 not available, continue to Level 3
+        
+        # Level 2 didn't work or not available, try Level 3: Replace with canon
+        try:
+            from .transformations.convert_to_simple_algorithm import convert_to_simple_algorithm
+            
+            level3_result = convert_to_simple_algorithm(code, canon_code, contract)
+            
+            if level3_result.get('success'):
+                # Validate with oracle if available
+                if oracle_system and contract:
+                    oracle_result = oracle_system.run_oracle_tests(
+                        level3_result['transformed_code'], 
+                        contract
+                    )
+                    
+                    if not oracle_result.get('passed', False):
+                        # Transformation broke correctness - revert
+                        return {
+                            "success": False,
+                            "error": "Transformation failed oracle validation",
+                            "original_code": code,
+                            "transformed_code": code,
+                            "final_distance": initial_distance,
+                            "transformation_level": 0,
+                            "transformations_applied": [],
+                            "iterations": 0
+                        }
+                
+                # Success with Level 3!
+                return {
+                    "success": True,
+                    "original_code": code,
+                    "transformed_code": level3_result['transformed_code'],
+                    "final_distance": 0.0,  # Exact match to canon
+                    "transformation_level": 3,
+                    "transformations_applied": level3_result.get('transformations', []),
+                    "iterations": 1
+                }
+        except ImportError:
+            pass  # Level 3 not available
+        
+        # All transformations failed
+        final_properties = self.properties_extractor.extract_all_properties(code)
         final_distance = self.properties_extractor.calculate_distance(
             canon_properties, final_properties
         )
         
         return {
-            "success": final_distance < 0.1,  # Consider success if very close
+            "success": False,
+            "error": "Could not transform to canonical form",
             "original_code": code,
-            "transformed_code": current_code,
+            "transformed_code": code,
             "final_distance": final_distance,
-            "iterations": len(transformations_applied),
-            "transformations_applied": transformations_applied
+            "transformation_level": 0,
+            "transformations_applied": [],
+            "iterations": 0
         }
     
     def _find_best_transformation(self, code: str, current_props: Dict[str, Any], 
