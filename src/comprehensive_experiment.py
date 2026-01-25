@@ -16,6 +16,7 @@ from .oracle_system import OracleSystem
 from .code_transformer import CodeTransformer
 from .metrics import ComprehensiveMetrics
 from .bell_curve_analysis import BellCurveAnalyzer
+from .simple_stats import compare_metrics, format_comparison_report
 from .config import TARGET_RUNS_PER_PROMPT, OUTPUTS_DIR
 
 
@@ -38,12 +39,12 @@ class ComprehensiveExperiment:
     Complete SKYT experiment pipeline implementation
     """
     
-    def __init__(self, output_dir: str = OUTPUTS_DIR, debug_mode: bool = True):
+    def __init__(self, output_dir: str = OUTPUTS_DIR, debug_mode: bool = True, model: str = None):
         self.output_dir = output_dir
         os.makedirs(output_dir, exist_ok=True)
         
         # Initialize all systems
-        self.llm_client = LLMClient()
+        self.llm_client = LLMClient(model=model) if model else LLMClient()
         self.canon_system = CanonSystem(os.path.join(output_dir, "canon"))
         self.oracle_system = OracleSystem()
         self.code_transformer = CodeTransformer(self.canon_system)
@@ -51,7 +52,7 @@ class ComprehensiveExperiment:
         self.bell_curve_analyzer = BellCurveAnalyzer(os.path.join(output_dir, "analysis"))
         
         print("🚀 SKYT Comprehensive Experiment System Initialized")
-        print("📋 Components: Contract → LLM → Canon → Transform → Metrics → Analysis")
+        print(f"📋 Components: Contract → LLM ({self.llm_client.model}) → Canon → Transform → Metrics → Analysis")
     
     def run_full_experiment(self, contract_template_path: str, contract_id: str,
                           num_runs: int = TARGET_RUNS_PER_PROMPT,

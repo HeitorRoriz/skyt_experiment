@@ -1,150 +1,242 @@
-# Skyt: Prompt Contracts for Software Repeatability in LLM-Assisted Development
+# SKYT: Prompt Contracts for Software Repeatability
 
-> **Anonymized artifact submission for MSR 2026 (Data & Tool Showcase)**  
-> Repository link anonymized using [anonymous.4open.science](https://anonymous.4open.science/).  
-> All organization names and author identifiers have been removed.
+**MSR 2026 - Data and Tool Showcase Track**  
+**Artifact for Paper Reproduction**
 
 ---
 
 ## Overview
 
-**Skyt** is a lightweight middleware that measures **software repeatability** in LLM-assisted code generation.  
-It treats repeatability as a **pinned-pipeline property**, defined by fixed model parameters and a schema-bound prompt contract.
+**SKYT** measures and improves **software repeatability** in LLM-generated code through:
 
-The tool executes tasks under *pinned environments*, normalizes outputs, and computes:
+1. **Prompt Contracts** - Structured specifications with behavioral oracles
+2. **Canonical Anchoring** - Fixed reference for structural comparison
+3. **Property-Based Repair** - AST-level transformations to canonical form
 
-- **R_raw** — raw repeatability (byte-identical outputs)  
-- **R_canon** — canonical repeatability (contract-valid outputs sharing a canonical signature)  
-- **Δ_rescue = R_canon − R_raw** — gain from canonization  
-- **R_repair@k** — repeatability after up to *k* bounded repair attempts  
+### Research Question
 
-Skyt also reports coverage, Wilson 95 % confidence intervals, and a short-term Sigma proxy (Φ⁻¹(R_canon)).
+*Can prompt contracts and canonicalization improve repeatability of LLM-generated code under pinned settings?*
+
+---
+
+## Experiment Summary
+
+### Scope
+
+- **12 algorithmic contracts** (sorting, searching, math, string processing)
+- **3 model families** (GPT-4o-mini, GPT-4o, Claude Sonnet 4.5)
+- **5 temperature settings** (0.0, 0.3, 0.5, 0.7, 1.0)
+- **20 runs per configuration**
+- **Total: 3,600 LLM generations**
+
+### Key Results
+
+| Task | Model | R_raw | R_anchor_pre | R_anchor_post | Δ_rescue |
+|------|-------|-------|--------------|---------------|----------|
+| Binary-Search | GPT-4o-mini | 0.49 | 0.25 | 0.50 | **+0.25** |
+| Balanced-Brackets | GPT-4o-mini | 0.30 | 0.36 | 0.82 | **+0.46** |
+| Slugify | GPT-4o-mini | 0.56 | 0.54 | 0.76 | **+0.22** |
+
+*Aggregated across all temperatures (N=100 per task/model)*
+
+**Key Finding:** Canonicalization improves repeatability by 22-46% for GPT-4o-mini, with the largest improvement on Balanced-Brackets (Δ_rescue = +0.46).
+
+---
+
+## Reproducing Paper Results
+
+### Quick Start
+
+```bash
+# 1. Install dependencies
+pip install -r requirements.txt
+
+# 2. Set up API keys
+cp .env.example .env
+# Edit .env with your OPENAI_API_KEY and ANTHROPIC_API_KEY
+
+# 3. Verify existing results match paper
+python reproduce_paper_results.py --verify-only
+```
+
+### Full Reproduction
+
+```bash
+# Run all 3,600 experiments (requires API keys, ~2-4 hours)
+python reproduce_paper_results.py
+```
+
+### Granular Experiments
+
+```bash
+# Single experiment
+python main.py --contract binary_search \
+  --model gpt-4o-mini --temperature 0.5 --runs 20
+
+# Full evaluation (all 12 contracts)
+python run_phase2_full.py
+```
+
+---
+
+## Experimental Data
+
+All experimental data is in `outputs/`:
+
+### `metrics_summary.csv`
+Aggregated metrics for all 180 configurations (12 contracts × 3 models × 5 temps):
+- `R_raw` - Raw repeatability (byte-identical)
+- `R_anchor_pre` - Canon match before repair
+- `R_anchor_post` - Canon match after repair
+- `Delta_rescue` - Improvement (R_anchor_post - R_anchor_pre)
+- `R_behavioral` - Oracle pass rate
+- `R_structural` - Structural constraint pass rate
+
+### Per-Run JSON Files
+Detailed logs for each experiment configuration:
+- Raw LLM outputs
+- Canonical anchor
+- Oracle test results
+- Property distances
+- Transformation steps
+
+**Example:** `outputs/binary_search_temp0.5_20260123_115030.json`
 
 ---
 
 ## Repository Structure
 
 ```
-skyt-msr-2026/
-├── README.md
-├── LICENSE
-├── environment.yml        # or requirements.txt
-├── configs/
-│   ├── pins.json          # model, temp, decoding, runtime, seeds
-│   ├── contract_basic.json
-│   └── contract_enhanced.json
-├── tasks/
-│   ├── fibonacci20/
-│   │   ├── oracle.py
-│   │   └── prompts/
-│   ├── slugify/
-│   └── brackets/
-├── runs/                  # sample outputs (anonymized)
-│   ├── outputs.jsonl
-│   ├── canon.jsonl
-│   └── metrics.csv
-├── skyt/
-│   ├── cli.py
-│   ├── metrics.py
-│   └── canon.py
-├── scripts/
-│   ├── run_all.sh
-│   └── plot_tables.py
-└── results/
-    ├── table_repeatability.csv
-    └── table_repair.csv
+skyt_experiment/
+├── README.md                    # This file
+├── reproduce_paper_results.py   # Single-command reproduction
+├── main.py                      # CLI for experiments
+├── requirements.txt             # Python dependencies
+│
+├── src/                         # Core implementation
+│   ├── llm_client.py            # Multi-provider LLM client
+│   ├── contract.py              # Contract system
+│   ├── oracle_system.py         # Behavioral testing
+│   ├── canon_system.py          # Canonical anchoring
+│   ├── code_transformer.py      # Property-based repair
+│   ├── foundational_properties.py  # 13 semantic properties
+│   ├── metrics.py               # Repeatability metrics
+│   └── enhanced_stats.py        # Statistical analysis
+│
+├── contracts/
+│   └── templates.json           # 12 algorithmic contracts
+│
+└── outputs/
+    ├── metrics_summary.csv      # Aggregated results
+    └── *.json                   # Per-run detailed logs
 ```
 
 ---
 
-## How to Reproduce the Results
+## Metrics Explained
 
-### 1 – Environment Setup
-```bash
-conda env create -f environment.yml
-conda activate skyt
-# or:
-pip install -r requirements.txt
-```
+### R_raw (Raw Repeatability)
+Proportion of byte-identical outputs under pinned settings.
 
-### 2 – Run All Experiments
-```bash
-bash scripts/run_all.sh
-```
-This executes all tasks (Fibonacci-20, Slugify, Balanced-Brackets) across contract types and temperature grid,  
-logs results to `runs/`, and regenerates Tables 1–2 as CSVs under `results/`.
+### R_anchor_pre (Pre-Repair Canon Match)
+Proportion of outputs matching canonical anchor before repair.
 
-### 3 – Generate Tables and Plots
-```bash
-python scripts/plot_tables.py
-```
-The script produces compact tables summarizing:
+### R_anchor_post (Post-Repair Canon Match)
+Proportion of outputs matching canonical anchor after property-based repair.
 
-- R_raw, R_canon, Δ_rescue (Table 1)  
-- R_repair@1, ΔR, and monotonicity M (Table 2)
+### Δ_rescue (Rescue Delta)
+Improvement from repair: `R_anchor_post - R_anchor_pre`
+
+**Interpretation:**
+- Δ_rescue > 0: Repair successfully increases canon alignment
+- Δ_rescue = 0: No improvement (outputs already canonical or too diverse)
 
 ---
 
-## Data Description
+## Statistical Rigor
 
-Each row in `metrics.csv` contains:
+All results include:
 
-| Field | Description |
-|--------|-------------|
-| task | task identifier (`fib20`, `slugify`, `brackets`) |
-| contract | `basic` or `enhanced` |
-| temperature | decoding temperature |
-| run_id | 1–20 |
-| r_raw | raw repeatability indicator (0/1) |
-| r_canon | canonical repeatability indicator (0/1) |
-| r_repair1 | post-repair indicator |
-| delta_rescue | R_canon − R_raw |
-| monotonicity | boolean monotonicity per run |
-| timestamp | UTC ISO-8601 time of run |
+1. **Wilson 95% Confidence Intervals** (for proportions with n=20)
+2. **Fisher's Exact Test** (for comparing pre/post repair)
+3. **Effect Sizes** (Cohen's h, odds ratios)
+4. **Holm-Bonferroni Correction** (for multiple comparisons)
 
-All generations are normalized, deterministic post-processing; no personal or proprietary data included.
+See `src/enhanced_stats.py` for implementation details.
 
 ---
 
-## Reproducibility Statement
+## Contracts Evaluated
 
-This artifact includes all configuration pins (model, temperature, decoding, runtime, seeds),  
-plus a one-click script to recompute every table in the paper.  
-Running `bash scripts/run_all.sh` regenerates the dataset, metrics, and plots within one hour  
-on a standard workstation (e.g., 8 GB RAM, 4 vCPUs).
+### Numeric (5 tasks)
+- Fibonacci (iterative)
+- Fibonacci (recursive)
+- Factorial
+- GCD (Euclidean algorithm)
+- Primality test
+
+### String (2 tasks)
+- Slugify (URL normalization)
+- Palindrome check
+
+### Data Structures (2 tasks)
+- Balanced brackets (stack-based)
+- LRU Cache (OrderedDict)
+
+### Sorting/Searching (3 tasks)
+- Binary search
+- Merge sort
+- Quick sort
 
 ---
 
-## Limitations
+## Key Findings
 
-- v1 evaluates three tasks and one model family.  
-- Repair loop bounded to *k ≤ 2* iterations.  
-- Schema authoring overhead not yet measured quantitatively.  
-- Future work will extend to multi-language and multi-model settings.
+1. **Temperature Effect:** R_raw decreases with temperature (more diversity), but canonicalization maintains structural repeatability.
 
----
+2. **Model Differences:** 
+   - GPT-4o-mini: Best rescue performance (Δ_rescue up to +0.46)
+   - Claude Sonnet: High raw repeatability but poor canon alignment (different structural patterns)
 
-## License and Data Availability
-
-- **Code:** MIT License  
-- **Data:** CC-BY-4.0 (anonymized synthetic code generations)  
-- **Archive:** versioned artifact snapshot (Zenodo/OSF link redacted for review)
+3. **Task Complexity:** 
+   - Simple tasks (GCD, Fibonacci): High baseline repeatability
+   - Complex tasks (Binary-Search, Balanced-Brackets): Larger improvement from canonicalization
 
 ---
 
 ## Citation
 
-```
+```bibtex
 @inproceedings{skyt2026,
-  title     = {Skyt: Prompt Contracts for Software Repeatability in LLM-Assisted Development},
-  booktitle = {MSR 2026 Data & Tool Showcase},
+  title     = {SKYT: Prompt Contracts for Software Repeatability in LLM-Assisted Development},
+  author    = {[Authors]},
+  booktitle = {Proceedings of the 23rd International Conference on Mining Software Repositories (MSR)},
+  series    = {MSR '26},
   year      = {2026},
-  note      = {Anonymized submission; authors withheld for double-anonymous review.}
+  publisher = {ACM},
+  note      = {Data and Tool Showcase Track}
 }
 ```
 
 ---
 
+## License
+
+- **Code:** MIT License
+- **Data:** CC-BY-4.0
+- **Documentation:** CC-BY-4.0
+
+---
+
 ## Contact
 
-Questions will be addressed after the review period, once anonymity is lifted.
+**Repository:** https://github.com/HeitorRoriz/skyt_experiment  
+**Branch:** `camera-ready-msr2026`
+
+For questions about reproduction or artifact usage, please open an issue on GitHub.
+
+---
+
+## Acknowledgments
+
+We thank the MSR 2026 reviewers for their constructive feedback and Professor Nasser for statistical methodology guidance.

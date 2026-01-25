@@ -83,6 +83,12 @@ Examples:
     )
     
     parser.add_argument(
+        "--model",
+        default="gpt-4o-mini",
+        help="LLM model to use (default: gpt-4o-mini). Supports: gpt-4o-mini, gpt-4o, claude-3-5-sonnet-20241022"
+    )
+    
+    parser.add_argument(
         "--enforce-ood-policy",
         action="store_true",
         help="Enforce out-of-domain policy checks (default: auto-detect from contract)"
@@ -103,7 +109,7 @@ Examples:
         sys.exit(1)
     
     # Initialize experiment system
-    experiment = ComprehensiveExperiment(args.output_dir)
+    experiment = ComprehensiveExperiment(args.output_dir, model=args.model)
     
     # Enable debug mode for transformation pipeline
     debug_mode = True  
