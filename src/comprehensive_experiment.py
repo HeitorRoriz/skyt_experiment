@@ -129,33 +129,90 @@ class ComprehensiveExperiment:
             canon_data = existing_canon
             canon_created = True
         else:
-            # Find first compliant output to create canon
-            for i, code in enumerate(successful_outputs):
-                oracle_result = self.oracle_system.run_oracle_tests(code, contract.data)
+            # Check if this is a strict contract (has misra_c_rules or nasa_power_of_10)
+            constraints = contract.data.get('constraints', {})
+            is_strict_contract = 'misra_c_rules' in constraints or 'nasa_power_of_10' in constraints
+            
+            if is_strict_contract:
+                # For strict contracts: canon MUST be oracle-passing AND contract-compliant
+                from .contract_compliance import check_contract_compliance, make_compliant
                 
-                if oracle_result["passed"]:
-                    print(f"✅ Creating canon from run {i + 1} (first oracle-passing output)")
-                    try:
-                        # CRITICAL FIX: Pass oracle result and require validation
-                        canon_data = self.canon_system.create_canon(
-                            contract, code, 
-                            oracle_result=oracle_result,
-                            require_oracle_pass=True
-                        )
-                        canon_created = True
-                        break
-                    except ValueError as e:
-                        print(f"  ⚠️  Failed to create canon: {e}")
-                else:
-                    print(f"  ❌ Run {i + 1} failed oracle tests")
+                print("  ℹ️  Strict contract detected - canon must be contract-compliant")
+                first_oracle_passing = None
+                first_oracle_passing_idx = None
+                
+                for i, code in enumerate(successful_outputs):
+                    oracle_result = self.oracle_system.run_oracle_tests(code, contract.data)
+                    
+                    if oracle_result["passed"]:
+                        # Save first oracle-passing for fallback
+                        if first_oracle_passing is None:
+                            first_oracle_passing = code
+                            first_oracle_passing_idx = i
+                        
+                        # Check contract compliance
+                        is_compliant, violations = check_contract_compliance(code, contract.data)
+                        
+                        if is_compliant:
+                            print(f"✅ Creating canon from run {i + 1} (oracle-passing + contract-compliant)")
+                            try:
+                                canon_data = self.canon_system.create_canon(
+                                    contract, code, 
+                                    oracle_result=oracle_result,
+                                    require_oracle_pass=True
+                                )
+                                canon_created = True
+                                break
+                            except ValueError as e:
+                                print(f"  ⚠️  Failed to create canon: {e}")
+                        else:
+                            print(f"  ⚠️  Run {i + 1} passes oracle but violates contract: {violations[:2]}...")
+                    else:
+                        print(f"  ❌ Run {i + 1} failed oracle tests")
+                
+                # If no compliant output found, transform first oracle-passing to be compliant
+                if not canon_created and first_oracle_passing:
+                    print(f"  🔧 No compliant outputs found. Transforming run {first_oracle_passing_idx + 1}...")
+                    compliant_code = make_compliant(first_oracle_passing, contract.data)
+                    
+                    # Verify transformed code still passes oracle
+                    oracle_result = self.oracle_system.run_oracle_tests(compliant_code, contract.data)
+                    if oracle_result["passed"]:
+                        print(f"✅ Creating canon from transformed compliant code")
+                        try:
+                            canon_data = self.canon_system.create_canon(
+                                contract, compliant_code,
+                                oracle_result=oracle_result,
+                                require_oracle_pass=True
+                            )
+                            canon_created = True
+                        except ValueError as e:
+                            print(f"  ⚠️  Failed to create canon: {e}")
+                    else:
+                        print(f"  ❌ Transformed code failed oracle tests")
+            else:
+                # For simple contracts: use first oracle-passing output
+                for i, code in enumerate(successful_outputs):
+                    oracle_result = self.oracle_system.run_oracle_tests(code, contract.data)
+                    
+                    if oracle_result["passed"]:
+                        print(f"✅ Creating canon from run {i + 1} (first oracle-passing output)")
+                        try:
+                            canon_data = self.canon_system.create_canon(
+                                contract, code, 
+                                oracle_result=oracle_result,
+                                require_oracle_pass=True
+                            )
+                            canon_created = True
+                            break
+                        except ValueError as e:
+                            print(f"  ⚠️  Failed to create canon: {e}")
+                    else:
+                        print(f"  ❌ Run {i + 1} failed oracle tests")
             
             if not canon_created:
-                print("❌ CRITICAL: No oracle-passing outputs found!")
-                print("   Cannot create valid canon. Consider:")
-                print("   1. Adjusting temperature/prompt")
-                print("   2. Using curated golden implementation")
-                print("   3. Relaxing oracle requirements")
-                return {"error": "No oracle-passing outputs to anchor canon"}
+                print("❌ CRITICAL: No valid outputs found!")
+                return {"error": "No valid outputs to anchor canon"}
         
         # Step 4: Transform subsequent outputs to match canon
         print(f"\n🔧 Step 4: Transforming outputs to canon...")
@@ -181,7 +238,7 @@ class ComprehensiveExperiment:
             else:
                 print(f"    🔧 Transforming (distance: {comparison['distance']:.3f})")
                 transform_result = self.code_transformer.transform_to_canon(
-                    code, contract_id, contract=contract.data
+                    code, contract_id, contract=contract.data, oracle_system=self.oracle_system
                 )
                 
                 repaired_outputs.append(transform_result["transformed_code"])  # Add repaired version
@@ -241,6 +298,7 @@ class ComprehensiveExperiment:
             # Experiment metadata
             "experiment_id": f"{contract_id}_temp{temperature}_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
             "contract_id": contract_id,
+            "model": self.llm_client.model,  # CRITICAL: Track which model generated these outputs
             "temperature": temperature,
             "timestamp": datetime.now().isoformat(),
             "num_runs": num_runs,
@@ -490,7 +548,7 @@ class ComprehensiveExperiment:
                    f"unknown,"  # repo_commit - can be added via git integration
                    f"{result['contract_id']},"
                    f"{canon_id},"
-                   f"gpt-4,"  # model - hardcoded for now, can be made configurable
+                   f"{result.get('model', 'unknown')},"  # Use actual model from experiment
                    f"{result['temperature']},"
                    f"{result['successful_runs']},"
                    f"{result['timestamp']},"

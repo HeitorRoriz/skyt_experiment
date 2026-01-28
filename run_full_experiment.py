@@ -24,13 +24,13 @@ import traceback
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 
-from llm_client import LLMClient
-from contract import Contract
-from oracle_system import OracleSystem
-from canon_system import CanonSystem
-from code_transformer import CodeTransformer
-from metrics import MetricsCalculator
-from enhanced_stats import (
+from src.llm_client import LLMClient
+from src.contract import Contract
+from src.oracle_system import OracleSystem
+from src.canon_system import CanonSystem
+from src.code_transformer import CodeTransformer
+from src.metrics import MetricsCalculator
+from src.enhanced_stats import (
     compare_repeatability_rigorous,
     format_rigorous_report
 )

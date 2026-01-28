@@ -1,0 +1,5354 @@
+{
+  "experiment_id": "is_palindrome_temp1.0_20260123_184937",
+  "contract_id": "is_palindrome",
+  "model": "gpt-4o",
+  "temperature": 1.0,
+  "timestamp": "2026-01-23T18:49:37.955894",
+  "num_runs": 20,
+  "successful_runs": 20,
+  "contract": {
+    "id": "is_palindrome",
+    "task_intent": "Check if string is a palindrome",
+    "prompt": "Write a Python function called 'is_palindrome' that takes a string and returns True if it reads the same forwards and backwards (ignoring case and spaces), False otherwise.",
+    "constraints": {
+      "function_name": "is_palindrome",
+      "output_type": "boolean",
+      "variable_naming": {
+        "fixed_variables": [
+          "s"
+        ],
+        "flexible_variables": [
+          "cleaned",
+          "text",
+          "left",
+          "right",
+          "i",
+          "j"
+        ],
+        "naming_policy": "strict"
+      }
+    },
+    "algorithm_family": "is_palindrome",
+    "language": "python",
+    "environment": {},
+    "output_format": "raw_code",
+    "oracle_requirements": {
+      "test_cases": [
+        {
+          "input": "racecar",
+          "expected": true,
+          "description": "Simple palindrome"
+        },
+        {
+          "input": "A man a plan a canal Panama",
+          "expected": true,
+          "description": "Palindrome with spaces"
+        },
+        {
+          "input": "hello",
+          "expected": false,
+          "description": "Not a palindrome"
+        },
+        {
+          "input": "Madam",
+          "expected": true,
+          "description": "Case insensitive"
+        },
+        {
+          "input": "",
+          "expected": true,
+          "description": "Empty string"
+        },
+        {
+          "input": "a",
+          "expected": true,
+          "description": "Single character"
+        },
+        {
+          "input": "ab",
+          "expected": false,
+          "description": "Two different chars"
+        },
+        {
+          "input": "aa",
+          "expected": true,
+          "description": "Two same chars"
+        }
+      ],
+      "correctness_threshold": 1.0,
+      "required_pass_rate": 0.8
+    },
+    "normalization_rules": {
+      "remove_comments": true,
+      "normalize_whitespace": true,
+      "enforce_function_name": true
+    },
+    "anchor_signature": null,
+    "compliance_flag": false,
+    "distance_metric": "foundational_properties",
+    "rescue_bounds": {
+      "allow_function_rename": true,
+      "allow_print_removal": true,
+      "max_transformations": 5
+    },
+    "model_specification": {},
+    "contract_version": "2.0",
+    "oracle_version": "1.0",
+    "normalization_version": "1.0",
+    "created_timestamp": "2026-01-23T18:49:15.645036",
+    "run_id": null,
+    "prompt_id": "is_palindrome",
+    "sample_id": null,
+    "ood_spec": {
+      "policy": "allow",
+      "exception": null,
+      "return_value": null,
+      "examples": [],
+      "max_checks": 3
+    }
+  },
+  "canon_data": {
+    "contract_id": "is_palindrome",
+    "canonical_code": "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 0,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [],
+        "nested_depth": 0,
+        "branch_patterns": []
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "cleaned": []
+        },
+        "assignments": {
+          "cleaned": "Call(func=Attribute(value=Constant(value=''), attr='join', ctx=Load()), args=[GeneratorExp(elt=Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='lower', ctx=Load())), generators=[comprehension(target=Name(id='c', ctx=Store()), iter=Name(id='s', ctx=Load()), ifs=[Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='isalnum', ctx=Load()))], is_async=0)])])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_is_palindrome"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "is_palindrome": {
+          "name": "is_palindrome",
+          "args": [
+            "s"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": [
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Attribute",
+          "Constant",
+          "Load",
+          "GeneratorExp",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "comprehension",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Return",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Subscript",
+          "Name",
+          "Load",
+          "Slice",
+          "UnaryOp",
+          "USub",
+          "Constant",
+          "Load"
+        ],
+        "ast_depth": 9,
+        "ast_hash": "a6166655d130265a5b168a968fe64d9d",
+        "alpha_renamed_hash": "ea3b79312d9e10fc37cc4064e827511e"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "Return_2"
+        ],
+        "control_flow_order": [
+          "FunctionDef"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "contract_data": {
+      "id": "is_palindrome",
+      "task_intent": "Check if string is a palindrome",
+      "prompt": "Write a Python function called 'is_palindrome' that takes a string and returns True if it reads the same forwards and backwards (ignoring case and spaces), False otherwise.",
+      "constraints": {
+        "function_name": "is_palindrome",
+        "output_type": "boolean",
+        "variable_naming": {
+          "fixed_variables": [
+            "s"
+          ],
+          "flexible_variables": [
+            "cleaned",
+            "text",
+            "left",
+            "right",
+            "i",
+            "j"
+          ],
+          "naming_policy": "strict"
+        }
+      },
+      "algorithm_family": "is_palindrome",
+      "language": "python",
+      "environment": {},
+      "output_format": "raw_code",
+      "oracle_requirements": {
+        "test_cases": [
+          {
+            "input": "racecar",
+            "expected": true,
+            "description": "Simple palindrome"
+          },
+          {
+            "input": "A man a plan a canal Panama",
+            "expected": true,
+            "description": "Palindrome with spaces"
+          },
+          {
+            "input": "hello",
+            "expected": false,
+            "description": "Not a palindrome"
+          },
+          {
+            "input": "Madam",
+            "expected": true,
+            "description": "Case insensitive"
+          },
+          {
+            "input": "",
+            "expected": true,
+            "description": "Empty string"
+          },
+          {
+            "input": "a",
+            "expected": true,
+            "description": "Single character"
+          },
+          {
+            "input": "ab",
+            "expected": false,
+            "description": "Two different chars"
+          },
+          {
+            "input": "aa",
+            "expected": true,
+            "description": "Two same chars"
+          }
+        ],
+        "correctness_threshold": 1.0,
+        "required_pass_rate": 0.8
+      },
+      "normalization_rules": {
+        "remove_comments": true,
+        "normalize_whitespace": true,
+        "enforce_function_name": true
+      },
+      "anchor_signature": "24a6c46678b5d8358f460e56ae186a5ffd677e83af40df150e6d89bfccbd735d",
+      "compliance_flag": true,
+      "distance_metric": "foundational_properties",
+      "rescue_bounds": {
+        "allow_function_rename": true,
+        "allow_print_removal": true,
+        "max_transformations": 5
+      },
+      "model_specification": {},
+      "contract_version": "2.0",
+      "oracle_version": "1.0",
+      "normalization_version": "1.0",
+      "created_timestamp": "2026-01-23T18:39:25.301375",
+      "run_id": null,
+      "prompt_id": "is_palindrome",
+      "sample_id": null,
+      "canonical_code": "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+      "foundational_properties": {
+        "control_flow_signature": {
+          "if_statements": 0,
+          "for_loops": 0,
+          "while_loops": 0,
+          "function_calls": [],
+          "nested_depth": 0,
+          "branch_patterns": []
+        },
+        "data_dependency_graph": {
+          "dependencies": {
+            "cleaned": []
+          },
+          "assignments": {
+            "cleaned": "Call(func=Attribute(value=Constant(value=''), attr='join', ctx=Load()), args=[GeneratorExp(elt=Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='lower', ctx=Load())), generators=[comprehension(target=Name(id='c', ctx=Store()), iter=Name(id='s', ctx=Load()), ifs=[Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='isalnum', ctx=Load()))], is_async=0)])])"
+          }
+        },
+        "execution_paths": {
+          "execution_paths": [
+            [
+              "function_is_palindrome"
+            ]
+          ]
+        },
+        "function_contracts": {
+          "is_palindrome": {
+            "name": "is_palindrome",
+            "args": [
+              "s"
+            ],
+            "returns": null,
+            "has_return": true
+          }
+        },
+        "complexity_class": {
+          "nested_loops": 0,
+          "recursive_calls": 0,
+          "estimated_complexity": "O(1)"
+        },
+        "side_effect_profile": {
+          "has_print": false,
+          "has_global_access": false,
+          "has_file_io": false,
+          "modifies_arguments": false,
+          "is_pure": true
+        },
+        "termination_properties": {
+          "has_base_case": false,
+          "has_bounded_loops": false,
+          "recursive_depth": 0
+        },
+        "algebraic_structure": {
+          "commutative_ops": [],
+          "associative_ops": [],
+          "binary_operations": []
+        },
+        "numerical_behavior": {
+          "uses_integers": true,
+          "uses_floats": false,
+          "has_arithmetic": false,
+          "numeric_constants": [
+            1
+          ]
+        },
+        "logical_equivalence": {
+          "boolean_ops": [],
+          "comparisons": [
+            "Eq"
+          ],
+          "logical_patterns": []
+        },
+        "normalized_ast_structure": {
+          "node_types": [
+            "Module",
+            "FunctionDef",
+            "arguments",
+            "arg",
+            "Assign",
+            "Name",
+            "Store",
+            "Call",
+            "Attribute",
+            "Constant",
+            "Load",
+            "GeneratorExp",
+            "Call",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "comprehension",
+            "Name",
+            "Store",
+            "Name",
+            "Load",
+            "Call",
+            "Attribute",
+            "Name",
+            "Load",
+            "Load",
+            "Return",
+            "Compare",
+            "Name",
+            "Load",
+            "Eq",
+            "Subscript",
+            "Name",
+            "Load",
+            "Slice",
+            "UnaryOp",
+            "USub",
+            "Constant",
+            "Load"
+          ],
+          "ast_depth": 9,
+          "ast_hash": "a6166655d130265a5b168a968fe64d9d",
+          "alpha_renamed_hash": "ea3b79312d9e10fc37cc4064e827511e"
+        },
+        "operator_precedence": {
+          "operator_sequence": [],
+          "precedence_levels": {}
+        },
+        "statement_ordering": {
+          "statement_types": [
+            "FunctionDef",
+            "Assign",
+            "Return"
+          ],
+          "statement_sequence": [
+            "FunctionDef_0",
+            "Assign_1",
+            "Return_2"
+          ],
+          "control_flow_order": [
+            "FunctionDef"
+          ]
+        },
+        "recursion_schema": {
+          "is_recursive": false,
+          "base_cases": [],
+          "recursive_calls": [],
+          "recursion_pattern": null,
+          "termination_guards": []
+        }
+      }
+    },
+    "created_timestamp": "2026-01-23T18:39:25.301375",
+    "canon_version": "1.0",
+    "oracle_validated": true,
+    "oracle_pass_rate": 1.0
+  },
+  "canon_created": true,
+  "llm_results": [
+    {
+      "run_id": 1,
+      "raw_output": "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_palindrome' that takes a string and returns True if it reads the same forwards and backwards (ignoring case and spaces), False otherwise.\n\nIMPORTANT: The function must be named 'is_palindrome'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 2,
+      "raw_output": "def is_palindrome(s: str) -> bool:\n    s = ''.join(c.lower() for c in s if c.isalnum())\n    return s == s[::-1]",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_palindrome' that takes a string and returns True if it reads the same forwards and backwards (ignoring case and spaces), False otherwise.\n\nIMPORTANT: The function must be named 'is_palindrome'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 3,
+      "raw_output": "def is_palindrome(s):\n    cleaned_string = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned_string == cleaned_string[::-1]",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_palindrome' that takes a string and returns True if it reads the same forwards and backwards (ignoring case and spaces), False otherwise.\n\nIMPORTANT: The function must be named 'is_palindrome'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 4,
+      "raw_output": "def is_palindrome(s):\n    filtered_chars = [char.lower() for char in s if char.isalnum()]\n    return filtered_chars == filtered_chars[::-1]",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_palindrome' that takes a string and returns True if it reads the same forwards and backwards (ignoring case and spaces), False otherwise.\n\nIMPORTANT: The function must be named 'is_palindrome'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 5,
+      "raw_output": "def is_palindrome(s):\n    s = s.replace(\" \", \"\").lower()\n    return s == s[::-1]",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_palindrome' that takes a string and returns True if it reads the same forwards and backwards (ignoring case and spaces), False otherwise.\n\nIMPORTANT: The function must be named 'is_palindrome'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 6,
+      "raw_output": "def is_palindrome(s):\n    cleaned_string = \"\".join(c.lower() for c in s if c.isalnum())\n    return cleaned_string == cleaned_string[::-1]",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_palindrome' that takes a string and returns True if it reads the same forwards and backwards (ignoring case and spaces), False otherwise.\n\nIMPORTANT: The function must be named 'is_palindrome'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 7,
+      "raw_output": "def is_palindrome(s):\n    cleaned_str = ''.join(char.lower() for char in s if char.isalnum())\n    return cleaned_str == cleaned_str[::-1]",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_palindrome' that takes a string and returns True if it reads the same forwards and backwards (ignoring case and spaces), False otherwise.\n\nIMPORTANT: The function must be named 'is_palindrome'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 8,
+      "raw_output": "def is_palindrome(s):\n    cleaned_str = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned_str == cleaned_str[::-1]",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_palindrome' that takes a string and returns True if it reads the same forwards and backwards (ignoring case and spaces), False otherwise.\n\nIMPORTANT: The function must be named 'is_palindrome'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 9,
+      "raw_output": "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_palindrome' that takes a string and returns True if it reads the same forwards and backwards (ignoring case and spaces), False otherwise.\n\nIMPORTANT: The function must be named 'is_palindrome'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 10,
+      "raw_output": "def is_palindrome(s):\n    s = ''.join(s.split()).lower()\n    return s == s[::-1]",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_palindrome' that takes a string and returns True if it reads the same forwards and backwards (ignoring case and spaces), False otherwise.\n\nIMPORTANT: The function must be named 'is_palindrome'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 11,
+      "raw_output": "def is_palindrome(s):\n    s = ''.join(c.lower() for c in s if c.isalnum())\n    return s == s[::-1]",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_palindrome' that takes a string and returns True if it reads the same forwards and backwards (ignoring case and spaces), False otherwise.\n\nIMPORTANT: The function must be named 'is_palindrome'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 12,
+      "raw_output": "def is_palindrome(s):\n    s = ''.join(filter(str.isalnum, s)).lower()\n    return s == s[::-1]",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_palindrome' that takes a string and returns True if it reads the same forwards and backwards (ignoring case and spaces), False otherwise.\n\nIMPORTANT: The function must be named 'is_palindrome'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 13,
+      "raw_output": "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_palindrome' that takes a string and returns True if it reads the same forwards and backwards (ignoring case and spaces), False otherwise.\n\nIMPORTANT: The function must be named 'is_palindrome'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 14,
+      "raw_output": "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_palindrome' that takes a string and returns True if it reads the same forwards and backwards (ignoring case and spaces), False otherwise.\n\nIMPORTANT: The function must be named 'is_palindrome'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 15,
+      "raw_output": "def is_palindrome(s):\n    s = ''.join(c for c in s if not c.isspace()).lower()\n    return s == s[::-1]",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_palindrome' that takes a string and returns True if it reads the same forwards and backwards (ignoring case and spaces), False otherwise.\n\nIMPORTANT: The function must be named 'is_palindrome'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 16,
+      "raw_output": "def is_palindrome(s):\n    cleaned = ''.join(char.lower() for char in s if char.isalnum())\n    return cleaned == cleaned[::-1]",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_palindrome' that takes a string and returns True if it reads the same forwards and backwards (ignoring case and spaces), False otherwise.\n\nIMPORTANT: The function must be named 'is_palindrome'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 17,
+      "raw_output": "def is_palindrome(s: str) -> bool:\n    cleaned = ''.join(c for c in s if c.isalnum()).lower()\n    return cleaned == cleaned[::-1]",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_palindrome' that takes a string and returns True if it reads the same forwards and backwards (ignoring case and spaces), False otherwise.\n\nIMPORTANT: The function must be named 'is_palindrome'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 18,
+      "raw_output": "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_palindrome' that takes a string and returns True if it reads the same forwards and backwards (ignoring case and spaces), False otherwise.\n\nIMPORTANT: The function must be named 'is_palindrome'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 19,
+      "raw_output": "def is_palindrome(s):\n    s = ''.join(c for c in s if c.isalnum()).lower()\n    return s == s[::-1]",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_palindrome' that takes a string and returns True if it reads the same forwards and backwards (ignoring case and spaces), False otherwise.\n\nIMPORTANT: The function must be named 'is_palindrome'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 20,
+      "raw_output": "def is_palindrome(s):\n    s = ''.join(c.lower() for c in s if c.isalnum())\n    return s == s[::-1]",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'is_palindrome' that takes a string and returns True if it reads the same forwards and backwards (ignoring case and spaces), False otherwise.\n\nIMPORTANT: The function must be named 'is_palindrome'.\n\nProvide only the Python code, no explanations or markdown."
+    }
+  ],
+  "raw_outputs": [
+    "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+    "def is_palindrome(s: str) -> bool:\n    s = ''.join(c.lower() for c in s if c.isalnum())\n    return s == s[::-1]",
+    "def is_palindrome(s):\n    cleaned_string = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned_string == cleaned_string[::-1]",
+    "def is_palindrome(s):\n    filtered_chars = [char.lower() for char in s if char.isalnum()]\n    return filtered_chars == filtered_chars[::-1]",
+    "def is_palindrome(s):\n    s = s.replace(\" \", \"\").lower()\n    return s == s[::-1]",
+    "def is_palindrome(s):\n    cleaned_string = \"\".join(c.lower() for c in s if c.isalnum())\n    return cleaned_string == cleaned_string[::-1]",
+    "def is_palindrome(s):\n    cleaned_str = ''.join(char.lower() for char in s if char.isalnum())\n    return cleaned_str == cleaned_str[::-1]",
+    "def is_palindrome(s):\n    cleaned_str = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned_str == cleaned_str[::-1]",
+    "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+    "def is_palindrome(s):\n    s = ''.join(s.split()).lower()\n    return s == s[::-1]",
+    "def is_palindrome(s):\n    s = ''.join(c.lower() for c in s if c.isalnum())\n    return s == s[::-1]",
+    "def is_palindrome(s):\n    s = ''.join(filter(str.isalnum, s)).lower()\n    return s == s[::-1]",
+    "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+    "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+    "def is_palindrome(s):\n    s = ''.join(c for c in s if not c.isspace()).lower()\n    return s == s[::-1]",
+    "def is_palindrome(s):\n    cleaned = ''.join(char.lower() for char in s if char.isalnum())\n    return cleaned == cleaned[::-1]",
+    "def is_palindrome(s: str) -> bool:\n    cleaned = ''.join(c for c in s if c.isalnum()).lower()\n    return cleaned == cleaned[::-1]",
+    "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+    "def is_palindrome(s):\n    s = ''.join(c for c in s if c.isalnum()).lower()\n    return s == s[::-1]",
+    "def is_palindrome(s):\n    s = ''.join(c.lower() for c in s if c.isalnum())\n    return s == s[::-1]"
+  ],
+  "repaired_outputs": [
+    "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+    "def is_palindrome(s: str) -> bool:\n    s = ''.join(c.lower() for c in s if c.isalnum())\n    return s == s[::-1]",
+    "def is_palindrome(s):\n    cleaned = ''.join((c.lower() for c in s if c.isalnum()))\n    return cleaned == cleaned[::-1]",
+    "def is_palindrome(s):\n    cleaned = [char.lower() for char in s if char.isalnum()]\n    return cleaned == cleaned[::-1]",
+    "def is_palindrome(s):\n    s = s.replace(\" \", \"\").lower()\n    return s == s[::-1]",
+    "def is_palindrome(s):\n    cleaned = ''.join((c.lower() for c in s if c.isalnum()))\n    return cleaned == cleaned[::-1]",
+    "def is_palindrome(s):\n    cleaned_str = ''.join(char.lower() for char in s if char.isalnum())\n    return cleaned_str == cleaned_str[::-1]",
+    "def is_palindrome(s):\n    cleaned = ''.join((c.lower() for c in s if c.isalnum()))\n    return cleaned == cleaned[::-1]",
+    "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+    "def is_palindrome(s):\n    s = ''.join(s.split()).lower()\n    return s == s[::-1]",
+    "def is_palindrome(s):\n    s = ''.join(c.lower() for c in s if c.isalnum())\n    return s == s[::-1]",
+    "def is_palindrome(s):\n    s = ''.join(filter(str.isalnum, s)).lower()\n    return s == s[::-1]",
+    "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+    "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+    "def is_palindrome(s):\n    s = ''.join(c for c in s if not c.isspace()).lower()\n    return s == s[::-1]",
+    "def is_palindrome(s):\n    cleaned = ''.join(char.lower() for char in s if char.isalnum())\n    return cleaned == cleaned[::-1]",
+    "def is_palindrome(s: str) -> bool:\n    cleaned = ''.join(c for c in s if c.isalnum()).lower()\n    return cleaned == cleaned[::-1]",
+    "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+    "def is_palindrome(s):\n    s = ''.join(c for c in s if c.isalnum()).lower()\n    return s == s[::-1]",
+    "def is_palindrome(s):\n    s = ''.join(c.lower() for c in s if c.isalnum())\n    return s == s[::-1]"
+  ],
+  "transformation_results": [
+    {
+      "run_id": 1,
+      "original_code": "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+      "transformed_code": "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+      "transformation_needed": false,
+      "final_distance": 0.0
+    },
+    {
+      "run_id": 2,
+      "original_code": "def is_palindrome(s: str) -> bool:\n    s = ''.join(c.lower() for c in s if c.isalnum())\n    return s == s[::-1]",
+      "transformed_code": "def is_palindrome(s: str) -> bool:\n    s = ''.join(c.lower() for c in s if c.isalnum())\n    return s == s[::-1]",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.14285714285714285,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 3,
+      "original_code": "def is_palindrome(s):\n    cleaned_string = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned_string == cleaned_string[::-1]",
+      "transformed_code": "def is_palindrome(s):\n    cleaned = ''.join((c.lower() for c in s if c.isalnum()))\n    return cleaned == cleaned[::-1]",
+      "transformation_needed": true,
+      "transformation_success": true,
+      "final_distance": 0.0,
+      "transformations_applied": [
+        "VariableRenamer"
+      ]
+    },
+    {
+      "run_id": 4,
+      "original_code": "def is_palindrome(s):\n    filtered_chars = [char.lower() for char in s if char.isalnum()]\n    return filtered_chars == filtered_chars[::-1]",
+      "transformed_code": "def is_palindrome(s):\n    cleaned = [char.lower() for char in s if char.isalnum()]\n    return cleaned == cleaned[::-1]",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.10714285714285714,
+      "transformations_applied": [
+        "VariableRenamer"
+      ]
+    },
+    {
+      "run_id": 5,
+      "original_code": "def is_palindrome(s):\n    s = s.replace(\" \", \"\").lower()\n    return s == s[::-1]",
+      "transformed_code": "def is_palindrome(s):\n    s = s.replace(\" \", \"\").lower()\n    return s == s[::-1]",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.14285714285714285,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 6,
+      "original_code": "def is_palindrome(s):\n    cleaned_string = \"\".join(c.lower() for c in s if c.isalnum())\n    return cleaned_string == cleaned_string[::-1]",
+      "transformed_code": "def is_palindrome(s):\n    cleaned = ''.join((c.lower() for c in s if c.isalnum()))\n    return cleaned == cleaned[::-1]",
+      "transformation_needed": true,
+      "transformation_success": true,
+      "final_distance": 0.0,
+      "transformations_applied": [
+        "VariableRenamer"
+      ]
+    },
+    {
+      "run_id": 7,
+      "original_code": "def is_palindrome(s):\n    cleaned_str = ''.join(char.lower() for char in s if char.isalnum())\n    return cleaned_str == cleaned_str[::-1]",
+      "transformed_code": "def is_palindrome(s):\n    cleaned_str = ''.join(char.lower() for char in s if char.isalnum())\n    return cleaned_str == cleaned_str[::-1]",
+      "transformation_needed": true,
+      "transformation_success": true,
+      "final_distance": 0.07142857142857142,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 8,
+      "original_code": "def is_palindrome(s):\n    cleaned_str = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned_str == cleaned_str[::-1]",
+      "transformed_code": "def is_palindrome(s):\n    cleaned = ''.join((c.lower() for c in s if c.isalnum()))\n    return cleaned == cleaned[::-1]",
+      "transformation_needed": true,
+      "transformation_success": true,
+      "final_distance": 0.0,
+      "transformations_applied": [
+        "VariableRenamer"
+      ]
+    },
+    {
+      "run_id": 9,
+      "original_code": "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+      "transformed_code": "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+      "transformation_needed": false,
+      "final_distance": 0.0
+    },
+    {
+      "run_id": 10,
+      "original_code": "def is_palindrome(s):\n    s = ''.join(s.split()).lower()\n    return s == s[::-1]",
+      "transformed_code": "def is_palindrome(s):\n    s = ''.join(s.split()).lower()\n    return s == s[::-1]",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.14285714285714285,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 11,
+      "original_code": "def is_palindrome(s):\n    s = ''.join(c.lower() for c in s if c.isalnum())\n    return s == s[::-1]",
+      "transformed_code": "def is_palindrome(s):\n    s = ''.join(c.lower() for c in s if c.isalnum())\n    return s == s[::-1]",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.14285714285714285,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 12,
+      "original_code": "def is_palindrome(s):\n    s = ''.join(filter(str.isalnum, s)).lower()\n    return s == s[::-1]",
+      "transformed_code": "def is_palindrome(s):\n    s = ''.join(filter(str.isalnum, s)).lower()\n    return s == s[::-1]",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.14285714285714285,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 13,
+      "original_code": "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+      "transformed_code": "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+      "transformation_needed": false,
+      "final_distance": 0.0
+    },
+    {
+      "run_id": 14,
+      "original_code": "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+      "transformed_code": "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+      "transformation_needed": false,
+      "final_distance": 0.0
+    },
+    {
+      "run_id": 15,
+      "original_code": "def is_palindrome(s):\n    s = ''.join(c for c in s if not c.isspace()).lower()\n    return s == s[::-1]",
+      "transformed_code": "def is_palindrome(s):\n    s = ''.join(c for c in s if not c.isspace()).lower()\n    return s == s[::-1]",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.14285714285714285,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 16,
+      "original_code": "def is_palindrome(s):\n    cleaned = ''.join(char.lower() for char in s if char.isalnum())\n    return cleaned == cleaned[::-1]",
+      "transformed_code": "def is_palindrome(s):\n    cleaned = ''.join(char.lower() for char in s if char.isalnum())\n    return cleaned == cleaned[::-1]",
+      "transformation_needed": true,
+      "transformation_success": true,
+      "final_distance": 0.03571428571428571,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 17,
+      "original_code": "def is_palindrome(s: str) -> bool:\n    cleaned = ''.join(c for c in s if c.isalnum()).lower()\n    return cleaned == cleaned[::-1]",
+      "transformed_code": "def is_palindrome(s: str) -> bool:\n    cleaned = ''.join(c for c in s if c.isalnum()).lower()\n    return cleaned == cleaned[::-1]",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.10714285714285714,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 18,
+      "original_code": "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+      "transformed_code": "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]",
+      "transformation_needed": false,
+      "final_distance": 0.0
+    },
+    {
+      "run_id": 19,
+      "original_code": "def is_palindrome(s):\n    s = ''.join(c for c in s if c.isalnum()).lower()\n    return s == s[::-1]",
+      "transformed_code": "def is_palindrome(s):\n    s = ''.join(c for c in s if c.isalnum()).lower()\n    return s == s[::-1]",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.14285714285714285,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 20,
+      "original_code": "def is_palindrome(s):\n    s = ''.join(c.lower() for c in s if c.isalnum())\n    return s == s[::-1]",
+      "transformed_code": "def is_palindrome(s):\n    s = ''.join(c.lower() for c in s if c.isalnum())\n    return s == s[::-1]",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.14285714285714285,
+      "transformations_applied": []
+    }
+  ],
+  "metrics": {
+    "R_raw": 0.25,
+    "R_anchor_pre": 0.25,
+    "R_anchor_post": 0.4,
+    "Delta_rescue": 0.15000000000000002,
+    "R_repair_at_k_pre": {
+      "k=0.05": 0.25,
+      "k=0.1": 0.25,
+      "k=0.15": 1.0,
+      "k=0.2": 1.0
+    },
+    "R_repair_at_k_post": {
+      "k=0.05": 0.4,
+      "k=0.1": 0.4,
+      "k=0.15": 1.0,
+      "k=0.2": 1.0
+    },
+    "distances_pre": [
+      0.0,
+      0.14285714285714285,
+      0.14285714285714285,
+      0.14285714285714285,
+      0.14285714285714285,
+      0.14285714285714285,
+      0.14285714285714285,
+      0.14285714285714285,
+      0.0,
+      0.14285714285714285,
+      0.14285714285714285,
+      0.14285714285714285,
+      0.0,
+      0.0,
+      0.14285714285714285,
+      0.10714285714285714,
+      0.10714285714285714,
+      0.0,
+      0.14285714285714285,
+      0.14285714285714285
+    ],
+    "distances_post": [
+      0.0,
+      0.14285714285714285,
+      0.0,
+      0.10714285714285714,
+      0.14285714285714285,
+      0.0,
+      0.14285714285714285,
+      0.0,
+      0.0,
+      0.14285714285714285,
+      0.14285714285714285,
+      0.14285714285714285,
+      0.0,
+      0.0,
+      0.14285714285714285,
+      0.10714285714285714,
+      0.10714285714285714,
+      0.0,
+      0.14285714285714285,
+      0.14285714285714285
+    ],
+    "mean_distance_pre": 0.10357142857142856,
+    "mean_distance_post": 0.08035714285714286,
+    "std_distance_pre": 0.06071428571428571,
+    "std_distance_post": 0.06669589070351106,
+    "Delta_mu": 0.0232142857142857,
+    "Delta_P_tau": {
+      "tau=0.05": 0.15000000000000002,
+      "tau=0.1": 0.15000000000000002,
+      "tau=0.15": 0.0,
+      "tau=0.2": 0.0
+    },
+    "canon_coverage": 1.0,
+    "rescue_rate": 0.2,
+    "R_behavioral": 1.0,
+    "R_structural": 0.4,
+    "R_canon": 0.4,
+    "behavioral_improvement": 0.75,
+    "structural_improvement": 0.15000000000000002,
+    "total_runs": 20,
+    "raw_stats": {
+      "unique_outputs": 15,
+      "most_common_count": 5,
+      "distribution": {
+        "def is_palindrome(s):\n    cleaned = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned == cleaned[::-1]": 5,
+        "def is_palindrome(s: str) -> bool:\n    s = ''.join(c.lower() for c in s if c.isalnum())\n    return s == s[::-1]": 1,
+        "def is_palindrome(s):\n    cleaned_string = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned_string == cleaned_string[::-1]": 1,
+        "def is_palindrome(s):\n    filtered_chars = [char.lower() for char in s if char.isalnum()]\n    return filtered_chars == filtered_chars[::-1]": 1,
+        "def is_palindrome(s):\n    s = s.replace(\" \", \"\").lower()\n    return s == s[::-1]": 1,
+        "def is_palindrome(s):\n    cleaned_string = \"\".join(c.lower() for c in s if c.isalnum())\n    return cleaned_string == cleaned_string[::-1]": 1,
+        "def is_palindrome(s):\n    cleaned_str = ''.join(char.lower() for char in s if char.isalnum())\n    return cleaned_str == cleaned_str[::-1]": 1,
+        "def is_palindrome(s):\n    cleaned_str = ''.join(c.lower() for c in s if c.isalnum())\n    return cleaned_str == cleaned_str[::-1]": 1,
+        "def is_palindrome(s):\n    s = ''.join(s.split()).lower()\n    return s == s[::-1]": 1,
+        "def is_palindrome(s):\n    s = ''.join(c.lower() for c in s if c.isalnum())\n    return s == s[::-1]": 2,
+        "def is_palindrome(s):\n    s = ''.join(filter(str.isalnum, s)).lower()\n    return s == s[::-1]": 1,
+        "def is_palindrome(s):\n    s = ''.join(c for c in s if not c.isspace()).lower()\n    return s == s[::-1]": 1,
+        "def is_palindrome(s):\n    cleaned = ''.join(char.lower() for char in s if char.isalnum())\n    return cleaned == cleaned[::-1]": 1,
+        "def is_palindrome(s: str) -> bool:\n    cleaned = ''.join(c for c in s if c.isalnum()).lower()\n    return cleaned == cleaned[::-1]": 1,
+        "def is_palindrome(s):\n    s = ''.join(c for c in s if c.isalnum()).lower()\n    return s == s[::-1]": 1
+      },
+      "entropy": 3.641446071165521
+    },
+    "anchor_pre_stats": {
+      "exact_matches": 5,
+      "total_outputs": 20,
+      "distances": [
+        0.0,
+        0.14285714285714285,
+        0.14285714285714285,
+        0.14285714285714285,
+        0.14285714285714285,
+        0.14285714285714285,
+        0.14285714285714285,
+        0.14285714285714285,
+        0.0,
+        0.14285714285714285,
+        0.14285714285714285,
+        0.14285714285714285,
+        0.0,
+        0.0,
+        0.14285714285714285,
+        0.10714285714285714,
+        0.10714285714285714,
+        0.0,
+        0.14285714285714285,
+        0.14285714285714285
+      ],
+      "mean_distance": 0.10357142857142856,
+      "min_distance": 0.0
+    },
+    "anchor_post_stats": {
+      "exact_matches": 8,
+      "total_outputs": 20,
+      "distances": [
+        0.0,
+        0.14285714285714285,
+        0.0,
+        0.10714285714285714,
+        0.14285714285714285,
+        0.0,
+        0.14285714285714285,
+        0.0,
+        0.0,
+        0.14285714285714285,
+        0.14285714285714285,
+        0.14285714285714285,
+        0.0,
+        0.0,
+        0.14285714285714285,
+        0.10714285714285714,
+        0.10714285714285714,
+        0.0,
+        0.14285714285714285,
+        0.14285714285714285
+      ],
+      "mean_distance": 0.08035714285714286,
+      "min_distance": 0.0
+    },
+    "behavioral_stats": {
+      "unique_behaviors": 1,
+      "oracle_results": [
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "racecar",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple palindrome"
+            },
+            {
+              "input": "A man a plan a canal Panama",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Palindrome with spaces"
+            },
+            {
+              "input": "hello",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Not a palindrome"
+            },
+            {
+              "input": "Madam",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Case insensitive"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "a",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Single character"
+            },
+            {
+              "input": "ab",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Two different chars"
+            },
+            {
+              "input": "aa",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Two same chars"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "racecar",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple palindrome"
+            },
+            {
+              "input": "A man a plan a canal Panama",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Palindrome with spaces"
+            },
+            {
+              "input": "hello",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Not a palindrome"
+            },
+            {
+              "input": "Madam",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Case insensitive"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "a",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Single character"
+            },
+            {
+              "input": "ab",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Two different chars"
+            },
+            {
+              "input": "aa",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Two same chars"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "racecar",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple palindrome"
+            },
+            {
+              "input": "A man a plan a canal Panama",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Palindrome with spaces"
+            },
+            {
+              "input": "hello",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Not a palindrome"
+            },
+            {
+              "input": "Madam",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Case insensitive"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "a",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Single character"
+            },
+            {
+              "input": "ab",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Two different chars"
+            },
+            {
+              "input": "aa",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Two same chars"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "racecar",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple palindrome"
+            },
+            {
+              "input": "A man a plan a canal Panama",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Palindrome with spaces"
+            },
+            {
+              "input": "hello",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Not a palindrome"
+            },
+            {
+              "input": "Madam",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Case insensitive"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "a",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Single character"
+            },
+            {
+              "input": "ab",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Two different chars"
+            },
+            {
+              "input": "aa",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Two same chars"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "racecar",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple palindrome"
+            },
+            {
+              "input": "A man a plan a canal Panama",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Palindrome with spaces"
+            },
+            {
+              "input": "hello",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Not a palindrome"
+            },
+            {
+              "input": "Madam",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Case insensitive"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "a",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Single character"
+            },
+            {
+              "input": "ab",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Two different chars"
+            },
+            {
+              "input": "aa",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Two same chars"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "racecar",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple palindrome"
+            },
+            {
+              "input": "A man a plan a canal Panama",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Palindrome with spaces"
+            },
+            {
+              "input": "hello",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Not a palindrome"
+            },
+            {
+              "input": "Madam",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Case insensitive"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "a",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Single character"
+            },
+            {
+              "input": "ab",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Two different chars"
+            },
+            {
+              "input": "aa",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Two same chars"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "racecar",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple palindrome"
+            },
+            {
+              "input": "A man a plan a canal Panama",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Palindrome with spaces"
+            },
+            {
+              "input": "hello",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Not a palindrome"
+            },
+            {
+              "input": "Madam",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Case insensitive"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "a",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Single character"
+            },
+            {
+              "input": "ab",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Two different chars"
+            },
+            {
+              "input": "aa",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Two same chars"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "racecar",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple palindrome"
+            },
+            {
+              "input": "A man a plan a canal Panama",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Palindrome with spaces"
+            },
+            {
+              "input": "hello",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Not a palindrome"
+            },
+            {
+              "input": "Madam",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Case insensitive"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "a",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Single character"
+            },
+            {
+              "input": "ab",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Two different chars"
+            },
+            {
+              "input": "aa",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Two same chars"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "racecar",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple palindrome"
+            },
+            {
+              "input": "A man a plan a canal Panama",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Palindrome with spaces"
+            },
+            {
+              "input": "hello",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Not a palindrome"
+            },
+            {
+              "input": "Madam",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Case insensitive"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "a",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Single character"
+            },
+            {
+              "input": "ab",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Two different chars"
+            },
+            {
+              "input": "aa",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Two same chars"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "racecar",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple palindrome"
+            },
+            {
+              "input": "A man a plan a canal Panama",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Palindrome with spaces"
+            },
+            {
+              "input": "hello",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Not a palindrome"
+            },
+            {
+              "input": "Madam",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Case insensitive"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "a",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Single character"
+            },
+            {
+              "input": "ab",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Two different chars"
+            },
+            {
+              "input": "aa",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Two same chars"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "racecar",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple palindrome"
+            },
+            {
+              "input": "A man a plan a canal Panama",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Palindrome with spaces"
+            },
+            {
+              "input": "hello",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Not a palindrome"
+            },
+            {
+              "input": "Madam",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Case insensitive"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "a",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Single character"
+            },
+            {
+              "input": "ab",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Two different chars"
+            },
+            {
+              "input": "aa",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Two same chars"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "racecar",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple palindrome"
+            },
+            {
+              "input": "A man a plan a canal Panama",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Palindrome with spaces"
+            },
+            {
+              "input": "hello",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Not a palindrome"
+            },
+            {
+              "input": "Madam",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Case insensitive"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "a",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Single character"
+            },
+            {
+              "input": "ab",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Two different chars"
+            },
+            {
+              "input": "aa",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Two same chars"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "racecar",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple palindrome"
+            },
+            {
+              "input": "A man a plan a canal Panama",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Palindrome with spaces"
+            },
+            {
+              "input": "hello",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Not a palindrome"
+            },
+            {
+              "input": "Madam",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Case insensitive"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "a",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Single character"
+            },
+            {
+              "input": "ab",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Two different chars"
+            },
+            {
+              "input": "aa",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Two same chars"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "racecar",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple palindrome"
+            },
+            {
+              "input": "A man a plan a canal Panama",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Palindrome with spaces"
+            },
+            {
+              "input": "hello",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Not a palindrome"
+            },
+            {
+              "input": "Madam",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Case insensitive"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "a",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Single character"
+            },
+            {
+              "input": "ab",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Two different chars"
+            },
+            {
+              "input": "aa",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Two same chars"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "racecar",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple palindrome"
+            },
+            {
+              "input": "A man a plan a canal Panama",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Palindrome with spaces"
+            },
+            {
+              "input": "hello",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Not a palindrome"
+            },
+            {
+              "input": "Madam",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Case insensitive"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "a",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Single character"
+            },
+            {
+              "input": "ab",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Two different chars"
+            },
+            {
+              "input": "aa",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Two same chars"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "racecar",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple palindrome"
+            },
+            {
+              "input": "A man a plan a canal Panama",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Palindrome with spaces"
+            },
+            {
+              "input": "hello",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Not a palindrome"
+            },
+            {
+              "input": "Madam",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Case insensitive"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "a",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Single character"
+            },
+            {
+              "input": "ab",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Two different chars"
+            },
+            {
+              "input": "aa",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Two same chars"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "racecar",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple palindrome"
+            },
+            {
+              "input": "A man a plan a canal Panama",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Palindrome with spaces"
+            },
+            {
+              "input": "hello",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Not a palindrome"
+            },
+            {
+              "input": "Madam",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Case insensitive"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "a",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Single character"
+            },
+            {
+              "input": "ab",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Two different chars"
+            },
+            {
+              "input": "aa",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Two same chars"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "racecar",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple palindrome"
+            },
+            {
+              "input": "A man a plan a canal Panama",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Palindrome with spaces"
+            },
+            {
+              "input": "hello",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Not a palindrome"
+            },
+            {
+              "input": "Madam",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Case insensitive"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "a",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Single character"
+            },
+            {
+              "input": "ab",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Two different chars"
+            },
+            {
+              "input": "aa",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Two same chars"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "racecar",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple palindrome"
+            },
+            {
+              "input": "A man a plan a canal Panama",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Palindrome with spaces"
+            },
+            {
+              "input": "hello",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Not a palindrome"
+            },
+            {
+              "input": "Madam",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Case insensitive"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "a",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Single character"
+            },
+            {
+              "input": "ab",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Two different chars"
+            },
+            {
+              "input": "aa",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Two same chars"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 8,
+          "total_tests": 8,
+          "test_results": [
+            {
+              "input": "racecar",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Simple palindrome"
+            },
+            {
+              "input": "A man a plan a canal Panama",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Palindrome with spaces"
+            },
+            {
+              "input": "hello",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Not a palindrome"
+            },
+            {
+              "input": "Madam",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Case insensitive"
+            },
+            {
+              "input": "",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Empty string"
+            },
+            {
+              "input": "a",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Single character"
+            },
+            {
+              "input": "ab",
+              "expected": false,
+              "actual": false,
+              "passed": true,
+              "description": "Two different chars"
+            },
+            {
+              "input": "aa",
+              "expected": true,
+              "actual": true,
+              "passed": true,
+              "description": "Two same chars"
+            }
+          ]
+        }
+      ],
+      "behavioral_groups": {
+        "PPPPPPPP": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ]
+      },
+      "pass_rate": 1.0
+    },
+    "structural_stats": {
+      "unique_structures": 12,
+      "property_results": [
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "cleaned": []
+            },
+            "assignments": {
+              "cleaned": "Call(func=Attribute(value=Constant(value=''), attr='join', ctx=Load()), args=[GeneratorExp(elt=Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='lower', ctx=Load())), generators=[comprehension(target=Name(id='c', ctx=Store()), iter=Name(id='s', ctx=Load()), ifs=[Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='isalnum', ctx=Load()))], is_async=0)])])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_palindrome"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_palindrome": {
+              "name": "is_palindrome",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "Eq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Constant",
+              "Load",
+              "GeneratorExp",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "comprehension",
+              "Name",
+              "Store",
+              "Name",
+              "Load",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Compare",
+              "Name",
+              "Load",
+              "Eq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Load"
+            ],
+            "ast_depth": 9,
+            "ast_hash": "a6166655d130265a5b168a968fe64d9d",
+            "alpha_renamed_hash": "ea3b79312d9e10fc37cc4064e827511e"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Return_2"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "s": []
+            },
+            "assignments": {
+              "s": "Call(func=Attribute(value=Constant(value=''), attr='join', ctx=Load()), args=[GeneratorExp(elt=Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='lower', ctx=Load())), generators=[comprehension(target=Name(id='c', ctx=Store()), iter=Name(id='s', ctx=Load()), ifs=[Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='isalnum', ctx=Load()))], is_async=0)])])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_palindrome"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_palindrome": {
+              "name": "is_palindrome",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "Eq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Name",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Constant",
+              "Load",
+              "GeneratorExp",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "comprehension",
+              "Name",
+              "Store",
+              "Name",
+              "Load",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Compare",
+              "Name",
+              "Load",
+              "Eq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Load",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 9,
+            "ast_hash": "7dafaf18d9dcd4852ccca9ac16c2a0f2",
+            "alpha_renamed_hash": "3aa404a0e34994c442967913a46f7734"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Return_2"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "cleaned": []
+            },
+            "assignments": {
+              "cleaned": "Call(func=Attribute(value=Constant(value=''), attr='join', ctx=Load()), args=[GeneratorExp(elt=Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='lower', ctx=Load())), generators=[comprehension(target=Name(id='c', ctx=Store()), iter=Name(id='s', ctx=Load()), ifs=[Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='isalnum', ctx=Load()))], is_async=0)])])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_palindrome"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_palindrome": {
+              "name": "is_palindrome",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "Eq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Constant",
+              "Load",
+              "GeneratorExp",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "comprehension",
+              "Name",
+              "Store",
+              "Name",
+              "Load",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Compare",
+              "Name",
+              "Load",
+              "Eq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Load"
+            ],
+            "ast_depth": 9,
+            "ast_hash": "a6166655d130265a5b168a968fe64d9d",
+            "alpha_renamed_hash": "ea3b79312d9e10fc37cc4064e827511e"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Return_2"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "cleaned": []
+            },
+            "assignments": {
+              "cleaned": "ListComp(elt=Call(func=Attribute(value=Name(id='char', ctx=Load()), attr='lower', ctx=Load())), generators=[comprehension(target=Name(id='char', ctx=Store()), iter=Name(id='s', ctx=Load()), ifs=[Call(func=Attribute(value=Name(id='char', ctx=Load()), attr='isalnum', ctx=Load()))], is_async=0)])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_palindrome"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_palindrome": {
+              "name": "is_palindrome",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "Eq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "ListComp",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "comprehension",
+              "Name",
+              "Store",
+              "Name",
+              "Load",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Compare",
+              "Name",
+              "Load",
+              "Eq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Load"
+            ],
+            "ast_depth": 8,
+            "ast_hash": "5c7c388116d5dc14dc82a8f0cb1e4879",
+            "alpha_renamed_hash": "0d5e28887f4fcbea769d7541f9c029e1"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Return_2"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "s": []
+            },
+            "assignments": {
+              "s": "Call(func=Attribute(value=Call(func=Attribute(value=Name(id='s', ctx=Load()), attr='replace', ctx=Load()), args=[Constant(value=' '), Constant(value='')]), attr='lower', ctx=Load()))"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_palindrome"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_palindrome": {
+              "name": "is_palindrome",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "Eq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Constant",
+              "Constant",
+              "Load",
+              "Return",
+              "Compare",
+              "Name",
+              "Load",
+              "Eq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Load"
+            ],
+            "ast_depth": 8,
+            "ast_hash": "360cde709cc120c066788f8386a93827",
+            "alpha_renamed_hash": "18fc7f0ce832857a00c618a0ccfb9311"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Return_2"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "cleaned": []
+            },
+            "assignments": {
+              "cleaned": "Call(func=Attribute(value=Constant(value=''), attr='join', ctx=Load()), args=[GeneratorExp(elt=Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='lower', ctx=Load())), generators=[comprehension(target=Name(id='c', ctx=Store()), iter=Name(id='s', ctx=Load()), ifs=[Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='isalnum', ctx=Load()))], is_async=0)])])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_palindrome"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_palindrome": {
+              "name": "is_palindrome",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "Eq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Constant",
+              "Load",
+              "GeneratorExp",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "comprehension",
+              "Name",
+              "Store",
+              "Name",
+              "Load",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Compare",
+              "Name",
+              "Load",
+              "Eq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Load"
+            ],
+            "ast_depth": 9,
+            "ast_hash": "a6166655d130265a5b168a968fe64d9d",
+            "alpha_renamed_hash": "ea3b79312d9e10fc37cc4064e827511e"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Return_2"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "cleaned_str": []
+            },
+            "assignments": {
+              "cleaned_str": "Call(func=Attribute(value=Constant(value=''), attr='join', ctx=Load()), args=[GeneratorExp(elt=Call(func=Attribute(value=Name(id='char', ctx=Load()), attr='lower', ctx=Load())), generators=[comprehension(target=Name(id='char', ctx=Store()), iter=Name(id='s', ctx=Load()), ifs=[Call(func=Attribute(value=Name(id='char', ctx=Load()), attr='isalnum', ctx=Load()))], is_async=0)])])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_palindrome"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_palindrome": {
+              "name": "is_palindrome",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "Eq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Constant",
+              "Load",
+              "GeneratorExp",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "comprehension",
+              "Name",
+              "Store",
+              "Name",
+              "Load",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Compare",
+              "Name",
+              "Load",
+              "Eq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Load"
+            ],
+            "ast_depth": 9,
+            "ast_hash": "cdd2039ddc60b68e74ca4de79ca9a556",
+            "alpha_renamed_hash": "ea3b79312d9e10fc37cc4064e827511e"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Return_2"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "cleaned": []
+            },
+            "assignments": {
+              "cleaned": "Call(func=Attribute(value=Constant(value=''), attr='join', ctx=Load()), args=[GeneratorExp(elt=Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='lower', ctx=Load())), generators=[comprehension(target=Name(id='c', ctx=Store()), iter=Name(id='s', ctx=Load()), ifs=[Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='isalnum', ctx=Load()))], is_async=0)])])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_palindrome"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_palindrome": {
+              "name": "is_palindrome",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "Eq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Constant",
+              "Load",
+              "GeneratorExp",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "comprehension",
+              "Name",
+              "Store",
+              "Name",
+              "Load",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Compare",
+              "Name",
+              "Load",
+              "Eq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Load"
+            ],
+            "ast_depth": 9,
+            "ast_hash": "a6166655d130265a5b168a968fe64d9d",
+            "alpha_renamed_hash": "ea3b79312d9e10fc37cc4064e827511e"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Return_2"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "cleaned": []
+            },
+            "assignments": {
+              "cleaned": "Call(func=Attribute(value=Constant(value=''), attr='join', ctx=Load()), args=[GeneratorExp(elt=Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='lower', ctx=Load())), generators=[comprehension(target=Name(id='c', ctx=Store()), iter=Name(id='s', ctx=Load()), ifs=[Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='isalnum', ctx=Load()))], is_async=0)])])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_palindrome"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_palindrome": {
+              "name": "is_palindrome",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "Eq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Constant",
+              "Load",
+              "GeneratorExp",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "comprehension",
+              "Name",
+              "Store",
+              "Name",
+              "Load",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Compare",
+              "Name",
+              "Load",
+              "Eq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Load"
+            ],
+            "ast_depth": 9,
+            "ast_hash": "a6166655d130265a5b168a968fe64d9d",
+            "alpha_renamed_hash": "ea3b79312d9e10fc37cc4064e827511e"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Return_2"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "s": []
+            },
+            "assignments": {
+              "s": "Call(func=Attribute(value=Call(func=Attribute(value=Constant(value=''), attr='join', ctx=Load()), args=[Call(func=Attribute(value=Name(id='s', ctx=Load()), attr='split', ctx=Load()))]), attr='lower', ctx=Load()))"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_palindrome"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_palindrome": {
+              "name": "is_palindrome",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "Eq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Call",
+              "Attribute",
+              "Constant",
+              "Load",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Load",
+              "Return",
+              "Compare",
+              "Name",
+              "Load",
+              "Eq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Load"
+            ],
+            "ast_depth": 9,
+            "ast_hash": "a310dafd88a857d829491cf701f83c34",
+            "alpha_renamed_hash": "812d1df3ad42a1f32de4e160c93cae4f"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Return_2"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "s": []
+            },
+            "assignments": {
+              "s": "Call(func=Attribute(value=Constant(value=''), attr='join', ctx=Load()), args=[GeneratorExp(elt=Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='lower', ctx=Load())), generators=[comprehension(target=Name(id='c', ctx=Store()), iter=Name(id='s', ctx=Load()), ifs=[Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='isalnum', ctx=Load()))], is_async=0)])])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_palindrome"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_palindrome": {
+              "name": "is_palindrome",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "Eq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Constant",
+              "Load",
+              "GeneratorExp",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "comprehension",
+              "Name",
+              "Store",
+              "Name",
+              "Load",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Compare",
+              "Name",
+              "Load",
+              "Eq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Load"
+            ],
+            "ast_depth": 9,
+            "ast_hash": "86727887941b800b6a832de7265b82fb",
+            "alpha_renamed_hash": "bcf3cc1d13a5eb1fd9f89b3c83f0749a"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Return_2"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [
+              "filter"
+            ],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "s": []
+            },
+            "assignments": {
+              "s": "Call(func=Attribute(value=Call(func=Attribute(value=Constant(value=''), attr='join', ctx=Load()), args=[Call(func=Name(id='filter', ctx=Load()), args=[Attribute(value=Name(id='str', ctx=Load()), attr='isalnum', ctx=Load()), Name(id='s', ctx=Load())])]), attr='lower', ctx=Load()))"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_palindrome"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_palindrome": {
+              "name": "is_palindrome",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "Eq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Call",
+              "Attribute",
+              "Constant",
+              "Load",
+              "Call",
+              "Name",
+              "Load",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Compare",
+              "Name",
+              "Load",
+              "Eq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Load"
+            ],
+            "ast_depth": 9,
+            "ast_hash": "14d59fb70ddc9407733791f35f1079e7",
+            "alpha_renamed_hash": "7cb6204ab902805ab849b2f4e38c87bb"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Return_2"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "cleaned": []
+            },
+            "assignments": {
+              "cleaned": "Call(func=Attribute(value=Constant(value=''), attr='join', ctx=Load()), args=[GeneratorExp(elt=Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='lower', ctx=Load())), generators=[comprehension(target=Name(id='c', ctx=Store()), iter=Name(id='s', ctx=Load()), ifs=[Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='isalnum', ctx=Load()))], is_async=0)])])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_palindrome"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_palindrome": {
+              "name": "is_palindrome",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "Eq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Constant",
+              "Load",
+              "GeneratorExp",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "comprehension",
+              "Name",
+              "Store",
+              "Name",
+              "Load",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Compare",
+              "Name",
+              "Load",
+              "Eq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Load"
+            ],
+            "ast_depth": 9,
+            "ast_hash": "a6166655d130265a5b168a968fe64d9d",
+            "alpha_renamed_hash": "ea3b79312d9e10fc37cc4064e827511e"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Return_2"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "cleaned": []
+            },
+            "assignments": {
+              "cleaned": "Call(func=Attribute(value=Constant(value=''), attr='join', ctx=Load()), args=[GeneratorExp(elt=Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='lower', ctx=Load())), generators=[comprehension(target=Name(id='c', ctx=Store()), iter=Name(id='s', ctx=Load()), ifs=[Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='isalnum', ctx=Load()))], is_async=0)])])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_palindrome"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_palindrome": {
+              "name": "is_palindrome",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "Eq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Constant",
+              "Load",
+              "GeneratorExp",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "comprehension",
+              "Name",
+              "Store",
+              "Name",
+              "Load",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Compare",
+              "Name",
+              "Load",
+              "Eq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Load"
+            ],
+            "ast_depth": 9,
+            "ast_hash": "a6166655d130265a5b168a968fe64d9d",
+            "alpha_renamed_hash": "ea3b79312d9e10fc37cc4064e827511e"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Return_2"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "s": []
+            },
+            "assignments": {
+              "s": "Call(func=Attribute(value=Call(func=Attribute(value=Constant(value=''), attr='join', ctx=Load()), args=[GeneratorExp(elt=Name(id='c', ctx=Load()), generators=[comprehension(target=Name(id='c', ctx=Store()), iter=Name(id='s', ctx=Load()), ifs=[UnaryOp(op=Not(), operand=Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='isspace', ctx=Load())))], is_async=0)])]), attr='lower', ctx=Load()))"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_palindrome"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_palindrome": {
+              "name": "is_palindrome",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "Eq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Call",
+              "Attribute",
+              "Constant",
+              "Load",
+              "GeneratorExp",
+              "Name",
+              "Load",
+              "comprehension",
+              "Name",
+              "Store",
+              "Name",
+              "Load",
+              "UnaryOp",
+              "Not",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Load",
+              "Return",
+              "Compare",
+              "Name",
+              "Load",
+              "Eq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Load"
+            ],
+            "ast_depth": 12,
+            "ast_hash": "f46fefca099ac44183075d099e81c10a",
+            "alpha_renamed_hash": "6cd795e4b78cd57577904ec826bcb85e"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Return_2"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "cleaned": []
+            },
+            "assignments": {
+              "cleaned": "Call(func=Attribute(value=Constant(value=''), attr='join', ctx=Load()), args=[GeneratorExp(elt=Call(func=Attribute(value=Name(id='char', ctx=Load()), attr='lower', ctx=Load())), generators=[comprehension(target=Name(id='char', ctx=Store()), iter=Name(id='s', ctx=Load()), ifs=[Call(func=Attribute(value=Name(id='char', ctx=Load()), attr='isalnum', ctx=Load()))], is_async=0)])])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_palindrome"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_palindrome": {
+              "name": "is_palindrome",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "Eq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Constant",
+              "Load",
+              "GeneratorExp",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "comprehension",
+              "Name",
+              "Store",
+              "Name",
+              "Load",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Compare",
+              "Name",
+              "Load",
+              "Eq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Load"
+            ],
+            "ast_depth": 9,
+            "ast_hash": "8a6b3687435d18bc3ee385f7c8e7a266",
+            "alpha_renamed_hash": "ea3b79312d9e10fc37cc4064e827511e"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Return_2"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "cleaned": []
+            },
+            "assignments": {
+              "cleaned": "Call(func=Attribute(value=Call(func=Attribute(value=Constant(value=''), attr='join', ctx=Load()), args=[GeneratorExp(elt=Name(id='c', ctx=Load()), generators=[comprehension(target=Name(id='c', ctx=Store()), iter=Name(id='s', ctx=Load()), ifs=[Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='isalnum', ctx=Load()))], is_async=0)])]), attr='lower', ctx=Load()))"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_palindrome"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_palindrome": {
+              "name": "is_palindrome",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "Eq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Name",
+              "Load",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Call",
+              "Attribute",
+              "Constant",
+              "Load",
+              "GeneratorExp",
+              "Name",
+              "Load",
+              "comprehension",
+              "Name",
+              "Store",
+              "Name",
+              "Load",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Load",
+              "Return",
+              "Compare",
+              "Name",
+              "Load",
+              "Eq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Load",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 11,
+            "ast_hash": "be3665cc7468657f1e1c811c3b87d6ee",
+            "alpha_renamed_hash": "ce71306115503e7388a61dee8714c400"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Return_2"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "cleaned": []
+            },
+            "assignments": {
+              "cleaned": "Call(func=Attribute(value=Constant(value=''), attr='join', ctx=Load()), args=[GeneratorExp(elt=Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='lower', ctx=Load())), generators=[comprehension(target=Name(id='c', ctx=Store()), iter=Name(id='s', ctx=Load()), ifs=[Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='isalnum', ctx=Load()))], is_async=0)])])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_palindrome"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_palindrome": {
+              "name": "is_palindrome",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "Eq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Constant",
+              "Load",
+              "GeneratorExp",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "comprehension",
+              "Name",
+              "Store",
+              "Name",
+              "Load",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Compare",
+              "Name",
+              "Load",
+              "Eq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Load"
+            ],
+            "ast_depth": 9,
+            "ast_hash": "a6166655d130265a5b168a968fe64d9d",
+            "alpha_renamed_hash": "ea3b79312d9e10fc37cc4064e827511e"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Return_2"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "s": []
+            },
+            "assignments": {
+              "s": "Call(func=Attribute(value=Call(func=Attribute(value=Constant(value=''), attr='join', ctx=Load()), args=[GeneratorExp(elt=Name(id='c', ctx=Load()), generators=[comprehension(target=Name(id='c', ctx=Store()), iter=Name(id='s', ctx=Load()), ifs=[Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='isalnum', ctx=Load()))], is_async=0)])]), attr='lower', ctx=Load()))"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_palindrome"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_palindrome": {
+              "name": "is_palindrome",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "Eq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Call",
+              "Attribute",
+              "Constant",
+              "Load",
+              "GeneratorExp",
+              "Name",
+              "Load",
+              "comprehension",
+              "Name",
+              "Store",
+              "Name",
+              "Load",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Load",
+              "Return",
+              "Compare",
+              "Name",
+              "Load",
+              "Eq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Load"
+            ],
+            "ast_depth": 11,
+            "ast_hash": "dc266063620c88f716f9578526125459",
+            "alpha_renamed_hash": "a7b76b891c5d1bb15ed07a277a9495c3"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Return_2"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 0,
+            "function_calls": [],
+            "nested_depth": 0,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {
+              "s": []
+            },
+            "assignments": {
+              "s": "Call(func=Attribute(value=Constant(value=''), attr='join', ctx=Load()), args=[GeneratorExp(elt=Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='lower', ctx=Load())), generators=[comprehension(target=Name(id='c', ctx=Store()), iter=Name(id='s', ctx=Load()), ifs=[Call(func=Attribute(value=Name(id='c', ctx=Load()), attr='isalnum', ctx=Load()))], is_async=0)])])"
+            }
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_is_palindrome"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "is_palindrome": {
+              "name": "is_palindrome",
+              "args": [
+                "s"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 0,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(1)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": []
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": false,
+            "numeric_constants": [
+              1
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "Eq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "Assign",
+              "Name",
+              "Store",
+              "Call",
+              "Attribute",
+              "Constant",
+              "Load",
+              "GeneratorExp",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "comprehension",
+              "Name",
+              "Store",
+              "Name",
+              "Load",
+              "Call",
+              "Attribute",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Compare",
+              "Name",
+              "Load",
+              "Eq",
+              "Subscript",
+              "Name",
+              "Load",
+              "Slice",
+              "UnaryOp",
+              "USub",
+              "Constant",
+              "Load"
+            ],
+            "ast_depth": 9,
+            "ast_hash": "86727887941b800b6a832de7265b82fb",
+            "alpha_renamed_hash": "bcf3cc1d13a5eb1fd9f89b3c83f0749a"
+          },
+          "operator_precedence": {
+            "operator_sequence": [],
+            "precedence_levels": {}
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "Assign_1",
+              "Return_2"
+            ],
+            "control_flow_order": [
+              "FunctionDef"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        }
+      ],
+      "structural_groups": {
+        "8749177550160703730_-5810721133222397368_-3694515486902142582_-5131920080999923634": [
+          0,
+          2,
+          5,
+          7,
+          8,
+          12,
+          13,
+          17
+        ],
+        "8749177550160703730_-5810721133222397368_-3694515486902142582_7135344867211554967": [
+          1
+        ],
+        "8749177550160703730_-5810721133222397368_-3694515486902142582_5031125490061418395": [
+          3
+        ],
+        "8749177550160703730_-5810721133222397368_-3694515486902142582_8570041524641503666": [
+          4
+        ],
+        "8749177550160703730_-5810721133222397368_-3694515486902142582_347300192163781446": [
+          6
+        ],
+        "8749177550160703730_-5810721133222397368_-3694515486902142582_-7282113939488353286": [
+          9
+        ],
+        "8749177550160703730_-5810721133222397368_-3694515486902142582_72104857127208223": [
+          10,
+          19
+        ],
+        "-7804076944723635273_-5810721133222397368_-3694515486902142582_914813932922759582": [
+          11
+        ],
+        "8749177550160703730_-5810721133222397368_-3694515486902142582_-5470218362812513112": [
+          14
+        ],
+        "8749177550160703730_-5810721133222397368_-3694515486902142582_4542593896110071890": [
+          15
+        ],
+        "8749177550160703730_-5810721133222397368_-3694515486902142582_6129940607332145197": [
+          16
+        ],
+        "8749177550160703730_-5810721133222397368_-3694515486902142582_512145550927676087": [
+          18
+        ]
+      },
+      "distances_to_canon": [
+        0.0,
+        0.14285714285714285,
+        0.0,
+        0.10714285714285714,
+        0.14285714285714285,
+        0.0,
+        0.07142857142857142,
+        0.0,
+        0.0,
+        0.14285714285714285,
+        0.14285714285714285,
+        0.14285714285714285,
+        0.0,
+        0.0,
+        0.14285714285714285,
+        0.03571428571428571,
+        0.10714285714285714,
+        0.0,
+        0.14285714285714285,
+        0.14285714285714285
+      ],
+      "mean_distance": 0.0732142857142857,
+      "std_distance": 0.06534348022689995
+    }
+  },
+  "bell_curve_analysis": {
+    "plot_path": "outputs\\analysis\\pre_post_comparison_is_palindrome_temp1.0.png",
+    "statistics": {
+      "pre_repair": {
+        "mean": 0.10357142857142856,
+        "std": 0.06071428571428571,
+        "median": 0.14285714285714285,
+        "min": 0.0,
+        "max": 0.14285714285714285,
+        "r_anchor": 0.25
+      },
+      "post_repair": {
+        "mean": 0.08035714285714286,
+        "std": 0.06669589070351106,
+        "median": 0.10714285714285714,
+        "min": 0.0,
+        "max": 0.14285714285714285,
+        "r_anchor": 0.4
+      },
+      "deltas": {
+        "delta_mu": 0.0232142857142857,
+        "delta_sigma": -0.005981604989225356,
+        "delta_rescue": 0.15000000000000002
+      },
+      "statistical_tests": {
+        "mann_whitney_u": {
+          "statistic": 240.5,
+          "p_value": 0.22576076984979077
+        },
+        "kolmogorov_smirnov": {
+          "statistic": 0.2,
+          "p_value": 0.8319696107963263
+        },
+        "significantly_different": false
+      }
+    },
+    "r_repair_at_k": {
+      "thresholds": [
+        0.05,
+        0.1,
+        0.15,
+        0.2,
+        0.25,
+        0.3
+      ],
+      "pre_repair": [
+        0.25,
+        0.25,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "post_repair": [
+        0.4,
+        0.4,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "hypothesis_evaluation": {
+    "hypothesis": "SKYT improves LLM code repeatability through contract-driven canonicalization",
+    "supported": true,
+    "evidence": {
+      "raw_repeatability": 0.25,
+      "behavioral_improvement": 0.75,
+      "structural_improvement": 0.15000000000000002,
+      "total_improvement": 0.15000000000000002
+    },
+    "conclusion": "Hypothesis SUPPORTED: Significant improvement detected"
+  }
+}

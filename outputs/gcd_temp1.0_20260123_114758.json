@@ -1,0 +1,5315 @@
+{
+  "experiment_id": "gcd_temp1.0_20260123_114758",
+  "contract_id": "gcd",
+  "model": "claude-sonnet-4-5-20250929",
+  "temperature": 1.0,
+  "timestamp": "2026-01-23T11:47:58.445738",
+  "num_runs": 20,
+  "successful_runs": 20,
+  "contract": {
+    "id": "gcd",
+    "task_intent": "Compute greatest common divisor using Euclidean algorithm",
+    "prompt": "Write a Python function called 'gcd' that takes two positive integers a and b and returns their greatest common divisor using the Euclidean algorithm.",
+    "constraints": {
+      "function_name": "gcd",
+      "output_type": "integer",
+      "implementation_style": "iterative",
+      "variable_naming": {
+        "fixed_variables": [
+          "a",
+          "b"
+        ],
+        "flexible_variables": [
+          "temp",
+          "remainder",
+          "r"
+        ],
+        "naming_policy": "strict"
+      }
+    },
+    "algorithm_family": "gcd",
+    "language": "python",
+    "environment": {},
+    "output_format": "raw_code",
+    "oracle_requirements": {
+      "test_cases": [
+        {
+          "input": [
+            48,
+            18
+          ],
+          "expected": 6,
+          "description": "Standard case"
+        },
+        {
+          "input": [
+            100,
+            50
+          ],
+          "expected": 50,
+          "description": "One divides the other"
+        },
+        {
+          "input": [
+            17,
+            19
+          ],
+          "expected": 1,
+          "description": "Coprime numbers"
+        },
+        {
+          "input": [
+            1071,
+            462
+          ],
+          "expected": 21,
+          "description": "Large numbers"
+        },
+        {
+          "input": [
+            12,
+            12
+          ],
+          "expected": 12,
+          "description": "Equal numbers"
+        },
+        {
+          "input": [
+            1,
+            5
+          ],
+          "expected": 1,
+          "description": "GCD with 1"
+        }
+      ],
+      "correctness_threshold": 1.0,
+      "required_pass_rate": 0.8
+    },
+    "normalization_rules": {
+      "remove_comments": true,
+      "normalize_whitespace": true,
+      "enforce_function_name": true
+    },
+    "anchor_signature": null,
+    "compliance_flag": false,
+    "distance_metric": "foundational_properties",
+    "rescue_bounds": {
+      "allow_function_rename": true,
+      "allow_print_removal": true,
+      "max_transformations": 5
+    },
+    "model_specification": {},
+    "contract_version": "2.0",
+    "oracle_version": "1.0",
+    "normalization_version": "1.0",
+    "created_timestamp": "2026-01-23T11:44:05.152611",
+    "run_id": null,
+    "prompt_id": "gcd",
+    "sample_id": null,
+    "ood_spec": {
+      "policy": "allow",
+      "exception": null,
+      "return_value": null,
+      "examples": [],
+      "max_checks": 3
+    }
+  },
+  "canon_data": {
+    "contract_id": "gcd",
+    "canonical_code": "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 0,
+        "for_loops": 0,
+        "while_loops": 1,
+        "function_calls": [],
+        "nested_depth": 1,
+        "branch_patterns": []
+      },
+      "data_dependency_graph": {
+        "dependencies": {},
+        "assignments": {}
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_gcd"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "gcd": {
+          "name": "gcd",
+          "args": [
+            "a",
+            "b"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": [
+          "Mod"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": false,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": []
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "While",
+          "Name",
+          "Load",
+          "Assign",
+          "Tuple",
+          "Name",
+          "Store",
+          "Name",
+          "Store",
+          "Store",
+          "Tuple",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mod",
+          "Name",
+          "Load",
+          "Load",
+          "Return",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 7,
+        "ast_hash": "3e636a8dd90072657dbd2d47abe960cb",
+        "alpha_renamed_hash": "9e27b54a2ff74bb49d232db79f0caefc"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Mod"
+        ],
+        "precedence_levels": {
+          "Mod": 4
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "While",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "While_1",
+          "Assign_2",
+          "Return_3"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "While"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "contract_data": {
+      "id": "gcd",
+      "task_intent": "Compute greatest common divisor using Euclidean algorithm",
+      "prompt": "Write a Python function called 'gcd' that takes two positive integers a and b and returns their greatest common divisor using the Euclidean algorithm.",
+      "constraints": {
+        "function_name": "gcd",
+        "output_type": "integer",
+        "implementation_style": "iterative",
+        "variable_naming": {
+          "fixed_variables": [
+            "a",
+            "b"
+          ],
+          "flexible_variables": [
+            "temp",
+            "remainder",
+            "r"
+          ],
+          "naming_policy": "strict"
+        }
+      },
+      "algorithm_family": "gcd",
+      "language": "python",
+      "environment": {},
+      "output_format": "raw_code",
+      "oracle_requirements": {
+        "test_cases": [
+          {
+            "input": [
+              48,
+              18
+            ],
+            "expected": 6,
+            "description": "Standard case"
+          },
+          {
+            "input": [
+              100,
+              50
+            ],
+            "expected": 50,
+            "description": "One divides the other"
+          },
+          {
+            "input": [
+              17,
+              19
+            ],
+            "expected": 1,
+            "description": "Coprime numbers"
+          },
+          {
+            "input": [
+              1071,
+              462
+            ],
+            "expected": 21,
+            "description": "Large numbers"
+          },
+          {
+            "input": [
+              12,
+              12
+            ],
+            "expected": 12,
+            "description": "Equal numbers"
+          },
+          {
+            "input": [
+              1,
+              5
+            ],
+            "expected": 1,
+            "description": "GCD with 1"
+          }
+        ],
+        "correctness_threshold": 1.0,
+        "required_pass_rate": 0.8
+      },
+      "normalization_rules": {
+        "remove_comments": true,
+        "normalize_whitespace": true,
+        "enforce_function_name": true
+      },
+      "anchor_signature": "22655c0ab34bde61ba443f2e464f2bdf343cd7cc2538512a50ef3600b8c9246c",
+      "compliance_flag": true,
+      "distance_metric": "foundational_properties",
+      "rescue_bounds": {
+        "allow_function_rename": true,
+        "allow_print_removal": true,
+        "max_transformations": 5
+      },
+      "model_specification": {},
+      "contract_version": "2.0",
+      "oracle_version": "1.0",
+      "normalization_version": "1.0",
+      "created_timestamp": "2025-10-22T13:33:23.922410",
+      "run_id": null,
+      "prompt_id": "gcd",
+      "sample_id": null,
+      "canonical_code": "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a",
+      "foundational_properties": {
+        "control_flow_signature": {
+          "if_statements": 0,
+          "for_loops": 0,
+          "while_loops": 1,
+          "function_calls": [],
+          "nested_depth": 1,
+          "branch_patterns": []
+        },
+        "data_dependency_graph": {
+          "dependencies": {},
+          "assignments": {}
+        },
+        "execution_paths": {
+          "execution_paths": [
+            [
+              "function_gcd"
+            ]
+          ]
+        },
+        "function_contracts": {
+          "gcd": {
+            "name": "gcd",
+            "args": [
+              "a",
+              "b"
+            ],
+            "returns": null,
+            "has_return": true
+          }
+        },
+        "complexity_class": {
+          "nested_loops": 1,
+          "recursive_calls": 0,
+          "estimated_complexity": "O(n)"
+        },
+        "side_effect_profile": {
+          "has_print": false,
+          "has_global_access": false,
+          "has_file_io": false,
+          "modifies_arguments": false,
+          "is_pure": true
+        },
+        "termination_properties": {
+          "has_base_case": false,
+          "has_bounded_loops": false,
+          "recursive_depth": 0
+        },
+        "algebraic_structure": {
+          "commutative_ops": [],
+          "associative_ops": [],
+          "binary_operations": [
+            "Mod"
+          ]
+        },
+        "numerical_behavior": {
+          "uses_integers": false,
+          "uses_floats": false,
+          "has_arithmetic": true,
+          "numeric_constants": []
+        },
+        "logical_equivalence": {
+          "boolean_ops": [],
+          "comparisons": [],
+          "logical_patterns": []
+        },
+        "normalized_ast_structure": {
+          "node_types": [
+            "Module",
+            "FunctionDef",
+            "arguments",
+            "arg",
+            "arg",
+            "While",
+            "Name",
+            "Load",
+            "Assign",
+            "Tuple",
+            "Name",
+            "Store",
+            "Name",
+            "Store",
+            "Store",
+            "Tuple",
+            "Name",
+            "Load",
+            "BinOp",
+            "Name",
+            "Load",
+            "Mod",
+            "Name",
+            "Load",
+            "Load",
+            "Return",
+            "Name",
+            "Load"
+          ],
+          "ast_depth": 7,
+          "ast_hash": "3e636a8dd90072657dbd2d47abe960cb",
+          "alpha_renamed_hash": "9e27b54a2ff74bb49d232db79f0caefc"
+        },
+        "operator_precedence": {
+          "operator_sequence": [
+            "Mod"
+          ],
+          "precedence_levels": {
+            "Mod": 4
+          }
+        },
+        "statement_ordering": {
+          "statement_types": [
+            "FunctionDef",
+            "While",
+            "Assign",
+            "Return"
+          ],
+          "statement_sequence": [
+            "FunctionDef_0",
+            "While_1",
+            "Assign_2",
+            "Return_3"
+          ],
+          "control_flow_order": [
+            "FunctionDef",
+            "While"
+          ]
+        },
+        "recursion_schema": {
+          "is_recursive": false,
+          "base_cases": [],
+          "recursive_calls": [],
+          "recursion_pattern": null,
+          "termination_guards": []
+        }
+      }
+    },
+    "created_timestamp": "2025-10-22T13:33:23.922410",
+    "canon_version": "1.0",
+    "oracle_validated": true,
+    "oracle_pass_rate": 1.0
+  },
+  "canon_created": true,
+  "llm_results": [
+    {
+      "run_id": 1,
+      "raw_output": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'gcd' that takes two positive integers a and b and returns their greatest common divisor using the Euclidean algorithm.\n\nIMPORTANT: The function must be named 'gcd'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 2,
+      "raw_output": "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'gcd' that takes two positive integers a and b and returns their greatest common divisor using the Euclidean algorithm.\n\nIMPORTANT: The function must be named 'gcd'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 3,
+      "raw_output": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'gcd' that takes two positive integers a and b and returns their greatest common divisor using the Euclidean algorithm.\n\nIMPORTANT: The function must be named 'gcd'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 4,
+      "raw_output": "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'gcd' that takes two positive integers a and b and returns their greatest common divisor using the Euclidean algorithm.\n\nIMPORTANT: The function must be named 'gcd'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 5,
+      "raw_output": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'gcd' that takes two positive integers a and b and returns their greatest common divisor using the Euclidean algorithm.\n\nIMPORTANT: The function must be named 'gcd'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 6,
+      "raw_output": "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'gcd' that takes two positive integers a and b and returns their greatest common divisor using the Euclidean algorithm.\n\nIMPORTANT: The function must be named 'gcd'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 7,
+      "raw_output": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'gcd' that takes two positive integers a and b and returns their greatest common divisor using the Euclidean algorithm.\n\nIMPORTANT: The function must be named 'gcd'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 8,
+      "raw_output": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'gcd' that takes two positive integers a and b and returns their greatest common divisor using the Euclidean algorithm.\n\nIMPORTANT: The function must be named 'gcd'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 9,
+      "raw_output": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'gcd' that takes two positive integers a and b and returns their greatest common divisor using the Euclidean algorithm.\n\nIMPORTANT: The function must be named 'gcd'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 10,
+      "raw_output": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'gcd' that takes two positive integers a and b and returns their greatest common divisor using the Euclidean algorithm.\n\nIMPORTANT: The function must be named 'gcd'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 11,
+      "raw_output": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'gcd' that takes two positive integers a and b and returns their greatest common divisor using the Euclidean algorithm.\n\nIMPORTANT: The function must be named 'gcd'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 12,
+      "raw_output": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'gcd' that takes two positive integers a and b and returns their greatest common divisor using the Euclidean algorithm.\n\nIMPORTANT: The function must be named 'gcd'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 13,
+      "raw_output": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'gcd' that takes two positive integers a and b and returns their greatest common divisor using the Euclidean algorithm.\n\nIMPORTANT: The function must be named 'gcd'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 14,
+      "raw_output": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'gcd' that takes two positive integers a and b and returns their greatest common divisor using the Euclidean algorithm.\n\nIMPORTANT: The function must be named 'gcd'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 15,
+      "raw_output": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'gcd' that takes two positive integers a and b and returns their greatest common divisor using the Euclidean algorithm.\n\nIMPORTANT: The function must be named 'gcd'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 16,
+      "raw_output": "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'gcd' that takes two positive integers a and b and returns their greatest common divisor using the Euclidean algorithm.\n\nIMPORTANT: The function must be named 'gcd'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 17,
+      "raw_output": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'gcd' that takes two positive integers a and b and returns their greatest common divisor using the Euclidean algorithm.\n\nIMPORTANT: The function must be named 'gcd'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 18,
+      "raw_output": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'gcd' that takes two positive integers a and b and returns their greatest common divisor using the Euclidean algorithm.\n\nIMPORTANT: The function must be named 'gcd'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 19,
+      "raw_output": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'gcd' that takes two positive integers a and b and returns their greatest common divisor using the Euclidean algorithm.\n\nIMPORTANT: The function must be named 'gcd'.\n\nProvide only the Python code, no explanations or markdown."
+    },
+    {
+      "run_id": 20,
+      "raw_output": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "success": true,
+      "enhanced_prompt": "Write a Python function called 'gcd' that takes two positive integers a and b and returns their greatest common divisor using the Euclidean algorithm.\n\nIMPORTANT: The function must be named 'gcd'.\n\nProvide only the Python code, no explanations or markdown."
+    }
+  ],
+  "raw_outputs": [
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a"
+  ],
+  "repaired_outputs": [
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+    "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a"
+  ],
+  "transformation_results": [
+    {
+      "run_id": 1,
+      "original_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformed_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.13095238095238096,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 2,
+      "original_code": "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a",
+      "transformed_code": "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a",
+      "transformation_needed": false,
+      "final_distance": 0.0
+    },
+    {
+      "run_id": 3,
+      "original_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformed_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.13095238095238096,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 4,
+      "original_code": "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a",
+      "transformed_code": "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a",
+      "transformation_needed": false,
+      "final_distance": 0.0
+    },
+    {
+      "run_id": 5,
+      "original_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformed_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.13095238095238096,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 6,
+      "original_code": "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a",
+      "transformed_code": "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a",
+      "transformation_needed": false,
+      "final_distance": 0.0
+    },
+    {
+      "run_id": 7,
+      "original_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformed_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.13095238095238096,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 8,
+      "original_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformed_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.13095238095238096,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 9,
+      "original_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformed_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.13095238095238096,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 10,
+      "original_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformed_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.13095238095238096,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 11,
+      "original_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformed_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.13095238095238096,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 12,
+      "original_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformed_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.13095238095238096,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 13,
+      "original_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformed_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.13095238095238096,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 14,
+      "original_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformed_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.13095238095238096,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 15,
+      "original_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformed_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.13095238095238096,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 16,
+      "original_code": "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a",
+      "transformed_code": "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a",
+      "transformation_needed": false,
+      "final_distance": 0.0
+    },
+    {
+      "run_id": 17,
+      "original_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformed_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.13095238095238096,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 18,
+      "original_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformed_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.13095238095238096,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 19,
+      "original_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformed_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.13095238095238096,
+      "transformations_applied": []
+    },
+    {
+      "run_id": 20,
+      "original_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformed_code": "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a",
+      "transformation_needed": true,
+      "transformation_success": false,
+      "final_distance": 0.13095238095238096,
+      "transformations_applied": []
+    }
+  ],
+  "metrics": {
+    "R_raw": 0.8,
+    "R_anchor_pre": 0.2,
+    "R_anchor_post": 0.2,
+    "Delta_rescue": 0.0,
+    "R_repair_at_k_pre": {
+      "k=0.05": 0.2,
+      "k=0.1": 0.2,
+      "k=0.15": 1.0,
+      "k=0.2": 1.0
+    },
+    "R_repair_at_k_post": {
+      "k=0.05": 0.2,
+      "k=0.1": 0.2,
+      "k=0.15": 1.0,
+      "k=0.2": 1.0
+    },
+    "distances_pre": [
+      0.13095238095238096,
+      0.0,
+      0.13095238095238096,
+      0.0,
+      0.13095238095238096,
+      0.0,
+      0.13095238095238096,
+      0.13095238095238096,
+      0.13095238095238096,
+      0.13095238095238096,
+      0.13095238095238096,
+      0.13095238095238096,
+      0.13095238095238096,
+      0.13095238095238096,
+      0.13095238095238096,
+      0.0,
+      0.13095238095238096,
+      0.13095238095238096,
+      0.13095238095238096,
+      0.13095238095238096
+    ],
+    "distances_post": [
+      0.13095238095238096,
+      0.0,
+      0.13095238095238096,
+      0.0,
+      0.13095238095238096,
+      0.0,
+      0.13095238095238096,
+      0.13095238095238096,
+      0.13095238095238096,
+      0.13095238095238096,
+      0.13095238095238096,
+      0.13095238095238096,
+      0.13095238095238096,
+      0.13095238095238096,
+      0.13095238095238096,
+      0.0,
+      0.13095238095238096,
+      0.13095238095238096,
+      0.13095238095238096,
+      0.13095238095238096
+    ],
+    "mean_distance_pre": 0.10476190476190476,
+    "mean_distance_post": 0.10476190476190476,
+    "std_distance_pre": 0.05238095238095238,
+    "std_distance_post": 0.05238095238095238,
+    "Delta_mu": 0.0,
+    "Delta_P_tau": {
+      "tau=0.05": 0.0,
+      "tau=0.1": 0.0,
+      "tau=0.15": 0.0,
+      "tau=0.2": 0.0
+    },
+    "canon_coverage": 1.0,
+    "rescue_rate": 0.0,
+    "R_behavioral": 1.0,
+    "R_structural": 0.8,
+    "R_canon": 0.2,
+    "behavioral_improvement": 0.19999999999999996,
+    "structural_improvement": 0.0,
+    "total_runs": 20,
+    "raw_stats": {
+      "unique_outputs": 2,
+      "most_common_count": 16,
+      "distribution": {
+        "def gcd(a, b):\n    while b != 0:\n        a, b = b, a % b\n    return a": 16,
+        "def gcd(a, b):\n    while b:\n        a, b = b, a % b\n    return a": 4
+      },
+      "entropy": 0.7219280948873623
+    },
+    "anchor_pre_stats": {
+      "exact_matches": 4,
+      "total_outputs": 20,
+      "distances": [
+        0.13095238095238096,
+        0.0,
+        0.13095238095238096,
+        0.0,
+        0.13095238095238096,
+        0.0,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.0,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096
+      ],
+      "mean_distance": 0.10476190476190476,
+      "min_distance": 0.0
+    },
+    "anchor_post_stats": {
+      "exact_matches": 4,
+      "total_outputs": 20,
+      "distances": [
+        0.13095238095238096,
+        0.0,
+        0.13095238095238096,
+        0.0,
+        0.13095238095238096,
+        0.0,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.0,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096
+      ],
+      "mean_distance": 0.10476190476190476,
+      "min_distance": 0.0
+    },
+    "behavioral_stats": {
+      "unique_behaviors": 1,
+      "oracle_results": [
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": [
+                48,
+                18
+              ],
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "Standard case"
+            },
+            {
+              "input": [
+                100,
+                50
+              ],
+              "expected": 50,
+              "actual": 50,
+              "passed": true,
+              "description": "One divides the other"
+            },
+            {
+              "input": [
+                17,
+                19
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Coprime numbers"
+            },
+            {
+              "input": [
+                1071,
+                462
+              ],
+              "expected": 21,
+              "actual": 21,
+              "passed": true,
+              "description": "Large numbers"
+            },
+            {
+              "input": [
+                12,
+                12
+              ],
+              "expected": 12,
+              "actual": 12,
+              "passed": true,
+              "description": "Equal numbers"
+            },
+            {
+              "input": [
+                1,
+                5
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "GCD with 1"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": [
+                48,
+                18
+              ],
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "Standard case"
+            },
+            {
+              "input": [
+                100,
+                50
+              ],
+              "expected": 50,
+              "actual": 50,
+              "passed": true,
+              "description": "One divides the other"
+            },
+            {
+              "input": [
+                17,
+                19
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Coprime numbers"
+            },
+            {
+              "input": [
+                1071,
+                462
+              ],
+              "expected": 21,
+              "actual": 21,
+              "passed": true,
+              "description": "Large numbers"
+            },
+            {
+              "input": [
+                12,
+                12
+              ],
+              "expected": 12,
+              "actual": 12,
+              "passed": true,
+              "description": "Equal numbers"
+            },
+            {
+              "input": [
+                1,
+                5
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "GCD with 1"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": [
+                48,
+                18
+              ],
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "Standard case"
+            },
+            {
+              "input": [
+                100,
+                50
+              ],
+              "expected": 50,
+              "actual": 50,
+              "passed": true,
+              "description": "One divides the other"
+            },
+            {
+              "input": [
+                17,
+                19
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Coprime numbers"
+            },
+            {
+              "input": [
+                1071,
+                462
+              ],
+              "expected": 21,
+              "actual": 21,
+              "passed": true,
+              "description": "Large numbers"
+            },
+            {
+              "input": [
+                12,
+                12
+              ],
+              "expected": 12,
+              "actual": 12,
+              "passed": true,
+              "description": "Equal numbers"
+            },
+            {
+              "input": [
+                1,
+                5
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "GCD with 1"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": [
+                48,
+                18
+              ],
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "Standard case"
+            },
+            {
+              "input": [
+                100,
+                50
+              ],
+              "expected": 50,
+              "actual": 50,
+              "passed": true,
+              "description": "One divides the other"
+            },
+            {
+              "input": [
+                17,
+                19
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Coprime numbers"
+            },
+            {
+              "input": [
+                1071,
+                462
+              ],
+              "expected": 21,
+              "actual": 21,
+              "passed": true,
+              "description": "Large numbers"
+            },
+            {
+              "input": [
+                12,
+                12
+              ],
+              "expected": 12,
+              "actual": 12,
+              "passed": true,
+              "description": "Equal numbers"
+            },
+            {
+              "input": [
+                1,
+                5
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "GCD with 1"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": [
+                48,
+                18
+              ],
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "Standard case"
+            },
+            {
+              "input": [
+                100,
+                50
+              ],
+              "expected": 50,
+              "actual": 50,
+              "passed": true,
+              "description": "One divides the other"
+            },
+            {
+              "input": [
+                17,
+                19
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Coprime numbers"
+            },
+            {
+              "input": [
+                1071,
+                462
+              ],
+              "expected": 21,
+              "actual": 21,
+              "passed": true,
+              "description": "Large numbers"
+            },
+            {
+              "input": [
+                12,
+                12
+              ],
+              "expected": 12,
+              "actual": 12,
+              "passed": true,
+              "description": "Equal numbers"
+            },
+            {
+              "input": [
+                1,
+                5
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "GCD with 1"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": [
+                48,
+                18
+              ],
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "Standard case"
+            },
+            {
+              "input": [
+                100,
+                50
+              ],
+              "expected": 50,
+              "actual": 50,
+              "passed": true,
+              "description": "One divides the other"
+            },
+            {
+              "input": [
+                17,
+                19
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Coprime numbers"
+            },
+            {
+              "input": [
+                1071,
+                462
+              ],
+              "expected": 21,
+              "actual": 21,
+              "passed": true,
+              "description": "Large numbers"
+            },
+            {
+              "input": [
+                12,
+                12
+              ],
+              "expected": 12,
+              "actual": 12,
+              "passed": true,
+              "description": "Equal numbers"
+            },
+            {
+              "input": [
+                1,
+                5
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "GCD with 1"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": [
+                48,
+                18
+              ],
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "Standard case"
+            },
+            {
+              "input": [
+                100,
+                50
+              ],
+              "expected": 50,
+              "actual": 50,
+              "passed": true,
+              "description": "One divides the other"
+            },
+            {
+              "input": [
+                17,
+                19
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Coprime numbers"
+            },
+            {
+              "input": [
+                1071,
+                462
+              ],
+              "expected": 21,
+              "actual": 21,
+              "passed": true,
+              "description": "Large numbers"
+            },
+            {
+              "input": [
+                12,
+                12
+              ],
+              "expected": 12,
+              "actual": 12,
+              "passed": true,
+              "description": "Equal numbers"
+            },
+            {
+              "input": [
+                1,
+                5
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "GCD with 1"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": [
+                48,
+                18
+              ],
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "Standard case"
+            },
+            {
+              "input": [
+                100,
+                50
+              ],
+              "expected": 50,
+              "actual": 50,
+              "passed": true,
+              "description": "One divides the other"
+            },
+            {
+              "input": [
+                17,
+                19
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Coprime numbers"
+            },
+            {
+              "input": [
+                1071,
+                462
+              ],
+              "expected": 21,
+              "actual": 21,
+              "passed": true,
+              "description": "Large numbers"
+            },
+            {
+              "input": [
+                12,
+                12
+              ],
+              "expected": 12,
+              "actual": 12,
+              "passed": true,
+              "description": "Equal numbers"
+            },
+            {
+              "input": [
+                1,
+                5
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "GCD with 1"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": [
+                48,
+                18
+              ],
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "Standard case"
+            },
+            {
+              "input": [
+                100,
+                50
+              ],
+              "expected": 50,
+              "actual": 50,
+              "passed": true,
+              "description": "One divides the other"
+            },
+            {
+              "input": [
+                17,
+                19
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Coprime numbers"
+            },
+            {
+              "input": [
+                1071,
+                462
+              ],
+              "expected": 21,
+              "actual": 21,
+              "passed": true,
+              "description": "Large numbers"
+            },
+            {
+              "input": [
+                12,
+                12
+              ],
+              "expected": 12,
+              "actual": 12,
+              "passed": true,
+              "description": "Equal numbers"
+            },
+            {
+              "input": [
+                1,
+                5
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "GCD with 1"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": [
+                48,
+                18
+              ],
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "Standard case"
+            },
+            {
+              "input": [
+                100,
+                50
+              ],
+              "expected": 50,
+              "actual": 50,
+              "passed": true,
+              "description": "One divides the other"
+            },
+            {
+              "input": [
+                17,
+                19
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Coprime numbers"
+            },
+            {
+              "input": [
+                1071,
+                462
+              ],
+              "expected": 21,
+              "actual": 21,
+              "passed": true,
+              "description": "Large numbers"
+            },
+            {
+              "input": [
+                12,
+                12
+              ],
+              "expected": 12,
+              "actual": 12,
+              "passed": true,
+              "description": "Equal numbers"
+            },
+            {
+              "input": [
+                1,
+                5
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "GCD with 1"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": [
+                48,
+                18
+              ],
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "Standard case"
+            },
+            {
+              "input": [
+                100,
+                50
+              ],
+              "expected": 50,
+              "actual": 50,
+              "passed": true,
+              "description": "One divides the other"
+            },
+            {
+              "input": [
+                17,
+                19
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Coprime numbers"
+            },
+            {
+              "input": [
+                1071,
+                462
+              ],
+              "expected": 21,
+              "actual": 21,
+              "passed": true,
+              "description": "Large numbers"
+            },
+            {
+              "input": [
+                12,
+                12
+              ],
+              "expected": 12,
+              "actual": 12,
+              "passed": true,
+              "description": "Equal numbers"
+            },
+            {
+              "input": [
+                1,
+                5
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "GCD with 1"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": [
+                48,
+                18
+              ],
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "Standard case"
+            },
+            {
+              "input": [
+                100,
+                50
+              ],
+              "expected": 50,
+              "actual": 50,
+              "passed": true,
+              "description": "One divides the other"
+            },
+            {
+              "input": [
+                17,
+                19
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Coprime numbers"
+            },
+            {
+              "input": [
+                1071,
+                462
+              ],
+              "expected": 21,
+              "actual": 21,
+              "passed": true,
+              "description": "Large numbers"
+            },
+            {
+              "input": [
+                12,
+                12
+              ],
+              "expected": 12,
+              "actual": 12,
+              "passed": true,
+              "description": "Equal numbers"
+            },
+            {
+              "input": [
+                1,
+                5
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "GCD with 1"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": [
+                48,
+                18
+              ],
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "Standard case"
+            },
+            {
+              "input": [
+                100,
+                50
+              ],
+              "expected": 50,
+              "actual": 50,
+              "passed": true,
+              "description": "One divides the other"
+            },
+            {
+              "input": [
+                17,
+                19
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Coprime numbers"
+            },
+            {
+              "input": [
+                1071,
+                462
+              ],
+              "expected": 21,
+              "actual": 21,
+              "passed": true,
+              "description": "Large numbers"
+            },
+            {
+              "input": [
+                12,
+                12
+              ],
+              "expected": 12,
+              "actual": 12,
+              "passed": true,
+              "description": "Equal numbers"
+            },
+            {
+              "input": [
+                1,
+                5
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "GCD with 1"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": [
+                48,
+                18
+              ],
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "Standard case"
+            },
+            {
+              "input": [
+                100,
+                50
+              ],
+              "expected": 50,
+              "actual": 50,
+              "passed": true,
+              "description": "One divides the other"
+            },
+            {
+              "input": [
+                17,
+                19
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Coprime numbers"
+            },
+            {
+              "input": [
+                1071,
+                462
+              ],
+              "expected": 21,
+              "actual": 21,
+              "passed": true,
+              "description": "Large numbers"
+            },
+            {
+              "input": [
+                12,
+                12
+              ],
+              "expected": 12,
+              "actual": 12,
+              "passed": true,
+              "description": "Equal numbers"
+            },
+            {
+              "input": [
+                1,
+                5
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "GCD with 1"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": [
+                48,
+                18
+              ],
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "Standard case"
+            },
+            {
+              "input": [
+                100,
+                50
+              ],
+              "expected": 50,
+              "actual": 50,
+              "passed": true,
+              "description": "One divides the other"
+            },
+            {
+              "input": [
+                17,
+                19
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Coprime numbers"
+            },
+            {
+              "input": [
+                1071,
+                462
+              ],
+              "expected": 21,
+              "actual": 21,
+              "passed": true,
+              "description": "Large numbers"
+            },
+            {
+              "input": [
+                12,
+                12
+              ],
+              "expected": 12,
+              "actual": 12,
+              "passed": true,
+              "description": "Equal numbers"
+            },
+            {
+              "input": [
+                1,
+                5
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "GCD with 1"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": [
+                48,
+                18
+              ],
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "Standard case"
+            },
+            {
+              "input": [
+                100,
+                50
+              ],
+              "expected": 50,
+              "actual": 50,
+              "passed": true,
+              "description": "One divides the other"
+            },
+            {
+              "input": [
+                17,
+                19
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Coprime numbers"
+            },
+            {
+              "input": [
+                1071,
+                462
+              ],
+              "expected": 21,
+              "actual": 21,
+              "passed": true,
+              "description": "Large numbers"
+            },
+            {
+              "input": [
+                12,
+                12
+              ],
+              "expected": 12,
+              "actual": 12,
+              "passed": true,
+              "description": "Equal numbers"
+            },
+            {
+              "input": [
+                1,
+                5
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "GCD with 1"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": [
+                48,
+                18
+              ],
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "Standard case"
+            },
+            {
+              "input": [
+                100,
+                50
+              ],
+              "expected": 50,
+              "actual": 50,
+              "passed": true,
+              "description": "One divides the other"
+            },
+            {
+              "input": [
+                17,
+                19
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Coprime numbers"
+            },
+            {
+              "input": [
+                1071,
+                462
+              ],
+              "expected": 21,
+              "actual": 21,
+              "passed": true,
+              "description": "Large numbers"
+            },
+            {
+              "input": [
+                12,
+                12
+              ],
+              "expected": 12,
+              "actual": 12,
+              "passed": true,
+              "description": "Equal numbers"
+            },
+            {
+              "input": [
+                1,
+                5
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "GCD with 1"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": [
+                48,
+                18
+              ],
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "Standard case"
+            },
+            {
+              "input": [
+                100,
+                50
+              ],
+              "expected": 50,
+              "actual": 50,
+              "passed": true,
+              "description": "One divides the other"
+            },
+            {
+              "input": [
+                17,
+                19
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Coprime numbers"
+            },
+            {
+              "input": [
+                1071,
+                462
+              ],
+              "expected": 21,
+              "actual": 21,
+              "passed": true,
+              "description": "Large numbers"
+            },
+            {
+              "input": [
+                12,
+                12
+              ],
+              "expected": 12,
+              "actual": 12,
+              "passed": true,
+              "description": "Equal numbers"
+            },
+            {
+              "input": [
+                1,
+                5
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "GCD with 1"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": [
+                48,
+                18
+              ],
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "Standard case"
+            },
+            {
+              "input": [
+                100,
+                50
+              ],
+              "expected": 50,
+              "actual": 50,
+              "passed": true,
+              "description": "One divides the other"
+            },
+            {
+              "input": [
+                17,
+                19
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Coprime numbers"
+            },
+            {
+              "input": [
+                1071,
+                462
+              ],
+              "expected": 21,
+              "actual": 21,
+              "passed": true,
+              "description": "Large numbers"
+            },
+            {
+              "input": [
+                12,
+                12
+              ],
+              "expected": 12,
+              "actual": 12,
+              "passed": true,
+              "description": "Equal numbers"
+            },
+            {
+              "input": [
+                1,
+                5
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "GCD with 1"
+            }
+          ]
+        },
+        {
+          "passed": true,
+          "pass_rate": 1.0,
+          "passed_tests": 6,
+          "total_tests": 6,
+          "test_results": [
+            {
+              "input": [
+                48,
+                18
+              ],
+              "expected": 6,
+              "actual": 6,
+              "passed": true,
+              "description": "Standard case"
+            },
+            {
+              "input": [
+                100,
+                50
+              ],
+              "expected": 50,
+              "actual": 50,
+              "passed": true,
+              "description": "One divides the other"
+            },
+            {
+              "input": [
+                17,
+                19
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "Coprime numbers"
+            },
+            {
+              "input": [
+                1071,
+                462
+              ],
+              "expected": 21,
+              "actual": 21,
+              "passed": true,
+              "description": "Large numbers"
+            },
+            {
+              "input": [
+                12,
+                12
+              ],
+              "expected": 12,
+              "actual": 12,
+              "passed": true,
+              "description": "Equal numbers"
+            },
+            {
+              "input": [
+                1,
+                5
+              ],
+              "expected": 1,
+              "actual": 1,
+              "passed": true,
+              "description": "GCD with 1"
+            }
+          ]
+        }
+      ],
+      "behavioral_groups": {
+        "PPPPPP": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ]
+      },
+      "pass_rate": 1.0
+    },
+    "structural_stats": {
+      "unique_structures": 2,
+      "property_results": [
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {},
+            "assignments": {}
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_gcd"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "gcd": {
+              "name": "gcd",
+              "args": [
+                "a",
+                "b"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "Mod"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              0
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "NotEq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "While",
+              "Compare",
+              "Name",
+              "Load",
+              "NotEq",
+              "Constant",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Name",
+              "Load",
+              "BinOp",
+              "Name",
+              "Load",
+              "Mod",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 7,
+            "ast_hash": "753e8442b6828bce15c50bd792dac84a",
+            "alpha_renamed_hash": "2e87e499de1c91f3b7d3b6d70adec627"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Mod"
+            ],
+            "precedence_levels": {
+              "Mod": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "While",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "While_1",
+              "Assign_2",
+              "Return_3"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "While"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {},
+            "assignments": {}
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_gcd"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "gcd": {
+              "name": "gcd",
+              "args": [
+                "a",
+                "b"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "Mod"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": false,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": []
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "While",
+              "Name",
+              "Load",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Name",
+              "Load",
+              "BinOp",
+              "Name",
+              "Load",
+              "Mod",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 7,
+            "ast_hash": "3e636a8dd90072657dbd2d47abe960cb",
+            "alpha_renamed_hash": "9e27b54a2ff74bb49d232db79f0caefc"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Mod"
+            ],
+            "precedence_levels": {
+              "Mod": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "While",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "While_1",
+              "Assign_2",
+              "Return_3"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "While"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {},
+            "assignments": {}
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_gcd"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "gcd": {
+              "name": "gcd",
+              "args": [
+                "a",
+                "b"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "Mod"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              0
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "NotEq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "While",
+              "Compare",
+              "Name",
+              "Load",
+              "NotEq",
+              "Constant",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Name",
+              "Load",
+              "BinOp",
+              "Name",
+              "Load",
+              "Mod",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 7,
+            "ast_hash": "753e8442b6828bce15c50bd792dac84a",
+            "alpha_renamed_hash": "2e87e499de1c91f3b7d3b6d70adec627"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Mod"
+            ],
+            "precedence_levels": {
+              "Mod": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "While",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "While_1",
+              "Assign_2",
+              "Return_3"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "While"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {},
+            "assignments": {}
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_gcd"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "gcd": {
+              "name": "gcd",
+              "args": [
+                "a",
+                "b"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "Mod"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": false,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": []
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "While",
+              "Name",
+              "Load",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Name",
+              "Load",
+              "BinOp",
+              "Name",
+              "Load",
+              "Mod",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 7,
+            "ast_hash": "3e636a8dd90072657dbd2d47abe960cb",
+            "alpha_renamed_hash": "9e27b54a2ff74bb49d232db79f0caefc"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Mod"
+            ],
+            "precedence_levels": {
+              "Mod": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "While",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "While_1",
+              "Assign_2",
+              "Return_3"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "While"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {},
+            "assignments": {}
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_gcd"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "gcd": {
+              "name": "gcd",
+              "args": [
+                "a",
+                "b"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "Mod"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              0
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "NotEq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "While",
+              "Compare",
+              "Name",
+              "Load",
+              "NotEq",
+              "Constant",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Name",
+              "Load",
+              "BinOp",
+              "Name",
+              "Load",
+              "Mod",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 7,
+            "ast_hash": "753e8442b6828bce15c50bd792dac84a",
+            "alpha_renamed_hash": "2e87e499de1c91f3b7d3b6d70adec627"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Mod"
+            ],
+            "precedence_levels": {
+              "Mod": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "While",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "While_1",
+              "Assign_2",
+              "Return_3"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "While"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {},
+            "assignments": {}
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_gcd"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "gcd": {
+              "name": "gcd",
+              "args": [
+                "a",
+                "b"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "Mod"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": false,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": []
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "While",
+              "Name",
+              "Load",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Name",
+              "Load",
+              "BinOp",
+              "Name",
+              "Load",
+              "Mod",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 7,
+            "ast_hash": "3e636a8dd90072657dbd2d47abe960cb",
+            "alpha_renamed_hash": "9e27b54a2ff74bb49d232db79f0caefc"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Mod"
+            ],
+            "precedence_levels": {
+              "Mod": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "While",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "While_1",
+              "Assign_2",
+              "Return_3"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "While"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {},
+            "assignments": {}
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_gcd"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "gcd": {
+              "name": "gcd",
+              "args": [
+                "a",
+                "b"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "Mod"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              0
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "NotEq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "While",
+              "Compare",
+              "Name",
+              "Load",
+              "NotEq",
+              "Constant",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Name",
+              "Load",
+              "BinOp",
+              "Name",
+              "Load",
+              "Mod",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 7,
+            "ast_hash": "753e8442b6828bce15c50bd792dac84a",
+            "alpha_renamed_hash": "2e87e499de1c91f3b7d3b6d70adec627"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Mod"
+            ],
+            "precedence_levels": {
+              "Mod": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "While",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "While_1",
+              "Assign_2",
+              "Return_3"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "While"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {},
+            "assignments": {}
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_gcd"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "gcd": {
+              "name": "gcd",
+              "args": [
+                "a",
+                "b"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "Mod"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              0
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "NotEq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "While",
+              "Compare",
+              "Name",
+              "Load",
+              "NotEq",
+              "Constant",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Name",
+              "Load",
+              "BinOp",
+              "Name",
+              "Load",
+              "Mod",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 7,
+            "ast_hash": "753e8442b6828bce15c50bd792dac84a",
+            "alpha_renamed_hash": "2e87e499de1c91f3b7d3b6d70adec627"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Mod"
+            ],
+            "precedence_levels": {
+              "Mod": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "While",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "While_1",
+              "Assign_2",
+              "Return_3"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "While"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {},
+            "assignments": {}
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_gcd"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "gcd": {
+              "name": "gcd",
+              "args": [
+                "a",
+                "b"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "Mod"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              0
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "NotEq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "While",
+              "Compare",
+              "Name",
+              "Load",
+              "NotEq",
+              "Constant",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Name",
+              "Load",
+              "BinOp",
+              "Name",
+              "Load",
+              "Mod",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 7,
+            "ast_hash": "753e8442b6828bce15c50bd792dac84a",
+            "alpha_renamed_hash": "2e87e499de1c91f3b7d3b6d70adec627"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Mod"
+            ],
+            "precedence_levels": {
+              "Mod": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "While",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "While_1",
+              "Assign_2",
+              "Return_3"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "While"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {},
+            "assignments": {}
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_gcd"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "gcd": {
+              "name": "gcd",
+              "args": [
+                "a",
+                "b"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "Mod"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              0
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "NotEq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "While",
+              "Compare",
+              "Name",
+              "Load",
+              "NotEq",
+              "Constant",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Name",
+              "Load",
+              "BinOp",
+              "Name",
+              "Load",
+              "Mod",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 7,
+            "ast_hash": "753e8442b6828bce15c50bd792dac84a",
+            "alpha_renamed_hash": "2e87e499de1c91f3b7d3b6d70adec627"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Mod"
+            ],
+            "precedence_levels": {
+              "Mod": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "While",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "While_1",
+              "Assign_2",
+              "Return_3"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "While"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {},
+            "assignments": {}
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_gcd"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "gcd": {
+              "name": "gcd",
+              "args": [
+                "a",
+                "b"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "Mod"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              0
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "NotEq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "While",
+              "Compare",
+              "Name",
+              "Load",
+              "NotEq",
+              "Constant",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Name",
+              "Load",
+              "BinOp",
+              "Name",
+              "Load",
+              "Mod",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 7,
+            "ast_hash": "753e8442b6828bce15c50bd792dac84a",
+            "alpha_renamed_hash": "2e87e499de1c91f3b7d3b6d70adec627"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Mod"
+            ],
+            "precedence_levels": {
+              "Mod": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "While",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "While_1",
+              "Assign_2",
+              "Return_3"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "While"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {},
+            "assignments": {}
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_gcd"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "gcd": {
+              "name": "gcd",
+              "args": [
+                "a",
+                "b"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "Mod"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              0
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "NotEq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "While",
+              "Compare",
+              "Name",
+              "Load",
+              "NotEq",
+              "Constant",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Name",
+              "Load",
+              "BinOp",
+              "Name",
+              "Load",
+              "Mod",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 7,
+            "ast_hash": "753e8442b6828bce15c50bd792dac84a",
+            "alpha_renamed_hash": "2e87e499de1c91f3b7d3b6d70adec627"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Mod"
+            ],
+            "precedence_levels": {
+              "Mod": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "While",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "While_1",
+              "Assign_2",
+              "Return_3"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "While"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {},
+            "assignments": {}
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_gcd"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "gcd": {
+              "name": "gcd",
+              "args": [
+                "a",
+                "b"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "Mod"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              0
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "NotEq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "While",
+              "Compare",
+              "Name",
+              "Load",
+              "NotEq",
+              "Constant",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Name",
+              "Load",
+              "BinOp",
+              "Name",
+              "Load",
+              "Mod",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 7,
+            "ast_hash": "753e8442b6828bce15c50bd792dac84a",
+            "alpha_renamed_hash": "2e87e499de1c91f3b7d3b6d70adec627"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Mod"
+            ],
+            "precedence_levels": {
+              "Mod": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "While",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "While_1",
+              "Assign_2",
+              "Return_3"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "While"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {},
+            "assignments": {}
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_gcd"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "gcd": {
+              "name": "gcd",
+              "args": [
+                "a",
+                "b"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "Mod"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              0
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "NotEq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "While",
+              "Compare",
+              "Name",
+              "Load",
+              "NotEq",
+              "Constant",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Name",
+              "Load",
+              "BinOp",
+              "Name",
+              "Load",
+              "Mod",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 7,
+            "ast_hash": "753e8442b6828bce15c50bd792dac84a",
+            "alpha_renamed_hash": "2e87e499de1c91f3b7d3b6d70adec627"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Mod"
+            ],
+            "precedence_levels": {
+              "Mod": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "While",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "While_1",
+              "Assign_2",
+              "Return_3"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "While"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {},
+            "assignments": {}
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_gcd"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "gcd": {
+              "name": "gcd",
+              "args": [
+                "a",
+                "b"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "Mod"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              0
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "NotEq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "While",
+              "Compare",
+              "Name",
+              "Load",
+              "NotEq",
+              "Constant",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Name",
+              "Load",
+              "BinOp",
+              "Name",
+              "Load",
+              "Mod",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 7,
+            "ast_hash": "753e8442b6828bce15c50bd792dac84a",
+            "alpha_renamed_hash": "2e87e499de1c91f3b7d3b6d70adec627"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Mod"
+            ],
+            "precedence_levels": {
+              "Mod": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "While",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "While_1",
+              "Assign_2",
+              "Return_3"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "While"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {},
+            "assignments": {}
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_gcd"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "gcd": {
+              "name": "gcd",
+              "args": [
+                "a",
+                "b"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "Mod"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": false,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": []
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "While",
+              "Name",
+              "Load",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Name",
+              "Load",
+              "BinOp",
+              "Name",
+              "Load",
+              "Mod",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 7,
+            "ast_hash": "3e636a8dd90072657dbd2d47abe960cb",
+            "alpha_renamed_hash": "9e27b54a2ff74bb49d232db79f0caefc"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Mod"
+            ],
+            "precedence_levels": {
+              "Mod": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "While",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "While_1",
+              "Assign_2",
+              "Return_3"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "While"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {},
+            "assignments": {}
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_gcd"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "gcd": {
+              "name": "gcd",
+              "args": [
+                "a",
+                "b"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "Mod"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              0
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "NotEq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "While",
+              "Compare",
+              "Name",
+              "Load",
+              "NotEq",
+              "Constant",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Name",
+              "Load",
+              "BinOp",
+              "Name",
+              "Load",
+              "Mod",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 7,
+            "ast_hash": "753e8442b6828bce15c50bd792dac84a",
+            "alpha_renamed_hash": "2e87e499de1c91f3b7d3b6d70adec627"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Mod"
+            ],
+            "precedence_levels": {
+              "Mod": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "While",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "While_1",
+              "Assign_2",
+              "Return_3"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "While"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {},
+            "assignments": {}
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_gcd"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "gcd": {
+              "name": "gcd",
+              "args": [
+                "a",
+                "b"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "Mod"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              0
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "NotEq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "While",
+              "Compare",
+              "Name",
+              "Load",
+              "NotEq",
+              "Constant",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Name",
+              "Load",
+              "BinOp",
+              "Name",
+              "Load",
+              "Mod",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 7,
+            "ast_hash": "753e8442b6828bce15c50bd792dac84a",
+            "alpha_renamed_hash": "2e87e499de1c91f3b7d3b6d70adec627"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Mod"
+            ],
+            "precedence_levels": {
+              "Mod": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "While",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "While_1",
+              "Assign_2",
+              "Return_3"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "While"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {},
+            "assignments": {}
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_gcd"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "gcd": {
+              "name": "gcd",
+              "args": [
+                "a",
+                "b"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "Mod"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              0
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "NotEq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "While",
+              "Compare",
+              "Name",
+              "Load",
+              "NotEq",
+              "Constant",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Name",
+              "Load",
+              "BinOp",
+              "Name",
+              "Load",
+              "Mod",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 7,
+            "ast_hash": "753e8442b6828bce15c50bd792dac84a",
+            "alpha_renamed_hash": "2e87e499de1c91f3b7d3b6d70adec627"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Mod"
+            ],
+            "precedence_levels": {
+              "Mod": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "While",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "While_1",
+              "Assign_2",
+              "Return_3"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "While"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        },
+        {
+          "control_flow_signature": {
+            "if_statements": 0,
+            "for_loops": 0,
+            "while_loops": 1,
+            "function_calls": [],
+            "nested_depth": 1,
+            "branch_patterns": []
+          },
+          "data_dependency_graph": {
+            "dependencies": {},
+            "assignments": {}
+          },
+          "execution_paths": {
+            "execution_paths": [
+              [
+                "function_gcd"
+              ]
+            ]
+          },
+          "function_contracts": {
+            "gcd": {
+              "name": "gcd",
+              "args": [
+                "a",
+                "b"
+              ],
+              "returns": null,
+              "has_return": true
+            }
+          },
+          "complexity_class": {
+            "nested_loops": 1,
+            "recursive_calls": 0,
+            "estimated_complexity": "O(n)"
+          },
+          "side_effect_profile": {
+            "has_print": false,
+            "has_global_access": false,
+            "has_file_io": false,
+            "modifies_arguments": false,
+            "is_pure": true
+          },
+          "termination_properties": {
+            "has_base_case": false,
+            "has_bounded_loops": false,
+            "recursive_depth": 0
+          },
+          "algebraic_structure": {
+            "commutative_ops": [],
+            "associative_ops": [],
+            "binary_operations": [
+              "Mod"
+            ]
+          },
+          "numerical_behavior": {
+            "uses_integers": true,
+            "uses_floats": false,
+            "has_arithmetic": true,
+            "numeric_constants": [
+              0
+            ]
+          },
+          "logical_equivalence": {
+            "boolean_ops": [],
+            "comparisons": [
+              "NotEq"
+            ],
+            "logical_patterns": []
+          },
+          "normalized_ast_structure": {
+            "node_types": [
+              "Module",
+              "FunctionDef",
+              "arguments",
+              "arg",
+              "arg",
+              "While",
+              "Compare",
+              "Name",
+              "Load",
+              "NotEq",
+              "Constant",
+              "Assign",
+              "Tuple",
+              "Name",
+              "Store",
+              "Name",
+              "Store",
+              "Store",
+              "Tuple",
+              "Name",
+              "Load",
+              "BinOp",
+              "Name",
+              "Load",
+              "Mod",
+              "Name",
+              "Load",
+              "Load",
+              "Return",
+              "Name",
+              "Load"
+            ],
+            "ast_depth": 7,
+            "ast_hash": "753e8442b6828bce15c50bd792dac84a",
+            "alpha_renamed_hash": "2e87e499de1c91f3b7d3b6d70adec627"
+          },
+          "operator_precedence": {
+            "operator_sequence": [
+              "Mod"
+            ],
+            "precedence_levels": {
+              "Mod": 4
+            }
+          },
+          "statement_ordering": {
+            "statement_types": [
+              "FunctionDef",
+              "While",
+              "Assign",
+              "Return"
+            ],
+            "statement_sequence": [
+              "FunctionDef_0",
+              "While_1",
+              "Assign_2",
+              "Return_3"
+            ],
+            "control_flow_order": [
+              "FunctionDef",
+              "While"
+            ]
+          },
+          "recursion_schema": {
+            "is_recursive": false,
+            "base_cases": [],
+            "recursive_calls": [],
+            "recursion_pattern": null,
+            "termination_guards": []
+          }
+        }
+      ],
+      "structural_groups": {
+        "6309309510861169874_-1851840294711779116_756760385978754315_3725426688646649064": [
+          0,
+          2,
+          4,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          16,
+          17,
+          18,
+          19
+        ],
+        "6309309510861169874_-1851840294711779116_756760385978754315_7251883889990917490": [
+          1,
+          3,
+          5,
+          15
+        ]
+      },
+      "distances_to_canon": [
+        0.13095238095238096,
+        0.0,
+        0.13095238095238096,
+        0.0,
+        0.13095238095238096,
+        0.0,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.0,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096,
+        0.13095238095238096
+      ],
+      "mean_distance": 0.10476190476190476,
+      "std_distance": 0.05238095238095238
+    }
+  },
+  "bell_curve_analysis": {
+    "plot_path": "outputs\\analysis\\pre_post_comparison_gcd_temp1.0.png",
+    "statistics": {
+      "pre_repair": {
+        "mean": 0.10476190476190476,
+        "std": 0.05238095238095238,
+        "median": 0.13095238095238096,
+        "min": 0.0,
+        "max": 0.13095238095238096,
+        "r_anchor": 0.2
+      },
+      "post_repair": {
+        "mean": 0.10476190476190476,
+        "std": 0.05238095238095238,
+        "median": 0.13095238095238096,
+        "min": 0.0,
+        "max": 0.13095238095238096,
+        "r_anchor": 0.2
+      },
+      "deltas": {
+        "delta_mu": 0.0,
+        "delta_sigma": 0.0,
+        "delta_rescue": 0.0
+      },
+      "statistical_tests": {
+        "mann_whitney_u": {
+          "statistic": 200.0,
+          "p_value": 1.0
+        },
+        "kolmogorov_smirnov": {
+          "statistic": 0.0,
+          "p_value": 1.0
+        },
+        "significantly_different": false
+      }
+    },
+    "r_repair_at_k": {
+      "thresholds": [
+        0.05,
+        0.1,
+        0.15,
+        0.2,
+        0.25,
+        0.3
+      ],
+      "pre_repair": [
+        0.2,
+        0.2,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "post_repair": [
+        0.2,
+        0.2,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "hypothesis_evaluation": {
+    "hypothesis": "SKYT improves LLM code repeatability through contract-driven canonicalization",
+    "supported": false,
+    "evidence": {
+      "raw_repeatability": 0.8,
+      "behavioral_improvement": 0.19999999999999996,
+      "structural_improvement": 0.0,
+      "total_improvement": 0.0
+    },
+    "conclusion": "Hypothesis NOT SUPPORTED: No significant improvement"
+  }
+}
