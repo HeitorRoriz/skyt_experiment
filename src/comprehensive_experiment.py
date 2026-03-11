@@ -19,6 +19,13 @@ from .bell_curve_analysis import BellCurveAnalyzer
 from .simple_stats import compare_metrics, format_comparison_report
 from .config import TARGET_RUNS_PER_PROMPT, OUTPUTS_DIR
 
+# Agent enhancement imports (optional - won't break if not available)
+try:
+    from agents.enhanced_transformer import EnhancedCodeTransformer
+    AGENTS_AVAILABLE = True
+except ImportError:
+    AGENTS_AVAILABLE = False
+
 
 class NumpyEncoder(json.JSONEncoder):
     """Custom JSON encoder for numpy types"""
@@ -39,20 +46,31 @@ class ComprehensiveExperiment:
     Complete SKYT experiment pipeline implementation
     """
     
-    def __init__(self, output_dir: str = OUTPUTS_DIR, debug_mode: bool = True, model: str = None):
+    def __init__(self, output_dir: str = OUTPUTS_DIR, debug_mode: bool = True, model: str = None, enable_agents: bool = True):
         self.output_dir = output_dir
+        self.debug_mode = debug_mode
         os.makedirs(output_dir, exist_ok=True)
         
         # Initialize all systems
         self.llm_client = LLMClient(model=model) if model else LLMClient()
         self.canon_system = CanonSystem(os.path.join(output_dir, "canon"))
         self.oracle_system = OracleSystem()
-        self.code_transformer = CodeTransformer(self.canon_system)
+        
+        # Initialize transformer with agent enhancement option
+        if enable_agents and AGENTS_AVAILABLE:
+            self.code_transformer = EnhancedCodeTransformer(self.canon_system, enable_agents=True)
+            self.agent_mode = "enhanced"
+        else:
+            self.code_transformer = CodeTransformer(self.canon_system)
+            self.agent_mode = "traditional"
+            if enable_agents and not AGENTS_AVAILABLE:
+                print("Warning: Agent components not available, using traditional transformation")
         self.metrics_calculator = ComprehensiveMetrics(self.canon_system)
         self.bell_curve_analyzer = BellCurveAnalyzer(os.path.join(output_dir, "analysis"))
         
         print("🚀 SKYT Comprehensive Experiment System Initialized")
         print(f"📋 Components: Contract → LLM ({self.llm_client.model}) → Canon → Transform → Metrics → Analysis")
+        print(f"🤖 Agent Mode: {self.agent_mode}")
     
     def run_full_experiment(self, contract_template_path: str, contract_id: str,
                           num_runs: int = TARGET_RUNS_PER_PROMPT,
@@ -242,7 +260,8 @@ class ComprehensiveExperiment:
                 )
                 
                 repaired_outputs.append(transform_result["transformed_code"])  # Add repaired version
-                transformation_results.append({
+                # Enhanced transformation result with agent information
+                transform_data = {
                     "run_id": i + 1,
                     "original_code": code,
                     "transformed_code": transform_result["transformed_code"],
@@ -250,7 +269,21 @@ class ComprehensiveExperiment:
                     "transformation_success": transform_result["success"],
                     "final_distance": transform_result["final_distance"],
                     "transformations_applied": transform_result["transformations_applied"]
-                })
+                }
+                
+                # Add agent information if available
+                if "strategy_used" in transform_result:
+                    transform_data["strategy_used"] = transform_result["strategy_used"]
+                if "agent_decisions" in transform_result:
+                    transform_data["agent_decisions"] = transform_result["agent_decisions"]
+                if "dna_preserved" in transform_result:
+                    transform_data["dna_preserved"] = transform_result["dna_preserved"]
+                if "planning_reasoning" in transform_result:
+                    transform_data["planning_reasoning"] = transform_result["planning_reasoning"]
+                if "planning_confidence" in transform_result:
+                    transform_data["planning_confidence"] = transform_result["planning_confidence"]
+                
+                transformation_results.append(transform_data)
                 
                 if transform_result["success"]:
                     print(f"    ✅ Transformation successful (final distance: {transform_result['final_distance']:.3f})")
@@ -324,7 +357,10 @@ class ComprehensiveExperiment:
             "bell_curve_analysis": bell_curve_result,
             
             # Research hypothesis evaluation
-            "hypothesis_evaluation": self._evaluate_hypothesis(metrics_result)
+            "hypothesis_evaluation": self._evaluate_hypothesis(metrics_result),
+            
+            # Agent performance (if available)
+            "agent_performance": self._get_agent_performance_summary()
         }
         
         # Save complete results
@@ -590,3 +626,38 @@ class ComprehensiveExperiment:
         print(f"💾 Results saved:")
         print(f"  📄 Detailed: {json_path}")
         print(f"  📊 Metrics CSV: {metrics_csv_path}")
+    
+    def _get_agent_performance_summary(self) -> Dict[str, Any]:
+        """Get summary of agent performance if agents are enabled"""
+        if not hasattr(self, 'agent_mode') or self.agent_mode != "enhanced":
+            return {
+                "agent_mode": self.agent_mode,
+                "agents_enabled": False,
+                "message": "Traditional transformation mode - no agent metrics available"
+            }
+        
+        try:
+            # Get performance from enhanced transformer
+            if hasattr(self.code_transformer, 'get_agent_performance'):
+                agent_performance = self.code_transformer.get_agent_performance()
+                if agent_performance:
+                    return {
+                        "agent_mode": self.agent_mode,
+                        "agents_enabled": True,
+                        "performance_metrics": agent_performance,
+                        "transformation_stats": self.code_transformer.get_transformation_stats()
+                    }
+            
+            # Fallback if enhanced transformer doesn't have performance data
+            return {
+                "agent_mode": self.agent_mode,
+                "agents_enabled": True,
+                "message": "Agent mode enabled but performance data not available"
+            }
+            
+        except Exception as e:
+            return {
+                "agent_mode": self.agent_mode,
+                "agents_enabled": True,
+                "error": f"Error getting agent performance: {str(e)}"
+            }

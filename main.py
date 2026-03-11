@@ -95,6 +95,12 @@ Examples:
     )
     
     parser.add_argument(
+        "--no-agents",
+        action="store_true",
+        help="Disable agent enhancements and use traditional transformation only"
+    )
+    
+    parser.add_argument(
         "--max-ood-checks",
         type=int,
         default=3,
@@ -109,7 +115,8 @@ Examples:
         sys.exit(1)
     
     # Initialize experiment system
-    experiment = ComprehensiveExperiment(args.output_dir, model=args.model)
+    enable_agents = not args.no_agents  # Default: enable agents unless --no-agents flag
+    experiment = ComprehensiveExperiment(args.output_dir, model=args.model, enable_agents=enable_agents)
     
     # Enable debug mode for transformation pipeline
     debug_mode = True  
