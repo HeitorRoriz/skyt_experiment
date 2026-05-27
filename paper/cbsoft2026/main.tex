@@ -1,0 +1,300 @@
+\documentclass[sigconf]{acmart}
+
+%% CBSoft uses an ACM-like format without the ACM Reference block.
+\settopmatter{printacmref=false}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+
+%% CBSoft uses an ACM-like format without a copyright note.
+\setcopyright{none}
+
+%% SBES 2026 Industry Track
+\acmConference[SBES 2026]{40th Brazilian Symposium on Software Engineering}{September 8--11, 2026}{São Paulo, SP, Brazil}
+
+% CBSoft uses an ACM-like format without CCS Concepts.
+% The following warning from acmart can be safely ignored:
+% "CCS concepts are mandatory for papers over two pages."
+
+\AtBeginDocument{
+    \providecommand\BibTeX{{Bib\TeX}}
+}
+
+\begin{document}
+
+\title[Engineering Repeatability with SKYT]{When the Same Prompt Yields Different Code: Engineering Repeatability with SKYT}
+
+%% AUTHORS — update names, affiliations, and emails before submission
+\author{Heitor Roriz}
+\affiliation{%
+  \institution{Massimus}
+  \city{S\~{a}o Paulo}
+  \country{Brazil}
+}
+\email{heitor@massimus.com}
+
+\author{Humberto Plinio Ribeiro}
+\affiliation{%
+  \institution{Wisi Group}
+  \city{Montes Claros}
+  \country{Brazil}
+}
+\email{humberto.ribeiro@wisi.com}
+
+\author{Nasser Jazdi-Motlagh}
+\affiliation{%
+  \institution{University of Stuttgart}
+  \city{Stuttgart}
+  \country{Germany}
+}
+\email{nasser.jazdi@ias.uni-stuttgart.de}
+
+\author{Vicente Lucena}
+\affiliation{%
+  \institution{Federal University of Amazonas}
+  \city{Manaus}
+  \country{Brazil}
+}
+\email{vicente@ufam.edu.br}
+
+\renewcommand{\shortauthors}{Roriz et al.}
+\renewcommand{\shorttitle}{Engineering Repeatability with SKYT}
+
+%% ---------- ABSTRACT (single paragraph, no breaks) ----------
+\begin{abstract}
+Through our work building developer tooling and engaging with embedded software practitioners, we identified that non-repeatability in LLM-generated code is a concrete engineering problem: identical prompts routinely produce structurally different programs, even under pinned model versions, temperatures, and system prompts~\cite{ouyang2023llm}. This undermines verification, auditing, and process reliability, particularly in safety-critical and compliance-driven domains. We present SKYT, a model-agnostic middleware layer---not a coding agent or code generator, but a post-generation canonicalization framework---that treats repeatability as a first-class engineering property. SKYT interposes between any LLM-based generator and the consuming workflow. It combines prompt contracts---structured specifications with behavioral oracles---with canonical anchoring and property-based AST repair to substantially increase the proportion of outputs matching a canonical form. In an empirical evaluation spanning 3{,}600 generations across three commercial LLMs, twelve algorithmic contracts, and five temperature settings, SKYT improved structural repeatability by 17--43 percentage points for the best-responding model (GPT-4o-mini), with individual configurations reaching up to 95 percentage points of rescue (binary search at $T{=}0.0$, $n{=}20$); results varied substantially across model families. We frame repeatability as a process capability question---analogous to first-pass yield in manufacturing---and report early lessons on when canonicalization helps and what practitioners should consider when adopting LLM-generated code in repeatable workflows. SKYT is available as an open-source tool.
+\end{abstract}
+
+\keywords{LLM Code Generation, Software Repeatability, Prompt Contracts, Canonicalization, Industry Practice, Deterministic Builds}
+
+\frenchspacing
+\maketitle
+
+%% ============================================================
+%%  SECTION 1 — The Problem
+%% ============================================================
+\section{The Problem: Non-Repeatability in LLM-Assisted Development}
+\label{sec:problem}
+
+% ORIGIN STORY: honest grounding in Massimus / Product Map
+Large Language Models are increasingly used to generate source code in industrial settings~\cite{fan2023large}. Through our work at Massimus building Product Map---a developer tool that constructs visual feature maps from codebases to show what is implemented---we identified that embedded software teams developing in C and assembly spend disproportionate effort on code understanding.  In interviews and ongoing conversations with these practitioners in firmware, automotive, and safety-critical domains, a specific concern emerged repeatedly: when LLMs are integrated into development workflows, identical prompts routinely produce structurally different programs, even under pinned model versions, temperatures, and system prompts~\cite{ouyang2023llm}. Embedded developers we interviewed confirmed that this structural variability disrupts their review and audit workflows.
+
+% CONCRETE SCENARIO — framed as what practitioners described
+The scenario practitioners described is concrete. In conversations with firmware teams, we repeatedly heard variations of this situation: a team uses an LLM to generate a bracket-validation utility from a structured prompt. On Monday the pipeline produces a stack-based implementation; on Tuesday, with identical settings, it produces a functionally equivalent but structurally different version. Neither output is wrong---both pass the test suite---but the diff is noisy, the code review is invalidated, and the compliance audit trail is broken. In our experiments, raw byte-identical repeatability for this contract dropped to just 15\% at temperature~0.7, meaning 85\% of outputs were structurally different despite identical generation settings.
+
+% BEYOND TOY TASKS — practical motivation (database migrations)
+The problem is not limited to algorithmic tasks.  Consider database migrations: two LLM-generated migration scripts may both produce the correct final schema, yet differ in lock behavior, operation ordering, transactional boundaries, and rollback safety---differences invisible to a schema-level test suite but critical in production.  While our current evaluation focuses on algorithmic contracts (Section~\ref{sec:evidence}), the underlying engineering problem---structurally different but functionally equivalent outputs---applies wherever operational details matter.
+
+% WHY IT MATTERS
+In contexts where traceability and determinism are expected---firmware, medical-device software, automotive systems subject to standards such as MISRA~C---non-repeatability has direct engineering cost~\cite{zhu2024hot}. Yet current LLM-assisted coding workflows offer no systematic answer: prompts are crafted ad hoc, outputs are consumed without structural verification, and there is no disciplined notion of \emph{repeatability as a measurable property}~\cite{vaithilingam2022expectation, barke2023grounded}. Looking ahead, as agentic code generation becomes more deeply integrated into CI/CD workflows, mechanisms for assessing and enforcing repeatability will be essential in contexts where correctness alone is insufficient. Repeatability must be treated as an engineering property, and SKYT is an initial practical step in that direction. Our early evidence yields five concrete lessons for practitioners adopting LLM-generated code in repeatable workflows (Section~\ref{sec:lessons}).
+
+%% ============================================================
+%%  SECTION 2 — The SKYT Approach
+%% ============================================================
+\section{The SKYT Approach}
+\label{sec:approach}
+
+SKYT is a middleware framework that interposes between the LLM and the consuming workflow, substantially increasing the proportion of outputs that match a deterministic canonical form.
+
+% --- 2.1 System Positioning ---
+\subsection{System Positioning}
+\label{sec:positioning}
+
+SKYT is not a code-generation system, a coding agent, or an alternative to tools such as GitHub Copilot or Claude Code.  It is a model-agnostic post-generation layer whose pipeline is:
+
+\smallskip
+{\centering\small\emph{Generator/Agent} $\rightarrow$ \textbf{SKYT} (contract\,+\,oracle\,+\,canon.) $\rightarrow$ \emph{Repeatable output}\par}
+\smallskip
+
+Several adjacent frameworks operate in related but distinct spaces.  Tools such as Instructor \cite{instructor2024}, BAML \cite{baml2024}, and PydanticAI \cite{pydanticai2024} focus on single-call structured output---enforcing type and schema constraints on individual LLM responses.  Guardrails \cite{guardrails2023} goes further: it validates outputs against user-defined specifications and can re-prompt or correct on failure, making it the closest neighbor to SKYT's validation layer.  However, even Guardrails operates on a \emph{per-run} basis---it ensures that each individual output meets a spec, but does not track whether successive valid outputs converge to the same structural form.  SKYT's contribution is orthogonal: it adds the \emph{cross-run} dimension---canonical anchoring, property-based distance, and deterministic repair---to measure and improve repeatability across generations.  These concerns can coexist; a team could use Guardrails to validate individual outputs and SKYT to ensure those validated outputs are structurally stable over time.
+
+% --- 2.2 Prompt Contracts ---
+\subsection{Prompt Contracts}
+\label{sec:contracts}
+
+A \emph{prompt contract} is a structured specification that accompanies the natural-language prompt.  It declares the expected function signature, behavioral oracles (input/output test pairs), structural constraints (e.g., naming policy, complexity class), and---optionally---compliance rules inspired by the discipline of safety standards such as MISRA~C~\cite{misra2012} and NASA's Power of~10~\cite{holzmann2006power}---though we do not claim certification compliance.  The contract serves two purposes: it constrains the LLM's generation space and provides a machine-checkable definition of correctness.
+
+% --- 2.3 Canonical Anchoring ---
+\subsection{Canonical Anchoring}
+\label{sec:canon}
+
+From the first compliant generation, SKYT derives a \emph{canonical anchor}---a reference implementation whose foundational properties (covering structural and semantic dimensions such as AST structure, control-flow signatures, and data dependencies; full list in the replication package) define the target form.  All subsequent outputs are compared against this anchor using a property-based distance metric rather than surface-level text comparison.
+
+When an output is behaviorally correct but structurally divergent, SKYT applies deterministic AST-level repair---monotonically reducing the distance to the canonical anchor while preserving behavioral correctness.  The repair never makes things worse: if transformation fails, the original output is retained.
+
+% --- 2.4 Repeatability Metrics ---
+\subsection{Repeatability Metrics}
+\label{sec:metrics}
+
+We quantify repeatability with three metrics:
+\begin{itemize}
+  \item \textbf{R\textsubscript{raw}}: proportion of byte-identical outputs (baseline, no SKYT).
+  \item \textbf{R\textsubscript{pre}} / \textbf{R\textsubscript{post}}: proportion matching the canonical anchor before and after repair, respectively.
+  \item \textbf{$\Delta$}: the repair improvement, $R_{\text{post}} - R_{\text{pre}}$.
+\end{itemize}
+We frame these as process capability measures: $R_{\text{raw}}$ approximates first-pass yield, $\Delta$ measures rework recovery, and the distributional metrics enable organizations to track LLM-assisted development as a controlled, measurable process---analogous to Six Sigma in manufacturing.
+
+%% ============================================================
+%%  SECTION 3 — Early Evidence
+%% ============================================================
+\section{Early Evidence}
+\label{sec:evidence}
+
+% --- 3.1 Experimental Setup (compact) ---
+\subsection{Experimental Setup}
+\label{sec:setup}
+
+We evaluated SKYT on 12 algorithmic contracts (sorting, searching, math, string processing) across three commercial LLMs (GPT-4o-mini, GPT-4o, Claude Sonnet~4.5), five temperatures (0.0--1.0), and 20 runs per configuration, totaling 3{,}600 generations.  Full experimental data and reproduction scripts are publicly available.\footnote{\url{https://github.com/HeitorRoriz/skyt_experiment/tree/sbes2026-submission/paper/cbsoft2026}}
+
+To ground the problem concretely, Figure~\ref{fig:example} shows two outputs generated by the same model from the same prompt for a balanced-brackets validator.  Both are correct---they pass all oracle tests---yet they differ structurally: different variable names, different bracket-matching strategies, different control flow.  A byte-level diff flags every line.  SKYT's canonical repair transforms both into the same canonical form.
+
+\begin{figure}[t]
+\centering
+\begin{minipage}[t]{0.48\columnwidth}
+{\scriptsize
+\begin{verbatim}
+def is_balanced(s):
+  stack = []
+  pairs = {')':'(',']':'[',
+           '}':'{'}
+  for c in s:
+    if c in pairs.values():
+      stack.append(c)
+    elif c in pairs:
+      if not stack or \
+         stack.pop()!=pairs[c]:
+        return False
+  return len(stack) == 0
+\end{verbatim}
+}
+\centerline{\small (a) Dictionary mapping}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\columnwidth}
+{\scriptsize
+\begin{verbatim}
+def is_balanced(text):
+  stk = []
+  for ch in text:
+    if ch in '([{':
+      stk.append(ch)
+    elif ch in ')]}':
+      if not stk:
+        return False
+      if ch==')' and stk[-1]!='(':
+        return False
+      stk.pop()
+  return stk == []
+\end{verbatim}
+}
+\centerline{\small (b) If-else chains}
+\end{minipage}
+\caption{Two LLM-generated balanced-brackets implementations from the same prompt.  Both pass all oracle tests but differ in variable names, matching strategy, and return style.}
+\label{fig:example}
+\Description{Two side-by-side code listings showing structurally different but functionally equivalent implementations of a balanced brackets checker.}
+\end{figure}
+
+% --- 3.2 Key Findings ---
+\subsection{Key Findings}
+\label{sec:findings}
+
+\paragraph{Canonicalization rescues repeatability.}
+For GPT-4o-mini, the model most responsive to canonicalization, SKYT improved structural repeatability by 17--43 percentage points across the three most diverse contracts (Table~\ref{tab:results}).  Balanced brackets showed the strongest effect at high temperature: raw repeatability of 15\% at $T{=}0.7$ was rescued to 70\% ($\Delta{=}{+}0.45$, $n{=}20$).  Across all configurations, the highest observed rescue reached $\Delta{=}{+}0.95$ (binary search, GPT-4o-mini, $T{=}0.0$, $n{=}20$).  Results varied substantially across model families (see below).
+
+\begin{table}[t]
+  \caption{SKYT repeatability across three tasks and three commercial LLMs, pooled across five temperatures (0.0--1.0). Each cell aggregates 66--100 generations depending on data availability.}
+  \label{tab:results}
+  \begin{tabular}{llcccc}
+    \toprule
+    Task & Model & $R_\text{raw}$ & $R_\text{pre}$ & $R_\text{post}$ & $\Delta$ \\
+    \midrule
+    Balanced Brackets & GPT-4o-mini       & 0.31 & 0.36 & 0.80 & +0.43 \\
+    Balanced Brackets & GPT-4o            & 0.27 & 0.00 & 0.00 & +0.00 \\
+    Balanced Brackets & Claude Sonnet 4.5 & 0.80 & 0.00 & 0.00 & +0.00 \\
+    \midrule
+    Binary Search     & GPT-4o-mini       & 0.47 & 0.02 & 0.30 & +0.29 \\
+    Binary Search     & GPT-4o            & 0.61 & 0.34 & 0.51 & +0.17 \\
+    Binary Search     & Claude Sonnet 4.5 & 0.83 & 0.00 & 0.00 & +0.00 \\
+    \midrule
+    Slugify           & GPT-4o-mini       & 0.60 & 0.58 & 0.75 & +0.17 \\
+    Slugify           & GPT-4o            & 0.32 & 0.02 & 0.09 & +0.07 \\
+    Slugify           & Claude Sonnet 4.5 & 0.66 & 0.00 & 0.00 & +0.00 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{Model choice strongly affects canonicalizability.}
+Claude Sonnet~4.5 achieved near-perfect behavioral correctness ({\raise.17ex\hbox{$\scriptstyle\sim$}}100\% oracle pass rate) but approximately 0\% canonical anchor match across most contracts---it produces structurally idiosyncratic implementations that resist normalization.  This suggests that model choice strongly affects canonicalizability, independent of functional correctness.  Behavioral correctness was preserved at 100\% for GPT-4o-mini across all 1{,}200 generations; no canonicalization step introduced a functional regression in any model.
+
+%% ============================================================
+%%  SECTION 4 — What Practitioners Should Know
+%% ============================================================
+\section{What Practitioners Should Know}
+\label{sec:practitioners}
+
+\subsection{Lessons Learned}
+\label{sec:lessons}
+
+\begin{enumerate}
+  \item \textbf{Temperature is an engineering parameter, not a creativity knob.}  Practitioners rarely consider that even small temperature increases dramatically reduce structural repeatability.  At $T{=}0.7$, most contracts produce fewer than 50\% identical outputs.
+  
+  \item \textbf{Problem structure determines repeatability.}  Simple algorithms (GCD, recursive Fibonacci) are naturally repeatable ($R_{\text{raw}} > 0.9$); complex tasks with multiple valid implementations (bracket matching, string processing) are not.  SKYT's benefit is concentrated where it is most needed.
+  
+  \item \textbf{Contracts do not make LLMs deterministic---they make post-processing deterministic.}  SKYT does not modify the LLM.  It provides a deterministic transformation layer that absorbs the variance the LLM cannot avoid.
+  
+  \item \textbf{Model choice matters.}  GPT-4o-mini responded best to canonicalization; Claude Sonnet~4.5 produced structurally idiosyncratic outputs that resisted normalization despite perfect functional correctness.  Teams should evaluate canonicalizability alongside accuracy when selecting models for repeatable workflows.
+  
+  \item \textbf{Non-repeatability is invisible until you measure it.}  Practitioners we spoke with were aware of output variability in principle but had no tooling to quantify it.  The gap between ``I know LLMs are stochastic'' and ``my pipeline produces 30\% identical outputs at $T{=}0.5$'' is where engineering begins.  Informal practitioner feedback further suggests that output variability is already recognized in real workflows---such as cross-language code conversion---but is still managed mainly through review discipline and prompt refinement rather than dedicated repeatability tooling.
+\end{enumerate}
+
+\subsection{Applicability to Industry}
+\label{sec:applicability}
+
+SKYT targets teams that generate code with LLMs in pipelines where output stability matters---controlled code-generation pipelines, compliance-sensitive workflows (automotive, medical devices), and review-intensive environments. It fits as a CI quality gate (reject commits below a repeatability threshold), a post-generation normalization layer, or an audit-support tool that ensures structural traceability.  Adoption requires three artifacts: a prompt contract (structured specification plus oracle tests), a pinned model version, and a canonical anchor derived from the first compliant generation.  Success is recognized by tracking $R_{\text{raw}}$ and $R_{\text{post}}$ over time, analogous to how teams track test coverage or linting scores.
+
+%% ============================================================
+%%  SECTION 5 — Open Problems and Collaboration Invitation
+%% ============================================================
+\section{Open Problems and Collaboration Invitation}
+\label{sec:open}
+
+SKYT is early work.  The following open problems cannot be solved by a single team and require cross-institutional collaboration~\cite{fan2023large}:
+
+\begin{itemize}
+  \item \textbf{Scaling beyond single-function tasks.}  Extending canonicalization to multi-file, dependency-heavy projects is the most pressing gap between the current proof of concept and industrial deployment.
+  
+  \item \textbf{Domain-specific contract languages.}  Production artifacts such as database migrations, infrastructure-as-code templates, and CI/CD configurations exhibit the same ``valid but different'' problem.  Building domain-specific contracts and oracles for these settings is a natural next step.
+  
+  \item \textbf{Domain-specific repeatability thresholds.}  What is an acceptable $R_{\text{post}}$ for firmware vs.\ web services vs.\ data pipelines?  Defining these thresholds requires input from domain practitioners.
+  
+  \item \textbf{Standardized benchmarks.}  The community lacks repeatability benchmarks analogous to HumanEval~\cite{chen2021evaluating} for correctness.  Without shared benchmarks, comparing mitigation approaches is impossible.
+\end{itemize}
+
+We seek three types of partners: \emph{industrial teams} willing to evaluate SKYT on real codebases; \emph{research groups} working on LLM evaluation and code analysis; and \emph{standards bodies} interested in repeatability as a measurable quality attribute.  We see the Brazilian software engineering community---with its strength in empirical methods and growing industry--academia collaboration---as a natural home for this effort.
+
+%% ============================================================
+%%  CONCLUSION
+%% ============================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+Non-repeatability in LLM-generated code is not a theoretical concern---it is an operational problem that affects verification, auditing, and process reliability today.  SKYT demonstrates that contract-driven canonicalization can substantially improve structural repeatability without sacrificing behavioral correctness.  Our early evidence, drawn from 3{,}600 generations across three commercial LLMs, shows improvements of 17--43 percentage points on the most diverse tasks for GPT-4o-mini, with individual configurations reaching up to 95 percentage points of rescue.
+
+We invite the software engineering community---researchers and practitioners alike---to join in building the tooling, benchmarks, and best practices needed to make LLM-assisted development reliably repeatable.
+
+%% ---------- Artifact Availability ----------
+\section*{Artifact Availability}
+
+The SKYT framework, all experimental data (3{,}600 generation logs), analysis scripts, and reproduction instructions are available at: \url{https://github.com/HeitorRoriz/skyt_experiment/tree/sbes2026-submission/paper/cbsoft2026}.  The repository is licensed under MIT (code) and CC-BY-4.0 (data and documentation).
+
+%% ---------- Acknowledgements ----------
+\section*{Acknowledgements}
+
+We thank Fabio Kon for encouraging this submission, and the reviewers of earlier versions of this work whose feedback strengthened the empirical methodology.  We also thank Emerson Murphy-Hill for the encouragement to pursue this line of research at broader venues.
+
+%% ---------- References ----------
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{references}
+
+%% NOTE: SBES Industry Track papers must NOT include author biographies
+%% (per official CBSoft template checklist, item 20).
+
+\end{document}
