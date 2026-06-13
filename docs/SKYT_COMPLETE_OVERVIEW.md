@@ -4,6 +4,22 @@
 
 ---
 
+> ## RECONCILIATION NOTE — 2026-06-13
+>
+> This overview is dated **October 23, 2025** and **predates both papers** — it reflects an early **7-contract / 13-property** snapshot. It is retained as historical context and intentionally not rewritten.
+>
+> Current scopes (kept distinct, not merged):
+> - **SBES/CBSoft 2026** — **12 algorithmic contracts · 3,600 generations**; MISRA C / NASA Power-of-10 as *inspiration only*.
+> - **MSR 2026 (camera-ready)** — **15 tasks (12 base + 3 strict) · 4,500 generations**.
+>
+> The active foundational-property count in code (`src/foundational_properties.py`) is now **14**, not the 13 shown below.
+>
+> **Strict-contract note (neutral):** the 3 `*_strict` variants were run, but at the time of this note no contract had been validated against an actual MISRA C / NASA Power-of-10 rule set — flagged as a concern (2026-06-13).
+>
+> No experimental data was deleted in making this note.
+
+---
+
 ## 1. System Purpose
 
 **SKYT (Systematic Knowledge-driven Yielding of Transformations)** answers:

@@ -4,6 +4,12 @@ This document explains the statistical methods implemented in SKYT, addressing P
 
 ---
 
+> ## RECONCILIATION NOTE — 2026-06-13
+>
+> The **"12 contracts"** used throughout the multiple-comparison examples below is the **SBES/CBSoft 2026** scope (family of 12 algorithmic contracts · 3,600 generations; MISRA/P10 as inspiration only). The **MSR 2026 (camera-ready)** analysis spans **15 tasks** (12 base + 3 strict) · 4,500 generations · **14 foundational properties**. The two scopes are kept distinct; the statistical methods themselves are unchanged. The 3 `*_strict` variants were run but were not validated against an actual MISRA C / NASA Power-of-10 rule set — noted as a concern (2026-06-13). No data was deleted.
+
+---
+
 ## Overview
 
 SKYT uses **small-sample-appropriate statistical methods** to analyze repeatability improvements. All methods are designed for:

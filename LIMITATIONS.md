@@ -4,6 +4,20 @@ This document outlines the limitations of the SKYT approach and threats to the v
 
 ---
 
+> ## RECONCILIATION NOTE — 2026-06-13
+>
+> The repo documents **two papers with different, intentionally scoped experiments** (kept distinct, not merged):
+> - **SBES/CBSoft 2026 (Industry Track)** — **12 algorithmic contracts · 3,600 generations**. MISRA C / NASA Power-of-10 cited as *inspiration only*; no certification compliance claimed or evaluated.
+> - **MSR 2026 (camera-ready)** — **15 tasks (12 base + 3 strict) · 4,500 generations · 14 foundational properties**.
+>
+> **This document** was written against the **SBES** scope (12 contracts / 3,600). Two corrections apply: §3.1's model list reading "GPT-5.2" is an **error** — the evaluated models were **GPT-4o-mini, GPT-4o, Claude Sonnet 4.5** (`claude-sonnet-4-5-20250929`), corrected inline below; and "13 foundational properties" should read **14** (`src/foundational_properties.py`).
+>
+> **Strict-contract note (neutral):** the 3 `*_strict` variants were run, but at the time of this note no contract had been validated against an actual MISRA C / NASA Power-of-10 rule set — flagged as a concern (2026-06-13).
+>
+> No experimental data was deleted in making this note.
+
+---
+
 ## 1. Scope Limitations
 
 ### 1.1 Single-File Programs Only
@@ -168,7 +182,7 @@ As contracts become stricter, even simple algorithms will require more transform
 **Threat:** Results may not generalize to all LLMs.
 
 **Description:**
-- Evaluated on 3 models: GPT-4o-mini, GPT-5.2, Claude-Sonnet-4.5
+- Evaluated on 3 models: GPT-4o-mini, ~~GPT-5.2~~ GPT-4o, Claude-Sonnet-4.5 _(corrected 2026-06-13: "GPT-5.2" was never used; the evaluated OpenAI models were GPT-4o-mini and GPT-4o — see reconciliation note)_
 - All are frontier models (late 2024/early 2025)
 - May not represent smaller or older models
 
@@ -375,7 +389,7 @@ def select_best_anchor(valid_outputs):
 - Model versions may be deprecated
 
 **Mitigation:**
-- Use specific model versions (e.g., `gpt-5.2-2025-12-11`)
+- Use specific model versions (e.g., ~~`gpt-5.2-2025-12-11`~~ `gpt-4o-mini`, `gpt-4o`, `claude-sonnet-4-5-20250929`) _(corrected 2026-06-13)_
 - Document exact model identifiers in results
 - Timestamp all experiments
 - Archive raw outputs for replication

@@ -11,6 +11,12 @@ The SKYT experiment system now collects **ALL required metrics** for your paper,
 
 ---
 
+> ## RECONCILIATION NOTE — 2026-06-13
+>
+> References to **"13 properties"** below reflect an earlier count; the code now has **14** active foundational properties (`src/foundational_properties.py`). Experiment scope differs by paper and is kept distinct: **SBES/CBSoft 2026** = 12 contracts / 3,600 generations (MISRA/P10 as inspiration only); **MSR 2026 (camera-ready)** = 15 tasks / 4,500 generations. The 3 `*_strict` variants were run but were not validated against an actual MISRA C / NASA Power-of-10 rule set — noted as a concern (2026-06-13). No data was deleted.
+
+---
+
 ## 📊 Core Repeatability Metrics
 
 ### R_raw (Raw Repeatability)

@@ -5,6 +5,20 @@
 
 ---
 
+> ## RECONCILIATION NOTE — 2026-06-13
+>
+> The repo documents **two papers with different, intentionally scoped experiments**; their figures are not interchangeable and are both kept as written:
+> - **SBES/CBSoft 2026 (Industry Track)** — `paper/cbsoft2026/main.tex` — **12 algorithmic contracts · 3,600 generations**. MISRA C / NASA Power-of-10 are cited as *inspiration only*; no certification compliance is claimed or evaluated.
+> - **MSR 2026 (Data & Tool Showcase, camera-ready)** — **15 tasks (12 base + 3 strict variants) · 4,500 generations · 14 foundational properties**.
+>
+> **Decision:** we are **not collapsing these into a single number** — each document is read against the paper it belongs to. The active foundational-property count in code (`src/foundational_properties.py`) is **14**, not 13.
+>
+> **This document:** the header reads *MSR 2026*, but the body figures below (12 contracts, 3,600 generations, "13 semantic properties") are the **SBES** scope. If this is intended as the MSR artifact, the MSR values above apply; the property count is **14** either way.
+>
+> **Strict-contract note (neutral):** the 3 `*_strict` variants (`is_prime_strict`, `binary_search_strict`, `lru_cache_strict`) were run, but at the time of this note no contract had been validated against an actual MISRA C / NASA Power-of-10 rule set — flagged here as a concern (2026-06-13).
+>
+> No experimental data (CSV/JSON logs) was deleted in making this note.
+
 ## Overview
 
 **SKYT** measures and improves **software repeatability** in LLM-generated code through:
