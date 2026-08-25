@@ -1,0 +1,244 @@
+\documentclass[sigconf,review,anonymous]{acmart}
+
+%% FSE 2027 Research track --- W0 skeleton. Not camera-ready.
+%% Double-blind: keep anonymous/review until camera-ready.
+\acmConference[FSE '27]{ACM International Conference on the Foundations of Software Engineering}{July 12--16, 2027}{Shenzhen, China}
+\acmBooktitle{Proceedings of the ACM International Conference on the Foundations of Software Engineering (FSE '27), July 12--16, 2027, Shenzhen, China}
+\copyrightyear{2027}
+\acmYear{2027}
+\setcopyright{none}
+
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{framed}
+
+\newcommand{\skyt}{\textsc{Skyt}}
+\newcommand{\etal}{et~al.}
+\newcommand{\ie}{i.e.,}
+\newcommand{\eg}{e.g.,}
+
+%% ---------- DRAFTING NOTES (delete this block before submission) ----------
+%% CONTRIBUTIONS (locked order):
+%%   C1 Protocol (the ruler): N regenerations + structural distance + reports
+%%      (pairwise U-statistics, certified modal mass, optional churn).
+%%   C2 Anchor-aware measurement: first-compliant vs Certified Consensus Canon;
+%%      measure ≠ policy.
+%%   C3 Empirical finding: corrected behavioral–structural gap on our corpus;
+%%      replication on HumanEval (pilot → full).
+%%   C4 Tool score: SKYT under pairwise / honest metrics (pre/post).
+%%
+%% METHODS FREEZE (do not reopen while drafting):
+%%   SELECT  Certified Consensus Canon
+%%           (certified mode → medoid on ties → deterministic tie-break)
+%%           "Certified" = oracle-pass + contract compliance
+%%   MEASURE 1. End-to-end pairwise exact-match U-statistic
+%%              (+ conditional-among-valid secondary)
+%%           2. Certified modal mass (largest certified class / n)
+%%           3. Pairwise distance U-statistic (secondary)
+%%           Inference: one score per contract → cluster bootstrap
+%%           Within-config pairwise: generation bootstrap if shown
+%%           NEVER: Wilson/binomial on C(n,2) pairs
+%%           NEVER: plain Wilson on in-sample modal share
+%%   POLICY  Repeated balanced CV at operational s=10
+%%           (U-statistic CV; large fixed-seed B, not single split-half)
+%%           Report held-out match, distance, canon stability
+%%           Baselines: first-compliant vs Certified Consensus
+%%           LOO / temporal = sensitivity only
+%%           Fresh holdout = strongest confirmation when budget allows
+%%   WILSON  Only: frozen canon + independent evaluation batch
+%%
+%% SCOPES: never merge SBES (12 / 3,600) with MSR (15 / 4,500).
+%% Do not headline split-half medoid (74.3%). Do not quote 66pp without
+%% "anchor-relative". Normalization = 14-property distance-0.
+%% Code DNA / IVR is out of scope.
+%% -----------------------------------------------------------------------
+
+\begin{document}
+
+\title{A Structural Repeatability Protocol for LLM-Generated Code}
+
+%% Blind review: authors commented until camera-ready.
+%% \author{Heitor Roriz}
+%% \affiliation{%
+%%   \institution{Massimus}
+%%   \city{S\~{a}o Paulo}
+%%   \country{Brazil}
+%% }
+%% \email{heitor@massimus.com}
+%%
+%% \author{Nasser Jazdi-Motlagh}
+%% \affiliation{%
+%%   \institution{University of Stuttgart}
+%%   \city{Stuttgart}
+%%   \country{Germany}
+%% }
+%% \email{nasser.jazdi@ias.uni-stuttgart.de}
+%%
+%% \author{Vicente Lucena}
+%% \affiliation{%
+%%   \institution{Federal University of Amazonas}
+%%   \city{Manaus}
+%%   \country{Brazil}
+%% }
+%% \email{vicente@ufam.edu.br}
+
+\renewcommand{\shortauthors}{Anonymous Author(s)}
+\renewcommand{\shorttitle}{A Structural Repeatability Protocol}
+
+%% ---------- ABSTRACT ----------
+\begin{abstract}
+Existing code-generation benchmarks score a single sample against a behavioral oracle. They do not measure how much the \emph{structure} of correct code varies when the same prompt is regenerated. We propose a \textbf{structural repeatability protocol}: $N$ independent generations, a property-based structural distance, and population-level reports based on pairwise U-statistics and certified modal mass. The protocol separates \emph{measurement} (how scattered are the outputs?) from \emph{policy} (which verified form should count as the canon?). On a locked corpus of commercial-LLM generations we report a corrected behavioral--structural gap and the effect of a post-generation canonicalizer (\skyt{}); an external-task arm on HumanEval is in progress. % W1/W3: replace this sentence with numbers after recompute under the Methods freeze.
+\end{abstract}
+
+\keywords{LLM code generation, structural repeatability, U-statistics, canonicalization, HumanEval, software measurement}
+
+\maketitle
+
+%% ============================================================
+%%  DRAFTING BOX --- visible to co-authors; delete before submit
+%% ============================================================
+\begin{shaded}
+\noindent\textbf{Drafting notes (remove before submission).}
+Contributions in locked order: \textbf{C1} protocol (the ruler);
+\textbf{C2} anchor-aware measurement (first-compliant vs Certified Consensus Canon; measure $\neq$ policy);
+\textbf{C3} empirical finding (corrected gap on our corpus; HumanEval replication);
+\textbf{C4} tool score (\skyt{} pre/post under honest metrics).
+Methods freeze: Certified Consensus Canon; end-to-end pairwise exact-match U-statistic + certified modal mass; cluster bootstrap by contract; repeated balanced CV at $s{=}10$; Wilson only for a frozen canon plus independent batch.
+Never Wilson on $C(n,2)$ pairs or in-sample modal share.
+Never headline split-half medoid.
+Never merge SBES and MSR scopes.
+Never quote a 66\,pp gap without the anchor-relative qualifier.
+\end{shaded}
+
+%% ============================================================
+\section{Introduction}
+\label{sec:intro}
+%% W2: ruler-first story. Benchmarks score one output; we score dispersion across N.
+%% Do not lead with the 66pp figure.
+
+Correctness benchmarks for LLM code generation---HumanEval~\cite{chen2021evaluating}, MBPP~\cite{austin2021program}, SWE-bench~\cite{jimenez2024swebench}---ask whether \emph{a} generated artifact passes tests. Production pipelines, however, regenerate: CI re-runs generators, agents retry, and independent developers issue the same prompt. Behavioral oracles cannot tell two passing regenerations apart, yet the artifacts can differ in structure~\cite{ouyang2023llm}.
+
+This paper's primary contribution is a \textbf{benchmark-agnostic overlay} that measures that structural scatter (\textbf{C1}). We then show that the choice of reference form (the \emph{canon}) is a policy, not a measurement, and compare first-compliant anchoring to a Certified Consensus Canon (\textbf{C2}). We apply the protocol to an existing contract corpus (\textbf{C3}, Results~A) and to HumanEval (\textbf{C3}, Results~B; W3). Finally we rescore a post-generation repair tool, \skyt{}, under the same honest metrics (\textbf{C4}).
+
+\paragraph{Not in this paper.} Generation-by-construction (``Code DNA'') is a separate vision paper. We do not claim MISRA~C or NASA Power-of-10 compliance for any contract.
+
+%% ============================================================
+\section{Motivation}
+\label{sec:motivation}
+%% W2: regeneration churn + Pillar 3 citations (TODO sweep).
+%% Gate 0 measured ~13.1% line churn among passing pairs (MSR; ~13.8% SBES).
+
+% TODO: practitioner regeneration-churn; reproducible builds / SLSA / tool qualification.
+% Fabio Kon objection (``if you need repeatability, freeze the first passing output''):
+% regeneration is routine; first-compliant is a poor center (~38% of configs);
+% T=0 is not bit-deterministic on commercial APIs.
+
+%% ============================================================
+\section{Related Work}
+\label{sec:related}
+%% W2 stubs.
+
+\paragraph{Correctness benchmarks.} HumanEval~\cite{chen2021evaluating}, MBPP~\cite{austin2021program}, SWE-bench~\cite{jimenez2024swebench}. These protocols score pass@$k$, not structural dispersion across $N$ passing samples.
+
+\paragraph{LLM variability.} Non-determinism in code generation~\cite{ouyang2023llm}; temperature~\cite{zhu2024hot}; developer interaction~\cite{vaithilingam2022expectation,barke2023grounded}.
+
+\paragraph{Repair and structured generation.} % TODO: program repair, constrained decoding, SKYT MSR~\cite{roriz2026skytmsr}.
+
+\paragraph{Reproducible artifacts.} % TODO: reproducible-builds, SLSA, qualified generators.
+
+%% ============================================================
+\section{The Structural Repeatability Protocol}
+\label{sec:protocol}
+%% W1: full Methods. Inputs, N, distance, U-statistics, modal mass,
+%% Certified Consensus Canon, CV-at-s=10, CI rules.
+
+\subsection{Inputs and regenerations}
+A \emph{task} supplies a prompt, a behavioral oracle (unit tests), and optional static constraints (a \emph{contract}). For each experimental cell we draw $N$ independent generations (corpus: $N{=}20$).
+
+\subsection{Structural sameness}
+Two generations are structurally identical when a vector of 14 foundational properties has distance $0$ (including $\alpha$-renaming where the contract allows). Headline exact-match rates are therefore \emph{weight-independent}: distance $0$ requires all properties to match. Mean distances are descriptive support only.
+
+\subsection{Population measures (not policies)}
+\label{sec:measures}
+\begin{enumerate}
+  \item \textbf{End-to-end pairwise exact-match U-statistic:} probability that two independent draws both certify and match at distance $0$. Conditional-among-valid pairwise match is secondary.
+  \item \textbf{Certified modal mass:} size of the largest certified exact-match class divided by $N$ (denominator is all generations, not only passers).
+  \item \textbf{Pairwise distance U-statistic} (secondary).
+\end{enumerate}
+Pairs within a config are dependent. Inference aggregates \emph{one score per contract} and uses a \textbf{cluster bootstrap}. Do not treat $C(N,2)$ pairs as binomial trials. Do not put a Wilson interval on in-sample modal share.
+
+\subsection{Canon policy (separate from measurement)}
+\label{sec:canon-policy}
+\textbf{Certified Consensus Canon:} among generations that pass the oracle \emph{and} contract compliance, take the modal exact form; break ties by medoid, then a deterministic lexicographic rule.
+
+\textbf{Policy evaluation:} repeated balanced cross-validation at operational batch size $s{=}10$ (U-statistic CV; large fixed-seed $B$), reporting held-out match, distance, and canon stability. Baselines: first-compliant vs Certified Consensus. Leave-one-out and temporal splits are sensitivity checks only. A Wilson interval is valid only for a \emph{frozen} canon scored on an independent batch.
+
+%% ============================================================
+\section{Experimental Setup}
+\label{sec:setup}
+
+\subsection{Corpus A --- contracted tasks}
+Two scopes, never pooled into one headline: \textbf{SBES} (12 contracts, 3{,}600 generations) and \textbf{MSR} (15 tasks including three \texttt{\_strict} variants, 4{,}500 generations). Models: GPT-4o-mini, GPT-4o, Claude Sonnet 4.5. Temperatures: $\{0.0, 0.3, 0.5, 0.7, 1.0\}$. $N{=}20$ per cell.
+
+Gate~0 analysis uses \textbf{220} complete configs (MSR grid 225 minus the entire \texttt{is\_prime\_strict}$\times$Claude cell). Strict variants were not validated against a real MISRA~C / NASA~P10 rule set.
+
+\subsection{Corpus B --- HumanEval}
+\label{sec:humaneval}
+%% W3. External tasks; HumanEval tests as oracle; human reference as a third
+%% canon-policy baseline. Pilot ~30 tasks, then full 164. SWE-bench is future work.
+
+\subsection{Tool under test}
+\skyt{} is a post-generation canonicalizer (prompt contracts + property-based AST repair), not a code-generating agent. Pre/post scores use the same protocol (\textbf{C4}).
+
+%% ============================================================
+\section{Results A: Contracted Corpus}
+\label{sec:results-a}
+%% W1: draft from outputs/gate0 and outputs/problem_evidence.
+%% Recompute under Methods freeze before camera-ready tables.
+%% Placeholder magnitudes from Gate 0 (pre-freeze headlines) --- do not ship:
+
+\paragraph{Corrected gap (pre-freeze, for orientation).}
+On the same 220 configs, stored behavioral repeatability is $\approx 98.4\%$. Anchor-free structural repeatability is $\approx 76.5\%$ modal share and $\approx 74.3\%$ split-half medoid (MSR, pre-repair). The \textbf{anchor-relative} gap to first-compliant was $\approx 66$\,pp; the first-compliant output is the empirical medoid in only $\approx 38$--$41\%$ of configs. Quote 66\,pp only with that qualifier.
+
+\paragraph{Problem evidence (pre-freeze).}
+Mean line churn among passing pairs $\approx 13.1\%$ (MSR) / $13.8\%$ (SBES), scaling with temperature ($3.2\%$ at $T{=}0$ to $23.1\%$ at $T{=}1$). Zero recursion flips under our style-pinning contracts (predicts larger algorithm flips on unconstrained HumanEval). Static \texttt{complexity\_class} flags are candidates only.
+
+%% ============================================================
+\section{Results B: HumanEval}
+\label{sec:results-b}
+%% W3. Empty until harness exists.
+
+%% ============================================================
+\section{Discussion}
+\label{sec:discussion}
+% Why freezing the first passer is not a pipeline policy (Kon).
+% Measure vs policy. Property ceiling / post-repair plateau.
+
+%% ============================================================
+\section{Threats to Validity}
+\label{sec:threats}
+%% From Gate 0 memo. Expand in W2.
+
+\begin{itemize}
+  \item \textbf{Oracle strength.} Some cells have weak tests (\eg{} \texttt{slugify}/GPT-4o at $T{=}0$). Certified rates inherit oracle quality.
+  \item \textbf{Construct.} Distance-$0$ on 14 properties is not semantic equivalence of all possible programs.
+  \item \textbf{Temperature 0.} Commercial APIs are not bit-deterministic at $T{=}0$.
+  \item \textbf{Sample size.} $N{=}20$; $n{=}10$ is the operational CV batch and the HumanEval-pilot design.
+  \item \textbf{Unsatisfiable strict contracts.} \texttt{binary\_search\_strict} had $0/20$ compliant in analyzed cells (literal-pattern constraints).
+  \item \textbf{Missing cell.} \texttt{is\_prime\_strict}$\times$Claude never completed (5 configs).
+  \item \textbf{Task selection.} Corpus A is author-designed; Corpus B (HumanEval) is the planned answer. SWE-bench is future work (multi-file; extractor does not transfer).
+\end{itemize}
+
+%% ============================================================
+\section{Conclusion}
+\label{sec:conclusion}
+We argue for measuring structural dispersion of LLM code with an explicit protocol, not with a single first-passing snapshot. Remaining work: freeze-aligned tables, HumanEval arm, and an artifact package.
+
+\begin{acks}
+%% TODO camera-ready.
+\end{acks}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{main}
+
+\end{document}
