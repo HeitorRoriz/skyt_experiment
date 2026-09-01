@@ -101,6 +101,11 @@ class ComprehensiveMetrics:
         r_behavioral, behavioral_stats = self._calculate_behavioral_repeatability(
             raw_outputs, contract
         )
+        r_behavioral_post, behavioral_stats_post = (
+            self._calculate_behavioral_repeatability(
+                repaired_outputs, contract
+            )
+        )
         r_structural, structural_stats = self._calculate_structural_repeatability(
             repaired_outputs, contract_id  # Use repaired outputs for structural repeatability
         )
@@ -131,6 +136,7 @@ class ComprehensiveMetrics:
             "canon_coverage": canon_coverage,
             "rescue_rate": rescue_rate,
             "R_behavioral": r_behavioral,
+            "R_behavioral_post": r_behavioral_post,
             "R_structural": r_structural,
             
             # === LEGACY COMPATIBILITY ===
@@ -144,6 +150,7 @@ class ComprehensiveMetrics:
             "anchor_pre_stats": anchor_pre_stats,
             "anchor_post_stats": anchor_post_stats,
             "behavioral_stats": behavioral_stats,
+            "behavioral_stats_post": behavioral_stats_post,
             "structural_stats": structural_stats
         }
     
@@ -537,6 +544,7 @@ class ComprehensiveMetrics:
             "R_anchor_post": 0.0,
             "Delta_rescue": 0.0,
             "R_behavioral": 0.0,
+            "R_behavioral_post": 0.0,
             "R_structural": 0.0,
             "R_canon": 0.0,
             "canon_coverage": 0.0,

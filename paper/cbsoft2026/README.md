@@ -8,6 +8,14 @@ This folder contains the LaTeX source, bibliography, and analysis scripts for th
 
 **Permanent artifact URL:** <https://github.com/HeitorRoriz/skyt_experiment/tree/sbes2026-submission/paper/cbsoft2026>
 
+> **Post-submission correction (2026-08-26):** the original pipeline measured
+> behavioral correctness on raw outputs but did not persist independent
+> post-repair oracle results. Sandboxed revalidation of all 3,600 SBES-scope
+> repaired outputs found 14 behavioral regressions (post pass rate 97.7% vs
+> 98.1% pre). None occurred in GPT-4o-mini; 13 occurred in GPT-4o and one in
+> Claude. The broad claim that no canonicalization step regressed any model is
+> withdrawn. The runtime now validates and rolls back every final repair.
+
 ---
 
 ## Reproducibility snapshot
@@ -54,7 +62,7 @@ SKYT repeatability across three tasks and three commercial LLMs, pooled across f
 
 - **17–43 percentage-point improvement** for GPT-4o-mini across the three most diverse contracts (Δ column above).
 - **Peak rescue Δ = +0.95** — binary search, GPT-4o-mini, T = 0.0, n = 20.
-- **100% behavioral correctness** preserved across all 1,200 GPT-4o-mini generations; no canonicalization step introduced a functional regression in any model.
+- **100% raw behavioral correctness** across all 1,200 GPT-4o-mini generations; post-repair revalidation also found no GPT-4o-mini regression. Across all models, however, 14/3,600 repaired outputs regressed (see correction above).
 - **Strongest temperature effect:** balanced brackets at T = 0.7 — R<sub>raw</sub> = 0.15 rescued to R<sub>post</sub> = 0.70 (Δ = +0.45, n = 20).
 
 ---

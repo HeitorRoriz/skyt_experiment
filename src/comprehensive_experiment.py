@@ -12,6 +12,7 @@ from datetime import datetime
 from .contract import Contract
 from .llm_client import LLMClient
 from .canon_system import CanonSystem
+from .canon_selection import select_certified_consensus_canon
 from .oracle_system import OracleSystem
 from .code_transformer import CodeTransformer
 from .metrics import ComprehensiveMetrics
@@ -135,109 +136,65 @@ class ComprehensiveExperiment:
         if not successful_outputs:
             return {"error": "No successful LLM outputs generated"}
         
-        # Step 3: Create canon from first compliant output
-        print(f"\n⚓ Step 3: Creating Canon...")
+        # Step 3: Certified Consensus canon (oracle + compliance; mode, medoid on ties)
+        print(f"\n⚓ Step 3: Creating Canon (Certified Consensus)...")
+        self.canon_system._active_canon = None
         canon_created = False
         canon_data = None
-        
-        # Check if canon already exists
-        existing_canon = self.canon_system.load_canon(contract_id)
-        if existing_canon:
-            print("✅ Using existing canon")
-            canon_data = existing_canon
-            canon_created = True
+        oracle_results = [
+            self.oracle_system.run_oracle_tests(code, contract.data)
+            for code in successful_outputs
+        ]
+        selected = select_certified_consensus_canon(
+            successful_outputs, contract.data, oracle_results
+        )
+        if selected is None:
+            print(
+                "  No certified outputs (oracle + compliance). "
+                "No canon stored; repair skipped."
+            )
         else:
-            # Check if this is a strict contract (has misra_c_rules or nasa_power_of_10)
-            constraints = contract.data.get('constraints', {})
-            is_strict_contract = 'misra_c_rules' in constraints or 'nasa_power_of_10' in constraints
-            
-            if is_strict_contract:
-                # For strict contracts: canon MUST be oracle-passing AND contract-compliant
-                from .contract_compliance import check_contract_compliance, make_compliant
-                
-                print("  ℹ️  Strict contract detected - canon must be contract-compliant")
-                first_oracle_passing = None
-                first_oracle_passing_idx = None
-                
-                for i, code in enumerate(successful_outputs):
-                    oracle_result = self.oracle_system.run_oracle_tests(code, contract.data)
-                    
-                    if oracle_result["passed"]:
-                        # Save first oracle-passing for fallback
-                        if first_oracle_passing is None:
-                            first_oracle_passing = code
-                            first_oracle_passing_idx = i
-                        
-                        # Check contract compliance
-                        is_compliant, violations = check_contract_compliance(code, contract.data)
-                        
-                        if is_compliant:
-                            print(f"✅ Creating canon from run {i + 1} (oracle-passing + contract-compliant)")
-                            try:
-                                canon_data = self.canon_system.create_canon(
-                                    contract, code, 
-                                    oracle_result=oracle_result,
-                                    require_oracle_pass=True
-                                )
-                                canon_created = True
-                                break
-                            except ValueError as e:
-                                print(f"  ⚠️  Failed to create canon: {e}")
-                        else:
-                            print(f"  ⚠️  Run {i + 1} passes oracle but violates contract: {violations[:2]}...")
-                    else:
-                        print(f"  ❌ Run {i + 1} failed oracle tests")
-                
-                # If no compliant output found, transform first oracle-passing to be compliant
-                if not canon_created and first_oracle_passing:
-                    print(f"  🔧 No compliant outputs found. Transforming run {first_oracle_passing_idx + 1}...")
-                    compliant_code = make_compliant(first_oracle_passing, contract.data)
-                    
-                    # Verify transformed code still passes oracle
-                    oracle_result = self.oracle_system.run_oracle_tests(compliant_code, contract.data)
-                    if oracle_result["passed"]:
-                        print(f"✅ Creating canon from transformed compliant code")
-                        try:
-                            canon_data = self.canon_system.create_canon(
-                                contract, compliant_code,
-                                oracle_result=oracle_result,
-                                require_oracle_pass=True
-                            )
-                            canon_created = True
-                        except ValueError as e:
-                            print(f"  ⚠️  Failed to create canon: {e}")
-                    else:
-                        print(f"  ❌ Transformed code failed oracle tests")
-            else:
-                # For simple contracts: use first oracle-passing output
-                for i, code in enumerate(successful_outputs):
-                    oracle_result = self.oracle_system.run_oracle_tests(code, contract.data)
-                    
-                    if oracle_result["passed"]:
-                        print(f"✅ Creating canon from run {i + 1} (first oracle-passing output)")
-                        try:
-                            canon_data = self.canon_system.create_canon(
-                                contract, code, 
-                                oracle_result=oracle_result,
-                                require_oracle_pass=True
-                            )
-                            canon_created = True
-                            break
-                        except ValueError as e:
-                            print(f"  ⚠️  Failed to create canon: {e}")
-                    else:
-                        print(f"  ❌ Run {i + 1} failed oracle tests")
-            
-            if not canon_created:
-                print("❌ CRITICAL: No valid outputs found!")
-                return {"error": "No valid outputs to anchor canon"}
-        
+            try:
+                canon_data = self.canon_system.create_canon(
+                    contract,
+                    selected["code"],
+                    oracle_result=selected["oracle_result"],
+                    require_oracle_pass=True,
+                )
+                canon_data["canon_policy"] = "certified_consensus"
+                canon_data["consensus_index"] = selected["index"]
+                canon_data["consensus_modal_size"] = selected["selection"]["modal_size"]
+                canon_data["n_certified"] = selected["n_certified"]
+                canon_created = True
+                print(
+                    f"✅ Canon is generation {selected['index'] + 1} "
+                    f"(Certified Consensus, {selected['n_certified']} certified)"
+                )
+            except ValueError as e:
+                print(f"  ⚠️  Failed to create canon: {e}")
+
         # Step 4: Transform subsequent outputs to match canon
         print(f"\n🔧 Step 4: Transforming outputs to canon...")
         transformation_results = []
-        repaired_outputs = []  # Collect repaired/canonicalized outputs
-        
-        for i, code in enumerate(successful_outputs):
+        repaired_outputs = []
+
+        if not canon_created:
+            for i, code in enumerate(successful_outputs):
+                repaired_outputs.append(code)
+                transformation_results.append({
+                    "run_id": i + 1,
+                    "original_code": code,
+                    "transformed_code": code,
+                    "transformation_needed": False,
+                    "final_distance": None,
+                    "skipped_reason": "no_certified_consensus_canon",
+                })
+            # Skip the per-output transform loop below.
+            successful_outputs_to_transform = []
+        else:
+            successful_outputs_to_transform = successful_outputs
+
+        for i, code in enumerate(successful_outputs_to_transform):
             print(f"  🔄 Transforming output {i + 1}...")
             
             # Compare to canon first
@@ -282,6 +239,15 @@ class ComprehensiveExperiment:
                     transform_data["planning_reasoning"] = transform_result["planning_reasoning"]
                 if "planning_confidence" in transform_result:
                     transform_data["planning_confidence"] = transform_result["planning_confidence"]
+                for key in (
+                    "oracle_validation_performed",
+                    "post_oracle_result",
+                    "attempted_post_oracle_result",
+                    "rolled_back",
+                    "attempted_transformed_code",
+                ):
+                    if key in transform_result:
+                        transform_data[key] = transform_result[key]
                 
                 transformation_results.append(transform_data)
                 
@@ -307,6 +273,11 @@ class ComprehensiveExperiment:
         print(f"  📏 Mean distance (pre→post): {metrics_result['mean_distance_pre']:.3f} → {metrics_result['mean_distance_post']:.3f}")
         print(f"  🎯 Canon coverage: {metrics_result['canon_coverage']:.3f}")
         print(f"  🔧 Rescue rate: {metrics_result['rescue_rate']:.3f}")
+        print(
+            "  ✅ Behavioral pass rate (pre→post): "
+            f"{metrics_result['behavioral_stats']['pass_rate']:.3f} → "
+            f"{metrics_result['behavioral_stats_post']['pass_rate']:.3f}"
+        )
         
         # Step 6: Generate bell curve analysis (pre vs post)
         print(f"\n📈 Step 6: Generating Bell Curve Analysis...")
@@ -341,6 +312,7 @@ class ComprehensiveExperiment:
             "contract": contract.to_dict(),
             "canon_data": canon_data,
             "canon_created": canon_created,
+            "canon_policy": "certified_consensus" if canon_created else None,
             
             # LLM outputs
             "llm_results": llm_results,

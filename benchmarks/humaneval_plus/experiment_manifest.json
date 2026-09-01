@@ -1,0 +1,46 @@
+{
+  "schema": "skyt-humaneval-plus-manifest-v1",
+  "frozen": false,
+  "notes": "Pins freeze after the 30-task pilot. Do not call paid APIs until smoke tests pass. No SKYT repair. No style contracts. Human reference is a baseline policy only.",
+  "dataset": {
+    "name": "HumanEval+",
+    "n_tasks": 164,
+    "evalplus_version": "0.3.1",
+    "humaneval_plus_dataset_version": "v0.1.10",
+    "dataset_md5": "916d9bfe7b490c2447245ec91595fa4f",
+    "comment": "Pinned 2026-09-01 from evalplus 0.3.1 / HumanEvalPlus v0.1.10 via get_human_eval_plus_hash(). Loaders must refuse a different digest."
+  },
+  "models": [
+    "gpt-4o-mini",
+    "claude-sonnet-4-5-20250929"
+  ],
+  "temperatures": [0.0, 0.7],
+  "n_pilot": 10,
+  "n_full": 20,
+  "pilot_seed": 20260826,
+  "generation": {
+    "max_tokens": 2048,
+    "retry_infrastructure_only": true,
+    "system_prompt_id": "humaneval-plus-complete-v1",
+    "user_prompt_id": "humaneval-plus-user-v1"
+  },
+  "sandbox": {
+    "image": "python:3.13-slim",
+    "image_digest": "sha256:7e3a6aca9d74f93cca21a91d86a8dad8c34749afd5b4a98ee481c9c47b9f5ed4",
+    "network": "none",
+    "read_only": true,
+    "memory": "512m",
+    "cpus": "1",
+    "pids_limit": 64,
+    "timeout_seconds": 20,
+    "evalplus_image": "ganler/evalplus:latest",
+    "evalplus_image_digest": null
+  },
+  "analysis": {
+    "certified_definition": "HumanEval+ extra tests pass (plus). Original HumanEval (base) is reported separately.",
+    "canon_policy": "Certified Consensus on plus-certified outputs",
+    "no_style_contracts": true,
+    "no_skyt_repair": true,
+    "human_reference": "canonical_solution is an external baseline, not the protocol canon"
+  }
+}

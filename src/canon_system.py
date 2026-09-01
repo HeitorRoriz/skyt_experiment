@@ -20,22 +20,23 @@ class CanonSystem:
         self.properties_extractor = FoundationalProperties()
         self.canon_storage_dir = canon_storage_dir
         os.makedirs(canon_storage_dir, exist_ok=True)
+        # In-memory canon for this process/config. Disk files keyed only by
+        # contract_id are not reused: that shared a first-valid across models.
+        self._active_canon: Optional[Dict[str, Any]] = None
     
     def create_canon(self, contract: Contract, code: str, 
                     oracle_result: Optional[Dict[str, Any]] = None,
                     require_oracle_pass: bool = True) -> Dict[str, Any]:
         """
-        Create canonical anchor from first compliant code output
-        
-        Args:
-            contract: Contract specification
-            code: First compliant code output
-            oracle_result: Optional oracle test results for validation
-            require_oracle_pass: If True, only create canon from oracle-passing code
-            
+        Store a caller-selected observed program as the runtime canon.
+
+        The caller chooses which program (Certified Consensus). This method
+        only stores it after optional oracle validation. It does not invent
+        a form via make_compliant.
+
         Returns:
             Canon data with foundational properties
-            
+
         Raises:
             ValueError: If require_oracle_pass is True and code fails oracle
         """
@@ -63,12 +64,14 @@ class CanonSystem:
             "contract_data": contract.data,  # Store full contract for variable naming
             "created_timestamp": contract.data.get("created_timestamp"),
             "canon_version": "1.0",
+            "canon_policy": "certified_consensus",
             "oracle_validated": oracle_result is not None and oracle_result.get("passed", False),
             "oracle_pass_rate": oracle_result.get("pass_rate", None) if oracle_result else None
         }
         
         # Set anchor in contract
         contract.set_anchor(code, properties)
+        self._active_canon = canon_data
         
         # Save canon to disk
         self._save_canon(contract.data["id"], canon_data)
@@ -77,20 +80,13 @@ class CanonSystem:
     
     def load_canon(self, contract_id: str) -> Optional[Dict[str, Any]]:
         """
-        Load existing canon for a contract
-        
-        Args:
-            contract_id: Contract identifier
-            
-        Returns:
-            Canon data or None if not found
+        Load the active canon for this process.
+
+        Disk fallback is disabled so a leftover first-valid file cannot be
+        reused across models or temperatures.
         """
-        canon_path = os.path.join(self.canon_storage_dir, f"{contract_id}_canon.json")
-        
-        if os.path.exists(canon_path):
-            with open(canon_path, 'r') as f:
-                return json.load(f)
-        
+        if self._active_canon and self._active_canon.get("contract_id") == contract_id:
+            return self._active_canon
         return None
     
     def compare_to_canon(self, contract_id: str, code: str,

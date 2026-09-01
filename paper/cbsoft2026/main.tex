@@ -118,7 +118,7 @@ A \emph{prompt contract} is a structured specification that accompanies the natu
 
 From the first compliant generation, SKYT derives a \emph{canonical anchor}---a reference implementation whose foundational properties (covering structural and semantic dimensions such as AST structure, control-flow signatures, and data dependencies; full list in the replication package) define the target form.  All subsequent outputs are compared against this anchor using a property-based distance metric rather than surface-level text comparison.
 
-When an output is behaviorally correct but structurally divergent, SKYT applies deterministic AST-level repair---monotonically reducing the distance to the canonical anchor while preserving behavioral correctness.  The repair never makes things worse: if transformation fails, the original output is retained.
+When an output is behaviorally correct but structurally divergent, SKYT applies deterministic AST-level repair intended to reduce the distance to the canonical anchor while preserving behavioral correctness. Post-submission sandboxed revalidation found that the evaluated implementation did not always enforce this invariant: 14 of 3{,}600 repaired outputs regressed behaviorally (post pass rate 97.7\% vs 98.1\% pre). The corrected runtime validates the exact final output and rolls back a repair when its oracle fails.
 
 % --- 2.4 Repeatability Metrics ---
 \subsection{Repeatability Metrics}
@@ -222,7 +222,7 @@ For GPT-4o-mini, the model most responsive to canonicalization, SKYT improved st
 \end{table}
 
 \paragraph{Model choice strongly affects canonicalizability.}
-Claude Sonnet~4.5 achieved near-perfect behavioral correctness ({\raise.17ex\hbox{$\scriptstyle\sim$}}100\% oracle pass rate) but approximately 0\% canonical anchor match across most contracts---it produces structurally idiosyncratic implementations that resist normalization.  This suggests that model choice strongly affects canonicalizability, independent of functional correctness.  Behavioral correctness was preserved at 100\% for GPT-4o-mini across all 1{,}200 generations; no canonicalization step introduced a functional regression in any model.
+Claude Sonnet~4.5 achieved near-perfect behavioral correctness ({\raise.17ex\hbox{$\scriptstyle\sim$}}100\% oracle pass rate) but approximately 0\% canonical anchor match across most contracts---it produces structurally idiosyncratic implementations that resist normalization.  This suggests that model choice strongly affects canonicalizability, independent of functional correctness. Raw behavioral correctness was 100\% for GPT-4o-mini across all 1{,}200 generations, and post-submission revalidation found no regression for that model. Across the full three-model corpus, 14 repaired outputs regressed (13 GPT-4o, one Claude), so we withdraw the original broader zero-regression claim.
 
 %% ============================================================
 %%  SECTION 4 — What Practitioners Should Know

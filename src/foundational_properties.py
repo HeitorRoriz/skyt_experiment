@@ -1,6 +1,6 @@
 # src/foundational_properties.py
 """
-13 Foundational Properties for Code Sameness
+14 Foundational Properties for Code Sameness
 Implements comprehensive property extraction and comparison for SKYT canonicalization
 """
 
@@ -13,11 +13,11 @@ import json
 
 class FoundationalProperties:
     """
-    Extracts and compares the 13 foundational properties that define code sameness
+    Extracts and compares the 14 foundational properties that define code sameness
     """
     
     def __init__(self, contract: Optional[Dict[str, Any]] = None):
-        # Define the 13 foundational properties
+        # Define the 14 foundational properties
         self.contract = contract
         self.properties = [
             "control_flow_signature",
@@ -39,7 +39,7 @@ class FoundationalProperties:
     
     def extract_all_properties(self, code: str) -> Dict[str, Any]:
         """
-        Extract all 13 foundational properties from code
+        Extract all 14 foundational properties from code
         
         Args:
             code: Python code string
@@ -146,9 +146,45 @@ class FoundationalProperties:
         visitor.visit(tree)
         
         return {
-            "dependencies": {k: list(v) for k, v in dependencies.items()},
+            # A set has no stable serialization order across Python processes.
+            # Sorting prevents equal dependency graphs from becoming unequal
+            # after one copy has been persisted and loaded in a later process.
+            "dependencies": {k: sorted(v) for k, v in dependencies.items()},
             "assignments": assignments
         }
+
+    @staticmethod
+    def normalize_properties(
+        properties: Optional[Dict[str, Any]]
+    ) -> Optional[Dict[str, Any]]:
+        """Canonicalize legacy property dictionaries loaded from JSON.
+
+        Older artifacts stored dependency sets as unsorted lists. Fresh
+        extraction is sorted at the source, but persisted canons cannot be
+        re-extracted. The original object is returned when no change is needed.
+        """
+        if not properties:
+            return properties
+
+        graph = properties.get("data_dependency_graph")
+        if not isinstance(graph, dict):
+            return properties
+        dependencies = graph.get("dependencies")
+        if not isinstance(dependencies, dict):
+            return properties
+
+        normalized_dependencies = {
+            key: sorted(values) if isinstance(values, list) else values
+            for key, values in dependencies.items()
+        }
+        if normalized_dependencies == dependencies:
+            return properties
+
+        normalized_graph = dict(graph)
+        normalized_graph["dependencies"] = normalized_dependencies
+        normalized = dict(properties)
+        normalized["data_dependency_graph"] = normalized_graph
+        return normalized
     
     def _extract_execution_paths(self, tree: ast.AST, code: str) -> Dict[str, Any]:
         """Extract canonical execution path representation"""
@@ -684,6 +720,11 @@ class FoundationalProperties:
         contract = contract or self.contract
         if not props1 or not props2:
             return 1.0
+
+        # Keep comparisons against legacy persisted canons independent of the
+        # Python process that originally serialized dependency sets.
+        props1 = self.normalize_properties(props1)
+        props2 = self.normalize_properties(props2)
         
         total_distance = 0.0
         property_count = 0

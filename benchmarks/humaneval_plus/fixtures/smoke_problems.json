@@ -1,0 +1,23 @@
+[
+  {
+    "task_id": "Smoke/add",
+    "entry_point": "add",
+    "prompt": "def add(a: int, b: int) -> int:\n    \"\"\"Return a plus b.\"\"\"\n",
+    "canonical_solution": "    return a + b\n",
+    "test": "def check(candidate):\n    assert candidate(1, 2) == 3\n    assert candidate(0, 0) == 0\n    assert candidate(10, -3) == 7\n",
+    "plus_cases": [
+      {"args": [-1, 1], "expected": 0},
+      {"args": [-5, -7], "expected": -12}
+    ]
+  },
+  {
+    "task_id": "Smoke/identity",
+    "entry_point": "identity",
+    "prompt": "def identity(x: int) -> int:\n    \"\"\"Return x unchanged.\"\"\"\n",
+    "canonical_solution": "    return x\n",
+    "test": "def check(candidate):\n    assert candidate(0) == 0\n    assert candidate(4) == 4\n",
+    "plus_cases": [
+      {"args": [-2], "expected": -2}
+    ]
+  }
+]

@@ -9,13 +9,22 @@ import os
 from typing import Dict, Any, Optional
 
 # SKYT imports
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+_REPO = os.path.join(os.path.dirname(__file__), '..')
+if _REPO not in sys.path:
+    sys.path.append(_REPO)
 from src.code_transformer import CodeTransformer
 from src.canon_system import CanonSystem
-from agents.agent_components import (
-    DnaSequencer, TransformationPlanner, GeneticEngineer, 
-    TransformationStrategy, AgentMetricsCollector
-)
+try:
+    from agents.agent_components import (
+        DnaSequencer, TransformationPlanner, GeneticEngineer,
+        TransformationStrategy, AgentMetricsCollector
+    )
+except ImportError:
+    DnaSequencer = None
+    TransformationPlanner = None
+    GeneticEngineer = None
+    TransformationStrategy = None
+    AgentMetricsCollector = None
 
 
 class EnhancedCodeTransformer:
@@ -36,8 +45,9 @@ class EnhancedCodeTransformer:
         self.traditional_transformer = CodeTransformer(canon_system)
         self.canon_system = canon_system
         
-        # Agent components (only initialized if enabled)
-        self.enable_agents = enable_agents
+        # Agent components (only initialized if enabled). Replay uses
+        # enable_agents=False and must not require the planner stack.
+        self.enable_agents = bool(enable_agents) and DnaSequencer is not None
         if self.enable_agents:
             self.dna_sequencer = DnaSequencer()
             self.transformation_planner = TransformationPlanner()
@@ -59,10 +69,18 @@ class EnhancedCodeTransformer:
         
         # BIG IF: Use agents if enabled and available
         if self.enable_agents and self._agents_available():
-            return self._agent_enhanced_transform(code, contract_id, contract)
+            result = self._agent_enhanced_transform(
+                code, contract_id, contract, oracle_system
+            )
         else:
             # FALLBACK: Use traditional transformation exactly as before
-            return self._traditional_transform(code, contract_id, contract)
+            result = self._traditional_transform(
+                code, contract_id, contract, oracle_system
+            )
+
+        return self._validate_final_output(
+            result, code, contract, oracle_system, contract_id
+        )
     
     def _agents_available(self) -> bool:
         """Check if all agent components are properly initialized"""
@@ -77,7 +95,12 @@ class EnhancedCodeTransformer:
         """
         try:
             # Use the existing transformer without any changes
-            result = self.traditional_transformer.transform_to_canon(code, contract_id, contract, oracle_system)
+            result = self.traditional_transformer.transform_to_canon(
+                code,
+                contract_id,
+                contract=contract,
+                oracle_system=oracle_system,
+            )
             
             # Add strategy information for consistency
             if isinstance(result, dict):
@@ -121,7 +144,9 @@ class EnhancedCodeTransformer:
             
             # Step 3: Execute based on strategy
             if plan.strategy == TransformationStrategy.TRADITIONAL:
-                result = self._traditional_transform(code, contract_id, contract)
+                result = self._traditional_transform(
+                    code, contract_id, contract, oracle_system
+                )
                 result["planning_reasoning"] = plan.reasoning
                 result["planning_confidence"] = plan.confidence
                 
@@ -176,6 +201,69 @@ class EnhancedCodeTransformer:
             # Any failure in agent enhancement - fall back to traditional
             print(f"Agent enhancement failed: {e}, falling back to traditional")
             return self._traditional_transform(code, contract_id, contract, oracle_system)
+
+    def _validate_final_output(
+        self,
+        result: Dict[str, Any],
+        original_code: str,
+        contract: Optional[Dict[str, Any]],
+        oracle_system: Optional[Any],
+        contract_id: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """Oracle-check the actual persisted output and roll back on regression."""
+        if not isinstance(result, dict):
+            result = {
+                "success": False,
+                "error": "Transformer returned a non-dictionary result",
+                "transformed_code": original_code,
+                "transformations_applied": [],
+                "final_distance": 1.0,
+            }
+
+        candidate = result.get("transformed_code", original_code)
+        result.setdefault("success", False)
+        result.setdefault("transformed_code", candidate)
+        result.setdefault("transformations_applied", [])
+        result.setdefault("final_distance", 1.0)
+        result["oracle_validation_performed"] = False
+        if oracle_system is None or contract is None:
+            return result
+
+        candidate_oracle = oracle_system.run_oracle_tests(candidate, contract)
+        result["oracle_validation_performed"] = True
+        result["attempted_post_oracle_result"] = candidate_oracle
+
+        if candidate_oracle.get("passed", False):
+            result["post_oracle_result"] = candidate_oracle
+            result["rolled_back"] = False
+            return result
+
+        if candidate == original_code:
+            result["post_oracle_result"] = candidate_oracle
+            result["rolled_back"] = False
+            return result
+
+        # Never persist a behavior-breaking transformation. Revalidate the
+        # original because it may itself have failed before transformation.
+        original_oracle = oracle_system.run_oracle_tests(original_code, contract)
+        result["attempted_transformed_code"] = candidate
+        result["attempted_final_distance"] = result.get("final_distance")
+        result["transformed_code"] = original_code
+        if contract_id and getattr(self, "canon_system", None):
+            try:
+                comparison = self.canon_system.compare_to_canon(
+                    contract_id, original_code
+                )
+                result["final_distance"] = comparison.get("distance", 1.0)
+            except Exception:
+                result["final_distance"] = 1.0
+        else:
+            result["final_distance"] = 1.0
+        result["post_oracle_result"] = original_oracle
+        result["rolled_back"] = True
+        result["success"] = False
+        result["error"] = "Transformation rolled back after oracle failure"
+        return result
     
     def get_agent_performance(self) -> Optional[Dict[str, Any]]:
         """Get agent performance metrics"""
