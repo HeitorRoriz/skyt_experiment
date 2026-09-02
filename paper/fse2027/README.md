@@ -8,7 +8,10 @@
 
 **Authors (draft):** Heitor Roriz (Massimus), Nasser Jazdi-Motlagh (University of Stuttgart), Vicente Lucena (UFAM)
 
-This folder is the **ACM Research skeleton** for Paper 1. It is not a camera-ready draft. Methods and Results sections are stubs until W1.
+This folder is the **ACM Research draft** for Paper 1. It is not camera-ready.
+W1/W3 (2026-09-02): Methods, Results A (Gate 0 both policies), Results B
+(HumanEval+ 30-task Tables 1–2), Threats filled from freeze + artifacts.
+Remaining: figure, related-work citation sweep, anonymization, 164-task run.
 
 ---
 
@@ -90,10 +93,9 @@ pdflatex main
 
 ## Writing sequence
 
-- **W0 (this folder):** scaffold + freeze box + restored Gate 0 memo.
-- **W1:** Methods + Results A from `outputs/gate0/` and `outputs/problem_evidence/` (recompute under freeze before final tables).
-- **W2:** Intro, Motivation, Related Work stubs, Threats.
-- **W3:** HumanEval harness + Results B.
-- **W4:** figures, artifact, anonymization, submit by 1 Oct 2026.
+- **W0:** scaffold + freeze box.
+- **W1/W3 (2026-09-02):** Methods + Results A (Gate 0 both policies) + Results B (30-task HumanEval+) + Threats. Numbers from `outputs/gate0/`, `outputs/gate0_consensus/`, `outputs/humaneval_plus/pilot/table1.json`, `outputs/humaneval_plus/pilot_skyt/table2.json`.
+- **W2 leftover:** related-work citation sweep (SLSA / repair); one figure; tighten intro.
+- **W4:** artifact pins in the PDF, anonymization, submit by 1 Oct 2026.
 
 Do not commit this folder unless explicitly asked.
