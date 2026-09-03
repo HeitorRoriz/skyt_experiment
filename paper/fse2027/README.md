@@ -9,9 +9,11 @@
 **Authors (draft):** Heitor Roriz (Massimus), Nasser Jazdi-Motlagh (University of Stuttgart), Vicente Lucena (UFAM)
 
 This folder is the **ACM Research draft** for Paper 1. It is not camera-ready.
-W1/W3 (2026-09-02): Methods, Results A (Gate 0 both policies), Results B
-(HumanEval+ 30-task Tables 1–2), Threats filled from freeze + artifacts.
-Remaining: figure, related-work citation sweep, anonymization, 164-task run.
+W1/W3 (2026-09-02): Methods, Results A/B, Threats.
+W2 (2026-09-03): measured-cost motivation, related work, Figure 1
+(`fig1.pdf` / `make_figure1.py`), artifact pins + 30-task id appendix.
+Remaining: anonymization, dry-run against SETTLED §10 / REVIEWER_FRY_AFTER_164.md,
+164-task run only if Heitor asks.
 
 ---
 
@@ -95,7 +97,10 @@ pdflatex main
 
 - **W0:** scaffold + freeze box.
 - **W1/W3 (2026-09-02):** Methods + Results A (Gate 0 both policies) + Results B (30-task HumanEval+) + Threats. Numbers from `outputs/gate0/`, `outputs/gate0_consensus/`, `outputs/humaneval_plus/pilot/table1.json`, `outputs/humaneval_plus/pilot_skyt/table2.json`.
-- **W2 leftover:** related-work citation sweep (SLSA / repair); one figure; tighten intro.
-- **W4:** artifact pins in the PDF, anonymization, submit by 1 Oct 2026.
+- **W2 (2026-09-03):** related work (clones / GumTree / AlphaCode / APR); Figure 1;
+  artifact pins in the PDF; intro outline.
+- **W4 leftover:** anonymization, internal dry-run against reviewer fries, submit by 1 Oct 2026.
+  Full 164 only if explicitly requested. Pillar 3 citation sweep (SLSA / reproducible builds)
+  is still a co-author task.
 
 Do not commit this folder unless explicitly asked.
