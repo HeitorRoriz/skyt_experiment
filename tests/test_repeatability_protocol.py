@@ -21,11 +21,16 @@ from gate0_pairwise_analysis import analyze_pass, derive_certification_mask
 
 
 def test_dependency_extraction_is_stable_across_hash_seeds():
+    # A strict naming policy preserves the source identifiers, so the assertion
+    # below can name them. Under a flexible policy _canonicalize alpha-renames
+    # the tree before extraction and the keys become v0/p0, which is the point
+    # of that policy rather than something this test is about.
     script = """
 import json
 from src.foundational_properties import FoundationalProperties
+contract = {'constraints': {'variable_naming': {'naming_policy': 'strict'}}}
 code = 'def f(a, b, c):\\n    result = a + b + c\\n    return result\\n'
-props = FoundationalProperties().extract_all_properties(code)
+props = FoundationalProperties(contract).extract_all_properties(code)
 print(json.dumps(props['data_dependency_graph']['dependencies'], sort_keys=True))
 """
     outputs = []
@@ -67,10 +72,11 @@ def test_distance_to_legacy_properties_ignores_serialization_order():
         "def f(a, b):\n    result = a + b\n    return result\n"
     )
     right = json.loads(json.dumps(left))
-    dependencies = right["data_dependency_graph"]["dependencies"]["result"]
-    right["data_dependency_graph"]["dependencies"]["result"] = list(
-        reversed(dependencies)
-    )
+    # The assigned variable's canonical name depends on the naming policy, so
+    # reverse whichever dependency list is present rather than naming the key.
+    graph = right["data_dependency_graph"]["dependencies"]
+    key = next(iter(graph))
+    graph[key] = list(reversed(graph[key]))
 
     assert fp.calculate_distance(left, right) == pytest.approx(0.0)
 

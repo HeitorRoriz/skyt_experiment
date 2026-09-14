@@ -299,11 +299,23 @@ This is the expensive phase and the one that earns the word *benchmark*.
 
 ## Immediate next actions
 
-1. Phase 0.1 ablation over existing artifacts (no API spend).
-2. Phase 0.2 metamorphic suite, docstring row first (no API spend).
-3. Write the validity report and the normal-form spec.
-4. Only then reopen definition and coverage questions.
+**Step 1 is done** (2026-09-14). Report: [`STEP1_VALIDITY.md`](STEP1_VALIDITY.md).
+Spec draft: [`SPEC.md`](SPEC.md). Settled: docstring = same; statement order and
+dead/`pass` = different. 22/22 metamorphic cases pass. On stored data the
+relation is exactly the canonical AST fingerprint (13 of 14 properties inert,
+zero binding pairs, zero false merges, zero transitivity violations).
 
-Steps 1 and 2 are read-only analysis and require no runtime modification. They
-also strengthen the current paper's threats section regardless of how the
-benchmark question is eventually scoped.
+Remaining before Phase 1 can be called v1:
+
+1. SPEC OPEN 1 / 3: metric names (`same@2`?) and a single *N* (recommended 20,
+   CV 10/10).
+2. SPEC OPEN 4: stamp `relation_version` into artifacts (needs approval to
+   touch the output schema).
+3. Then Phase 2 packaging / Phase 3 coverage.
+
+Sameness is settled as the **canonical-form fingerprint**; the other 13
+properties are diagnostics, not identity conjuncts. The FSE draft's
+"14-property distance of 0" sentence needs a wording pass, not a new run.
+HumanEval+ Table 1/2 in that draft still quote pre-fix 56.9% / 67.4%;
+post-fix recomputes are 62.19% / 73.69% and should not silently replace
+published tables without an explicit paper edit.

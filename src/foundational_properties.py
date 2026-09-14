@@ -49,6 +49,7 @@ class FoundationalProperties:
         """
         try:
             tree = ast.parse(code)
+            tree, code = self._canonicalize(tree, code)
             
             properties = {}
             for prop_name in self.properties:
@@ -495,15 +496,113 @@ class FoundationalProperties:
             
             def visit_Name(self, node):
                 # Rename variable references
-                if node.id not in ['range', 'len', 'print', 'max', 'min', 'sum', 'abs']:  # Built-ins
+                if node.id in bound_names:  # Free names carry meaning; keep them
                     if node.id not in self.var_map:
                         self.var_map[node.id] = f"v{self.counter}"
                         self.counter += 1
                     node.id = self.var_map[node.id]
                 return node
         
+        bound_names = self._collect_bound_names(tree)
         renamer = AlphaRenamer()
         return renamer.visit(tree)
+
+    def _canonicalize(self, tree: ast.AST, code: str) -> Tuple[ast.AST, str]:
+        """Apply the contract's comparison policy once, before extraction.
+
+        Docstrings are prose rather than form, so they are stripped. When the
+        naming policy is flexible the whole tree is α-renamed here instead of
+        inside a single distance branch, so no property can treat identifier
+        choice as structure. Under a strict policy identifiers are preserved.
+
+        The source string is regenerated from the canonical tree so that
+        extractors reading ``code`` stay consistent with those reading ``tree``.
+        """
+        tree = self._strip_docstrings(tree)
+        if self._should_use_alpha_renaming(self.contract):
+            tree = self._alpha_rename_ast(tree)
+        try:
+            code = ast.unparse(ast.fix_missing_locations(tree))
+            tree = ast.parse(code)
+        except Exception:
+            # Keep the canonical tree even if it cannot be round-tripped.
+            pass
+        return tree, code
+
+    @staticmethod
+    def _strip_docstrings(tree: ast.AST) -> ast.AST:
+        """Drop the leading string expression from every definition body.
+
+        A body that is only a docstring becomes ``pass``, which is what it
+        already means operationally.
+        """
+        for node in ast.walk(tree):
+            if not isinstance(
+                node,
+                (ast.Module, ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef),
+            ):
+                continue
+            body = getattr(node, "body", None)
+            if not body:
+                continue
+            first = body[0]
+            if (
+                isinstance(first, ast.Expr)
+                and isinstance(first.value, ast.Constant)
+                and isinstance(first.value.value, str)
+            ):
+                node.body = body[1:] or [ast.Pass()]
+        return tree
+
+    @staticmethod
+    def _collect_bound_names(tree: ast.AST) -> Set[str]:
+        """Names bound somewhere in the tree, excluding definition names.
+
+        Only bound names may be α-renamed. Free names are globals, builtins and
+        imported callables, and they carry meaning: renaming them would let
+        ``all(...)`` and ``any(...)`` collapse onto the same form. Function and
+        class names are bound but deliberately preserved as contract surface.
+        """
+        bound: Set[str] = set()
+        definitions: Set[str] = set()
+
+        def bind_target(node: ast.AST) -> None:
+            for sub in ast.walk(node):
+                if isinstance(sub, ast.Name):
+                    bound.add(sub.id)
+
+        for node in ast.walk(tree):
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                definitions.add(node.name)
+                args = node.args
+                for arg in [*args.posonlyargs, *args.args, *args.kwonlyargs]:
+                    bound.add(arg.arg)
+                if args.vararg:
+                    bound.add(args.vararg.arg)
+                if args.kwarg:
+                    bound.add(args.kwarg.arg)
+            elif isinstance(node, ast.ClassDef):
+                definitions.add(node.name)
+            elif isinstance(node, ast.Assign):
+                for target in node.targets:
+                    bind_target(target)
+            elif isinstance(node, (ast.AnnAssign, ast.AugAssign)):
+                bind_target(node.target)
+            elif isinstance(node, (ast.For, ast.AsyncFor)):
+                bind_target(node.target)
+            elif isinstance(node, ast.comprehension):
+                bind_target(node.target)
+            elif isinstance(node, ast.withitem):
+                if node.optional_vars is not None:
+                    bind_target(node.optional_vars)
+            elif isinstance(node, ast.ExceptHandler):
+                if node.name:
+                    bound.add(node.name)
+            elif isinstance(node, (ast.Import, ast.ImportFrom)):
+                for alias in node.names:
+                    bound.add(alias.asname or alias.name.split(".")[0])
+
+        return bound - definitions
     
     def _extract_operator_precedence(self, tree: ast.AST, code: str) -> Dict[str, Any]:
         """Extract explicit precedence normalization"""
