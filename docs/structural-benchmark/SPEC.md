@@ -202,9 +202,11 @@ Rules:
   The HumanEval+ figures are version-sensitive: 56.93% under v1, 62.19% under
   v2.
 
-**OPEN 4.** Stamping the version into output files means writing a constant into
-`src/` and threading it through the artifact schema. That is a further
-extractor-adjacent change and needs approval before I touch it.
+**OPEN 4.** Stamping the version into *generation* artifacts means writing a
+constant into `src/` and threading it through that schema. That still needs
+approval. Overlay reports from
+`benchmarks.structural_repeatability` already carry `relation_version: 2`
+without changing the frozen jsonl schema.
 
 ## 7. Out of scope for the benchmark
 
@@ -226,4 +228,4 @@ stronger position than being the whole table.
 | 1 | Metric names | **OPEN.** Recommendation: `same@2` and `same@2\|cert` |
 | 2 | Relation definition | **Settled.** Canonical-form fingerprint; 13 properties are diagnostics |
 | 3 | Fix *N* | **OPEN.** Recommendation: 20, CV split 10/10 |
-| 4 | Stamp `relation_version` into artifacts | **OPEN.** Needs approval to touch output schema |
+| 4 | Stamp `relation_version` into artifacts | **OPEN** for generation jsonl / `src/`. Overlay reports already stamp `2`. |

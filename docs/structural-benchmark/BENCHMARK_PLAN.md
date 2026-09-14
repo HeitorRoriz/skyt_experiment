@@ -199,19 +199,29 @@ Everything here is a documented, versioned choice.
 
 ## Phase 2 — Reference implementation and harness
 
-Much of this exists in `benchmarks/humaneval_plus/` and needs packaging rather
-than invention.
+**Done 2026-09-14** as an overlay CLI. Details:
+[`STEP3_HARNESS.md`](STEP3_HARNESS.md). Package:
+`benchmarks/structural_repeatability/`.
 
-- Single-command runner over a task set, model, temperature, and *N*.
+```
+python -m benchmarks.structural_repeatability score \
+    --source-dir outputs/humaneval_plus/pilot \
+    --out-dir outputs/structural_repeatability/pilot_v2
+```
+
+- Single-command runner over a task, model, temperature, and *N* (`run`), plus
+  a no-API `score` over stored jsonl.
 - Pins enforced, not documented: dataset hash checked with refuse-on-mismatch,
   sandbox image pinned by digest, network disabled, fixed seeds for sampling and
-  bootstrap.
-- Untrusted code executed only in the sandbox, never on the host.
-- Stable output schema: per-config records plus an aggregate file, including
-  every denominator (how many configs entered each column and how many were
-  dropped as undefined).
-- Cost estimate printed before any paid call, and a hard refusal without an
-  explicit opt-in flag.
+  bootstrap. `run` refuses to spend until both pins verify.
+- Untrusted code executed only in the sandbox, never on the host (existing
+  HumanEval+ adapter).
+- Stable output schema (`overlay_report.json`): `same_at_2`,
+  `same_at_2_given_cert`, `plus_pass`, `relation_version`, and every
+  denominator including configs dropped as undefined.
+- Cost estimate printed before any paid call, and a hard refusal without
+  `--allow-api`.
+- Writes into `outputs/gate0/` or `outputs/humaneval_plus/pilot/` are refused.
 
 ---
 
@@ -305,13 +315,20 @@ dead/`pass` = different. 22/22 metamorphic cases pass. On stored data the
 relation is exactly the canonical AST fingerprint (13 of 14 properties inert,
 zero binding pairs, zero false merges, zero transitivity violations).
 
-Remaining before Phase 1 can be called v1:
+**Step 3 is done** (2026-09-14). Overlay CLI:
+[`STEP3_HARNESS.md`](STEP3_HARNESS.md). Measuring tape only; no canon, no
+repair, no writes into frozen trees.
+
+Remaining before the spec can be called v1:
 
 1. SPEC OPEN 1 / 3: metric names (`same@2`?) and a single *N* (recommended 20,
-   CV 10/10).
-2. SPEC OPEN 4: stamp `relation_version` into artifacts (needs approval to
-   touch the output schema).
-3. Then Phase 2 packaging / Phase 3 coverage.
+   CV 10/10). The harness uses the recommended names in JSON and requires
+   `--n` rather than silently doubling the HumanEval+ pilot.
+2. SPEC OPEN 4: stamp `relation_version` into the *generation-record* schema
+   (needs approval to touch `src/` artifacts). Overlay reports already carry
+   `relation_version: 2`.
+3. Phase 3 coverage (full task set) is next if a baseline table is wanted.
+   That is paid API and a new output tree.
 
 Sameness is settled as the **canonical-form fingerprint**; the other 13
 properties are diagnostics, not identity conjuncts. The FSE draft's
