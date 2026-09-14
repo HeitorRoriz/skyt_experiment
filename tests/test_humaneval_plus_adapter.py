@@ -9,6 +9,7 @@ import pytest
 
 from benchmarks.humaneval_plus.analyze import analyze_records
 from benchmarks.humaneval_plus.cli import main, run_smoke
+from benchmarks.humaneval_plus.cost import usd_for_usage
 from benchmarks.humaneval_plus.dataset import load_smoke_problems
 from benchmarks.humaneval_plus.generate import ApiSpendBlocked, generate_completion
 from benchmarks.humaneval_plus.manifest import MANIFEST, PILOT_SEED, PILOT_TASK_IDS
@@ -41,6 +42,14 @@ def test_evalplus_dataset_md5_is_pinned():
     assert digest == "916d9bfe7b490c2447245ec91595fa4f"
     assert MANIFEST["dataset"]["evalplus_version"] == "0.3.1"
     assert MANIFEST["dataset"]["humaneval_plus_dataset_version"] == "v0.1.10"
+
+
+def test_usd_estimate_uses_pinned_list_prices():
+    assert usd_for_usage("gpt-4o-mini", {"prompt_tokens": 1_000_000, "completion_tokens": 0}) == 0.15
+    assert usd_for_usage(
+        "claude-sonnet-4-5-20250929",
+        {"input_tokens": 0, "output_tokens": 1_000_000},
+    ) == 15.0
 
 
 def test_extract_and_stitch_body_fence_and_garbage():
@@ -77,6 +86,7 @@ def test_generate_refuses_without_allow_api():
         )
     assert main(["generate"]) == 3
     assert main(["run", "--task-id", "HumanEval/23", "--n", "2", "--out-dir", "outputs/humaneval_plus/dryrun"]) == 3
+    assert main(["pilot"]) == 3
 
 
 def test_provenance_record_has_hashes_and_no_repair():
@@ -185,3 +195,49 @@ def test_smoke_report_stitch_always_runs():
     else:
         assert report["ok"] is False
         assert "Docker" in report["sandbox"]["error"]
+
+
+def test_repair_contract_sets_entry_point_not_style_rules():
+    from benchmarks.humaneval_plus.repair import humaneval_repair_contract
+    from src.contract import Contract
+    from src.transformations.convert_to_simple_algorithm import convert_to_simple_algorithm
+
+    contract = humaneval_repair_contract(
+        task_id="HumanEval/0",
+        model="gpt-4o-mini",
+        temperature=0.0,
+        prompt="def add(a, b):\n",
+        entry_point="add",
+    )
+    assert contract["id"] == "HumanEval_0_gpt_4o_mini_temp0.0"
+    assert contract["constraints"]["variable_naming"]["naming_policy"] == "flexible"
+    assert "misra_c_rules" not in contract["constraints"]
+
+    original = "def add(a, b):\n    return abs(a) + abs(b)\n"
+    canon = "def add(a, b):\n    return a + b\n"
+    result = convert_to_simple_algorithm(original, canon, contract)
+    assert result["success"] is True
+    assert "return a + b" in result["transformed_code"]
+
+
+def test_repair_refuses_to_overwrite_table1_dir(tmp_path):
+    from benchmarks.humaneval_plus.repair import repair_config, repair_pilot
+
+    shared = tmp_path / "pilot"
+    shared.mkdir()
+    with pytest.raises(ValueError, match="Refusing to overwrite"):
+        repair_config(
+            source_dir=shared,
+            out_dir=shared,
+            task_id="HumanEval/23",
+            model="gpt-4o-mini",
+            temperature=0.0,
+        )
+    with pytest.raises(ValueError, match="Refusing to overwrite"):
+        repair_pilot(source_dir=shared, out_dir=shared)
+
+
+def test_repair_cli_does_not_require_allow_api():
+    with pytest.raises(SystemExit) as exc:
+        main(["repair", "--help"])
+    assert exc.value.code == 0

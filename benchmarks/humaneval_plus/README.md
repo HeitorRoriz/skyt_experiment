@@ -4,6 +4,8 @@ Isolated from the frozen SKYT research runtime. No style contracts. No SKYT repa
 
 The protocol still selects the **most reproduced verified form** (HumanEval+ pass), then measures whether later generations match it. The shipped human solution is an **external baseline**, not that canon.
 
+Generation / Table 1: no SKYT repair. Table 2 is a **replay** of Certified Consensus repair on the stored generations (`python -m benchmarks.humaneval_plus repair`). It does not call paid APIs and does not overwrite Table 1.
+
 ## Pins
 
 See `experiment_manifest.json` and the preregistered 30-task list in `pilot_task_ids.json` (seed `20260826`).

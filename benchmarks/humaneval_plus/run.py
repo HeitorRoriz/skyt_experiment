@@ -9,11 +9,12 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from .analyze import analyze_records
+from .cost import usd_for_usage, write_cost_ledger
 from .dataset import load_evalplus_problems
 from .generate import ApiSpendBlocked, generate_completion
 from .manifest import MANIFEST, PILOT_TASK_IDS
 from .provenance import attach_oracle, dump_jsonl, new_generation_record
-from .sandbox import SandboxUnavailable, docker_available, evaluate_stitched
+from .sandbox import SandboxUnavailable, docker_available, evaluate_stitched, plus_cases_for_problem
 from .stitch import stitch_solution
 
 
@@ -42,8 +43,17 @@ def _load_existing(path: Path) -> List[Dict[str, Any]]:
             line = line.strip()
             if not line:
                 continue
-            records.append(json.loads(line))
+            try:
+                records.append(json.loads(line))
+            except json.JSONDecodeError:
+                # Power-loss can truncate the last line. Keep prior records.
+                continue
     return records
+
+
+def _config_complete(records: List[Dict[str, Any]], n: int) -> bool:
+    indexes = {int(record.get("run_index", -1)) for record in records}
+    return set(range(n)).issubset(indexes)
 
 
 def run_config(
@@ -69,6 +79,16 @@ def run_config(
 
     problems, dataset_md5 = load_evalplus_problems()
     problem = dict(problems[task_id])
+    cache_dir = out_dir / "plus_cases"
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    cache_path = cache_dir / f"{_safe_name(task_id, 'canon', 0.0)}.json"
+    if cache_path.exists():
+        problem["plus_cases"] = json.loads(cache_path.read_text(encoding="utf-8"))
+    else:
+        problem["plus_cases"] = plus_cases_for_problem(problem)
+        cache_path.write_text(
+            json.dumps(problem["plus_cases"]), encoding="utf-8"
+        )
     human = stitch_solution(
         problem["prompt"],
         problem["canonical_solution"],
@@ -148,8 +168,114 @@ def run_config(
         "n_base_passed": analysis["n_base_passed"],
         "n_plus_certified": analysis["n_plus_certified"],
         "consensus_index": analysis["consensus_index"],
+        "usd_estimate": sum(
+            usd_for_usage(model, record.get("usage")) or 0.0 for record in records
+        ),
     }
     summary_path.write_text(
         json.dumps(summary, indent=2, default=str), encoding="utf-8"
     )
     return summary
+
+
+def run_pilot(
+    *,
+    out_dir: Path,
+    n: int,
+    allow_api: bool,
+    models: Optional[List[str]] = None,
+    temperatures: Optional[List[float]] = None,
+) -> Dict[str, Any]:
+    if not allow_api:
+        raise ApiSpendBlocked(
+            "Refusing to call an LLM. Re-run with --allow-api after smoke tests pass."
+        )
+    models = list(models or MANIFEST["models"])
+    # Claude first: OpenAI already rate-limited on this account.
+    models = sorted(models, key=lambda name: (0 if name.startswith("claude-") else 1, name))
+    temperatures = list(temperatures if temperatures is not None else MANIFEST["temperatures"])
+    out_dir.mkdir(parents=True, exist_ok=True)
+    log_path = out_dir / "pilot_progress.log"
+    configs = [
+        (task_id, model, float(temp))
+        for model in models
+        for task_id in PILOT_TASK_IDS
+        for temp in temperatures
+    ]
+    rows = []
+    for index, (task_id, model, temp) in enumerate(configs, start=1):
+        line = f"[{index}/{len(configs)}] {task_id} {model} T={temp}"
+        print(line, flush=True)
+        with log_path.open("a", encoding="utf-8") as handle:
+            handle.write(line + "\n")
+        jsonl_path = out_dir / f"{_safe_name(task_id, model, temp)}.jsonl"
+        summary_path = out_dir / f"{_safe_name(task_id, model, temp)}_summary.json"
+        if _config_complete(_load_existing(jsonl_path), n) and summary_path.exists():
+            print("  SKIPPED complete", flush=True)
+            try:
+                prior = json.loads(summary_path.read_text(encoding="utf-8"))
+            except json.JSONDecodeError:
+                prior = {}
+            rows.append(
+                {
+                    "task_id": task_id,
+                    "model": model,
+                    "temperature": temp,
+                    "n_plus_certified": prior.get("n_plus_certified"),
+                    "n_base_passed": prior.get("n_base_passed"),
+                    "usd_estimate": prior.get("usd_estimate"),
+                    "skipped": "complete",
+                }
+            )
+            continue
+        try:
+            summary = run_config(
+                task_id=task_id,
+                model=model,
+                temperature=temp,
+                n=n,
+                out_dir=out_dir,
+                allow_api=True,
+            )
+        except Exception as exc:
+            err = type(exc).__name__
+            detail = str(exc)[:300]
+            print(f"  FAILED {err}: {detail}", flush=True)
+            rows.append(
+                {
+                    "task_id": task_id,
+                    "model": model,
+                    "temperature": temp,
+                    "error": err,
+                }
+            )
+            write_cost_ledger(out_dir)
+            continue
+        rows.append(
+            {
+                "task_id": task_id,
+                "model": model,
+                "temperature": temp,
+                "n_plus_certified": summary.get("n_plus_certified"),
+                "n_base_passed": summary.get("n_base_passed"),
+                "usd_estimate": summary.get("usd_estimate"),
+            }
+        )
+        write_cost_ledger(out_dir)
+
+    ledger = write_cost_ledger(out_dir)
+    report = {
+        "schema": "skyt-humaneval-plus-pilot-v1",
+        "n_configs": len(configs),
+        "n": n,
+        "models": models,
+        "temperatures": temperatures,
+        "no_skyt_repair": True,
+        "cost": ledger,
+        "configs": rows,
+    }
+    (out_dir / "pilot_report.json").write_text(
+        json.dumps(report, indent=2, default=str), encoding="utf-8"
+    )
+    return report
+

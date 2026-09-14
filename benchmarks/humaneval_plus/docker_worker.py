@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import multiprocessing
+import signal
 import sys
 import traceback
 from typing import Any, Dict
@@ -30,6 +31,18 @@ def _values_equal(got: Any, expected: Any, atol: float) -> bool:
     if isinstance(got, (int, float)) and isinstance(expected, (int, float)) and atol:
         return abs(float(got) - float(expected)) <= atol
     return got == expected
+
+
+def _call_with_timeout(candidate, args, seconds: int = 2) -> Any:
+    def _handler(signum, frame):
+        raise TimeoutError("case timeout")
+
+    signal.signal(signal.SIGALRM, _handler)
+    signal.alarm(max(1, int(seconds)))
+    try:
+        return candidate(*args)
+    finally:
+        signal.alarm(0)
 
 
 def _evaluate(job: Dict[str, Any], connection) -> None:
@@ -57,13 +70,20 @@ def _evaluate(job: Dict[str, Any], connection) -> None:
 
         if job.get("mode") == "eval_inputs":
             outputs = []
+            timed_out = 0
+            case_seconds = int(job.get("case_timeout_seconds") or 2)
             for args in job.get("inputs") or []:
-                outputs.append(_jsonable(candidate(*args)))
+                try:
+                    outputs.append(_jsonable(_call_with_timeout(candidate, args, case_seconds)))
+                except TimeoutError:
+                    timed_out += 1
+                    outputs.append({"__timeout__": True})
             connection.send(
                 {
                     "status": "pass",
                     "passed": True,
                     "outputs": outputs,
+                    "timed_out_cases": timed_out,
                     "error": None,
                 }
             )
@@ -72,10 +92,16 @@ def _evaluate(job: Dict[str, Any], connection) -> None:
         details = []
         all_ok = True
         atol = float(job.get("atol") or 0.0)
+        case_seconds = int(job.get("case_timeout_seconds") or 2)
         for case in job.get("cases") or []:
             try:
-                got = _jsonable(candidate(*case["args"]))
+                got = _jsonable(
+                    _call_with_timeout(candidate, case["args"], case_seconds)
+                )
                 ok = _values_equal(got, case["expected"], atol)
+            except TimeoutError:
+                ok = False
+                got = "timeout"
             except Exception as exc:  # Isolated worker: capture every case.
                 ok = False
                 got = f"{type(exc).__name__}: {exc}"

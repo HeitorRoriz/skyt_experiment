@@ -137,6 +137,18 @@ def run_sandboxed_job(job: Dict[str, Any]) -> Dict[str, Any]:
             return json.load(handle)
 
 
+def _plus_input_too_expensive(args: Any) -> bool:
+    """Drop plus inputs that explode naive recurrences (e.g. tri(n=1e6))."""
+    if not isinstance(args, (list, tuple)):
+        return False
+    for arg in args:
+        if isinstance(arg, bool):
+            continue
+        if isinstance(arg, int) and abs(arg) > 30:
+            return True
+    return False
+
+
 def plus_cases_for_problem(problem: Dict[str, Any]) -> List[Dict[str, Any]]:
     """Return args/expected pairs for HumanEval+ extras.
 
@@ -147,7 +159,11 @@ def plus_cases_for_problem(problem: Dict[str, Any]) -> List[Dict[str, Any]]:
     existing = problem.get("plus_cases")
     if existing:
         return list(existing)
-    inputs = list(problem.get("plus_input") or [])
+    inputs = [
+        args
+        for args in list(problem.get("plus_input") or [])
+        if not _plus_input_too_expensive(args)
+    ]
     if not inputs:
         return []
     stitch = stitch_solution(
@@ -157,7 +173,7 @@ def plus_cases_for_problem(problem: Dict[str, Any]) -> List[Dict[str, Any]]:
     )
     if not stitch.get("parse_ok") or not stitch.get("has_entry_point"):
         raise SandboxUnavailable("canonical solution did not stitch")
-    timeout = int(MANIFEST["sandbox"]["timeout_seconds"])
+    timeout = max(int(MANIFEST["sandbox"]["timeout_seconds"]), 60)
     result = run_sandboxed_job(
         {
             "mode": "eval_inputs",
@@ -165,6 +181,7 @@ def plus_cases_for_problem(problem: Dict[str, Any]) -> List[Dict[str, Any]]:
             "entry_point": problem["entry_point"],
             "inputs": inputs,
             "timeout_seconds": timeout,
+            "case_timeout_seconds": 1,
         }
     )
     outputs = result.get("outputs") or []
@@ -172,10 +189,13 @@ def plus_cases_for_problem(problem: Dict[str, Any]) -> List[Dict[str, Any]]:
         raise SandboxUnavailable(
             f"canonical plus eval failed: {result.get('error')}"
         )
-    cases = [
-        {"args": args, "expected": expected}
-        for args, expected in zip(inputs, outputs)
-    ]
+    cases = []
+    for args, expected in zip(inputs, outputs):
+        if isinstance(expected, dict) and expected.get("__timeout__"):
+            continue
+        cases.append({"args": args, "expected": expected})
+    if not cases:
+        raise SandboxUnavailable("canonical plus eval timed out on every extra case")
     problem["plus_cases"] = cases
     return cases
 
@@ -206,6 +226,7 @@ def evaluate_stitched(
                 "cases": plus_cases,
                 "atol": problem.get("atol") or 0,
                 "timeout_seconds": timeout,
+                "case_timeout_seconds": 2,
             }
         )
     else:

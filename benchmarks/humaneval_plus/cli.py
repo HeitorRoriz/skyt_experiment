@@ -9,7 +9,8 @@ from pathlib import Path
 from typing import Any, Dict, List
 
 from .analyze import analyze_records
-from .run import run_config
+from .repair import repair_pilot
+from .run import run_config, run_pilot
 from .dataset import load_smoke_problems
 from .generate import ApiSpendBlocked, generate_completion
 from .manifest import MANIFEST, PILOT_TASK_IDS
@@ -137,6 +138,31 @@ def main(argv: List[str] | None = None) -> int:
     run.add_argument("--n", type=int, required=True)
     run.add_argument("--out-dir", required=True)
     run.add_argument("--force", action="store_true")
+    pilot = sub.add_parser(
+        "pilot",
+        help="30-task HumanEval+ grid (blocked unless --allow-api)",
+    )
+    pilot.add_argument("--allow-api", action="store_true")
+    pilot.add_argument("--n", type=int, default=int(MANIFEST["n_pilot"]))
+    pilot.add_argument(
+        "--out-dir",
+        default=str(Path("outputs") / "humaneval_plus" / "pilot"),
+    )
+    repair = sub.add_parser(
+        "repair",
+        help="SKYT Certified Consensus replay on stored gens (no API)",
+    )
+    repair.add_argument(
+        "--source-dir",
+        default=str(Path("outputs") / "humaneval_plus" / "pilot"),
+    )
+    repair.add_argument(
+        "--out-dir",
+        default=str(Path("outputs") / "humaneval_plus" / "pilot_skyt"),
+    )
+    repair.add_argument("--n", type=int, default=int(MANIFEST["n_pilot"]))
+    repair.add_argument("--limit", type=int, default=0)
+    repair.add_argument("--force", action="store_true")
     args = parser.parse_args(argv)
 
     if args.cmd == "smoke":
@@ -183,6 +209,60 @@ def main(argv: List[str] | None = None) -> int:
         json.dump(summary, sys.stdout, indent=2, default=str)
         sys.stdout.write("\n")
         return 0
+
+    if args.cmd == "pilot":
+        if not args.allow_api:
+            print(
+                "Refusing to call an LLM. Re-run with --allow-api after smoke tests pass.",
+                file=sys.stderr,
+            )
+            return 3
+        try:
+            report = run_pilot(
+                out_dir=Path(args.out_dir),
+                n=args.n,
+                allow_api=True,
+            )
+        except (ApiSpendBlocked, SandboxUnavailable) as exc:
+            print(exc, file=sys.stderr)
+            return 3
+        json.dump(
+            {
+                "n_configs": report["n_configs"],
+                "cost": report["cost"],
+            },
+            sys.stdout,
+            indent=2,
+            default=str,
+        )
+        sys.stdout.write("\n")
+        return 0
+
+    if args.cmd == "repair":
+        try:
+            report = repair_pilot(
+                source_dir=Path(args.source_dir),
+                out_dir=Path(args.out_dir),
+                n=args.n,
+                force=bool(args.force),
+                limit=int(args.limit),
+            )
+        except (SandboxUnavailable, ValueError) as exc:
+            print(exc, file=sys.stderr)
+            return 3
+        json.dump(
+            {
+                "n_configs": report["n_configs"],
+                "n_regressions": report["n_regressions"],
+                "n_rescues": report["n_rescues"],
+                "n_failed_configs": report["n_failed_configs"],
+            },
+            sys.stdout,
+            indent=2,
+            default=str,
+        )
+        sys.stdout.write("\n")
+        return 0 if report["n_failed_configs"] == 0 else 2
     return 1
 
 
