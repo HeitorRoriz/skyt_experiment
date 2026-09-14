@@ -9,6 +9,81 @@ Written 2026-09-14. Background and the code findings this plan rests on:
 
 ---
 
+## Plain-language summary
+
+### What the benchmark should do
+
+Ask an LLM to write `is_prime` ten times. Maybe eight answers work. But one may
+use a `for` loop and another a `while` loop, with different variable names. Both
+pass every test.
+
+Existing benchmarks ask only **"does it work?"** and report 8/10.
+
+This benchmark adds a second question: **"are the answers the same program?"**
+The output looks like *"this model at temperature 0.7 produces working code 79%
+of the time, but two working answers are the same program only 50% of the
+time."* Nobody reports that number today, and it matters because teams assume a
+pinned model at temperature 0 gives stable output. It does not.
+
+To be a real benchmark you need five things:
+
+1. A fixed task set anyone can download
+2. A fixed way to check "does it work" (unit tests)
+3. A fixed way to check "is it the same program" ← **the new and hard part**
+4. One agreed number everyone reports
+5. Baseline results others can compare against
+
+Items 1 and 2 come free by borrowing an existing task set. We have a version of
+3 and 4. We have nothing for 5. And item 3 has never been checked for
+correctness.
+
+### How SKYT becomes that benchmark
+
+SKYT today is a tool with three pieces:
+
+- a **measuring tape** that decides how different two programs are
+- a **chooser** that picks which version counts as official
+- a **rewriter** that edits the others to match
+
+The benchmark is **only the measuring tape**. The chooser and the rewriter are
+product features. So the work is to pull the measuring tape out, make it
+standalone, and prove it is accurate.
+
+The measuring tape currently computes 14 numbers per program and calls two
+programs identical when all 14 match. That rule has never been tested. It can
+fail in two directions:
+
+- **Too picky:** calls near-identical programs different. Example: the
+  fingerprint covers the parsed code *including the docstring*, so the same
+  logic with a reworded docstring counts as a different program. This makes
+  models look less consistent than they are, which inflates our own headline
+  claim.
+- **Too loose:** calls different programs identical. Example: variables are
+  renamed to `v0`, `v1`, ... to make naming irrelevant, but the built-in
+  allowlist holds only seven names, so `sorted` and `enumerate` get renamed too.
+  Two programs differing only in which of those they call can look identical.
+
+There is also a strong possibility that one of the 14 numbers — an AST
+fingerprint — is doing all the work, leaving the other 13 as decoration.
+
+Steps, in order:
+
+1. **Prove the measuring tape is accurate.** Cheap, days, no API spend. Phase 0.
+2. **Write the rules down:** how many samples, what counts as working, and which
+   differences we agree to ignore. Phase 1.
+3. **Make it one command.** Phase 2.
+4. **Run every task, not a sample.** Phase 3.
+5. **Show we did not reinvent clone detection or AST diffing.** Phase 4.
+6. **Ask humans whether they agree with the tape.** Phase 5.
+
+Then SKYT becomes one row in the results table: numbers before, numbers after.
+That is a stronger position than being the whole story.
+
+Step 1 is not negotiable as the starting point. If the measuring tape is off,
+every number measured with it is off too.
+
+---
+
 ## 0. Design decision up front: overlay, not a new task set
 
 The benchmark does **not** ship new prompts.
