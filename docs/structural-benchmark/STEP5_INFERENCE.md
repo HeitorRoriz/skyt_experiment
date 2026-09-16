@@ -56,8 +56,8 @@ or `N < 20`. That is the frozen-protocol size, not a desk-reject.
 ## What this does not fix
 
 - 30 tasks is still a convenience sample. The code can label `pilot_grid`; it
-  cannot invent a superpopulation. Full HumanEval+ (164) is Phase 3, paid API,
-  new `--out-dir`.
+  cannot invent a superpopulation. Full HumanEval+ (164 × *N*=20) is
+  `python -m benchmark full`: paid API, new `--out-dir`, default refuse.
 - Binary same/not-same stays. Discriminant is [`STEP4_DISCRIMINANT.md`](STEP4_DISCRIMINANT.md).
 - Humans are still Phase 5.
 

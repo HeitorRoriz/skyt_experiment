@@ -1,6 +1,6 @@
 \documentclass[sigconf,review,anonymous]{acmart}
 
-%% FSE 2027 Research track --- W2 draft (2026-09-03). Not camera-ready.
+%% FSE 2027 Research track --- W5 SameEval rewrite (2026-09-16). Not camera-ready.
 %% Double-blind: keep anonymous/review until camera-ready.
 \acmConference[FSE '27]{ACM International Conference on the Foundations of Software Engineering}{July 12--16, 2027}{Shenzhen, China}
 \acmBooktitle{Proceedings of the ACM International Conference on the Foundations of Software Engineering (FSE '27), July 12--16, 2027, Shenzhen, China}
@@ -10,53 +10,31 @@
 
 \usepackage{booktabs}
 \usepackage{graphicx}
-\usepackage{xcolor}
-\usepackage{framed}
 \usepackage{amsmath}
 
 \newcommand{\skyt}{\textsc{Skyt}}
+\newcommand{\sameeval}{SameEval}
+\newcommand{\sameat}{\mbox{\texttt{same@2}}}
+\newcommand{\sameatc}{\mbox{\texttt{same@2|cert}}}
 \newcommand{\etal}{et~al.}
 \newcommand{\ie}{i.e.,}
 \newcommand{\eg}{e.g.,}
 
-%% ---------- DRAFTING NOTES (delete this block before submission) ----------
-%% CONTRIBUTIONS (locked order):
-%%   C1 Protocol (the ruler): N regenerations + structural distance + reports
-%%      (pairwise U-statistics, certified modal mass, optional churn).
-%%   C2 Anchor-aware measurement: first-compliant vs Certified Consensus Canon;
-%%      measure ≠ policy.
-%%   C3 Empirical finding: corrected behavioral–structural gap on our corpus;
-%%      replication on HumanEval+ (30-task run in this draft; 164 planned).
-%%   C4 Tool score: SKYT under pairwise / honest metrics (pre/post).
-%%
-%% METHODS FREEZE (do not reopen while drafting):
-%%   SELECT  Certified Consensus Canon
-%%           (certified mode → medoid on ties → deterministic tie-break)
-%%           Contracted tasks: certified = oracle-pass + contract compliance
-%%           HumanEval+: certified = HumanEval+ extra tests pass
-%%   MEASURE 1. End-to-end pairwise exact-match U-statistic
-%%              (+ certified/conditional pairwise as secondary)
-%%           2. Certified modal mass (largest certified class / n)
-%%           3. Pairwise distance U-statistic (secondary)
-%%           Inference: one score per contract/task → cluster bootstrap
-%%           NEVER: Wilson/binomial on C(n,2) pairs
-%%           NEVER: plain Wilson on in-sample modal share
-%%   POLICY  Repeated balanced CV at operational s=10 on contracted tasks
-%%           HumanEval+ this draft: N=10 ⇒ s=5
-%%           Baselines: first-compliant vs Certified Consensus (contracts)
-%%           HumanEval+ Table 2 is consensus-only
-%%   WILSON  Only: frozen canon + independent evaluation batch
-%%
-%% SCOPES: never merge SBES (12 / 3,600), MSR (15 / 4,500), HumanEval+ (30 / 1,200).
-%% Do not headline split-half medoid (74.3%). Do not quote 66pp without
-%% "anchor-relative". Normalization = 14-property distance-0.
-%% Code DNA / IVR is out of scope.
-%% Do not score SKYT by pass@k or match-to-human.
+%% ---------- DRAFTING NOTES (LaTeX comments only; do not print) ----------
+%% C1 SameEval overlay: N regenerations + canonical-form fingerprint + same@2.
+%% C2 Measure ≠ policy: first-valid vs Certified Consensus; SKYT is the tool.
+%% C3 Empirical: contracted tasks + HumanEval+ 30-task N=10 tables.
+%% C4 SKYT as one row on the SameEval table (in-sample substitution).
+%% Protocol N=20 / s=10. HumanEval+ tables in this PDF: N=10 / s=5 / 30 tasks.
+%% Never merge SBES (12/3600), MSR (15/4500), HumanEval+ (30/1200).
+%% Do not headline split-half medoid 74.3%. 66pp is anchor-relative only.
+%% HE+ Table 1/2 stay 56.9% / 67.4% (do not substitute 62.19% / 73.69%).
+%% Code DNA / IVR is out of scope. Do not score SKYT by pass@k or match-to-human.
 %% -----------------------------------------------------------------------
 
 \begin{document}
 
-\title{A Structural Repeatability Protocol for LLM-Generated Code}
+\title{\sameeval{}: Measuring Whether Regenerated Code Is the Same Program}
 
 %% Blind review: authors commented until camera-ready.
 %% \author{Heitor Roriz}
@@ -84,79 +62,68 @@
 %% \email{vicente@ufam.edu.br}
 
 \renewcommand{\shortauthors}{Anonymous Author(s)}
-\renewcommand{\shorttitle}{A Structural Repeatability Protocol}
+\renewcommand{\shorttitle}{\sameeval{}: Is Regenerated Code the Same Program?}
 
-%% ---------- ABSTRACT ----------
 \begin{abstract}
-Existing code-generation benchmarks score a sample against a behavioral oracle.
-They do not measure how much the \emph{structure} of passing programs varies
-when the same prompt is issued again and the model returns different code.
-We propose a \textbf{structural repeatability protocol}: $N$ independent
-generations, a 14-property structural distance, and population reports based on
-pairwise U-statistics and certified modal mass.
-The protocol separates \emph{measurement} (how scattered are the outputs?) from
-\emph{policy} (which verified form should count as the canon?).
-On contracted Python tasks, behavioral pass rates are high ($\approx$98\%) while
-end-to-end pairwise exact-match is 61.0\% (MSR, 15 tasks, 4{,}500 generations)
-and 67.5\% (SBES, 12 contracts, 3{,}600 generations).
-Repairing toward the first certified generation and toward a certified consensus
-form are different policies; we report both and do not mix them.
-On a 30-task HumanEval+ run (1{,}200 generations, no style contracts), plus-test
-pass is 80.5\%, end-to-end pairwise exact-match is 56.9\%, and match to the
-shipped human solution is 9.3\%.
-A post-generation canonicalizer (\skyt{}) applied to those same 1{,}200 programs
-raises end-to-end pairwise exact-match to 75.9\% (0 regressions, 34 rescues);
-most rewrites substitute the named function with the stored consensus program.
+Code-generation benchmarks score one sample against tests.
+They do not ask whether the \emph{next} sample from the same prompt is the
+same program.
+\sameeval{} is an overlay on existing prompts and oracles: draw $N$ independent
+generations, fingerprint each canonical form, and report \sameat{} (two draws
+both pass and match) together with \sameatc{} (match among passers).
+Measurement (how scattered are the outputs?) is separate from policy (which
+verified form, if any, should later draws be repaired toward).
+\skyt{} is a repair tool scored \emph{on} \sameeval{}, not the benchmark.
+On contracted Python tasks, pass rates are $\approx$98\% while \sameat{} is
+61.0\% (MSR, 15 tasks, 4{,}500 generations) and 67.5\% (SBES, 12 contracts,
+3{,}600 generations).
+Repairing toward the first passer and toward a certified consensus form are
+different policies; we report both.
+On a 30-task HumanEval+ run (1{,}200 generations), plus-test pass is 80.5\%,
+\sameat{} is 56.9\%, and match to the shipped human solution is 9.3\%.
+Applying \skyt{} to those same programs raises \sameat{} to 75.9\% because most
+rewrites substitute the named function with the stored consensus program.
+That is batch cleanup under a test suite, not a quieter sampler.
 \end{abstract}
 
-\keywords{LLM code generation, structural repeatability, U-statistics, canonicalization, HumanEval+, software measurement}
+\keywords{LLM code generation, structural repeatability, \sameeval{}, \sameat{}, HumanEval+, software measurement}
 
 \maketitle
 
-\begin{shaded}
-\noindent\textbf{Drafting notes (remove before submission).}
-W2 (2026-09-03): measured-cost motivation, related work, Figure~1,
-artifact pins. W1/W3 (2026-09-02): Methods, Results~A/~B, Threats.
-Contributions in locked order: \textbf{C1} protocol;
-\textbf{C2} first-compliant vs Certified Consensus (measure $\neq$ policy);
-\textbf{C3} gap on contracted tasks + HumanEval+ 30-task run;
-\textbf{C4} \skyt{} pre/post under the same metrics.
-Never merge SBES, MSR, and HumanEval+.
-Never headline split-half medoid.
-Never quote 66\,pp without ``anchor-relative''.
-Never lead with plus-pass as a HumanEval win.
-Table~2 on HumanEval+ is in-sample consensus repair, not a held-out rewrite.
-No 164-task API run in this draft.
-\end{shaded}
-
-%% ============================================================
 \section{Introduction}
 \label{sec:intro}
 
 Correctness benchmarks for LLM code generation---HumanEval~\cite{chen2021evaluating},
 MBPP~\cite{austin2021program}, SWE-bench~\cite{jimenez2024swebench}---ask whether
 \emph{a} generated artifact passes tests.
-Production pipelines regenerate: CI re-runs generators, agents retry, and
-independent developers issue the same prompt.
-Behavioral oracles cannot tell two passing regenerations apart, yet the
-artifacts can differ in structure~\cite{ouyang2023llm}.
+Production pipelines regenerate: CI retries a generator, an agent re-samples
+after a failed test, and two developers issue the same prompt.
+Tests cannot tell two passing regenerations apart, yet the artifacts can
+differ in structure~\cite{ouyang2023llm}.
 
-This paper's primary contribution is a \textbf{benchmark overlay} that measures
-that structural scatter (\textbf{C1}).
-We then show that the choice of reference form (the \emph{canon}) is a policy,
-not a measurement, and compare first-compliant anchoring to a Certified
-Consensus Canon (\textbf{C2}).
-We apply the protocol to author-written contracted tasks (\textbf{C3},
-Results~A) and to HumanEval+~\cite{liu2023evalplus} (\textbf{C3}, Results~B).
-Finally we rescore a post-generation repair tool, \skyt{}, under the same
-metrics (\textbf{C4}).
+This paper's primary contribution is \textbf{\sameeval{}}, a benchmark overlay
+that measures that scatter.
+It ships no new prompts and no new tests.
+It adds a form report on top of an existing task set.
+The report's headline is \sameat{}: the probability that two independent draws
+both certify and are the same program.
+A second column, \sameatc{}, asks the same identity question among passers
+only; configs with fewer than two passers are dropped from that column and the
+drop is reported.
 
-The protocol does \emph{not} select the best program and does \emph{not} aim at
-a shipped human solution.
-It selects the most reproduced verified form, then measures whether other
-generations match it.
-``Same form'' means identical structure under a 14-property distance of 0
-(numeric tolerance $10^{-12}$).
+\sameeval{} does not pick a canon and does not aim at a shipped human solution.
+``Same form'' means identical canonical-form fingerprints
+(Section~\ref{sec:sameness}).
+Which verified form, if any, later generations should be repaired toward is a
+\emph{policy}, not a measurement.
+We compare first-compliant repair to Certified Consensus repair on contracted
+tasks, and we rescore a post-generation tool, \skyt{}~\cite{roriz2026skytmsr},
+as one row on the \sameeval{} table---before and after, never mixed into the
+raw overlay.
+
+We apply \sameeval{} to author-written contracted tasks (Results~A) and to a
+30-task HumanEval+~\cite{liu2023evalplus} run (Results~B).
+SBES, MSR, and HumanEval+ numbers are never pooled.
 
 \paragraph{Not in this paper.}
 Generation-by-construction (``Code DNA'') is a separate vision paper.
@@ -166,25 +133,23 @@ We do not score \skyt{} by pass@$k$ or by match to the HumanEval canonical
 solution.
 
 \paragraph{Outline.}
-Section~\ref{sec:motivation} records a measured review cost on contracted
-tasks.
-Section~\ref{sec:protocol} defines the ruler (C1) and separates measurement
-from canon policy (C2).
+Section~\ref{sec:motivation} records a measured review cost.
+Section~\ref{sec:related} places \sameeval{} next to pass@$k$, clones, and
+repair.
+Section~\ref{sec:protocol} defines the overlay and separates measurement from
+canon policy.
 Section~\ref{sec:setup} pins the two corpora.
 Section~\ref{sec:results-a} reports contracted-task scores under both repair
 policies.
-Section~\ref{sec:results-b} reports a 30-task HumanEval+ run (C3) and
-rescores \skyt{} on those same programs (C4).
-Section~\ref{sec:threats} states the in-sample and construct caveats.
+Section~\ref{sec:results-b} reports HumanEval+ \sameeval{} scores and the
+\skyt{} row.
+Section~\ref{sec:threats} states construct and in-sample caveats.
 Section~\ref{sec:artifact} lists hashes, seeds, and recompute commands.
 
-%% ============================================================
 \section{Motivation}
 \label{sec:motivation}
 
 Regeneration is how LLM-assisted development actually works.
-CI retries a generator, an agent re-samples after a failed test, and two
-developers issue the same prompt.
 Correctness benchmarks record whether \emph{a} sample
 passes~\cite{chen2021evaluating,liu2023evalplus}.
 They do not record whether the next passing sample is the same program.
@@ -196,28 +161,17 @@ $\approx$12-line functions.
 Churn tracks temperature: 3.2\% at $T{=}0.0$ to 23.1\% at $T{=}1.0$.
 The test suite treats those pairs as interchangeable; a reviewer does not.
 
-\paragraph{Freezing the first passer is a policy.}
-A natural operational response is to keep the first program that certifies.
+\paragraph{Keeping the first passer is a policy.}
+A natural operational response is to freeze the first program that certifies.
 On contracted tasks that first certified generation matches the certified
 consensus form in only 40.5\% of MSR configs that have a consensus
 (40.6\% SBES).
 Commercial APIs are not bit-deterministic at
 $T{=}0$~\cite{ouyang2023llm}.
-Freezing one output works until anyone re-runs the prompt---and in agent and
-CI pipelines, that is every build.
+Freezing one output works until anyone re-runs the prompt.
 
-\paragraph{Style contracts pin some axes; the gap remains.}
-On contracted tasks we observe zero recursion-schema flips among passers,
-because those contracts constrain style.
-The behavioral--structural gap still remains (Section~\ref{sec:results-a}):
-pass rates near 98\%, certified modal mass 69.6\% (MSR) and 76.4\% (SBES).
-An older $\approx$66\,pp figure compared pass rate to match against the first
-certified generation; that gap is \textbf{anchor-relative} and is not a
-headline.
+That is the measurement problem \sameeval{} is for.
 
-That is the measurement problem this protocol is for.
-
-%% ============================================================
 \section{Related Work}
 \label{sec:related}
 
@@ -226,43 +180,45 @@ HumanEval~\cite{chen2021evaluating}, MBPP~\cite{austin2021program}, and
 SWE-bench~\cite{jimenez2024swebench} score pass@$k$ against tests.
 HumanEval+~\cite{liu2023evalplus} keeps the same 164 prompts and replaces the
 hidden tests with a larger extra suite.
-These protocols do not report structural dispersion across $N$ passing samples.
+These protocols do not report how often independent draws share structure.
 AlphaCode~\cite{li2022alphacode} clusters programs by input--output behavior to
 filter duplicate submissions; that is a selection policy, not a population
-report of how often independent draws share structure.
+report.
 
 \paragraph{LLM variability.}
 Ouyang \etal{}~\cite{ouyang2023llm} document non-determinism in code
 generation, including that $T{=}0$ is not bit-deterministic on commercial
 APIs; temperature changes output diversity~\cite{zhu2024hot}.
+ReCode~\cite{wang2023recode} perturbs \emph{prompts} and asks whether pass
+rate holds.
+\sameeval{} leaves the prompt fixed and asks whether two answers are the same
+program.
 Studies of developer interaction~\cite{vaithilingam2022expectation,barke2023grounded}
 treat a generation as a single artifact.
-We measure scatter of structure given tests (and, when present, contracts).
 
-\paragraph{Clones, diffs, and unique solutions.}
-Distance 0 on our extractors is closer to clone and equivalence measurement
-than to pass@$k$~\cite{roy2009clone}.
+\paragraph{Clones and diffs.}
+Fingerprint identity is closer to clone measurement than to
+pass@$k$~\cite{roy2009clone}.
 AST differencing~\cite{falleri2014gumtree} produces an edit script between two
-trees; we instead ask how often independent regenerations land on the same
-14-property form.
-We do not claim observational equivalence, algorithm identity, or a replacement
-for clone detectors (Section~\ref{sec:threats}).
-Where a contract allows flexible naming, comparison includes $\alpha$-renaming
-under that policy.
+trees; Zhang--Shasha tree-edit distance~\cite{zhang1989simple} is a related
+numeric judge.
+\sameeval{} asks how often independent regenerations land on the same
+canonical form.
+It is not a clone detector, not observational equivalence, and not algorithm
+identity.
+Section~\ref{sec:discriminant} places the fingerprint next to string, AST, TED,
+and clone-style bits on stored HumanEval+ pairs.
+None of those bits is written into \sameat{}.
 
 \paragraph{Repair versus overlay.}
 Program repair with language models patches failing
 code~\cite{xia2023apr}.
-\skyt{} is a post-generation canonicalizer toward a stored verified form, not a
-bug fixer and not a generator~\cite{roriz2026skytmsr}.
-On HumanEval+ in this draft it is consensus pick plus AST repair plus rollback,
-with no style contract.
-The protocol is an overlay on existing prompts and oracles: same tasks, extra
-structural reports.
-It is not a new HumanEval.
+\skyt{} is a post-generation canonicalizer toward a stored verified
+form~\cite{roriz2026skytmsr}, not a bug fixer and not a generator.
+\sameeval{} is the overlay: same tasks, extra form reports.
+\skyt{} is one system scored on that overlay.
 
-%% ============================================================
-\section{The Structural Repeatability Protocol}
+\section{\sameeval{}}
 \label{sec:protocol}
 
 \subsection{Inputs and regenerations}
@@ -270,8 +226,10 @@ A \emph{task} supplies a prompt, a behavioral oracle (unit tests), and optional
 static constraints (a \emph{contract}).
 An experimental \emph{config} is one task $\times$ one model $\times$ one
 temperature.
-For each config we draw $N$ independent generations
-($N{=}20$ on contracted tasks; $N{=}10$ on the HumanEval+ run in this draft).
+For each config we draw $N$ independent generations.
+The \sameeval{} protocol uses $N{=}20$ (cross-validation train size $s{=}10$).
+The HumanEval+ tables in this paper are a 30-task grid at $N{=}10$
+($s{=}5$); they are not pooled with $N{=}20$ numbers.
 
 \subsection{Certification}
 \label{sec:certification}
@@ -282,58 +240,55 @@ the contract checker passes.
 On HumanEval+, certified means the HumanEval+ extra tests (plus) pass.
 Original HumanEval (base) tests are stored and are never mixed into
 certification.
-If a generation cannot be represented by the structural extractors, it is
-structurally invalid; certified generations must also be valid.
+Unparseable code is structurally invalid; it cannot certify, but it stays in
+the \sameat{} denominator.
 
 \subsection{Structural sameness}
 \label{sec:sameness}
-We extract a vector of 14 properties from each generation
-(control-flow signature, data-dependency graph, execution paths, function
-contracts, complexity class, side-effect profile, termination properties,
-algebraic structure, numerical behavior, logical equivalence, normalized AST
-structure, operator precedence, statement ordering, recursion schema).
+Two generations are the \emph{same form} iff both parse and their canonical-form
+fingerprints match.
+The canonical form is: parse to an AST; strip leading docstrings from every
+module, function, and class body; $\alpha$-rename bound parameters and locals
+when the task's naming policy is flexible (free names stay); unparse so the
+tree and the source agree; hash \texttt{ast.dump} of that tree.
+
+\skyt{} still extracts a vector of 14 properties for the \emph{tool}.
+Those extras are diagnostics of \emph{how} two forms differ.
+They are not conjuncts of \sameeval{} identity.
 A previously used behavioral-signature extractor is disabled because it
 executed generated code.
-Two generations are the \emph{same form} when the distance on this vector is 0
-(tolerance $10^{-12}$).
-Headline exact-match rates are weight-independent: distance 0 requires all
-extracted properties to match.
-Mean distances are descriptive only.
-Where a contract allows flexible naming, comparison includes $\alpha$-renaming
-under that policy.
 
-Distance 0 means these extractors agree.
-It is not semantic equivalence of all programs
+Distance 0 on the fingerprint is not semantic equivalence
 (Section~\ref{sec:threats}).
 
-\subsection{Population measures (not policies)}
+\subsection{Population measures}
 \label{sec:measures}
-Let a config have $N$ generations.
-Write $C(N,2)$ for the unordered pairs.
-A pair \emph{end-to-end matches} if both generations are certified and their
-distance is 0.
-Pairs in which either generation fails contribute 0.
+Let a config have $N$ generations and write $C(N,2)$ for the unordered pairs.
 
 \begin{enumerate}
-  \item \textbf{End-to-end pairwise exact-match} (primary pairwise report;
-        MEASURE~1):
+  \item \textbf{\sameat{}} (primary).
+        The fraction of pairs in which both generations are certified and have
+        the same form.
         \[
-          R_{\mathrm{e2e}}
+          \texttt{same@2}
           \;=\;
-          \frac{\#\{\{i,j\}\,:\,\text{both certified and distance }0\}}{C(N,2)}.
+          \frac{\#\{\{i,j\}\,:\,\text{both certified and same form}\}}{C(N,2)}.
         \]
-        This is a U-statistic.
+        This is a U-statistic of order 2.
         Failures remain in the denominator.
         It is defined on every config.
-  \item \textbf{Certified pairwise exact-match} (secondary):
-        the same identity check restricted to pairs of certified generations.
+  \item \textbf{\sameatc{}} (secondary).
+        The same identity check restricted to pairs of certified generations.
         Undefined when fewer than two generations certify; those configs are
         omitted from the mean of this column and the omission is reported.
-  \item \textbf{Certified modal mass:} size of the largest certified
-        distance-0 class, divided by $N$ (failures count).
-  \item \textbf{Pairwise distance} (secondary): mean distance among
-        structurally valid pairs.
+  \item \textbf{Certified modal mass.}
+        Size of the largest certified same-form class, divided by $N$
+        (failures count).
 \end{enumerate}
+
+Always report \sameat{}, \sameatc{} (with the drop count), and pass rate
+together, with $N$ and the task count in the same sentence as the headline.
+Reporting \sameatc{} alone is forbidden: it rises when the pass rate falls.
 
 Pairs within a config share generations and are not independent Bernoulli
 trials.
@@ -341,18 +296,17 @@ Inference aggregates \emph{one score per task} (or contract) and uses a
 cluster bootstrap (10{,}000 resamples, seed 20260723).
 We do not treat $C(N,2)$ pairs as binomial trials and do not put a Wilson
 interval on in-sample modal share.
-A Wilson interval is valid only for a frozen canon scored on an independent
-batch; this draft does not report such an interval as a headline.
 
-\subsection{Canon policy (separate from measurement)}
+\subsection{Canon policy (not part of \sameeval{})}
 \label{sec:canon-policy}
-Measurement asks how scattered the outputs are.
+\sameeval{} asks how scattered the outputs are.
 A \emph{canon} is a chosen reference form used as a repair target or as a
 held-out predictor.
 That choice is a policy.
+\skyt{} implements a policy; it is not the overlay.
 
 \textbf{Certified Consensus.}
-Among certified, structurally valid generations, form distance-0 equivalence
+Among certified, structurally valid generations, form same-form equivalence
 classes (transitivity checked).
 Take the largest class (mode).
 If several classes share that size, take their members as candidates.
@@ -369,16 +323,15 @@ It is not the live repair target.
 
 \textbf{Policy evaluation.}
 Repeated balanced cross-validation: pick a consensus form on a train split of
-size $s$, score end-to-end match on the complement.
+size $s$, score \sameat{} on the complement.
 On contracted tasks, $s{=}10$ ($N{=}20$), $B{=}2000$ splits, same seed.
-On the HumanEval+ run in this draft, $N{=}10$ so $s{=}5$.
+On the HumanEval+ tables in this paper, $N{=}10$ so $s{=}5$.
 Leave-one-out and a single split-half are sensitivity only; we do not headline
-the Gate~0 split-half medoid (74.3\%).
+the contracted-task split-half medoid (74.3\%).
 
 The shipped HumanEval \texttt{canonical\_solution} is an external baseline, not
-the protocol canon.
+a \sameeval{} canon.
 
-%% ============================================================
 \section{Experimental Setup}
 \label{sec:setup}
 
@@ -400,10 +353,14 @@ or NASA Power-of-10 rule set; those names are inspiration only.
 Historical artifacts \texttt{outputs/*.json} and \texttt{outputs/gate0/} are
 first-valid repair.
 Certified Consensus repair was replayed without new LLM calls into a parallel
-tree (\texttt{outputs/consensus_repair/}, Gate~0 on that tree in
-\texttt{outputs/gate0_consensus/}).
+tree (\texttt{outputs/consensus\_repair/}, Gate~0 on that tree in
+\texttt{outputs/gate0\_consensus/}).
 If nothing certifies (\texttt{binary\_search\_strict}, 15 configs), raw
 generations are copied through; no form is invented.
+
+On this corpus, fingerprint identity and the older 14-property conjunction
+agree on every same/different verdict, so contracted-task \sameat{} does not
+depend on that choice.
 
 \subsection{HumanEval+}
 \label{sec:humaneval}
@@ -412,8 +369,8 @@ The oracle is HumanEval+ extra tests~\cite{liu2023evalplus}, not the original
 hidden file.
 Dataset pin: \texttt{evalplus==0.3.1}, HumanEvalPlus \texttt{v0.1.10},
 \texttt{dataset\_md5 = 916d9bfe7b490c2447245ec91595fa4f}.
-This draft reports a 30-task slice (seed 20260826; ids stored in sorted order),
-not all 164.
+This paper reports a 30-task slice (seed 20260826; ids in
+Appendix~\ref{app:pilot-ids}), not all 164.
 Grid: 30 tasks $\times$ 2 models (GPT-4o-mini, Claude Sonnet 4.5,
 \texttt{claude-sonnet-4-5-20250929}) $\times$ $T\in\{0.0,0.7\}$ $\times$
 $N{=}10$ $=$ 1{,}200 generations / 120 configs.
@@ -427,6 +384,11 @@ point so function substitution (Section~\ref{sec:skyt}) can target that
 \texttt{def}.
 The human \texttt{canonical\_solution} is scored as a baseline.
 
+The 30-task tables use the relation stamped when those programs were scored
+(14-property conjunction; docstrings counted).
+A fingerprint-only rescore of the same files is higher and is not substituted
+here (Section~\ref{sec:results-b}).
+
 \subsection{Tool under test}
 \label{sec:skyt}
 \skyt{} is a post-generation canonicalizer, not a generating agent.
@@ -438,46 +400,50 @@ On HumanEval+, we replay Certified Consensus on the \emph{same} 1{,}200
 programs (no second API draw).
 Agent components are off.
 The live ladder is:
-if distance to the stored consensus form is ${<}0.1$, leave the code unchanged
-(this is \emph{not} protocol identity, which is $10^{-12}$);
+if the 14-property tool distance to the stored consensus form is ${<}0.1$,
+leave the code unchanged
+(this is \emph{not} \sameeval{} identity);
 else try Level~2 (delete statements absent from the consensus form if plus
 tests still pass);
 else Level~3 (replace the named function's AST with the consensus function and
 emit source with \texttt{astor}).
+Level~3 is function substitution, not a merge of names or control flow from the
+other draws.
+The $N$ samples are a vote for which form to stamp; after the vote, diversity
+is discarded.
 Level~3 records a zero distance without remeasuring; paper scores re-extract
-properties from the saved programs.
+from the saved programs.
 Plus tests are re-run; failure rolls back to the original generation.
 
-%% ============================================================
 \section{Results A: Contracted Tasks}
 \label{sec:results-a}
 
-Figure~\ref{fig:overview} summarizes end-to-end pairwise exact-match on
-contracted tasks (panel~a) and the HumanEval+ 30-task overlay (panel~b).
+Figure~\ref{fig:overview} summarizes \sameat{} on contracted tasks (panel~a)
+and the HumanEval+ 30-task overlay (panel~b).
 The two corpora are never pooled.
 Error bars are 95\% cluster bootstrap by contract or by task.
 
 \begin{figure*}[t]
   \centering
   \includegraphics[width=\textwidth]{fig1.pdf}
-  \caption{Protocol scores under the locked ruler.
-    (a)~Contracted tasks: end-to-end pairwise exact-match (MEASURE~1) on raw
-    generations, after first-valid repair, and after Certified Consensus
-    repair. MSR (15 tasks, 4{,}500 generations) and SBES (12 contracts,
-    3{,}600 generations) are separate groups.
-    (b)~HumanEval+ 30-task run (1{,}200 generations): Table~1 is protocol only;
-    Table~2 applies \skyt{} to those same programs (in-sample consensus
+  \caption{\sameeval{} scores.
+    (a)~Contracted tasks: \sameat{} on raw generations, after first-valid
+    repair, and after Certified Consensus repair.
+    MSR (15 tasks, 4{,}500 generations) and SBES (12 contracts, 3{,}600
+    generations) are separate groups.
+    (b)~HumanEval+ 30-task run (1{,}200 generations): Table~1 is \sameeval{}
+    only; Table~2 applies \skyt{} to those same programs (in-sample consensus
     substitution, Section~\ref{sec:results-b}).
-    Match to the shipped human solution is a baseline, not the canon.
+    Match to the shipped human solution is a baseline, not a canon.
     Whiskers are 95\% cluster bootstrap.}
   \label{fig:overview}
 \end{figure*}
 
-Table~\ref{tab:gate0-pre} reports protocol measures on the \emph{raw}
+Table~\ref{tab:gate0-pre} reports \sameeval{} measures on the \emph{raw}
 generations (repair policy does not change pre-repair scores).
 Behavioral pass is 98.4\% (MSR) and 98.1\% (SBES).
-End-to-end pairwise exact-match is 61.0\% (MSR; 95\% cluster CI 46.3--74.6)
-and 67.5\% (SBES; 53.8--81.0).
+\sameat{} is 61.0\% (MSR; 95\% cluster CI 46.3--74.6) and 67.5\% (SBES;
+53.8--81.0).
 Certified modal mass is 69.6\% (MSR; 55.7--81.7) and 76.4\% (SBES; 65.5--87.0).
 Held-out CV at $s{=}10$ is 67.5\% (MSR; 53.1--80.2) and 74.3\% (SBES; 62.2--85.9).
 The gap between behavioral pass and certified modal mass is 28.8\,pp (MSR) and
@@ -487,17 +453,17 @@ first certified generation; that gap is \textbf{anchor-relative} and is not a
 headline.
 
 \begin{table}[t]
-  \caption{Pre-repair protocol measures on contracted tasks (contract-mean).
-    Pairwise is end-to-end exact-match (MEASURE~1).
-    CV is repeated balanced held-out end-to-end match at $s{=}10$.
+  \caption{Pre-repair \sameeval{} measures on contracted tasks (contract-mean).
+    Pairwise is \sameat{}.
+    CV is repeated balanced held-out \sameat{} at $s{=}10$.
     Scopes are never merged.
-    Cluster-bootstrap 95\% CIs for pairwise: MSR 46.3--74.6, SBES 53.8--81.0.
-    The freeze forbids headlining the MSR split-half medoid (also $\approx$74.3\%);
-    that quantity is not the SBES CV cell.}
+    Cluster-bootstrap 95\% CIs for \sameat{}: MSR 46.3--74.6, SBES 53.8--81.0.
+    The MSR split-half medoid (also $\approx$74.3\%) is not a headline and is
+    not the SBES CV cell.}
   \label{tab:gate0-pre}
   \begin{tabular}{lcccc}
     \toprule
-    Scope & Pairwise & Modal & CV & Pass \\
+    Scope & \sameat{} & Modal & CV & Pass \\
     \midrule
     MSR (15 tasks)  & 61.0\% & 69.6\% & 67.5\% & 98.4\% \\
     SBES (12 contracts) & 67.5\% & 76.4\% & 74.3\% & 98.1\% \\
@@ -505,38 +471,38 @@ headline.
   \end{tabular}
 \end{table}
 
-Conditional certified pairwise (among configs with $\geq$2 certified
-generations) is 66.5\% on MSR (205/220 configs; 14/15 tasks).
-End-to-end keeps all 220 configs.
+Conditional \sameatc{} (among configs with $\geq$2 certified generations) is
+66.5\% on MSR (205/220 configs; 14/15 tasks).
+\sameat{} keeps all 220 configs.
 \texttt{binary\_search\_strict} contributes 0 certified generations in the 15
 analyzed configs (literal-pattern constraints that generations did not
 satisfy).
 
 Table~\ref{tab:gate0-post} reports the same measures after repair, with the two
 policies labeled.
-First-valid raises MSR pairwise 61.0\%$\rightarrow$67.4\% (CI 56.2--78.5) and
+First-valid raises MSR \sameat{} 61.0\%$\rightarrow$67.4\% (CI 56.2--78.5) and
 SBES 67.5\%$\rightarrow$73.2\% (61.4--84.4), with 69 MSR regressions / 0
 rescues (post pass 96.8\%) and 14 SBES regressions / 0 rescues (post pass
 97.7\%).
 Fifty-five of the MSR regressions are \texttt{is\_prime\_strict}/GPT-4o.
-Certified Consensus raises MSR pairwise to 77.2\% (60.7--90.4) and SBES to
+Certified Consensus raises MSR \sameat{} to 77.2\% (60.7--90.4) and SBES to
 85.2\% (73.2--93.3), with 0 regressions and 56 rescues in each scope (post
 pass 99.7\% MSR, 99.6\% SBES).
 We report both policies and do not mix them into one number.
 
 \begin{table}[t]
-  \caption{Post-repair protocol measures on contracted tasks (contract-mean).
-    Pairwise is end-to-end exact-match.
+  \caption{Post-repair \sameeval{} measures on contracted tasks (contract-mean).
+    Pairwise is \sameat{}.
     First-valid artifacts: \texttt{outputs/gate0/}.
     Consensus artifacts: \texttt{outputs/consensus\_repair/} and
     \texttt{outputs/gate0\_consensus/}.
-    Cluster-bootstrap 95\% CIs for pairwise: MSR first-valid 56.2--78.5,
+    Cluster-bootstrap 95\% CIs for \sameat{}: MSR first-valid 56.2--78.5,
     MSR consensus 60.7--90.4, SBES first-valid 61.4--84.4, SBES consensus
     73.2--93.3.}
   \label{tab:gate0-post}
   \begin{tabular}{llcccc}
     \toprule
-    Scope & Policy & Pairwise & Modal & CV & Pass \\
+    Scope & Policy & \sameat{} & Modal & CV & Pass \\
     \midrule
     MSR  & first-valid & 67.4\% & 75.4\% & 74.1\% & 96.8\% \\
     MSR  & consensus   & 77.2\% & 82.2\% & 81.4\% & 99.7\% \\
@@ -548,11 +514,9 @@ We report both policies and do not mix them into one number.
 
 First-valid matches Certified Consensus in 40.5\% of MSR configs that have a
 consensus (40.6\% SBES).
-That is the empirical content of C2 on these tasks: the two policies are not
-the same center.
+The two policies are not the same center.
 
-%% ============================================================
-\section{Results B: HumanEval+}
+\section{Results B: \sameeval{} on HumanEval+}
 \label{sec:results-b}
 
 All HumanEval+ numbers in this section are a 30-task run (1{,}200 generations).
@@ -563,32 +527,37 @@ Aggregation is a task-mean with cluster bootstrap by \texttt{task\_id}
 (10{,}000, seed 20260723).
 CV train size is 5.
 
-Table~\ref{tab:he-table1} is protocol only (no \skyt{}).
+Table~\ref{tab:he-table1} is \sameeval{} only (no \skyt{}).
 Overall plus-pass is 80.5\% (95\% CI 66.5--92.8).
-End-to-end pairwise exact-match (MEASURE~1) is 56.9\% (44.6--68.8).
-Certified pairwise is 67.4\% (57.2--77.0) and is computed on 99/120 configs
+\sameat{} is 56.9\% (44.6--68.8).
+\sameatc{} is 67.4\% (57.2--77.0) and is computed on 99/120 configs
 (21 configs had fewer than two plus-passers and are omitted from that column
 only).
 Certified modal mass is 64.2\%.
 Held-out CV match is 59.7\%.
 Match to the shipped human solution, among plus-passers, is 9.3\% (0.0--20.4;
 20 configs with zero plus-pass omitted).
-$T{=}0.0$ is not 100\% certified pairwise.
+$T{=}0.0$ is not 100\% \sameatc{}.
+
+These tables use the relation stamped when the programs were first scored
+(14-property conjunction; docstrings counted).
+A later fingerprint-only rescore of the same jsonl is 62.19\% \sameat{} /
+73.69\% \sameatc{}.
+We do not substitute those figures.
 
 The cell that drives the structural story is GPT-4o-mini at $T{=}0.7$:
-plus-pass 78.7\%, certified pairwise 50.3\%, end-to-end 41.0\%.
-Tests pass; structures still differ.
+plus-pass 78.7\%, \sameatc{} 50.3\%, \sameat{} 41.0\%.
+Tests pass; forms still differ.
 
 \begin{table*}[t]
-  \caption{HumanEval+ 30-task run, protocol only (Table~1).
-    $N{=}10$. Pairwise (cert.) is among plus-passers; Pairwise (e2e) is
-    MEASURE~1.
-    Human is match to the shipped solution among plus-passers, not the canon.
+  \caption{\sameeval{} on HumanEval+, 30-task run, overlay only (Table~1).
+    $N{=}10$.
+    Human is match to the shipped solution among plus-passers, not a canon.
     CIs are 95\% cluster bootstrap by task.}
   \label{tab:he-table1}
   \begin{tabular}{llcccccc}
     \toprule
-    Model & $T$ & Plus pass & Pairwise (cert.) & Pairwise (e2e) & Modal & CV & Human \\
+    Model & $T$ & Plus pass & \sameatc{} & \sameat{} & Modal & CV & Human \\
     \midrule
     GPT-4o-mini & 0.0 & 77.7\% & 83.0\% & 64.5\% & 70.0\% & 67.3\% & 8.3\% \\
     GPT-4o-mini & 0.7 & 78.7\% & 50.3\% & 41.0\% & 51.3\% & 43.7\% & 7.7\% \\
@@ -603,35 +572,38 @@ Table~\ref{tab:he-table2} applies \skyt{} to those same 1{,}200 programs
 (Certified Consensus only; first-valid was not run on HumanEval+).
 Overall plus-pass becomes 83.3\% (70.0--95.0): that is 34 rescues and 0
 regressions, not a pass@$k$ result.
-End-to-end pairwise exact-match becomes 75.9\% (63.1--87.4).
-Certified pairwise becomes 90.5\% (84.3--95.5; 20/120 configs omitted).
+\sameat{} becomes 75.9\% (63.1--87.4).
+\sameatc{} becomes 90.5\% (84.3--95.5; 20/120 configs omitted).
 Match to the human solution stays 9.3\%: repair is not aimed at that file.
-GPT-4o-mini at $T{=}0.7$ certified pairwise moves 50.3\%$\rightarrow$87.8\%.
+GPT-4o-mini at $T{=}0.7$ \sameatc{} moves 50.3\%$\rightarrow$87.8\%.
 
 Of 1{,}200 generations: 200 skipped (20 configs, no plus-passer, no canon);
 770 already distance 0 to the consensus form;
-59 left unchanged with $0 < d < 0.1$;
+59 left unchanged with $0 < d < 0.1$ on the \emph{tool} distance;
 17 Level~2;
 154 Level~3 function substitution;
 0 rolled back.
 Rewrites total 171.
-After repair, certified pairwise sits at or above plus-pass in every cell
+After repair, \sameatc{} sits at or above plus-pass in every cell
 (Claude $T{=}0.7$ tied).
 
-These Table~2 scores are in-sample: the consensus form is picked from the same
-$N{=}10$ that is rewritten and rescored.
-They measure batch canonicalization under the plus suite, not that the
+Table~1 measures scatter of samples.
+Table~2 measures what happens when you replace functions in those same samples
+with their in-sample modal passer.
+The consensus form is picked from the same $N{=}10$ that is rewritten and
+rescored.
+That is batch canonicalization under the plus suite, not evidence that the
 generator became repeatable, and not held-out match of a frozen form on a new
 draw.
 
 \begin{table*}[t]
-  \caption{HumanEval+ 30-task run after \skyt{} on the same 1{,}200 programs
+  \caption{\sameeval{} on HumanEval+ after \skyt{} on the same 1{,}200 programs
     (Table~2). Repair policy: Certified Consensus.
     Plus-pass delta is 34 rescues / 0 regressions.}
   \label{tab:he-table2}
   \begin{tabular}{llcccccc}
     \toprule
-    Model & $T$ & Plus pass & Pairwise (cert.) & Pairwise (e2e) & Modal & CV & Human \\
+    Model & $T$ & Plus pass & \sameatc{} & \sameat{} & Modal & CV & Human \\
     \midrule
     GPT-4o-mini & 0.0 & 80.0\% & 100.0\% & 80.0\% & 80.0\% & 80.0\% & 8.3\% \\
     GPT-4o-mini & 0.7 & 86.7\% & 87.8\% & 76.1\% & 79.7\% & 78.3\% & 7.7\% \\
@@ -642,7 +614,37 @@ draw.
   \end{tabular}
 \end{table*}
 
-%% ============================================================
+\subsection{What the fingerprint is not}
+\label{sec:discriminant}
+Table~\ref{tab:discriminant} compares the fingerprint to string equality,
+parse-unparse, raw AST hash, Type-2 $\alpha$-rename (keeping docstrings),
+Zhang--Shasha TED${=}0$~\cite{zhang1989simple}, and a Type-3 cutoff
+$\mathrm{TED}/\max(\mathrm{size})<0.30$ (documented, not fitted).
+The census is 4{,}279 plus-certified pairs from the 30-task run (no new API).
+Parse-unparse, raw AST hash, and TED${=}0$ coincide on this data.
+The 75 Type-2 leftovers sampled as docstring/prose; the 515 Type-3 leftovers
+sampled as control-flow near-misses.
+We do not retune the $0.30$ ratio to hide that cell.
+
+\begin{table}[t]
+  \caption{Disagreement census vs the \sameeval{} fingerprint on 4{,}279
+    plus-certified pairs (30-task HumanEval+ run, no new API).
+    Off-diagonals are the result.
+    Parse-unparse, raw AST hash, and TED${=}0$ coincide on this data.
+    Type-3 cutoff $0.30$ is documented, not fitted.}
+  \label{tab:discriminant}
+  \begin{tabular}{lrrrr}
+    \toprule
+    Judge & both same & both diff. & tape same, judge diff. & tape diff., judge same \\
+    \midrule
+    Exact string & 2853 & 921 & 505 & 0 \\
+    Parse-unparse / raw AST / TED${=}0$ & 3036 & 921 & 322 & 0 \\
+    Type-2 ($\alpha$-rename, keep docs) & 3283 & 921 & 75 & 0 \\
+    Type-3 ($\mathrm{TED}/\mathrm{size}<0.30$) & 3358 & 406 & 0 & 515 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
 \section{Discussion}
 \label{sec:discussion}
 
@@ -656,12 +658,15 @@ a chosen repair target.
 Certified Consensus is a center among verified forms, not a quality-best
 program and not the HumanEval human file.
 
-On HumanEval+, most of the certified-pairwise increase is Level~3 substitution
-of the stored consensus function.
-An ideal post-\skyt{} certified pairwise of 100\% on configs that have a canon
-would mean every plus-passer is that stored program.
+On HumanEval+, most of the \sameatc{} increase is Level~3 substitution of the
+stored consensus function.
+An ideal post-\skyt{} \sameatc{} of 100\% on configs that have a canon would
+mean every plus-passer \emph{is} that stored program.
 Leftover disagreement in this run is the 20 configs with no canon, the 59
-generations in $(0,0.1)$, and pretty-print noise from \texttt{astor}.
+generations in $(0,0.1)$ on the tool distance, and pretty-print noise from
+\texttt{astor}.
+Copying a passer is close to what Table~2 does.
+It does not answer \sameat{} on raw draws.
 
 Plus-pass moving 80.5\%$\rightarrow$83.3\% is expected if a failing generation
 receives a function body that already passed plus tests.
@@ -671,48 +676,37 @@ First-valid on contracted tasks improves structure less than consensus and
 introduces regressions.
 Consensus repair on those tasks improves structure with rescues rather than
 regressions in the Gate~0 replay.
-Those two sentences are why C2 is in the paper.
+Those two sentences are why both policies are in the paper.
 
-%% ============================================================
 \section{Threats to Validity}
 \label{sec:threats}
 
 \paragraph{Two pairwise columns.}
-Email figures used certified pairwise (among passers).
-The freeze's primary pairwise report is end-to-end (MEASURE~1).
+\sameat{} keeps failures in the denominator.
+\sameatc{} drops configs with fewer than two passers and therefore conditions
+on tasks the model can already pass.
 This paper reports both.
-Dropping configs with fewer than two plus-passers conditions certified
-pairwise on tasks the model can already pass.
 
 \paragraph{In-sample Table~2.}
 HumanEval+ consensus is selected from the same $N$ that is rewritten and
 rescored.
-Held-out rewrite (pick on train, apply on test) is not in this draft.
+Held-out rewrite (pick on train, apply on test) is not in this paper.
 CV scores held-out match \emph{without} rewrite.
-
-\paragraph{Function substitution.}
-Level~3 replaces the entry-point function with the stored consensus AST.
-Of 171 HumanEval+ rewrites, 154 are that substitution.
+Of 171 HumanEval+ rewrites, 154 are Level~3 function substitution.
 Do not read Table~2 as evidence of a better generator.
 
 \paragraph{Skip threshold versus identity.}
-Protocol identity is distance $0$ ($10^{-12}$).
-The transformer leaves $d<0.1$ unchanged.
+\sameeval{} identity is exact match of canonical trees.
+The transformer leaves 14-property tool distance $d<0.1$ unchanged.
 Those cutoffs are different jobs.
 Transformer \texttt{final\_distance} after Level~3 is not a paper score.
 
-\paragraph{$N$ and CV batch.}
+\paragraph{Sample size and task count.}
 Contracted tasks use $N{=}20$ and CV $s{=}10$.
-HumanEval+ in this draft uses $N{=}10$ and $s{=}5$.
-That is the operational design of this run, not the freeze $s{=}10$.
-
-\paragraph{Task count.}
-Results~B is 30 of 164 HumanEval+ tasks.
-A later full-set run does not change C1--C2 or the Table~2 in-sample caveat.
-
-\paragraph{First-valid on HumanEval+.}
-Option~C (both repair policies) is reported on contracted tasks.
-HumanEval+ Table~2 is consensus only.
+HumanEval+ tables in this paper use $N{=}10$ and $s{=}5$ on 30 of 164 tasks.
+A later 164-task overlay at $N{=}20$ writes a new tree; it does not change the
+Table~2 in-sample caveat.
+First-valid was not replayed on HumanEval+; Table~2 is consensus only.
 
 \paragraph{Oracle.}
 Certified inherits the suite.
@@ -724,34 +718,30 @@ HumanEval/130 plus inputs with huge integers were capped; the worker uses a
 per-case time limit.
 
 \paragraph{Construct.}
-Distance 0 on 14 extractors is not observational equivalence.
-Several property names sound semantic (\texttt{logical\_equivalence},
-\texttt{complexity\_class}, \texttt{termination\_properties}); they are AST
-heuristics.
-\texttt{complexity\_class} flags are candidates only.
-We did not ablate properties against a clone-detection baseline.
+Fingerprint identity is not observational equivalence.
+The other SKYT properties have names that sound semantic
+(\texttt{logical\_equivalence}, \texttt{complexity\_class},
+\texttt{termination\_properties}); they are AST heuristics and are not
+\sameeval{} identity conjuncts.
+Human agreement with the fingerprint is not in this paper.
+The extractor does not transfer to multi-file
+SWE-bench~\cite{jimenez2024swebench}.
 
 \paragraph{Contamination and models.}
 HumanEval prompts are likely in pretraining.
 Match-to-human 9.3\% does not rule out other memorized solutions.
 Two closed APIs; $T{=}0$ is not bit-deterministic; draws are a timestamped
 snapshot.
-
-\paragraph{Contracted-task grid.}
 \texttt{binary\_search\_strict}: 0/20 compliant in analyzed cells.
 \texttt{is\_prime\_strict}$\times$Claude never completed.
 Author-written tasks; HumanEval+ is the external-task check.
-The extractor does not transfer to multi-file SWE-bench~\cite{jimenez2024swebench}.
-
-\paragraph{Tool identity.}
 HumanEval+ replay used the traditional transformer with agents off, not the
 full modular pipeline.
 
-%% ============================================================
 \section{Artifact Pins}
 \label{sec:artifact}
 
-No new LLM calls are required to recompute the tables in this draft.
+No new LLM calls are required to recompute the tables in this paper.
 Do not overwrite \texttt{outputs/humaneval\_plus/pilot/} or
 \texttt{outputs/gate0/}.
 
@@ -767,8 +757,11 @@ Appendix~\ref{app:pilot-ids}).
 Cluster bootstrap seed 20260723, 10{,}000 resamples.
 
 \paragraph{Recompute (no API).}
+\texttt{python -m benchmark score} is the \sameeval{} scorer on stored jsonl
+(do not overwrite the frozen pilot tree).
+\texttt{python -m benchmark discriminant} produced Table~\ref{tab:discriminant}.
 \texttt{python -m benchmarks.humaneval\_plus.table1} reads the stored Table~1
-generations.
+summaries (relation as generated).
 \texttt{python -m benchmarks.humaneval\_plus.table2} reads the parallel
 \texttt{pilot\_skyt} tree.
 Certified Consensus repair on those generations uses
@@ -783,29 +776,30 @@ The default Gate~0 out-dir refuses to overwrite if the source is not the
 historical tree.
 
 \paragraph{What this package does not include.}
-Paid generation requires \texttt{--allow-api} and is not needed for the
+Paid generation requires \texttt{--allow-api} and is not needed for these
 tables.
 First-valid was not replayed on HumanEval+.
-The 164-task grid is not in this draft.
+The 164-task \sameeval{} grid is not in this paper.
 
-%% ============================================================
 \section{Conclusion}
 \label{sec:conclusion}
 
-We argue for measuring structural dispersion of LLM code with an explicit
-protocol, not with a single first-passing snapshot.
+Tests do not say whether the next passing program is the same program.
+\sameeval{} is an overlay that asks that question with a canonical-form
+fingerprint and \sameat{}.
+\skyt{} is a repair tool scored on that overlay, not the overlay itself.
 On contracted tasks the behavioral--structural gap survives after removing the
 first-compliant confound; first-valid and certified consensus are different
 repair policies.
-On a 30-task HumanEval+ run, passing tests does not imply the same structure,
-and match to the shipped human solution is rare.
+On a 30-task HumanEval+ run, passing tests does not imply the same form, and
+match to the shipped human solution is rare.
 \skyt{} on those programs is batch canonicalization toward the in-sample
-consensus form, scored with the same ruler.
+consensus function.
 
 Remaining work: a held-out rewrite evaluation, first-valid on the same
-HumanEval+ generations, aligning the transformer skip with distance 0 on a new
-output tree, and the 164-task grid under the locked adapter.
-The pins in Section~\ref{sec:artifact} are the artifact surface for this draft.
+HumanEval+ generations, human agreement with the fingerprint, and the 164-task
+\sameeval{} grid at protocol $N{=}20$.
+The pins in Section~\ref{sec:artifact} are the artifact surface for this paper.
 
 \begin{acks}
 %% TODO camera-ready.

@@ -87,6 +87,7 @@ def test_generate_refuses_without_allow_api():
     assert main(["generate"]) == 3
     assert main(["run", "--task-id", "HumanEval/23", "--n", "2", "--out-dir", "outputs/humaneval_plus/dryrun"]) == 3
     assert main(["pilot"]) == 3
+    assert main(["full"]) == 3
 
 
 def test_provenance_record_has_hashes_and_no_repair():
@@ -241,3 +242,22 @@ def test_repair_cli_does_not_require_allow_api():
     with pytest.raises(SystemExit) as exc:
         main(["repair", "--help"])
     assert exc.value.code == 0
+
+
+def test_run_full_refuses_wrong_n_frozen_dir_and_api(tmp_path):
+    from benchmark.protect import ProtectedOutputError, REPO_ROOT
+    from benchmark.schema import FROZEN_PROTOCOL_N
+    from benchmarks.humaneval_plus.run import run_full
+
+    assert FROZEN_PROTOCOL_N == 20
+    assert MANIFEST["n_full"] == FROZEN_PROTOCOL_N
+    with pytest.raises(ValueError, match="protocol N=20"):
+        run_full(out_dir=tmp_path, n=10, allow_api=False)
+    with pytest.raises(ProtectedOutputError):
+        run_full(
+            out_dir=REPO_ROOT / "outputs" / "humaneval_plus" / "pilot",
+            n=20,
+            allow_api=False,
+        )
+    with pytest.raises(ApiSpendBlocked):
+        run_full(out_dir=tmp_path / "humaneval_plus_164_n20", n=20, allow_api=False)

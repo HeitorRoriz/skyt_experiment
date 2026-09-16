@@ -18,6 +18,9 @@ python -m benchmark run \
     --task-id HumanEval/23 --model gpt-4o-mini --temperature 0.0 --n 10 \
     --out-dir outputs/benchmark/dryrun \
     --allow-api
+python -m benchmark full
+python -m benchmark full --from-dir outputs/humaneval_plus/pilot
+python -m benchmark full --allow-api --from-dir outputs/humaneval_plus/pilot
 ```
 
 `run` may use any of the 164 HumanEval+ ids and does **not** write SKYT
@@ -40,9 +43,10 @@ Both numbers, always, with every denominator:
 | `plus_pass` | pass rate | Share of the *N* draws that certify (HumanEval+ plus tests). |
 
 `relation_version` is `2` (canonical-form fingerprint from Step 1). SPEC OPEN 1
-(the public names) and OPEN 3 (a single *N*) are still open; this harness does
-not silently switch the HumanEval+ pilot from N=10 to N=20. `--n` is required
-on `run` and `estimate`.
+(the public names) is still open. OPEN 3 is **settled**: protocol *N*=20,
+CV 10/10. `full` locks *N* to 20 and refuses mixed or smaller *N*. It does
+**not** rewrite the HumanEval+ 30-task pilot (*N*=10, labeled `pilot_grid`).
+`--n` is required on `run` and `estimate`.
 
 Intervals are a task-clustered bootstrap (seed `20260723`), not a binomial
 interval over pairs. Schema `structural-repeatability-benchmark-v2` stamps an
@@ -52,7 +56,7 @@ interval over pairs. Schema `structural-repeatability-benchmark-v2` stamps an
 Tests (no API):
 
 ```
-python -m pytest tests/test_structural_repeatability.py tests/test_structural_validity.py tests/test_benchmark_inference.py
+python -m pytest tests/test_structural_repeatability.py tests/test_structural_validity.py tests/test_benchmark_inference.py tests/test_humaneval_plus_adapter.py
 ```
 
 ---
@@ -63,7 +67,7 @@ python -m pytest tests/test_structural_repeatability.py tests/test_structural_va
   by `benchmarks.humaneval_plus.dataset.load_evalplus_problems`).
 - Sandbox image digest from `experiment_manifest.json`. `run` refuses to spend
   until both the dataset hash and the local image digest verify.
-- `score` and `run` refuse `--out-dir` under `outputs/gate0/` or
+- `score`, `run`, and `full` refuse `--out-dir` under `outputs/gate0/` or
   `outputs/humaneval_plus/pilot/`. Reading the pilot for a v2 rescore is fine;
   writing back into it is not.
 - `score` refuses jsonl that already has `repair_applied` or a style contract.
@@ -77,7 +81,9 @@ Paid generation still requires `--allow-api`. The cost sketch is printed first
 
 - No Certified Consensus picker in the overlay path.
 - No SKYT repair.
-- No full 164-task run (Phase 3).
+- No paid 164-task generation until `--allow-api`. The runner exists:
+  `python -m benchmark full` writes `outputs/benchmark/humaneval_plus_164_n20`
+  (164 × 2 models × 2 temperatures × *N*=20). Frozen trees stay read-only.
 - No stamp of `relation_version` onto the frozen generation-record schema in
   `src/` (SPEC OPEN 4). Overlay reports carry the version; existing jsonl does
   not change.

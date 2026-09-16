@@ -180,13 +180,28 @@ def run_config(
     return summary
 
 
-def run_pilot(
+def all_evalplus_task_ids() -> List[str]:
+    problems, _digest = load_evalplus_problems()
+    ids = sorted(problems)
+    if len(ids) != 164:
+        raise ValueError(f"Expected 164 HumanEval+ tasks, got {len(ids)}")
+    return ids
+
+
+def run_grid(
     *,
+    task_ids: List[str],
     out_dir: Path,
     n: int,
     allow_api: bool,
     models: Optional[List[str]] = None,
     temperatures: Optional[List[float]] = None,
+    restrict_to_pilot: bool = True,
+    analyze: bool = True,
+    force: bool = False,
+    log_filename: str = "grid_progress.log",
+    report_filename: str = "grid_report.json",
+    schema: str = "skyt-humaneval-plus-grid-v1",
 ) -> Dict[str, Any]:
     if not allow_api:
         raise ApiSpendBlocked(
@@ -197,11 +212,11 @@ def run_pilot(
     models = sorted(models, key=lambda name: (0 if name.startswith("claude-") else 1, name))
     temperatures = list(temperatures if temperatures is not None else MANIFEST["temperatures"])
     out_dir.mkdir(parents=True, exist_ok=True)
-    log_path = out_dir / "pilot_progress.log"
+    log_path = out_dir / log_filename
     configs = [
         (task_id, model, float(temp))
         for model in models
-        for task_id in PILOT_TASK_IDS
+        for task_id in task_ids
         for temp in temperatures
     ]
     rows = []
@@ -238,6 +253,9 @@ def run_pilot(
                 n=n,
                 out_dir=out_dir,
                 allow_api=True,
+                force=force,
+                restrict_to_pilot=restrict_to_pilot,
+                analyze=analyze,
             )
         except Exception as exc:
             err = type(exc).__name__
@@ -267,17 +285,89 @@ def run_pilot(
 
     ledger = write_cost_ledger(out_dir)
     report = {
-        "schema": "skyt-humaneval-plus-pilot-v1",
+        "schema": schema,
         "n_configs": len(configs),
+        "n_tasks": len(task_ids),
         "n": n,
         "models": models,
         "temperatures": temperatures,
         "no_skyt_repair": True,
+        "restrict_to_pilot": restrict_to_pilot,
+        "analyze": analyze,
         "cost": ledger,
         "configs": rows,
     }
-    (out_dir / "pilot_report.json").write_text(
+    (out_dir / report_filename).write_text(
         json.dumps(report, indent=2, default=str), encoding="utf-8"
     )
     return report
+
+
+def run_pilot(
+    *,
+    out_dir: Path,
+    n: int,
+    allow_api: bool,
+    models: Optional[List[str]] = None,
+    temperatures: Optional[List[float]] = None,
+) -> Dict[str, Any]:
+    report = run_grid(
+        task_ids=list(PILOT_TASK_IDS),
+        out_dir=out_dir,
+        n=n,
+        allow_api=allow_api,
+        models=models,
+        temperatures=temperatures,
+        restrict_to_pilot=True,
+        analyze=True,
+        log_filename="pilot_progress.log",
+        report_filename="pilot_report.json",
+        schema="skyt-humaneval-plus-pilot-v1",
+    )
+    return report
+
+
+def run_full(
+    *,
+    out_dir: Path,
+    n: int,
+    allow_api: bool,
+    models: Optional[List[str]] = None,
+    temperatures: Optional[List[float]] = None,
+    force: bool = False,
+) -> Dict[str, Any]:
+    """164-task overlay at protocol N. New tree only. No SKYT analysis."""
+    from benchmark.protect import assert_writable
+    from benchmark.schema import FROZEN_PROTOCOL_N
+
+    protocol_n = FROZEN_PROTOCOL_N
+    if int(MANIFEST["n_full"]) != protocol_n:
+        raise ValueError(
+            f"experiment_manifest n_full={MANIFEST['n_full']} must equal "
+            f"protocol N={protocol_n}"
+        )
+    if n != protocol_n:
+        raise ValueError(
+            f"Full HumanEval+ overlay uses protocol N={protocol_n} (SPEC OPEN 3 "
+            f"settled). Got N={n}. The 30-task pilot stays N=10 in its own tree."
+        )
+    assert_writable(out_dir)
+    if not allow_api:
+        raise ApiSpendBlocked(
+            "Refusing to call an LLM. Re-run with --allow-api after smoke tests pass."
+        )
+    return run_grid(
+        task_ids=all_evalplus_task_ids(),
+        out_dir=out_dir,
+        n=n,
+        allow_api=allow_api,
+        models=models,
+        temperatures=temperatures,
+        restrict_to_pilot=False,
+        analyze=False,
+        force=force,
+        log_filename="full_progress.log",
+        report_filename="full_report.json",
+        schema="skyt-humaneval-plus-full-v1",
+    )
 

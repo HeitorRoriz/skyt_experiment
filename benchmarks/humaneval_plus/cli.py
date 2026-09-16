@@ -10,7 +10,7 @@ from typing import Any, Dict, List
 
 from .analyze import analyze_records
 from skyt.humaneval_repair import repair_pilot
-from .run import run_config, run_pilot
+from .run import run_config, run_full, run_pilot
 from .dataset import load_smoke_problems
 from .generate import ApiSpendBlocked, generate_completion
 from .manifest import MANIFEST, PILOT_TASK_IDS
@@ -163,6 +163,16 @@ def main(argv: List[str] | None = None) -> int:
     repair.add_argument("--n", type=int, default=int(MANIFEST["n_pilot"]))
     repair.add_argument("--limit", type=int, default=0)
     repair.add_argument("--force", action="store_true")
+    full = sub.add_parser(
+        "full",
+        help="164-task overlay at protocol N=20 (blocked unless --allow-api).",
+    )
+    full.add_argument("--allow-api", action="store_true")
+    full.add_argument(
+        "--out-dir",
+        default=str(Path("outputs") / "benchmark" / "humaneval_plus_164_n20"),
+    )
+    full.add_argument("--force", action="store_true")
     args = parser.parse_args(argv)
 
     if args.cmd == "smoke":
@@ -229,6 +239,37 @@ def main(argv: List[str] | None = None) -> int:
         json.dump(
             {
                 "n_configs": report["n_configs"],
+                "cost": report["cost"],
+            },
+            sys.stdout,
+            indent=2,
+            default=str,
+        )
+        sys.stdout.write("\n")
+        return 0
+
+    if args.cmd == "full":
+        if not args.allow_api:
+            print(
+                "Refusing to call an LLM. Re-run with --allow-api after smoke tests pass.",
+                file=sys.stderr,
+            )
+            return 3
+        try:
+            report = run_full(
+                out_dir=Path(args.out_dir),
+                n=int(MANIFEST["n_full"]),
+                allow_api=True,
+                force=bool(args.force),
+            )
+        except (ApiSpendBlocked, SandboxUnavailable, ValueError) as exc:
+            print(exc, file=sys.stderr)
+            return 3
+        json.dump(
+            {
+                "n_configs": report["n_configs"],
+                "n_tasks": report["n_tasks"],
+                "n": report["n"],
                 "cost": report["cost"],
             },
             sys.stdout,

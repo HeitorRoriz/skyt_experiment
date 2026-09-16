@@ -134,8 +134,8 @@ inside `equivalence_classes` never fires.
   "same algorithm" as a person would say it.
 - Multi-file / non-Python extractors.
 - Held-out rewrite evaluation of SKYT (a tool question, not a ruler question).
-- Metric names (`same@2` vs current wording) and a single *N* (SPEC.md OPEN 1
-  and OPEN 3).
+- Metric names (`same@2` vs current wording) — SPEC.md OPEN 1.
+  Protocol *N* is settled at 20 (OPEN 3, 2026-09-16).
 
 **Settled:** the public definition of sameness is the canonical-form
 fingerprint. The 14-property list describes *how* two forms differ; it is not

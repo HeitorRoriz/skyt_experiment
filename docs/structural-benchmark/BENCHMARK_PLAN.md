@@ -340,15 +340,16 @@ change the runtime.
 
 Remaining before the spec can be called v1:
 
-1. SPEC OPEN 1 / 3: metric names (`same@2`?) and a single *N* (recommended 20,
-   CV 10/10). The harness uses the recommended names in JSON and requires
-   `--n` rather than silently doubling the HumanEval+ pilot.
+1. SPEC OPEN 1: public metric names (`same@2` / `same@2|cert` recommended).
+   JSON already uses those keys. OPEN 3 is **settled**: protocol *N*=20,
+   CV 10/10. The 30-task HumanEval+ tables stay *N*=10 as a labeled
+   `pilot_grid`.
 2. SPEC OPEN 4: stamp `relation_version` into the *generation-record* schema
    (needs approval to touch `src/` artifacts). Overlay reports already carry
    `relation_version: 2`.
-3. Phase 3 coverage (full 164-task set) if a baseline table is wanted.
-   That is paid API and a new output tree. Discriminant census on the stored
-   30-task pilot is already done.
+3. Phase 3 coverage: runner is `python -m benchmark full` (164 tasks, *N*=20,
+   new tree `outputs/benchmark/humaneval_plus_164_n20`). Default refuses
+   API. Discriminant census on the stored 30-task pilot is already done.
 4. Phase 5 human agreement is still later.
 
 Sameness is settled as the **canonical-form fingerprint**; the other 13

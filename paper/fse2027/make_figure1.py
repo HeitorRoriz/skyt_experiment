@@ -13,7 +13,7 @@ import numpy as np
 
 OUT = Path(__file__).resolve().parent
 
-# Cluster-bootstrap 95% CIs (percent). Pairwise in panel (a) is MEASURE 1.
+# Cluster-bootstrap 95% CIs (percent). Panel (a) is same@2.
 MSR_E2E = {
     "raw": (61.0, 46.3, 74.6),
     "first_valid": (67.4, 56.2, 78.5),
@@ -28,14 +28,14 @@ SBES_E2E = {
 # HumanEval+ 30-task overall (task-mean, cluster by task).
 HE_PRE = {
     "Plus pass": (80.5, 66.5, 92.8),
-    "Pairwise (e2e)": (56.9, 44.6, 68.8),
-    "Pairwise (cert.)": (67.4, 57.2, 77.0),
+    "same@2": (56.9, 44.6, 68.8),
+    "same@2|cert": (67.4, 57.2, 77.0),
     "Match to human": (9.3, 0.0, 20.4),
 }
 HE_POST = {
     "Plus pass": (83.3, 70.0, 95.0),
-    "Pairwise (e2e)": (75.9, 63.1, 87.4),
-    "Pairwise (cert.)": (90.5, 84.3, 95.5),
+    "same@2": (75.9, 63.1, 87.4),
+    "same@2|cert": (90.5, 84.3, 95.5),
     "Match to human": (9.3, 0.0, 20.4),
 }
 
@@ -100,8 +100,8 @@ def main() -> None:
 
     ax.set_xticks(x, group_names)
     ax.set_ylim(0, 100)
-    ax.set_ylabel("End-to-end pairwise exact-match (%)")
-    ax.set_title("(a) Contracted tasks (MEASURE 1)")
+    ax.set_ylabel("same@2 (%)")
+    ax.set_title("(a) Contracted tasks")
     ax.legend(frameon=False, loc="upper left", ncols=1)
     ax.set_axisbelow(True)
     ax.yaxis.grid(True, linestyle=":", linewidth=0.5, color="#bbbbbb")
@@ -140,10 +140,10 @@ def main() -> None:
         capsize=2.0,
         error_kw={"elinewidth": 0.7, "capthick": 0.7},
     )
-    ax.set_xticks(x, ["Plus\npass", "Pairwise\n(e2e)", "Pairwise\n(cert.)", "Match to\nhuman"])
+    ax.set_xticks(x, ["Plus\npass", "same@2", "same@2\n|cert", "Match to\nhuman"])
     ax.set_ylim(0, 100)
     ax.set_ylabel("Task-mean (%)")
-    ax.set_title("(b) HumanEval+ 30-task run")
+    ax.set_title("(b) SameEval on HumanEval+ (30 tasks)")
     ax.legend(frameon=False, loc="upper left")
     ax.set_axisbelow(True)
     ax.yaxis.grid(True, linestyle=":", linewidth=0.5, color="#bbbbbb")

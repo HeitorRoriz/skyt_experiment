@@ -167,24 +167,23 @@ Rules:
 
 ## 5. Sample size *N*
 
-Two values currently coexist: *N*=10 on the HumanEval+ pilot, *N*=20 on the
-contract corpus. The spec needs one.
+**Settled 2026-09-16: *N* = 20.** Cross-validation split is 10/10
+(`train_size = N/2`).
 
-**Recommendation: *N* = 20.**
+- Gives \(\binom{20}{2} = 190\) pairs per config rather than 45 at *N*=10.
+- The canon, when one is picked for SKYT, is chosen from ten draws, not five.
+- Modal mass is less downward-biased than at *N*=10.
 
-- Gives \(\binom{20}{2} = 190\) pairs per config rather than 45.
-- Makes the cross-validation split symmetric: train 10, hold out 10. At *N*=10
-  the current `train_size = min(10, N // 2)` gives a 5/5 split, so the canon is
-  chosen from five draws, which is a thin basis.
-- Modal mass is biased low at small *N*; *N*=20 reduces that.
+The HumanEval+ **30-task pilot** remains *N*=10. That grid is a labeled
+historical run (`pilot_grid`), not the protocol. New overlay runs use *N*=20.
+Do not pool *N*=10 and *N*=20 numbers.
 
-Worth being clear about what *N* does **not** buy: interval width on the
-headline is driven by the **number of tasks**, because the bootstrap clusters on
-tasks. Going from *N*=10 to *N*=20 doubles generation cost and tightens
-within-task estimates, but it does not substantially narrow the published CIs.
-More tasks do that.
-
-**OPEN 3.** Confirm *N*=20, and confirm the CV split follows as 10/10.
+What *N* does **not** buy: interval width on the headline is driven by the
+**number of tasks**, because the bootstrap clusters on tasks. Going from
+*N*=10 to *N*=20 doubles generation cost and tightens within-task estimates,
+but it does not substantially narrow the published CIs. More tasks do that.
+That is why the next overlay run is 164 tasks at *N*=20, not another 30-task
+slice at *N*=20.
 
 ## 6. Versioning
 
@@ -235,5 +234,5 @@ stronger position than being the whole table.
 | --- | --- | --- |
 | 1 | Metric names | **OPEN.** Recommendation: `same@2` and `same@2\|cert` |
 | 2 | Relation definition | **Settled.** Canonical-form fingerprint; 13 properties are diagnostics |
-| 3 | Fix *N* | **OPEN.** Recommendation: 20, CV split 10/10 |
+| 3 | Fix *N* | **Settled.** *N*=20, CV 10/10. HumanEval+ 30-task pilot stays *N*=10 as a labeled historical grid. |
 | 4 | Stamp `relation_version` into artifacts | **OPEN** for generation jsonl / `src/`. Overlay reports already stamp `2`. |

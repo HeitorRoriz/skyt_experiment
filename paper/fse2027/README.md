@@ -1,6 +1,23 @@
-# FSE 2027 — Structural Repeatability Protocol (draft)
+# FSE 2027 — SameEval (draft)
 
-**Working title:** *A Structural Repeatability Protocol for LLM-Generated Code*
+**Working title:** *SameEval: Measuring Whether Regenerated Code Is the Same Program*
+
+**Venue:** ACM International Conference on the Foundations of Software Engineering (FSE 2027), Research track  
+**Conference:** 12–16 July 2027, Shenzhen, China  
+**Deadline:** 2 October 2026 (AoE)
+
+**Authors (draft):** Heitor Roriz (Massimus), Nasser Jazdi-Motlagh (University of Stuttgart), Vicente Lucena (UFAM)
+
+This folder is the **ACM Research draft** for Paper 1. It is not camera-ready.
+**SameEval** is the overlay (prompts + tests + `same@2`).
+**SKYT** is the repair tool scored as one row on that overlay.
+
+W5 (2026-09-16): SameEval rename; drafting box removed from the PDF; discriminant
+moved to Results B; MEASURE 1 / freeze voice stripped.
+W4: fingerprint identity, `same@2` names, Level 3 as function substitution.
+Table 1/2 headlines still 56.9% / 67.4%.
+Remaining: anonymization, dry-run against SETTLED §10 / REVIEWER_FRY_AFTER_164.md.
+164-task overlay: runner ready (`python -m benchmark full`); paid pass not started.
 
 **Venue:** ACM International Conference on the Foundations of Software Engineering (FSE 2027), Research track  
 **Conference:** 12–16 July 2027, Shenzhen, China  
@@ -12,30 +29,30 @@ This folder is the **ACM Research draft** for Paper 1. It is not camera-ready.
 W1/W3 (2026-09-02): Methods, Results A/B, Threats.
 W2 (2026-09-03): measured-cost motivation, related work, Figure 1
 (`fig1.pdf` / `make_figure1.py`), artifact pins + 30-task id appendix.
-Remaining: anonymization, dry-run against SETTLED §10 / REVIEWER_FRY_AFTER_164.md,
-164-task run only if Heitor asks.
+Remaining: anonymization, dry-run against SETTLED §10 / REVIEWER_FRY_AFTER_164.md.
+164-task overlay: runner ready (`python -m benchmark full`); paid pass not started.
 
 ---
 
 ## Paper identity (locked)
 
-- **One** Research paper. Framing is **ruler-first**: the primary contribution is a structural repeatability *protocol*. Empirical scores (our corpus, SKYT pre/post, later HumanEval) are the first numbers on that ruler.
+- **One** Research paper. Framing is **SameEval-first**: the primary contribution is the overlay (`same@2` / `same@2|cert`). SKYT is a tool scored on that overlay. Empirical scores (contract corpus, SKYT pre/post, HumanEval+) are the first numbers.
 - **Not in this paper:** Code DNA / generation-by-construction (IVR track).
 - **Scopes never merged:** SBES (12 contracts · 3,600 generations) and MSR (15 tasks · 4,500 generations) are reported separately wherever our corpus appears.
 - The 3 `*_strict` variants were **not** validated against a real MISRA C / NASA P10 rule set. Keep that caveat; do not claim compliance.
 
 ### Contributions (C1–C4, order in abstract/intro)
 
-1. **C1 — Protocol (the ruler).** N regenerations + structural distance + reports (pairwise U-statistics, certified modal mass, optional churn).
-2. **C2 — Anchor-aware measurement.** First-compliant vs Certified Consensus Canon; measure ≠ policy.
-3. **C3 — Empirical finding.** Corrected behavioral–structural gap on our corpus; replication on HumanEval (pilot → full).
-4. **C4 — Tool score.** SKYT under pairwise / honest metrics (pre/post).
+1. **C1 — SameEval (the overlay).** N regenerations + canonical-form fingerprint + `same@2` / `same@2|cert`.
+2. **C2 — Anchor-aware measurement.** First-compliant vs Certified Consensus; measure ≠ policy. SKYT is the tool, not the benchmark.
+3. **C3 — Empirical finding.** Corrected behavioral–structural gap on our corpus; replication on HumanEval+ (30-task tables in this PDF).
+4. **C4 — Tool score.** SKYT under `same@2` (pre/post), disclosed as in-sample substitution on HumanEval+.
 
 ---
 
 ## Methods freeze (do not reopen while drafting)
 
-Copied into `main.tex` as a drafting box. Remove that box before submission.
+Copied into `main.tex` as LaTeX comments only. Do not print a drafting box.
 
 ```
 SELECT   Certified Consensus Canon
@@ -63,7 +80,9 @@ WILSON   Only: frozen canon + independent evaluation batch
 
 **Headline numbers are not** the Gate 0 “74.3% split-half medoid.” That figure is policy/sensitivity language only.
 
-**Normalization** = existing 14-property distance-0 equivalence (including α-renaming where the contract allows). Not a new unnamed normalizer.
+**Normalization** = canonical-form fingerprint (docstrings stripped; bound
+names α-renamed when the contract allows). The other 13 SKYT properties are
+diagnostics, not identity conjuncts. Not a new unnamed normalizer.
 
 Do **not** quote the MSR-era “66pp gap” without the **anchor-relative** qualifier. The Gate 0 corrected gap on the same 220 configs is **~22–24pp** (behavioral ~98.4% vs modal ~76.5% / split-half medoid ~74.3%). Recompute under this freeze before any camera-ready table.
 
@@ -99,8 +118,14 @@ pdflatex main
 - **W1/W3 (2026-09-02):** Methods + Results A (Gate 0 both policies) + Results B (30-task HumanEval+) + Threats. Numbers from `outputs/gate0/`, `outputs/gate0_consensus/`, `outputs/humaneval_plus/pilot/table1.json`, `outputs/humaneval_plus/pilot_skyt/table2.json`.
 - **W2 (2026-09-03):** related work (clones / GumTree / AlphaCode / APR); Figure 1;
   artifact pins in the PDF; intro outline.
+- **W4 (2026-09-16):** fingerprint identity, `same@2` names, discriminant
+  census table, Level 3 as function substitution. Table 1/2 headlines still
+  56.9% / 67.4%.
+- **W5 (2026-09-16):** SameEval name and title; PDF drafting box gone; discriminant in Results B.
+  Table 1/2 headlines still 56.9% / 67.4%.
 - **W4 leftover:** anonymization, internal dry-run against reviewer fries, submit by 1 Oct 2026.
-  Full 164 only if explicitly requested. Pillar 3 citation sweep (SLSA / reproducible builds)
-  is still a co-author task.
+  164-task overlay runner: `python -m benchmark full` (*N* locked 20, new tree,
+  `--allow-api` required). Not executed until the paid pass. Pillar 3 citation
+  sweep (SLSA / reproducible builds) is still a co-author task.
 
 Do not commit this folder unless explicitly asked.

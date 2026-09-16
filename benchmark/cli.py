@@ -78,6 +78,19 @@ def main(argv: Optional[List[str]] = None) -> int:
     run.add_argument("--force", action="store_true")
     run.add_argument("--from-dir")
 
+    full = sub.add_parser(
+        "full",
+        help="164 HumanEval+ tasks at protocol N=20 (blocked unless --allow-api).",
+    )
+    full.add_argument("--allow-api", action="store_true")
+    full.add_argument(
+        "--out-dir",
+        default=str(Path("outputs") / "benchmark" / "humaneval_plus_164_n20"),
+    )
+    full.add_argument("--from-dir")
+    full.add_argument("--force", action="store_true")
+    full.add_argument("--n-bootstrap", type=int, default=10000)
+
     args = parser.parse_args(argv)
 
     if args.cmd == "pins":
@@ -216,6 +229,82 @@ def main(argv: Optional[List[str]] = None) -> int:
                 "relation_version": RELATION_VERSION,
                 "inference_version": report.get("inference_version"),
                 "pilot_grid": report.get("pilot_grid"),
+                "slices": report["slices"],
+                "report_path": str(path),
+            }
+        )
+        return 0
+
+    if args.cmd == "full":
+        out_dir = Path(args.out_dir)
+        try:
+            assert_writable(out_dir)
+        except ProtectedOutputError as exc:
+            print(exc, file=sys.stderr)
+            return 3
+        sketch = estimate_grid(
+            n_tasks=164,
+            n=FROZEN_PROTOCOL_N,
+            from_dir=Path(args.from_dir) if args.from_dir else None,
+        )
+        print(
+            "Cost sketch (list price, not an invoice): "
+            f"USD {sketch['usd_estimate']} for {sketch['n_calls']} calls "
+            f"(164 tasks, N={FROZEN_PROTOCOL_N}, relation_version={RELATION_VERSION}).",
+            file=sys.stderr,
+        )
+        json.dump(sketch, sys.stderr, indent=2, default=str)
+        sys.stderr.write("\n")
+        if not args.allow_api:
+            print(
+                "Refusing to call an LLM. Re-run with --allow-api after pins pass.",
+                file=sys.stderr,
+            )
+            return 3
+        try:
+            pins = require_verified_pins()
+        except PinMismatch as exc:
+            print(exc, file=sys.stderr)
+            return 2
+        from benchmarks.humaneval_plus.generate import ApiSpendBlocked
+        from benchmarks.humaneval_plus.run import run_full
+        from benchmarks.humaneval_plus.sandbox import SandboxUnavailable
+
+        try:
+            grid = run_full(
+                out_dir=out_dir,
+                n=FROZEN_PROTOCOL_N,
+                allow_api=True,
+                force=bool(args.force),
+            )
+        except (ApiSpendBlocked, SandboxUnavailable, ValueError) as exc:
+            print(exc, file=sys.stderr)
+            return 3
+        try:
+            report = score_directory(
+                out_dir, out_dir, n_bootstrap=args.n_bootstrap
+            )
+        except (ProtectedOutputError, ValueError) as exc:
+            print(exc, file=sys.stderr)
+            return 3
+        report["pins"] = pins
+        report["cost_sketch"] = sketch
+        report["grid"] = {
+            "n_configs": grid["n_configs"],
+            "n_tasks": grid["n_tasks"],
+            "n": grid["n"],
+        }
+        path = out_dir / "benchmark_report.json"
+        path.write_text(json.dumps(report, indent=2, default=str), encoding="utf-8")
+        _warn_pilot_grid(report)
+        _print_json(
+            {
+                "schema": SCHEMA,
+                "relation_version": RELATION_VERSION,
+                "inference_version": report.get("inference_version"),
+                "pilot_grid": report.get("pilot_grid"),
+                "n_tasks": grid["n_tasks"],
+                "n": grid["n"],
                 "slices": report["slices"],
                 "report_path": str(path),
             }

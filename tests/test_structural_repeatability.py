@@ -240,11 +240,26 @@ def test_cli_refuses_api_and_frozen_dirs(tmp_path):
         )
         == 3
     )
+    assert main(["full"]) == 3
+    assert (
+        main(
+            [
+                "full",
+                "--allow-api",
+                "--out-dir",
+                str(REPO_ROOT / "outputs" / "gate0"),
+            ]
+        )
+        == 3
+    )
 
 
 def test_estimate_and_writable_helper(tmp_path):
     payload = estimate_grid(n_tasks=30, n=10)
     assert payload["n_calls"] == 30 * 2 * 2 * 10
+    full = estimate_grid(n_tasks=164, n=20)
+    assert full["n_calls"] == 164 * 2 * 2 * 20
+    assert "Protocol N is 20" in full["note"]
     frozen = tmp_path / "pilot"
     frozen.mkdir()
     with pytest.raises(ProtectedOutputError):

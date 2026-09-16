@@ -96,7 +96,8 @@ def estimate_grid(
         "usd_estimate": round(usd_total, 4),
         "by_model": by_model,
         "note": (
-            "List-price sketch, not an invoice. SPEC OPEN 3 is still open: "
-            "this command does not silently switch N from 10 to 20."
+            "List-price sketch, not an invoice. Protocol N is 20 "
+            "(SPEC OPEN 3 settled 2026-09-16). This command does not "
+            "silently rewrite stored N=10 jsonl."
         ),
     }
