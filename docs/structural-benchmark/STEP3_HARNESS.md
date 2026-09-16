@@ -1,27 +1,31 @@
 # Step 3 — overlay harness (one command)
 
-Date: 2026-09-14. Phase 2 of [`BENCHMARK_PLAN.md`](BENCHMARK_PLAN.md).
-
-This step packages the measuring tape. It does **not** pick a canon and it
-does **not** run SKYT repair. Historical trees stay frozen.
+**Cut 2026-09-14.** The measuring tape is `python -m benchmark`. That scorer
+uses **canonical-form fingerprint only**: no Certified Consensus, no CV, no
+match-to-human. SKYT repair/Table 2 live under `skyt/`. Frozen runtime remains
+`src/` + `agents/`.
 
 ```
-python -m benchmarks.structural_repeatability pins
-python -m benchmarks.structural_repeatability estimate --n-tasks 30 --n 10
-python -m benchmarks.structural_repeatability score \
+python -m benchmark pins
+python -m benchmark estimate --n-tasks 30 --n 10
+python -m benchmark score \
     --source-dir outputs/humaneval_plus/pilot \
-    --out-dir outputs/structural_repeatability/pilot_v2
-python -m benchmarks.structural_repeatability run \
+    --out-dir outputs/benchmark/pilot_v2
+python -m benchmark discriminant \
+    --source-dir outputs/humaneval_plus/pilot \
+    --out-dir outputs/benchmark/discriminant
+python -m benchmark run \
     --task-id HumanEval/23 --model gpt-4o-mini --temperature 0.0 --n 10 \
-    --out-dir outputs/structural_repeatability/dryrun \
+    --out-dir outputs/benchmark/dryrun \
     --allow-api
 ```
 
-Tests (no API):
+`run` may use any of the 164 HumanEval+ ids and does **not** write SKYT
+summaries (`analyze=False`). The historical HumanEval+ CLI still defaults to
+the 30-task pilot lock. Never write into `outputs/humaneval_plus/pilot/` or
+`outputs/gate0/`.
 
-```
-python -m pytest tests/test_structural_repeatability.py
-```
+Reports are **one slice per model × temperature**, not one mixed headline.
 
 ---
 
@@ -41,7 +45,15 @@ not silently switch the HumanEval+ pilot from N=10 to N=20. `--n` is required
 on `run` and `estimate`.
 
 Intervals are a task-clustered bootstrap (seed `20260723`), not a binomial
-interval over pairs.
+interval over pairs. Schema `structural-repeatability-benchmark-v2` stamps an
+`inference` block and `pilot_grid`. Details:
+[`STEP5_INFERENCE.md`](STEP5_INFERENCE.md).
+
+Tests (no API):
+
+```
+python -m pytest tests/test_structural_repeatability.py tests/test_structural_validity.py tests/test_benchmark_inference.py
+```
 
 ---
 

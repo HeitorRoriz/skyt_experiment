@@ -243,17 +243,24 @@ datasets into one headline.
 
 ## Phase 4 — Discriminant validity against existing tools
 
-Show the relation is not a rebranding of something standard. Compare, on the
-same pairs:
+**Implemented 2026-09-14.** Census, not F1. Write-up:
+[`STEP4_DISCRIMINANT.md`](STEP4_DISCRIMINANT.md).
 
-- exact string equality (strict lower bound)
-- normalized AST hash alone (the Phase 0.1 comparison, formalised)
-- tree edit distance (GumTree-style AST differencing)
-- a clone detector across Type-1/2/3 clones
+```
+python -m benchmark discriminant \
+    --source-dir outputs/humaneval_plus/pilot \
+    --out-dir outputs/benchmark/discriminant
+```
 
-Report where the verdicts disagree and argue why this relation's disagreements
-are the desirable ones. Without this, the fair criticism is "AST hashing with
-extra dials."
+On plus-certified pairs (same task × model × temperature), independent judges
+cast a bit against the fingerprint tape. Off-diagonals are the result. Do not
+retune `TYPE3_TED_RATIO` (0.30, documented, not fitted) or `same()` to hide
+them. TED is Zhang–Shasha on labeled Python ASTs (GumTree-*style* labels, not
+the Java GumTree matcher). No LLM-as-judge, no CodeBERT, and none of these
+bits is written into `same()`.
+
+The remaining Phase 4 *numbers* are a no-API rescore of stored jsonl. Human
+labels are still Phase 5.
 
 ---
 
@@ -315,9 +322,21 @@ dead/`pass` = different. 22/22 metamorphic cases pass. On stored data the
 relation is exactly the canonical AST fingerprint (13 of 14 properties inert,
 zero binding pairs, zero false merges, zero transitivity violations).
 
-**Step 3 is done** (2026-09-14). Overlay CLI:
-[`STEP3_HARNESS.md`](STEP3_HARNESS.md). Measuring tape only; no canon, no
-repair, no writes into frozen trees.
+**The cut is done** (2026-09-14). Benchmark package: `benchmark/`
+(`python -m benchmark`). Fingerprint-only `same()`, per model × temperature
+slices, no canon/CV/human on that path. SKYT repair/Table 2: `skyt/`. Frozen
+runtime still `src/` + `agents/`.
+
+**Phase 4 discriminant is implemented** (2026-09-14). Census vs string /
+parse-unparse / raw AST / Type-2 / TED=0 / Type-3 (`TED/size < 0.30`). Command:
+`python -m benchmark discriminant`. Details:
+[`STEP4_DISCRIMINANT.md`](STEP4_DISCRIMINANT.md). Running it on stored jsonl is
+no-API; that produces the disagreement table, not a retuned `same()`.
+
+**Inference lock is done** (2026-09-16). Task-cluster bootstrap + jackknife
+sensitivity, schema v2, `pilot_grid` warning. Write-up:
+[`STEP5_INFERENCE.md`](STEP5_INFERENCE.md). Does not retune Table 1/2 or
+change the runtime.
 
 Remaining before the spec can be called v1:
 
@@ -327,8 +346,10 @@ Remaining before the spec can be called v1:
 2. SPEC OPEN 4: stamp `relation_version` into the *generation-record* schema
    (needs approval to touch `src/` artifacts). Overlay reports already carry
    `relation_version: 2`.
-3. Phase 3 coverage (full task set) is next if a baseline table is wanted.
-   That is paid API and a new output tree.
+3. Phase 3 coverage (full 164-task set) if a baseline table is wanted.
+   That is paid API and a new output tree. Discriminant census on the stored
+   30-task pilot is already done.
+4. Phase 5 human agreement is still later.
 
 Sameness is settled as the **canonical-form fingerprint**; the other 13
 properties are diagnostics, not identity conjuncts. The FSE draft's

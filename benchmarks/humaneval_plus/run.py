@@ -65,6 +65,8 @@ def run_config(
     out_dir: Path,
     allow_api: bool,
     force: bool = False,
+    restrict_to_pilot: bool = True,
+    analyze: bool = True,
 ) -> Dict[str, Any]:
     if not allow_api:
         raise ApiSpendBlocked(
@@ -72,7 +74,7 @@ def run_config(
         )
     if n < 2:
         raise ValueError("Need at least two generations")
-    if task_id not in PILOT_TASK_IDS:
+    if restrict_to_pilot and task_id not in PILOT_TASK_IDS:
         raise ValueError(f"{task_id} is not a preregistered pilot task")
     if not docker_available():
         raise SandboxUnavailable("Docker is required to score HumanEval+")
@@ -152,7 +154,7 @@ def run_config(
         records.append(record)
         dump_jsonl(jsonl_path, records)
 
-    analysis = analyze_records(records)
+    analysis = analyze_records(records) if analyze else None
     summary = {
         "schema": "skyt-humaneval-plus-summary-v1",
         "created_at": datetime.now(timezone.utc).isoformat(),
@@ -165,9 +167,9 @@ def run_config(
         "no_style_contracts": True,
         "jsonl": str(jsonl_path),
         "analysis": analysis,
-        "n_base_passed": analysis["n_base_passed"],
-        "n_plus_certified": analysis["n_plus_certified"],
-        "consensus_index": analysis["consensus_index"],
+        "n_base_passed": None if analysis is None else analysis["n_base_passed"],
+        "n_plus_certified": None if analysis is None else analysis["n_plus_certified"],
+        "consensus_index": None if analysis is None else analysis["consensus_index"],
         "usd_estimate": sum(
             usd_for_usage(model, record.get("usage")) or 0.0 for record in records
         ),

@@ -58,7 +58,9 @@ reported. Previously "certified pairwise exact-match".
   forbidden: it rises when the pass rate falls.
 - Pairs share generations, so they are not independent binomial trials. These
   are U-statistics; intervals come from an **equal-cluster bootstrap over
-  tasks**, never a binomial interval over pairs.
+  tasks**, never a binomial interval over pairs. Locked in code:
+  [`STEP5_INFERENCE.md`](STEP5_INFERENCE.md) (schema v2, jackknife sensitivity,
+  `pilot_grid` warning).
 - Aggregate as task-mean (each task weighted equally), not pair-weighted.
 - Report every denominator: tasks entering each column, and tasks dropped as
   undefined.
@@ -81,8 +83,10 @@ repeatability rate — no parallel to existing usage).
 
 Two programs are the same iff their **canonical forms** are identical.
 
-The canonical form is produced by `_canonicalize` in
-`src/foundational_properties.py`:
+The canonical form is produced by `benchmark.relation.canonicalize`
+(shared with `src/foundational_properties.py` so SKYT still sees the same
+tree). Identity for the **benchmark** is fingerprint equality. SKYT still
+averages 14 properties for the tool.
 
 1. Parse to an AST. Unparseable code is *structurally invalid* and can never
    certify, but it stays in the `same@2` denominator.
@@ -101,9 +105,13 @@ fingerprint**. The other 13 properties remain published diagnostics that
 describe *how* two forms differ when they differ. They are not conjuncts of
 sameness: on stored data they never change a same/different verdict.
 
-This is a wording change for the papers, not a second runtime change. The
-implementation still extracts all 14; the spec says only the fingerprint
-defines identity.
+The benchmark scorer implements fingerprint equality (`benchmark.relation.same`).
+SKYT still extracts all 14 properties for the tool's distance; those 13 extras
+are not identity conjuncts for the benchmark.
+
+Clone-like and TED judges live in `benchmark.discriminant` and are a
+**comparison**, not part of this definition. See
+[`STEP4_DISCRIMINANT.md`](STEP4_DISCRIMINANT.md).
 
 ### 3.2 Normal form — what is ignored
 

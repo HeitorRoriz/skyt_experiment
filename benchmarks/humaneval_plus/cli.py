@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any, Dict, List
 
 from .analyze import analyze_records
-from .repair import repair_pilot
+from skyt.humaneval_repair import repair_pilot
 from .run import run_config, run_pilot
 from .dataset import load_smoke_problems
 from .generate import ApiSpendBlocked, generate_completion

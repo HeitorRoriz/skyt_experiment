@@ -510,24 +510,17 @@ class FoundationalProperties:
     def _canonicalize(self, tree: ast.AST, code: str) -> Tuple[ast.AST, str]:
         """Apply the contract's comparison policy once, before extraction.
 
-        Docstrings are prose rather than form, so they are stripped. When the
-        naming policy is flexible the whole tree is α-renamed here instead of
-        inside a single distance branch, so no property can treat identifier
-        choice as structure. Under a strict policy identifiers are preserved.
-
-        The source string is regenerated from the canonical tree so that
-        extractors reading ``code`` stay consistent with those reading ``tree``.
+        Shared with the benchmark tape (``benchmark.relation.canonicalize``)
+        so SKYT's 14-property distance and the benchmark fingerprint see the
+        same canonical tree. Identity for the *benchmark* is fingerprint
+        equality; this class still averages 14 properties for the tool.
         """
-        tree = self._strip_docstrings(tree)
-        if self._should_use_alpha_renaming(self.contract):
-            tree = self._alpha_rename_ast(tree)
-        try:
-            code = ast.unparse(ast.fix_missing_locations(tree))
-            tree = ast.parse(code)
-        except Exception:
-            # Keep the canonical tree even if it cannot be round-tripped.
-            pass
-        return tree, code
+        from benchmark.relation import canonicalize
+
+        return canonicalize(
+            tree,
+            flexible_naming=self._should_use_alpha_renaming(self.contract),
+        )
 
     @staticmethod
     def _strip_docstrings(tree: ast.AST) -> ast.AST:
