@@ -23,6 +23,7 @@
 \newcommand{\etal}{et~al.}
 \newcommand{\ie}{i.e.,}
 \newcommand{\eg}{e.g.,}
+\newcommand{\blank}{[\,--\,]}
 
 \begin{document}
 
@@ -57,34 +58,55 @@
 \renewcommand{\shorttitle}{\sameeval{}: Is Regenerated Code the Same Program?}
 
 \begin{abstract}
-Code-generation benchmarks ask whether a generated program passes tests.
-Real pipelines regenerate the same prompt.
-A passer therefore does not tell us whether the next passer is the same
-program.
+Code-generation benchmarks ask whether a generated program passes tests, but
+real development workflows often regenerate code from the same prompt.
+Functional correctness alone therefore leaves an important question
+unanswered: if generation is repeated, will the next correct program have
+the same structure?
+This matters particularly in embedded, high-assurance, and safety-critical
+software engineering, where generated code may be subject to strict
+constraints, traceability, review, qualification, and certification
+processes, and structurally different outputs can increase downstream
+verification effort even when they exhibit equivalent test behavior.
 
-We introduce \sameeval{}, an overlay on an existing task set: same prompts,
-same tests, plus a form report.
-For each task, model, and temperature it draws $N$ independent generations,
-runs the existing oracle, maps parseable programs to canonical-form
-fingerprints, and reports \sameat{}: the probability that two draws both
-pass \emph{and} share a form.
-Failures stay in the denominator, so \sameat{} is not a pass rate.
-\sameatc{} asks the same identity question among passers only.
+We introduce \sameeval{}, a benchmark overlay for measuring structural
+repeatability in LLM-generated code, and use it to evaluate \skyt{}, a
+contract- and oracle-guided approach for making code generation more
+repeatable.
+For each task, model, and temperature configuration, \sameeval{} draws
+multiple independent generations, evaluates them using the existing
+behavioral oracle, maps structurally valid outputs to canonical-form
+fingerprints, and reports \sameat{}, a pairwise U-statistic estimating the
+probability that two independent generations both certify and have the
+same canonical form.
+We additionally report \sameatc{}, which measures structural agreement
+among successful generations.
 
-On all 164 HumanEval+ tasks at $N{=}20$ (13{,}120 generations) the plus-test
-pass rate is 83.3\%, \sameat{} is 65.9\%, and \sameatc{} is 76.6\%.
-Certified pairs still disagree on form.
-The weakest cell is GPT-4o-mini at $T{=}0.7$: plus-pass 79.7\%, \sameat{}
-48.9\%.
+Across 13{,}120 baseline generations covering all 164 HumanEval+ tasks
+and 656 task--model--temperature cells ($N{=}20$), the plus-test pass
+rate is 83.3\%, while \sameat{} is only 65.9\% and \sameatc{} is 76.6\%.
+Thus, even when independently generated programs are behaviorally
+correct, a substantial fraction do not converge to the same program form.
+The weakest configuration, GPT-4o-mini at $T{=}0.7$, achieves 79.7\%
+plus-test pass rate but only 48.9\% \sameat{}.
 
-\sameeval{} does not pick a canon.
-\skyt{} does: it stores the most reproduced verified form (Certified
-Consensus) and rewrites later generations toward that form.
-We evaluate \skyt{} held-out on the same 13{,}120 stored programs (no new
-LLM calls): pick the form on 10 draws, repair the other 10, and score
-\sameat{} on the rewritten slice.
-Held-out \skyt{}: plus-pass \mbox{--.--}\%, \sameat{} \mbox{--.--}\%,
-\sameatc{} \mbox{--.--}\%.
+We then evaluate \skyt{} across all 656 HumanEval+
+task--model--temperature cells, obtaining \blank{} generations.
+\skyt{} increases \sameat{} from \blank\% to \blank\%
+(\blank{} percentage points / \blank{}$\times$) and \sameatc{} from
+\blank\% to \blank\%, while achieving a plus-test pass rate of
+\blank\%.
+Under \blank{}, \skyt{} raises \sameat{} from \blank\% to \blank\%.
+These results show that structural variability in LLM-generated code can
+be systematically measured and reduced through explicit contracts,
+verification, and canonicalization.
+
+\sameeval{} adds a complementary dimension to code-generation evaluation:
+whether repeated successful generations converge to the same program form.
+\skyt{} provides a concrete mechanism for improving that property, with
+particular relevance to embedded, high-assurance, and safety-critical
+development, where reducing generation variability can simplify
+downstream verification and assurance.
 \end{abstract}
 
 \keywords{LLM code generation, structural repeatability, \sameeval{}, \skyt{}, \sameat{}, HumanEval+}
