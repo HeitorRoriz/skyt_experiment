@@ -11,7 +11,7 @@ import json
 from copy import deepcopy
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 from src.canon_selection import select_certified_consensus_canon
 from src.canon_system import CanonSystem
@@ -131,6 +131,118 @@ def _paired_counts(pre: List[Dict[str, Any]], post: List[Dict[str, Any]]) -> Dic
     return {"n_regressions": regressions, "n_rescues": rescues}
 
 
+def apply_certified_consensus_repair(
+    *,
+    records: List[Dict[str, Any]],
+    selected: Optional[Dict[str, Any]],
+    contract_dict: Dict[str, Any],
+    oracle: CachedPlusOracle,
+    canon_store: Path,
+    consensus_index: Optional[int] = None,
+    canon_system: Optional[CanonSystem] = None,
+    transformer: Optional[Any] = None,
+) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]], int, int]:
+    """Repair ``records`` toward a frozen Certified Consensus form.
+
+    ``selected`` is None when the train (or in-sample) slice has no certified
+    consensus: copy the records and skip the transformer. Does not change how
+    the runtime picks a canon.
+    """
+    repaired_records: List[Dict[str, Any]] = []
+    transform_rows: List[Dict[str, Any]] = []
+    n_rolled_back = 0
+    n_transformed = 0
+    if selected is None:
+        for record in records:
+            updated = deepcopy(record)
+            updated["stitched_code_pre"] = record.get("stitched_code")
+            updated["oracle_pre"] = record.get("oracle")
+            updated["repair_applied"] = False
+            updated["repair_policy"] = "certified_consensus"
+            updated["skipped_reason"] = "no_certified_consensus_canon"
+            updated["rolled_back"] = False
+            repaired_records.append(updated)
+            transform_rows.append(
+                {
+                    "run_index": record.get("run_index"),
+                    "transformation_needed": False,
+                    "skipped_reason": "no_certified_consensus_canon",
+                }
+            )
+        return repaired_records, transform_rows, n_transformed, n_rolled_back
+
+    if EnhancedCodeTransformer is None:
+        raise RuntimeError("EnhancedCodeTransformer import failed")
+    codes = [record.get("stitched_code") or "" for record in records]
+    if canon_system is None:
+        canon_system = CanonSystem(str(canon_store))
+    contract = Contract(contract_dict)
+    canon_system.create_canon(
+        contract,
+        selected["code"],
+        oracle_result=selected["oracle_result"],
+        require_oracle_pass=True,
+    )
+    if transformer is None:
+        transformer = EnhancedCodeTransformer(canon_system, enable_agents=False)
+        transformer.enable_agents = False
+    else:
+        transformer.enable_agents = False
+    contract_id = contract_dict["id"]
+    index = selected["index"] if consensus_index is None else consensus_index
+    for record, code in zip(records, codes):
+        comparison = canon_system.compare_to_canon(contract_id, code, contract_dict)
+        updated = deepcopy(record)
+        updated["stitched_code_pre"] = code
+        updated["oracle_pre"] = record.get("oracle")
+        updated["repair_policy"] = "certified_consensus"
+        updated["consensus_index"] = index
+        if comparison.get("is_identical"):
+            updated["repair_applied"] = False
+            updated["rolled_back"] = False
+            updated["skipped_reason"] = "already_consensus_form"
+            repaired_records.append(updated)
+            transform_rows.append(
+                {
+                    "run_index": record.get("run_index"),
+                    "transformation_needed": False,
+                    "final_distance": comparison.get("distance"),
+                    "skipped_reason": "already_consensus_form",
+                }
+            )
+            continue
+        result = transformer.transform_to_canon(
+            code,
+            contract_id,
+            contract=contract_dict,
+            oracle_system=oracle,
+        )
+        candidate = result.get("transformed_code", code)
+        post = oracle.run_oracle_tests(candidate, contract_dict)
+        if result.get("rolled_back"):
+            n_rolled_back += 1
+        if candidate != code and not result.get("rolled_back"):
+            n_transformed += 1
+        updated["stitched_code"] = candidate
+        updated = attach_oracle(updated, post)
+        updated["repair_applied"] = candidate != code
+        updated["rolled_back"] = bool(result.get("rolled_back"))
+        updated["transformation_level"] = result.get("transformation_level")
+        updated["transformations_applied"] = result.get("transformations_applied")
+        repaired_records.append(updated)
+        transform_rows.append(
+            {
+                "run_index": record.get("run_index"),
+                "transformation_needed": True,
+                "transformation_success": result.get("success"),
+                "rolled_back": result.get("rolled_back"),
+                "final_distance": result.get("final_distance"),
+                "transformation_level": result.get("transformation_level"),
+            }
+        )
+    return repaired_records, transform_rows, n_transformed, n_rolled_back
+
+
 def repair_config(
     *,
     source_dir: Path,
@@ -176,90 +288,16 @@ def repair_config(
     for code, record in zip(codes, records):
         oracle.seed_from_record(code, record)
 
-    repaired_records: List[Dict[str, Any]] = []
-    transform_rows: List[Dict[str, Any]] = []
-    n_rolled_back = 0
-    n_transformed = 0
-
-    if selected is None:
-        for record in records:
-            updated = deepcopy(record)
-            updated["stitched_code_pre"] = record.get("stitched_code")
-            updated["oracle_pre"] = record.get("oracle")
-            updated["repair_applied"] = False
-            updated["repair_policy"] = "certified_consensus"
-            updated["skipped_reason"] = "no_certified_consensus_canon"
-            updated["rolled_back"] = False
-            repaired_records.append(updated)
-            transform_rows.append(
-                {
-                    "run_index": record.get("run_index"),
-                    "transformation_needed": False,
-                    "skipped_reason": "no_certified_consensus_canon",
-                }
-            )
-    else:
-        contract = Contract(contract_dict)
-        canon_system = CanonSystem(str(out_dir / "canon" / stem))
-        canon_system.create_canon(
-            contract,
-            selected["code"],
-            oracle_result=selected["oracle_result"],
-            require_oracle_pass=True,
+    repaired_records, transform_rows, n_transformed, n_rolled_back = (
+        apply_certified_consensus_repair(
+            records=records,
+            selected=selected,
+            contract_dict=contract_dict,
+            oracle=oracle,
+            canon_store=out_dir / "canon" / stem,
+            consensus_index=None if selected is None else selected["index"],
         )
-        transformer = EnhancedCodeTransformer(canon_system, enable_agents=False)
-        transformer.enable_agents = False
-        contract_id = contract_dict["id"]
-        for record, code in zip(records, codes):
-            comparison = canon_system.compare_to_canon(contract_id, code, contract_dict)
-            updated = deepcopy(record)
-            updated["stitched_code_pre"] = code
-            updated["oracle_pre"] = record.get("oracle")
-            updated["repair_policy"] = "certified_consensus"
-            updated["consensus_index"] = selected["index"]
-            if comparison.get("is_identical"):
-                updated["repair_applied"] = False
-                updated["rolled_back"] = False
-                updated["skipped_reason"] = "already_consensus_form"
-                repaired_records.append(updated)
-                transform_rows.append(
-                    {
-                        "run_index": record.get("run_index"),
-                        "transformation_needed": False,
-                        "final_distance": comparison.get("distance"),
-                        "skipped_reason": "already_consensus_form",
-                    }
-                )
-                continue
-            result = transformer.transform_to_canon(
-                code,
-                contract_id,
-                contract=contract_dict,
-                oracle_system=oracle,
-            )
-            candidate = result.get("transformed_code", code)
-            post = oracle.run_oracle_tests(candidate, contract_dict)
-            if result.get("rolled_back"):
-                n_rolled_back += 1
-            if candidate != code and not result.get("rolled_back"):
-                n_transformed += 1
-            updated["stitched_code"] = candidate
-            updated = attach_oracle(updated, post)
-            updated["repair_applied"] = candidate != code
-            updated["rolled_back"] = bool(result.get("rolled_back"))
-            updated["transformation_level"] = result.get("transformation_level")
-            updated["transformations_applied"] = result.get("transformations_applied")
-            repaired_records.append(updated)
-            transform_rows.append(
-                {
-                    "run_index": record.get("run_index"),
-                    "transformation_needed": True,
-                    "transformation_success": result.get("success"),
-                    "rolled_back": result.get("rolled_back"),
-                    "final_distance": result.get("final_distance"),
-                    "transformation_level": result.get("transformation_level"),
-                }
-            )
+    )
 
     out_dir.mkdir(parents=True, exist_ok=True)
     dump_jsonl(jsonl_path, repaired_records)

@@ -242,6 +242,9 @@ def test_repair_cli_does_not_require_allow_api():
     with pytest.raises(SystemExit) as exc:
         main(["repair", "--help"])
     assert exc.value.code == 0
+    with pytest.raises(SystemExit) as exc:
+        main(["heldout", "--help"])
+    assert exc.value.code == 0
 
 
 def test_run_full_refuses_wrong_n_frozen_dir_and_api(tmp_path):

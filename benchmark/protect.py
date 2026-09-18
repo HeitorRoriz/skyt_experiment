@@ -11,6 +11,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 PROTECTED_RELATIVE = (
     Path("outputs") / "gate0",
     Path("outputs") / "humaneval_plus" / "pilot",
+    Path("outputs") / "benchmark" / "humaneval_plus_164_n20",
 )
 
 

@@ -2,6 +2,7 @@
 
 from skyt.humaneval_repair import *  # noqa: F403
 from skyt.humaneval_repair import (  # noqa: F401
+    apply_certified_consensus_repair,
     humaneval_repair_contract,
     repair_config,
     repair_pilot,

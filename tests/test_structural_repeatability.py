@@ -70,8 +70,12 @@ def test_pins_and_schema():
 def test_protected_trees():
     assert is_protected(REPO_ROOT / "outputs" / "gate0")
     assert is_protected(REPO_ROOT / "outputs" / "humaneval_plus" / "pilot" / "nested")
+    assert is_protected(REPO_ROOT / "outputs" / "benchmark" / "humaneval_plus_164_n20")
     assert not is_protected(REPO_ROOT / "outputs" / "gate0_consensus")
     assert not is_protected(REPO_ROOT / "outputs" / "benchmark")
+    assert not is_protected(
+        REPO_ROOT / "outputs" / "benchmark" / "humaneval_plus_164_n20_skyt_heldout"
+    )
 
 
 def test_score_is_fingerprint_only_and_sliced(tmp_path):

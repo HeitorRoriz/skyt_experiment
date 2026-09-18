@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any, Dict, List
 
 from .analyze import analyze_records
+from skyt.humaneval_heldout import HELDOUT_OUT, OVERLAY_SOURCE, heldout_grid
 from skyt.humaneval_repair import repair_pilot
 from .run import run_config, run_full, run_pilot
 from .dataset import load_smoke_problems
@@ -163,6 +164,25 @@ def main(argv: List[str] | None = None) -> int:
     repair.add_argument("--n", type=int, default=int(MANIFEST["n_pilot"]))
     repair.add_argument("--limit", type=int, default=0)
     repair.add_argument("--force", action="store_true")
+    heldout = sub.add_parser(
+        "heldout",
+        help=(
+            "Held-out SKYT rewrite on stored N=20 overlay gens (no API). "
+            "Train 10 pick Certified Consensus, repair the other 10, "
+            "fingerprint same@2 on the test slice."
+        ),
+    )
+    heldout.add_argument("--source-dir", default=str(OVERLAY_SOURCE))
+    heldout.add_argument("--out-dir", default=str(HELDOUT_OUT))
+    heldout.add_argument("--n", type=int, default=int(MANIFEST["n_full"]))
+    heldout.add_argument("--train-size", type=int, default=10)
+    heldout.add_argument("--n-splits", type=int, default=20)
+    heldout.add_argument("--seed", type=int, default=20260723)
+    heldout.add_argument("--limit", type=int, default=0)
+    heldout.add_argument("--force", action="store_true")
+    heldout.add_argument("--task-id")
+    heldout.add_argument("--model")
+    heldout.add_argument("--temperature", type=float)
     full = sub.add_parser(
         "full",
         help="164-task overlay at protocol N=20 (blocked unless --allow-api).",
@@ -303,6 +323,43 @@ def main(argv: List[str] | None = None) -> int:
                 "n_regressions": report["n_regressions"],
                 "n_rescues": report["n_rescues"],
                 "n_failed_configs": report["n_failed_configs"],
+            },
+            sys.stdout,
+            indent=2,
+            default=str,
+        )
+        sys.stdout.write("\n")
+        return 0 if report["n_failed_configs"] == 0 else 2
+
+    if args.cmd == "heldout":
+        try:
+            report = heldout_grid(
+                source_dir=Path(args.source_dir),
+                out_dir=Path(args.out_dir),
+                n=int(args.n),
+                train_size=int(args.train_size),
+                n_splits=int(args.n_splits),
+                seed=int(args.seed),
+                force=bool(args.force),
+                limit=int(args.limit),
+                task_id=args.task_id,
+                model=args.model,
+                temperature=args.temperature,
+            )
+        except (SandboxUnavailable, ValueError) as exc:
+            print(exc, file=sys.stderr)
+            return 3
+        post = (report.get("post") or {}).get("all") or {}
+        json.dump(
+            {
+                "n_configs": report["n_configs"],
+                "n_scored": report["n_scored"],
+                "n_failed_configs": report["n_failed_configs"],
+                "n_splits": report["n_splits"],
+                "post_same_at_2": post.get("same_at_2"),
+                "post_same_at_2_given_cert": post.get("same_at_2_given_cert"),
+                "post_plus_pass": post.get("plus_pass"),
+                "out_dir": report["out_dir"],
             },
             sys.stdout,
             indent=2,

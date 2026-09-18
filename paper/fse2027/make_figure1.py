@@ -1,7 +1,8 @@
 """Figure 1 for the FSE 2027 draft.
 
-Hardcoded from Gate 0 CSVs and HumanEval+ 164-task benchmark_report.json
-(2026-09-18). Does not read outputs/, call APIs, or touch the runtime.
+Hardcoded from HumanEval+ 164-task benchmark_report.json (2026-09-18).
+Does not read outputs/, call APIs, or touch the runtime.
+No SBES/MSR numbers.
 """
 
 from __future__ import annotations
@@ -13,30 +14,33 @@ import numpy as np
 
 OUT = Path(__file__).resolve().parent
 
-# Cluster-bootstrap 95% CIs (percent). Panel (a) is same@2.
-MSR_E2E = {
-    "raw": (61.0, 46.3, 74.6),
-    "first_valid": (67.4, 56.2, 78.5),
-    "consensus": (77.2, 60.7, 90.4),
-}
-SBES_E2E = {
-    "raw": (67.5, 53.8, 81.0),
-    "first_valid": (73.2, 61.4, 84.4),
-    "consensus": (85.2, 73.2, 93.3),
-}
+# Per-cell task-mean with cluster-bootstrap 95% CIs (percent).
+CELLS = [
+    ("GPT-4o-mini\nT=0.0", {
+        "Plus pass": (79.3, 73.0, 85.2),
+        "same@2": (74.3, 67.9, 80.3),
+        "same@2|cert": (93.7, 90.9, 96.1),
+    }),
+    ("GPT-4o-mini\nT=0.7", {
+        "Plus pass": (79.7, 73.8, 85.2),
+        "same@2": (48.9, 42.9, 54.8),
+        "same@2|cert": (60.0, 54.4, 65.6),
+    }),
+    ("Claude 4.5\nT=0.0", {
+        "Plus pass": (87.4, 82.3, 92.1),
+        "same@2": (77.3, 71.8, 82.5),
+        "same@2|cert": (88.4, 85.0, 91.5),
+    }),
+    ("Claude 4.5\nT=0.7", {
+        "Plus pass": (86.8, 81.6, 91.7),
+        "same@2": (63.2, 57.4, 68.9),
+        "same@2|cert": (72.2, 67.0, 77.1),
+    }),
+]
 
-# HumanEval+ 164-task overlay overall (task-mean, cluster by task, N=20).
-HE_164 = {
-    "Plus pass": (83.3, 78.3, 88.0),
-    "same@2": (65.9, 61.0, 70.6),
-    "same@2|cert": (76.6, 73.0, 80.0),
-}
-
-RAW = "#4C78A8"
-FIRST = "#F58518"
-CONS = "#54A24B"
-PRE = "#4C78A8"
-POST = "#54A24B"
+PASS = "#4C78A8"
+SAME = "#F58518"
+CERT = "#54A24B"
 
 
 def _yerr(point: float, lo: float, hi: float) -> tuple[float, float]:
@@ -61,27 +65,25 @@ def main() -> None:
         }
     )
 
-    fig, axes = plt.subplots(1, 2, figsize=(7.15, 3.05), layout="constrained")
-
-    ax = axes[0]
-    policies = ("raw", "first_valid", "consensus")
-    labels = ("Raw", "First-valid", "Consensus")
-    colors = (RAW, FIRST, CONS)
-    hatches = ("", "//", "xx")
-    x = np.arange(2)
+    fig, ax = plt.subplots(figsize=(7.15, 3.05), layout="constrained")
+    labels = [name for name, _ in CELLS]
+    x = np.arange(len(labels))
     width = 0.24
+    metrics = (
+        ("Plus pass", PASS, ""),
+        ("same@2|cert", CERT, "xx"),
+        ("same@2", SAME, "//"),
+    )
     offsets = (-width, 0.0, width)
-    group_names = ("MSR (15 tasks)", "SBES (12 contracts)")
-    series = (MSR_E2E, SBES_E2E)
 
-    for i, (key, lab, color, hatch) in enumerate(zip(policies, labels, colors, hatches)):
-        vals = [series[g][key][0] for g in range(2)]
-        err = np.array([_yerr(*series[g][key]) for g in range(2)]).T
+    for offset, (metric, color, hatch) in zip(offsets, metrics):
+        vals = [cell[metric][0] for _, cell in CELLS]
+        err = np.array([_yerr(*cell[metric]) for _, cell in CELLS]).T
         ax.bar(
-            x + offsets[i],
+            x + offset,
             vals,
             width,
-            label=lab,
+            label=metric,
             color=color,
             edgecolor="black",
             linewidth=0.4,
@@ -91,38 +93,11 @@ def main() -> None:
             error_kw={"elinewidth": 0.7, "capthick": 0.7},
         )
 
-    ax.set_xticks(x, group_names)
-    ax.set_ylim(0, 100)
-    ax.set_ylabel("same@2 (%)")
-    ax.set_title("(a) Contracted tasks")
-    ax.legend(frameon=False, loc="upper left", ncols=1)
-    ax.set_axisbelow(True)
-    ax.yaxis.grid(True, linestyle=":", linewidth=0.5, color="#bbbbbb")
-
-    ax = axes[1]
-    metrics = list(HE_164.keys())
-    x = np.arange(len(metrics))
-    width = 0.55
-    vals = [HE_164[m][0] for m in metrics]
-    err = np.array([_yerr(*HE_164[m]) for m in metrics]).T
-
-    ax.bar(
-        x,
-        vals,
-        width,
-        label="overlay",
-        color=PRE,
-        edgecolor="black",
-        linewidth=0.4,
-        yerr=err,
-        capsize=2.0,
-        error_kw={"elinewidth": 0.7, "capthick": 0.7},
-    )
-    ax.set_xticks(x, ["Plus\npass", "same@2", "same@2\n|cert"])
+    ax.set_xticks(x, labels)
     ax.set_ylim(0, 100)
     ax.set_ylabel("Task-mean (%)")
-    ax.set_title("(b) SameEval on HumanEval+ (164 tasks, N=20)")
-    ax.legend(frameon=False, loc="upper left")
+    ax.set_title("SameEval on HumanEval+ (164 tasks, N=20)")
+    ax.legend(frameon=False, loc="lower left")
     ax.set_axisbelow(True)
     ax.yaxis.grid(True, linestyle=":", linewidth=0.5, color="#bbbbbb")
 
