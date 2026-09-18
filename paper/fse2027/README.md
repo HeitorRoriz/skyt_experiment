@@ -10,14 +10,10 @@
 
 This folder is the **ACM Research draft** for Paper 1. It is not camera-ready.
 **SameEval** is the overlay (prompts + tests + `same@2`).
-**SKYT** is the repair tool scored as one row on that overlay.
+**SKYT** is the repair tool scored on contracted tasks only.
 
-W5 (2026-09-16): SameEval rename; drafting box removed from the PDF; discriminant
-moved to Results B; MEASURE 1 / freeze voice stripped.
-W4: fingerprint identity, `same@2` names, Level 3 as function substitution.
-Table 1/2 headlines still 56.9% / 67.4%.
+HumanEval+ in this PDF is the 164-task N=20 overlay (plus-pass 83.3% / same@2 65.9% / same@2|cert 76.6%).
 Remaining: anonymization, dry-run against SETTLED §10 / REVIEWER_FRY_AFTER_164.md.
-164-task overlay: runner ready (`python -m benchmark full`); paid pass not started.
 
 **Venue:** ACM International Conference on the Foundations of Software Engineering (FSE 2027), Research track  
 **Conference:** 12–16 July 2027, Shenzhen, China  
@@ -28,9 +24,9 @@ Remaining: anonymization, dry-run against SETTLED §10 / REVIEWER_FRY_AFTER_164.
 This folder is the **ACM Research draft** for Paper 1. It is not camera-ready.
 W1/W3 (2026-09-02): Methods, Results A/B, Threats.
 W2 (2026-09-03): measured-cost motivation, related work, Figure 1
-(`fig1.pdf` / `make_figure1.py`), artifact pins + 30-task id appendix.
+(`fig1.pdf` / `make_figure1.py`), artifact pins.
 Remaining: anonymization, dry-run against SETTLED §10 / REVIEWER_FRY_AFTER_164.md.
-164-task overlay: runner ready (`python -m benchmark full`); paid pass not started.
+164-task overlay scored 2026-09-18.
 
 ---
 
@@ -45,8 +41,8 @@ Remaining: anonymization, dry-run against SETTLED §10 / REVIEWER_FRY_AFTER_164.
 
 1. **C1 — SameEval (the overlay).** N regenerations + canonical-form fingerprint + `same@2` / `same@2|cert`.
 2. **C2 — Anchor-aware measurement.** First-compliant vs Certified Consensus; measure ≠ policy. SKYT is the tool, not the benchmark.
-3. **C3 — Empirical finding.** Corrected behavioral–structural gap on our corpus; replication on HumanEval+ (30-task tables in this PDF).
-4. **C4 — Tool score.** SKYT under `same@2` (pre/post), disclosed as in-sample substitution on HumanEval+.
+3. **C3 — Empirical finding.** Corrected behavioral–structural gap on our corpus; replication on HumanEval+ (Table 1 = 164 tasks N=20 overlay).
+4. **C4 — Tool score.** SKYT under `same@2` (pre/post) on contracted tasks only. Not reported on HumanEval+.
 
 ---
 
@@ -115,17 +111,15 @@ pdflatex main
 ## Writing sequence
 
 - **W0:** scaffold + freeze box.
-- **W1/W3 (2026-09-02):** Methods + Results A (Gate 0 both policies) + Results B (30-task HumanEval+) + Threats. Numbers from `outputs/gate0/`, `outputs/gate0_consensus/`, `outputs/humaneval_plus/pilot/table1.json`, `outputs/humaneval_plus/pilot_skyt/table2.json`.
+- **W1/W3 (2026-09-02):** Methods + Results A (Gate 0 both policies) + Results B + Threats.
 - **W2 (2026-09-03):** related work (clones / GumTree / AlphaCode / APR); Figure 1;
   artifact pins in the PDF; intro outline.
-- **W4 (2026-09-16):** fingerprint identity, `same@2` names, discriminant
-  census table, Level 3 as function substitution. Table 1/2 headlines still
-  56.9% / 67.4%.
-- **W5 (2026-09-16):** SameEval name and title; PDF drafting box gone; discriminant in Results B.
-  Table 1/2 headlines still 56.9% / 67.4%.
-- **W4 leftover:** anonymization, internal dry-run against reviewer fries, submit by 1 Oct 2026.
-  164-task overlay runner: `python -m benchmark full` (*N* locked 20, new tree,
-  `--allow-api` required). Not executed until the paid pass. Pillar 3 citation
-  sweep (SLSA / reproducible builds) is still a co-author task.
+- **W4 (2026-09-16):** fingerprint identity, `same@2` names.
+- **W5 (2026-09-16):** SameEval name and title; PDF drafting box gone.
+- **W6 (2026-09-18):** HumanEval+ table = 164-task N=20 overlay from
+  `outputs/benchmark/humaneval_plus_164_n20/benchmark_report.json`
+  (13,120 gens / 656 configs). SKYT is contracted-task only.
+- **Leftover:** anonymization, internal dry-run against reviewer fries, submit by 1 Oct 2026.
+  Pillar 3 citation sweep (SLSA / reproducible builds) is still a co-author task.
 
 Do not commit this folder unless explicitly asked.

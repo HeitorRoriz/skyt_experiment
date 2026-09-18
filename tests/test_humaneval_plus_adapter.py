@@ -261,3 +261,37 @@ def test_run_full_refuses_wrong_n_frozen_dir_and_api(tmp_path):
         )
     with pytest.raises(ApiSpendBlocked):
         run_full(out_dir=tmp_path / "humaneval_plus_164_n20", n=20, allow_api=False)
+
+
+def test_incomplete_task_ids_skips_complete_configs(tmp_path):
+    from benchmarks.humaneval_plus.provenance import dump_jsonl
+    from benchmarks.humaneval_plus.run import incomplete_task_ids
+
+    complete = tmp_path / "HumanEval_0_gpt_4o_mini_temp0.0.jsonl"
+    dump_jsonl(complete, [{"run_index": i} for i in range(20)])
+    (tmp_path / "HumanEval_0_gpt_4o_mini_temp0.0_summary.json").write_text(
+        "{}", encoding="utf-8"
+    )
+    missing = incomplete_task_ids(
+        tmp_path,
+        n=20,
+        task_ids=["HumanEval/0", "HumanEval/10"],
+        models=["gpt-4o-mini"],
+        temperatures=[0.0, 0.7],
+    )
+    assert missing == ["HumanEval/0", "HumanEval/10"]
+    dump_jsonl(
+        tmp_path / "HumanEval_0_gpt_4o_mini_temp0.7.jsonl",
+        [{"run_index": i} for i in range(20)],
+    )
+    (tmp_path / "HumanEval_0_gpt_4o_mini_temp0.7_summary.json").write_text(
+        "{}", encoding="utf-8"
+    )
+    missing = incomplete_task_ids(
+        tmp_path,
+        n=20,
+        task_ids=["HumanEval/0", "HumanEval/10"],
+        models=["gpt-4o-mini"],
+        temperatures=[0.0, 0.7],
+    )
+    assert missing == ["HumanEval/10"]

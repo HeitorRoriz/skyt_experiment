@@ -11,8 +11,9 @@ import json
 import multiprocessing
 import signal
 import sys
+import time
 import traceback
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 
 def _jsonable(value: Any) -> Any:
@@ -138,19 +139,38 @@ def main() -> int:
     process = context.Process(target=_evaluate, args=(job, child), daemon=True)
     process.start()
     child.close()
-    process.join(timeout)
+    # Drain the pipe while waiting. HumanEval/14 all_prefixes (and similar)
+    # returns large list payloads; if the parent only join()s, the child
+    # blocks on send once the pipe buffer fills and the job looks idle
+    # at 0% CPU until the wall timeout.
+    result: Optional[Dict[str, Any]] = None
+    deadline = time.monotonic() + timeout
+    while True:
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            break
+        if parent.poll(min(0.5, remaining)):
+            result = parent.recv()
+            process.join(1)
+            break
+        if not process.is_alive():
+            if parent.poll(0.1):
+                result = parent.recv()
+            break
     if process.is_alive():
         process.kill()
         process.join(1)
-        result = {"status": "timeout", "passed": False, "error": "timeout"}
-    elif parent.poll():
-        result = parent.recv()
-    else:
-        result = {
-            "status": "fail",
-            "passed": False,
-            "error": f"worker exit {process.exitcode}",
-        }
+        if result is None:
+            result = {"status": "timeout", "passed": False, "error": "timeout"}
+    elif result is None:
+        if parent.poll():
+            result = parent.recv()
+        else:
+            result = {
+                "status": "fail",
+                "passed": False,
+                "error": f"worker exit {process.exitcode}",
+            }
     with open(result_path, "w", encoding="utf-8") as handle:
         json.dump(result, handle)
     return 0

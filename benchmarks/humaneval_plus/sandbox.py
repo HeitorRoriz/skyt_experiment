@@ -149,6 +149,45 @@ def _plus_input_too_expensive(args: Any) -> bool:
     return False
 
 
+def _eval_canonical_plus_inputs(
+    code: str,
+    entry_point: str,
+    inputs: List[Any],
+) -> List[Any]:
+    """Run canonical plus inputs in Docker batches so a 60s wall clock cannot
+    kill the whole extra-test suite (HumanEval/10, /14, /21, /38, /93, /113).
+    """
+    outputs: List[Any] = []
+    remaining = list(inputs)
+    batch_size = 80
+    batch_timeout = max(int(MANIFEST["sandbox"]["timeout_seconds"]), 180)
+    while remaining:
+        batch = remaining[:batch_size]
+        result = run_sandboxed_job(
+            {
+                "mode": "eval_inputs",
+                "code": code,
+                "entry_point": entry_point,
+                "inputs": batch,
+                "timeout_seconds": batch_timeout,
+                "case_timeout_seconds": 1,
+            }
+        )
+        got = result.get("outputs") or []
+        if result.get("passed") and len(got) == len(batch):
+            outputs.extend(got)
+            remaining = remaining[len(batch) :]
+            batch_size = 80
+            continue
+        if batch_size > 20:
+            batch_size = max(20, batch_size // 2)
+            continue
+        outputs.extend([{"__timeout__": True} for _ in batch])
+        remaining = remaining[len(batch) :]
+        batch_size = 80
+    return outputs
+
+
 def plus_cases_for_problem(problem: Dict[str, Any]) -> List[Dict[str, Any]]:
     """Return args/expected pairs for HumanEval+ extras.
 
@@ -173,21 +212,12 @@ def plus_cases_for_problem(problem: Dict[str, Any]) -> List[Dict[str, Any]]:
     )
     if not stitch.get("parse_ok") or not stitch.get("has_entry_point"):
         raise SandboxUnavailable("canonical solution did not stitch")
-    timeout = max(int(MANIFEST["sandbox"]["timeout_seconds"]), 60)
-    result = run_sandboxed_job(
-        {
-            "mode": "eval_inputs",
-            "code": stitch["stitched_code"],
-            "entry_point": problem["entry_point"],
-            "inputs": inputs,
-            "timeout_seconds": timeout,
-            "case_timeout_seconds": 1,
-        }
+    outputs = _eval_canonical_plus_inputs(
+        stitch["stitched_code"], problem["entry_point"], inputs
     )
-    outputs = result.get("outputs") or []
-    if not result.get("passed") or len(outputs) != len(inputs):
+    if len(outputs) != len(inputs):
         raise SandboxUnavailable(
-            f"canonical plus eval failed: {result.get('error')}"
+            f"canonical plus eval failed: expected {len(inputs)} outputs, got {len(outputs)}"
         )
     cases = []
     for args, expected in zip(inputs, outputs):
@@ -218,6 +248,9 @@ def evaluate_stitched(
     base = run_sandboxed_job(base_job)
     plus_cases: List[Dict[str, Any]] = plus_cases_for_problem(problem)
     if plus_cases:
+        plus_timeout = timeout
+        if timeout_seconds is None:
+            plus_timeout = max(timeout, min(180, 20 + len(plus_cases) // 5))
         plus = run_sandboxed_job(
             {
                 "mode": "cases",
@@ -225,7 +258,7 @@ def evaluate_stitched(
                 "entry_point": problem["entry_point"],
                 "cases": plus_cases,
                 "atol": problem.get("atol") or 0,
-                "timeout_seconds": timeout,
+                "timeout_seconds": plus_timeout,
                 "case_timeout_seconds": 2,
             }
         )

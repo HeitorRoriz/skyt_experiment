@@ -12,6 +12,7 @@ from .protect import assert_writable
 from .relation import RELATION_VERSION, fingerprint
 from .report import build_report
 from .schema import SCHEMA
+from benchmarks.humaneval_plus.provenance import atomic_write_json
 
 
 ConfigKey = Tuple[str, str, float]
@@ -72,17 +73,30 @@ def score_directory(
     *,
     n_bootstrap: int = 10000,
     flexible_naming: bool = True,
+    skip_incomplete: bool = False,
+    require_n: int | None = None,
+    report_filename: str = "benchmark_report.json",
 ) -> Dict[str, Any]:
     assert_writable(out_dir)
     source_dir = source_dir.expanduser().resolve()
     out_dir = out_dir.expanduser().resolve()
     grouped = load_configs(source_dir)
     rows = []
+    n_skipped_incomplete = 0
     for (task_id, model, temperature), records in sorted(grouped.items()):
-        ordered = sorted(records, key=lambda item: int(item.get("run_index", 0)))
-        if len(ordered) < 2:
+        by_index = {
+            int(record.get("run_index", -1)): record for record in records
+        }
+        ordered = [by_index[key] for key in sorted(by_index)]
+        if require_n is not None and set(range(require_n)).issubset(by_index):
+            ordered = [by_index[index] for index in range(require_n)]
+        elif require_n is not None or len(ordered) < 2:
+            if skip_incomplete:
+                n_skipped_incomplete += 1
+                continue
             raise ValueError(
                 f"{task_id} {model} T={temperature}: need at least two generations"
+                + (f" and N={require_n}" if require_n is not None else "")
             )
         prints = [
             fingerprint(
@@ -113,14 +127,29 @@ def score_directory(
                 "relation_version": RELATION_VERSION,
             }
         )
-    report = build_report(
-        rows,
-        n_bootstrap=n_bootstrap,
-        source_dir=str(source_dir),
-    )
+    if not rows:
+        report = {
+            "schema": SCHEMA,
+            "relation_version": RELATION_VERSION,
+            "n_complete_configs": 0,
+            "n_skipped_incomplete": n_skipped_incomplete,
+            "slices": [],
+            "configs": [],
+            "pilot_grid": True,
+            "source_dir": str(source_dir),
+            "note": "No complete configs to score yet.",
+        }
+    else:
+        report = build_report(
+            rows,
+            n_bootstrap=n_bootstrap,
+            source_dir=str(source_dir),
+        )
+        report["n_complete_configs"] = len(rows)
+        report["n_skipped_incomplete"] = n_skipped_incomplete
     out_dir.mkdir(parents=True, exist_ok=True)
-    report_path = out_dir / "benchmark_report.json"
-    report_path.write_text(json.dumps(report, indent=2, default=str), encoding="utf-8")
+    report_path = out_dir / report_filename
+    atomic_write_json(report_path, report)
     report["report_path"] = str(report_path)
     report["schema"] = SCHEMA
     return report

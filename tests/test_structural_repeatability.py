@@ -281,3 +281,42 @@ def test_estimate_and_writable_helper(tmp_path):
         )
         == 0
     )
+
+
+def test_dump_jsonl_replaces_atomically(tmp_path):
+    path = tmp_path / "cell.jsonl"
+    dump_jsonl(path, [{"run_index": 0, "ok": True}])
+    dump_jsonl(path, [{"run_index": 0, "ok": True}, {"run_index": 1, "ok": True}])
+    lines = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    assert [row["run_index"] for row in lines] == [0, 1]
+    assert not list(tmp_path.glob("*.tmp"))
+
+
+def test_score_skips_incomplete_when_asked(tmp_path):
+    problems = load_smoke_problems()
+    add = problems[0]
+    good = stitch_solution(add["prompt"], "    return a + b\n", "add")
+    source = tmp_path / "source"
+    source.mkdir()
+    dump_jsonl(
+        source / "complete.jsonl",
+        [
+            _record("Smoke/add", "smoke-local", 0.0, 0, good, True),
+            _record("Smoke/add", "smoke-local", 0.0, 1, good, True),
+        ],
+    )
+    dump_jsonl(
+        source / "partial.jsonl",
+        [_record("Smoke/id", "smoke-local", 0.7, 0, good, True)],
+    )
+    report = score_directory(
+        source,
+        tmp_path / "out",
+        n_bootstrap=50,
+        skip_incomplete=True,
+        require_n=2,
+        report_filename="sameeval_checkpoint.json",
+    )
+    assert report["n_complete_configs"] == 1
+    assert report["n_skipped_incomplete"] == 1
+    assert (tmp_path / "out" / "sameeval_checkpoint.json").exists()

@@ -89,6 +89,11 @@ def main(argv: Optional[List[str]] = None) -> int:
     )
     full.add_argument("--from-dir")
     full.add_argument("--force", action="store_true")
+    full.add_argument(
+        "--only-incomplete",
+        action="store_true",
+        help="Retry configs that lack a complete jsonl+summary. Do not regenerate finished ones.",
+    )
     full.add_argument("--n-bootstrap", type=int, default=10000)
 
     args = parser.parse_args(argv)
@@ -276,6 +281,7 @@ def main(argv: Optional[List[str]] = None) -> int:
                 n=FROZEN_PROTOCOL_N,
                 allow_api=True,
                 force=bool(args.force),
+                only_incomplete=bool(args.only_incomplete),
             )
         except (ApiSpendBlocked, SandboxUnavailable, ValueError) as exc:
             print(exc, file=sys.stderr)

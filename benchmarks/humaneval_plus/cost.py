@@ -172,7 +172,9 @@ def collect_cost(out_dir: Path) -> Dict[str, Any]:
 
 def write_cost_ledger(out_dir: Path) -> Dict[str, Any]:
     payload = collect_cost(out_dir)
+    from .provenance import atomic_write_json
+
     path = out_dir / "cost_ledger.json"
-    path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    atomic_write_json(path, payload)
     payload["ledger_path"] = str(path)
     return payload

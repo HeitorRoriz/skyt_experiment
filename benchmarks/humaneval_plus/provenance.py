@@ -4,7 +4,10 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
+import time
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any, Dict, Optional
 
 from .prompts import (
@@ -81,7 +84,43 @@ def attach_oracle(record: Dict[str, Any], oracle: Dict[str, Any]) -> Dict[str, A
     return updated
 
 
+def _replace_with_retry(tmp: Path, destination: Path, attempts: int = 12) -> None:
+    """os.replace can hit WinError 5 while OneDrive or an editor holds the dest."""
+    last: Optional[Exception] = None
+    for attempt in range(attempts):
+        try:
+            os.replace(tmp, destination)
+            return
+        except PermissionError as exc:
+            last = exc
+            time.sleep(0.25 * (attempt + 1))
+    assert last is not None
+    raise last
+
+
+def atomic_write_text(path, text: str) -> None:
+    """Write then fsync, then replace, so a power loss keeps the previous file."""
+    destination = Path(path)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    tmp = destination.with_name(destination.name + ".tmp")
+    with tmp.open("w", encoding="utf-8") as handle:
+        handle.write(text)
+        handle.flush()
+        os.fsync(handle.fileno())
+    _replace_with_retry(tmp, destination)
+
+
+def atomic_write_json(path, payload: Any) -> None:
+    atomic_write_text(path, json.dumps(payload, indent=2, default=str) + "\n")
+
+
 def dump_jsonl(path, records) -> None:
-    with open(path, "w", encoding="utf-8") as handle:
+    destination = Path(path)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    tmp = destination.with_name(destination.name + ".tmp")
+    with tmp.open("w", encoding="utf-8") as handle:
         for record in records:
             handle.write(json.dumps(record, default=str) + "\n")
+        handle.flush()
+        os.fsync(handle.fileno())
+    _replace_with_retry(tmp, destination)

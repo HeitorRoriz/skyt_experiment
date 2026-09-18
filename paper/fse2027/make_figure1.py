@@ -1,7 +1,7 @@
 """Figure 1 for the FSE 2027 draft.
 
-Hardcoded from Gate 0 CSVs and HumanEval+ table1.json / table2.json
-(2026-09-02). Does not read outputs/, call APIs, or touch the runtime.
+Hardcoded from Gate 0 CSVs and HumanEval+ 164-task benchmark_report.json
+(2026-09-18). Does not read outputs/, call APIs, or touch the runtime.
 """
 
 from __future__ import annotations
@@ -25,18 +25,11 @@ SBES_E2E = {
     "consensus": (85.2, 73.2, 93.3),
 }
 
-# HumanEval+ 30-task overall (task-mean, cluster by task).
-HE_PRE = {
-    "Plus pass": (80.5, 66.5, 92.8),
-    "same@2": (56.9, 44.6, 68.8),
-    "same@2|cert": (67.4, 57.2, 77.0),
-    "Match to human": (9.3, 0.0, 20.4),
-}
-HE_POST = {
-    "Plus pass": (83.3, 70.0, 95.0),
-    "same@2": (75.9, 63.1, 87.4),
-    "same@2|cert": (90.5, 84.3, 95.5),
-    "Match to human": (9.3, 0.0, 20.4),
+# HumanEval+ 164-task overlay overall (task-mean, cluster by task, N=20).
+HE_164 = {
+    "Plus pass": (83.3, 78.3, 88.0),
+    "same@2": (65.9, 61.0, 70.6),
+    "same@2|cert": (76.6, 73.0, 80.0),
 }
 
 RAW = "#4C78A8"
@@ -107,43 +100,28 @@ def main() -> None:
     ax.yaxis.grid(True, linestyle=":", linewidth=0.5, color="#bbbbbb")
 
     ax = axes[1]
-    metrics = list(HE_PRE.keys())
+    metrics = list(HE_164.keys())
     x = np.arange(len(metrics))
-    width = 0.36
-    pre_vals = [HE_PRE[m][0] for m in metrics]
-    post_vals = [HE_POST[m][0] for m in metrics]
-    pre_err = np.array([_yerr(*HE_PRE[m]) for m in metrics]).T
-    post_err = np.array([_yerr(*HE_POST[m]) for m in metrics]).T
+    width = 0.55
+    vals = [HE_164[m][0] for m in metrics]
+    err = np.array([_yerr(*HE_164[m]) for m in metrics]).T
 
     ax.bar(
-        x - width / 2,
-        pre_vals,
+        x,
+        vals,
         width,
-        label="Table 1 (raw)",
+        label="overlay",
         color=PRE,
         edgecolor="black",
         linewidth=0.4,
-        yerr=pre_err,
+        yerr=err,
         capsize=2.0,
         error_kw={"elinewidth": 0.7, "capthick": 0.7},
     )
-    ax.bar(
-        x + width / 2,
-        post_vals,
-        width,
-        label="Table 2 (SKYT)",
-        color=POST,
-        edgecolor="black",
-        linewidth=0.4,
-        hatch="xx",
-        yerr=post_err,
-        capsize=2.0,
-        error_kw={"elinewidth": 0.7, "capthick": 0.7},
-    )
-    ax.set_xticks(x, ["Plus\npass", "same@2", "same@2\n|cert", "Match to\nhuman"])
+    ax.set_xticks(x, ["Plus\npass", "same@2", "same@2\n|cert"])
     ax.set_ylim(0, 100)
     ax.set_ylabel("Task-mean (%)")
-    ax.set_title("(b) SameEval on HumanEval+ (30 tasks)")
+    ax.set_title("(b) SameEval on HumanEval+ (164 tasks, N=20)")
     ax.legend(frameon=False, loc="upper left")
     ax.set_axisbelow(True)
     ax.yaxis.grid(True, linestyle=":", linewidth=0.5, color="#bbbbbb")

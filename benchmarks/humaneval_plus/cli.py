@@ -173,6 +173,11 @@ def main(argv: List[str] | None = None) -> int:
         default=str(Path("outputs") / "benchmark" / "humaneval_plus_164_n20"),
     )
     full.add_argument("--force", action="store_true")
+    full.add_argument(
+        "--only-incomplete",
+        action="store_true",
+        help="Retry configs that lack a complete jsonl+summary. Do not regenerate finished ones.",
+    )
     args = parser.parse_args(argv)
 
     if args.cmd == "smoke":
@@ -261,6 +266,7 @@ def main(argv: List[str] | None = None) -> int:
                 n=int(MANIFEST["n_full"]),
                 allow_api=True,
                 force=bool(args.force),
+                only_incomplete=bool(args.only_incomplete),
             )
         except (ApiSpendBlocked, SandboxUnavailable, ValueError) as exc:
             print(exc, file=sys.stderr)
