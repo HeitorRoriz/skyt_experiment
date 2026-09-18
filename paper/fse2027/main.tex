@@ -2,9 +2,9 @@
 
 %% FSE 2027 Research track --- SameEval on HumanEval+ (new study).
 %% Double-blind: keep anonymous/review until camera-ready.
-%% Empirical scores in this paper are HumanEval+ 164 / N=20 / 13,120 only.
+%% Empirical scores in this paper are HumanEval+ 164 / N=20 / 13,120.
 %% Do not import SBES (12/3600) or MSR (15/4500) numbers.
-%% No SKYT score in this paper.
+%% SKYT held-out numbers are blanks until the rewrite run finishes.
 %% Code DNA / IVR is out of scope.
 \acmConference[FSE '27]{ACM International Conference on the Foundations of Software Engineering}{July 12--16, 2027}{Shenzhen, China}
 \acmBooktitle{Proceedings of the ACM International Conference on the Foundations of Software Engineering (FSE '27), July 12--16, 2027, Shenzhen, China}
@@ -57,33 +57,37 @@
 \renewcommand{\shorttitle}{\sameeval{}: Is Regenerated Code the Same Program?}
 
 \begin{abstract}
-Code-generation benchmarks ask whether a generated program passes tests, but
-real development workflows often regenerate code from the same prompt.
-A passing sample therefore does not tell us whether the next successful sample
-will have the same structure.
+Code-generation benchmarks ask whether a generated program passes tests.
+Real pipelines regenerate the same prompt.
+A passer therefore does not tell us whether the next passer is the same
+program.
 
-We introduce \sameeval{}, a benchmark overlay for measuring structural
-repeatability in LLM-generated code. For each task, model, and temperature
-configuration, \sameeval{} draws multiple independent generations, evaluates
-them using the existing behavioral oracle, maps structurally valid outputs to
-canonical-form fingerprints, and reports \sameat{}: the probability that two
-independent generations both certify and have the same canonical form.
-We additionally report \sameatc{}, which measures structural agreement among
-successful generations.
+We introduce \sameeval{}, an overlay on an existing task set: same prompts,
+same tests, plus a form report.
+For each task, model, and temperature it draws $N$ independent generations,
+runs the existing oracle, maps parseable programs to canonical-form
+fingerprints, and reports \sameat{}: the probability that two draws both
+pass \emph{and} share a form.
+Failures stay in the denominator, so \sameat{} is not a pass rate.
+\sameatc{} asks the same identity question among passers only.
 
-On 13{,}120 generations from all 164 HumanEval+ tasks ($N{=}20$), the plus-test
+On all 164 HumanEval+ tasks at $N{=}20$ (13{,}120 generations) the plus-test
 pass rate is 83.3\%, \sameat{} is 65.9\%, and \sameatc{} is 76.6\%.
-\sameat{} is a pairwise U-statistic with failures in the denominator; it is
-not a pass rate and is not comparable to pass$^2$.
-Among certified pairs, a substantial share still disagree on form.
+Certified pairs still disagree on form.
 The weakest cell is GPT-4o-mini at $T{=}0.7$: plus-pass 79.7\%, \sameat{}
 48.9\%.
 
-\sameeval{} adds a complementary dimension to code-generation evaluation:
-whether repeated successful generations converge to the same program form.
+\sameeval{} does not pick a canon.
+\skyt{} does: it stores the most reproduced verified form (Certified
+Consensus) and rewrites later generations toward that form.
+We evaluate \skyt{} held-out on the same 13{,}120 stored programs (no new
+LLM calls): pick the form on 10 draws, repair the other 10, and score
+\sameat{} on the rewritten slice.
+Held-out \skyt{}: plus-pass \mbox{--.--}\%, \sameat{} \mbox{--.--}\%,
+\sameatc{} \mbox{--.--}\%.
 \end{abstract}
 
-\keywords{LLM code generation, structural repeatability, \sameeval{}, \sameat{}, HumanEval+, software measurement}
+\keywords{LLM code generation, structural repeatability, \sameeval{}, \skyt{}, \sameat{}, HumanEval+}
 
 \maketitle
 
@@ -111,9 +115,11 @@ drop is reported.
 \sameeval{} does not pick a canon and does not aim at a shipped human solution.
 ``Same form'' means identical canonical-form fingerprints
 (Section~\ref{sec:sameness}).
-Which verified form, if any, later generations should be repaired toward is a
+Which verified form later generations should be repaired toward is a
 \emph{policy}, not a measurement.
-This paper measures scatter on the overlay; it does not score a repair tool.
+This paper measures scatter with \sameeval{} and then scores \skyt{} as a
+held-out rewrite on the same stored generations (Certified Consensus pick;
+numbers in the abstract are blanks until that run finishes).
 
 We apply \sameeval{} to all 164 HumanEval+~\cite{liu2023evalplus} tasks at
 protocol $N{=}20$ (Table~\ref{tab:he-table1}): 13{,}120 generations, two models,
@@ -121,9 +127,8 @@ two temperatures.
 
 \paragraph{Not in this paper.}
 Generation-by-construction (``Code DNA'') is a separate vision paper.
-We do not score a post-generation canonicalizer, including
-\skyt{}~\cite{roriz2026skytmsr}.
 We do not score by pass@$k$ or by match to the HumanEval canonical solution.
+We do not treat copying the first passer as the \skyt{} policy.
 
 \paragraph{Outline.}
 Section~\ref{sec:motivation} states the measurement problem.
