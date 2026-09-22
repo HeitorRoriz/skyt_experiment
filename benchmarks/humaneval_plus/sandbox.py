@@ -280,3 +280,34 @@ def evaluate_stitched(
         "base": base,
         "plus": plus,
     }
+
+
+def evaluate_base_only(
+    code: str,
+    problem: Dict[str, Any],
+    *,
+    timeout_seconds: Optional[int] = None,
+) -> Dict[str, Any]:
+    """HumanEval original tests only. Does not run EvalPlus extra cases."""
+    timeout = timeout_seconds or int(MANIFEST["sandbox"]["timeout_seconds"])
+    base = run_sandboxed_job(
+        {
+            "mode": "check",
+            "code": code,
+            "entry_point": problem["entry_point"],
+            "test": problem["test"],
+            "timeout_seconds": timeout,
+        }
+    )
+    passed = bool(base.get("passed"))
+    return {
+        "base_status": base.get("status"),
+        "base_passed": passed,
+        "plus_status": "not_run",
+        "plus_passed": None,
+        "certified": False,
+        "passed": passed,
+        "pass_rate": 1.0 if passed else 0.0,
+        "base": base,
+        "plus": {"status": "not_run", "passed": None},
+    }

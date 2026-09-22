@@ -9,6 +9,7 @@ never overwrites the 164 overlay, Gate 0, or the 30-task pilot.
 from __future__ import annotations
 
 import json
+import random
 import statistics
 from datetime import datetime, timezone
 from pathlib import Path
@@ -59,6 +60,33 @@ def heldout_splits(
     return _balanced_splits(n, train_size, n_splits, seed)
 
 
+def balanced_splits_ordered(
+    n: int,
+    train_size: int,
+    n_splits: int,
+    seed: int = HELDOUT_SEED,
+) -> List[Tuple[int, ...]]:
+    """Unique train tuples in RNG encounter order (not sorted).
+
+    The first *k* tuples are the same *set* as ``heldout_splits(..., k)``.
+    Nested B=20 ⊂ B=50 ⊂ B=500 uses this prefix property. Do not sort.
+    """
+    if not 1 <= train_size < n:
+        raise ValueError("train_size must be between 1 and n-1")
+    if n_splits <= 0:
+        raise ValueError("n_splits must be positive")
+    rng = random.Random(seed)
+    ordered: List[Tuple[int, ...]] = []
+    seen = set()
+    while len(ordered) < n_splits:
+        item = tuple(sorted(rng.sample(range(n), train_size)))
+        if item in seen:
+            continue
+        seen.add(item)
+        ordered.append(item)
+    return ordered
+
+
 def fingerprint_repeatability(records: Sequence[Dict[str, Any]]) -> Dict[str, Any]:
     ordered = sorted(records, key=lambda item: int(item.get("run_index", 0)))
     prints = [
@@ -77,11 +105,12 @@ def select_train_canon(
     records: Sequence[Dict[str, Any]],
     contract_dict: Dict[str, Any],
     train_indices: Sequence[int],
+    payload_fn=_oracle_payload,
 ) -> Optional[Dict[str, Any]]:
     """Certified Consensus on the train slice only. Index is into ``records``."""
     train = [records[index] for index in train_indices]
     codes = [record.get("stitched_code") or "" for record in train]
-    oracles = [_oracle_payload(record) for record in train]
+    oracles = [payload_fn(record) for record in train]
     selected = select_certified_consensus_canon(codes, contract_dict, oracles)
     if selected is None:
         return None

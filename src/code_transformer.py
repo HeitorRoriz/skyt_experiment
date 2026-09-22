@@ -31,6 +31,10 @@ class CodeTransformer:
             self.modular_pipeline = None
             self.use_modular_system = False
         
+        # Analysis-only cap. Default 3 is the live path (L2 then L3).
+        # Level 1 is not a separate step here: distance < 0.1 returns unchanged.
+        self.max_transformation_level = 3
+
         # Legacy transformations (kept for compatibility)
         self.transformations = [
             ("normalize_function_names", self._normalize_function_names),
@@ -101,7 +105,11 @@ class CodeTransformer:
         try:
             from .transformations.intelligent_simplifier import intelligent_simplify
             
-            if oracle_system and contract:
+            if (
+                int(getattr(self, "max_transformation_level", 3) or 3) >= 2
+                and oracle_system
+                and contract
+            ):
                 level2_result = intelligent_simplify(code, canon_code, contract, oracle_system)
                 
                 if level2_result.get('success'):
@@ -128,44 +136,45 @@ class CodeTransformer:
             pass  # Level 2 not available, continue to Level 3
         
         # Level 2 didn't work or not available, try Level 3: Replace with canon
-        try:
-            from .transformations.convert_to_simple_algorithm import convert_to_simple_algorithm
-            
-            level3_result = convert_to_simple_algorithm(code, canon_code, contract)
-            
-            if level3_result.get('success'):
-                # Validate with oracle if available
-                if oracle_system and contract:
-                    oracle_result = oracle_system.run_oracle_tests(
-                        level3_result['transformed_code'], 
-                        contract
-                    )
-                    
-                    if not oracle_result.get('passed', False):
-                        # Transformation broke correctness - revert
-                        return {
-                            "success": False,
-                            "error": "Transformation failed oracle validation",
-                            "original_code": code,
-                            "transformed_code": code,
-                            "final_distance": initial_distance,
-                            "transformation_level": 0,
-                            "transformations_applied": [],
-                            "iterations": 0
-                        }
-                
-                # Success with Level 3!
-                return {
-                    "success": True,
-                    "original_code": code,
-                    "transformed_code": level3_result['transformed_code'],
-                    "final_distance": 0.0,  # Exact match to canon
-                    "transformation_level": 3,
-                    "transformations_applied": level3_result.get('transformations', []),
-                    "iterations": 1
-                }
-        except ImportError:
-            pass  # Level 3 not available
+        if int(getattr(self, "max_transformation_level", 3) or 3) >= 3:
+            try:
+                from .transformations.convert_to_simple_algorithm import convert_to_simple_algorithm
+
+                level3_result = convert_to_simple_algorithm(code, canon_code, contract)
+
+                if level3_result.get('success'):
+                    # Validate with oracle if available
+                    if oracle_system and contract:
+                        oracle_result = oracle_system.run_oracle_tests(
+                            level3_result['transformed_code'],
+                            contract
+                        )
+
+                        if not oracle_result.get('passed', False):
+                            # Transformation broke correctness - revert
+                            return {
+                                "success": False,
+                                "error": "Transformation failed oracle validation",
+                                "original_code": code,
+                                "transformed_code": code,
+                                "final_distance": initial_distance,
+                                "transformation_level": 0,
+                                "transformations_applied": [],
+                                "iterations": 0
+                            }
+
+                    # Success with Level 3!
+                    return {
+                        "success": True,
+                        "original_code": code,
+                        "transformed_code": level3_result['transformed_code'],
+                        "final_distance": 0.0,  # Exact match to canon
+                        "transformation_level": 3,
+                        "transformations_applied": level3_result.get('transformations', []),
+                        "iterations": 1
+                    }
+            except ImportError:
+                pass  # Level 3 not available
         
         # All transformations failed
         final_properties = self.properties_extractor.extract_all_properties(code)

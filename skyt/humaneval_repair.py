@@ -141,12 +141,14 @@ def apply_certified_consensus_repair(
     consensus_index: Optional[int] = None,
     canon_system: Optional[CanonSystem] = None,
     transformer: Optional[Any] = None,
+    max_transformation_level: Optional[int] = None,
 ) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]], int, int]:
     """Repair ``records`` toward a frozen Certified Consensus form.
 
     ``selected`` is None when the train (or in-sample) slice has no certified
     consensus: copy the records and skip the transformer. Does not change how
     the runtime picks a canon.
+    ``max_transformation_level`` is analysis-only (default None = live path, 3).
     """
     repaired_records: List[Dict[str, Any]] = []
     transform_rows: List[Dict[str, Any]] = []
@@ -188,6 +190,9 @@ def apply_certified_consensus_repair(
         transformer.enable_agents = False
     else:
         transformer.enable_agents = False
+    if max_transformation_level is not None:
+        inner = getattr(transformer, "traditional_transformer", transformer)
+        inner.max_transformation_level = int(max_transformation_level)
     contract_id = contract_dict["id"]
     index = selected["index"] if consensus_index is None else consensus_index
     for record, code in zip(records, codes):

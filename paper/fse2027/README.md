@@ -14,7 +14,10 @@ The study in this PDF is HumanEval+ only: 164 tasks, N=20, 13,120 generations
 (plus-pass 83.3% / same@2 65.9% / same@2|cert 76.6%).
 
 Do **not** import SBES (12/3600) or MSR (15/4500) numbers into this paper.
-SKYT is related work, not a scored system here.
+Primary evaluation is \skyt{} on held-out test generations, using only
+HumanEval base tests during repair and reserving HumanEval+ extra tests for
+final evaluation.
+(HumanEval Base operational; Extra tests unseen until evaluation).
 
 Remaining: anonymization, dry-run against SETTLED §10 / REVIEWER_FRY_AFTER_164.md.
 

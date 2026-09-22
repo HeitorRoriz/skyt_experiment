@@ -11,6 +11,7 @@ from skyt.humaneval_heldout import (
     heldout_config,
     heldout_grid,
     heldout_splits,
+    balanced_splits_ordered,
     select_train_canon,
 )
 from skyt.humaneval_repair import (
@@ -61,6 +62,12 @@ def test_heldout_splits_are_balanced_and_reproducible():
         test = set(range(20)) - set(train)
         assert len(test) == 10
         assert not set(train) & test
+
+
+def test_ordered_splits_share_set_with_sorted_heldout_splits():
+    assert set(heldout_splits(20, 10, 20, 20260723)) == set(
+        balanced_splits_ordered(20, 10, 20, 20260723)
+    )
 
 
 def test_train_only_canon_ignores_heldout_majority():
@@ -157,3 +164,37 @@ def test_heldout_cli_does_not_require_allow_api():
     with pytest.raises(SystemExit) as exc:
         main(["heldout", "--help"])
     assert exc.value.code == 0
+
+
+def test_operational_canon_uses_base_when_plus_fails():
+    from skyt.humaneval_oracle_split import _base_operational_payload, dual_repeatability
+
+    records = []
+    for index in range(10):
+        plus_ok = False
+        base_ok = index < 3
+        records.append(
+            {
+                "run_index": index,
+                "task_id": "HumanEval/0",
+                "model": "gpt-4o-mini",
+                "temperature": 0.0,
+                "stitched_code": FORM_A if base_ok else FORM_FAIL,
+                "oracle": {
+                    "base_passed": base_ok,
+                    "plus_passed": plus_ok,
+                    "certified": plus_ok,
+                },
+            }
+        )
+    contract = _contract()
+    plus_pick = select_train_canon(records, contract, list(range(10)))
+    base_pick = select_train_canon(
+        records, contract, list(range(10)), payload_fn=_base_operational_payload
+    )
+    assert plus_pick is None
+    assert base_pick is not None
+    assert records[base_pick["index"]]["stitched_code"] == FORM_A
+    analysis = dual_repeatability(records)
+    assert analysis["base_pass"] == pytest.approx(0.3)
+    assert analysis["plus_pass"] == pytest.approx(0.0)
