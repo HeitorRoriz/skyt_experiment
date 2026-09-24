@@ -135,6 +135,7 @@ It ships no new prompts and no new tests.
 It adds a form report on top of an existing task set.
 The report's headline is \sameat{}: the probability that two independent draws
 both certify and are the same program.
+\sameat{} is not a proxy for hidden-test correctness (exploratory).
 A second column, \sameatc{}, asks the same identity question among passers
 only; configs with fewer than two passers are dropped from that column and the
 drop is reported.
@@ -278,6 +279,11 @@ AlphaCode~\cite{li2022alphacode}, execution-guided minimum Bayes-risk
 selection~\cite{shi2022mbrexec}, and self-consistency-style
 agreement~\cite{wang2023selfconsistency} are policies for what to keep.
 None of them reports the pairwise form rate of the raw draws.
+Consensus over execution behavior is known to track correctness
+(AlphaCode clustering; execution-guided minimum Bayes
+risk~\cite{shi2022mbrexec}).
+We find that consensus over structural form, among programs that already
+pass, does not.
 Rewriting toward a stored verified form~\cite{roriz2026skytmsr} is likewise a
 policy.
 \sameeval{} is the overlay: same tasks, extra form reports.
@@ -394,6 +400,20 @@ table column.
 
 The overlay is scored with canonical-form fingerprints
 (Section~\ref{sec:sameness}; \texttt{relation\_version}=2).
+
+An exploratory analysis asks whether form diversity among Base-passing
+programs carries information about Extra-test failure beyond the Base pass
+rate.
+Forms are equivalence classes under the same fingerprint, computed only on
+Base-passers.
+The modal form of a program is the largest class among the other
+Base-passers in its configuration (leave-one-out); ties are unclassified.
+$D_c$ is one minus Base-certified \sameat{}.
+$F_c$ is the Extra-failure rate among Base-passers.
+Extra outcomes never define forms, modes, or $D_c$.
+Configurations with fewer than two Base-passers are excluded.
+The modal contrast also requires at least one modal and one non-modal
+classified program.
 
 \subsection{\skyt{} on the test 10}
 \label{sec:heldout-setup}
@@ -766,6 +786,76 @@ HumanEval/109 under Claude at $T{=}0.7$ already has Plus-pass $100\%$ before
 \skyt{}; \sameat{} still rises from $4.9\%$ to $100\%$.
 \skyt{} is most useful when instability is already measurable.
 
+\subsection{Repeatability as a defect signal (exploratory)}
+\label{sec:diversity-signal}
+This subsection is exploratory.
+The RQ split that would place it under ``does \sameat{} carry information
+beyond pass@$k$?'' is not in this draft yet; it sits at the end of Results
+until that restructure lands.
+A1 and A2 below are exploratory (pre-registered).
+The uniformity check in the discussion is post hoc and descriptive.
+
+Form diversity carried no detectable signal about hidden-test failure
+beyond the pass rate.
+Among Base-passing programs, modal and non-modal forms survived Extra tests
+at the same rate ($\Delta = 0.06$\,pp [$-1.4$, $1.4$]).
+Configurations with more diverse forms had slightly higher Extra-failure
+rates ($\rho = 0.13$ [0.02, 0.23]), but the association did not survive
+adjustment for Base pass rate (partial $\rho = 0.07$ [$-0.04$, 0.18]) or
+for task (within-task $\rho = 0.02$ [$-0.10$, 0.13]).
+Configurations whose Base-passing programs all shared one form still failed
+Extra tests 10.7\% of the time: repeatable generation can be repeatably wrong.
+Repeatability and hidden-test correctness are distinct properties, which is
+why \sameeval{} measures the former separately.
+
+\begin{table}[t]
+  \caption{Exploratory diversity signal on the frozen overlay
+    (task-cluster bootstrap, 10{,}000 resamples, seed 20260723).
+    Exploratory.
+    The partial correlation (controlling for Base pass rate) tests whether
+    diversity carries information beyond the pass rate.
+    Panel A is Extra survival.
+    Panel B is Spearman $\rho(D_c, F_c)$; partial $\rho$ controls for
+    $n_c/20$; within-task $\rho$ uses task-demeaned values and is undefined
+    inside one cell.
+    Exclusions: 34 configs with $n_c{<}2$; 396 configs with no modal versus
+    non-modal contrast; 289 unclassified programs from leave-one-out ties.}
+  \label{tab:diversity-signal}
+  \begin{tabular}{lccc}
+    \toprule
+    \multicolumn{4}{l}{\textit{Panel A. Modal vs.\ non-modal Extra survival}} \\
+    Cell & $s_{\mathrm{mod}}$ & $s_{\mathrm{non}}$ & $\Delta$ [CI] \\
+    \midrule
+    GPT-4o-mini $T{=}0.0$ & 85.2\% & 82.1\% & 3.1 [$-1.7$, 12.0] \\
+    GPT-4o-mini $T{=}0.7$ & 89.4\% & 90.6\% & $-1.2$ [$-5.2$, 1.7] \\
+    Claude 4.5 $T{=}0.0$ & 92.5\% & 91.5\% & 1.0 [$-0.7$, 3.2] \\
+    Claude 4.5 $T{=}0.7$ & 87.8\% & 87.8\% & 0.0 [0.0, 0.0] \\
+    Pooled & 89.8\% & 89.7\% & 0.06 [$-1.4$, 1.4] \\
+    \midrule
+    \multicolumn{4}{l}{\textit{Panel B. Diversity vs.\ Extra-failure rate}} \\
+    Cell & $\rho$ & partial $\rho$ & within-task $\rho$ \\
+    \midrule
+    GPT-4o-mini $T{=}0.0$ & 0.16 [$-0.04$, 0.36] & 0.13 [$-0.07$, 0.35] & --- \\
+    GPT-4o-mini $T{=}0.7$ & 0.13 [$-0.04$, 0.29] & 0.04 [$-0.13$, 0.22] & --- \\
+    Claude 4.5 $T{=}0.0$ & 0.03 [$-0.14$, 0.21] & $-0.01$ [$-0.17$, 0.18] & --- \\
+    Claude 4.5 $T{=}0.7$ & 0.20 [0.03, 0.36] & 0.16 [$-0.01$, 0.33] & --- \\
+    Pooled & 0.13 [0.02, 0.23] & 0.07 [$-0.04$, 0.18] & 0.02 [$-0.10$, 0.13] \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/fig_diversity_signal.pdf}
+  \caption{Mean Extra-failure rate among Base-passers by form-diversity bin
+    ($D_c{=}0$, then tertiles of $D_c{>}0$).
+    Bars are model$\times$temperature cells.
+    Intervals are task-cluster bootstrap 95\% CIs.
+    Bins are not monotone and intervals overlap.
+    Exploratory.}
+  \label{fig:diversity-signal}
+\end{figure}
+
 \begin{figure}[t]
   \centering
   \includegraphics[width=\columnwidth]{fig_lift.pdf}
@@ -780,6 +870,13 @@ HumanEval/109 under Claude at $T{=}0.7$ already has Plus-pass $100\%$ before
 HumanEval+ functional correctness and generation repeatability diverge.
 Passing plus tests is not equivalent to repeatable generation.
 \sameat{} exposes a gap that pass rate alone does not show.
+In a post hoc check, when any Base-passing program failed Extra tests, all
+of them failed in 65\% [50.0, 80.3] of configurations.
+Hidden-test failures were often shared across forms, reflecting a common
+misreading of the specification rather than the quirks of one form, which
+is why form diversity could not signal them.
+Programs sharing a form had identical Extra outcomes in 100\% [100, 100] of
+forms.
 \skyt{} substantially increases pairwise agreement on held-out generations,
 and the observed effect is primarily on repeatability rather than
 functional success.
@@ -826,6 +923,10 @@ Static prompts favor cache-based policies.
 \skyt{} is aimed at settings where regeneration remains necessary---changed
 context, changed requirements, incremental edits, or a policy that forbids
 replaying a stored file---and those settings are not this experiment.
+\skyt{}'s potential advantage over caching lies in regeneration settings
+where replay is unavailable or unsafe (changed context, incremental edits,
+model updates).
+Testing that is future work.
 
 Relaxing the operational oracle from HumanEval+ to original HumanEval
 increases canon availability from 569/656 to 627/656 configurations, while
@@ -954,6 +1055,19 @@ Cache is a legitimate baseline.
 \skyt{}'s advantage must not be framed as beating caching unless the
 numbers show it, and even then only for the regeneration setting this
 design actually tests.
+
+\paragraph{Exploratory diversity signal.}
+The modal-form and diversity analyses were specified before computation,
+after a related count of distinct forms had already been seen in the
+\skyt{} lift results.
+\texttt{same()} is structural, not semantic.
+Extra tests are incomplete, so Extra survival is a proxy for hidden
+correctness.
+$F_c$ is zero for many configurations; the association uses rank correlation
+for that reason.
+A1 is estimable only for configurations with at least two passing forms
+(226 of 656); it says nothing about configurations with a single passing form.
+The uniformity check is post hoc.
 
 \paragraph{Statistical conclusion.}
 Inference is a cluster bootstrap by task, not Wilson on $C(N,2)$ pairs.
