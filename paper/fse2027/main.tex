@@ -65,53 +65,29 @@
 \renewcommand{\shorttitle}{\sameeval{}: Is Regenerated Code the Same Program?}
 
 \begin{abstract}
-Code-generation benchmarks ask whether a generated program passes tests, but
-real development workflows often regenerate code from the same prompt.
-Passing those tests does not imply that the next correct program is the same
-program.
-Repeatability is especially relevant in settings where review, verification,
-auditability, and change control are expensive: structurally different
-outputs can increase downstream cost even when they exhibit equivalent test
-behavior.
+Code-generation benchmarks ask whether a program passes tests.
+They do not ask whether the next passing program is the same program.
+That distinction matters where review and change control are expensive.
 
-We introduce \sameeval{}, a benchmark overlay that measures
-execution-aware pairwise repeatability.
-For each task, model, and temperature, it draws multiple independent
-generations, scores them with the existing behavioral oracle, maps parseable
-outputs to canonical-form fingerprints, and reports \sameat{}, a U-statistic
-estimating the probability that two independent draws both certify and
-resolve to the same form.
-A secondary column, \sameatc{}, asks that identity question among certified
-pairs.
+\sameeval{} is an overlay on an existing task set.
+\sameat{} is a U-statistic of order 2 with failures kept in the denominator;
+\sameatc{} asks the same question among certified pairs and is secondary.
 
-Across 13{,}120 baseline generations covering all 164 HumanEval+ tasks and
-656 task--model--temperature cells ($N{=}20$), the plus-test pass rate is
-83.3\%, while \sameat{} is only 65.9\%.
-The weakest configuration, GPT-4o-mini at $T{=}0.7$, achieves 79.7\%
-plus-test pass but only 48.9\% \sameat{}.
+On 13{,}120 generations of all 164 HumanEval+ tasks, Plus pass is 83.3\%
+and \sameat{} is 65.9\%.
+GPT-4o-mini at $T{=}0.7$ reaches 79.7\% Plus pass and 48.9\% \sameat{}.
+Tighter equivalence rulers widen that overlay gap.
+Repeatability is not a proxy for hidden-test correctness (exploratory):
+generation can be repeatably wrong, and the association with Extra-test
+failure does not survive adjustment for the Base pass rate.
 
-We then apply \skyt{} to held-out test generations from those stored programs
-(no new language-model calls).
-Certified Consensus is selected on a train slice of 10 and used to repair
-the test 10, averaged over 20 splits.
-The headline evaluation is \skyt{} on held-out test generations, using only
-HumanEval base tests during repair and reserving HumanEval+ extra tests for
-final evaluation.
-\sameat{} rises from 66.1\% to 83.1\% (a 17.0 percentage-point increase,
-95\% CI 14.5--19.6), while Plus-test success changes only from 83.3\% to
-85.9\% ($+$2.7\,pp, 1.7--3.8).
-Among Base-certified outputs, Extra-test survival is 88.5\%$\rightarrow$89.7\%
-($+$1.2\,pp, 0.3--2.3).
-On the 561 configurations eligible both before and after, disagreement
-among certified outputs falls from 23.5\% to 3.2\%, an 86.4\% relative
-reduction.
-The largest gains occur at $T{=}0.7$, where unconstrained sampling
-diversity is higher.
+On held-out generations, with only HumanEval base tests used during repair
+and Extra tests reserved for evaluation, \skyt{} raises \sameat{} by
+17.0\,pp (14.5--19.6) while Plus pass rises by 2.7\,pp.
+A stored-program cache remains the ceiling on static prompts.
+The gains are largest at $T{=}0.7$.
 
-\sameeval{} shows that functional correctness and repeatability are
-different properties.
-\skyt{} shows that the latter can be improved with only a modest change in
-the former.
+Repeatability is a separate dimension and should be measured explicitly.
 \end{abstract}
 
 \keywords{LLM code generation, structural repeatability, \sameeval{}, \skyt{}, \sameat{}, HumanEval+}
@@ -135,7 +111,6 @@ It ships no new prompts and no new tests.
 It adds a form report on top of an existing task set.
 The report's headline is \sameat{}: the probability that two independent draws
 both certify and are the same program.
-\sameat{} is not a proxy for hidden-test correctness (exploratory).
 A second column, \sameatc{}, asks the same identity question among passers
 only; configs with fewer than two passers are dropped from that column and the
 drop is reported.
@@ -146,8 +121,7 @@ drop is reported.
 Which verified form later generations should be repaired toward is a
 \emph{policy}, not a measurement.
 This paper measures scatter with \sameeval{} and then scores \skyt{} applied
-to held-out test generations (Certified Consensus pick on a train slice;
-repair of the test 10).
+to held-out generations.
 
 We apply \sameeval{} to all 164 HumanEval+~\cite{liu2023evalplus} tasks at
 protocol $N{=}20$ (Table~\ref{tab:he-table1}): 13{,}120 generations, two models,
@@ -156,17 +130,38 @@ We then ask four questions.
 
 \begin{enumerate}
   \item \textbf{RQ1.}
-        Does functional correctness imply repeatability?
+        How far apart are functional correctness and repeatability on
+        HumanEval+?
   \item \textbf{RQ2.}
-        Can \skyt{} on the test 10 improve repeatability when using only
-        HumanEval base tests during repair and reserving HumanEval+ extra
-        tests for final evaluation?
+        Does \sameat{} measure what it claims, and does it tell us something
+        pass@$k$ does not?
   \item \textbf{RQ3.}
-        After conditioning on certified outputs, how much form disagreement
-        remains?
+        Does repeatability carry information about hidden-test correctness?
   \item \textbf{RQ4.}
-        When does \skyt{} help most?
+        Can \sameeval{} separate mitigation policies, and where do their
+        effects come from?
 \end{enumerate}
+
+\paragraph{Contributions.}
+\begin{enumerate}
+  \item \sameeval{}: the \sameat{} / \sameatc{} estimators, with failures in
+        the denominator, and a versioned canonical-form fingerprint.
+  \item Validity evidence in this draft: three computational rulers.
+        Human agreement, rank reversal, and sample-size reliability are not
+        yet reported.
+  \item Empirical findings: correctness does not imply repeatability;
+        generation can be repeatably wrong, so \sameat{} is not a proxy for
+        hidden-test correctness (exploratory).
+  \item A held-out, oracle-split protocol for evaluating mitigation policies,
+        applied to raw generation, stored-program caching, \skyt{}, and a
+        level ablation.
+  \item Artifact: all generations, the scorer, and recompute commands.
+\end{enumerate}
+
+Ouyang \etal{}~\cite{ouyang2023llm} document non-determinism in code
+generation.
+\sameeval{} contributes a standardized estimator, certification conditioning,
+a validated fingerprint, and a protocol for evaluating mitigations.
 
 \paragraph{Not in this paper.}
 Generation-by-construction (``Code DNA'') is a separate vision paper.
@@ -175,15 +170,17 @@ We do not treat copying the first passer as the \skyt{} policy; we \emph{do}
 report it as a cache baseline (Section~\ref{sec:results}).
 This study is Python HumanEval+, not an embedded or safety-certification
 evaluation.
+A regeneration track under perturbed contexts is future work
+(Section~\ref{sec:conclusion}).
 
 \paragraph{Outline.}
 Section~\ref{sec:motivation} states the measurement problem.
 Section~\ref{sec:related} places \sameeval{} next to pass@$k$, clones,
 consensus selection, and repair.
 Section~\ref{sec:protocol} defines the overlay.
-Section~\ref{sec:setup} pins the HumanEval+ run and \skyt{} on the test 10.
-Section~\ref{sec:results} reports overlay scores and \skyt{} applied to
-held-out test generations.
+Section~\ref{sec:setup} pins the HumanEval+ run and the held-out split.
+Section~\ref{sec:results} answers the four questions.
+Section~\ref{sec:discussion} interprets the gap, the shortcuts, and cache.
 Section~\ref{sec:threats} states construct, oracle, and baseline caveats.
 Section~\ref{sec:artifact} lists hashes, seeds, and recompute commands.
 
@@ -287,8 +284,8 @@ pass, does not.
 Rewriting toward a stored verified form~\cite{roriz2026skytmsr} is likewise a
 policy.
 \sameeval{} is the overlay: same tasks, extra form reports.
-This paper scores the overlay and then uses it to evaluate \skyt{} on the
-test 10,
+This paper scores the overlay and then uses it to evaluate \skyt{} on
+held-out generations,
 including cache baselines that replay a stored passer instead of
 regenerating.
 
@@ -376,7 +373,7 @@ We do not treat $C(N,2)$ pairs as binomial trials.
 The shipped HumanEval \texttt{canonical\_solution} is an external baseline, not
 a \sameeval{} canon.
 The overlay itself does not pick a repair target.
-Section~\ref{sec:setup} describes \skyt{} on the test 10, scored on top
+Section~\ref{sec:setup} describes \skyt{} on held-out generations, scored on top
 of the overlay.
 
 \section{Experimental Setup}
@@ -415,11 +412,36 @@ Configurations with fewer than two Base-passers are excluded.
 The modal contrast also requires at least one modal and one non-modal
 classified program.
 
-\subsection{\skyt{} on the test 10}
+Each reported interval resamples tasks with seed 20260723 (10{,}000 draws).
+A call that uses that seed on the same task set draws the same tasks, so the
+pooled estimate and the temperature interaction share those resamples.
+
+\paragraph{Confirmatory and exploratory claims.}
+\begin{table}[t]
+  \caption{Confirmatory and exploratory claims in this draft.
+    Human agreement, rank reversal, and sample-size reliability are not yet
+    reported, so they are not listed as confirmatory results.}
+  \label{tab:claim-status}
+  \begin{tabular}{ll}
+    \toprule
+    Status & Claim \\
+    \midrule
+    Confirmatory & RQ1 gap \\
+    Confirmatory & RQ4 held-out $\Delta$ \sameat{} \\
+    Confirmatory & RQ4 certified disagreement \\
+    Confirmatory & RQ4 temperature interaction \\
+    Exploratory, pre-registered & RQ3 A1 and A2 \\
+    Post hoc, descriptive & RQ3 uniformity check \\
+    Post hoc, descriptive & RQ4 case examples \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Held-out split}
 \label{sec:heldout-setup}
 \skyt{} selects a Certified Consensus form from certified train generations
 and repairs later programs toward that stored form, rolling back if the
-operational oracle fails~\cite{roriz2026skytmsr}.
+operational oracle fails.
 If no train generation certifies, there is no canon and repair is skipped.
 We do not change that pick rule.
 
@@ -442,7 +464,7 @@ The headline evaluation is \skyt{} on held-out test generations, using only
 HumanEval base tests during repair and reserving HumanEval+ extra tests for
 final evaluation.
 Extra tests do not select the canon and do not authorize a rollback.
-A robustness run (Section~\ref{sec:plus-operational}) applies \skyt{} to the
+A robustness run (Section~\ref{sec:rq4-robustness}) applies \skyt{} to the
 same test 10 using the full Plus suite for pick, rollback, and scoring.
 Post scores live in sibling trees;
 \texttt{outputs/benchmark/humaneval\_plus\_164\_n20/} is not overwritten.
@@ -451,6 +473,7 @@ Post scores live in sibling trees;
 \label{sec:results}
 
 \subsection{RQ1: Correctness does not imply repeatability}
+\label{sec:rq1}
 Table~\ref{tab:he-table1} is \sameeval{} on all 164 HumanEval+ tasks at
 protocol $N{=}20$ (13{,}120 generations).
 Aggregation is a task-mean with cluster bootstrap by \texttt{task\_id}
@@ -463,48 +486,13 @@ Overall plus-pass is 83.3\% (95\% CI 78.3--88.0).
 (94 configs had fewer than two plus-passers and are omitted from that column
 only).
 $T{=}0.0$ is not 100\% \sameatc{}.
-Passing tests therefore leaves a substantial repeatability gap:
-independent Bernoulli certification at that pass rate would give
-$\mathrm{pass}^2\approx 69\%$ even if every certified pair matched;
-across-task heterogeneity makes the share of certified pairs larger than
-$\mathrm{pass}^2$ (implied joint certification $\sameat{}/\sameatc{}\approx 86\%$).
+Passing tests therefore leaves a substantial repeatability gap.
 The form disagreement among passers is $100\%-76.6\%=23.4$\,pp on overlay
 \sameatc{}.
 
 The cell that drives the structural story is GPT-4o-mini at $T{=}0.7$:
 plus-pass 79.7\%, \sameatc{} 60.0\%, \sameat{} 48.9\%.
 Tests pass; forms still differ.
-
-The overlay \sameat{} gap is not an artifact of one fingerprint.
-A stricter parse-and-unparse identity yields 59.8\% (55.1--64.4);
-AST identity after docstring stripping yields 61.9\% (57.1--66.5);
-the production SameEval fingerprint ($\alpha$-rename) is 65.9\% (61.0--70.6).
-Held-out pre-\sameat{} on the test-10 slice is 59.9 / 62.1 / 66.1 under the
-same three rulers.
-A persist replay of \skyt{} on the test 10 (0 new LLM calls; oracle inherited
-when the repaired entry point matches a stored program) raises post-\sameat{}
-to 74.8 / 77.4 / 83.2.
-Paired lifts are $+14.9$\,pp (12.6--17.3), $+15.4$\,pp (13.0--17.8), and
-$+17.1$\,pp (14.6--19.8).
-Tighter rulers make the raw gap larger; the SKYT lift survives all three.
-The SameEval replay ($66.1\rightarrow 83.2$, $+17.1$) matches the original
-Docker held-out table ($66.1\rightarrow 83.1$, $+17.0$) to $0.1$\,pp.
-
-\begin{table}[t]
-  \caption{Overlay and test-10 \sameat{} under three equivalence rulers.
-    Test-10 $\Delta$ is paired cluster bootstrap by task (10{,}000, seed 20260723)
-    on the persist replay.}
-  \label{tab:fingerprint}
-  \begin{tabular}{lcccc}
-    \toprule
-    Ruler & Overlay & Pre & SKYT post & $\Delta$ \\
-    \midrule
-    Normalized source & 59.8\% & 59.9\% & 74.8\% & $+14.9$ [12.6, 17.3] \\
-    AST (docstrings stripped) & 61.9\% & 62.1\% & 77.4\% & $+15.4$ [13.0, 17.8] \\
-    SameEval v2 ($\alpha$-rename) & 65.9\% & 66.1\% & 83.2\% & $+17.1$ [14.6, 19.8] \\
-    \bottomrule
-  \end{tabular}
-\end{table}
 
 \begin{figure*}[t]
   \centering
@@ -535,265 +523,43 @@ Docker held-out table ($66.1\rightarrow 83.1$, $+17.0$) to $0.1$\,pp.
   \end{tabular}
 \end{table*}
 
-\subsection{RQ2: \skyt{} on the test 10 raises repeatability when Extra tests are reserved}
+
+\subsection{RQ2: Validity of the measure}
 \label{sec:rq2}
-On the same 13{,}120 stored programs we apply \skyt{} to held-out test
-generations, using only HumanEval base tests during repair and reserving
-HumanEval+ extra tests for final evaluation.
-Plus \sameat{} (Plus-certification in the U-statistic) rises from 66.1\% to
-83.1\%, a 17.0 percentage-point increase (95\% CI 14.5--19.6).
-Plus pass changes from 83.3\% to 85.9\% ($+$2.7\,pp, 1.7--3.8) and does not
-deteriorate.
-The 66.1\% pre-\sameat{} differs from Table~\ref{tab:he-table1}'s 65.9\%
-because those scores are on the test 10, not all 20 draws; it is not a
-new overlay finding.
-The repeatability effect therefore persists under stronger tests unavailable
-to \skyt{} during repair.
-That is not a cross-benchmark generalization claim.
+Human agreement with the fingerprint is pending; a 128-pair dual-annotator
+protocol is prepared (Section~\ref{sec:threats}).
+Rank reversal against the pass rate and sample-size reliability are not yet
+computed, so this draft does not report them.
 
-Figure~\ref{fig:arrows} shows the four cells in Plus-pass $\times$ \sameat{}
-space: arrows are mostly vertical.
-GPT-4o-mini at $T{=}0.7$ is the exception that also moves right
-($+$5.9\,pp Plus pass, 3.5--8.5).
+The overlay \sameat{} gap is not an artifact of one fingerprint.
+A stricter parse-and-unparse identity yields 59.8\% (55.1--64.4);
+AST identity after docstring stripping yields 61.9\% (57.1--66.5);
+the production SameEval fingerprint ($\alpha$-rename) is 65.9\% (61.0--70.6).
 
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=\columnwidth]{fig_arrows.pdf}
-  \caption{\skyt{} primarily improves repeatability rather than functional
-    success.
-    Circles are raw held-out generations; squares are \skyt{}-rewritten
-    generations.
-    Canon selection, repair, and rollback see only HumanEval Base tests.
-    The largest vertical gains occur at $T{=}0.7$, where baseline
-    structural variation is highest.}
-  \label{fig:arrows}
-\end{figure}
-
-\begin{table*}[t]
-  \caption{\skyt{} on the test 10, using only HumanEval base tests during
-    repair and reserving HumanEval+ extra tests for final evaluation.
-    Train 10 / test 10, $B{=}20$ splits.
-    Point estimates are task-means.
-    $\Delta$ CIs are paired cluster bootstrap by task (10{,}000, seed 20260723).}
-  \label{tab:heldout}
-  \begin{tabular}{llcccccc}
-    \toprule
-    Model & $T$ & Plus pre & Plus post & $\Delta$ plus & \sameat{} pre & \sameat{} post & $\Delta$ \sameat{} \\
-    \midrule
-    GPT-4o-mini & 0.0 & 79.2\% & 81.0\% & $+$1.7 [0.4, 3.5] & 74.3\% & 80.1\% & $+$5.9 [3.4, 8.8] \\
-    GPT-4o-mini & 0.7 & 79.6\% & 85.5\% & $+$5.9 [3.5, 8.5] & 49.3\% & 78.5\% & $+$29.3 [24.6, 34.1] \\
-    Claude 4.5 & 0.0 & 87.4\% & 88.6\% & $+$1.1 [0.1, 2.4] & 77.4\% & 87.5\% & $+$10.1 [7.3, 13.3] \\
-    Claude 4.5 & 0.7 & 86.8\% & 88.7\% & $+$1.9 [0.7, 3.4] & 63.5\% & 86.2\% & $+$22.8 [18.4, 27.2] \\
-    both & both & 83.3\% & 85.9\% & $+$2.7 [1.7, 3.8] & 66.1\% & 83.1\% & $+$17.0 [14.5, 19.6] \\
-    \bottomrule
-  \end{tabular}
-\end{table*}
-
-Most of \skyt{}'s observed effect is therefore on repeatability, not on
-simply producing more passing outputs.
-The $+$2.7\,pp Plus-pass interval excludes zero; we do not interpret that
-as evidence of better generalization beyond HumanEval+.
-Four configurations have a negative held-out Plus-pass delta
-(HumanEval/124 GPT-4o-mini at both temperatures; HumanEval/91 Claude at
-$T{=}0.0$; HumanEval/32 GPT-4o-mini at $T{=}0.7$); the paired overall
-interval still excludes zero.
-Mean rollback on those cells is 0: Extra tests failed after a
-Base-authorized commit.
-No configuration has a negative operational (Base-certified) \sameat{} delta.
-Operational \sameat{} is 72.0\%$\rightarrow$91.5\% ($+$19.6\,pp, 16.9--22.4);
-Base pass is 92.0\%$\rightarrow$94.7\%.
-Among generations that already pass the operational Base oracle,
-Extra-test survival is 88.5\%$\rightarrow$89.7\% ($+$1.2\,pp, 0.3--2.3).
-\skyt{} therefore raises repeatability without reducing the probability
-that an operationally certified output survives unseen Extra tests.
+Tighter rulers widen the overlay gap.
+The Pre and post columns of Table~\ref{tab:fingerprint} are the held-out
+mitigation comparison and are read with Section~\ref{sec:rq4}.
 
 \begin{table}[t]
-  \caption{Extra-test survival among Base-certified test generations
-    (oracle-split tree).
-    $\Delta$ CI is paired cluster bootstrap by task.}
-  \label{tab:extra-survival}
-  \begin{tabular}{lccc}
+  \caption{Overlay and held-out \sameat{} under three equivalence rulers.
+    Held-out $\Delta$ is paired cluster bootstrap by task (10{,}000, seed 20260723)
+    on the persist replay.}
+  \label{tab:fingerprint}
+  \begin{tabular}{lcccc}
     \toprule
-    Metric & Pre & Post & $\Delta$ \\
+    Ruler & Overlay & Pre & SKYT post & $\Delta$ \\
     \midrule
-    Extra survival $\mid$ Base pass & 88.5\% & 89.7\% & $+$1.2 [0.3, 2.3] \\
+    Normalized source & 59.8\% & 59.9\% & 74.8\% & $+14.9$ [12.6, 17.3] \\
+    AST (docstrings stripped) & 61.9\% & 62.1\% & 77.4\% & $+15.4$ [13.0, 17.8] \\
+    SameEval v2 ($\alpha$-rename) & 65.9\% & 66.1\% & 83.2\% & $+17.1$ [14.6, 19.8] \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-On a static prompt, caching a Base-certified train program is a stronger
-\sameat{} baseline than \skyt{} (Table~\ref{tab:cache}).
-First Base-certified cache reaches 84.9\% Plus \sameat{} (80.0--89.4);
-Base-certified Consensus cache reaches 85.2\% (80.3--89.6).
-\skyt{} reaches 83.1\% (78.4--87.4), $-$1.8\,pp versus first-cache
-($-$2.9 to $-$0.8) and $-$2.1\,pp versus consensus-cache ($-$3.0 to $-$1.1).
-Both cache policies replay one Base-certified train program when one exists
-(split-mean coverage 94.9\%) and otherwise copy the raw test slice.
-When a Base passer is cached, 11.7\% (7.5--16.3) of those cached programs
-fail Extra tests; \skyt{} Extra-survival is 89.7\% versus 88.3\% for
-first-cache.
-\skyt{} Plus pass is 85.9\% versus 85.0\% / 85.2\% for the two caches.
-That is the intended trade-off: caching eliminates regeneration; \skyt{}
-constrains regeneration while still producing a new artifact.
-We do not claim that \skyt{} beats caching on HumanEval+.
-Static HumanEval prompts favor cache-based policies.
-\skyt{} is the policy for when regeneration remains necessary.
-
-\subsection{Robustness: \skyt{} on the test 10 with Plus tests during repair}
-\label{sec:plus-operational}
-A robustness run applies \skyt{} to the same test 10 using the full Plus
-suite for canon selection, repair, and rollback.
-It yields an almost identical \sameat{} effect
-($+$17.0\,pp, 14.5--19.6), indicating that the repeatability result is not an
-artifact of which tests \skyt{} sees during repair.
-Plus pass on that run is 83.3\%$\rightarrow$85.7\% ($+$2.4\,pp, 1.5--3.5).
-Cell-level Plus \sameat{} lifts differ from Table~\ref{tab:heldout} by at
-most 0.5\,pp.
-We keep Table~\ref{tab:heldout} as the headline because it is the
-scientifically cleaner design.
-
-\begin{table}[t]
-  \caption{Robustness: \skyt{} on the test 10 when pick and rollback also see
-    Plus tests.
-    $\Delta$ CIs are paired cluster bootstrap by task.}
-  \label{tab:plus-operational}
-  \begin{tabular}{lccc}
-    \toprule
-    Metric & Pre & Post & $\Delta$ \\
-    \midrule
-    Plus pass & 83.3\% & 85.7\% & $+$2.4 [1.5, 3.5] \\
-    Plus \sameat{} & 66.1\% & 83.1\% & $+$17.0 [14.5, 19.6] \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-A nested persist replay of unique 10/10 splits from the same seed
-(20260723; $B{=}k$ is the first $k$ splits; $B{=}20$ is the same set as the
-paper held-out run) yields \sameat{} lifts of $+17.1$ at $B{=}20$,
-$+17.3$ at $B{=}100$, and $+17.3$ at $B{=}500$
-(Table~\ref{tab:nested-b}).
-The $0.2$\,pp move from $B{=}20$ to $B{=}100$ is within the original CI;
-$B{=}500$ does not change the point estimate.
-This is not a new LLM run: repaired programs are persisted and scored under
-an inherited Plus oracle.
-
-\begin{table}[t]
-  \caption{Nested split-count robustness (persist replay, SameEval v2
-    \sameat{}, $n{=}656$).
-    $B{=}k$ is the first $k$ unique 10/10 splits from seed 20260723.
-    $\Delta$ CIs are paired cluster bootstrap by task.}
-  \label{tab:nested-b}
-  \begin{tabular}{rccc}
-    \toprule
-    $B$ & Pre \sameat{} & Post \sameat{} & $\Delta$ \\
-    \midrule
-    20 & 66.1\% & 83.2\% & $+$17.1 [14.6, 19.8] \\
-    50 & 66.0\% & 83.2\% & $+$17.2 [14.7, 19.8] \\
-    100 & 65.9\% & 83.2\% & $+$17.3 [14.7, 20.0] \\
-    500 & 65.9\% & 83.3\% & $+$17.3 [14.8, 20.0] \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-\subsection{RQ3: Certified disagreement falls on common support}
+\subsection{RQ3: Repeatability and hidden-test correctness}
 \label{sec:rq3}
-\sameatc{} is undefined when a config has fewer than two certified test
-draws.
-The rates below use Plus-certification on the same oracle-separated
-experiment as RQ2.
-Plus-certified common support is 561/656 (85.5\%): configs with at least two
-Plus-passers on the test 10 both before and after \skyt{}.
-On that set, \sameatc{} rises from 76.5\% to 96.8\%
-($+$20.3\,pp, 17.0--23.8).
-Equivalently, certified disagreement falls from 23.5\% to 3.2\%, an
-86.4\% relative reduction (Figure~\ref{fig:disagreement}).
-The Plus-operational robustness run yields a nearly identical reduction,
-23.2\% to 3.5\% (85.0\% relative) on 562/656.
-We do not headline all-eligible post figures that add configs becoming
-eligible only after \skyt{}.
-
-\begin{figure}[t]
-  \centering
-  \includegraphics[width=\columnwidth]{fig_disagreement.pdf}
-  \caption{Certified disagreement on common-support configs
-    ($n{=}561$, oracle-split tree).
-    RAW 23.5\% $\rightarrow$ \skyt{} 3.2\% (86.4\% relative reduction).}
-  \label{fig:disagreement}
-\end{figure}
-
-\begin{table}[t]
-  \caption{Certified disagreement ($1{-}\sameatc{}$) on oracle-split
-    common support ($n{=}561$).}
-  \label{tab:disagreement}
-  \begin{tabular}{lccc}
-    \toprule
-    Cell & Pre & Post & Rel.\ reduction \\
-    \midrule
-    GPT-4o-mini $T{=}0.0$ & 6.5\% & 0.9\% & 86.6\% \\
-    GPT-4o-mini $T{=}0.7$ & 39.4\% & 7.7\% & 80.5\% \\
-    Claude 4.5 $T{=}0.0$ & 11.5\% & 0.9\% & 91.8\% \\
-    Claude 4.5 $T{=}0.7$ & 27.6\% & 2.2\% & 91.9\% \\
-    Overall & 23.5\% & 3.2\% & 86.4\% \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-\subsection{RQ4: Larger gains under higher-temperature sampling}
-\label{sec:rq4}
-The primary explanatory result is the paired temperature interaction
-$\Delta_{T{=}0.7}-\Delta_{T{=}0.0}$ on the same oracle-split tree as RQ2
-and RQ3.
-It is $+18.0$\,pp (95\% CI 15.0--21.1) pooled across models
-($+$23.4\,pp for GPT-4o-mini, $+12.6$\,pp for Claude).
-The Plus-operational robustness interaction is $+18.1$\,pp (15.0--21.2).
-Cell lifts on Table~\ref{tab:heldout} are
-$+$29.3\,pp versus $+5.9$\,pp for GPT-4o-mini and
-$+$22.8\,pp versus $+10.1$\,pp for Claude Sonnet 4.5.
-\skyt{}'s repeatability benefit is substantially larger under
-higher-temperature sampling.
-
-Exploratory analyses consistently associate larger \skyt{} gains with greater
-baseline structural dispersion.
-Config-level Spearman correlation between baseline \sameat{} and lift is
-$-0.51$ (cluster bootstrap 95\% CI $-0.67$ to $-0.34$; Pearson $-0.50$).
-The number of distinct Plus-certified forms in the $N{=}20$ overlay predicts
-lift (Spearman $0.85$, $0.77$--$0.89$).
-Figure~\ref{fig:lift} shows the ceiling: many cells are rewritten onto a
-single form (lift $\approx 100{-}$baseline).
-We do not treat mechanically related quantities---whether the transformer
-fired, train modal share among already-certified programs---as independent
-discoveries.
-
-Mean rollback per config is 0 when \skyt{} on the test 10 also sees Plus
-tests during repair.
-The dominant observed source of zero repeatability gain is the absence of a
-certified train consensus (87/656 configurations; 36 tasks have at least one
-such cell).
-When Extra tests are reserved for final evaluation, four configurations
-exhibit held-out Plus correctness regressions, indicating that operational
-certification does not fully eliminate repair risk.
-The unseen Extra tests can detect regressions unavailable to \skyt{}, which
-confirms that the held-out tests are genuinely informative.
-Overall Plus correctness still improves ($+$2.7\,pp, 1.7--3.8).
-Python construct rates (loops, recursion, nested defs) do not isolate the
-wins; list comprehensions are more common among no-canon cells (35\% of
-generations) than among the ten largest lifts (0\%).
-Largest lifts include HumanEval/83 (\texttt{starts\_one\_ends}) under
-GPT-4o-mini, where pre \sameat{} is 0--1\% and \skyt{} rewrites the test slice
-onto the train consensus (post \sameat{} $1.0$; Plus-pass $29\%\rightarrow 100\%$
-at $T{=}0.7$).
-HumanEval/109 under Claude at $T{=}0.7$ already has Plus-pass $100\%$ before
-\skyt{}; \sameat{} still rises from $4.9\%$ to $100\%$.
-\skyt{} is most useful when instability is already measurable.
-
-\subsection{Repeatability as a defect signal (exploratory)}
-\label{sec:diversity-signal}
-This subsection is exploratory.
-The RQ split that would place it under ``does \sameat{} carry information
-beyond pass@$k$?'' is not in this draft yet; it sits at the end of Results
-until that restructure lands.
-A1 and A2 below are exploratory (pre-registered).
-The uniformity check in the discussion is post hoc and descriptive.
+A1 and A2 are exploratory (pre-registered).
+The uniformity check is post hoc and descriptive.
 
 Form diversity carried no detectable signal about hidden-test failure
 beyond the pass rate.
@@ -864,36 +630,128 @@ why \sameeval{} measures the former separately.
   \label{fig:lift}
 \end{figure}
 
-\section{Discussion}
-\label{sec:discussion}
-
-HumanEval+ functional correctness and generation repeatability diverge.
-Passing plus tests is not equivalent to repeatable generation.
-\sameat{} exposes a gap that pass rate alone does not show.
 In a post hoc check, when any Base-passing program failed Extra tests, all
-of them failed in 65\% [50.0, 80.3] of configurations.
-Hidden-test failures were often shared across forms, reflecting a common
+of them failed in 65.0\% [50.0, 80.3] of configurations.
+Hidden-test failures were often shared across forms, consistent with a common
 misreading of the specification rather than the quirks of one form, which
 is why form diversity could not signal them.
-Programs sharing a form had identical Extra outcomes in 100\% [100, 100] of
-forms.
-\skyt{} substantially increases pairwise agreement on held-out generations,
-and the observed effect is primarily on repeatability rather than
-functional success.
-The largest gains occur under higher-temperature sampling, and residual
-form disagreement among certified outputs is substantially reduced.
 
-The two shortcuts in Section~\ref{sec:motivation} remain available after
-Table~\ref{tab:he-table1}.
-Copy-first would freeze, for GPT-4o-mini at $T{=}0.7$, a passer from a cell
-whose certified pairs agree only $60.0\%$ of the time on the overlay.
-Stop-after-first-pass would report the $79.7\%$ plus-pass and never the
-$48.9\%$ \sameat{}.
-On the held-out splits, under the same Base-only operational information as
-\skyt{}, first Base-certified cache reaches 84.9\% Plus \sameat{} and
-Base-certified Consensus cache reaches 85.2\% (Table~\ref{tab:cache}).
-\skyt{} is 83.1\% and still regenerates.
-Split-mean cache coverage is 94.9\%; 11.7\% of cached Base passers fail Extra.
+
+\subsection{RQ4: Evaluating mitigation policies}
+\label{sec:rq4}
+RQ4 uses \sameeval{} to evaluate policies, not to promote one.
+On static prompts, replaying a stored program is the ceiling; \skyt{} is
+evaluated as a policy that still regenerates.
+
+\paragraph{Policies and design.}
+\label{sec:rq4-policies}
+The policies are raw generation, first Base-certified cache, Base Consensus
+cache, and \skyt{}.
+Each sees only HumanEval base tests at selection time.
+Extra tests are reserved for evaluation.
+
+\paragraph{Repeatability and correctness under each policy.}
+On the same 13{,}120 stored programs we apply \skyt{} to held-out test
+generations, using only HumanEval base tests during repair and reserving
+HumanEval+ extra tests for final evaluation.
+Plus \sameat{} (Plus-certification in the U-statistic) rises from 66.1\% to
+83.1\%, a 17.0 percentage-point increase (95\% CI 14.5--19.6).
+Plus pass changes from 83.3\% to 85.9\% ($+$2.7\,pp, 1.7--3.8) and does not
+deteriorate.
+The 66.1\% pre-\sameat{} differs from Table~\ref{tab:he-table1}'s 65.9\%
+because those scores are on the held-out generations, not all 20 draws; it is not a
+new overlay finding.
+The repeatability effect therefore persists under stronger tests unavailable
+to \skyt{} during repair.
+That is not a cross-benchmark generalization claim.
+
+Figure~\ref{fig:arrows} shows the four cells in Plus-pass $\times$ \sameat{}
+space: arrows are mostly vertical.
+GPT-4o-mini at $T{=}0.7$ is the exception that also moves right
+($+$5.9\,pp Plus pass, 3.5--8.5).
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{fig_arrows.pdf}
+  \caption{\skyt{} primarily improves repeatability rather than functional
+    success.
+    Circles are raw held-out generations; squares are \skyt{}-rewritten
+    generations.
+    Canon selection, repair, and rollback see only HumanEval Base tests.
+    The largest vertical gains occur at $T{=}0.7$, where baseline
+    structural variation is highest.}
+  \label{fig:arrows}
+\end{figure}
+
+\begin{table*}[t]
+  \caption{\skyt{} on the held-out generations, using only HumanEval base tests during
+    repair and reserving HumanEval+ extra tests for final evaluation.
+    Train 10 / held-out generations, $B{=}20$ splits.
+    Point estimates are task-means.
+    $\Delta$ CIs are paired cluster bootstrap by task (10{,}000, seed 20260723).}
+  \label{tab:heldout}
+  \begin{tabular}{llcccccc}
+    \toprule
+    Model & $T$ & Plus pre & Plus post & $\Delta$ plus & \sameat{} pre & \sameat{} post & $\Delta$ \sameat{} \\
+    \midrule
+    GPT-4o-mini & 0.0 & 79.2\% & 81.0\% & $+$1.7 [0.4, 3.5] & 74.3\% & 80.1\% & $+$5.9 [3.4, 8.8] \\
+    GPT-4o-mini & 0.7 & 79.6\% & 85.5\% & $+$5.9 [3.5, 8.5] & 49.3\% & 78.5\% & $+$29.3 [24.6, 34.1] \\
+    Claude 4.5 & 0.0 & 87.4\% & 88.6\% & $+$1.1 [0.1, 2.4] & 77.4\% & 87.5\% & $+$10.1 [7.3, 13.3] \\
+    Claude 4.5 & 0.7 & 86.8\% & 88.7\% & $+$1.9 [0.7, 3.4] & 63.5\% & 86.2\% & $+$22.8 [18.4, 27.2] \\
+    both & both & 83.3\% & 85.9\% & $+$2.7 [1.7, 3.8] & 66.1\% & 83.1\% & $+$17.0 [14.5, 19.6] \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+Most of \skyt{}'s observed effect is therefore on repeatability, not on
+simply producing more passing outputs.
+The $+$2.7\,pp Plus-pass interval excludes zero; we do not interpret that
+as evidence of better generalization beyond HumanEval+.
+Four configurations have a negative held-out Plus-pass delta
+(HumanEval/124 GPT-4o-mini at both temperatures; HumanEval/91 Claude at
+$T{=}0.0$; HumanEval/32 GPT-4o-mini at $T{=}0.7$); the paired overall
+interval still excludes zero.
+Mean rollback on those cells is 0: Extra tests failed after a
+Base-authorized commit.
+No configuration has a negative operational (Base-certified) \sameat{} delta.
+Operational \sameat{} is 72.0\%$\rightarrow$91.5\% ($+$19.6\,pp, 16.9--22.4);
+Base pass is 92.0\%$\rightarrow$94.7\%.
+Among generations that already pass the operational Base oracle,
+Extra-test survival is 88.5\%$\rightarrow$89.7\% ($+$1.2\,pp, 0.3--2.3).
+\skyt{} therefore raises repeatability without reducing the probability
+that an operationally certified output survives unseen Extra tests.
+
+\begin{table}[t]
+  \caption{Extra-test survival among Base-certified test generations
+    (oracle-split tree).
+    $\Delta$ CI is paired cluster bootstrap by task.}
+  \label{tab:extra-survival}
+  \begin{tabular}{lccc}
+    \toprule
+    Metric & Pre & Post & $\Delta$ \\
+    \midrule
+    Extra survival $\mid$ Base pass & 88.5\% & 89.7\% & $+$1.2 [0.3, 2.3] \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+On a static prompt, caching a Base-certified train program is a stronger
+\sameat{} baseline than \skyt{} (Table~\ref{tab:cache}).
+First Base-certified cache reaches 84.9\% Plus \sameat{} (80.0--89.4);
+Base-certified Consensus cache reaches 85.2\% (80.3--89.6).
+\skyt{} reaches 83.1\% (78.4--87.4), $-$1.8\,pp versus first-cache
+($-$2.9 to $-$0.8) and $-$2.1\,pp versus consensus-cache ($-$3.0 to $-$1.1).
+Both cache policies replay one Base-certified train program when one exists
+(split-mean coverage 94.9\%) and otherwise copy the raw test slice.
+When a Base passer is cached, 11.7\% (7.5--16.3) of those cached programs
+fail Extra tests; \skyt{} Extra-survival is 89.7\% versus 88.3\% for
+first-cache.
+\skyt{} Plus pass is 85.9\% versus 85.0\% / 85.2\% for the two caches.
+That is the intended trade-off: caching eliminates regeneration; \skyt{}
+constrains regeneration while still producing a new artifact.
+We do not claim that \skyt{} beats caching on HumanEval+.
+Static HumanEval prompts favor cache-based policies.
+\skyt{} is the policy for when regeneration remains necessary.
 
 \begin{table*}[t]
   \caption{Oracle-fair baselines: every policy sees only HumanEval Base tests
@@ -914,35 +772,104 @@ Split-mean cache coverage is 94.9\%; 11.7\% of cached Base passers fail Extra.
   \end{tabular}
 \end{table*}
 
-That is expected: caching eliminates regeneration.
-\skyt{} is the policy that still regenerates, then constrains the artifact
-toward a frozen form and rolls back if the operational oracle fails.
-We do not claim that this HumanEval+ replay proves \skyt{} is preferable to
-caching when regeneration is optional.
-Static prompts favor cache-based policies.
-\skyt{} is aimed at settings where regeneration remains necessary---changed
-context, changed requirements, incremental edits, or a policy that forbids
-replaying a stored file---and those settings are not this experiment.
-\skyt{}'s potential advantage over caching lies in regeneration settings
-where replay is unavailable or unsafe (changed context, incremental edits,
-model updates).
-Testing that is future work.
+On Plus pass, \skyt{} minus first Base-certified cache is $+0.9$\,pp
+[0.2, 1.8] and \skyt{} minus Base Consensus cache is $+0.7$\,pp [0.1, 1.5].
+On Extra survival the paired differences are $+1.4$\,pp [0.5, 2.6] and
+$+1.0$\,pp [0.2, 2.0].
+Those intervals exclude zero.
+They are correctness differences, not a repeatability advantage:
+cache remains higher on \sameat{} (84.9\% and 85.2\% versus 83.1\%).
 
-Relaxing the operational oracle from HumanEval+ to original HumanEval
-increases canon availability from 569/656 to 627/656 configurations, while
-held-out Plus repeatability remains essentially unchanged
-(Table~\ref{tab:heldout} versus Table~\ref{tab:plus-operational}).
-How often a train canon exists therefore depends on operational-oracle
-strictness and warrants further study; we do not treat that coverage shift
-as a causal claim beyond this design.
+\paragraph{Certified disagreement.}
+\label{sec:rq4-disagreement}
+\sameatc{} is undefined when a config has fewer than two certified test
+draws.
+The rates below use Plus-certification on the same oracle-separated
+experiment as RQ2.
+Plus-certified common support is 561/656 (85.5\%): configs with at least two
+Plus-passers on the held-out generations both before and after \skyt{}.
+On that set, \sameatc{} rises from 76.5\% to 96.8\%
+($+$20.3\,pp, 17.0--23.8).
+Equivalently, certified disagreement falls from 23.5\% to 3.2\%, an
+86.4\% relative reduction (Figure~\ref{fig:disagreement}).
+The Plus-operational robustness run yields a nearly identical reduction,
+23.2\% to 3.5\% (85.0\% relative) on 562/656.
+We do not headline all-eligible post figures that add configs becoming
+eligible only after \skyt{}.
 
-Diversity in the \emph{sample} is information (Table~\ref{tab:he-table1},
-and a later fragment-merge if one is built).
-Diversity in what is \emph{shipped} is still a re-read for no behavioral
-gain.
-This paper does not merge useful fragments from failing programs and does
-not claim semantic equivalence.
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{fig_disagreement.pdf}
+  \caption{Certified disagreement on common-support configs
+    ($n{=}561$, oracle-split tree).
+    RAW 23.5\% $\rightarrow$ \skyt{} 3.2\% (86.4\% relative reduction).}
+  \label{fig:disagreement}
+\end{figure}
 
+\begin{table}[t]
+  \caption{Certified disagreement ($1{-}\sameatc{}$) on oracle-split
+    common support ($n{=}561$).}
+  \label{tab:disagreement}
+  \begin{tabular}{lccc}
+    \toprule
+    Cell & Pre & Post & Rel.\ reduction \\
+    \midrule
+    GPT-4o-mini $T{=}0.0$ & 6.5\% & 0.9\% & 86.6\% \\
+    GPT-4o-mini $T{=}0.7$ & 39.4\% & 7.7\% & 80.5\% \\
+    Claude 4.5 $T{=}0.0$ & 11.5\% & 0.9\% & 91.8\% \\
+    Claude 4.5 $T{=}0.7$ & 27.6\% & 2.2\% & 91.9\% \\
+    Overall & 23.5\% & 3.2\% & 86.4\% \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+\paragraph{Temperature.}
+\label{sec:rq4-temperature}
+The primary explanatory result is the paired temperature interaction
+$\Delta_{T{=}0.7}-\Delta_{T{=}0.0}$ on the same oracle-split tree as RQ2
+and RQ3.
+It is $+18.0$\,pp (95\% CI 15.0--21.1) pooled across models
+($+$23.4\,pp for GPT-4o-mini, $+12.6$\,pp for Claude).
+The Plus-operational robustness interaction is $+18.1$\,pp (15.0--21.2).
+Cell lifts on Table~\ref{tab:heldout} are
+$+$29.3\,pp versus $+5.9$\,pp for GPT-4o-mini and
+$+$22.8\,pp versus $+10.1$\,pp for Claude Sonnet 4.5.
+\skyt{}'s repeatability benefit is substantially larger under
+higher-temperature sampling.
+
+Figure~\ref{fig:lift} shows the ceiling: many cells are rewritten onto a
+single form (lift $\approx 100{-}$baseline).
+We do not treat mechanically related quantities---whether the transformer
+fired, train modal share among already-certified programs---as independent
+discoveries.
+
+Mean rollback per config is 0 when \skyt{} on the held-out generations also sees Plus
+tests during repair.
+The dominant observed source of zero repeatability gain is the absence of a
+certified train consensus (87/656 configurations; 36 tasks have at least one
+such cell).
+When Extra tests are reserved for final evaluation, four configurations
+exhibit held-out Plus correctness regressions, indicating that operational
+certification does not fully eliminate repair risk.
+The unseen Extra tests can detect regressions unavailable to \skyt{}, which
+confirms that the held-out tests are genuinely informative.
+Overall Plus correctness still improves ($+$2.7\,pp, 1.7--3.8).
+Python construct rates (loops, recursion, nested defs) do not isolate the
+wins; list comprehensions are more common among no-canon cells (35\% of
+generations) than among the ten largest lifts (0\%).
+Largest lifts include HumanEval/83 (\texttt{starts\_one\_ends}) under
+GPT-4o-mini, where pre \sameat{} is 0--1\% and \skyt{} rewrites the test slice
+onto the train consensus (post \sameat{} $1.0$; Plus-pass $29\%\rightarrow 100\%$
+at $T{=}0.7$).
+HumanEval/109 under Claude at $T{=}0.7$ already has Plus-pass $100\%$ before
+\skyt{}; \sameat{} still rises from $4.9\%$ to $100\%$.
+\skyt{} is most useful when instability is already measurable.
+
+
+
+\paragraph{Where the effect comes from.}
+\label{sec:rq4-mechanism}
 When \skyt{} fires, the typical rewrite is Level-3 substitution of the
 entry-point AST with the train Certified Consensus function.
 The live transformer (agents off) has no separate Level-1 style pass:
@@ -981,7 +908,7 @@ $1.0$ means the test slice landed on the train form.
     L3-only inherit is a no-Docker substitution replay (not a strict subset
     of live \skyt{}).
     L1+L2 is the same transformer capped at Level 2 on a sibling Docker tree.
-    Repair/10 is the mean number of test-10 programs transformed per split.
+    Repair/10 is the mean number of held-out programs transformed per split.
     $\Delta$ CIs are paired cluster bootstrap by task (10{,}000, seed 20260723).}
   \label{tab:level-ablation}
   \begin{tabular}{lccccc}
@@ -996,6 +923,141 @@ $1.0$ means the test slice landed on the train form.
     \bottomrule
   \end{tabular}
 \end{table*}
+
+
+\paragraph{Robustness.}
+\label{sec:rq4-robustness}
+
+The same three rulers on the held-out replay are in
+Table~\ref{tab:fingerprint}.
+Held-out pre-\sameat{} on the held-out slice is 59.9 / 62.1 / 66.1 under the
+same three rulers.
+A persist replay of \skyt{} on held-out generations (0 new LLM calls; oracle inherited
+when the repaired entry point matches a stored program) raises post-\sameat{}
+to 74.8 / 77.4 / 83.2.
+Paired lifts are $+14.9$\,pp (12.6--17.3), $+15.4$\,pp (13.0--17.8), and
+$+17.1$\,pp (14.6--19.8).
+Tighter rulers make the raw gap larger; the SKYT lift survives all three.
+The SameEval replay ($66.1\rightarrow 83.2$, $+17.1$) matches the original
+Docker held-out table ($66.1\rightarrow 83.1$, $+17.0$) to $0.1$\,pp.
+
+
+A robustness run applies \skyt{} to the same held-out generations using the full Plus
+suite for canon selection, repair, and rollback.
+It yields an almost identical \sameat{} effect
+($+$17.0\,pp, 14.5--19.6), indicating that the repeatability result is not an
+artifact of which tests \skyt{} sees during repair.
+Plus pass on that run is 83.3\%$\rightarrow$85.7\% ($+$2.4\,pp, 1.5--3.5).
+Cell-level Plus \sameat{} lifts differ from Table~\ref{tab:heldout} by at
+most 0.5\,pp.
+We keep Table~\ref{tab:heldout} as the headline because it is the
+scientifically cleaner design.
+
+\begin{table}[t]
+  \caption{Robustness: \skyt{} on the held-out generations when pick and rollback also see
+    Plus tests.
+    $\Delta$ CIs are paired cluster bootstrap by task.}
+  \label{tab:plus-operational}
+  \begin{tabular}{lccc}
+    \toprule
+    Metric & Pre & Post & $\Delta$ \\
+    \midrule
+    Plus pass & 83.3\% & 85.7\% & $+$2.4 [1.5, 3.5] \\
+    Plus \sameat{} & 66.1\% & 83.1\% & $+$17.0 [14.5, 19.6] \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+A nested persist replay of unique 10/10 splits from the same seed
+(20260723; $B{=}k$ is the first $k$ splits; $B{=}20$ is the same set as the
+paper held-out run) yields \sameat{} lifts of $+17.1$ at $B{=}20$,
+$+17.3$ at $B{=}100$, and $+17.3$ at $B{=}500$
+(Table~\ref{tab:nested-b}).
+The $0.2$\,pp move from $B{=}20$ to $B{=}100$ is within the original CI;
+$B{=}500$ does not change the point estimate.
+This is not a new LLM run: repaired programs are persisted and scored under
+an inherited Plus oracle.
+
+\begin{table}[t]
+  \caption{Nested split-count robustness (persist replay, SameEval v2
+    \sameat{}, $n{=}656$).
+    $B{=}k$ is the first $k$ unique 10/10 splits from seed 20260723.
+    $\Delta$ CIs are paired cluster bootstrap by task.}
+  \label{tab:nested-b}
+  \begin{tabular}{rccc}
+    \toprule
+    $B$ & Pre \sameat{} & Post \sameat{} & $\Delta$ \\
+    \midrule
+    20 & 66.1\% & 83.2\% & $+$17.1 [14.6, 19.8] \\
+    50 & 66.0\% & 83.2\% & $+$17.2 [14.7, 19.8] \\
+    100 & 65.9\% & 83.2\% & $+$17.3 [14.7, 20.0] \\
+    500 & 65.9\% & 83.3\% & $+$17.3 [14.8, 20.0] \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+
+\section{Discussion}
+\label{sec:discussion}
+
+HumanEval+ functional correctness and generation repeatability diverge.
+Passing plus tests is not equivalent to repeatable generation.
+\sameat{} exposes a gap that pass rate alone does not show.
+
+The two shortcuts in Section~\ref{sec:motivation} remain available after
+Table~\ref{tab:he-table1}.
+Copy-first would freeze, for GPT-4o-mini at $T{=}0.7$, a passer from a cell
+whose certified pairs agree only $60.0\%$ of the time on the overlay.
+Stop-after-first-pass would report the $79.7\%$ plus-pass and never the
+$48.9\%$ \sameat{}.
+
+That is expected: caching eliminates regeneration.
+\skyt{} is the policy that still regenerates, then constrains the artifact
+toward a frozen form and rolls back if the operational oracle fails.
+We do not claim that this HumanEval+ replay proves \skyt{} is preferable to
+caching when regeneration is optional.
+Static prompts favor cache-based policies.
+\skyt{} is aimed at settings where regeneration remains necessary and replay
+is unavailable or unsafe---changed context, changed requirements, incremental
+edits, model updates, or a policy that forbids replaying a stored file.
+Those settings are not this experiment.
+
+Relaxing the operational oracle from HumanEval+ to original HumanEval
+increases canon availability from 569/656 to 627/656 configurations, while
+held-out Plus repeatability remains essentially unchanged
+(Table~\ref{tab:heldout} versus Table~\ref{tab:plus-operational}).
+How often a train canon exists therefore depends on operational-oracle
+strictness and warrants further study; we do not treat that coverage shift
+as a causal claim beyond this design.
+
+Diversity in the sample is what \sameat{} measures.
+Diversity in what is \emph{shipped} is still a re-read for no behavioral
+gain.
+This paper does not merge useful fragments from failing programs and does
+not claim semantic equivalence.
+
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+On HumanEval+, Plus pass and \sameat{} are far apart: 83.3\% versus 65.9\%,
+and the gap is widest at $T{=}0.7$.
+The validity evidence in this draft is the three computational rulers;
+human agreement, rank reversal, and sample-size reliability are still open.
+Repeatability does not carry information about hidden-test correctness
+beyond the pass rate (exploratory).
+\sameeval{} separates mitigation policies on held-out generations: a stored
+program is the ceiling on static prompts, and the \skyt{} lift comes from
+canonical substitution rather than statement removal.
+
+\sameeval{} leaves one question open by design.
+When regeneration is required---changed context, incremental edits, model
+updates---does constraining form toward a verified canon beat replaying a
+stored program?
+Answering it requires a regeneration track for \sameeval{}: the same tasks
+under perturbed contexts, where a stored program may no longer apply.
+We leave both the track and the comparison to future work.
 
 \section{Threats to Validity}
 \label{sec:threats}
@@ -1031,7 +1093,7 @@ Table~\ref{tab:extra-survival} reports Extra-test survival among
 Base-certified generations.
 RQ2, RQ3, and RQ4 use the same oracle-split tree; Plus-operational results
 are robustness (Table~\ref{tab:plus-operational}).
-A robustness run applies \skyt{} to the same test 10 using the full Plus
+A robustness run applies \skyt{} to the same held-out generations using the full Plus
 suite for pick, rollback, and scoring (Table~\ref{tab:plus-operational}).
 Plus \sameat{} lift matches to the reported precision.
 Using only the first $B\in\{5,10,15,20\}$ stored splits, the same@2 lift
@@ -1117,7 +1179,7 @@ Cluster bootstrap seed 20260723, 10{,}000 resamples.
 \texttt{python -m benchmark score} on
 \texttt{outputs/benchmark/humaneval\_plus\_164\_n20} is Table~\ref{tab:he-table1}
 (do not overwrite that tree).
-Summaries for \skyt{} on the test 10 with Plus tests during repair:
+Summaries for \skyt{} on held-out generations with Plus tests during repair:
 \texttt{outputs/benchmark/humaneval\_plus\_164\_n20\_skyt\_heldout/};
 \texttt{python -m skyt.heldout\_posthoc}.
 Summaries for \skyt{} on held-out test generations, using only HumanEval
@@ -1149,28 +1211,6 @@ Figures: \texttt{python paper/fse2027/make\_figure1.py} and
 \paragraph{What this package does not include.}
 Paid generation requires \texttt{--allow-api} and is not needed to recompute
 the table.
-
-\section{Conclusion}
-\label{sec:conclusion}
-
-Tests do not say whether the next passing program is the same program.
-\sameeval{} is an overlay that asks that question with a canonical-form
-fingerprint and \sameat{}.
-On all 164 HumanEval+ tasks at $N{=}20$, passing tests does not imply the
-same form.
-On the test 10, \skyt{} raises \sameat{} from 66.1\% to 83.1\%
-using only HumanEval base tests during repair and reserving HumanEval+ extra
-tests for final evaluation; Plus-test success changes only from 83.3\% to
-85.9\%.
-Among Base-certified outputs, Extra-test survival is 88.5\%$\rightarrow$89.7\%.
-Among certified outputs on common support, disagreement falls from 23.5\% to
-3.2\%.
-Repeatability is an independent empirical dimension of LLM-assisted
-generation and should be measured explicitly.
-
-Remaining work: human agreement with the fingerprint; and whether a stored
-form can absorb useful fragments from non-modal or failing draws.
-The pins in Section~\ref{sec:artifact} are the artifact surface for this paper.
 
 \begin{acks}
 %% TODO camera-ready.
