@@ -2,7 +2,10 @@
 
 %% FSE 2027 Research track --- SameEval on HumanEval+ (new study).
 %% Double-blind: keep anonymous/review until camera-ready.
-%% Empirical scores in this paper are HumanEval+ 164 / N=20 / 13,120.
+%% Empirical overlay scores: HumanEval+ 164 / N=20.
+%% T-grid pool: 4 models x 2 temperatures = 26,240 gens / 1,312 configs.
+%% Sonnet 5 default sampling: 3,280 gens / 164 configs (not in T-grid pool).
+%% RQ4 SKYT/cache: GPT-4o-mini + Claude Sonnet 4.5 only.
 %% Do not import SBES (12/3600) or MSR (15/4500) numbers.
 %% Primary evaluation: SKYT on held-out test generations, using only
 %% HumanEval base tests during repair and reserving HumanEval+ extra tests
@@ -73,17 +76,20 @@ That distinction matters where review and change control are expensive.
 \sameat{} is a U-statistic of order 2 with failures kept in the denominator;
 \sameatc{} asks the same question among certified pairs and is secondary.
 
-On 13{,}120 generations of all 164 HumanEval+ tasks, Plus pass is 83.3\%
-and \sameat{} is 65.9\%.
-GPT-4o-mini at $T{=}0.7$ reaches 79.7\% Plus pass and 48.9\% \sameat{}.
+On 26{,}240 generations of all 164 HumanEval+ tasks from four models at two
+temperatures, Plus pass is 86.4\% and \sameat{} is 67.7\%.
+A fifth model at provider-default sampling reaches 92.9\% and 66.3\%.
+GPT-4o-mini at $T{=}0.7$ reaches 79.7\% Plus pass and 48.9\% \sameat{},
+the lowest \sameat{} among T-grid cells.
 Tighter equivalence rulers widen that overlay gap.
-Repeatability is not a proxy for hidden-test correctness (exploratory):
-generation can be repeatably wrong, and the association with Extra-test
-failure does not survive adjustment for the Base pass rate.
+Repeatability is not a proxy for hidden-test correctness
+(exploratory): generation can be repeatably wrong, and form diversity does
+not signal Extra-test failure within a task.
+The expanded-pool replication is reported in Section~\ref{sec:rq3}.
 
-On held-out generations, with only HumanEval base tests used during repair
-and Extra tests reserved for evaluation, \skyt{} raises \sameat{} by
-17.0\,pp (14.5--19.6) while Plus pass rises by 2.7\,pp.
+On held-out generations of the two original models, with only HumanEval base
+tests used during repair and Extra tests reserved for evaluation, \skyt{}
+raises \sameat{} by 17.0\,pp (14.5--19.6) while Plus pass rises by 2.7\,pp.
 A stored-program cache remains the ceiling on static prompts.
 The gains are largest at $T{=}0.7$.
 
@@ -124,8 +130,8 @@ This paper measures scatter with \sameeval{} and then scores \skyt{} applied
 to held-out generations.
 
 We apply \sameeval{} to all 164 HumanEval+~\cite{liu2023evalplus} tasks at
-protocol $N{=}20$ (Table~\ref{tab:he-table1}): 13{,}120 generations, two models,
-two temperatures.
+protocol $N{=}20$ (Table~\ref{tab:he-table1}): four models at two temperatures
+plus one at provider-default sampling (29{,}520 generations / 1{,}476 configs).
 We then ask four questions.
 
 \begin{enumerate}
@@ -146,7 +152,9 @@ We then ask four questions.
 \begin{enumerate}
   \item \sameeval{}: the \sameat{} / \sameatc{} estimators, with failures in
         the denominator, and a versioned canonical-form fingerprint.
-  \item Validity evidence in this draft: three computational rulers.
+  \item Validity evidence in this draft: three computational rulers, a rank
+        comparison against pass rate, and sample-size reliability.
+        Human agreement is still pending.
         Human agreement, rank reversal, and sample-size reliability are not
         yet reported.
   \item Empirical findings: correctness does not imply repeatability;
@@ -384,10 +392,22 @@ The overlay oracle is the full HumanEval+ suite~\cite{liu2023evalplus}
 (Base plus Extra), not the original hidden HumanEval file alone.
 Dataset pin: \texttt{evalplus==0.3.1}, HumanEvalPlus \texttt{v0.1.10},
 \texttt{dataset\_md5 = 916d9bfe7b490c2447245ec91595fa4f}.
-Table~\ref{tab:he-table1} reports all 164 tasks at protocol $N{=}20$
-(GPT-4o-mini and Claude Sonnet 4.5,
-\texttt{claude-sonnet-4-5-20250929};
-$T\in\{0.0,0.7\}$; 13{,}120 generations / 656 configs).
+Table~\ref{tab:he-table1} reports all 164 tasks at protocol $N{=}20$.
+The T-grid models are GPT-4o-mini, Claude Sonnet 4.5
+(\texttt{claude-sonnet-4-5-20250929}), Claude Haiku 4.5
+(\texttt{claude-haiku-4-5-20251001}), and GPT-6 Luna (\texttt{gpt-6-luna}),
+each at $T\in\{0.0,0.7\}$ (26{,}240 generations / 1{,}312 configs).
+$T{=}0$ is the lowest-variance setting a user can choose, and it is still not
+deterministic; $T{=}0.7$ is a common sampling setting within the range used in
+code-generation evaluation~\cite{chen2021evaluating}.
+Claude Sonnet 5 (\texttt{claude-sonnet-5}) is scored at provider-default
+sampling only (3{,}280 generations / 164 configs): Haiku and Luna take a
+temperature; Luna uses reasoning effort \texttt{none}; Sonnet 5 exposes no
+sampling parameters.
+The Sonnet 5 row covers provider-default sampling, which users of recent
+frontier models cannot change.
+Expansion generations were produced with the Batch API (submitted 2026-09-24,
+downloaded 2026-09-25); the original two models were synchronous.
 Completions are stitched onto the prompt and scored in network-disabled Docker
 (\texttt{python:3.13-slim@sha256:7e3a6aca9d74f93cca21a91d86a8dad8c34749afd5b4a98ee481c9c47b9f5ed4}).
 Untrusted code is not executed on the host.
@@ -401,6 +421,8 @@ The overlay is scored with canonical-form fingerprints
 An exploratory analysis asks whether form diversity among Base-passing
 programs carries information about Extra-test failure beyond the Base pass
 rate.
+That question is pre-registered on the original overlay; the expanded pool
+in Section~\ref{sec:rq3} is a replication.
 Forms are equivalence classes under the same fingerprint, computed only on
 Base-passers.
 The modal form of a program is the largest class among the other
@@ -418,19 +440,21 @@ pooled estimate and the temperature interaction share those resamples.
 
 \paragraph{Confirmatory and exploratory claims.}
 \begin{table}[t]
-  \caption{Confirmatory and exploratory claims in this draft.
-    Human agreement, rank reversal, and sample-size reliability are not yet
-    reported, so they are not listed as confirmatory results.}
+  \caption{Confirmatory and exploratory claims in this draft.}
   \label{tab:claim-status}
   \begin{tabular}{ll}
     \toprule
     Status & Claim \\
     \midrule
     Confirmatory & RQ1 gap \\
+    Confirmatory & RQ2 computational rulers \\
+    Confirmatory & RQ2 rank comparison \\
+    Confirmatory & RQ2 sample-size reliability \\
     Confirmatory & RQ4 held-out $\Delta$ \sameat{} \\
     Confirmatory & RQ4 certified disagreement \\
     Confirmatory & RQ4 temperature interaction \\
-    Exploratory, pre-registered & RQ3 A1 and A2 \\
+    Exploratory, pre-registered & RQ3 A1 and A2 (original overlay) \\
+    Exploratory, replication & RQ3 expanded-pool diversity analyses \\
     Post hoc, descriptive & RQ3 uniformity check \\
     Post hoc, descriptive & RQ4 case examples \\
     \bottomrule
@@ -475,40 +499,43 @@ Post scores live in sibling trees;
 \subsection{RQ1: Correctness does not imply repeatability}
 \label{sec:rq1}
 Table~\ref{tab:he-table1} is \sameeval{} on all 164 HumanEval+ tasks at
-protocol $N{=}20$ (13{,}120 generations).
+protocol $N{=}20$.
 Aggregation is a task-mean with cluster bootstrap by \texttt{task\_id}
 (10{,}000, seed 20260723).
-Figure~\ref{fig:overview} shows the four model$\times$temperature cells.
+Figure~\ref{fig:overview} shows the original two models; full cells are in
+Table~\ref{tab:he-table1}.
 
-Overall plus-pass is 83.3\% (95\% CI 78.3--88.0).
-\sameat{} is 65.9\% (61.0--70.6).
-\sameatc{} is 76.6\% (73.0--80.0) and is computed on 562/656 configs
-(94 configs had fewer than two plus-passers and are omitted from that column
+On the four-model T-grid pool (26{,}240 generations / 1{,}312 configs), Plus
+pass is 86.4\% (95\% CI 82.4--90.2), \sameat{} is 67.7\% (63.6--71.6), and
+\sameatc{} is 76.9\% (74.0--79.7) on 1{,}167/1{,}312 configs
+(145 configs had fewer than two Plus-passers and are omitted from that column
 only).
+Claude Sonnet 5 at provider-default sampling reaches 92.9\% Plus pass and
+66.3\% \sameat{}.
 $T{=}0.0$ is not 100\% \sameatc{}.
 Passing tests therefore leaves a substantial repeatability gap.
-The form disagreement among passers is $100\%-76.6\%=23.4$\,pp on overlay
-\sameatc{}.
 
-The cell that drives the structural story is GPT-4o-mini at $T{=}0.7$:
-plus-pass 79.7\%, \sameatc{} 60.0\%, \sameat{} 48.9\%.
+The cell with the lowest T-grid \sameat{} is GPT-4o-mini at $T{=}0.7$:
+Plus pass 79.7\%, \sameatc{} 60.0\%, \sameat{} 48.9\%.
 Tests pass; forms still differ.
 
 \begin{figure*}[t]
   \centering
   \includegraphics[width=\textwidth]{fig1.pdf}
-  \caption{\sameeval{} on HumanEval+ (164 tasks, $N{=}20$, 13{,}120 generations).
+  \caption{\sameeval{} on HumanEval+ for the original two models
+    (164 tasks, $N{=}20$).
     Overlay only.
+    Full T-grid and Sonnet 5 cells are in Table~\ref{tab:he-table1}.
     Whiskers are 95\% cluster bootstrap by task.}
   \label{fig:overview}
 \end{figure*}
 
 \begin{table*}[t]
-  \caption{\sameeval{} on HumanEval+, 164 tasks.
-    $N{=}20$. Overlay only.
+  \caption{\sameeval{} on HumanEval+, 164 tasks, $N{=}20$. Overlay only.
     CIs are 95\% cluster bootstrap by task.
-    \sameatc{} drops configs with fewer than two plus-passers
-    (94/656 omitted).}
+    \sameatc{} drops configs with fewer than two Plus-passers.
+    The T-grid pool excludes Sonnet 5.
+    The RQ4-subset row is GPT-4o-mini + Claude Sonnet 4.5.}
   \label{tab:he-table1}
   \begin{tabular}{llccc}
     \toprule
@@ -518,7 +545,13 @@ Tests pass; forms still differ.
     GPT-4o-mini & 0.7 & 79.7\% & 60.0\% & 48.9\% \\
     Claude Sonnet 4.5 & 0.0 & 87.4\% & 88.4\% & 77.3\% \\
     Claude Sonnet 4.5 & 0.7 & 86.8\% & 72.2\% & 63.2\% \\
-    both & both & 83.3\% & 76.6\% & 65.9\% \\
+    Claude Haiku 4.5 & 0.0 & 89.0\% & 96.4\% & 85.8\% \\
+    Claude Haiku 4.5 & 0.7 & 89.8\% & 64.5\% & 57.8\% \\
+    GPT-6 Luna & 0.0 & 89.5\% & 81.4\% & 72.6\% \\
+    GPT-6 Luna & 0.7 & 89.9\% & 68.7\% & 61.7\% \\
+    Claude Sonnet 5 & default & 92.9\% & 71.7\% & 66.3\% \\
+    All T-grid models & both & 86.4\% & 76.9\% & 67.7\% \\
+    RQ4 subset & both & 83.3\% & 76.6\% & 65.9\% \\
     \bottomrule
   \end{tabular}
 \end{table*}
@@ -528,17 +561,35 @@ Tests pass; forms still differ.
 \label{sec:rq2}
 Human agreement with the fingerprint is pending; a 128-pair dual-annotator
 protocol is prepared (Section~\ref{sec:threats}).
-Rank reversal against the pass rate and sample-size reliability are not yet
-computed, so this draft does not report them.
 
+\paragraph{Computational rulers.}
 The overlay \sameat{} gap is not an artifact of one fingerprint.
 A stricter parse-and-unparse identity yields 59.8\% (55.1--64.4);
 AST identity after docstring stripping yields 61.9\% (57.1--66.5);
 the production SameEval fingerprint ($\alpha$-rename) is 65.9\% (61.0--70.6).
-
 Tighter rulers widen the overlay gap.
 The Pre and post columns of Table~\ref{tab:fingerprint} are the held-out
 mitigation comparison and are read with Section~\ref{sec:rq4}.
+
+\paragraph{Rank comparison against pass rate.}
+At each temperature we compare every T-grid model pair on Plus pass and on
+\sameatc{} (common support), with paired task-cluster CIs.
+A rank reversal is claimed only when the \sameatc{} CI excludes zero with
+sign opposite to the Plus-pass difference.
+At $T{=}0.0$, GPT-6 Luna outranks GPT-4o-mini on Plus pass
+($+10.2$\,pp [4.5, 16.2]) while GPT-4o-mini outranks Luna on \sameatc{}
+($+12.3$\,pp [7.3, 17.3]): the two measures reverse those two models.
+Luna similarly reverses against Haiku 4.5 and Sonnet 4.5 on \sameatc{} even
+when the Plus-pass differences include zero.
+At $T{=}0.7$, Haiku 4.5 outranks Sonnet 4.5 on Plus pass in point estimate
+while Sonnet 4.5 outranks Haiku on \sameatc{}
+($-9.0$\,pp [$-14.9$, $-3.2$] for Haiku minus Sonnet).
+
+\paragraph{Sample-size reliability.}
+Subsampling the first $N\in\{4,6,10,14\}$ stored generations per config,
+the task-cluster CI width for \sameat{} shrinks slowly and the estimate
+correlates with the $N{=}20$ value at $0.84$--$0.97$ already at $N{=}4$ and
+at $0.97$--$0.99$ by $N{=}10$ across cells.
 
 \begin{table}[t]
   \caption{Overlay and held-out \sameat{} under three equivalence rulers.
@@ -558,34 +609,61 @@ mitigation comparison and are read with Section~\ref{sec:rq4}.
 
 \subsection{RQ3: Repeatability and hidden-test correctness}
 \label{sec:rq3}
-A1 and A2 are exploratory (pre-registered).
+Both analyses below were pre-registered on the original overlay and are
+exploratory.
+The expanded pool is a replication: GPT-4o-mini, Claude Sonnet 4.5, Claude
+Haiku 4.5, and GPT-6 Luna at $T\in\{0.0,0.7\}$, plus Claude Sonnet 5 at
+provider-default sampling (1{,}476 configs).
+Sonnet 5 is inside that pool, not a separate diversity row.
 The uniformity check is post hoc and descriptive.
 
-Form diversity carried no detectable signal about hidden-test failure
-beyond the pass rate.
+On the pre-registered overlay, form diversity carried no detectable signal
+about hidden-test failure beyond the pass rate.
 Among Base-passing programs, modal and non-modal forms survived Extra tests
 at the same rate ($\Delta = 0.06$\,pp [$-1.4$, $1.4$]).
 Configurations with more diverse forms had slightly higher Extra-failure
 rates ($\rho = 0.13$ [0.02, 0.23]), but the association did not survive
 adjustment for Base pass rate (partial $\rho = 0.07$ [$-0.04$, 0.18]) or
 for task (within-task $\rho = 0.02$ [$-0.10$, 0.13]).
-Configurations whose Base-passing programs all shared one form still failed
-Extra tests 10.7\% of the time: repeatable generation can be repeatably wrong.
+
+In the expanded pool, the association survives adjustment for Base pass rate
+(partial $\rho = 0.13$ [0.06, 0.20]) but not for task (within-task
+$\rho = 0.04$ [$-0.02$, 0.11]).
+Modal and non-modal forms again survived Extra tests at similar rates
+($\Delta = -0.01$\,pp [$-1.4$, $1.5$]).
+The association is therefore between tasks: tasks whose passing programs
+take many forms also tend to fail Extra tests, but within a task, more
+diverse configurations are not detectably more error-prone.
+Task-level factors such as specification ambiguity or difficulty may drive
+both.
+
+On the pre-registered overlay, configurations whose Base-passing programs
+all shared one form still failed Extra tests 10.7\% of the time: repeatable
+generation can be repeatably wrong.
+In a post hoc check, when any Base-passing program failed Extra tests, all
+of them failed in 65.0\% [50.0, 80.3] of configurations (expanded pool:
+53.0\% [39.6, 66.7]).
+Hidden-test failures were often shared across forms, consistent with a
+common misreading of the specification rather than the quirks of one form,
+which is why form diversity does not signal them within a task.
+
 Repeatability and hidden-test correctness are distinct properties, which is
 why \sameeval{} measures the former separately.
 
 \begin{table}[t]
-  \caption{Exploratory diversity signal on the frozen overlay
+  \caption{Exploratory diversity signal
     (task-cluster bootstrap, 10{,}000 resamples, seed 20260723).
-    Exploratory.
-    The partial correlation (controlling for Base pass rate) tests whether
-    diversity carries information beyond the pass rate.
+    Panels A--B are the pre-registered original overlay.
+    Panel C is a replication on the expanded pool (GPT-4o-mini, Claude
+    Sonnet 4.5, Claude Haiku 4.5, and GPT-6 Luna at $T\in\{0.0,0.7\}$, plus
+    Claude Sonnet 5 at provider-default sampling).
     Panel A is Extra survival.
     Panel B is Spearman $\rho(D_c, F_c)$; partial $\rho$ controls for
     $n_c/20$; within-task $\rho$ uses task-demeaned values and is undefined
     inside one cell.
-    Exclusions: 34 configs with $n_c{<}2$; 396 configs with no modal versus
-    non-modal contrast; 289 unclassified programs from leave-one-out ties.}
+    Exclusions on the original overlay: 34 configs with $n_c{<}2$; 396
+    configs with no modal versus non-modal contrast; 289 unclassified
+    programs from leave-one-out ties.}
   \label{tab:diversity-signal}
   \begin{tabular}{lccc}
     \toprule
@@ -606,6 +684,13 @@ why \sameeval{} measures the former separately.
     Claude 4.5 $T{=}0.0$ & 0.03 [$-0.14$, 0.21] & $-0.01$ [$-0.17$, 0.18] & --- \\
     Claude 4.5 $T{=}0.7$ & 0.20 [0.03, 0.36] & 0.16 [$-0.01$, 0.33] & --- \\
     Pooled & 0.13 [0.02, 0.23] & 0.07 [$-0.04$, 0.18] & 0.02 [$-0.10$, 0.13] \\
+    \midrule
+    \multicolumn{4}{l}{\textit{Panel C. Replication, expanded pool (pooled)}} \\
+    A1 & 91.0\% & 91.0\% & $-0.01$ [$-1.4$, $1.5$] \\
+    \midrule
+    & $\rho$ & partial $\rho$ & within-task $\rho$ \\
+    \midrule
+    A2 & 0.17 [0.09, 0.24] & 0.13 [0.06, 0.20] & 0.04 [$-0.02$, 0.11] \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -630,15 +715,12 @@ why \sameeval{} measures the former separately.
   \label{fig:lift}
 \end{figure}
 
-In a post hoc check, when any Base-passing program failed Extra tests, all
-of them failed in 65.0\% [50.0, 80.3] of configurations.
-Hidden-test failures were often shared across forms, consistent with a common
-misreading of the specification rather than the quirks of one form, which
-is why form diversity could not signal them.
 
 
 \subsection{RQ4: Evaluating mitigation policies}
 \label{sec:rq4}
+RQ4 uses the two original models (GPT-4o-mini, Claude Sonnet 4.5); the
+expansion models are scored on the overlay only.
 RQ4 uses \sameeval{} to evaluate policies, not to promote one.
 On static prompts, replaying a stored program is the ceiling; \skyt{} is
 evaluated as a policy that still regenerates.
@@ -658,7 +740,8 @@ Plus \sameat{} (Plus-certification in the U-statistic) rises from 66.1\% to
 83.1\%, a 17.0 percentage-point increase (95\% CI 14.5--19.6).
 Plus pass changes from 83.3\% to 85.9\% ($+$2.7\,pp, 1.7--3.8) and does not
 deteriorate.
-The 66.1\% pre-\sameat{} differs from Table~\ref{tab:he-table1}'s 65.9\%
+The 66.1\% pre-\sameat{} differs from the RQ4-subset row of
+Table~\ref{tab:he-table1} (65.9\%)
 because those scores are on the held-out generations, not all 20 draws; it is not a
 new overlay finding.
 The repeatability effect therefore persists under stronger tests unavailable
@@ -835,8 +918,8 @@ The Plus-operational robustness interaction is $+18.1$\,pp (15.0--21.2).
 Cell lifts on Table~\ref{tab:heldout} are
 $+$29.3\,pp versus $+5.9$\,pp for GPT-4o-mini and
 $+$22.8\,pp versus $+10.1$\,pp for Claude Sonnet 4.5.
-\skyt{}'s repeatability benefit is substantially larger under
-higher-temperature sampling.
+The benefit is larger at $T{=}0.7$ than at $T{=}0.0$ ($+18.0$\,pp); with two
+settings we do not estimate a dose--response curve.
 
 Figure~\ref{fig:lift} shows the ceiling: many cells are rewritten onto a
 single form (lift $\approx 100{-}$baseline).
@@ -1041,15 +1124,17 @@ not claim semantic equivalence.
 \section{Conclusion}
 \label{sec:conclusion}
 
-On HumanEval+, Plus pass and \sameat{} are far apart: 83.3\% versus 65.9\%,
-and the gap is widest at $T{=}0.7$.
-The validity evidence in this draft is the three computational rulers;
-human agreement, rank reversal, and sample-size reliability are still open.
-Repeatability does not carry information about hidden-test correctness
-beyond the pass rate (exploratory).
-\sameeval{} separates mitigation policies on held-out generations: a stored
-program is the ceiling on static prompts, and the \skyt{} lift comes from
-canonical substitution rather than statement removal.
+On HumanEval+, Plus pass and \sameat{} remain far apart on the T-grid pool:
+86.4\% versus 67.7\%, and the gap is widest at $T{=}0.7$
+(GPT-4o-mini: 79.7\% versus 48.9\%).
+Three computational rulers preserve that gap; \sameatc{} can reverse model
+order relative to Plus pass, and $N{=}10$ already tracks $N{=}20$ closely.
+We found no evidence that, within a task, form diversity signals
+hidden-test failure (exploratory).
+The expanded-pool replication is reported in Section~\ref{sec:rq3}.
+\sameeval{} separates mitigation policies on the two original models' held-out
+generations: a stored program is the ceiling on static prompts, and the
+\skyt{} lift comes from canonical substitution rather than statement removal.
 
 \sameeval{} leaves one question open by design.
 When regeneration is required---changed context, incremental edits, model
@@ -1104,8 +1189,11 @@ A nested persist replay of $B\in\{20,50,100,500\}$ from the same seed
 $B{=}500$ equals $B{=}100$ at this precision.
 
 \paragraph{External.}
-HumanEval+ only; Python only; two closed models; two temperatures;
-function-level tasks.
+HumanEval+ only; Python only; five closed models from two API vendors
+(no open-weight model); two temperatures plus provider-default sampling for
+one model; no dose--response claim; function-level tasks.
+RQ4 is evaluated on two models; replicating the policy comparison on the
+expansion models is future work.
 No repository-level change, no embedded execution environment, and no
 safety-certification study.
 We do not claim that these results demonstrate readiness for
@@ -1127,16 +1215,22 @@ Extra tests are incomplete, so Extra survival is a proxy for hidden
 correctness.
 $F_c$ is zero for many configurations; the association uses rank correlation
 for that reason.
-A1 is estimable only for configurations with at least two passing forms
-(226 of 656); it says nothing about configurations with a single passing form.
+On the pre-registered overlay, A1 is estimable only for configurations with
+at least two passing forms (226 of 656); it says nothing about
+configurations with a single passing form.
 The uniformity check is post hoc.
+The expanded-pool replication pools models and has about twice the
+configurations of the original analysis; its partial correlation excludes
+zero while its within-task correlation does not.
+We read the difference as a small between-task association, not as a
+within-task signal.
 
 \paragraph{Statistical conclusion.}
 Inference is a cluster bootstrap by task, not Wilson on $C(N,2)$ pairs.
 Treatment-effect CIs are paired.
 Conditional-metric support is reported.
-Four model$\times$temperature cells share tasks; per-cell intervals should
-not be read as four independent populations.
+Model$\times$temperature cells share tasks; per-cell intervals should
+not be read as independent populations.
 
 \paragraph{Two pairwise columns.}
 \sameat{} keeps failures in the denominator.
@@ -1173,6 +1267,10 @@ Oracle image
 \texttt{python:3.13-slim@sha256:7e3a6aca9d74f93cca21a91d86a8dad8c34749afd5b4a98ee481c9c47b9f5ed4},
 network disabled, read-only root.
 Table~\ref{tab:he-table1} is all 164 tasks at $N{=}20$.
+Expansion overlay trees:
+\texttt{outputs/benchmark/humaneval\_plus\_164\_n20\_expansion/\{haiku45,luna,sonnet5\}/}
+with batch results under \texttt{.../batches/} and pooled analysis under
+\texttt{.../analysis/}.
 Cluster bootstrap seed 20260723, 10{,}000 resamples.
 
 \paragraph{Recompute (no API).}

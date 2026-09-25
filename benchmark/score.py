@@ -60,7 +60,8 @@ def load_configs(source_dir: Path) -> Dict[ConfigKey, List[Dict[str, Any]]]:
             model = record.get("model")
             if task_id is None or model is None:
                 continue
-            temperature = float(record.get("temperature", 0.0))
+            raw_temp = record.get("temperature", 0.0)
+            temperature = None if raw_temp is None else float(raw_temp)
             grouped[(str(task_id), str(model), temperature)].append(record)
     if not grouped:
         raise ValueError(f"No generation records in {source_dir}")
@@ -83,7 +84,15 @@ def score_directory(
     grouped = load_configs(source_dir)
     rows = []
     n_skipped_incomplete = 0
-    for (task_id, model, temperature), records in sorted(grouped.items()):
+    for (task_id, model, temperature), records in sorted(
+        grouped.items(),
+        key=lambda item: (
+            item[0][0],
+            item[0][1],
+            item[0][2] is None,
+            -1.0 if item[0][2] is None else float(item[0][2]),
+        ),
+    ):
         by_index = {
             int(record.get("run_index", -1)): record for record in records
         }
@@ -114,7 +123,7 @@ def score_directory(
             {
                 "task_id": task_id,
                 "model": model,
-                "temperature": float(temperature),
+                "temperature": None if temperature is None else float(temperature),
                 "n": analysis["n"],
                 "n_certified": analysis["n_certified"],
                 "same_at_2": analysis["same_at_2"],

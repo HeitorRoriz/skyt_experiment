@@ -135,7 +135,8 @@ def build_report(
         raise ValueError("No scored configs")
     groups: Dict[Tuple[str, float], List[Dict[str, Any]]] = {}
     for row in rows:
-        key = (str(row["model"]), float(row["temperature"]))
+        raw_temp = row["temperature"]
+        key = (str(row["model"]), None if raw_temp is None else float(raw_temp))
         groups.setdefault(key, []).append(row)
     slices = [
         _slice_payload(
@@ -144,7 +145,10 @@ def build_report(
             temperature=key[1],
             n_bootstrap=n_bootstrap,
         )
-        for key in sorted(groups)
+        for key in sorted(
+            groups,
+            key=lambda item: (item[0], item[1] is None, -1.0 if item[1] is None else item[1]),
+        )
     ]
     inference = dict(INFERENCE)
     inference["n_bootstrap"] = n_bootstrap
