@@ -173,6 +173,44 @@ def test_posthoc_uniformity_does_not_touch_preregistered_files(tmp_path: Path):
     assert (out / "posthoc_uniformity_per_config.csv").is_file()
 
 
+def test_min_distinct_forms_filter_keeps_default_output(tmp_path: Path):
+    source = tmp_path / "src"
+    source.mkdir()
+    records = []
+    for index in range(4):
+        records.append(
+            _record("HumanEval/0", "m", 0.0, index, _fn("f", "return x"), True, False)
+        )
+    for index in range(4):
+        body = "return x" if index < 2 else "return x + 1"
+        records.append(
+            _record("HumanEval/1", "m", 0.0, index, _fn("f", body), True, index < 2)
+        )
+    (source / "one.jsonl").write_text(
+        "\n".join(json.dumps(record) for record in records) + "\n",
+        encoding="utf-8",
+    )
+    out = tmp_path / "out"
+    from benchmark.diversity_signal import posthoc_uniformity
+
+    default = posthoc_uniformity([source], out, n_bootstrap=20, seed=1)
+    default_path = out / "posthoc_uniformity.json"
+    frozen = default_path.read_bytes()
+    assert default["min_distinct_forms"] == 1
+    assert default["b1"]["pooled"]["n_configs"] == 2
+    filtered = posthoc_uniformity(
+        [source], out, n_bootstrap=20, seed=1, min_distinct_forms=2
+    )
+    assert default_path.read_bytes() == frozen
+    assert filtered["min_distinct_forms"] == 2
+    assert filtered["b1"]["pooled"]["n_configs"] == 1
+    assert (out / "posthoc_uniformity_min2.json").is_file()
+    assert (out / "posthoc_uniformity_min2_per_config.csv").is_file()
+    kept = (out / "posthoc_uniformity_min2_per_config.csv").read_text(encoding="utf-8")
+    assert "HumanEval/1" in kept
+    assert "HumanEval/0" not in kept
+
+
 def test_pooled_mean_interval_matches_helper():
     values = [0.1, 0.2, 0.4, 0.5]
     ids = ["t1", "t1", "t2", "t2"]

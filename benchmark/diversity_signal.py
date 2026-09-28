@@ -904,6 +904,7 @@ def _uniformity_row(records: Sequence[Dict[str, Any]]) -> Dict[str, Any]:
         "a2_eligible": row["a2_eligible"],
         "n_forms_uniform": uniform,
         "n_forms_ge2": multi,
+        "n_distinct_forms": len(set(row["keys"])),
     }
 
 
@@ -946,6 +947,7 @@ def posthoc_uniformity(
     *,
     n_bootstrap: int = 10000,
     seed: int = BOOTSTRAP_SEED,
+    min_distinct_forms: int = 1,
 ) -> Dict[str, Any]:
     """Post hoc, descriptive. Does not write pre-registered files."""
     _forbidden_write(out_dir)
@@ -962,6 +964,7 @@ def posthoc_uniformity(
             grouped[(str(task_id), str(model), temperature)].append(record)
     rows = [_uniformity_row(records) for records in grouped.values()]
     a2_rows = [row for row in rows if row["a2_eligible"]]
+    a2_rows = [r for r in a2_rows if r["n_distinct_forms"] >= min_distinct_forms]
     tasks = sorted({str(row["task_id"]) for row in a2_rows})
     cells = sorted({str(row["cell"]) for row in a2_rows})
     by_cell = {cell: [row for row in a2_rows if row["cell"] == cell] for cell in cells}
@@ -1029,6 +1032,7 @@ def posthoc_uniformity(
         "n_bootstrap": n_bootstrap,
         "source_dirs": [str(path) for path in source_dirs],
         "eligibility": "n_c >= 2 (same as A2)",
+        "min_distinct_forms": min_distinct_forms,
         "b1": {
             "pooled": pack(a2_rows, "pooled.", intervals),
             "cells": {cell: pack(selected, f"{cell}.", intervals) for cell, selected in by_cell.items()},
@@ -1046,8 +1050,14 @@ def posthoc_uniformity(
             "stop_for_investigation": claude_mixed > 0,
         },
     }
-    atomic_write_json(out_dir / "posthoc_uniformity.json", report)
-    _write_uniformity_csv(out_dir / "posthoc_uniformity_per_config.csv", a2_rows)
+    if min_distinct_forms == 1:
+        json_name = "posthoc_uniformity.json"
+        csv_name = "posthoc_uniformity_per_config.csv"
+    else:
+        json_name = f"posthoc_uniformity_min{min_distinct_forms}.json"
+        csv_name = f"posthoc_uniformity_min{min_distinct_forms}_per_config.csv"
+    atomic_write_json(out_dir / json_name, report)
+    _write_uniformity_csv(out_dir / csv_name, a2_rows)
     return report
 
 
@@ -1081,9 +1091,16 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
         action="store_true",
         help="Post hoc descriptive check. Does not rewrite pre-registered outputs.",
     )
+    parser.add_argument("--min-distinct-forms", type=int, default=1)
     args = parser.parse_args(argv)
     if args.posthoc_uniformity:
-        posthoc_uniformity(args.trees, args.out, n_bootstrap=args.n_boot, seed=args.seed)
+        posthoc_uniformity(
+            args.trees,
+            args.out,
+            n_bootstrap=args.n_boot,
+            seed=args.seed,
+            min_distinct_forms=args.min_distinct_forms,
+        )
     else:
         analyze(args.trees, args.out, n_bootstrap=args.n_boot, seed=args.seed)
 

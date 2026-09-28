@@ -2,7 +2,7 @@
 
 ACM research-track draft. Data Availability points at the repository README, which lists the study and one command per table.
 
-`main.tex` uses `acmart` with the `acmsmall`, `screen`, `review`, and `anonymous` options. Author names stay commented out until camera-ready.
+`main.tex` uses `acmart` with the `acmsmall`, `screen`, `review`, and `anonymous` options. Author names are omitted for review.
 
 ## Compile
 

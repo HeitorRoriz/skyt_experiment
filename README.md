@@ -71,7 +71,8 @@ The "Expected" column gives one value per element, for a quick check.
 | Table 4, held-out columns; nested splits (Sec. 6.4.5) | `python -m skyt.heldout_robust --analyze-only` | SameEval ruler Δ +17.1 |
 | Table 5, original rows | `diversity_signal`, first command below | A1 Δ 0.06 |
 | Table 5, replication rows | `diversity_signal`, second command below | within-task ρ 0.04 |
-| Uniformity check (Sec. 6.3) | `diversity_signal --posthoc-uniformity`, below | 65.0% [50.0, 80.3]. The paper's 53.3% [34.7, 72.0] keeps only configs with at least two distinct Base-passing forms; this flag does not apply that filter. |
+| Uniformity check, original (Sec. 6.3) | `diversity_signal --posthoc-uniformity --min-distinct-forms 2`, below | 53.3% [34.6, 72.2]. The paper prints [34.7, 72.0]. |
+| Uniformity check, five-model replication (Sec. 6.3) | same flag, second command below | 41.5% [27.3, 55.9]. The paper prints [27.8, 56.0]. |
 | Tables 6 and 8; temperature interaction (Sec. 6.4.3) | `python -m skyt.oracle_split_posthoc` | same@2 66.1 → 83.1 |
 | Table 7 (cache baselines) | `python -m skyt.oracle_fair` | First-cache same@2 84.9 |
 | Table 9, L3-only row | `python -m skyt.level_ablation --max-level 3` | same@2 84.2 |
@@ -104,11 +105,17 @@ python -m benchmark.diversity_signal --trees outputs/benchmark/humaneval_plus_16
   --out outputs/benchmark/diversity_signal_model_replication
 ```
 
-Uniformity check. This writes `posthoc_uniformity.json` next to the diversity-signal report and does not rewrite that report. The printed rate is 65.0% [50.0, 80.3].
+Uniformity check, restricted to configurations with at least two distinct Base-passing forms. These commands write `posthoc_uniformity_min2.json` and do not rewrite `posthoc_uniformity.json`.
 
 ```bash
 python -m benchmark.diversity_signal --trees outputs/benchmark/humaneval_plus_164_n20 \
-  --out outputs/benchmark/diversity_signal --posthoc-uniformity
+  --out outputs/benchmark/diversity_signal --posthoc-uniformity --min-distinct-forms 2
+
+python -m benchmark.diversity_signal --trees outputs/benchmark/humaneval_plus_164_n20 \
+  outputs/benchmark/humaneval_plus_164_n20_expansion/haiku45 \
+  outputs/benchmark/humaneval_plus_164_n20_expansion/luna \
+  outputs/benchmark/humaneval_plus_164_n20_expansion/sonnet5 \
+  --out outputs/benchmark/diversity_signal_model_replication --posthoc-uniformity --min-distinct-forms 2
 ```
 
 Split-half reliability. Writes `outputs/benchmark/humaneval_plus_164_n20_expansion/analysis/t6_split_half.json`.
