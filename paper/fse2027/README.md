@@ -1,6 +1,6 @@
 # FSE 2027 paper source
 
-ACM research-track draft. The study and the recompute commands are in the repository README.
+ACM research-track draft. Data Availability points at the repository README, which lists the study and one command per table.
 
 `main.tex` uses `acmart` with the `acmsmall`, `screen`, `review`, and `anonymous` options. Author names stay commented out until camera-ready.
 

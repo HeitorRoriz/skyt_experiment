@@ -56,15 +56,13 @@ On all 164 HumanEval+ tasks with four models at two temperatures
 (26{,}240 generations), Plus pass is 86.4\% but \sameat{} is 67.7\%; a fifth
 model at provider-default sampling passes 92.9\% of the time yet produces the
 same code in only 66.3\% of pairs.
-Raising temperature from 0 to 0.7 lowers \sameat{} by 10.95 to 28.01 points,
-while Plus pass changes by at most 0.79 points (every 95\% CI within
-$\pm$2.41), and two models with indistinguishable pass
+Raising temperature from 0 to 0.7 lowers \sameat{} by 11.0 to 28.0 points,
+while Plus pass changes by at most 0.8 points (every 95\% CI within
+$\pm$2.4), and two models with indistinguishable pass
 rates differ by 15 points in repeatability among passers.
-Two engineers judged 63 and 64 of the 64 fingerprint-same pairs to be the
-same implementation, but also called many structurally different passing pairs
-the same ($\kappa{=}0.41$ between them): models agree on the approach more
+Two engineers ($\kappa{=}0.41$ with each other) judged 63 and 64 of the 64 fingerprint-same pairs to be the same implementation, but also called many structurally different passing pairs the same: models agree on the approach more
 than on the code.
-Form diversity does not signal hidden-test failure within a task
+Form diversity shows no detectable association with hidden-test failure within a task
 (exploratory).
 \sameeval{} also separates mitigation policies: on held-out generations,
 \skyt{}, which regenerates and then substitutes a stored verified function,
@@ -93,7 +91,7 @@ each step backed by evidence from this study.
 \ccsdesc[500]{Software and its engineering~Software verification and validation}
 \ccsdesc[300]{Computing methodologies~Artificial intelligence}
 
-\keywords{LLM code generation, structural repeatability, benchmark, \sameat{}, HumanEval+}
+\keywords{LLM code generation, structural repeatability, benchmark, same@2, HumanEval+}
 
 \maketitle
 
@@ -156,11 +154,10 @@ four questions.
         cannot; and ten generations per configuration suffice (split-half
         $r_{10}{\ge}0.89$).
   \item Empirical findings: on HumanEval+, Plus pass is 86.4\% but \sameat{}
-        is 67.7\%; temperature lowers \sameat{} while every Plus-pass CI
-        includes zero; generation
+        is 67.7\%; temperature lowers \sameat{} while Plus pass moves by at most 0.8 points (every CI within $\pm$2.4); generation
         can be repeatably wrong, so \sameat{} is not a proxy for hidden-test
         correctness (exploratory); and among mitigation policies, a stored
-        program is the ceiling on static prompts while \skyt{}'s lift comes
+        program is the ceiling on static prompts while \skyt{}~\cite{roriz2026skytmsr}'s lift comes
         from canonical substitution.
   \item An artifact with all generations, the scorer, a protocol checklist,
         and recompute commands (Data Availability).
@@ -366,7 +363,7 @@ Let a config have $N$ generations and write $C(N,2)$ for the unordered pairs.
 
 We always report \sameat{}, \sameatc{} (with the drop count), and pass rate
 together.
-Reporting \sameatc{} alone is misleading: it rises when the pass rate falls.
+Reporting \sameatc{} alone is misleading: it can rise when the pass rate falls.
 Pairs within a config share generations and are not independent trials, so
 inference aggregates one score per task and uses a cluster bootstrap
 (10{,}000 resamples, seed 20260723).
@@ -394,8 +391,7 @@ cannot change.
 447 of its 3{,}280 responses contained thinking blocks, which were excluded
 from the extracted programs.
 Its output budget was 16{,}000 tokens (2{,}048 for the other models); one
-response exceeded 2{,}048 output tokens, so the larger budget did not affect
-the comparison.
+response exceeded 2{,}048 output tokens, so the larger budget affected at most one of 3{,}280 responses (thinking tokens included).
 Expansion generations used the Batch API; the original two models were called
 synchronously.
 Completions are stitched onto the prompt and scored in network-disabled
@@ -458,7 +454,7 @@ replication).
 Post hoc: the paired temperature CIs in Table~\ref{tab:temperature}; the
 prevalence-reweighted human rates in Section~\ref{sec:rq2}; the
 implementation-level estimate in Section~\ref{sec:discussion}; the diff-cost
-summary in Section~\ref{sec:rq1}; the RQ3 uniformity check; and RQ4 case
+summary in Section~\ref{sec:rq1}; the RQ3 uniformity check in Section~\ref{sec:rq3}; and RQ4 case
 examples.
 
 \subsection{Held-out split for RQ4}
@@ -514,11 +510,11 @@ confirmed that they did not; the 128 pair labels are their own judgments.
 \subsection{RQ1: Correctness does not imply repeatability}
 \label{sec:rq1}
 
-Table~\ref{tab:he-table1} is \sameeval{} on all 164 HumanEval+ tasks.
+Table~\ref{tab:he-table1} is \sameeval{} on all 164 HumanEval+ tasks; Figure~\ref{fig:overview} shows the two original models.
 On the T-grid pool, Plus pass is 86.4\% but \sameat{} is 67.7\%; \sameatc{} is
 76.9\% on 1{,}167 of 1{,}312 configs (145 had fewer than two Plus-passers).
-Claude Sonnet 5 has the highest Plus pass of any model (92.9\%) and a
-\sameat{} of 66.3\%: the strongest model at its only available setting
+Claude Sonnet 5 has the highest Plus-pass point estimate (92.9\%) and a
+\sameat{} of 66.3\%: the highest-passing model at its only available setting
 produces different code in about a third of pairs.
 The lowest cell is GPT-4o-mini at $T{=}0.7$ (79.7\% Plus pass, 48.9\%
 \sameat{}).
@@ -557,8 +553,8 @@ $T{=}0$ does not give identical code: \sameatc{} ranges from 81.4\% (Luna) to
 
 \paragraph{Temperature moves repeatability, not pass rate.}
 Table~\ref{tab:temperature} contrasts $T{=}0.7$ with $T{=}0.0$ per model.
-Plus pass changes by at most 0.79 points (every 95\% CI within $\pm$2.41),
-while \sameat{} falls by 10.95 to 28.01 points.
+Plus pass changes by at most 0.8 points (every 95\% CI within $\pm$2.4),
+while \sameat{} falls by 11.0 to 28.0 points.
 With two settings we do not estimate a dose--response curve.
 
 \begin{table}[t]
@@ -567,27 +563,28 @@ With two settings we do not estimate a dose--response curve.
   \caption{Change from $T{=}0.0$ to $T{=}0.7$, in points.
     $\Delta$ CIs are paired cluster bootstrap by task
     (10{,}000, seed 20260723).
-    Post hoc intervals on the confirmatory temperature contrast.}
+    Post hoc intervals.}
   \label{tab:temperature}
   \begin{tabular}{lcc}
     \toprule
     Model & $\Delta$ Plus pass & $\Delta$ \sameat{} \\
     \midrule
-    GPT-4o-mini & $+0.4$ [$-0.82$, $1.77$] & $-25.43$ [$-29.84$, $-21.06$] \\
-    Claude Sonnet 4.5 & $-0.61$ [$-1.65$, $0.12$] & $-14.09$ [$-17.16$, $-11.09$] \\
-    Claude Haiku 4.5 & $+0.79$ [$-0.58$, $2.41$] & $-28.01$ [$-32.6$, $-23.59$] \\
-    GPT-6 Luna & $+0.49$ [$-0.37$, $1.55$] & $-10.95$ [$-13.64$, $-8.34$] \\
+    GPT-4o-mini & $+0.4$ [$-0.8$, $1.8$] & $-25.4$ [$-29.8$, $-21.1$] \\
+    Claude Sonnet 4.5 & $-0.6$ [$-1.6$, $0.1$] & $-14.1$ [$-17.2$, $-11.1$] \\
+    Claude Haiku 4.5 & $+0.8$ [$-0.6$, $2.4$] & $-28.0$ [$-32.6$, $-23.6$] \\
+    GPT-6 Luna & $+0.5$ [$-0.4$, $1.6$] & $-11.0$ [$-13.6$, $-8.3$] \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 \paragraph{What the difference costs.}
 Among Plus-passing pairs with different fingerprints, the median unified diff
-is 7 to 14 lines across the eight T-grid cells, and the median changed-line
+is 7 to 14 changed lines (added plus removed) across the eight T-grid cells, and the median changed-line
 share is 0.149 to 0.478.
 Fingerprint-same pairs have a median of 0 changed lines in every cell; their
 byte-identical share is 0.822 to 0.953 at $T{=}0$ and 0.597 to 0.745 at
 $T{=}0.7$.
+So 25 to 40\% of fingerprint-same pairs at $T{=}0.7$ still differ as text (formatting, comments, docstrings, or renamed locals): \sameat{} understates the diff a reviewer sees.
 Per-cell values are in the artifact.
 This summary is post hoc.
 
@@ -606,8 +603,8 @@ This summary is post hoc.
 \rqanswer{RQ1}{Passing tests does not mean regenerating produces the same
 code: Plus pass is 86.4\% but \sameat{} is 67.7\% across four models, and the
 highest-passing model (92.9\%) reaches only 66.3\%. Temperature lowers
-\sameat{} by 10.95 to 28.01 points. Plus pass changes by at most 0.79 points,
-and every 95\% CI for that change lies within $\pm$2.41.}
+\sameat{} by 11.0 to 28.0 points. Plus pass changes by at most 0.8 points,
+and every 95\% CI for that change lies within $\pm$2.4.}
 
 %% -------------------------------------------------------------------
 \subsection{RQ2: Validity of the measure}
@@ -636,7 +633,7 @@ assignments.
 Reweighting each stratum by its share of parseable within-configuration pairs
 in the four annotated cells raises sensitivity to 93.1\% [89.7, 96.4] for A
 and 83.2\% [80.9, 85.9] for B, with specificity 98.2\% [94.2, 100] and 100\%,
-and PPV 99.6\% [98.7, 100] and 100\%.
+and PPV 99.6\% [98.7, 100] and 100\%; B's two 100\% rates have no disagreements to resample, so their bootstrap intervals are degenerate.
 These reweighted rates are post hoc.
 The fingerprint is therefore a precise but conservative ruler: its ``same''
 is one engineers accept, and its ``different'' includes variation that
@@ -648,7 +645,7 @@ engineers weigh differently.
     (64 fingerprint-same, 64 fingerprint-different).
     Consensus is the 96 pairs on which A and B agree.
     Unweighted counts are sample metrics on a design-balanced set.
-    Population sensitivity, specificity, PPV, and NPV reweight each stratum
+    Population sensitivity, specificity, and PPV (Section~\ref{sec:rq2}) reweight each stratum
     by its share of within-configuration pairs in the four annotated cells.
     Human--human agreement: 75.0\% (96/128).
     Sample $\kappa{=}0.41$, 95\% CI 0.26--0.55
@@ -659,8 +656,8 @@ engineers weigh differently.
     & Annotator A & Annotator B & Consensus \\
     \midrule
     Agreement with fingerprint & 85.2\% (109/128) & 71.1\% (91/128) & 87.5\% (84/96) \\
-    Sensitivity & 77.8\% (63/81) & 63.4\% (64/101) & 84.0\% (63/75) \\
-    Specificity & 97.9\% (46/47) & 100\% (27/27) & 100\% (21/21) \\
+    Sensitivity (sample) & 77.8\% (63/81) & 63.4\% (64/101) & 84.0\% (63/75) \\
+    Specificity (sample) & 97.9\% (46/47) & 100\% (27/27) & 100\% (21/21) \\
     Precision (sample) & 98.4\% (63/64) & 100\% (64/64) & 100\% (63/63) \\
     \bottomrule
   \end{tabular}
@@ -668,7 +665,7 @@ engineers weigh differently.
 
 \paragraph{Computational rulers.}
 The overlay gap is not an artifact of one fingerprint.
-On the original two models, a stricter parse-and-unparse identity yields
+On the original two models, normalized-source identity (parse and unparse) yields
 \sameat{} 59.8\% (55.1--64.4), AST identity after docstring stripping 61.9\%
 (57.1--66.5), and the \sameeval{} fingerprint 65.9\% (61.0--70.6).
 Tighter rulers widen the gap; the \sameeval{} fingerprint is the most lenient
@@ -737,9 +734,9 @@ exploratory; the five-model pool (1{,}476 configurations, including Sonnet 5)
 is a replication, and the uniformity check is post hoc.
 
 On the pre-registered overlay, form diversity carried no detectable signal
-about hidden-test failure beyond the pass rate.
+about hidden-test failure beyond the pass rate (Table~\ref{tab:diversity-signal}, Figure~\ref{fig:diversity-signal}).
 Among Base-passing programs, modal and non-modal forms survived Extra tests at
-the same rate ($\Delta{=}0.06$ points [$-1.4$, 1.4]).
+rates within 1.4 points of each other ($\Delta{=}0.06$ points [$-1.4$, 1.4]).
 Configurations with more diverse forms had slightly higher Extra-failure rates
 ($\rho{=}0.13$ [0.02, 0.23]), but the association did not survive adjustment
 for Base pass rate (partial $\rho{=}0.07$ [$-0.04$, 0.18]) or for task
@@ -798,7 +795,7 @@ rather than the quirks of one form.
   \label{fig:diversity-signal}
 \end{figure}
 
-\rqanswer{RQ3}{Within a task, form diversity does not signal hidden-test
+\rqanswer{RQ3}{(Exploratory.) Within a task, form diversity shows no detectable association with hidden-test
 failure, in either dataset. Repeatable generation can be repeatably wrong, so
 \sameat{} measures something other than correctness.}
 
@@ -811,8 +808,7 @@ original models (GPT-4o-mini, Claude Sonnet 4.5); the expansion models are
 scored on the overlay only.
 On static prompts, replaying a stored program is the ceiling; \skyt{} is
 evaluated as a policy that still regenerates.
-A fingerprint ``same'' produced by either policy is one engineers accept
-(RQ2).
+RQ2 validated the fingerprint's ``same'' on raw pairs; repaired programs were not labeled.
 
 \subsubsection{Policies and results}
 \label{sec:rq4-policies}
@@ -821,7 +817,7 @@ cache, and \skyt{}; each sees only Base tests at selection time, and Extra
 tests are reserved for evaluation.
 On held-out generations, \skyt{} raises Plus \sameat{} from 66.1\% to 83.1\%
 ($+17.0$ points [14.5, 19.6]) while Plus pass rises from 83.3\% to 85.9\%
-($+2.7$ [1.7, 3.8]) (Table~\ref{tab:heldout}).
+($+2.7$ [1.7, 3.8]) (Table~\ref{tab:heldout}, Figure~\ref{fig:arrows}).
 (The 66.1\% pre-\sameat{} differs from the RQ4-subset row of
 Table~\ref{tab:he-table1}, 65.9\%, because it is computed on the held-out
 halves.)
@@ -861,7 +857,7 @@ On a static prompt, caching a Base-certified train program is the stronger
 (80.0--89.4) and consensus-cache 85.2\% (80.3--89.6), versus 83.1\% for
 \skyt{} ($-1.8$ [$-2.9$, $-0.8$] and $-2.1$ [$-3.0$, $-1.1$]).
 Both caches replay one Base-certified train program when one exists (coverage
-94.9\%); 11.7\% (7.5--16.3) of cached programs fail Extra tests.
+94.9\%); 11.7\% (7.5--16.3) of first-cache programs and 11.3\% of consensus-cache programs fail Extra tests.
 \skyt{} is slightly more correct: Plus pass $+0.9$ [0.2, 1.8] and $+0.7$
 [0.1, 1.5] points over the two caches, Extra survival $+1.4$ [0.5, 2.6] and
 $+1.0$ [0.2, 2.0].
@@ -914,17 +910,18 @@ eligible only after \skyt{}.
 \begin{table}[t]
   \small
   \caption{Certified disagreement ($1{-}\sameatc{}$) on common support
-    ($n{=}561$).}
+    ($n{=}561$).
+    Overall is the task-weighted mean over the 561 configurations, not the mean of the cell rows.}
   \label{tab:disagreement}
-  \begin{tabular}{lccc}
+  \begin{tabular}{lcccc}
     \toprule
-    Cell & Pre & Post & Rel.\ reduction \\
+    Cell & $n$ & Pre & Post & Rel.\ reduction \\
     \midrule
-    GPT-4o-mini $T{=}0.0$ & 6.5\% & 0.9\% & 86.6\% \\
-    GPT-4o-mini $T{=}0.7$ & 39.4\% & 7.7\% & 80.5\% \\
-    Claude 4.5 $T{=}0.0$ & 11.5\% & 0.9\% & 91.8\% \\
-    Claude 4.5 $T{=}0.7$ & 27.6\% & 2.2\% & 91.9\% \\
-    Overall & 23.5\% & 3.2\% & 86.4\% \\
+    GPT-4o-mini $T{=}0.0$ & 132 & 6.5\% & 0.9\% & 86.6\% \\
+    GPT-4o-mini $T{=}0.7$ & 141 & 39.4\% & 7.7\% & 80.5\% \\
+    Claude 4.5 $T{=}0.0$ & 144 & 11.5\% & 0.9\% & 91.8\% \\
+    Claude 4.5 $T{=}0.7$ & 144 & 27.6\% & 2.2\% & 91.9\% \\
+    Overall & 561 & 23.5\% & 3.2\% & 86.4\% \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -1004,12 +1001,12 @@ from 4.9\% to 100\%.
 \subsubsection{Robustness}
 \label{sec:rq4-robustness}
 The lift survives all three rulers ($+14.9$, $+15.4$, $+17.1$ points;
-Table~\ref{tab:fingerprint}).
+Table~\ref{tab:fingerprint}). These come from a persist replay of the repaired programs, which matches the held-out run in Table~\ref{tab:heldout} ($66.1\rightarrow 83.1$, $+17.0$) to 0.1 points.
 Using the full Plus suite during repair yields an almost identical effect
-($+17.0$ [14.5, 19.6]; Plus pass $+2.4$ [1.5, 3.5]; certified disagreement
+($+17.0$ [14.5, 19.6]; Plus pass $+2.4$ [1.5, 3.5]; the \sameat{} effect equals the headline at the reported precision (same bootstrap seed); certified disagreement
 23.2\% $\to$ 3.5\% on 562 configs), so the result does not depend on which
 tests \skyt{} sees.
-Nested split counts $B\in\{20,50,100,500\}$ move the lift from $+17.1$ to
+Nested split counts $B\in\{20,50,100,500\}$ move the lift from $+17.1$ (persist replay) to
 $+17.3$ points, inside the original interval.
 
 \rqanswer{RQ4}{\sameeval{} separates policies. On static prompts a stored
@@ -1027,8 +1024,8 @@ another benchmark, model, or configuration.
 Each step states what to do and the evidence in this paper that motivates it;
 steps without empirical evidence are marked as design requirements.
 The protocol follows the logic of industrial measurement-system analysis:
-first establish that the measurement is reliable (step~3) and that the ruler
-agrees with human judgment (step~6), then measure the process.
+establish that the measurement is reliable (step~3) and that the ruler
+agrees with human judgment (step~6) before drawing conclusions from comparisons (steps~7--8).
 
 \begin{table}[t]
   \small
@@ -1065,7 +1062,7 @@ agrees with human judgment (step~6), then measure the process.
     6. Calibrate the ruler &
       Check stricter rulers; label a stratified sample of pairs (by
       fingerprint verdict and certification) with two annotators; report
-      sensitivity, specificity, and $\kappa$. State which notion of sameness
+      sensitivity and specificity reweighted by stratum share, and $\kappa$. State which notion of sameness
       is measured. &
       Three rulers preserve the gap; engineers agree with ``same'' but are
       more lenient on ``different'' (sample $\kappa{=}0.41$, 95\% CI
@@ -1073,8 +1070,8 @@ agrees with human judgment (step~6), then measure the process.
     7. Compare configurations &
       Use paired task-level differences; pre-specify any rank-reversal
       rule. Compare temperatures and models on both pass and \sameat{}. &
-      Equal pass, 15.3-point \sameatc{} gap; \sameat{} falls 10.95--28.01
-      points from $T{=}0$ to $0.7$, and every Plus-pass CI includes zero
+      Equal pass, 15.3-point \sameatc{} gap; \sameat{} falls 11.0--28.0
+      points from $T{=}0$ to $0.7$, while every Plus-pass CI lies within $\pm$2.4 points
       (RQ1, RQ2). \\
     8. Evaluate a mitigation &
       Select on a train split, evaluate on held-out generations, reserve
@@ -1095,8 +1092,7 @@ Nor does the protocol decide which notion of sameness a team should adopt:
 step~6 makes that choice explicit and measurable.
 
 \paragraph{Cost and scope.}
-The dominant cost is step~3: $N{=}10$ generations per configuration halves
-the sampling cost of this study without changing configuration rankings.
+The dominant cost is step~3: $N{=}10$ generations per configuration halves the sampling cost of this study while keeping split-half reliability at or above 0.89.
 The human calibration in step~6 is per ruler version and language, not per
 model; we recommend repeating it when either changes.
 The evidence behind steps~3 and 5--8 comes from HumanEval+ only; the steps
@@ -1118,11 +1114,7 @@ Both levels are real, and they answer different questions.
 At the structural level, which is what diffs, audits, and change control see,
 passing regenerations disagree often.
 At the implementation level, they agree more.
-Within the four annotated cells, the fingerprint separates 19.9\% of
-both-certified pairs; annotator A would call 14.4\% different (95\% CI
-10.8--17.6) and annotator B 3.8\% (95\% CI 1.1--6.8).
-That frame is the annotated cells, not the 23.5\% pooled certified
-disagreement.
+Pair-weighted over the four RQ4 cells, the fingerprint separates 19.9\% of both-certified pairs; annotator A would call 14.4\% different (95\% CI 10.8--17.6) and annotator B 3.8\% (1.1--6.8) (post hoc). The task-weighted fingerprint rate on the same cells is 23.4\% (Table~\ref{tab:he-table1}, RQ4 subset); the two figures differ in weighting, not in cells.
 Models agree on the approach more than on the code.
 
 \paragraph{The shortcuts, revisited.}
@@ -1150,11 +1142,10 @@ configurations, while held-out repeatability is essentially unchanged.
 
 \paragraph{For practitioners.}
 If structural repeatability matters, use $T{=}0$ where the provider allows it:
-\sameatc{} reaches 96.4\% (Haiku 4.5), and every Plus-pass CI for the step
-from $T{=}0$ to $T{=}0.7$ includes zero.
+\sameatc{} reaches 96.4\% (Haiku 4.5), and the step from $T{=}0$ to $T{=}0.7$ moves Plus pass by at most 0.8 points (every CI within $\pm$2.4).
 Choose models on repeatability as well as correctness: at $T{=}0$, Haiku 4.5 and
 Luna pass equally often but differ by 15.3 points among passers.
-Do not assume the strongest model is the most repeatable: Sonnet 5 passes
+Do not assume the highest-passing model is the most repeatable: Sonnet 5 passes
 92.9\% of tasks yet reaches 66.3\% \sameat{}, at a setting users cannot change.
 When regeneration is optional, replay a stored program.
 
@@ -1195,6 +1186,7 @@ Plus pass includes Base tests, so it is not a fully unseen correctness metric;
 Extra tests are unseen, and Extra survival is reported separately.
 RQ4 uses two models; replicating the policy comparison on the expansion models
 is future work.
+The expansion models were called through the Batch API and the original two synchronously; model comparisons that cross these groups (for example, Haiku 4.5 versus Sonnet 4.5) cannot separate model from serving mode.
 Post hoc analyses are labeled as such.
 
 \paragraph{External.}
@@ -1226,6 +1218,7 @@ Inference is a cluster bootstrap by task with paired CIs for effects; cells
 share tasks, so per-cell intervals are not independent.
 \sameat{} is a U-statistic of order 2, not a squared pass rate; we do not treat
 $p^2$ as a null.
+Model-pair comparisons (12 pairs, two metrics) use unadjusted 95\% intervals; the headline 15.3-point \sameatc{} gap has interval [11.0, 19.7], far from zero.
 
 %% ===================================================================
 \section{Conclusion}
@@ -1233,13 +1226,13 @@ $p^2$ as a null.
 
 Tests do not say whether the next passing program is the same code.
 On HumanEval+, Plus pass and \sameat{} are far apart (86.4\% versus 67.7\%
-across four models), temperature lowers \sameat{} by 10.95 to 28.01 points
-while every Plus-pass CI includes zero, and \sameat{} separates models that
+across four models), temperature lowers \sameat{} by 11.0 to 28.0 points
+while Plus pass moves by at most 0.8 points, and \sameat{} separates models that
 pass@$k$ cannot.
 Engineers agree with the fingerprint's ``same'' but judge some structural
 differences to be the same implementation: models agree on the approach more
 than on the code.
-Within a task, form diversity does not signal hidden-test failure
+Within a task, form diversity shows no detectable association with hidden-test failure
 (exploratory).
 \sameeval{} separates mitigation policies: a stored program is the ceiling on
 static prompts, and \skyt{}'s lift comes from canonical substitution.
@@ -1260,7 +1253,7 @@ A natural extension would use that diversity instead of discarding it:
 selecting among, and possibly combining, verified forms from several draws to
 build the canon toward which later regenerations converge.
 Our results bound what to expect.
-Within a task, form diversity does not signal hidden-test failure (RQ3), so
+Within a task, form diversity shows no detectable association with hidden-test failure (RQ3), so
 diversity is material to build from, not a correctness signal, and every
 combined form still needs the oracle.
 Any such extension should be judged with \sameeval{} against a stored program,
@@ -1271,44 +1264,17 @@ replay is unavailable.
 \section*{Data Availability}
 \label{sec:data}
 
-\todo{anonymized artifact URL}
-The replication package contains a checklist version of the protocol in
-Table~\ref{tab:protocol}, all 29{,}520 generations, batch manifests and
-checksums, the scorer, the analysis scripts, the annotation kit and both
-sheets, and one command per table.
-No language-model calls are needed to recompute any number.
+The replication package is available at
+\url{https://anonymous.4open.science/r/SameEval-v1/}.
+It contains the protocol checklist (Table~\ref{tab:protocol}), all 29{,}520
+generations, batch manifests and checksums, the scorer and analysis scripts,
+and the annotation kit with both sheets.
+Every number in this paper is printed by a command in that package's README.
+No language-model calls are needed; the Level-2 replay requires Docker.
 Dataset: \texttt{evalplus==0.3.1}, HumanEvalPlus \texttt{v0.1.10}, MD5
 \path{916d9bfe7b490c2447245ec91595fa4f}.
-Sandbox image: \texttt{python:3.13-slim}, pinned by SHA-256 digest (recorded
-in the artifact), network disabled.
-Bootstrap: seed 20260723, 10{,}000 resamples.
-Recompute:
-Table~\ref{tab:he-table1} per-cell rows, \path{python -m benchmark score};
-Table~\ref{tab:he-table1} pooled rows and model-pair deltas,
-\path{python -m benchmarks.humaneval_plus.expansion_analyze};
-Table~\ref{tab:temperature} and the diff-cost summary,
-\path{python -m skyt.fse_final_posthoc tgrid} and
-\path{python -m skyt.fse_final_posthoc diffcost};
-Table~\ref{tab:human}, the $\kappa$ interval, reweighted rates, and the
-implementation-level disagreement,
-\path{python -m skyt.fse_final_posthoc human};
-Table~\ref{tab:fingerprint} overlay column,
-\path{python -m skyt.zero_api_analysis};
-Table~\ref{tab:fingerprint} held-out columns and nested splits,
-\path{python -m skyt.heldout_robust --analyze-only};
-Table~\ref{tab:diversity-signal} pre-registered rows,
-\path{python -m benchmark.diversity_signal --trees outputs/benchmark/humaneval_plus_164_n20};
-Table~\ref{tab:diversity-signal} five-model replication,
-\path{python -m benchmark.diversity_signal --trees outputs/benchmark/humaneval_plus_164_n20 outputs/benchmark/humaneval_plus_164_n20_expansion/haiku45 outputs/benchmark/humaneval_plus_164_n20_expansion/luna outputs/benchmark/humaneval_plus_164_n20_expansion/sonnet5};
-Tables~\ref{tab:heldout} and \ref{tab:disagreement},
-\path{python -m skyt.oracle_split_posthoc};
-Table~\ref{tab:cache}, \path{python -m skyt.oracle_fair};
-Table~\ref{tab:level-ablation},
-\path{python -m skyt.level_ablation --max-level 3}
-and \path{python -m skyt.humaneval_oracle_split --max-transformation-level 2}.
-The Anthropic batch results were saved through SDK serialization; content is
-identical by request identifier.
-
+Sandbox image: \texttt{python:3.13-slim}, pinned by SHA-256 digest in the
+artifact, network disabled.
 %% Acknowledgments: add at camera-ready only (CFP asks to omit at submission).
 
 \bibliographystyle{ACM-Reference-Format}
