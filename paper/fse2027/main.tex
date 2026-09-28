@@ -157,7 +157,7 @@ four questions.
         is 67.7\%; temperature lowers \sameat{} while Plus pass moves by at most 0.8 points (every CI within $\pm$2.4); generation
         can be repeatably wrong, so \sameat{} is not a proxy for hidden-test
         correctness (exploratory); and among mitigation policies, a stored
-        program is the ceiling on static prompts while \skyt{}~\cite{roriz2026skytmsr}'s lift comes
+        program is the ceiling on static prompts while the lift of \skyt{}~\cite{roriz2026skytmsr} comes
         from canonical substitution.
   \item An artifact with all generations, the scorer, a protocol checklist,
         and recompute commands (Data Availability).
@@ -394,6 +394,12 @@ Its output budget was 16{,}000 tokens (2{,}048 for the other models); one
 response exceeded 2{,}048 output tokens, so the larger budget affected at most one of 3{,}280 responses (thinking tokens included).
 Expansion generations used the Batch API; the original two models were called
 synchronously.
+Returned identifiers:
+GPT-4o-mini (alias; generated 17--18 September 2026);
+Claude Sonnet 4.5 \path{claude-sonnet-4-5-20250929} (generated 16--18 September 2026);
+Claude Haiku 4.5 \path{claude-haiku-4-5-20251001} (generated 24--25 September 2026);
+GPT-6 Luna \path{gpt-6-luna} (alias; generated 24--25 September 2026);
+Claude Sonnet 5 \path{claude-sonnet-5} (alias; generated 24--25 September 2026).
 Completions are stitched onto the prompt and scored in network-disabled
 Docker; untrusted code is never executed on the host.
 Fingerprints use \texttt{relation\_version}=2.
@@ -434,7 +440,7 @@ No repaired (post-\skyt{}) programs were labeled.
 \subsection{Exploratory analysis (RQ3)}
 We ask whether form diversity among Base-passing programs carries information
 about Extra-test failure beyond the Base pass rate.
-The analysis was pre-registered on the original overlay; the replication uses
+The analysis was pre-specified on the original overlay, in a dated analysis plan included in the artifact; the replication uses
 all five models (1{,}476 configurations, including Sonnet 5).
 Forms are fingerprint classes computed only on Base-passers.
 A program's modal form is the largest class among the other Base-passers in
@@ -449,7 +455,7 @@ Confirmatory: the RQ1 gap; RQ2 human agreement (pre-specified protocol) and
 rank comparison (pre-specified decision rule); RQ4 held-out $\Delta$\sameat{},
 certified disagreement, and temperature interaction.
 Descriptive: RQ2 reliability.
-Exploratory: RQ3 (pre-registered on the original overlay; five-model
+Exploratory: RQ3 (pre-specified on the original overlay; five-model
 replication).
 Post hoc: the paired temperature CIs in Table~\ref{tab:temperature}; the
 prevalence-reweighted human rates in Section~\ref{sec:rq2}; the
@@ -490,7 +496,7 @@ the statistical design, and check the manuscript against computed results:
 ChatGPT 5.6 Sol (High), Claude Opus 5.5, and Grok 4.7 (High) through Cursor.
 All reported numbers are printed by the scripts listed in Data Availability.
 The authors made all design and interpretation decisions; the exploratory
-analyses were pre-registered in writing before computation.
+analyses were pre-specified in writing before computation.
 Outputs were verified in four ways: every reported number is produced by a
 script in the artifact and was checked against its JSON output; rescoring the
 original overlay with the current code reproduces its numbers exactly; the
@@ -729,11 +735,11 @@ $N{=}10$.}
 \subsection{RQ3: Repeatability and hidden-test correctness}
 \label{sec:rq3}
 
-The analyses below were pre-registered on the original overlay and are
+The analyses below were pre-specified on the original overlay and are
 exploratory; the five-model pool (1{,}476 configurations, including Sonnet 5)
 is a replication, and the uniformity check is post hoc.
 
-On the pre-registered overlay, form diversity carried no detectable signal
+On the pre-specified overlay, form diversity carried no detectable signal
 about hidden-test failure beyond the pass rate (Table~\ref{tab:diversity-signal}, Figure~\ref{fig:diversity-signal}).
 Among Base-passing programs, modal and non-modal forms survived Extra tests at
 rates within 1.4 points of each other ($\Delta{=}0.06$ points [$-1.4$, 1.4]).
@@ -752,16 +758,15 @@ Task-level factors such as specification ambiguity may drive both.
 
 Configurations whose Base-passing programs all shared one form still failed
 Extra tests 10.7\% of the time: generation can be repeatably wrong.
-When any Base-passer failed Extra tests, all of them failed in 65.0\%
-[50.0, 80.3] of configurations (five-model replication: 53.0\%
-[39.6, 66.7]), consistent with a shared misreading of the specification
-rather than the quirks of one form.
+When any Base-passer failed Extra tests, all of them failed in 53.3\%
+[34.7, 72.0] of configurations that have at least two distinct Base-passing
+forms (five-model replication: 41.5\% [27.8, 56.0]) (post hoc uniformity check).
 
 \begin{table}[t]
   \small
   \setlength{\tabcolsep}{4pt}
   \caption{Diversity and Extra-test failure (exploratory).
-    Rows ``original'' are the pre-registered overlay (GPT-4o-mini, Claude
+    Rows ``original'' are the pre-specified overlay (GPT-4o-mini, Claude
     Sonnet 4.5; 656 configs); rows ``replication'' pool all five models
     (1{,}476 configs).
     A1: Extra survival of modal versus non-modal Base-passers.
@@ -972,7 +977,7 @@ Canonical substitution can produce a lift at least as large as live \skyt{};
 live \skyt{} is the more conservative policy.
 Level 3 does not invent an algorithm: it pastes a stored verified function.
 The dominant source of zero gain is the absence of a certified train consensus
-(87 of 656 configurations).
+on the Base oracle-split design (29 of 656 configurations).
 The largest lifts match the mechanism: for HumanEval/83 under GPT-4o-mini at
 $T{=}0.7$, pre-\sameat{} is near 0 and \skyt{} rewrites the test slice onto the
 train form (post \sameat{} 1.0; Plus pass 29\% $\to$ 100\%); for HumanEval/109
@@ -1003,9 +1008,10 @@ from 4.9\% to 100\%.
 The lift survives all three rulers ($+14.9$, $+15.4$, $+17.1$ points;
 Table~\ref{tab:fingerprint}). These come from a persist replay of the repaired programs, which matches the held-out run in Table~\ref{tab:heldout} ($66.1\rightarrow 83.1$, $+17.0$) to 0.1 points.
 Using the full Plus suite during repair yields an almost identical effect
-($+17.0$ [14.5, 19.6]; Plus pass $+2.4$ [1.5, 3.5]; the \sameat{} effect equals the headline at the reported precision (same bootstrap seed); certified disagreement
+($+17.0$ [14.5, 19.6]; Plus pass $+2.4$ [1.5, 3.5]; certified disagreement
 23.2\% $\to$ 3.5\% on 562 configs), so the result does not depend on which
 tests \skyt{} sees.
+The \sameat{} effect equals the headline at the reported precision; both runs use the same bootstrap seed.
 Nested split counts $B\in\{20,50,100,500\}$ move the lift from $+17.1$ (persist replay) to
 $+17.3$ points, inside the original interval.
 
@@ -1057,7 +1063,7 @@ agrees with human judgment (step~6) before drawing conclusions from comparisons 
     5. Report together &
       Report pass rate, \sameat{}, and \sameatc{} with its drop count, with
       task-cluster bootstrap CIs. Never report \sameatc{} alone. &
-      Pass and \sameat{} diverge (RQ1); \sameatc{} rises as pass falls
+      Pass and \sameat{} diverge (RQ1); \sameatc{} can rise as pass falls
       (Section~\ref{sec:measures}). \\
     6. Calibrate the ruler &
       Check stricter rulers; label a stratified sample of pairs (by

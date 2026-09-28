@@ -157,6 +157,16 @@ def _disagreement_post(row: dict) -> float:
 
 def make_disagreement(report: dict, out_stem: Path) -> None:
     _style()
+    plt.rcParams.update(
+        {
+            "font.size": 9,
+            "axes.labelsize": 9,
+            "axes.titlesize": 9,
+            "xtick.labelsize": 9,
+            "ytick.labelsize": 9,
+            "legend.fontsize": 9,
+        }
+    )
     overall = _slice_by_label(report, "all")
     labels = ["Overall"] + list(CELL_LABELS.values())
     keys = ["all"] + list(CELL_LABELS)
@@ -196,9 +206,9 @@ def make_disagreement(report: dict, out_stem: Path) -> None:
         f"({rel}% relative)"
     )
     for xpos, height in zip(x - width / 2, pre):
-        ax.text(xpos, height + 0.6, f"{height:.1f}", ha="center", va="bottom", fontsize=6.5)
+        ax.text(xpos, height + 0.6, f"{height:.1f}", ha="center", va="bottom", fontsize=9)
     for xpos, height in zip(x + width / 2, post):
-        ax.text(xpos, height + 0.6, f"{height:.1f}", ha="center", va="bottom", fontsize=6.5)
+        ax.text(xpos, height + 0.6, f"{height:.1f}", ha="center", va="bottom", fontsize=9)
     ax.legend(frameon=False, loc="center", bbox_to_anchor=(0.24, 0.62))
     ax.set_axisbelow(True)
     ax.yaxis.grid(True, linestyle=":", linewidth=0.5, color="#bbbbbb")
@@ -229,10 +239,10 @@ def make_lift_scatter(out_stem: Path) -> None:
         ceiling,
         100.0 - ceiling,
         color="#333333",
-        linewidth=0.9,
+        linewidth=1.2,
         linestyle="--",
         label="lift = 100 − baseline",
-        zorder=1,
+        zorder=3,
     )
     ax.axhline(0.0, color="#888888", linewidth=0.6)
     ax.set_xlim(-2, 104)

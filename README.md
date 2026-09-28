@@ -77,7 +77,7 @@ python -m benchmark.diversity_signal --trees outputs/benchmark/humaneval_plus_16
 python -m benchmark.diversity_signal --trees outputs/benchmark/humaneval_plus_164_n20 outputs/benchmark/humaneval_plus_164_n20_expansion/haiku45 outputs/benchmark/humaneval_plus_164_n20_expansion/luna outputs/benchmark/humaneval_plus_164_n20_expansion/sonnet5 --out outputs/benchmark/diversity_signal_model_replication
 ```
 
-The first command prints the pre-registered rows. The second prints the five-model replication.
+The first command prints the pre-specified rows. The second prints the five-model replication. The dated RQ3 analysis plan is `paper/fse2027/rq3_analysis_plan_2026-09-24.md`.
 
 **Level ablation.** The second command is the Level-2 replay and requires Docker.
 

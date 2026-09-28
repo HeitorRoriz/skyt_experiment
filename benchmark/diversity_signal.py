@@ -26,7 +26,7 @@ from benchmark.score import _iter_jsonl
 from benchmarks.humaneval_plus.provenance import atomic_write_json
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-PREREG_RELATIVE = Path("docs/internal/DIVERSITY_SIGNAL_PREREG_2026-09-24.md")
+PREREG_RELATIVE = Path("paper/fse2027/rq3_analysis_plan_2026-09-24.md")
 BOOTSTRAP_SEED = 20260723
 
 ConfigKey = Tuple[str, str, Optional[float]]

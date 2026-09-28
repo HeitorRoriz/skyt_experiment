@@ -18,6 +18,14 @@ REPO = PAPER.parents[1]
 REPORT = REPO / "outputs" / "benchmark" / "diversity_signal" / "diversity_signal.json"
 OUT = PAPER / "figures" / "fig_diversity_signal.pdf"
 
+# Same model x temperature colors as Figure 3 (make_figure_skyt.COLORS).
+COLORS = {
+    "gpt-4o-mini T=0.0": "#4C78A8",
+    "gpt-4o-mini T=0.7": "#72B7B2",
+    "claude-sonnet-4-5-20250929 T=0.0": "#F58518",
+    "claude-sonnet-4-5-20250929 T=0.7": "#E45756",
+}
+
 BIN_ORDER = ("D=0", "T1", "T2", "T3")
 BIN_LABELS = ("D = 0", "T1", "T2", "T3")
 
@@ -54,7 +62,6 @@ def _pretty(cell: str) -> str:
 def make_figure(report: dict, out_path: Path) -> None:
     _style()
     cells = list(report["bins"]["cells"])
-    colors = ["#4C78A8", "#72B7B2", "#F58518", "#E45756", "#54A24B", "#B279A2"]
     x = np.arange(len(BIN_ORDER))
     width = 0.8 / max(len(cells), 1)
     fig, ax = plt.subplots(figsize=(5.2, 3.2), layout="constrained")
@@ -83,7 +90,7 @@ def make_figure(report: dict, out_path: Path) -> None:
             heights,
             width=width * 0.92,
             label=_pretty(cell),
-            color=colors[index % len(colors)],
+            color=COLORS[cell],
             yerr=np.vstack([lows, highs]),
             capsize=2,
             error_kw={"elinewidth": 0.6},
