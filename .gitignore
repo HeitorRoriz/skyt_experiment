@@ -34,15 +34,53 @@ ENV/
 .DS_Store
 Thumbs.db
 
-# Experiment outputs (keep structure, ignore data)
-outputs/*/
-results/*/
-!outputs/.gitkeep
-!results/.gitkeep
+# Experiment outputs stay on disk. This branch does not publish them.
+/outputs/
+/results/
 
 # Pytest cache
 .pytest_cache/
 .mypy_cache/
 
-# Internal development documentation
-docs/internal/
+# Local-only on this branch: earlier papers, lab notes, and one-off scripts.
+/*.py
+!/gate0_pairwise_analysis.py
+/*.ps1
+/*.bat
+/*.csv
+/phase2_errors.txt
+/phase2_log.txt
+/benchmarks/humaneval_plus/expansion_smoke.py
+/benchmarks/humaneval_plus/expansion_split_half.py
+/benchmarks/humaneval_plus/expansion_submit.py
+/tests/test_expansion_batch.py
+/docs/
+/paper/cbsoft2026/
+/paper/msr2026/
+/contracts/
+/CODE_DNA_SUMMARY.md
+/DISCUSSION_CAMERA_READY.md
+/DISTANCE_METRICS.md
+/LIMITATIONS.md
+/MULTI_FILE_ROADMAP.md
+/PAPER_CORRECTIONS.md
+/PAPER_CORRECTIONS_V2.md
+/PAPER_CORRECTIONS_V3.md
+/PAPER_CORRECTIONS_V4.md
+/STATISTICAL_METHODS.md
+/SKYT_MSR2026_Poster_Brief.docx
+/create_poster_docx.py
+/deep_analysis.py
+/generate_poster_charts.py
+/poster_charts.py
+/poster_charts/
+/poster_final_analysis.py
+/agents/*.md
+/agents/contract_agent.py
+/agents/simple_agent.py
+/agents/test_agent.py
+/agents/test_enhanced_skyt.py
+/agents/requirements.txt
+/tests/debug_statement_explainer.py
+/tests/debug_slugify.py
+/tests/check_results.py
