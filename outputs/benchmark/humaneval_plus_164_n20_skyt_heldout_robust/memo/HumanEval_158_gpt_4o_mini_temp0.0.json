@@ -1,0 +1,47 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "40a089903b789f148330164c2e836d50cfb8bd2b2c6ffe46eaa99230bff1b31f|c26d08a5158bd85e07e7e0fe8715ca39e6926f6a6bb95f75f19beba7a57b6b9f": {
+      "stitched_code": "def find_max(words):\n    def unique_char_count(word):\n        return len(set(word))\n    \n    max_word = \"\"\n    max_unique_count = 0\n    \n    for word in words:\n        unique_count = unique_char_count(word)\n        if (unique_count > max_unique_count) or (unique_count == max_unique_count and word < max_word):\n            max_word = word\n            max_unique_count = unique_count\n            \n    return max_word\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.07142857142857142,
+        "transformation_level": 0
+      }
+    },
+    "c26d08a5158bd85e07e7e0fe8715ca39e6926f6a6bb95f75f19beba7a57b6b9f|c26d08a5158bd85e07e7e0fe8715ca39e6926f6a6bb95f75f19beba7a57b6b9f": {
+      "stitched_code": "def find_max(words):\n    def unique_char_count(word):\n        return len(set(word))\n    \n    max_word = \"\"\n    max_unique_count = 0\n    \n    for word in words:\n        unique_count = unique_char_count(word)\n        if (unique_count > max_unique_count) or (unique_count == max_unique_count and word < max_word):\n            max_unique_count = unique_count\n            max_word = word\n            \n    return max_word\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

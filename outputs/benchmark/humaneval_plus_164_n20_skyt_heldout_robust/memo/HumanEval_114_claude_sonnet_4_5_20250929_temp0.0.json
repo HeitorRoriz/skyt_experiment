@@ -1,0 +1,25 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "452ab891a98767be0068963b937bc1f3001492c4e906c39ea36e363078fbc539|452ab891a98767be0068963b937bc1f3001492c4e906c39ea36e363078fbc539": {
+      "stitched_code": "def minSubArraySum(nums):\n    \"\"\"\n    Given an array of integers nums, find the minimum sum of any non-empty sub-array\n    of nums.\n    Example\n    minSubArraySum([2, 3, 4, 1, 2, 4]) == 1\n    minSubArraySum([-1, -2, -3]) == -6\n    \"\"\"\n    min_sum = float('inf')\n    current_sum = 0\n    \n    for num in nums:\n        current_sum = min(num, current_sum + num)\n        min_sum = min(min_sum, current_sum)\n    \n    return min_sum\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

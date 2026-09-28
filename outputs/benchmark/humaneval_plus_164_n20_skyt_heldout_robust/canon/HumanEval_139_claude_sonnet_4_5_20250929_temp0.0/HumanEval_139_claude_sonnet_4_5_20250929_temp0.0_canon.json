@@ -1,0 +1,370 @@
+{
+  "contract_id": "HumanEval_139_claude_sonnet_4_5_20250929_temp0.0",
+  "canonical_code": "def special_factorial(n):\n    \"\"\"The Brazilian factorial is defined as:\n    brazilian_factorial(n) = n! * (n-1)! * (n-2)! * ... * 1!\n    where n > 0\n\n    For example:\n    >>> special_factorial(4)\n    288\n\n    The function will receive an integer as input and should return the special\n    factorial of this integer.\n    \"\"\"\n    result = 1\n    factorial = 1\n    \n    for i in range(1, n + 1):\n        factorial *= i\n        result *= factorial\n    \n    return result\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 0,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [
+        "range"
+      ],
+      "nested_depth": 1,
+      "branch_patterns": []
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [],
+        "v1": []
+      },
+      "assignments": {
+        "v0": "Constant(value=1)",
+        "v1": "Constant(value=1)"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_special_factorial"
+        ],
+        [
+          "function_special_factorial",
+          "loop"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "special_factorial": {
+        "name": "special_factorial",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add"
+      ],
+      "associative_ops": [
+        "Add"
+      ],
+      "binary_operations": [
+        "Add"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Constant",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Mult",
+        "Name",
+        "Load",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Mult",
+        "Name",
+        "Load",
+        "Return",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 6,
+      "ast_hash": "3264ab4c4a7395a7d2a4b26b2f036583",
+      "alpha_renamed_hash": "3264ab4c4a7395a7d2a4b26b2f036583"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Add"
+      ],
+      "precedence_levels": {
+        "Add": 3
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "Assign",
+        "For",
+        "AugAssign",
+        "AugAssign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "Assign_2",
+        "For_3",
+        "AugAssign_4",
+        "AugAssign_5",
+        "Return_6"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "For"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_139_claude_sonnet_4_5_20250929_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/139",
+    "prompt": "\ndef special_factorial(n):\n    \"\"\"The Brazilian factorial is defined as:\n    brazilian_factorial(n) = n! * (n-1)! * (n-2)! * ... * 1!\n    where n > 0\n\n    For example:\n    >>> special_factorial(4)\n    288\n\n    The function will receive an integer as input and should return the special\n    factorial of this integer.\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "special_factorial"
+    },
+    "anchor_signature": "80debf39a45f1e197160bc058cd7b17e1c4f884169c8dd3658d2fd2fbc25488e",
+    "canonical_code": "def special_factorial(n):\n    \"\"\"The Brazilian factorial is defined as:\n    brazilian_factorial(n) = n! * (n-1)! * (n-2)! * ... * 1!\n    where n > 0\n\n    For example:\n    >>> special_factorial(4)\n    288\n\n    The function will receive an integer as input and should return the special\n    factorial of this integer.\n    \"\"\"\n    result = 1\n    factorial = 1\n    \n    for i in range(1, n + 1):\n        factorial *= i\n        result *= factorial\n    \n    return result\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 0,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "range"
+        ],
+        "nested_depth": 1,
+        "branch_patterns": []
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [],
+          "v1": []
+        },
+        "assignments": {
+          "v0": "Constant(value=1)",
+          "v1": "Constant(value=1)"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_special_factorial"
+          ],
+          [
+            "function_special_factorial",
+            "loop"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "special_factorial": {
+          "name": "special_factorial",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add"
+        ],
+        "associative_ops": [
+          "Add"
+        ],
+        "binary_operations": [
+          "Add"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Constant",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Mult",
+          "Name",
+          "Load",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Mult",
+          "Name",
+          "Load",
+          "Return",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 6,
+        "ast_hash": "3264ab4c4a7395a7d2a4b26b2f036583",
+        "alpha_renamed_hash": "3264ab4c4a7395a7d2a4b26b2f036583"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Add"
+        ],
+        "precedence_levels": {
+          "Add": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "For",
+          "AugAssign",
+          "AugAssign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "Assign_2",
+          "For_3",
+          "AugAssign_4",
+          "AugAssign_5",
+          "Return_6"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "For"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

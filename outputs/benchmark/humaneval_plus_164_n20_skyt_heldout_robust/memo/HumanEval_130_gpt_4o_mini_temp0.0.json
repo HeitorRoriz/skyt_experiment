@@ -1,0 +1,25 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "401ed17cd0a5e86d8a207b5f67940e468add168735c9e554906b51c7dcbd3951|401ed17cd0a5e86d8a207b5f67940e468add168735c9e554906b51c7dcbd3951": {
+      "stitched_code": "def tri(n):\n    result = []\n    \n    def tribonacci(x):\n        if x == 1:\n            return 3\n        elif x % 2 == 0:\n            return 1 + x / 2\n        else:\n            return tribonacci(x - 1) + tribonacci(x - 2) + tribonacci(x + 1)\n    \n    for i in range(n + 1):\n        result.append(tribonacci(i))\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

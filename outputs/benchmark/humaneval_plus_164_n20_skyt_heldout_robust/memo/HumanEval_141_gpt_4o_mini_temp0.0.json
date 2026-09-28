@@ -1,0 +1,25 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "7d0f6f18b879161f35c595cc729d212b03b548cf895670f0c1ce9af75b2d9abb|7d0f6f18b879161f35c595cc729d212b03b548cf895670f0c1ce9af75b2d9abb": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    name, extension = file_name.split('.')\n    \n    if not name or not name[0].isalpha():\n        return 'No'\n    \n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    digit_count = sum(c.isdigit() for c in file_name)\n    \n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

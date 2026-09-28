@@ -1,0 +1,426 @@
+{
+  "contract_id": "HumanEval_111_gpt_4o_mini_temp0.0",
+  "canonical_code": "def histogram(test):\n    if not test:\n        return {}\n    \n    from collections import Counter\n    \n    letters = test.split()\n    count = Counter(letters)\n    max_count = max(count.values())\n    \n    return {letter: cnt for letter, cnt in count.items() if cnt == max_count}\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 1,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "v2",
+        "max"
+      ],
+      "nested_depth": 1,
+      "branch_patterns": [
+        "if_at_depth_0"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [],
+        "v1": [
+          "v0"
+        ],
+        "v3": []
+      },
+      "assignments": {
+        "v0": "Call(func=Attribute(value=Name(id='p0', ctx=Load()), attr='split', ctx=Load()))",
+        "v1": "Call(func=Name(id='v2', ctx=Load()), args=[Name(id='v0', ctx=Load())])",
+        "v3": "Call(func=Name(id='max', ctx=Load()), args=[Call(func=Attribute(value=Name(id='v1', ctx=Load()), attr='values', ctx=Load()))])"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_histogram"
+        ],
+        [
+          "function_histogram",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "histogram": {
+        "name": "histogram",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": []
+    },
+    "numerical_behavior": {
+      "uses_integers": false,
+      "uses_floats": false,
+      "has_arithmetic": false,
+      "numeric_constants": []
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "If",
+        "UnaryOp",
+        "Not",
+        "Name",
+        "Load",
+        "Return",
+        "Dict",
+        "ImportFrom",
+        "alias",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Return",
+        "DictComp",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "comprehension",
+        "Tuple",
+        "Name",
+        "Store",
+        "Name",
+        "Store",
+        "Store",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 8,
+      "ast_hash": "d442aefc2adb058f04afe066bbf43655",
+      "alpha_renamed_hash": "f1bdf36f534b72d5820bc6f97b497fb0"
+    },
+    "operator_precedence": {
+      "operator_sequence": [],
+      "precedence_levels": {}
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Return",
+        "ImportFrom",
+        "Assign",
+        "Assign",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Return_2",
+        "ImportFrom_3",
+        "Assign_4",
+        "Assign_5",
+        "Assign_6",
+        "Return_7"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "not p0",
+          "return_type": "expression"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "not p0"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_111_gpt_4o_mini_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/111",
+    "prompt": "\ndef histogram(test):\n    \"\"\"Given a string representing a space separated lowercase letters, return a dictionary\n    of the letter with the most repetition and containing the corresponding count.\n    If several letters have the same occurrence, return all of them.\n    \n    Example:\n    histogram('a b c') == {'a': 1, 'b': 1, 'c': 1}\n    histogram('a b b a') == {'a': 2, 'b': 2}\n    histogram('a b c a b') == {'a': 2, 'b': 2}\n    histogram('b b b b a') == {'b': 4}\n    histogram('') == {}\n\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "histogram"
+    },
+    "anchor_signature": "d0cd6e7aec72daab4e8cc0076ac8d637f3a2d624379ad1ee1dfca730c63675c7",
+    "canonical_code": "def histogram(test):\n    if not test:\n        return {}\n    \n    from collections import Counter\n    \n    letters = test.split()\n    count = Counter(letters)\n    max_count = max(count.values())\n    \n    return {letter: cnt for letter, cnt in count.items() if cnt == max_count}\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 1,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "v2",
+          "max"
+        ],
+        "nested_depth": 1,
+        "branch_patterns": [
+          "if_at_depth_0"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [],
+          "v1": [
+            "v0"
+          ],
+          "v3": []
+        },
+        "assignments": {
+          "v0": "Call(func=Attribute(value=Name(id='p0', ctx=Load()), attr='split', ctx=Load()))",
+          "v1": "Call(func=Name(id='v2', ctx=Load()), args=[Name(id='v0', ctx=Load())])",
+          "v3": "Call(func=Name(id='max', ctx=Load()), args=[Call(func=Attribute(value=Name(id='v1', ctx=Load()), attr='values', ctx=Load()))])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_histogram"
+          ],
+          [
+            "function_histogram",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "histogram": {
+          "name": "histogram",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": false,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": []
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "If",
+          "UnaryOp",
+          "Not",
+          "Name",
+          "Load",
+          "Return",
+          "Dict",
+          "ImportFrom",
+          "alias",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Return",
+          "DictComp",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "comprehension",
+          "Tuple",
+          "Name",
+          "Store",
+          "Name",
+          "Store",
+          "Store",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 8,
+        "ast_hash": "d442aefc2adb058f04afe066bbf43655",
+        "alpha_renamed_hash": "f1bdf36f534b72d5820bc6f97b497fb0"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "ImportFrom",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "ImportFrom_3",
+          "Assign_4",
+          "Assign_5",
+          "Assign_6",
+          "Return_7"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "not p0",
+            "return_type": "expression"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "not p0"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "af8d034fe2c34763c9d0d28c0f7558fb674f3cceb4229c6e34157f1f3cb3b0bc|af8d034fe2c34763c9d0d28c0f7558fb674f3cceb4229c6e34157f1f3cb3b0bc": {
+      "stitched_code": "def add_elements(arr, k):\n    \"\"\"\n    Given a non-empty array of integers arr and an integer k, return\n    the sum of the elements with at most two digits from the first k elements of arr.\n\n    Example:\n\n        Input: arr = [111,21,3,4000,5,6,7,8,9], k = 4\n        Output: 24 # sum of 21 + 3\n\n    Constraints:\n        1. 1 <= len(arr) <= 100\n        2. 1 <= k <= len(arr)\n    \"\"\"\n    return sum(num for num in arr[:k] if -99 <= num <= 99)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "d337a3a84d43283bf7477dfc3ac94ee6551d84e547a4aaeea508288e93d375de|af8d034fe2c34763c9d0d28c0f7558fb674f3cceb4229c6e34157f1f3cb3b0bc": {
+      "stitched_code": "def add_elements(arr, k):\n    \"\"\"\n    Given a non-empty array of integers arr and an integer k, return\n    the sum of the elements with at most two digits from the first k elements of arr.\n\n    Example:\n\n        Input: arr = [111,21,3,4000,5,6,7,8,9], k = 4\n        Output: 24 # sum of 21 + 3\n\n    Constraints:\n        1. 1 <= len(arr) <= 100\n        2. 1 <= k <= len(arr)\n    \"\"\"\n    return sum(x for x in arr[:k] if -99 <= x <= 99)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

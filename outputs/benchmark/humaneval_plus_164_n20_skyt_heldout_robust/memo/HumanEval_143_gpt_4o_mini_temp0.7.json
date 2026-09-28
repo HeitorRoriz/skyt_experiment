@@ -1,0 +1,133 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "9ce5707797c889ad09d4b55e7c87de5e5ff1e4d2c809cc6fe7776d0022f3022a|6029c29de243b41f8f0fcdfc19f78d29dfa19b7795347c95a08958c8c08140b0": {
+      "stitched_code": "def is_prime(num):\n    if num < 2:\n        return False\n    for i in range(2, int(num ** 0.5) + 1):\n        if num % i == 0:\n            return False\n    return True\n\n\ndef words_in_sentence(sentence):\n    words = sentence.split()\n    prime_length_words = [word for word in words if is_prime(len(word))]\n    return ' '.join(prime_length_words)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "6029c29de243b41f8f0fcdfc19f78d29dfa19b7795347c95a08958c8c08140b0|6029c29de243b41f8f0fcdfc19f78d29dfa19b7795347c95a08958c8c08140b0": {
+      "stitched_code": "def is_prime(n):\n    if n <= 1:\n        return False\n    for i in range(2, int(n**0.5) + 1):\n        if n % i == 0:\n            return False\n    return True\n\ndef words_in_sentence(sentence):\n    words = sentence.split()\n    prime_length_words = [word for word in words if is_prime(len(word))]\n    return ' '.join(prime_length_words)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "9e7345f342cb15394767601944f56b8f5cf97e3e7e56abdd8f9d3d96eb749a79|6029c29de243b41f8f0fcdfc19f78d29dfa19b7795347c95a08958c8c08140b0": {
+      "stitched_code": "def is_prime(n):\n    if n < 2:\n        return False\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return False\n    return True\n\n\ndef words_in_sentence(sentence):\n    words = sentence.split()\n    prime_length_words = [word for word in words if is_prime(len(word))]\n    return ' '.join(prime_length_words)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "10e7ed0f8f4330ee5c400cd281f33b3963c98b95627ba2d8667e1471ef5a8804|6029c29de243b41f8f0fcdfc19f78d29dfa19b7795347c95a08958c8c08140b0": {
+      "stitched_code": "def is_prime(num):\n    if num <= 1:\n        return False\n    for i in range(2, int(num**0.5) + 1):\n        if num % i == 0:\n            return False\n    return True\n\ndef words_in_sentence(sentence):\n    words = sentence.split()\n    prime_length_words = [word for word in words if is_prime(len(word))]\n    return ' '.join(prime_length_words)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "6029c29de243b41f8f0fcdfc19f78d29dfa19b7795347c95a08958c8c08140b0|9e7345f342cb15394767601944f56b8f5cf97e3e7e56abdd8f9d3d96eb749a79": {
+      "stitched_code": "def is_prime(n):\n    if n <= 1:\n        return False\n    for i in range(2, int(n ** 0.5) + 1):\n        if n % i == 0:\n            return False\n    return True\n\n\ndef words_in_sentence(sentence):\n    words = sentence.split()\n    prime_length_words = [word for word in words if is_prime(len(word))]\n    return ' '.join(prime_length_words)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "10e7ed0f8f4330ee5c400cd281f33b3963c98b95627ba2d8667e1471ef5a8804|9e7345f342cb15394767601944f56b8f5cf97e3e7e56abdd8f9d3d96eb749a79": {
+      "stitched_code": "def is_prime(num):\n    if num <= 1:\n        return False\n    for i in range(2, int(num ** 0.5) + 1):\n        if num % i == 0:\n            return False\n    return True\n\n\ndef words_in_sentence(sentence):\n    words = sentence.split()\n    prime_length_words = [word for word in words if is_prime(len(word))]\n    return ' '.join(prime_length_words)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

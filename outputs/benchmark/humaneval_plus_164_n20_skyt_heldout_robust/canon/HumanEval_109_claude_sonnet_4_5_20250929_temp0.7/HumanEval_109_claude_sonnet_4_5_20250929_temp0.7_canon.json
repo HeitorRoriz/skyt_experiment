@@ -1,0 +1,632 @@
+{
+  "contract_id": "HumanEval_109_claude_sonnet_4_5_20250929_temp0.7",
+  "canonical_code": "def move_one_ball(arr):\n    if not arr:\n        return True\n    \n    # Count the number of positions where arr[i] > arr[i+1]\n    breaks = 0\n    break_pos = -1\n    \n    for i in range(len(arr) - 1):\n        if arr[i] > arr[i + 1]:\n            breaks += 1\n            break_pos = i\n    \n    # If no breaks, array is already sorted\n    if breaks == 0:\n        return True\n    \n    # If more than one break, can't be fixed by rotation\n    if breaks > 1:\n        return False\n    \n    # If exactly one break, check if last element <= first element\n    # This ensures that when we rotate, it will be sorted\n    return arr[-1] <= arr[0]\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 4,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [
+        "range",
+        "len"
+      ],
+      "nested_depth": 2,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_1",
+        "if_at_depth_0",
+        "if_at_depth_0"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [],
+        "v1": [
+          "v2"
+        ]
+      },
+      "assignments": {
+        "v0": "Constant(value=0)",
+        "v1": "Name(id='v2', ctx=Load())"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_move_one_ball"
+        ],
+        [
+          "function_move_one_ball",
+          "branch"
+        ],
+        [
+          "function_move_one_ball",
+          "loop"
+        ],
+        [
+          "function_move_one_ball",
+          "loop",
+          "branch"
+        ],
+        [
+          "function_move_one_ball",
+          "branch"
+        ],
+        [
+          "function_move_one_ball",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "move_one_ball": {
+        "name": "move_one_ball",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add"
+      ],
+      "associative_ops": [
+        "Add"
+      ],
+      "binary_operations": [
+        "Sub",
+        "Add"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        true,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0,
+        true,
+        1,
+        false,
+        1,
+        0
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Gt",
+        "Eq",
+        "Gt",
+        "LtE"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "If",
+        "UnaryOp",
+        "Not",
+        "Name",
+        "Load",
+        "Return",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "UnaryOp",
+        "USub",
+        "Constant",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Sub",
+        "Constant",
+        "If",
+        "Compare",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Gt",
+        "Subscript",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Constant",
+        "Load",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Add",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Return",
+        "Constant",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Constant",
+        "Return",
+        "Constant",
+        "Return",
+        "Compare",
+        "Subscript",
+        "Name",
+        "Load",
+        "UnaryOp",
+        "USub",
+        "Constant",
+        "Load",
+        "LtE",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load"
+      ],
+      "ast_depth": 8,
+      "ast_hash": "5587c3a596305dc2082ca46f13c4e88a",
+      "alpha_renamed_hash": "5587c3a596305dc2082ca46f13c4e88a"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Sub",
+        "Add"
+      ],
+      "precedence_levels": {
+        "Sub": 3,
+        "Add": 3
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Return",
+        "Assign",
+        "Assign",
+        "For",
+        "If",
+        "AugAssign",
+        "Assign",
+        "If",
+        "Return",
+        "If",
+        "Return",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Return_2",
+        "Assign_3",
+        "Assign_4",
+        "For_5",
+        "If_6",
+        "AugAssign_7",
+        "Assign_8",
+        "If_9",
+        "Return_10",
+        "If_11",
+        "Return_12",
+        "Return_13"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If",
+        "For",
+        "If",
+        "If",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "not p0",
+          "return_type": "constant"
+        },
+        {
+          "condition": "v0 == 0",
+          "return_type": "constant"
+        },
+        {
+          "condition": "v0 > 1",
+          "return_type": "constant"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "not p0",
+        "v0 == 0",
+        "v0 > 1"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_109_claude_sonnet_4_5_20250929_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/109",
+    "prompt": "\ndef move_one_ball(arr):\n    \"\"\"We have an array 'arr' of N integers arr[1], arr[2], ..., arr[N].The\n    numbers in the array will be randomly ordered. Your task is to determine if\n    it is possible to get an array sorted in non-decreasing order by performing \n    the following operation on the given array:\n        You are allowed to perform right shift operation any number of times.\n    \n    One right shift operation means shifting all elements of the array by one\n    position in the right direction. The last element of the array will be moved to\n    the starting position in the array i.e. 0th index. \n\n    If it is possible to obtain the sorted array by performing the above operation\n    then return True else return False.\n    If the given array is empty then return True.\n\n    Note: The given list is guaranteed to have unique elements.\n\n    For Example:\n    \n    move_one_ball([3, 4, 5, 1, 2])==>True\n    Explanation: By performin 2 right shift operations, non-decreasing order can\n                 be achieved for the given array.\n    move_one_ball([3, 5, 4, 1, 2])==>False\n    Explanation:It is not possible to get non-decreasing order for the given\n                array by performing any number of right shift operations.\n                \n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "move_one_ball"
+    },
+    "anchor_signature": "0fffdfcb6c7d0782f4470a3fd3fc56d407c8232d5d03f57cb399d411dd49aa35",
+    "canonical_code": "def move_one_ball(arr):\n    if not arr:\n        return True\n    \n    # Count the number of positions where arr[i] > arr[i+1]\n    breaks = 0\n    break_pos = -1\n    \n    for i in range(len(arr) - 1):\n        if arr[i] > arr[i + 1]:\n            breaks += 1\n            break_pos = i\n    \n    # If no breaks, array is already sorted\n    if breaks == 0:\n        return True\n    \n    # If more than one break, can't be fixed by rotation\n    if breaks > 1:\n        return False\n    \n    # If exactly one break, check if last element <= first element\n    # This ensures that when we rotate, it will be sorted\n    return arr[-1] <= arr[0]\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 4,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "range",
+          "len"
+        ],
+        "nested_depth": 2,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_1",
+          "if_at_depth_0",
+          "if_at_depth_0"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [],
+          "v1": [
+            "v2"
+          ]
+        },
+        "assignments": {
+          "v0": "Constant(value=0)",
+          "v1": "Name(id='v2', ctx=Load())"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_move_one_ball"
+          ],
+          [
+            "function_move_one_ball",
+            "branch"
+          ],
+          [
+            "function_move_one_ball",
+            "loop"
+          ],
+          [
+            "function_move_one_ball",
+            "loop",
+            "branch"
+          ],
+          [
+            "function_move_one_ball",
+            "branch"
+          ],
+          [
+            "function_move_one_ball",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "move_one_ball": {
+          "name": "move_one_ball",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add"
+        ],
+        "associative_ops": [
+          "Add"
+        ],
+        "binary_operations": [
+          "Sub",
+          "Add"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          true,
+          0,
+          1,
+          1,
+          1,
+          1,
+          0,
+          true,
+          1,
+          false,
+          1,
+          0
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Gt",
+          "Eq",
+          "Gt",
+          "LtE"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "If",
+          "UnaryOp",
+          "Not",
+          "Name",
+          "Load",
+          "Return",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "UnaryOp",
+          "USub",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Sub",
+          "Constant",
+          "If",
+          "Compare",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Gt",
+          "Subscript",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Constant",
+          "Load",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Add",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Return",
+          "Constant",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Constant",
+          "Return",
+          "Constant",
+          "Return",
+          "Compare",
+          "Subscript",
+          "Name",
+          "Load",
+          "UnaryOp",
+          "USub",
+          "Constant",
+          "Load",
+          "LtE",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load"
+        ],
+        "ast_depth": 8,
+        "ast_hash": "5587c3a596305dc2082ca46f13c4e88a",
+        "alpha_renamed_hash": "5587c3a596305dc2082ca46f13c4e88a"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Sub",
+          "Add"
+        ],
+        "precedence_levels": {
+          "Sub": 3,
+          "Add": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "Assign",
+          "Assign",
+          "For",
+          "If",
+          "AugAssign",
+          "Assign",
+          "If",
+          "Return",
+          "If",
+          "Return",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "Assign_3",
+          "Assign_4",
+          "For_5",
+          "If_6",
+          "AugAssign_7",
+          "Assign_8",
+          "If_9",
+          "Return_10",
+          "If_11",
+          "Return_12",
+          "Return_13"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "For",
+          "If",
+          "If",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "not p0",
+            "return_type": "constant"
+          },
+          {
+            "condition": "v0 == 0",
+            "return_type": "constant"
+          },
+          {
+            "condition": "v0 > 1",
+            "return_type": "constant"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "not p0",
+          "v0 == 0",
+          "v0 > 1"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

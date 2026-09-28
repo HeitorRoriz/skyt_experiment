@@ -1,0 +1,305 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "a3ddcdb9151aee9becba2555b5b61e79e9353e8d96280950210adbe8fccceff5|98d637d74afa26cef21060eb52ae5e5ebf99834288a7589776361c2da32fcf58": {
+      "stitched_code": "def select_words(s, n):\n    if not s:\n        return []\n    words = s.split()\n    result = []\n    vowels = set('aeiouAEIOU')\n    for word in words:\n        consonant_count = 0\n        for char in word:\n            if char.isalpha() and char not in vowels:\n                consonant_count += 1\n        if consonant_count == n:\n            result.append(word)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "98d637d74afa26cef21060eb52ae5e5ebf99834288a7589776361c2da32fcf58|98d637d74afa26cef21060eb52ae5e5ebf99834288a7589776361c2da32fcf58": {
+      "stitched_code": "def select_words(s, n):\n    if not s:\n        return []\n    \n    words = s.split()\n    result = []\n    vowels = set('aeiouAEIOU')\n    \n    for word in words:\n        consonant_count = 0\n        for char in word:\n            if char.isalpha() and char not in vowels:\n                consonant_count += 1\n        \n        if consonant_count == n:\n            result.append(word)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "5792e137469da7d345683ab1ba5bc9051a269d50d71e7d88e3b19c8eb697e52e|98d637d74afa26cef21060eb52ae5e5ebf99834288a7589776361c2da32fcf58": {
+      "stitched_code": "def select_words(s, n):\n    if not s:\n        return []\n    words = s.split()\n    result = []\n    vowels = set('aeiouAEIOU')\n    for word in words:\n        consonant_count = 0\n        for char in word:\n            if char.isalpha() and char not in vowels:\n                consonant_count += 1\n        if consonant_count == n:\n            result.append(word)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "c322625587bad80e23c7224d608dbbcda4446639142817372b9bea6d2b187339|98d637d74afa26cef21060eb52ae5e5ebf99834288a7589776361c2da32fcf58": {
+      "stitched_code": "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s.\n    If the string s is empty then the function should return an empty list.\n    Note: you may assume the input string contains only letters and spaces.\n    Examples:\n    select_words(\"Mary had a little lamb\", 4) ==> [\"little\"]\n    select_words(\"Mary had a little lamb\", 3) ==> [\"Mary\", \"lamb\"]\n    select_words(\"simple white space\", 2) ==> []\n    select_words(\"Hello world\", 4) ==> [\"world\"]\n    select_words(\"Uncle sam\", 3) ==> [\"Uncle\"]\n    \"\"\"\n    if not s:\n        return []\n    \n    words = s.split()\n    result = []\n    vowels = set('aeiouAEIOU')\n    \n    for word in words:\n        consonant_count = 0\n        for char in word:\n            if char.isalpha() and char not in vowels:\n                consonant_count += 1\n        \n        if consonant_count == n:\n            result.append(word)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "98d637d74afa26cef21060eb52ae5e5ebf99834288a7589776361c2da32fcf58|c322625587bad80e23c7224d608dbbcda4446639142817372b9bea6d2b187339": {
+      "stitched_code": "def select_words(s, n):\n    if not s:\n        return []\n    \n    words = s.split()\n    result = []\n    vowels = set('aeiouAEIOU')\n    \n    for word in words:\n        consonant_count = 0\n        for char in word:\n            if char.isalpha() and char not in vowels:\n                consonant_count += 1\n        \n        if consonant_count == n:\n            result.append(word)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "5792e137469da7d345683ab1ba5bc9051a269d50d71e7d88e3b19c8eb697e52e|c322625587bad80e23c7224d608dbbcda4446639142817372b9bea6d2b187339": {
+      "stitched_code": "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s.\n    If the string s is empty then the function should return an empty list.\n    Note: you may assume the input string contains only letters and spaces.\n    Examples:\n    select_words(\"Mary had a little lamb\", 4) ==> [\"little\"]\n    select_words(\"Mary had a little lamb\", 3) ==> [\"Mary\", \"lamb\"]\n    select_words(\"simple white space\", 2) ==> []\n    select_words(\"Hello world\", 4) ==> [\"world\"]\n    select_words(\"Uncle sam\", 3) ==> [\"Uncle\"]\n    \"\"\"\n    if not s:\n        return []\n    words = s.split()\n    result = []\n    vowels = set('aeiouAEIOU')\n    for word in words:\n        consonant_count = 0\n        for char in word:\n            if char.isalpha() and char not in vowels:\n                consonant_count += 1\n        if consonant_count == n:\n            result.append(word)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "a3ddcdb9151aee9becba2555b5b61e79e9353e8d96280950210adbe8fccceff5|c322625587bad80e23c7224d608dbbcda4446639142817372b9bea6d2b187339": {
+      "stitched_code": "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s.\n    If the string s is empty then the function should return an empty list.\n    Note: you may assume the input string contains only letters and spaces.\n    Examples:\n    select_words(\"Mary had a little lamb\", 4) ==> [\"little\"]\n    select_words(\"Mary had a little lamb\", 3) ==> [\"Mary\", \"lamb\"]\n    select_words(\"simple white space\", 2) ==> []\n    select_words(\"Hello world\", 4) ==> [\"world\"]\n    select_words(\"Uncle sam\", 3) ==> [\"Uncle\"]\n    \"\"\"\n    if not s:\n        return []\n    words = s.split()\n    result = []\n    vowels = set('aeiouAEIOU')\n    for word in words:\n        consonant_count = 0\n        for char in word:\n            if char.isalpha() and char not in vowels:\n                consonant_count += 1\n        if consonant_count == n:\n            result.append(word)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0b6ecf02417d57769f82b3f289fa52fbc340c8d6996ac5d610735d2a9ebb00d1|c322625587bad80e23c7224d608dbbcda4446639142817372b9bea6d2b187339": {
+      "stitched_code": "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s.\n    If the string s is empty then the function should return an empty list.\n    Note: you may assume the input string contains only letters and spaces.\n    Examples:\n    select_words(\"Mary had a little lamb\", 4) ==> [\"little\"]\n    select_words(\"Mary had a little lamb\", 3) ==> [\"Mary\", \"lamb\"]\n    select_words(\"simple white space\", 2) ==> []\n    select_words(\"Hello world\", 4) ==> [\"world\"]\n    select_words(\"Uncle sam\", 3) ==> [\"Uncle\"]\n    \"\"\"\n    if not s:\n        return []\n    words = s.split()\n    result = []\n    vowels = set('aeiouAEIOU')\n    for word in words:\n        consonant_count = 0\n        for char in word:\n            if char.isalpha() and char not in vowels:\n                consonant_count += 1\n        if consonant_count == n:\n            result.append(word)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0b6ecf02417d57769f82b3f289fa52fbc340c8d6996ac5d610735d2a9ebb00d1|98d637d74afa26cef21060eb52ae5e5ebf99834288a7589776361c2da32fcf58": {
+      "stitched_code": "def select_words(s, n):\n    if not s:\n        return []\n    words = s.split()\n    result = []\n    vowels = set('aeiouAEIOU')\n    for word in words:\n        consonant_count = 0\n        for char in word:\n            if char.isalpha() and char not in vowels:\n                consonant_count += 1\n        if consonant_count == n:\n            result.append(word)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "a3ddcdb9151aee9becba2555b5b61e79e9353e8d96280950210adbe8fccceff5|a3ddcdb9151aee9becba2555b5b61e79e9353e8d96280950210adbe8fccceff5": {
+      "stitched_code": "def select_words(s, n):\n    if not s:\n        return []\n    \n    vowels = set('aeiouAEIOU')\n    words = s.split()\n    result = []\n    \n    for word in words:\n        consonant_count = sum(1 for char in word if char.isalpha() and char not in vowels)\n        if consonant_count == n:\n            result.append(word)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "98d637d74afa26cef21060eb52ae5e5ebf99834288a7589776361c2da32fcf58|a3ddcdb9151aee9becba2555b5b61e79e9353e8d96280950210adbe8fccceff5": {
+      "stitched_code": "def select_words(s, n):\n    if not s:\n        return []\n    vowels = set('aeiouAEIOU')\n    words = s.split()\n    result = []\n    for word in words:\n        consonant_count = sum(1 for char in word if char.isalpha() and char\n             not in vowels)\n        if consonant_count == n:\n            result.append(word)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0b6ecf02417d57769f82b3f289fa52fbc340c8d6996ac5d610735d2a9ebb00d1|a3ddcdb9151aee9becba2555b5b61e79e9353e8d96280950210adbe8fccceff5": {
+      "stitched_code": "def select_words(s, n):\n    if not s:\n        return []\n    vowels = set('aeiouAEIOU')\n    words = s.split()\n    result = []\n    for word in words:\n        consonant_count = sum(1 for char in word if char.isalpha() and char\n             not in vowels)\n        if consonant_count == n:\n            result.append(word)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "5792e137469da7d345683ab1ba5bc9051a269d50d71e7d88e3b19c8eb697e52e|a3ddcdb9151aee9becba2555b5b61e79e9353e8d96280950210adbe8fccceff5": {
+      "stitched_code": "def select_words(s, n):\n    if not s:\n        return []\n    vowels = set('aeiouAEIOU')\n    words = s.split()\n    result = []\n    for word in words:\n        consonant_count = sum(1 for char in word if char.isalpha() and char\n             not in vowels)\n        if consonant_count == n:\n            result.append(word)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "c322625587bad80e23c7224d608dbbcda4446639142817372b9bea6d2b187339|a3ddcdb9151aee9becba2555b5b61e79e9353e8d96280950210adbe8fccceff5": {
+      "stitched_code": "def select_words(s, n):\n    if not s:\n        return []\n    vowels = set('aeiouAEIOU')\n    words = s.split()\n    result = []\n    for word in words:\n        consonant_count = sum(1 for char in word if char.isalpha() and char\n             not in vowels)\n        if consonant_count == n:\n            result.append(word)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

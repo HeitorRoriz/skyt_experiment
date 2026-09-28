@@ -1,0 +1,69 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "901e50c342f40582e50f0fcabd800aa318386ae4f6f23222372e976c571ed94c|901e50c342f40582e50f0fcabd800aa318386ae4f6f23222372e976c571ed94c": {
+      "stitched_code": "def derivative(xs: list):\n    \"\"\" xs represent coefficients of a polynomial.\n    xs[0] + xs[1] * x + xs[2] * x^2 + ....\n     Return derivative of this polynomial in the same form.\n    >>> derivative([3, 1, 2, 4, 5])\n    [1, 4, 12, 20]\n    >>> derivative([1, 2, 3])\n    [2, 6]\n    \"\"\"\n    return [(i + 1) * xs[i + 1] for i in range(len(xs) - 1)]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "291070b4f2fa357c9574aaec55f740b3d6cc5207794feb80dad0ce017ea67718|901e50c342f40582e50f0fcabd800aa318386ae4f6f23222372e976c571ed94c": {
+      "stitched_code": "def derivative(xs: list):\n    \"\"\" xs represent coefficients of a polynomial.\n    xs[0] + xs[1] * x + xs[2] * x^2 + ....\n     Return derivative of this polynomial in the same form.\n    >>> derivative([3, 1, 2, 4, 5])\n    [1, 4, 12, 20]\n    >>> derivative([1, 2, 3])\n    [2, 6]\n    \"\"\"\n    return [((i + 1) * xs[i + 1]) for i in range(len(xs) - 1)]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "901e50c342f40582e50f0fcabd800aa318386ae4f6f23222372e976c571ed94c|291070b4f2fa357c9574aaec55f740b3d6cc5207794feb80dad0ce017ea67718": {
+      "stitched_code": "def derivative(xs: list):\n    \"\"\" xs represent coefficients of a polynomial.\n    xs[0] + xs[1] * x + xs[2] * x^2 + ....\n     Return derivative of this polynomial in the same form.\n    >>> derivative([3, 1, 2, 4, 5])\n    [1, 4, 12, 20]\n    >>> derivative([1, 2, 3])\n    [2, 6]\n    \"\"\"\n    if len(xs) <= 1:\n        return []\n    return [(i * xs[i]) for i in range(1, len(xs))]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

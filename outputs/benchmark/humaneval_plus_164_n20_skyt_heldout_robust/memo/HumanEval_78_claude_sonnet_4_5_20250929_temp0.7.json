@@ -1,0 +1,559 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "405eb1d052f45607c1acba6ffaf57937c8a1706e1bfc3ddbf92c0155951a0400|d7048df5f39348403aad6c71df9e0ca1bce20b339a19b6dbb33a75c37736866d": {
+      "stitched_code": "def hex_key(num):\n    \"\"\"You have been tasked to write a function that receives \n    a hexadecimal number as a string and counts the number of hexadecimal \n    digits that are primes (prime number, or a prime, is a natural number \n    greater than 1 that is not a product of two smaller natural numbers).\n    Hexadecimal digits are 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F.\n    Prime numbers are 2, 3, 5, 7, 11, 13, 17,...\n    So you have to determine a number of the following digits: 2, 3, 5, 7, \n    B (=decimal 11), D (=decimal 13).\n    Note: you may assume the input is always correct or empty string, \n    and symbols A,B,C,D,E,F are always uppercase.\n    Examples:\n    For num = \"AB\" the output should be 1.\n    For num = \"1077E\" the output should be 2.\n    For num = \"ABED1A33\" the output should be 4.\n    For num = \"123456789ABCDEF0\" the output should be 6.\n    For num = \"2020\" the output should be 2.\n    \"\"\"\n    prime_hex_digits = {'2', '3', '5', '7', 'B', 'D'}\n    count = 0\n    for digit in num:\n        if digit in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "b13c12074611635852748d717798df633d54094dc4acf6666b14f48793bd7d71|d7048df5f39348403aad6c71df9e0ca1bce20b339a19b6dbb33a75c37736866d": {
+      "stitched_code": "def hex_key(num):\n    prime_hex_digits = {'2', '3', '5', '7', 'B', 'D'}\n    count = 0\n    for digit in num:\n        if digit in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1ca5709b0198083a740b146a819f058a85ab05a6631183a04a7a04f81b49a5c0|405eb1d052f45607c1acba6ffaf57937c8a1706e1bfc3ddbf92c0155951a0400": {
+      "stitched_code": "def hex_key(num):\n    prime_hex_digits = set('2357BD')\n    count = 0\n    for char in num:\n        if char in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "b13c12074611635852748d717798df633d54094dc4acf6666b14f48793bd7d71|405eb1d052f45607c1acba6ffaf57937c8a1706e1bfc3ddbf92c0155951a0400": {
+      "stitched_code": "def hex_key(num):\n    prime_hex_digits = set('2357BD')\n    count = 0\n    for char in num:\n        if char in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "405eb1d052f45607c1acba6ffaf57937c8a1706e1bfc3ddbf92c0155951a0400|405eb1d052f45607c1acba6ffaf57937c8a1706e1bfc3ddbf92c0155951a0400": {
+      "stitched_code": "def hex_key(num):\n    prime_hex_digits = set('2357BD')\n    count = 0\n    for char in num:\n        if char in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "845fd38eb55daaf4217f97d0ebda9b7568d023e747718016dff4731c91304009|405eb1d052f45607c1acba6ffaf57937c8a1706e1bfc3ddbf92c0155951a0400": {
+      "stitched_code": "def hex_key(num):\n    prime_hex_digits = set('2357BD')\n    count = 0\n    for digit in num:\n        if digit in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0b27cc6a7659de833abbe4a4e47b1fbb98b445b7db018ef9d8ea79b2db4e3be1|405eb1d052f45607c1acba6ffaf57937c8a1706e1bfc3ddbf92c0155951a0400": {
+      "stitched_code": "def hex_key(num):\n    prime_hex_digits = set('2357BD')\n    count = 0\n    for char in num:\n        if char in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d7048df5f39348403aad6c71df9e0ca1bce20b339a19b6dbb33a75c37736866d|405eb1d052f45607c1acba6ffaf57937c8a1706e1bfc3ddbf92c0155951a0400": {
+      "stitched_code": "def hex_key(num):\n    prime_hex_digits = set('2357BD')\n    count = 0\n    for char in num:\n        if char in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "1ca5709b0198083a740b146a819f058a85ab05a6631183a04a7a04f81b49a5c0|d7048df5f39348403aad6c71df9e0ca1bce20b339a19b6dbb33a75c37736866d": {
+      "stitched_code": "def hex_key(num):\n    \"\"\"You have been tasked to write a function that receives \n    a hexadecimal number as a string and counts the number of hexadecimal \n    digits that are primes (prime number, or a prime, is a natural number \n    greater than 1 that is not a product of two smaller natural numbers).\n    Hexadecimal digits are 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F.\n    Prime numbers are 2, 3, 5, 7, 11, 13, 17,...\n    So you have to determine a number of the following digits: 2, 3, 5, 7, \n    B (=decimal 11), D (=decimal 13).\n    Note: you may assume the input is always correct or empty string, \n    and symbols A,B,C,D,E,F are always uppercase.\n    Examples:\n    For num = \"AB\" the output should be 1.\n    For num = \"1077E\" the output should be 2.\n    For num = \"ABED1A33\" the output should be 4.\n    For num = \"123456789ABCDEF0\" the output should be 6.\n    For num = \"2020\" the output should be 2.\n    \"\"\"\n    prime_hex_digits = {'2', '3', '5', '7', 'B', 'D'}\n    count = 0\n    for digit in num:\n        if digit in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "3dfc32135ba51665bc17f7e21c57587f78bbc4405a42c291104ede8fc11e9900|d7048df5f39348403aad6c71df9e0ca1bce20b339a19b6dbb33a75c37736866d": {
+      "stitched_code": "def hex_key(num):\n    \"\"\"You have been tasked to write a function that receives \n    a hexadecimal number as a string and counts the number of hexadecimal \n    digits that are primes (prime number, or a prime, is a natural number \n    greater than 1 that is not a product of two smaller natural numbers).\n    Hexadecimal digits are 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F.\n    Prime numbers are 2, 3, 5, 7, 11, 13, 17,...\n    So you have to determine a number of the following digits: 2, 3, 5, 7, \n    B (=decimal 11), D (=decimal 13).\n    Note: you may assume the input is always correct or empty string, \n    and symbols A,B,C,D,E,F are always uppercase.\n    Examples:\n    For num = \"AB\" the output should be 1.\n    For num = \"1077E\" the output should be 2.\n    For num = \"ABED1A33\" the output should be 4.\n    For num = \"123456789ABCDEF0\" the output should be 6.\n    For num = \"2020\" the output should be 2.\n    \"\"\"\n    prime_hex_digits = {'2', '3', '5', '7', 'B', 'D'}\n    count = 0\n    for digit in num:\n        if digit in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0b27cc6a7659de833abbe4a4e47b1fbb98b445b7db018ef9d8ea79b2db4e3be1|d7048df5f39348403aad6c71df9e0ca1bce20b339a19b6dbb33a75c37736866d": {
+      "stitched_code": "def hex_key(num):\n    prime_hex_digits = {'2', '3', '5', '7', 'B', 'D'}\n    count = 0\n    for char in num:\n        if char in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "405eb1d052f45607c1acba6ffaf57937c8a1706e1bfc3ddbf92c0155951a0400|0b27cc6a7659de833abbe4a4e47b1fbb98b445b7db018ef9d8ea79b2db4e3be1": {
+      "stitched_code": "def hex_key(num):\n    prime_hex_digits = {'2', '3', '5', '7', 'B', 'D'}\n    count = 0\n    for char in num:\n        if char in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "b13c12074611635852748d717798df633d54094dc4acf6666b14f48793bd7d71|0b27cc6a7659de833abbe4a4e47b1fbb98b445b7db018ef9d8ea79b2db4e3be1": {
+      "stitched_code": "def hex_key(num):\n    prime_hex_digits = {'2', '3', '5', '7', 'B', 'D'}\n    count = 0\n    for digit in num:\n        if digit in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "845fd38eb55daaf4217f97d0ebda9b7568d023e747718016dff4731c91304009|0b27cc6a7659de833abbe4a4e47b1fbb98b445b7db018ef9d8ea79b2db4e3be1": {
+      "stitched_code": "def hex_key(num):\n    prime_hex_digits = {'2', '3', '5', '7', 'B', 'D'}\n    count = 0\n    for char in num:\n        if char in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "3dfc32135ba51665bc17f7e21c57587f78bbc4405a42c291104ede8fc11e9900|0b27cc6a7659de833abbe4a4e47b1fbb98b445b7db018ef9d8ea79b2db4e3be1": {
+      "stitched_code": "def hex_key(num):\n    prime_hex_digits = {'2', '3', '5', '7', 'B', 'D'}\n    count = 0\n    for char in num:\n        if char in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d7048df5f39348403aad6c71df9e0ca1bce20b339a19b6dbb33a75c37736866d|0b27cc6a7659de833abbe4a4e47b1fbb98b445b7db018ef9d8ea79b2db4e3be1": {
+      "stitched_code": "def hex_key(num):\n    \"\"\"You have been tasked to write a function that receives \n    a hexadecimal number as a string and counts the number of hexadecimal \n    digits that are primes (prime number, or a prime, is a natural number \n    greater than 1 that is not a product of two smaller natural numbers).\n    Hexadecimal digits are 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F.\n    Prime numbers are 2, 3, 5, 7, 11, 13, 17,...\n    So you have to determine a number of the following digits: 2, 3, 5, 7, \n    B (=decimal 11), D (=decimal 13).\n    Note: you may assume the input is always correct or empty string, \n    and symbols A,B,C,D,E,F are always uppercase.\n    Examples:\n    For num = \"AB\" the output should be 1.\n    For num = \"1077E\" the output should be 2.\n    For num = \"ABED1A33\" the output should be 4.\n    For num = \"123456789ABCDEF0\" the output should be 6.\n    For num = \"2020\" the output should be 2.\n    \"\"\"\n    prime_hex_digits = {'2', '3', '5', '7', 'B', 'D'}\n    count = 0\n    for digit in num:\n        if digit in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "3dfc32135ba51665bc17f7e21c57587f78bbc4405a42c291104ede8fc11e9900|405eb1d052f45607c1acba6ffaf57937c8a1706e1bfc3ddbf92c0155951a0400": {
+      "stitched_code": "def hex_key(num):\n    prime_hex_digits = set('2357BD')\n    count = 0\n    for char in num:\n        if char in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "845fd38eb55daaf4217f97d0ebda9b7568d023e747718016dff4731c91304009|d7048df5f39348403aad6c71df9e0ca1bce20b339a19b6dbb33a75c37736866d": {
+      "stitched_code": "def hex_key(num):\n    \"\"\"You have been tasked to write a function that receives \n    a hexadecimal number as a string and counts the number of hexadecimal \n    digits that are primes (prime number, or a prime, is a natural number \n    greater than 1 that is not a product of two smaller natural numbers).\n    Hexadecimal digits are 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F.\n    Prime numbers are 2, 3, 5, 7, 11, 13, 17,...\n    So you have to determine a number of the following digits: 2, 3, 5, 7, \n    B (=decimal 11), D (=decimal 13).\n    Note: you may assume the input is always correct or empty string, \n    and symbols A,B,C,D,E,F are always uppercase.\n    Examples:\n    For num = \"AB\" the output should be 1.\n    For num = \"1077E\" the output should be 2.\n    For num = \"ABED1A33\" the output should be 4.\n    For num = \"123456789ABCDEF0\" the output should be 6.\n    For num = \"2020\" the output should be 2.\n    \"\"\"\n    prime_hex_digits = {'2', '3', '5', '7', 'B', 'D'}\n    count = 0\n    for digit in num:\n        if digit in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "1ca5709b0198083a740b146a819f058a85ab05a6631183a04a7a04f81b49a5c0|0b27cc6a7659de833abbe4a4e47b1fbb98b445b7db018ef9d8ea79b2db4e3be1": {
+      "stitched_code": "def hex_key(num):\n    prime_hex_digits = {'2', '3', '5', '7', 'B', 'D'}\n    count = 0\n    for char in num:\n        if char in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "405eb1d052f45607c1acba6ffaf57937c8a1706e1bfc3ddbf92c0155951a0400|b13c12074611635852748d717798df633d54094dc4acf6666b14f48793bd7d71": {
+      "stitched_code": "def hex_key(num):\n    prime_hex_digits = {'2', '3', '5', '7', 'B', 'D'}\n    count = 0\n    for digit in num:\n        if digit in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "1ca5709b0198083a740b146a819f058a85ab05a6631183a04a7a04f81b49a5c0|b13c12074611635852748d717798df633d54094dc4acf6666b14f48793bd7d71": {
+      "stitched_code": "def hex_key(num):\n    prime_hex_digits = {'2', '3', '5', '7', 'B', 'D'}\n    count = 0\n    for digit in num:\n        if digit in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "845fd38eb55daaf4217f97d0ebda9b7568d023e747718016dff4731c91304009|b13c12074611635852748d717798df633d54094dc4acf6666b14f48793bd7d71": {
+      "stitched_code": "def hex_key(num):\n    prime_hex_digits = {'2', '3', '5', '7', 'B', 'D'}\n    count = 0\n    for digit in num:\n        if digit in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "3dfc32135ba51665bc17f7e21c57587f78bbc4405a42c291104ede8fc11e9900|b13c12074611635852748d717798df633d54094dc4acf6666b14f48793bd7d71": {
+      "stitched_code": "def hex_key(num):\n    prime_hex_digits = {'2', '3', '5', '7', 'B', 'D'}\n    count = 0\n    for digit in num:\n        if digit in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "b13c12074611635852748d717798df633d54094dc4acf6666b14f48793bd7d71|b13c12074611635852748d717798df633d54094dc4acf6666b14f48793bd7d71": {
+      "stitched_code": "def hex_key(num):\n    prime_hex_digits = {'2', '3', '5', '7', 'B', 'D'}\n    count = 0\n    for digit in num:\n        if digit in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0b27cc6a7659de833abbe4a4e47b1fbb98b445b7db018ef9d8ea79b2db4e3be1|b13c12074611635852748d717798df633d54094dc4acf6666b14f48793bd7d71": {
+      "stitched_code": "def hex_key(num):\n    prime_hex_digits = {'2', '3', '5', '7', 'B', 'D'}\n    count = 0\n    for char in num:\n        if char in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "d7048df5f39348403aad6c71df9e0ca1bce20b339a19b6dbb33a75c37736866d|b13c12074611635852748d717798df633d54094dc4acf6666b14f48793bd7d71": {
+      "stitched_code": "def hex_key(num):\n    \"\"\"You have been tasked to write a function that receives \n    a hexadecimal number as a string and counts the number of hexadecimal \n    digits that are primes (prime number, or a prime, is a natural number \n    greater than 1 that is not a product of two smaller natural numbers).\n    Hexadecimal digits are 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F.\n    Prime numbers are 2, 3, 5, 7, 11, 13, 17,...\n    So you have to determine a number of the following digits: 2, 3, 5, 7, \n    B (=decimal 11), D (=decimal 13).\n    Note: you may assume the input is always correct or empty string, \n    and symbols A,B,C,D,E,F are always uppercase.\n    Examples:\n    For num = \"AB\" the output should be 1.\n    For num = \"1077E\" the output should be 2.\n    For num = \"ABED1A33\" the output should be 4.\n    For num = \"123456789ABCDEF0\" the output should be 6.\n    For num = \"2020\" the output should be 2.\n    \"\"\"\n    prime_hex_digits = {'2', '3', '5', '7', 'B', 'D'}\n    count = 0\n    for digit in num:\n        if digit in prime_hex_digits:\n            count += 1\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

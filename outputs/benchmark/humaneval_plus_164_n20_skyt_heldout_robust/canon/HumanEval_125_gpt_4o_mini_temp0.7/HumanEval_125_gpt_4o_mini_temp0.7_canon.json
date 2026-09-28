@@ -1,0 +1,448 @@
+{
+  "contract_id": "HumanEval_125_gpt_4o_mini_temp0.7",
+  "canonical_code": "def split_words(txt):\n    if ' ' in txt:\n        return txt.split()\n    elif ',' in txt:\n        return txt.split(',')\n    else:\n        return sum(1 for char in txt if char.islower() and (ord(char) - ord('a')) % 2 == 1)\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 2,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "sum",
+        "ord",
+        "ord"
+      ],
+      "nested_depth": 2,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_1"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {},
+      "assignments": {}
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_split_words"
+        ],
+        [
+          "function_split_words",
+          "branch"
+        ],
+        [
+          "function_split_words",
+          "branch",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "split_words": {
+        "name": "split_words",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": [
+        "Mod",
+        "Sub"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        1,
+        2,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [
+        "And"
+      ],
+      "comparisons": [
+        "In",
+        "In",
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "If",
+        "Compare",
+        "Constant",
+        "In",
+        "Name",
+        "Load",
+        "Return",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "If",
+        "Compare",
+        "Constant",
+        "In",
+        "Name",
+        "Load",
+        "Return",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Constant",
+        "Return",
+        "Call",
+        "Name",
+        "Load",
+        "GeneratorExp",
+        "Constant",
+        "comprehension",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "BoolOp",
+        "And",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Compare",
+        "BinOp",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Sub",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "Mod",
+        "Constant",
+        "Eq",
+        "Constant"
+      ],
+      "ast_depth": 14,
+      "ast_hash": "b238eb64299b49f00f31a28dcdd8e887",
+      "alpha_renamed_hash": "b238eb64299b49f00f31a28dcdd8e887"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Mod",
+        "Sub"
+      ],
+      "precedence_levels": {
+        "Mod": 4,
+        "Sub": 3
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Return",
+        "If",
+        "Return",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Return_2",
+        "If_3",
+        "Return_4",
+        "Return_5"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "' ' in p0",
+          "return_type": "expression"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "' ' in p0"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_125_gpt_4o_mini_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/125",
+    "prompt": "\ndef split_words(txt):\n    '''\n    Given a string of words, return a list of words split on whitespace, if no whitespaces exists in the text you\n    should split on commas ',' if no commas exists you should return the number of lower-case letters with odd order in the\n    alphabet, ord('a') = 0, ord('b') = 1, ... ord('z') = 25\n    Examples\n    split_words(\"Hello world!\") \u279e [\"Hello\", \"world!\"]\n    split_words(\"Hello,world!\") \u279e [\"Hello\", \"world!\"]\n    split_words(\"abcdef\") == 3 \n    '''\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "split_words"
+    },
+    "anchor_signature": "e8f3ece06d0e9d7137976ff9ca9a32df64bf01c299bd86edc5c73f413152a8c5",
+    "canonical_code": "def split_words(txt):\n    if ' ' in txt:\n        return txt.split()\n    elif ',' in txt:\n        return txt.split(',')\n    else:\n        return sum(1 for char in txt if char.islower() and (ord(char) - ord('a')) % 2 == 1)\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 2,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "sum",
+          "ord",
+          "ord"
+        ],
+        "nested_depth": 2,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_1"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {},
+        "assignments": {}
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_split_words"
+          ],
+          [
+            "function_split_words",
+            "branch"
+          ],
+          [
+            "function_split_words",
+            "branch",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "split_words": {
+          "name": "split_words",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": [
+          "Mod",
+          "Sub"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          1,
+          2,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [
+          "And"
+        ],
+        "comparisons": [
+          "In",
+          "In",
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "If",
+          "Compare",
+          "Constant",
+          "In",
+          "Name",
+          "Load",
+          "Return",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "If",
+          "Compare",
+          "Constant",
+          "In",
+          "Name",
+          "Load",
+          "Return",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Constant",
+          "Return",
+          "Call",
+          "Name",
+          "Load",
+          "GeneratorExp",
+          "Constant",
+          "comprehension",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "BoolOp",
+          "And",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Compare",
+          "BinOp",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Sub",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "Mod",
+          "Constant",
+          "Eq",
+          "Constant"
+        ],
+        "ast_depth": 14,
+        "ast_hash": "b238eb64299b49f00f31a28dcdd8e887",
+        "alpha_renamed_hash": "b238eb64299b49f00f31a28dcdd8e887"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Mod",
+          "Sub"
+        ],
+        "precedence_levels": {
+          "Mod": 4,
+          "Sub": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "If",
+          "Return",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "If_3",
+          "Return_4",
+          "Return_5"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "' ' in p0",
+            "return_type": "expression"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "' ' in p0"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "b1134f643c4c012a48788758f424ced04e37beb10d9c794d65d7f52f31069bc2|b1134f643c4c012a48788758f424ced04e37beb10d9c794d65d7f52f31069bc2": {
+      "stitched_code": "def can_arrange(arr):\n    \"\"\"Create a function which returns the largest index of an element which\n    is not greater than or equal to the element immediately preceding it. If\n    no such element exists then return -1. The given array will not contain\n    duplicate values.\n\n    Examples:\n    can_arrange([1,2,4,3,5]) = 3\n    can_arrange([1,2,3]) = -1\n    \"\"\"\n    largest_index = -1\n    \n    for i in range(1, len(arr)):\n        if arr[i] < arr[i-1]:\n            largest_index = i\n    \n    return largest_index\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "be10e57666648d340df30c6eac4a57241722cce37dc02dccbd90f1f82da9b5e7|b1134f643c4c012a48788758f424ced04e37beb10d9c794d65d7f52f31069bc2": {
+      "stitched_code": "def can_arrange(arr):\n    \"\"\"Create a function which returns the largest index of an element which\n    is not greater than or equal to the element immediately preceding it. If\n    no such element exists then return -1. The given array will not contain\n    duplicate values.\n\n    Examples:\n    can_arrange([1,2,4,3,5]) = 3\n    can_arrange([1,2,3]) = -1\n    \"\"\"\n    result = -1\n    for i in range(1, len(arr)):\n        if arr[i] < arr[i-1]:\n            result = i\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

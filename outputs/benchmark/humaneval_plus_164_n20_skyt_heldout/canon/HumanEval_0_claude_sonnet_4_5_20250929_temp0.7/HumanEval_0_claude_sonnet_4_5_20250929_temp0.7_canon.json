@@ -1,0 +1,460 @@
+{
+  "contract_id": "HumanEval_0_claude_sonnet_4_5_20250929_temp0.7",
+  "canonical_code": "def has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n    for i in range(len(numbers)):\n        for j in range(i + 1, len(numbers)):\n            if abs(numbers[i] - numbers[j]) < threshold:\n                return True\n    return False\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 1,
+      "for_loops": 2,
+      "while_loops": 0,
+      "function_calls": [
+        "range",
+        "len",
+        "range",
+        "len",
+        "abs"
+      ],
+      "nested_depth": 3,
+      "branch_patterns": [
+        "if_at_depth_2"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {},
+      "assignments": {}
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_has_close_elements"
+        ],
+        [
+          "function_has_close_elements",
+          "loop"
+        ],
+        [
+          "function_has_close_elements",
+          "loop",
+          "loop"
+        ],
+        [
+          "function_has_close_elements",
+          "loop",
+          "loop",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "has_close_elements": {
+        "name": "has_close_elements",
+        "args": [
+          "p0",
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 2,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n^2)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add"
+      ],
+      "associative_ops": [
+        "Add"
+      ],
+      "binary_operations": [
+        "Add",
+        "Sub"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        1,
+        true,
+        false
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Lt"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "arg",
+        "Name",
+        "Load",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Constant",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Sub",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Lt",
+        "Name",
+        "Load",
+        "Return",
+        "Constant",
+        "Return",
+        "Constant",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 10,
+      "ast_hash": "fc78853ef0007fc98af7649b74ad40dd",
+      "alpha_renamed_hash": "fc78853ef0007fc98af7649b74ad40dd"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Add",
+        "Sub"
+      ],
+      "precedence_levels": {
+        "Add": 3,
+        "Sub": 3
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "For",
+        "For",
+        "If",
+        "Return",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "For_1",
+        "For_2",
+        "If_3",
+        "Return_4",
+        "Return_5"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "For",
+        "For",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_0_claude_sonnet_4_5_20250929_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/0",
+    "prompt": "from typing import List\n\n\ndef has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "has_close_elements"
+    },
+    "anchor_signature": "0452bddd7f5bbe5a898ceafc85a824d9157670fca39de2dcf98fc49ed09bc531",
+    "canonical_code": "def has_close_elements(numbers: List[float], threshold: float) -> bool:\n    \"\"\" Check if in given list of numbers, are any two numbers closer to each other than\n    given threshold.\n    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)\n    False\n    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)\n    True\n    \"\"\"\n    for i in range(len(numbers)):\n        for j in range(i + 1, len(numbers)):\n            if abs(numbers[i] - numbers[j]) < threshold:\n                return True\n    return False\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 1,
+        "for_loops": 2,
+        "while_loops": 0,
+        "function_calls": [
+          "range",
+          "len",
+          "range",
+          "len",
+          "abs"
+        ],
+        "nested_depth": 3,
+        "branch_patterns": [
+          "if_at_depth_2"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {},
+        "assignments": {}
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_has_close_elements"
+          ],
+          [
+            "function_has_close_elements",
+            "loop"
+          ],
+          [
+            "function_has_close_elements",
+            "loop",
+            "loop"
+          ],
+          [
+            "function_has_close_elements",
+            "loop",
+            "loop",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "has_close_elements": {
+          "name": "has_close_elements",
+          "args": [
+            "p0",
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 2,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n^2)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add"
+        ],
+        "associative_ops": [
+          "Add"
+        ],
+        "binary_operations": [
+          "Add",
+          "Sub"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          1,
+          true,
+          false
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Lt"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "arg",
+          "Name",
+          "Load",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Constant",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Sub",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Lt",
+          "Name",
+          "Load",
+          "Return",
+          "Constant",
+          "Return",
+          "Constant",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 10,
+        "ast_hash": "fc78853ef0007fc98af7649b74ad40dd",
+        "alpha_renamed_hash": "fc78853ef0007fc98af7649b74ad40dd"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Add",
+          "Sub"
+        ],
+        "precedence_levels": {
+          "Add": 3,
+          "Sub": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "For",
+          "For",
+          "If",
+          "Return",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "For_1",
+          "For_2",
+          "If_3",
+          "Return_4",
+          "Return_5"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "For",
+          "For",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

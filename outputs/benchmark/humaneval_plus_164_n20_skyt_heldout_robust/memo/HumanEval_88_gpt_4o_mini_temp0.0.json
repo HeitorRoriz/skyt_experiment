@@ -1,0 +1,89 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "553854d28e4da242e5c8e1a20156a096da986ac7a0e05f6ef71e5685bd1ad74b|553854d28e4da242e5c8e1a20156a096da986ac7a0e05f6ef71e5685bd1ad74b": {
+      "stitched_code": "def sort_array(array):\n    if not array:\n        return []\n    \n    first = array[0]\n    last = array[-1]\n    total = first + last\n    \n    if total % 2 == 0:\n        return sorted(array, reverse=True)\n    else:\n        return sorted(array)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "8ccce63118fdf1e66052c9ce58917932074a3d0c013b4aeda60b573f4fbe7bbb|553854d28e4da242e5c8e1a20156a096da986ac7a0e05f6ef71e5685bd1ad74b": {
+      "stitched_code": "def sort_array(array):\n    if not array:\n        return []\n    first = array[0]\n    last = array[-1]\n    total = first + last\n    if total % 2 == 0:\n        return sorted(array, reverse=True)\n    else:\n        return sorted(array)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "553854d28e4da242e5c8e1a20156a096da986ac7a0e05f6ef71e5685bd1ad74b|8ccce63118fdf1e66052c9ce58917932074a3d0c013b4aeda60b573f4fbe7bbb": {
+      "stitched_code": "def sort_array(array):\n    if not array:\n        return []\n    first = array[0]\n    last = array[-1]\n    sorted_array = sorted(array)\n    if (first + last) % 2 == 0:\n        return sorted_array[::-1]\n    else:\n        return sorted_array\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8ccce63118fdf1e66052c9ce58917932074a3d0c013b4aeda60b573f4fbe7bbb|8ccce63118fdf1e66052c9ce58917932074a3d0c013b4aeda60b573f4fbe7bbb": {
+      "stitched_code": "def sort_array(array):\n    if not array:\n        return []\n    \n    first = array[0]\n    last = array[-1]\n    sorted_array = sorted(array)\n    \n    if (first + last) % 2 == 0:\n        return sorted_array[::-1]\n    else:\n        return sorted_array\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

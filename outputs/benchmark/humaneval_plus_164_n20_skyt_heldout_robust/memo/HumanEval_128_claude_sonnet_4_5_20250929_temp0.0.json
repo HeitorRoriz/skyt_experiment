@@ -1,0 +1,47 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "6a663d8ac3887a7a2b67fd1e206d14721478df35a55d0e75f61ceeca925f8a4a|6a663d8ac3887a7a2b67fd1e206d14721478df35a55d0e75f61ceeca925f8a4a": {
+      "stitched_code": "def prod_signs(arr):\n    \"\"\"\n    You are given an array arr of integers and you need to return\n    sum of magnitudes of integers multiplied by product of all signs\n    of each number in the array, represented by 1, -1 or 0.\n    Note: return None for empty arr.\n\n    Example:\n    >>> prod_signs([1, 2, 2, -4]) == -9\n    >>> prod_signs([0, 1]) == 0\n    >>> prod_signs([]) == None\n    \"\"\"\n    if not arr:\n        return None\n    \n    if 0 in arr:\n        return 0\n    \n    sum_magnitudes = sum(abs(x) for x in arr)\n    product_signs = 1\n    for x in arr:\n        if x < 0:\n            product_signs *= -1\n    \n    return sum_magnitudes * product_signs\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "55698e70060898fe3f4b4951bdccfedbec3d3567cb3dc55c3a0fc06380679817|6a663d8ac3887a7a2b67fd1e206d14721478df35a55d0e75f61ceeca925f8a4a": {
+      "stitched_code": "def prod_signs(arr):\n    \"\"\"\n    You are given an array arr of integers and you need to return\n    sum of magnitudes of integers multiplied by product of all signs\n    of each number in the array, represented by 1, -1 or 0.\n    Note: return None for empty arr.\n\n    Example:\n    >>> prod_signs([1, 2, 2, -4]) == -9\n    >>> prod_signs([0, 1]) == 0\n    >>> prod_signs([]) == None\n    \"\"\"\n    if not arr:\n        return None\n    if 0 in arr:\n        return 0\n    sum_magnitudes = sum(abs(x) for x in arr)\n    product_signs = 1\n    for x in arr:\n        if x < 0:\n            product_signs *= -1\n    return sum_magnitudes * product_signs\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

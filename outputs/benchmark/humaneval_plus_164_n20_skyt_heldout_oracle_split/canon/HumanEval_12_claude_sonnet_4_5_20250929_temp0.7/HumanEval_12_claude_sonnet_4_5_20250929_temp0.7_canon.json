@@ -1,0 +1,494 @@
+{
+  "contract_id": "HumanEval_12_claude_sonnet_4_5_20250929_temp0.7",
+  "canonical_code": "def longest(strings: List[str]) -> Optional[str]:\n    \"\"\" Out of list of strings, return the longest one. Return the first one in case of multiple\n    strings of the same length. Return None in case the input list is empty.\n    >>> longest([])\n\n    >>> longest(['a', 'b', 'c'])\n    'a'\n    >>> longest(['a', 'bb', 'ccc'])\n    'ccc'\n    \"\"\"\n    if not strings:\n        return None\n    \n    max_string = strings[0]\n    max_length = len(strings[0])\n    \n    for string in strings[1:]:\n        if len(string) > max_length:\n            max_string = string\n            max_length = len(string)\n    \n    return max_string\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 2,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [
+        "len",
+        "len",
+        "len"
+      ],
+      "nested_depth": 2,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_1"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [
+          "v2"
+        ],
+        "v1": [
+          "v2"
+        ]
+      },
+      "assignments": {
+        "v0": "Name(id='v2', ctx=Load())",
+        "v1": "Call(func=Name(id='len', ctx=Load()), args=[Name(id='v2', ctx=Load())])"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_longest"
+        ],
+        [
+          "function_longest",
+          "branch"
+        ],
+        [
+          "function_longest",
+          "loop"
+        ],
+        [
+          "function_longest",
+          "loop",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "longest": {
+        "name": "longest",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": []
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": false,
+      "numeric_constants": [
+        0,
+        0,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Gt"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "If",
+        "UnaryOp",
+        "Not",
+        "Name",
+        "Load",
+        "Return",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "For",
+        "Name",
+        "Store",
+        "Subscript",
+        "Name",
+        "Load",
+        "Slice",
+        "Constant",
+        "Load",
+        "If",
+        "Compare",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Gt",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Return",
+        "Name",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load"
+      ],
+      "ast_depth": 7,
+      "ast_hash": "feb60b7163f32be8d6d8ce885828b2dc",
+      "alpha_renamed_hash": "feb60b7163f32be8d6d8ce885828b2dc"
+    },
+    "operator_precedence": {
+      "operator_sequence": [],
+      "precedence_levels": {}
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Return",
+        "Assign",
+        "Assign",
+        "For",
+        "If",
+        "Assign",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Return_2",
+        "Assign_3",
+        "Assign_4",
+        "For_5",
+        "If_6",
+        "Assign_7",
+        "Assign_8",
+        "Return_9"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If",
+        "For",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "not p0",
+          "return_type": "constant"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "not p0"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_12_claude_sonnet_4_5_20250929_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/12",
+    "prompt": "from typing import List, Optional\n\n\ndef longest(strings: List[str]) -> Optional[str]:\n    \"\"\" Out of list of strings, return the longest one. Return the first one in case of multiple\n    strings of the same length. Return None in case the input list is empty.\n    >>> longest([])\n\n    >>> longest(['a', 'b', 'c'])\n    'a'\n    >>> longest(['a', 'bb', 'ccc'])\n    'ccc'\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "longest"
+    },
+    "anchor_signature": "3d891a73d6ed248605d277c214e38b6fd481802628d10c82aa08bf3aea730aa8",
+    "canonical_code": "def longest(strings: List[str]) -> Optional[str]:\n    \"\"\" Out of list of strings, return the longest one. Return the first one in case of multiple\n    strings of the same length. Return None in case the input list is empty.\n    >>> longest([])\n\n    >>> longest(['a', 'b', 'c'])\n    'a'\n    >>> longest(['a', 'bb', 'ccc'])\n    'ccc'\n    \"\"\"\n    if not strings:\n        return None\n    \n    max_string = strings[0]\n    max_length = len(strings[0])\n    \n    for string in strings[1:]:\n        if len(string) > max_length:\n            max_string = string\n            max_length = len(string)\n    \n    return max_string\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 2,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "len",
+          "len",
+          "len"
+        ],
+        "nested_depth": 2,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_1"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [
+            "v2"
+          ],
+          "v1": [
+            "v2"
+          ]
+        },
+        "assignments": {
+          "v0": "Name(id='v2', ctx=Load())",
+          "v1": "Call(func=Name(id='len', ctx=Load()), args=[Name(id='v2', ctx=Load())])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_longest"
+          ],
+          [
+            "function_longest",
+            "branch"
+          ],
+          [
+            "function_longest",
+            "loop"
+          ],
+          [
+            "function_longest",
+            "loop",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "longest": {
+          "name": "longest",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": [
+          0,
+          0,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Gt"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "If",
+          "UnaryOp",
+          "Not",
+          "Name",
+          "Load",
+          "Return",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "For",
+          "Name",
+          "Store",
+          "Subscript",
+          "Name",
+          "Load",
+          "Slice",
+          "Constant",
+          "Load",
+          "If",
+          "Compare",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Gt",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Return",
+          "Name",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load"
+        ],
+        "ast_depth": 7,
+        "ast_hash": "feb60b7163f32be8d6d8ce885828b2dc",
+        "alpha_renamed_hash": "feb60b7163f32be8d6d8ce885828b2dc"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "Assign",
+          "Assign",
+          "For",
+          "If",
+          "Assign",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "Assign_3",
+          "Assign_4",
+          "For_5",
+          "If_6",
+          "Assign_7",
+          "Assign_8",
+          "Return_9"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "For",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "not p0",
+            "return_type": "constant"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "not p0"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

@@ -1,0 +1,800 @@
+{
+  "contract_id": "HumanEval_32_gpt_4o_mini_temp0.7",
+  "canonical_code": "import math\n\n\ndef poly(xs: list, x: float):\n    \"\"\"\n    Evaluates polynomial with coefficients xs at point x.\n    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n\n    \"\"\"\n    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])\n\n\ndef find_zero(xs: list):\n    \"\"\" xs are coefficients of a polynomial.\n    find_zero find x such that poly(x) = 0.\n    find_zero returns only only zero point, even if there are many.\n    Moreover, find_zero only takes list xs having even number of coefficients\n    and largest non zero coefficient as it guarantees\n    a solution.\n    >>> round(find_zero([1, 2]), 2) # f(x) = 1 + 2x\n    -0.5\n    >>> round(find_zero([-6, 11, -6, 1]), 2) # (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3\n    1.0\n    \"\"\"\n    if len(xs) % 2 != 0:\n        raise ValueError(\"Coefficient list must have an even number of elements.\")\n    \n    # Use a numerical method to find the root, e.g., bisection method\n    lower_bound = -1000\n    upper_bound = 1000\n    tolerance = 1e-7\n\n    while upper_bound - lower_bound > tolerance:\n        mid = (lower_bound + upper_bound) / 2\n        if poly(xs, mid) == 0:\n            return mid\n        elif poly(xs, lower_bound) * poly(xs, mid) < 0:\n            upper_bound = mid\n        else:\n            lower_bound = mid\n\n    return (lower_bound + upper_bound) / 2\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 3,
+      "for_loops": 0,
+      "while_loops": 1,
+      "function_calls": [
+        "sum",
+        "enumerate",
+        "len",
+        "ValueError",
+        "poly",
+        "poly",
+        "poly"
+      ],
+      "nested_depth": 3,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_1",
+        "if_at_depth_2"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v3": [
+          "v6"
+        ],
+        "v4": [
+          "v6"
+        ],
+        "v5": [],
+        "v6": [
+          "v3",
+          "v4"
+        ]
+      },
+      "assignments": {
+        "v3": "Name(id='v6', ctx=Load())",
+        "v4": "Name(id='v6', ctx=Load())",
+        "v5": "Constant(value=1e-07)",
+        "v6": "BinOp(left=BinOp(left=Name(id='v3', ctx=Load()), op=Add(), right=Name(id='v4', ctx=Load())), op=Div(), right=Constant(value=2))"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_poly"
+        ],
+        [
+          "function_find_zero"
+        ],
+        [
+          "function_find_zero",
+          "branch"
+        ],
+        [
+          "function_find_zero",
+          "branch"
+        ],
+        [
+          "function_find_zero",
+          "branch",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "poly": {
+        "name": "poly",
+        "args": [
+          "p0",
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      },
+      "find_zero": {
+        "name": "find_zero",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 3,
+      "estimated_complexity": "O(2^n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Mult",
+        "Add",
+        "Mult",
+        "Add"
+      ],
+      "associative_ops": [
+        "Mult",
+        "Add",
+        "Mult",
+        "Add"
+      ],
+      "binary_operations": [
+        "Mult",
+        "Mod",
+        "Sub",
+        "Div",
+        "Add",
+        "Mult",
+        "Div",
+        "Add"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": true,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        2,
+        0,
+        1000,
+        1000,
+        1e-07,
+        2,
+        0,
+        0,
+        2
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "NotEq",
+        "Gt",
+        "Eq",
+        "Lt"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "Import",
+        "alias",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Name",
+        "Load",
+        "arg",
+        "Name",
+        "Load",
+        "Return",
+        "Call",
+        "Name",
+        "Load",
+        "ListComp",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mult",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "comprehension",
+        "Tuple",
+        "Name",
+        "Store",
+        "Name",
+        "Store",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Mod",
+        "Constant",
+        "NotEq",
+        "Constant",
+        "Raise",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "UnaryOp",
+        "USub",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "While",
+        "Compare",
+        "BinOp",
+        "Name",
+        "Load",
+        "Sub",
+        "Name",
+        "Load",
+        "Gt",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "BinOp",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Name",
+        "Load",
+        "Div",
+        "Constant",
+        "If",
+        "Compare",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Return",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Mult",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Lt",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Return",
+        "BinOp",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Name",
+        "Load",
+        "Div",
+        "Constant"
+      ],
+      "ast_depth": 9,
+      "ast_hash": "fcc4762b0b59f04f133d590ab362f2eb",
+      "alpha_renamed_hash": "3b26f5be949fd7e8cc934a338de04350"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Mult",
+        "Mod",
+        "Sub",
+        "Div",
+        "Add",
+        "Mult",
+        "Div",
+        "Add"
+      ],
+      "precedence_levels": {
+        "Mult": 4,
+        "Mod": 4,
+        "Sub": 3,
+        "Div": 4,
+        "Add": 3
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "Import",
+        "FunctionDef",
+        "Return",
+        "FunctionDef",
+        "If",
+        "Raise",
+        "Assign",
+        "Assign",
+        "Assign",
+        "While",
+        "Assign",
+        "If",
+        "Return",
+        "If",
+        "Assign",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "Import_0",
+        "FunctionDef_1",
+        "Return_2",
+        "FunctionDef_3",
+        "If_4",
+        "Raise_5",
+        "Assign_6",
+        "Assign_7",
+        "Assign_8",
+        "While_9",
+        "Assign_10",
+        "If_11",
+        "Return_12",
+        "If_13",
+        "Assign_14",
+        "Assign_15",
+        "Return_16"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "FunctionDef",
+        "If",
+        "While",
+        "If",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_32_gpt_4o_mini_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/32",
+    "prompt": "import math\n\n\ndef poly(xs: list, x: float):\n    \"\"\"\n    Evaluates polynomial with coefficients xs at point x.\n    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n\n    \"\"\"\n    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])\n\n\ndef find_zero(xs: list):\n    \"\"\" xs are coefficients of a polynomial.\n    find_zero find x such that poly(x) = 0.\n    find_zero returns only only zero point, even if there are many.\n    Moreover, find_zero only takes list xs having even number of coefficients\n    and largest non zero coefficient as it guarantees\n    a solution.\n    >>> round(find_zero([1, 2]), 2) # f(x) = 1 + 2x\n    -0.5\n    >>> round(find_zero([-6, 11, -6, 1]), 2) # (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3\n    1.0\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "find_zero"
+    },
+    "anchor_signature": "73f169de884b55ba70d839865829e7528b5671cbe646b4fabc2b13505c12f86f",
+    "canonical_code": "import math\n\n\ndef poly(xs: list, x: float):\n    \"\"\"\n    Evaluates polynomial with coefficients xs at point x.\n    return xs[0] + xs[1] * x + xs[1] * x^2 + .... xs[n] * x^n\n    \"\"\"\n    return sum([coeff * math.pow(x, i) for i, coeff in enumerate(xs)])\n\n\ndef find_zero(xs: list):\n    \"\"\" xs are coefficients of a polynomial.\n    find_zero find x such that poly(x) = 0.\n    find_zero returns only only zero point, even if there are many.\n    Moreover, find_zero only takes list xs having even number of coefficients\n    and largest non zero coefficient as it guarantees\n    a solution.\n    >>> round(find_zero([1, 2]), 2) # f(x) = 1 + 2x\n    -0.5\n    >>> round(find_zero([-6, 11, -6, 1]), 2) # (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3\n    1.0\n    \"\"\"\n    if len(xs) % 2 != 0:\n        raise ValueError(\"Coefficient list must have an even number of elements.\")\n    \n    # Use a numerical method to find the root, e.g., bisection method\n    lower_bound = -1000\n    upper_bound = 1000\n    tolerance = 1e-7\n\n    while upper_bound - lower_bound > tolerance:\n        mid = (lower_bound + upper_bound) / 2\n        if poly(xs, mid) == 0:\n            return mid\n        elif poly(xs, lower_bound) * poly(xs, mid) < 0:\n            upper_bound = mid\n        else:\n            lower_bound = mid\n\n    return (lower_bound + upper_bound) / 2\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 3,
+        "for_loops": 0,
+        "while_loops": 1,
+        "function_calls": [
+          "sum",
+          "enumerate",
+          "len",
+          "ValueError",
+          "poly",
+          "poly",
+          "poly"
+        ],
+        "nested_depth": 3,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_1",
+          "if_at_depth_2"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v3": [
+            "v6"
+          ],
+          "v4": [
+            "v6"
+          ],
+          "v5": [],
+          "v6": [
+            "v3",
+            "v4"
+          ]
+        },
+        "assignments": {
+          "v3": "Name(id='v6', ctx=Load())",
+          "v4": "Name(id='v6', ctx=Load())",
+          "v5": "Constant(value=1e-07)",
+          "v6": "BinOp(left=BinOp(left=Name(id='v3', ctx=Load()), op=Add(), right=Name(id='v4', ctx=Load())), op=Div(), right=Constant(value=2))"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_poly"
+          ],
+          [
+            "function_find_zero"
+          ],
+          [
+            "function_find_zero",
+            "branch"
+          ],
+          [
+            "function_find_zero",
+            "branch"
+          ],
+          [
+            "function_find_zero",
+            "branch",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "poly": {
+          "name": "poly",
+          "args": [
+            "p0",
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        },
+        "find_zero": {
+          "name": "find_zero",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 3,
+        "estimated_complexity": "O(2^n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Mult",
+          "Add",
+          "Mult",
+          "Add"
+        ],
+        "associative_ops": [
+          "Mult",
+          "Add",
+          "Mult",
+          "Add"
+        ],
+        "binary_operations": [
+          "Mult",
+          "Mod",
+          "Sub",
+          "Div",
+          "Add",
+          "Mult",
+          "Div",
+          "Add"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": true,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          2,
+          0,
+          1000,
+          1000,
+          1e-07,
+          2,
+          0,
+          0,
+          2
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "NotEq",
+          "Gt",
+          "Eq",
+          "Lt"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "Import",
+          "alias",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Name",
+          "Load",
+          "arg",
+          "Name",
+          "Load",
+          "Return",
+          "Call",
+          "Name",
+          "Load",
+          "ListComp",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mult",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "comprehension",
+          "Tuple",
+          "Name",
+          "Store",
+          "Name",
+          "Store",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Mod",
+          "Constant",
+          "NotEq",
+          "Constant",
+          "Raise",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "UnaryOp",
+          "USub",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "While",
+          "Compare",
+          "BinOp",
+          "Name",
+          "Load",
+          "Sub",
+          "Name",
+          "Load",
+          "Gt",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "BinOp",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Name",
+          "Load",
+          "Div",
+          "Constant",
+          "If",
+          "Compare",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Return",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Mult",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Lt",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Return",
+          "BinOp",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Name",
+          "Load",
+          "Div",
+          "Constant"
+        ],
+        "ast_depth": 9,
+        "ast_hash": "fcc4762b0b59f04f133d590ab362f2eb",
+        "alpha_renamed_hash": "3b26f5be949fd7e8cc934a338de04350"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Mult",
+          "Mod",
+          "Sub",
+          "Div",
+          "Add",
+          "Mult",
+          "Div",
+          "Add"
+        ],
+        "precedence_levels": {
+          "Mult": 4,
+          "Mod": 4,
+          "Sub": 3,
+          "Div": 4,
+          "Add": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "Import",
+          "FunctionDef",
+          "Return",
+          "FunctionDef",
+          "If",
+          "Raise",
+          "Assign",
+          "Assign",
+          "Assign",
+          "While",
+          "Assign",
+          "If",
+          "Return",
+          "If",
+          "Assign",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "Import_0",
+          "FunctionDef_1",
+          "Return_2",
+          "FunctionDef_3",
+          "If_4",
+          "Raise_5",
+          "Assign_6",
+          "Assign_7",
+          "Assign_8",
+          "While_9",
+          "Assign_10",
+          "If_11",
+          "Return_12",
+          "If_13",
+          "Assign_14",
+          "Assign_15",
+          "Return_16"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "FunctionDef",
+          "If",
+          "While",
+          "If",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

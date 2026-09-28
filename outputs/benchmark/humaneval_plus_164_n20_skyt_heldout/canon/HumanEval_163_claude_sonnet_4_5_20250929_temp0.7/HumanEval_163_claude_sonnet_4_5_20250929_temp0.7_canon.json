@@ -1,0 +1,490 @@
+{
+  "contract_id": "HumanEval_163_claude_sonnet_4_5_20250929_temp0.7",
+  "canonical_code": "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even digits between a\n    and b, in ascending order.\n\n    For example:\n    generate_integers(2, 8) => [2, 4, 6, 8]\n    generate_integers(8, 2) => [2, 4, 6, 8]\n    generate_integers(10, 14) => []\n    \"\"\"\n    lower = min(a, b)\n    upper = max(a, b)\n    \n    result = []\n    for digit in range(lower, upper + 1):\n        if digit < 10 and digit % 2 == 0:\n            result.append(digit)\n    \n    return result\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 1,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [
+        "min",
+        "max",
+        "range"
+      ],
+      "nested_depth": 2,
+      "branch_patterns": [
+        "if_at_depth_1"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [
+          "p0",
+          "p1"
+        ],
+        "v1": [
+          "p0",
+          "p1"
+        ],
+        "v2": []
+      },
+      "assignments": {
+        "v0": "Call(func=Name(id='min', ctx=Load()), args=[Name(id='p0', ctx=Load()), Name(id='p1', ctx=Load())])",
+        "v1": "Call(func=Name(id='max', ctx=Load()), args=[Name(id='p0', ctx=Load()), Name(id='p1', ctx=Load())])",
+        "v2": "List(ctx=Load())"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_generate_integers"
+        ],
+        [
+          "function_generate_integers",
+          "loop"
+        ],
+        [
+          "function_generate_integers",
+          "loop",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "generate_integers": {
+        "name": "generate_integers",
+        "args": [
+          "p0",
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add"
+      ],
+      "associative_ops": [
+        "Add"
+      ],
+      "binary_operations": [
+        "Add",
+        "Mod"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        1,
+        10,
+        2,
+        0
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [
+        "And"
+      ],
+      "comparisons": [
+        "Lt",
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "List",
+        "Load",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Constant",
+        "If",
+        "BoolOp",
+        "And",
+        "Compare",
+        "Name",
+        "Load",
+        "Lt",
+        "Constant",
+        "Compare",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mod",
+        "Constant",
+        "Eq",
+        "Constant",
+        "Expr",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Name",
+        "Load",
+        "Return",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 8,
+      "ast_hash": "842dc1a7a431bec146ff5ec990214e53",
+      "alpha_renamed_hash": "842dc1a7a431bec146ff5ec990214e53"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Add",
+        "Mod"
+      ],
+      "precedence_levels": {
+        "Add": 3,
+        "Mod": 4
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "Assign",
+        "Assign",
+        "For",
+        "If",
+        "Expr",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "Assign_2",
+        "Assign_3",
+        "For_4",
+        "If_5",
+        "Expr_6",
+        "Return_7"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "For",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_163_claude_sonnet_4_5_20250929_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/163",
+    "prompt": "\ndef generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even digits between a\n    and b, in ascending order.\n\n    For example:\n    generate_integers(2, 8) => [2, 4, 6, 8]\n    generate_integers(8, 2) => [2, 4, 6, 8]\n    generate_integers(10, 14) => []\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "generate_integers"
+    },
+    "anchor_signature": "33d3354d2aa310f1e0a4f9a0a5b2da3f0000a9a6fa50fec9bfa3835991cd7b11",
+    "canonical_code": "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even digits between a\n    and b, in ascending order.\n\n    For example:\n    generate_integers(2, 8) => [2, 4, 6, 8]\n    generate_integers(8, 2) => [2, 4, 6, 8]\n    generate_integers(10, 14) => []\n    \"\"\"\n    lower = min(a, b)\n    upper = max(a, b)\n    \n    result = []\n    for digit in range(lower, upper + 1):\n        if digit < 10 and digit % 2 == 0:\n            result.append(digit)\n    \n    return result\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 1,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "min",
+          "max",
+          "range"
+        ],
+        "nested_depth": 2,
+        "branch_patterns": [
+          "if_at_depth_1"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [
+            "p0",
+            "p1"
+          ],
+          "v1": [
+            "p0",
+            "p1"
+          ],
+          "v2": []
+        },
+        "assignments": {
+          "v0": "Call(func=Name(id='min', ctx=Load()), args=[Name(id='p0', ctx=Load()), Name(id='p1', ctx=Load())])",
+          "v1": "Call(func=Name(id='max', ctx=Load()), args=[Name(id='p0', ctx=Load()), Name(id='p1', ctx=Load())])",
+          "v2": "List(ctx=Load())"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_generate_integers"
+          ],
+          [
+            "function_generate_integers",
+            "loop"
+          ],
+          [
+            "function_generate_integers",
+            "loop",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "generate_integers": {
+          "name": "generate_integers",
+          "args": [
+            "p0",
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add"
+        ],
+        "associative_ops": [
+          "Add"
+        ],
+        "binary_operations": [
+          "Add",
+          "Mod"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          1,
+          10,
+          2,
+          0
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [
+          "And"
+        ],
+        "comparisons": [
+          "Lt",
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "List",
+          "Load",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Constant",
+          "If",
+          "BoolOp",
+          "And",
+          "Compare",
+          "Name",
+          "Load",
+          "Lt",
+          "Constant",
+          "Compare",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mod",
+          "Constant",
+          "Eq",
+          "Constant",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Name",
+          "Load",
+          "Return",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 8,
+        "ast_hash": "842dc1a7a431bec146ff5ec990214e53",
+        "alpha_renamed_hash": "842dc1a7a431bec146ff5ec990214e53"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Add",
+          "Mod"
+        ],
+        "precedence_levels": {
+          "Add": 3,
+          "Mod": 4
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "Assign",
+          "For",
+          "If",
+          "Expr",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "Assign_2",
+          "Assign_3",
+          "For_4",
+          "If_5",
+          "Expr_6",
+          "Return_7"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "For",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

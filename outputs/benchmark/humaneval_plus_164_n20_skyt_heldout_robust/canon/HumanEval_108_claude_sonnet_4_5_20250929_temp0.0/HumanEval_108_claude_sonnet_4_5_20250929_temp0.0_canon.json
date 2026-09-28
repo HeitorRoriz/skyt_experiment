@@ -1,0 +1,770 @@
+{
+  "contract_id": "HumanEval_108_claude_sonnet_4_5_20250929_temp0.0",
+  "canonical_code": "def count_nums(arr):\n    def digit_sum(n):\n        if n == 0:\n            return 0\n        \n        if n > 0:\n            # Positive number: sum all digits\n            total = 0\n            while n > 0:\n                total += n % 10\n                n //= 10\n            return total\n        else:\n            # Negative number: first digit is negative, rest are positive\n            n = -n  # Make it positive\n            digits = []\n            while n > 0:\n                digits.append(n % 10)\n                n //= 10\n            \n            # Reverse to get correct order, make first digit negative\n            digits.reverse()\n            return -digits[0] + sum(digits[1:])\n    \n    count = 0\n    for num in arr:\n        if digit_sum(num) > 0:\n            count += 1\n    \n    return count\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 3,
+      "for_loops": 1,
+      "while_loops": 2,
+      "function_calls": [
+        "sum",
+        "digit_sum"
+      ],
+      "nested_depth": 2,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_0",
+        "if_at_depth_1"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [],
+        "p1": [],
+        "v1": [],
+        "v2": []
+      },
+      "assignments": {
+        "v0": "Constant(value=0)",
+        "p1": "UnaryOp(op=USub(), operand=Name(id='p1', ctx=Load()))",
+        "v1": "List(ctx=Load())",
+        "v2": "Constant(value=0)"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_count_nums"
+        ],
+        [
+          "function_count_nums",
+          "function_digit_sum"
+        ],
+        [
+          "function_count_nums",
+          "function_digit_sum",
+          "branch"
+        ],
+        [
+          "function_count_nums",
+          "function_digit_sum",
+          "branch"
+        ],
+        [
+          "function_count_nums",
+          "loop"
+        ],
+        [
+          "function_count_nums",
+          "loop",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "count_nums": {
+        "name": "count_nums",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      },
+      "digit_sum": {
+        "name": "digit_sum",
+        "args": [
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 1,
+      "estimated_complexity": "O(2^n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add"
+      ],
+      "associative_ops": [
+        "Add"
+      ],
+      "binary_operations": [
+        "Mod",
+        "Mod",
+        "Add"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        10,
+        10,
+        0,
+        10,
+        10,
+        0,
+        1,
+        0,
+        0,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Eq",
+        "Gt",
+        "Gt",
+        "Gt",
+        "Gt"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Return",
+        "Constant",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "While",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Constant",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Add",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mod",
+        "Constant",
+        "AugAssign",
+        "Name",
+        "Store",
+        "FloorDiv",
+        "Constant",
+        "Return",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "UnaryOp",
+        "USub",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "List",
+        "Load",
+        "While",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Constant",
+        "Expr",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mod",
+        "Constant",
+        "AugAssign",
+        "Name",
+        "Store",
+        "FloorDiv",
+        "Constant",
+        "Expr",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Return",
+        "BinOp",
+        "UnaryOp",
+        "USub",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "Add",
+        "Call",
+        "Name",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Slice",
+        "Constant",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "For",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Gt",
+        "Constant",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Add",
+        "Constant",
+        "Return",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 9,
+      "ast_hash": "3e2fa0e5bcd03412adc9c00189e122d7",
+      "alpha_renamed_hash": "3e2fa0e5bcd03412adc9c00189e122d7"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Mod",
+        "Mod",
+        "Add"
+      ],
+      "precedence_levels": {
+        "Mod": 4,
+        "Add": 3
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "FunctionDef",
+        "If",
+        "Return",
+        "If",
+        "Assign",
+        "While",
+        "AugAssign",
+        "AugAssign",
+        "Return",
+        "Assign",
+        "Assign",
+        "While",
+        "Expr",
+        "AugAssign",
+        "Expr",
+        "Return",
+        "Assign",
+        "For",
+        "If",
+        "AugAssign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "FunctionDef_1",
+        "If_2",
+        "Return_3",
+        "If_4",
+        "Assign_5",
+        "While_6",
+        "AugAssign_7",
+        "AugAssign_8",
+        "Return_9",
+        "Assign_10",
+        "Assign_11",
+        "While_12",
+        "Expr_13",
+        "AugAssign_14",
+        "Expr_15",
+        "Return_16",
+        "Assign_17",
+        "For_18",
+        "If_19",
+        "AugAssign_20",
+        "Return_21"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "FunctionDef",
+        "If",
+        "If",
+        "While",
+        "While",
+        "For",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "p1 == 0",
+          "return_type": "constant"
+        },
+        {
+          "condition": "p1 > 0",
+          "return_type": "expression"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "p1 == 0",
+        "p1 > 0"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_108_claude_sonnet_4_5_20250929_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/108",
+    "prompt": "\ndef count_nums(arr):\n    \"\"\"\n    Write a function count_nums which takes an array of integers and returns\n    the number of elements which has a sum of digits > 0.\n    If a number is negative, then its first signed digit will be negative:\n    e.g. -123 has signed digits -1, 2, and 3.\n    >>> count_nums([]) == 0\n    >>> count_nums([-1, 11, -11]) == 1\n    >>> count_nums([1, 1, 2]) == 3\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "count_nums"
+    },
+    "anchor_signature": "7ede0b1bdbdf7c6e8dd0ede3a65d16bfec7631603e249cde0e547e64e0772c42",
+    "canonical_code": "def count_nums(arr):\n    def digit_sum(n):\n        if n == 0:\n            return 0\n        \n        if n > 0:\n            # Positive number: sum all digits\n            total = 0\n            while n > 0:\n                total += n % 10\n                n //= 10\n            return total\n        else:\n            # Negative number: first digit is negative, rest are positive\n            n = -n  # Make it positive\n            digits = []\n            while n > 0:\n                digits.append(n % 10)\n                n //= 10\n            \n            # Reverse to get correct order, make first digit negative\n            digits.reverse()\n            return -digits[0] + sum(digits[1:])\n    \n    count = 0\n    for num in arr:\n        if digit_sum(num) > 0:\n            count += 1\n    \n    return count\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 3,
+        "for_loops": 1,
+        "while_loops": 2,
+        "function_calls": [
+          "sum",
+          "digit_sum"
+        ],
+        "nested_depth": 2,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_0",
+          "if_at_depth_1"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [],
+          "p1": [],
+          "v1": [],
+          "v2": []
+        },
+        "assignments": {
+          "v0": "Constant(value=0)",
+          "p1": "UnaryOp(op=USub(), operand=Name(id='p1', ctx=Load()))",
+          "v1": "List(ctx=Load())",
+          "v2": "Constant(value=0)"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_count_nums"
+          ],
+          [
+            "function_count_nums",
+            "function_digit_sum"
+          ],
+          [
+            "function_count_nums",
+            "function_digit_sum",
+            "branch"
+          ],
+          [
+            "function_count_nums",
+            "function_digit_sum",
+            "branch"
+          ],
+          [
+            "function_count_nums",
+            "loop"
+          ],
+          [
+            "function_count_nums",
+            "loop",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "count_nums": {
+          "name": "count_nums",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        },
+        "digit_sum": {
+          "name": "digit_sum",
+          "args": [
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 1,
+        "estimated_complexity": "O(2^n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add"
+        ],
+        "associative_ops": [
+          "Add"
+        ],
+        "binary_operations": [
+          "Mod",
+          "Mod",
+          "Add"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          10,
+          10,
+          0,
+          10,
+          10,
+          0,
+          1,
+          0,
+          0,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Eq",
+          "Gt",
+          "Gt",
+          "Gt",
+          "Gt"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Return",
+          "Constant",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "While",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Constant",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Add",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mod",
+          "Constant",
+          "AugAssign",
+          "Name",
+          "Store",
+          "FloorDiv",
+          "Constant",
+          "Return",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "UnaryOp",
+          "USub",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "List",
+          "Load",
+          "While",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Constant",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mod",
+          "Constant",
+          "AugAssign",
+          "Name",
+          "Store",
+          "FloorDiv",
+          "Constant",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Return",
+          "BinOp",
+          "UnaryOp",
+          "USub",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "Add",
+          "Call",
+          "Name",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Slice",
+          "Constant",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Gt",
+          "Constant",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Add",
+          "Constant",
+          "Return",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 9,
+        "ast_hash": "3e2fa0e5bcd03412adc9c00189e122d7",
+        "alpha_renamed_hash": "3e2fa0e5bcd03412adc9c00189e122d7"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Mod",
+          "Mod",
+          "Add"
+        ],
+        "precedence_levels": {
+          "Mod": 4,
+          "Add": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "FunctionDef",
+          "If",
+          "Return",
+          "If",
+          "Assign",
+          "While",
+          "AugAssign",
+          "AugAssign",
+          "Return",
+          "Assign",
+          "Assign",
+          "While",
+          "Expr",
+          "AugAssign",
+          "Expr",
+          "Return",
+          "Assign",
+          "For",
+          "If",
+          "AugAssign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "FunctionDef_1",
+          "If_2",
+          "Return_3",
+          "If_4",
+          "Assign_5",
+          "While_6",
+          "AugAssign_7",
+          "AugAssign_8",
+          "Return_9",
+          "Assign_10",
+          "Assign_11",
+          "While_12",
+          "Expr_13",
+          "AugAssign_14",
+          "Expr_15",
+          "Return_16",
+          "Assign_17",
+          "For_18",
+          "If_19",
+          "AugAssign_20",
+          "Return_21"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "FunctionDef",
+          "If",
+          "If",
+          "While",
+          "While",
+          "For",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "p1 == 0",
+            "return_type": "constant"
+          },
+          {
+            "condition": "p1 > 0",
+            "return_type": "expression"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "p1 == 0",
+          "p1 > 0"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

@@ -1,0 +1,111 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "0b94c02e6eb8ceefda22005db07246fc37d2e7be1120d29907c987f14d7053a3|0b94c02e6eb8ceefda22005db07246fc37d2e7be1120d29907c987f14d7053a3": {
+      "stitched_code": "\n\ndef fizz_buzz(n: int):\n    \"\"\"Return the number of times the digit 7 appears in integers less than n which are divisible by 11 or 13.\n    >>> fizz_buzz(50)\n    0\n    >>> fizz_buzz(78)\n    2\n    >>> fizz_buzz(79)\n    3\n    \"\"\"\n    count = 0\n    for i in range(n):\n        if i % 11 == 0 or i % 13 == 0:\n            count += str(i).count('7')\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "57849d4645d2112b088e914561794c68a9dd59ede9455ed1a9ce4e6c1ced9550|0b94c02e6eb8ceefda22005db07246fc37d2e7be1120d29907c987f14d7053a3": {
+      "stitched_code": "def fizz_buzz(n: int):\n    count = 0\n    for i in range(n):\n        if i % 11 == 0 or i % 13 == 0:\n            count += str(i).count('7')\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "af0e06894ac9a7f3e34264fecd5cd1d697d80ad95598ecbfb60b869fb8719a21|0b94c02e6eb8ceefda22005db07246fc37d2e7be1120d29907c987f14d7053a3": {
+      "stitched_code": "def fizz_buzz(n: int):\n    \"\"\"Return the number of times the digit 7 appears in integers less than n which are divisible by 11 or 13.\n    >>> fizz_buzz(50)\n    0\n    >>> fizz_buzz(78)\n    2\n    >>> fizz_buzz(79)\n    3\n    \"\"\"\n    count = 0\n    for i in range(n):\n        if i % 11 == 0 or i % 13 == 0:\n            count += str(i).count('7')\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0b94c02e6eb8ceefda22005db07246fc37d2e7be1120d29907c987f14d7053a3|af0e06894ac9a7f3e34264fecd5cd1d697d80ad95598ecbfb60b869fb8719a21": {
+      "stitched_code": "def fizz_buzz(n: int):\n    count = 0\n    for i in range(n):\n        if (i % 11 == 0 or i % 13 == 0) and '7' in str(i):\n            count += str(i).count('7')\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "57849d4645d2112b088e914561794c68a9dd59ede9455ed1a9ce4e6c1ced9550|af0e06894ac9a7f3e34264fecd5cd1d697d80ad95598ecbfb60b869fb8719a21": {
+      "stitched_code": "def fizz_buzz(n: int):\n    count = 0\n    for i in range(n):\n        if (i % 11 == 0 or i % 13 == 0) and '7' in str(i):\n            count += str(i).count('7')\n    return count\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

@@ -1,0 +1,524 @@
+{
+  "contract_id": "HumanEval_19_claude_sonnet_4_5_20250929_temp0.7",
+  "canonical_code": "def sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a space-delimited string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted from smallest to largest\n    >>> sort_numbers('three one five')\n    'one three five'\n    \"\"\"\n    if not numbers:\n        return ''\n    \n    word_to_num = {\n        'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4,\n        'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9\n    }\n    \n    num_to_word = {v: k for k, v in word_to_num.items()}\n    \n    words = numbers.split()\n    nums = [word_to_num[word] for word in words]\n    nums.sort()\n    \n    return ' '.join(num_to_word[num] for num in nums)\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 1,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [],
+      "nested_depth": 1,
+      "branch_patterns": [
+        "if_at_depth_0"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [],
+        "v1": [],
+        "v4": [],
+        "v5": []
+      },
+      "assignments": {
+        "v0": "Dict(keys=[Constant(value='zero'), Constant(value='one'), Constant(value='two'), Constant(value='three'), Constant(value='four'), Constant(value='five'), Constant(value='six'), Constant(value='seven'), Constant(value='eight'), Constant(value='nine')], values=[Constant(value=0), Constant(value=1), Constant(value=2), Constant(value=3), Constant(value=4), Constant(value=5), Constant(value=6), Constant(value=7), Constant(value=8), Constant(value=9)])",
+        "v1": "DictComp(key=Name(id='v2', ctx=Load()), value=Name(id='v3', ctx=Load()), generators=[comprehension(target=Tuple(elts=[Name(id='v3', ctx=Store()), Name(id='v2', ctx=Store())], ctx=Store()), iter=Call(func=Attribute(value=Name(id='v0', ctx=Load()), attr='items', ctx=Load())), is_async=0)])",
+        "v4": "Call(func=Attribute(value=Name(id='p0', ctx=Load()), attr='split', ctx=Load()))",
+        "v5": "ListComp(elt=Subscript(value=Name(id='v0', ctx=Load()), slice=Name(id='v6', ctx=Load()), ctx=Load()), generators=[comprehension(target=Name(id='v6', ctx=Store()), iter=Name(id='v4', ctx=Load()), is_async=0)])"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_sort_numbers"
+        ],
+        [
+          "function_sort_numbers",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "sort_numbers": {
+        "name": "sort_numbers",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": []
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": false,
+      "numeric_constants": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Name",
+        "Load",
+        "If",
+        "UnaryOp",
+        "Not",
+        "Name",
+        "Load",
+        "Return",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Dict",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "DictComp",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "comprehension",
+        "Tuple",
+        "Name",
+        "Store",
+        "Name",
+        "Store",
+        "Store",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "ListComp",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "comprehension",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Expr",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Return",
+        "Call",
+        "Attribute",
+        "Constant",
+        "Load",
+        "GeneratorExp",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "comprehension",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 8,
+      "ast_hash": "93ec4830d645ab78403f0ec1d0ef1f5c",
+      "alpha_renamed_hash": "93ec4830d645ab78403f0ec1d0ef1f5c"
+    },
+    "operator_precedence": {
+      "operator_sequence": [],
+      "precedence_levels": {}
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Return",
+        "Assign",
+        "Assign",
+        "Assign",
+        "Assign",
+        "Expr",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Return_2",
+        "Assign_3",
+        "Assign_4",
+        "Assign_5",
+        "Assign_6",
+        "Expr_7",
+        "Return_8"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "not p0",
+          "return_type": "constant"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "not p0"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_19_claude_sonnet_4_5_20250929_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/19",
+    "prompt": "from typing import List\n\n\ndef sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a space-delimited string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted from smallest to largest\n    >>> sort_numbers('three one five')\n    'one three five'\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "sort_numbers"
+    },
+    "anchor_signature": "df8e7e47c7c5e91cfc29c2b167c0c47771b7c2fb330826c6b5744907377db828",
+    "canonical_code": "def sort_numbers(numbers: str) -> str:\n    \"\"\" Input is a space-delimited string of numberals from 'zero' to 'nine'.\n    Valid choices are 'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight' and 'nine'.\n    Return the string with numbers sorted from smallest to largest\n    >>> sort_numbers('three one five')\n    'one three five'\n    \"\"\"\n    if not numbers:\n        return ''\n    \n    word_to_num = {\n        'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4,\n        'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9\n    }\n    \n    num_to_word = {v: k for k, v in word_to_num.items()}\n    \n    words = numbers.split()\n    nums = [word_to_num[word] for word in words]\n    nums.sort()\n    \n    return ' '.join(num_to_word[num] for num in nums)\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 1,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [],
+        "nested_depth": 1,
+        "branch_patterns": [
+          "if_at_depth_0"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [],
+          "v1": [],
+          "v4": [],
+          "v5": []
+        },
+        "assignments": {
+          "v0": "Dict(keys=[Constant(value='zero'), Constant(value='one'), Constant(value='two'), Constant(value='three'), Constant(value='four'), Constant(value='five'), Constant(value='six'), Constant(value='seven'), Constant(value='eight'), Constant(value='nine')], values=[Constant(value=0), Constant(value=1), Constant(value=2), Constant(value=3), Constant(value=4), Constant(value=5), Constant(value=6), Constant(value=7), Constant(value=8), Constant(value=9)])",
+          "v1": "DictComp(key=Name(id='v2', ctx=Load()), value=Name(id='v3', ctx=Load()), generators=[comprehension(target=Tuple(elts=[Name(id='v3', ctx=Store()), Name(id='v2', ctx=Store())], ctx=Store()), iter=Call(func=Attribute(value=Name(id='v0', ctx=Load()), attr='items', ctx=Load())), is_async=0)])",
+          "v4": "Call(func=Attribute(value=Name(id='p0', ctx=Load()), attr='split', ctx=Load()))",
+          "v5": "ListComp(elt=Subscript(value=Name(id='v0', ctx=Load()), slice=Name(id='v6', ctx=Load()), ctx=Load()), generators=[comprehension(target=Name(id='v6', ctx=Store()), iter=Name(id='v4', ctx=Load()), is_async=0)])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_sort_numbers"
+          ],
+          [
+            "function_sort_numbers",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "sort_numbers": {
+          "name": "sort_numbers",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Name",
+          "Load",
+          "If",
+          "UnaryOp",
+          "Not",
+          "Name",
+          "Load",
+          "Return",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Dict",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "DictComp",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "comprehension",
+          "Tuple",
+          "Name",
+          "Store",
+          "Name",
+          "Store",
+          "Store",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "ListComp",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "comprehension",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Return",
+          "Call",
+          "Attribute",
+          "Constant",
+          "Load",
+          "GeneratorExp",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "comprehension",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 8,
+        "ast_hash": "93ec4830d645ab78403f0ec1d0ef1f5c",
+        "alpha_renamed_hash": "93ec4830d645ab78403f0ec1d0ef1f5c"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Expr",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "Assign_3",
+          "Assign_4",
+          "Assign_5",
+          "Assign_6",
+          "Expr_7",
+          "Return_8"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "not p0",
+            "return_type": "constant"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "not p0"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

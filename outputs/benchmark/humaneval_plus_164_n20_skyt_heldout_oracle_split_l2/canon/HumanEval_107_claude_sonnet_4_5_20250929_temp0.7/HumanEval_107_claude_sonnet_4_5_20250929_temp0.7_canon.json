@@ -1,0 +1,510 @@
+{
+  "contract_id": "HumanEval_107_claude_sonnet_4_5_20250929_temp0.7",
+  "canonical_code": "def even_odd_palindrome(n):\n    \"\"\"\n    Given a positive integer n, return a tuple that has the number of even and odd\n    integer palindromes that fall within the range(1, n), inclusive.\n\n    Example 1:\n\n        Input: 3\n        Output: (1, 2)\n        Explanation:\n        Integer palindrome are 1, 2, 3. one of them is even, and two of them are odd.\n\n    Example 2:\n\n        Input: 12\n        Output: (4, 6)\n        Explanation:\n        Integer palindrome are 1, 2, 3, 4, 5, 6, 7, 8, 9, 11. four of them are even, and 6 of them are odd.\n\n    Note:\n        1. 1 <= n <= 10^3\n        2. returned tuple has the number of even and odd integer palindromes respectively.\n    \"\"\"\n    even_count = 0\n    odd_count = 0\n    \n    for i in range(1, n + 1):\n        # Check if i is a palindrome\n        s = str(i)\n        if s == s[::-1]:\n            # It's a palindrome, check if even or odd\n            if i % 2 == 0:\n                even_count += 1\n            else:\n                odd_count += 1\n    \n    return (even_count, odd_count)\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 2,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [
+        "range",
+        "str"
+      ],
+      "nested_depth": 3,
+      "branch_patterns": [
+        "if_at_depth_1",
+        "if_at_depth_2"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [],
+        "v1": [],
+        "v3": [
+          "v2"
+        ]
+      },
+      "assignments": {
+        "v0": "Constant(value=0)",
+        "v1": "Constant(value=0)",
+        "v3": "Call(func=Name(id='str', ctx=Load()), args=[Name(id='v2', ctx=Load())])"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_even_odd_palindrome"
+        ],
+        [
+          "function_even_odd_palindrome",
+          "loop"
+        ],
+        [
+          "function_even_odd_palindrome",
+          "loop",
+          "branch"
+        ],
+        [
+          "function_even_odd_palindrome",
+          "loop",
+          "branch",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "even_odd_palindrome": {
+        "name": "even_odd_palindrome",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add"
+      ],
+      "associative_ops": [
+        "Add"
+      ],
+      "binary_operations": [
+        "Add",
+        "Mod"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        2,
+        0,
+        1,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Eq",
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Subscript",
+        "Name",
+        "Load",
+        "Slice",
+        "UnaryOp",
+        "USub",
+        "Constant",
+        "Load",
+        "If",
+        "Compare",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mod",
+        "Constant",
+        "Eq",
+        "Constant",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Add",
+        "Constant",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Add",
+        "Constant",
+        "Return",
+        "Tuple",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load"
+      ],
+      "ast_depth": 8,
+      "ast_hash": "17897ca8014aa41f1003c74252392566",
+      "alpha_renamed_hash": "17897ca8014aa41f1003c74252392566"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Add",
+        "Mod"
+      ],
+      "precedence_levels": {
+        "Add": 3,
+        "Mod": 4
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "Assign",
+        "For",
+        "Assign",
+        "If",
+        "If",
+        "AugAssign",
+        "AugAssign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "Assign_2",
+        "For_3",
+        "Assign_4",
+        "If_5",
+        "If_6",
+        "AugAssign_7",
+        "AugAssign_8",
+        "Return_9"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "For",
+        "If",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_107_claude_sonnet_4_5_20250929_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/107",
+    "prompt": "\ndef even_odd_palindrome(n):\n    \"\"\"\n    Given a positive integer n, return a tuple that has the number of even and odd\n    integer palindromes that fall within the range(1, n), inclusive.\n\n    Example 1:\n\n        Input: 3\n        Output: (1, 2)\n        Explanation:\n        Integer palindrome are 1, 2, 3. one of them is even, and two of them are odd.\n\n    Example 2:\n\n        Input: 12\n        Output: (4, 6)\n        Explanation:\n        Integer palindrome are 1, 2, 3, 4, 5, 6, 7, 8, 9, 11. four of them are even, and 6 of them are odd.\n\n    Note:\n        1. 1 <= n <= 10^3\n        2. returned tuple has the number of even and odd integer palindromes respectively.\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "even_odd_palindrome"
+    },
+    "anchor_signature": "26c0f2f78fedb7455fba1fb4cbf12262e82c11a16688a7a5ceaeaec1f1baef7b",
+    "canonical_code": "def even_odd_palindrome(n):\n    \"\"\"\n    Given a positive integer n, return a tuple that has the number of even and odd\n    integer palindromes that fall within the range(1, n), inclusive.\n\n    Example 1:\n\n        Input: 3\n        Output: (1, 2)\n        Explanation:\n        Integer palindrome are 1, 2, 3. one of them is even, and two of them are odd.\n\n    Example 2:\n\n        Input: 12\n        Output: (4, 6)\n        Explanation:\n        Integer palindrome are 1, 2, 3, 4, 5, 6, 7, 8, 9, 11. four of them are even, and 6 of them are odd.\n\n    Note:\n        1. 1 <= n <= 10^3\n        2. returned tuple has the number of even and odd integer palindromes respectively.\n    \"\"\"\n    even_count = 0\n    odd_count = 0\n    \n    for i in range(1, n + 1):\n        # Check if i is a palindrome\n        s = str(i)\n        if s == s[::-1]:\n            # It's a palindrome, check if even or odd\n            if i % 2 == 0:\n                even_count += 1\n            else:\n                odd_count += 1\n    \n    return (even_count, odd_count)\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 2,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "range",
+          "str"
+        ],
+        "nested_depth": 3,
+        "branch_patterns": [
+          "if_at_depth_1",
+          "if_at_depth_2"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [],
+          "v1": [],
+          "v3": [
+            "v2"
+          ]
+        },
+        "assignments": {
+          "v0": "Constant(value=0)",
+          "v1": "Constant(value=0)",
+          "v3": "Call(func=Name(id='str', ctx=Load()), args=[Name(id='v2', ctx=Load())])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_even_odd_palindrome"
+          ],
+          [
+            "function_even_odd_palindrome",
+            "loop"
+          ],
+          [
+            "function_even_odd_palindrome",
+            "loop",
+            "branch"
+          ],
+          [
+            "function_even_odd_palindrome",
+            "loop",
+            "branch",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "even_odd_palindrome": {
+          "name": "even_odd_palindrome",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add"
+        ],
+        "associative_ops": [
+          "Add"
+        ],
+        "binary_operations": [
+          "Add",
+          "Mod"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          0,
+          0,
+          1,
+          1,
+          1,
+          2,
+          0,
+          1,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Eq",
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Subscript",
+          "Name",
+          "Load",
+          "Slice",
+          "UnaryOp",
+          "USub",
+          "Constant",
+          "Load",
+          "If",
+          "Compare",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mod",
+          "Constant",
+          "Eq",
+          "Constant",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Add",
+          "Constant",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Add",
+          "Constant",
+          "Return",
+          "Tuple",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load"
+        ],
+        "ast_depth": 8,
+        "ast_hash": "17897ca8014aa41f1003c74252392566",
+        "alpha_renamed_hash": "17897ca8014aa41f1003c74252392566"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Add",
+          "Mod"
+        ],
+        "precedence_levels": {
+          "Add": 3,
+          "Mod": 4
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "For",
+          "Assign",
+          "If",
+          "If",
+          "AugAssign",
+          "AugAssign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "Assign_2",
+          "For_3",
+          "Assign_4",
+          "If_5",
+          "If_6",
+          "AugAssign_7",
+          "AugAssign_8",
+          "Return_9"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "For",
+          "If",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

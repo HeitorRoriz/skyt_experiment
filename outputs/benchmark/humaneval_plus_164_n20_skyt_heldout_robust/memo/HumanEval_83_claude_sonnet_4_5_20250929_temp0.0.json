@@ -1,0 +1,47 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "971ee8efd17ac5237e7ef2d499fa5f81e1da018dcda51fb2a39c6f0ca85ff8c4|971ee8efd17ac5237e7ef2d499fa5f81e1da018dcda51fb2a39c6f0ca85ff8c4": {
+      "stitched_code": "def starts_one_ends(n):\n    if n == 1:\n        return 1\n    \n    # Count numbers starting with 1\n    start_with_1 = 10 ** (n - 1)\n    \n    # Count numbers ending with 1\n    end_with_1 = 9 * (10 ** (n - 2))\n    \n    # Count numbers both starting and ending with 1\n    both = 10 ** (n - 2)\n    \n    # Apply inclusion-exclusion principle\n    return start_with_1 + end_with_1 - both\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "4626f0f93c7c6b91cdb4036fbd1a1cfdd60bc0c2f7adf6158497115a2af7f2c7|971ee8efd17ac5237e7ef2d499fa5f81e1da018dcda51fb2a39c6f0ca85ff8c4": {
+      "stitched_code": "def starts_one_ends(n):\n    if n == 1:\n        return 1\n    start_with_1 = 10 ** (n - 1)\n    end_with_1 = 9 * 10 ** (n - 2)\n    both = 10 ** (n - 2)\n    return start_with_1 + end_with_1 - both\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

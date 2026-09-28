@@ -1,0 +1,109 @@
+{
+  "schema": "structural-repeatability-discriminant-v1",
+  "relation_version": 2,
+  "judge_version": 1,
+  "type3_ted_ratio": 0.3,
+  "sample_seed": 20260723,
+  "sample_per_cell": 5,
+  "n_pairs": 50,
+  "source_dir": "outputs\\humaneval_plus\\pilot",
+  "tape": "fingerprint_eq",
+  "judges": {
+    "string_eq": "Exact source string.",
+    "parse_unparse_eq": "ast.unparse(ast.parse) \u2014 Type-1-ish, comments/format dropped.",
+    "raw_ast_eq": "MD5 of ast.dump, no canonicalize (docstrings and names count).",
+    "type2_eq": "\u03b1-rename bound names, keep docstrings \u2014 Type-2-ish.",
+    "ted_zero": "Zhang\u2013Shasha distance 0 on labeled Python ASTs (GumTree-style labels).",
+    "type3_near": "TED / max(size) < 0.3 \u2014 Type-3-ish, not fitted.",
+    "fingerprint_eq": "Benchmark same(): canonical-form fingerprint."
+  },
+  "note": "Off-diagonal cells are the result. Do not retune TYPE3_TED_RATIO or the tape to shrink them. Codes in the sample are for the appendix.",
+  "vs_fingerprint": {
+    "string_eq": {
+      "both_same": 50,
+      "both_different": 0,
+      "tape_same_judge_different": 0,
+      "tape_different_judge_same": 0,
+      "n_compared": 50,
+      "n_skipped": 0
+    },
+    "parse_unparse_eq": {
+      "both_same": 50,
+      "both_different": 0,
+      "tape_same_judge_different": 0,
+      "tape_different_judge_same": 0,
+      "n_compared": 50,
+      "n_skipped": 0
+    },
+    "raw_ast_eq": {
+      "both_same": 50,
+      "both_different": 0,
+      "tape_same_judge_different": 0,
+      "tape_different_judge_same": 0,
+      "n_compared": 50,
+      "n_skipped": 0
+    },
+    "type2_eq": {
+      "both_same": 50,
+      "both_different": 0,
+      "tape_same_judge_different": 0,
+      "tape_different_judge_same": 0,
+      "n_compared": 50,
+      "n_skipped": 0
+    },
+    "ted_zero": {
+      "both_same": 50,
+      "both_different": 0,
+      "tape_same_judge_different": 0,
+      "tape_different_judge_same": 0,
+      "n_compared": 50,
+      "n_skipped": 0
+    },
+    "type3_near": {
+      "both_same": 50,
+      "both_different": 0,
+      "tape_same_judge_different": 0,
+      "tape_different_judge_same": 0,
+      "n_compared": 50,
+      "n_skipped": 0
+    }
+  },
+  "sample": {
+    "string_eq": {
+      "tape_same_judge_different": [],
+      "tape_same_judge_different_n_available": 0,
+      "tape_different_judge_same": [],
+      "tape_different_judge_same_n_available": 0
+    },
+    "parse_unparse_eq": {
+      "tape_same_judge_different": [],
+      "tape_same_judge_different_n_available": 0,
+      "tape_different_judge_same": [],
+      "tape_different_judge_same_n_available": 0
+    },
+    "raw_ast_eq": {
+      "tape_same_judge_different": [],
+      "tape_same_judge_different_n_available": 0,
+      "tape_different_judge_same": [],
+      "tape_different_judge_same_n_available": 0
+    },
+    "type2_eq": {
+      "tape_same_judge_different": [],
+      "tape_same_judge_different_n_available": 0,
+      "tape_different_judge_same": [],
+      "tape_different_judge_same_n_available": 0
+    },
+    "ted_zero": {
+      "tape_same_judge_different": [],
+      "tape_same_judge_different_n_available": 0,
+      "tape_different_judge_same": [],
+      "tape_different_judge_same_n_available": 0
+    },
+    "type3_near": {
+      "tape_same_judge_different": [],
+      "tape_same_judge_different_n_available": 0,
+      "tape_different_judge_same": [],
+      "tape_different_judge_same_n_available": 0
+    }
+  }
+}

@@ -1,0 +1,516 @@
+{
+  "contract_id": "HumanEval_150_gpt_4o_mini_temp0.0",
+  "canonical_code": "def x_or_y(n, x, y):\n    def is_prime(num):\n        if num <= 1:\n            return False\n        for i in range(2, int(num**0.5) + 1):\n            if num % i == 0:\n                return False\n        return True\n\n    return x if is_prime(n) else y\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 2,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [
+        "range",
+        "int",
+        "is_prime"
+      ],
+      "nested_depth": 2,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_1"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {},
+      "assignments": {}
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_x_or_y"
+        ],
+        [
+          "function_x_or_y",
+          "function_is_prime"
+        ],
+        [
+          "function_x_or_y",
+          "function_is_prime",
+          "branch"
+        ],
+        [
+          "function_x_or_y",
+          "function_is_prime",
+          "loop"
+        ],
+        [
+          "function_x_or_y",
+          "function_is_prime",
+          "loop",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "x_or_y": {
+        "name": "x_or_y",
+        "args": [
+          "p0",
+          "p1",
+          "p2"
+        ],
+        "returns": null,
+        "has_return": true
+      },
+      "is_prime": {
+        "name": "is_prime",
+        "args": [
+          "p3"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 1,
+      "estimated_complexity": "O(2^n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add"
+      ],
+      "associative_ops": [
+        "Add"
+      ],
+      "binary_operations": [
+        "Add",
+        "Pow",
+        "Mod"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": true,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        1,
+        false,
+        2,
+        0.5,
+        1,
+        0,
+        false,
+        true
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "LtE",
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "arg",
+        "arg",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "LtE",
+        "Constant",
+        "Return",
+        "Constant",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Pow",
+        "Constant",
+        "Add",
+        "Constant",
+        "If",
+        "Compare",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mod",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Return",
+        "Constant",
+        "Return",
+        "Constant",
+        "Return",
+        "IfExp",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 9,
+      "ast_hash": "9d42357ff20763111ad5deee44c90b48",
+      "alpha_renamed_hash": "9d42357ff20763111ad5deee44c90b48"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Add",
+        "Pow",
+        "Mod"
+      ],
+      "precedence_levels": {
+        "Add": 3,
+        "Pow": 6,
+        "Mod": 4
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "FunctionDef",
+        "If",
+        "Return",
+        "For",
+        "If",
+        "Return",
+        "Return",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "FunctionDef_1",
+        "If_2",
+        "Return_3",
+        "For_4",
+        "If_5",
+        "Return_6",
+        "Return_7",
+        "Return_8"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "FunctionDef",
+        "If",
+        "For",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "p3 <= 1",
+          "return_type": "constant"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "p3 <= 1"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_150_gpt_4o_mini_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/150",
+    "prompt": "\ndef x_or_y(n, x, y):\n    \"\"\"A simple program which should return the value of x if n is \n    a prime number and should return the value of y otherwise.\n\n    Examples:\n    for x_or_y(7, 34, 12) == 34\n    for x_or_y(15, 8, 5) == 5\n    \n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "x_or_y"
+    },
+    "anchor_signature": "d89f0c64e514309da7265dff6c078a2c94824dc9a6ab7a0335b58eae2cfae743",
+    "canonical_code": "def x_or_y(n, x, y):\n    def is_prime(num):\n        if num <= 1:\n            return False\n        for i in range(2, int(num**0.5) + 1):\n            if num % i == 0:\n                return False\n        return True\n\n    return x if is_prime(n) else y\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 2,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "range",
+          "int",
+          "is_prime"
+        ],
+        "nested_depth": 2,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_1"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {},
+        "assignments": {}
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_x_or_y"
+          ],
+          [
+            "function_x_or_y",
+            "function_is_prime"
+          ],
+          [
+            "function_x_or_y",
+            "function_is_prime",
+            "branch"
+          ],
+          [
+            "function_x_or_y",
+            "function_is_prime",
+            "loop"
+          ],
+          [
+            "function_x_or_y",
+            "function_is_prime",
+            "loop",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "x_or_y": {
+          "name": "x_or_y",
+          "args": [
+            "p0",
+            "p1",
+            "p2"
+          ],
+          "returns": null,
+          "has_return": true
+        },
+        "is_prime": {
+          "name": "is_prime",
+          "args": [
+            "p3"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 1,
+        "estimated_complexity": "O(2^n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add"
+        ],
+        "associative_ops": [
+          "Add"
+        ],
+        "binary_operations": [
+          "Add",
+          "Pow",
+          "Mod"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": true,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          1,
+          false,
+          2,
+          0.5,
+          1,
+          0,
+          false,
+          true
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "LtE",
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "arg",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "LtE",
+          "Constant",
+          "Return",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Pow",
+          "Constant",
+          "Add",
+          "Constant",
+          "If",
+          "Compare",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mod",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Return",
+          "Constant",
+          "Return",
+          "Constant",
+          "Return",
+          "IfExp",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 9,
+        "ast_hash": "9d42357ff20763111ad5deee44c90b48",
+        "alpha_renamed_hash": "9d42357ff20763111ad5deee44c90b48"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Add",
+          "Pow",
+          "Mod"
+        ],
+        "precedence_levels": {
+          "Add": 3,
+          "Pow": 6,
+          "Mod": 4
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "FunctionDef",
+          "If",
+          "Return",
+          "For",
+          "If",
+          "Return",
+          "Return",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "FunctionDef_1",
+          "If_2",
+          "Return_3",
+          "For_4",
+          "If_5",
+          "Return_6",
+          "Return_7",
+          "Return_8"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "FunctionDef",
+          "If",
+          "For",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "p3 <= 1",
+            "return_type": "constant"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "p3 <= 1"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

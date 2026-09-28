@@ -1,0 +1,25 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "478ddeb1f3aa67ee9d948a4c2c74237b69bb64602ae2719fa52b96e39ae17b03|478ddeb1f3aa67ee9d948a4c2c74237b69bb64602ae2719fa52b96e39ae17b03": {
+      "stitched_code": "def bf(planet1, planet2):\n    planets = [\"Mercury\", \"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\", \"Uranus\", \"Neptune\"]\n    \n    # Check if both planets are valid\n    if planet1 not in planets or planet2 not in planets:\n        return ()\n    \n    # Get indices of both planets\n    idx1 = planets.index(planet1)\n    idx2 = planets.index(planet2)\n    \n    # Ensure idx1 is the smaller index\n    if idx1 > idx2:\n        idx1, idx2 = idx2, idx1\n    \n    # Return planets between idx1 and idx2 (exclusive)\n    return tuple(planets[idx1 + 1:idx2])\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

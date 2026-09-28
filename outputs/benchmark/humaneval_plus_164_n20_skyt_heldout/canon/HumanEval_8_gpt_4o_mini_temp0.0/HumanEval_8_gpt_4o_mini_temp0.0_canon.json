@@ -1,0 +1,376 @@
+{
+  "contract_id": "HumanEval_8_gpt_4o_mini_temp0.0",
+  "canonical_code": "from typing import List, Tuple\n\n\ndef sum_product(numbers: List[int]) -> Tuple[int, int]:\n    \"\"\" For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list.\n    Empty sum should be equal to 0 and empty product should be equal to 1.\n    >>> sum_product([])\n    (0, 1)\n    >>> sum_product([1, 2, 3, 4])\n    (10, 24)\n    \"\"\"\n    total_sum = sum(numbers)\n    total_product = 1\n    for number in numbers:\n        total_product *= number\n    return total_sum, total_product\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 0,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [
+        "sum"
+      ],
+      "nested_depth": 1,
+      "branch_patterns": []
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v1": [
+          "p0"
+        ],
+        "v2": []
+      },
+      "assignments": {
+        "v1": "Call(func=Name(id='sum', ctx=Load()), args=[Name(id='p0', ctx=Load())])",
+        "v2": "Constant(value=1)"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_sum_product"
+        ],
+        [
+          "function_sum_product",
+          "loop"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "sum_product": {
+        "name": "sum_product",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": []
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": false,
+      "numeric_constants": [
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "ImportFrom",
+        "alias",
+        "alias",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "For",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Mult",
+        "Name",
+        "Load",
+        "Return",
+        "Tuple",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Tuple",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Load"
+      ],
+      "ast_depth": 6,
+      "ast_hash": "4deca20688e97318cedcfc1ac2f3463a",
+      "alpha_renamed_hash": "ed6a28f4cdfae31d166d2525bb4cf5a6"
+    },
+    "operator_precedence": {
+      "operator_sequence": [],
+      "precedence_levels": {}
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "ImportFrom",
+        "FunctionDef",
+        "Assign",
+        "Assign",
+        "For",
+        "AugAssign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "ImportFrom_0",
+        "FunctionDef_1",
+        "Assign_2",
+        "Assign_3",
+        "For_4",
+        "AugAssign_5",
+        "Return_6"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "For"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_8_gpt_4o_mini_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/8",
+    "prompt": "from typing import List, Tuple\n\n\ndef sum_product(numbers: List[int]) -> Tuple[int, int]:\n    \"\"\" For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list.\n    Empty sum should be equal to 0 and empty product should be equal to 1.\n    >>> sum_product([])\n    (0, 1)\n    >>> sum_product([1, 2, 3, 4])\n    (10, 24)\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "sum_product"
+    },
+    "anchor_signature": "7032a7811796f595678b7a9262bb1d8c9104ac9cc951696e1995cb7a1db5ce05",
+    "canonical_code": "from typing import List, Tuple\n\n\ndef sum_product(numbers: List[int]) -> Tuple[int, int]:\n    \"\"\" For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list.\n    Empty sum should be equal to 0 and empty product should be equal to 1.\n    >>> sum_product([])\n    (0, 1)\n    >>> sum_product([1, 2, 3, 4])\n    (10, 24)\n    \"\"\"\n    total_sum = sum(numbers)\n    total_product = 1\n    for number in numbers:\n        total_product *= number\n    return total_sum, total_product\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 0,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "sum"
+        ],
+        "nested_depth": 1,
+        "branch_patterns": []
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v1": [
+            "p0"
+          ],
+          "v2": []
+        },
+        "assignments": {
+          "v1": "Call(func=Name(id='sum', ctx=Load()), args=[Name(id='p0', ctx=Load())])",
+          "v2": "Constant(value=1)"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_sum_product"
+          ],
+          [
+            "function_sum_product",
+            "loop"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "sum_product": {
+          "name": "sum_product",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": [
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "ImportFrom",
+          "alias",
+          "alias",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Mult",
+          "Name",
+          "Load",
+          "Return",
+          "Tuple",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Tuple",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Load"
+        ],
+        "ast_depth": 6,
+        "ast_hash": "4deca20688e97318cedcfc1ac2f3463a",
+        "alpha_renamed_hash": "ed6a28f4cdfae31d166d2525bb4cf5a6"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "ImportFrom",
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "For",
+          "AugAssign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "ImportFrom_0",
+          "FunctionDef_1",
+          "Assign_2",
+          "Assign_3",
+          "For_4",
+          "AugAssign_5",
+          "Return_6"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "For"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

@@ -1,0 +1,481 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "397b02b5f7e36ab210cd870fd75f7684ced38e751f0a319aab029d02155bb9e0|fa1d4ae075cd49fa15cdbce65723e40b9276a3c1b03ab425853e887e3ab54116": {
+      "stitched_code": "def move_one_ball(arr):\n    if not arr:\n        return True\n    n = len(arr)\n    break_count = 0\n    break_index = -1\n    for i in range(n - 1):\n        if arr[i] > arr[i + 1]:\n            break_count += 1\n            break_index = i\n    if break_count == 0:\n        return True\n    if break_count > 1:\n        return False\n    if arr[n - 1] <= arr[0]:\n        return True\n    return False\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "fa1d4ae075cd49fa15cdbce65723e40b9276a3c1b03ab425853e887e3ab54116|fa1d4ae075cd49fa15cdbce65723e40b9276a3c1b03ab425853e887e3ab54116": {
+      "stitched_code": "def move_one_ball(arr):\n    if not arr:\n        return True\n    \n    n = len(arr)\n    \n    # Count the number of break points where arr[i] > arr[i+1]\n    break_count = 0\n    break_index = -1\n    \n    for i in range(n - 1):\n        if arr[i] > arr[i + 1]:\n            break_count += 1\n            break_index = i\n    \n    # If no breaks, array is already sorted\n    if break_count == 0:\n        return True\n    \n    # If more than one break, cannot be sorted by rotation\n    if break_count > 1:\n        return False\n    \n    # If exactly one break, check if it's a valid rotation\n    # The last element should be <= first element\n    if arr[n - 1] <= arr[0]:\n        return True\n    \n    return False\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "c4146d57851e3102082fe452c0800083eef068fbf21b4706bb52c7c115ceee36|fa1d4ae075cd49fa15cdbce65723e40b9276a3c1b03ab425853e887e3ab54116": {
+      "stitched_code": "def move_one_ball(arr):\n    if not arr:\n        return True\n    n = len(arr)\n    break_count = 0\n    break_index = -1\n    for i in range(n - 1):\n        if arr[i] > arr[i + 1]:\n            break_count += 1\n            break_index = i\n    if break_count == 0:\n        return True\n    if break_count > 1:\n        return False\n    if arr[n - 1] <= arr[0]:\n        return True\n    return False\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "b2ce34514f1f3fc268164782e0a4798642b542f89fce188e3dbdfc980ba9855a|fa1d4ae075cd49fa15cdbce65723e40b9276a3c1b03ab425853e887e3ab54116": {
+      "stitched_code": "def move_one_ball(arr):\n    if not arr:\n        return True\n    \n    n = len(arr)\n    \n    # Count the number of positions where arr[i] > arr[i+1]\n    break_points = 0\n    break_index = -1\n    \n    for i in range(n - 1):\n        if arr[i] > arr[i + 1]:\n            break_points += 1\n            break_index = i\n    \n    # If no break points, array is already sorted\n    if break_points == 0:\n        return True\n    \n    # If more than one break point, cannot be sorted by rotation\n    if break_points > 1:\n        return False\n    \n    # If exactly one break point, check if the last element <= first element\n    # This ensures that after rotation, the array will be sorted\n    if arr[n - 1] <= arr[0]:\n        return True\n    \n    return False\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "769461556cf134e0e10a812fd0ac9032163cd4db9296be63690e4781824340c2|fa1d4ae075cd49fa15cdbce65723e40b9276a3c1b03ab425853e887e3ab54116": {
+      "stitched_code": "def move_one_ball(arr):\n    if not arr:\n        return True\n    n = len(arr)\n    break_count = 0\n    break_index = -1\n    for i in range(n - 1):\n        if arr[i] > arr[i + 1]:\n            break_count += 1\n            break_index = i\n    if break_count == 0:\n        return True\n    if break_count > 1:\n        return False\n    if arr[n - 1] <= arr[0]:\n        return True\n    return False\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "52b310ae51786a16905ace9ce9e574db76084ccc886c36211975190c79b64629|fa1d4ae075cd49fa15cdbce65723e40b9276a3c1b03ab425853e887e3ab54116": {
+      "stitched_code": "def move_one_ball(arr):\n    if not arr:\n        return True\n    n = len(arr)\n    break_count = 0\n    break_index = -1\n    for i in range(n - 1):\n        if arr[i] > arr[i + 1]:\n            break_count += 1\n            break_index = i\n    if break_count == 0:\n        return True\n    if break_count > 1:\n        return False\n    if arr[n - 1] <= arr[0]:\n        return True\n    return False\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "769461556cf134e0e10a812fd0ac9032163cd4db9296be63690e4781824340c2|c4146d57851e3102082fe452c0800083eef068fbf21b4706bb52c7c115ceee36": {
+      "stitched_code": "def move_one_ball(arr):\n    if not arr:\n        return True\n    breaks = 0\n    break_pos = -1\n    for i in range(len(arr) - 1):\n        if arr[i] > arr[i + 1]:\n            breaks += 1\n            break_pos = i\n    if breaks == 0:\n        return True\n    if breaks > 1:\n        return False\n    if arr[-1] <= arr[0]:\n        return True\n    return False\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "fa1d4ae075cd49fa15cdbce65723e40b9276a3c1b03ab425853e887e3ab54116|c4146d57851e3102082fe452c0800083eef068fbf21b4706bb52c7c115ceee36": {
+      "stitched_code": "def move_one_ball(arr):\n    if not arr:\n        return True\n    breaks = 0\n    break_pos = -1\n    for i in range(len(arr) - 1):\n        if arr[i] > arr[i + 1]:\n            breaks += 1\n            break_pos = i\n    if breaks == 0:\n        return True\n    if breaks > 1:\n        return False\n    if arr[-1] <= arr[0]:\n        return True\n    return False\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "b2ce34514f1f3fc268164782e0a4798642b542f89fce188e3dbdfc980ba9855a|c4146d57851e3102082fe452c0800083eef068fbf21b4706bb52c7c115ceee36": {
+      "stitched_code": "def move_one_ball(arr):\n    if not arr:\n        return True\n    breaks = 0\n    break_pos = -1\n    for i in range(len(arr) - 1):\n        if arr[i] > arr[i + 1]:\n            breaks += 1\n            break_pos = i\n    if breaks == 0:\n        return True\n    if breaks > 1:\n        return False\n    if arr[-1] <= arr[0]:\n        return True\n    return False\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "c4146d57851e3102082fe452c0800083eef068fbf21b4706bb52c7c115ceee36|c4146d57851e3102082fe452c0800083eef068fbf21b4706bb52c7c115ceee36": {
+      "stitched_code": "def move_one_ball(arr):\n    if not arr:\n        return True\n    \n    # Count the number of positions where arr[i] > arr[i+1]\n    breaks = 0\n    break_pos = -1\n    \n    for i in range(len(arr) - 1):\n        if arr[i] > arr[i + 1]:\n            breaks += 1\n            break_pos = i\n    \n    # If already sorted (no breaks)\n    if breaks == 0:\n        return True\n    \n    # If more than one break, cannot be sorted by rotation\n    if breaks > 1:\n        return False\n    \n    # If exactly one break, check if last element <= first element\n    # This ensures that after rotation, the array will be sorted\n    if arr[-1] <= arr[0]:\n        return True\n    \n    return False\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "397b02b5f7e36ab210cd870fd75f7684ced38e751f0a319aab029d02155bb9e0|c4146d57851e3102082fe452c0800083eef068fbf21b4706bb52c7c115ceee36": {
+      "stitched_code": "def move_one_ball(arr):\n    if not arr:\n        return True\n    breaks = 0\n    break_pos = -1\n    for i in range(len(arr) - 1):\n        if arr[i] > arr[i + 1]:\n            breaks += 1\n            break_pos = i\n    if breaks == 0:\n        return True\n    if breaks > 1:\n        return False\n    if arr[-1] <= arr[0]:\n        return True\n    return False\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "397b02b5f7e36ab210cd870fd75f7684ced38e751f0a319aab029d02155bb9e0|769461556cf134e0e10a812fd0ac9032163cd4db9296be63690e4781824340c2": {
+      "stitched_code": "def move_one_ball(arr):\n    if not arr:\n        return True\n    n = len(arr)\n    breaks = 0\n    break_index = -1\n    for i in range(n - 1):\n        if arr[i] > arr[i + 1]:\n            breaks += 1\n            break_index = i\n    if breaks == 0:\n        return True\n    if breaks > 1:\n        return False\n    return arr[n - 1] <= arr[0]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "fa1d4ae075cd49fa15cdbce65723e40b9276a3c1b03ab425853e887e3ab54116|769461556cf134e0e10a812fd0ac9032163cd4db9296be63690e4781824340c2": {
+      "stitched_code": "def move_one_ball(arr):\n    if not arr:\n        return True\n    n = len(arr)\n    breaks = 0\n    break_index = -1\n    for i in range(n - 1):\n        if arr[i] > arr[i + 1]:\n            breaks += 1\n            break_index = i\n    if breaks == 0:\n        return True\n    if breaks > 1:\n        return False\n    return arr[n - 1] <= arr[0]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "c4146d57851e3102082fe452c0800083eef068fbf21b4706bb52c7c115ceee36|769461556cf134e0e10a812fd0ac9032163cd4db9296be63690e4781824340c2": {
+      "stitched_code": "def move_one_ball(arr):\n    if not arr:\n        return True\n    n = len(arr)\n    breaks = 0\n    break_index = -1\n    for i in range(n - 1):\n        if arr[i] > arr[i + 1]:\n            breaks += 1\n            break_index = i\n    if breaks == 0:\n        return True\n    if breaks > 1:\n        return False\n    return arr[n - 1] <= arr[0]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "b2ce34514f1f3fc268164782e0a4798642b542f89fce188e3dbdfc980ba9855a|769461556cf134e0e10a812fd0ac9032163cd4db9296be63690e4781824340c2": {
+      "stitched_code": "def move_one_ball(arr):\n    if not arr:\n        return True\n    n = len(arr)\n    breaks = 0\n    break_index = -1\n    for i in range(n - 1):\n        if arr[i] > arr[i + 1]:\n            breaks += 1\n            break_index = i\n    if breaks == 0:\n        return True\n    if breaks > 1:\n        return False\n    return arr[n - 1] <= arr[0]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "769461556cf134e0e10a812fd0ac9032163cd4db9296be63690e4781824340c2|769461556cf134e0e10a812fd0ac9032163cd4db9296be63690e4781824340c2": {
+      "stitched_code": "def move_one_ball(arr):\n    if not arr:\n        return True\n    \n    n = len(arr)\n    \n    # Count the number of \"breaks\" where arr[i] > arr[i+1]\n    breaks = 0\n    break_index = -1\n    \n    for i in range(n - 1):\n        if arr[i] > arr[i + 1]:\n            breaks += 1\n            break_index = i\n    \n    # If no breaks, array is already sorted\n    if breaks == 0:\n        return True\n    \n    # If more than one break, cannot be fixed by rotation\n    if breaks > 1:\n        return False\n    \n    # If exactly one break, check if rotation would work\n    # After rotation, the last element would come before the first element\n    # So we need arr[n-1] <= arr[0]\n    return arr[n - 1] <= arr[0]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "52b310ae51786a16905ace9ce9e574db76084ccc886c36211975190c79b64629|c4146d57851e3102082fe452c0800083eef068fbf21b4706bb52c7c115ceee36": {
+      "stitched_code": "def move_one_ball(arr):\n    if not arr:\n        return True\n    breaks = 0\n    break_pos = -1\n    for i in range(len(arr) - 1):\n        if arr[i] > arr[i + 1]:\n            breaks += 1\n            break_pos = i\n    if breaks == 0:\n        return True\n    if breaks > 1:\n        return False\n    if arr[-1] <= arr[0]:\n        return True\n    return False\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "52b310ae51786a16905ace9ce9e574db76084ccc886c36211975190c79b64629|769461556cf134e0e10a812fd0ac9032163cd4db9296be63690e4781824340c2": {
+      "stitched_code": "def move_one_ball(arr):\n    if not arr:\n        return True\n    n = len(arr)\n    breaks = 0\n    break_index = -1\n    for i in range(n - 1):\n        if arr[i] > arr[i + 1]:\n            breaks += 1\n            break_index = i\n    if breaks == 0:\n        return True\n    if breaks > 1:\n        return False\n    return arr[n - 1] <= arr[0]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "b2ce34514f1f3fc268164782e0a4798642b542f89fce188e3dbdfc980ba9855a|52b310ae51786a16905ace9ce9e574db76084ccc886c36211975190c79b64629": {
+      "stitched_code": "def move_one_ball(arr):\n    if not arr:\n        return True\n    break_points = 0\n    break_index = -1\n    for i in range(len(arr) - 1):\n        if arr[i] > arr[i + 1]:\n            break_points += 1\n            break_index = i\n    if break_points == 0:\n        return True\n    if break_points > 1:\n        return False\n    return arr[-1] <= arr[0]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "fa1d4ae075cd49fa15cdbce65723e40b9276a3c1b03ab425853e887e3ab54116|52b310ae51786a16905ace9ce9e574db76084ccc886c36211975190c79b64629": {
+      "stitched_code": "def move_one_ball(arr):\n    if not arr:\n        return True\n    break_points = 0\n    break_index = -1\n    for i in range(len(arr) - 1):\n        if arr[i] > arr[i + 1]:\n            break_points += 1\n            break_index = i\n    if break_points == 0:\n        return True\n    if break_points > 1:\n        return False\n    return arr[-1] <= arr[0]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "c4146d57851e3102082fe452c0800083eef068fbf21b4706bb52c7c115ceee36|52b310ae51786a16905ace9ce9e574db76084ccc886c36211975190c79b64629": {
+      "stitched_code": "def move_one_ball(arr):\n    if not arr:\n        return True\n    break_points = 0\n    break_index = -1\n    for i in range(len(arr) - 1):\n        if arr[i] > arr[i + 1]:\n            break_points += 1\n            break_index = i\n    if break_points == 0:\n        return True\n    if break_points > 1:\n        return False\n    return arr[-1] <= arr[0]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "769461556cf134e0e10a812fd0ac9032163cd4db9296be63690e4781824340c2|52b310ae51786a16905ace9ce9e574db76084ccc886c36211975190c79b64629": {
+      "stitched_code": "def move_one_ball(arr):\n    if not arr:\n        return True\n    break_points = 0\n    break_index = -1\n    for i in range(len(arr) - 1):\n        if arr[i] > arr[i + 1]:\n            break_points += 1\n            break_index = i\n    if break_points == 0:\n        return True\n    if break_points > 1:\n        return False\n    return arr[-1] <= arr[0]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

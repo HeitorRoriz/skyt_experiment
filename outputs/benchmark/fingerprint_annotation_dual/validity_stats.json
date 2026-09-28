@@ -1,0 +1,372 @@
+{
+  "seed": 20260723,
+  "n_bootstrap": 10000,
+  "n_configs": 656,
+  "n_configs_certified_defined": 562,
+  "parsed_pairs": 124621,
+  "population_stratum_share": {
+    "fp_same|both_cert": 0.6594233716628819,
+    "fp_same|not_both_cert": 0.10857720608886143,
+    "fp_diff|both_cert": 0.16386483818939024,
+    "fp_diff|not_both_cert": 0.06813458405886648
+  },
+  "population_stratum_count": {
+    "fp_same|both_cert": 82178,
+    "fp_diff|both_cert": 20421,
+    "fp_same|not_both_cert": 13531,
+    "fp_diff|not_both_cert": 8491
+  },
+  "structural_certified_disagreement": {
+    "point_task_mean": 0.23397129377205445,
+    "point_config_mean": 0.21647301005450803,
+    "task_cluster_bootstrap": {
+      "mean": 0.2341132601998532,
+      "lower": 0.19965647249429158,
+      "upper": 0.2700319665438293
+    },
+    "cell": {
+      "claude-sonnet-4-5-20250929|0.0": 0.11628336332283701,
+      "claude-sonnet-4-5-20250929|0.7": 0.27845371933994223,
+      "gpt-4o-mini|0.0": 0.06338199460478842,
+      "gpt-4o-mini|0.7": 0.3998999040053648
+    },
+    "note": "Config-mean of (fingerprint-different both-certified pairs) / (both-certified pairs), on the four annotated cells. This is 1 - same@2|cert under the paper's config mean."
+  },
+  "kappa": {
+    "point": 0.40928756850302855,
+    "stratified_bootstrap": {
+      "mean": 0.40861078666655437,
+      "lower": 0.2523364485981308,
+      "upper": 0.5572211011818968
+    },
+    "task_cluster_bootstrap": {
+      "mean": 0.4032462286547274,
+      "lower": 0.233280126603034,
+      "upper": 0.560614351328667
+    },
+    "n_annotation_tasks": 80,
+    "primary": "stratified_bootstrap",
+    "primary_reason": "The 128 pairs are a stratified sample. The stratified resample matches that design. The task-cluster interval is the dependence check."
+  },
+  "sample_metrics": {
+    "A": {
+      "sensitivity": 0.7777777777777778,
+      "specificity": 0.9787234042553191,
+      "agreement": 0.8515625,
+      "n": 128
+    },
+    "B": {
+      "sensitivity": 0.6336633663366337,
+      "specificity": 1.0,
+      "agreement": 0.7109375,
+      "n": 128
+    },
+    "consensus": {
+      "sensitivity": 0.84,
+      "specificity": 1.0,
+      "agreement": 0.875,
+      "n": 96
+    }
+  },
+  "prevalence_reweighted": {
+    "A": {
+      "point": {
+        "sensitivity": 0.9147768302469829,
+        "specificity": 0.9793308454785555
+      },
+      "stratified_bootstrap": {
+        "sensitivity": {
+          "mean": 0.9148411034507318,
+          "lower": 0.8836768578720956,
+          "upper": 0.9461706575594023
+        },
+        "specificity": {
+          "mean": 0.9795267473827005,
+          "lower": 0.934209822578998,
+          "upper": 1.0
+        }
+      }
+    },
+    "B": {
+      "point": {
+        "sensitivity": 0.8279851255689091,
+        "specificity": 1.0
+      },
+      "stratified_bootstrap": {
+        "sensitivity": {
+          "mean": 0.8281120499744353,
+          "lower": 0.8082805069224146,
+          "upper": 0.850295065509651
+        },
+        "specificity": {
+          "mean": 1.0,
+          "lower": 1.0,
+          "upper": 1.0
+        }
+      }
+    },
+    "consensus": {
+      "point": {
+        "sensitivity": 0.9323644051445273,
+        "specificity": 1.0
+      },
+      "stratified_bootstrap": {
+        "sensitivity": {
+          "mean": 0.9324052058509721,
+          "lower": 0.9013433237735492,
+          "upper": 0.9622510827450863
+        },
+        "specificity": {
+          "mean": 1.0,
+          "lower": 1.0,
+          "upper": 1.0
+        }
+      }
+    }
+  },
+  "implementation_disagreement": {
+    "A": {
+      "point": 0.17024473360567358,
+      "bootstrap": {
+        "mean": 0.1704133657624092,
+        "lower": 0.12171495030459319,
+        "upper": 0.2200621189950168
+      },
+      "per_cell": {
+        "claude-sonnet-4-5-20250929|0.0": {
+          "structural_disagreement": 0.11628336332283701,
+          "p_human_different_given_fp_diff": 0.75,
+          "p_human_different_given_fp_same": 0.0,
+          "implementation_disagreement": 0.08721252249212776,
+          "n_configs": 144
+        },
+        "claude-sonnet-4-5-20250929|0.7": {
+          "structural_disagreement": 0.27845371933994223,
+          "p_human_different_given_fp_diff": 0.75,
+          "p_human_different_given_fp_same": 0.0,
+          "implementation_disagreement": 0.20884028950495667,
+          "n_configs": 144
+        },
+        "gpt-4o-mini|0.0": {
+          "structural_disagreement": 0.06338199460478842,
+          "p_human_different_given_fp_diff": 0.375,
+          "p_human_different_given_fp_same": 0.0,
+          "implementation_disagreement": 0.023768247976795658,
+          "n_configs": 133
+        },
+        "gpt-4o-mini|0.7": {
+          "structural_disagreement": 0.3998999040053648,
+          "p_human_different_given_fp_diff": 0.75,
+          "p_human_different_given_fp_same": 0.0,
+          "implementation_disagreement": 0.2999249280040236,
+          "n_configs": 141
+        }
+      }
+    },
+    "B": {
+      "point": 0.04682659763938725,
+      "bootstrap": {
+        "mean": 0.046846801868216596,
+        "lower": 0.01263427492679956,
+        "upper": 0.0874657646446225
+      },
+      "per_cell": {
+        "claude-sonnet-4-5-20250929|0.0": {
+          "structural_disagreement": 0.11628336332283701,
+          "p_human_different_given_fp_diff": 0.125,
+          "p_human_different_given_fp_same": 0.0,
+          "implementation_disagreement": 0.014535420415354626,
+          "n_configs": 144
+        },
+        "claude-sonnet-4-5-20250929|0.7": {
+          "structural_disagreement": 0.27845371933994223,
+          "p_human_different_given_fp_diff": 0.0,
+          "p_human_different_given_fp_same": 0.0,
+          "implementation_disagreement": 0.0,
+          "n_configs": 144
+        },
+        "gpt-4o-mini|0.0": {
+          "structural_disagreement": 0.06338199460478842,
+          "p_human_different_given_fp_diff": 0.125,
+          "p_human_different_given_fp_same": 0.0,
+          "implementation_disagreement": 0.007922749325598553,
+          "n_configs": 133
+        },
+        "gpt-4o-mini|0.7": {
+          "structural_disagreement": 0.3998999040053648,
+          "p_human_different_given_fp_diff": 0.375,
+          "p_human_different_given_fp_same": 0.0,
+          "implementation_disagreement": 0.1499624640020118,
+          "n_configs": 141
+        }
+      }
+    }
+  },
+  "per_cell_human": {
+    "A": {
+      "claude-sonnet-4-5-20250929|0.7|fp_diff|not_both_cert": {
+        "n": 8,
+        "p_different": 0.75,
+        "p_same": 0.25
+      },
+      "claude-sonnet-4-5-20250929|0.0|fp_diff|both_cert": {
+        "n": 8,
+        "p_different": 0.75,
+        "p_same": 0.25
+      },
+      "claude-sonnet-4-5-20250929|0.7|fp_same|both_cert": {
+        "n": 8,
+        "p_different": 0.0,
+        "p_same": 1.0
+      },
+      "gpt-4o-mini|0.0|fp_diff|not_both_cert": {
+        "n": 8,
+        "p_different": 0.875,
+        "p_same": 0.125
+      },
+      "claude-sonnet-4-5-20250929|0.0|fp_diff|not_both_cert": {
+        "n": 8,
+        "p_different": 0.625,
+        "p_same": 0.375
+      },
+      "gpt-4o-mini|0.7|fp_diff|not_both_cert": {
+        "n": 8,
+        "p_different": 0.875,
+        "p_same": 0.125
+      },
+      "claude-sonnet-4-5-20250929|0.7|fp_same|not_both_cert": {
+        "n": 8,
+        "p_different": 0.0,
+        "p_same": 1.0
+      },
+      "gpt-4o-mini|0.7|fp_same|both_cert": {
+        "n": 8,
+        "p_different": 0.0,
+        "p_same": 1.0
+      },
+      "gpt-4o-mini|0.0|fp_same|both_cert": {
+        "n": 8,
+        "p_different": 0.0,
+        "p_same": 1.0
+      },
+      "gpt-4o-mini|0.0|fp_diff|both_cert": {
+        "n": 8,
+        "p_different": 0.375,
+        "p_same": 0.625
+      },
+      "claude-sonnet-4-5-20250929|0.0|fp_same|both_cert": {
+        "n": 8,
+        "p_different": 0.0,
+        "p_same": 1.0
+      },
+      "claude-sonnet-4-5-20250929|0.7|fp_diff|both_cert": {
+        "n": 8,
+        "p_different": 0.75,
+        "p_same": 0.25
+      },
+      "gpt-4o-mini|0.0|fp_same|not_both_cert": {
+        "n": 8,
+        "p_different": 0.0,
+        "p_same": 1.0
+      },
+      "gpt-4o-mini|0.7|fp_diff|both_cert": {
+        "n": 8,
+        "p_different": 0.75,
+        "p_same": 0.25
+      },
+      "claude-sonnet-4-5-20250929|0.0|fp_same|not_both_cert": {
+        "n": 8,
+        "p_different": 0.125,
+        "p_same": 0.875
+      },
+      "gpt-4o-mini|0.7|fp_same|not_both_cert": {
+        "n": 8,
+        "p_different": 0.0,
+        "p_same": 1.0
+      }
+    },
+    "B": {
+      "claude-sonnet-4-5-20250929|0.7|fp_diff|not_both_cert": {
+        "n": 8,
+        "p_different": 0.75,
+        "p_same": 0.25
+      },
+      "claude-sonnet-4-5-20250929|0.0|fp_diff|both_cert": {
+        "n": 8,
+        "p_different": 0.125,
+        "p_same": 0.875
+      },
+      "claude-sonnet-4-5-20250929|0.7|fp_same|both_cert": {
+        "n": 8,
+        "p_different": 0.0,
+        "p_same": 1.0
+      },
+      "gpt-4o-mini|0.0|fp_diff|not_both_cert": {
+        "n": 8,
+        "p_different": 0.875,
+        "p_same": 0.125
+      },
+      "claude-sonnet-4-5-20250929|0.0|fp_diff|not_both_cert": {
+        "n": 8,
+        "p_different": 0.5,
+        "p_same": 0.5
+      },
+      "gpt-4o-mini|0.7|fp_diff|not_both_cert": {
+        "n": 8,
+        "p_different": 0.625,
+        "p_same": 0.375
+      },
+      "claude-sonnet-4-5-20250929|0.7|fp_same|not_both_cert": {
+        "n": 8,
+        "p_different": 0.0,
+        "p_same": 1.0
+      },
+      "gpt-4o-mini|0.7|fp_same|both_cert": {
+        "n": 8,
+        "p_different": 0.0,
+        "p_same": 1.0
+      },
+      "gpt-4o-mini|0.0|fp_same|both_cert": {
+        "n": 8,
+        "p_different": 0.0,
+        "p_same": 1.0
+      },
+      "gpt-4o-mini|0.0|fp_diff|both_cert": {
+        "n": 8,
+        "p_different": 0.125,
+        "p_same": 0.875
+      },
+      "claude-sonnet-4-5-20250929|0.0|fp_same|both_cert": {
+        "n": 8,
+        "p_different": 0.0,
+        "p_same": 1.0
+      },
+      "claude-sonnet-4-5-20250929|0.7|fp_diff|both_cert": {
+        "n": 8,
+        "p_different": 0.0,
+        "p_same": 1.0
+      },
+      "gpt-4o-mini|0.0|fp_same|not_both_cert": {
+        "n": 8,
+        "p_different": 0.0,
+        "p_same": 1.0
+      },
+      "gpt-4o-mini|0.7|fp_diff|both_cert": {
+        "n": 8,
+        "p_different": 0.375,
+        "p_same": 0.625
+      },
+      "claude-sonnet-4-5-20250929|0.0|fp_same|not_both_cert": {
+        "n": 8,
+        "p_different": 0.0,
+        "p_same": 1.0
+      },
+      "gpt-4o-mini|0.7|fp_same|not_both_cert": {
+        "n": 8,
+        "p_different": 0.0,
+        "p_same": 1.0
+      }
+    }
+  },
+  "label": "post hoc descriptive for implementation_disagreement; fingerprint unchanged"
+}

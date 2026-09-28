@@ -1,0 +1,951 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "629a8a5234944b1b4d76ba7214fbf3372e93842d26706f60c4ecf25bd85ba3a6|31b0e0fb23d030d0260371c3e8c184528b612a5677065b75597349ac90bf98e8": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    \n    # Check if sorted in ascending order\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    \n    # Check if any number appears more than twice\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    \n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "2ad918c4c8081c043b98efd286e14bedf854d64e0750c0f2fd33ae8497f4d926|31b0e0fb23d030d0260371c3e8c184528b612a5677065b75597349ac90bf98e8": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    \n    # Check if sorted\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    \n    # Check if any number appears more than twice\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    \n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "a89753fdc985f0d25d2b8f33b164ff12d62e65350c5d89716d2e47d9d986c1c8|31b0e0fb23d030d0260371c3e8c184528b612a5677065b75597349ac90bf98e8": {
+      "stitched_code": "def is_sorted(lst):\n    \"\"\"\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n\n    Examples\n    is_sorted([5]) \u279e True\n    is_sorted([1, 2, 3, 4, 5]) \u279e True\n    is_sorted([1, 3, 2, 4, 5]) \u279e False\n    is_sorted([1, 2, 3, 4, 5, 6]) \u279e True\n    is_sorted([1, 2, 3, 4, 5, 6, 7]) \u279e True\n    is_sorted([1, 3, 2, 4, 5, 6, 7]) \u279e False\n    is_sorted([1, 2, 2, 3, 3, 4]) \u279e True\n    is_sorted([1, 2, 2, 2, 3, 4]) \u279e False\n    \"\"\"\n    if len(lst) == 0:\n        return True\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "dde733b031f3b35b19ff38df93b0c1176a2a1c194e851cf2b8e8fdf50138c123|31b0e0fb23d030d0260371c3e8c184528b612a5677065b75597349ac90bf98e8": {
+      "stitched_code": "def is_sorted(lst):\n    \"\"\"\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n\n    Examples\n    is_sorted([5]) \u279e True\n    is_sorted([1, 2, 3, 4, 5]) \u279e True\n    is_sorted([1, 3, 2, 4, 5]) \u279e False\n    is_sorted([1, 2, 3, 4, 5, 6]) \u279e True\n    is_sorted([1, 2, 3, 4, 5, 6, 7]) \u279e True\n    is_sorted([1, 3, 2, 4, 5, 6, 7]) \u279e False\n    is_sorted([1, 2, 2, 3, 3, 4]) \u279e True\n    is_sorted([1, 2, 2, 2, 3, 4]) \u279e False\n    \"\"\"\n    if len(lst) == 0:\n        return True\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "4222051a8a56c3ff4d45c6959c422e29c9da48ffd824bcdbbaecd72fac312add|31b0e0fb23d030d0260371c3e8c184528b612a5677065b75597349ac90bf98e8": {
+      "stitched_code": "def is_sorted(lst):\n    \"\"\"\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n\n    Examples\n    is_sorted([5]) \u279e True\n    is_sorted([1, 2, 3, 4, 5]) \u279e True\n    is_sorted([1, 3, 2, 4, 5]) \u279e False\n    is_sorted([1, 2, 3, 4, 5, 6]) \u279e True\n    is_sorted([1, 2, 3, 4, 5, 6, 7]) \u279e True\n    is_sorted([1, 3, 2, 4, 5, 6, 7]) \u279e False\n    is_sorted([1, 2, 2, 3, 3, 4]) \u279e True\n    is_sorted([1, 2, 2, 2, 3, 4]) \u279e False\n    \"\"\"\n    if len(lst) == 0:\n        return True\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "f67d5be088e56fdad5f7ab03e0ddb1b0ac0a419b6543ff28fa703d365ecbd561|31b0e0fb23d030d0260371c3e8c184528b612a5677065b75597349ac90bf98e8": {
+      "stitched_code": "def is_sorted(lst):\n    \"\"\"\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n\n    Examples\n    is_sorted([5]) \u279e True\n    is_sorted([1, 2, 3, 4, 5]) \u279e True\n    is_sorted([1, 3, 2, 4, 5]) \u279e False\n    is_sorted([1, 2, 3, 4, 5, 6]) \u279e True\n    is_sorted([1, 2, 3, 4, 5, 6, 7]) \u279e True\n    is_sorted([1, 3, 2, 4, 5, 6, 7]) \u279e False\n    is_sorted([1, 2, 2, 3, 3, 4]) \u279e True\n    is_sorted([1, 2, 2, 2, 3, 4]) \u279e False\n    \"\"\"\n    if len(lst) == 0:\n        return True\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2ad918c4c8081c043b98efd286e14bedf854d64e0750c0f2fd33ae8497f4d926|0fdd3bdb1c379d59361d274a2607108d504ef4b022ffa26e24c53075871a1ebc": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    \n    # Check if sorted\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    \n    # Check if any number appears more than twice\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    \n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "a89753fdc985f0d25d2b8f33b164ff12d62e65350c5d89716d2e47d9d986c1c8|0fdd3bdb1c379d59361d274a2607108d504ef4b022ffa26e24c53075871a1ebc": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "fc35650ca8e808e1d75dd59fe276b10b153bfd3b8295823e0a76751b1712cc44|0fdd3bdb1c379d59361d274a2607108d504ef4b022ffa26e24c53075871a1ebc": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "3e644aafd47b9817ac3edef7200a6c8a6d819663822f8b1f19b3dcc3a1989488|0fdd3bdb1c379d59361d274a2607108d504ef4b022ffa26e24c53075871a1ebc": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    \n    # Check if sorted\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    \n    # Check for more than 1 duplicate (i.e., count > 2)\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    \n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "f67d5be088e56fdad5f7ab03e0ddb1b0ac0a419b6543ff28fa703d365ecbd561|0fdd3bdb1c379d59361d274a2607108d504ef4b022ffa26e24c53075871a1ebc": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "4222051a8a56c3ff4d45c6959c422e29c9da48ffd824bcdbbaecd72fac312add|0fdd3bdb1c379d59361d274a2607108d504ef4b022ffa26e24c53075871a1ebc": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "31b0e0fb23d030d0260371c3e8c184528b612a5677065b75597349ac90bf98e8|0fdd3bdb1c379d59361d274a2607108d504ef4b022ffa26e24c53075871a1ebc": {
+      "stitched_code": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n\n    Examples\n    is_sorted([5]) \u279e True\n    is_sorted([1, 2, 3, 4, 5]) \u279e True\n    is_sorted([1, 3, 2, 4, 5]) \u279e False\n    is_sorted([1, 2, 3, 4, 5, 6]) \u279e True\n    is_sorted([1, 2, 3, 4, 5, 6, 7]) \u279e True\n    is_sorted([1, 3, 2, 4, 5, 6, 7]) \u279e False\n    is_sorted([1, 2, 2, 3, 3, 4]) \u279e True\n    is_sorted([1, 2, 2, 2, 3, 4]) \u279e False\n    '''\n    if len(lst) == 0:\n        return True\n    \n    # Check if sorted in ascending order\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    \n    # Check for more than 1 duplicate (i.e., more than 2 occurrences)\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    \n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "dde733b031f3b35b19ff38df93b0c1176a2a1c194e851cf2b8e8fdf50138c123|0fdd3bdb1c379d59361d274a2607108d504ef4b022ffa26e24c53075871a1ebc": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "629a8a5234944b1b4d76ba7214fbf3372e93842d26706f60c4ecf25bd85ba3a6|0fdd3bdb1c379d59361d274a2607108d504ef4b022ffa26e24c53075871a1ebc": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    \n    # Check if sorted in ascending order\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    \n    # Check if any number appears more than twice\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    \n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "629a8a5234944b1b4d76ba7214fbf3372e93842d26706f60c4ecf25bd85ba3a6|3e644aafd47b9817ac3edef7200a6c8a6d819663822f8b1f19b3dcc3a1989488": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    \n    # Check if sorted in ascending order\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    \n    # Check if any number appears more than twice\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    \n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0fdd3bdb1c379d59361d274a2607108d504ef4b022ffa26e24c53075871a1ebc|3e644aafd47b9817ac3edef7200a6c8a6d819663822f8b1f19b3dcc3a1989488": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    \n    # Check if sorted\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    \n    # Check for more than 2 occurrences of any number\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    \n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "2ad918c4c8081c043b98efd286e14bedf854d64e0750c0f2fd33ae8497f4d926|3e644aafd47b9817ac3edef7200a6c8a6d819663822f8b1f19b3dcc3a1989488": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    \n    # Check if sorted\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    \n    # Check if any number appears more than twice\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    \n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "a89753fdc985f0d25d2b8f33b164ff12d62e65350c5d89716d2e47d9d986c1c8|3e644aafd47b9817ac3edef7200a6c8a6d819663822f8b1f19b3dcc3a1989488": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "fc35650ca8e808e1d75dd59fe276b10b153bfd3b8295823e0a76751b1712cc44|3e644aafd47b9817ac3edef7200a6c8a6d819663822f8b1f19b3dcc3a1989488": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "f67d5be088e56fdad5f7ab03e0ddb1b0ac0a419b6543ff28fa703d365ecbd561|3e644aafd47b9817ac3edef7200a6c8a6d819663822f8b1f19b3dcc3a1989488": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "31b0e0fb23d030d0260371c3e8c184528b612a5677065b75597349ac90bf98e8|3e644aafd47b9817ac3edef7200a6c8a6d819663822f8b1f19b3dcc3a1989488": {
+      "stitched_code": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n\n    Examples\n    is_sorted([5]) \u279e True\n    is_sorted([1, 2, 3, 4, 5]) \u279e True\n    is_sorted([1, 3, 2, 4, 5]) \u279e False\n    is_sorted([1, 2, 3, 4, 5, 6]) \u279e True\n    is_sorted([1, 2, 3, 4, 5, 6, 7]) \u279e True\n    is_sorted([1, 3, 2, 4, 5, 6, 7]) \u279e False\n    is_sorted([1, 2, 2, 3, 3, 4]) \u279e True\n    is_sorted([1, 2, 2, 2, 3, 4]) \u279e False\n    '''\n    if len(lst) == 0:\n        return True\n    \n    # Check if sorted in ascending order\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    \n    # Check for more than 1 duplicate (i.e., more than 2 occurrences)\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    \n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0fdd3bdb1c379d59361d274a2607108d504ef4b022ffa26e24c53075871a1ebc|31b0e0fb23d030d0260371c3e8c184528b612a5677065b75597349ac90bf98e8": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    \n    # Check if sorted\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    \n    # Check for more than 2 occurrences of any number\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    \n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "fc35650ca8e808e1d75dd59fe276b10b153bfd3b8295823e0a76751b1712cc44|31b0e0fb23d030d0260371c3e8c184528b612a5677065b75597349ac90bf98e8": {
+      "stitched_code": "def is_sorted(lst):\n    \"\"\"\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n\n    Examples\n    is_sorted([5]) \u279e True\n    is_sorted([1, 2, 3, 4, 5]) \u279e True\n    is_sorted([1, 3, 2, 4, 5]) \u279e False\n    is_sorted([1, 2, 3, 4, 5, 6]) \u279e True\n    is_sorted([1, 2, 3, 4, 5, 6, 7]) \u279e True\n    is_sorted([1, 3, 2, 4, 5, 6, 7]) \u279e False\n    is_sorted([1, 2, 2, 3, 3, 4]) \u279e True\n    is_sorted([1, 2, 2, 2, 3, 4]) \u279e False\n    \"\"\"\n    if len(lst) == 0:\n        return True\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "dde733b031f3b35b19ff38df93b0c1176a2a1c194e851cf2b8e8fdf50138c123|3e644aafd47b9817ac3edef7200a6c8a6d819663822f8b1f19b3dcc3a1989488": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "4222051a8a56c3ff4d45c6959c422e29c9da48ffd824bcdbbaecd72fac312add|3e644aafd47b9817ac3edef7200a6c8a6d819663822f8b1f19b3dcc3a1989488": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0fdd3bdb1c379d59361d274a2607108d504ef4b022ffa26e24c53075871a1ebc|2ad918c4c8081c043b98efd286e14bedf854d64e0750c0f2fd33ae8497f4d926": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    \n    # Check if sorted\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    \n    # Check for more than 2 occurrences of any number\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    \n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "2ad918c4c8081c043b98efd286e14bedf854d64e0750c0f2fd33ae8497f4d926|2ad918c4c8081c043b98efd286e14bedf854d64e0750c0f2fd33ae8497f4d926": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    \n    # Check if sorted\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    \n    # Check if any number appears more than twice\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    \n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "629a8a5234944b1b4d76ba7214fbf3372e93842d26706f60c4ecf25bd85ba3a6|2ad918c4c8081c043b98efd286e14bedf854d64e0750c0f2fd33ae8497f4d926": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    \n    # Check if sorted in ascending order\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    \n    # Check if any number appears more than twice\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    \n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "dde733b031f3b35b19ff38df93b0c1176a2a1c194e851cf2b8e8fdf50138c123|2ad918c4c8081c043b98efd286e14bedf854d64e0750c0f2fd33ae8497f4d926": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "3e644aafd47b9817ac3edef7200a6c8a6d819663822f8b1f19b3dcc3a1989488|2ad918c4c8081c043b98efd286e14bedf854d64e0750c0f2fd33ae8497f4d926": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    \n    # Check if sorted\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    \n    # Check for more than 1 duplicate (i.e., count > 2)\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    \n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "f67d5be088e56fdad5f7ab03e0ddb1b0ac0a419b6543ff28fa703d365ecbd561|2ad918c4c8081c043b98efd286e14bedf854d64e0750c0f2fd33ae8497f4d926": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "31b0e0fb23d030d0260371c3e8c184528b612a5677065b75597349ac90bf98e8|2ad918c4c8081c043b98efd286e14bedf854d64e0750c0f2fd33ae8497f4d926": {
+      "stitched_code": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n\n    Examples\n    is_sorted([5]) \u279e True\n    is_sorted([1, 2, 3, 4, 5]) \u279e True\n    is_sorted([1, 3, 2, 4, 5]) \u279e False\n    is_sorted([1, 2, 3, 4, 5, 6]) \u279e True\n    is_sorted([1, 2, 3, 4, 5, 6, 7]) \u279e True\n    is_sorted([1, 3, 2, 4, 5, 6, 7]) \u279e False\n    is_sorted([1, 2, 2, 3, 3, 4]) \u279e True\n    is_sorted([1, 2, 2, 2, 3, 4]) \u279e False\n    '''\n    if len(lst) == 0:\n        return True\n    \n    # Check if sorted in ascending order\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    \n    # Check for more than 1 duplicate (i.e., more than 2 occurrences)\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    \n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "3e644aafd47b9817ac3edef7200a6c8a6d819663822f8b1f19b3dcc3a1989488|31b0e0fb23d030d0260371c3e8c184528b612a5677065b75597349ac90bf98e8": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    \n    # Check if sorted\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    \n    # Check for more than 1 duplicate (i.e., count > 2)\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    \n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "629a8a5234944b1b4d76ba7214fbf3372e93842d26706f60c4ecf25bd85ba3a6|629a8a5234944b1b4d76ba7214fbf3372e93842d26706f60c4ecf25bd85ba3a6": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    \n    # Check if sorted in ascending order\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    \n    # Check if any number appears more than twice\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    \n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0fdd3bdb1c379d59361d274a2607108d504ef4b022ffa26e24c53075871a1ebc|629a8a5234944b1b4d76ba7214fbf3372e93842d26706f60c4ecf25bd85ba3a6": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    \n    # Check if sorted\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    \n    # Check for more than 2 occurrences of any number\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    \n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "2ad918c4c8081c043b98efd286e14bedf854d64e0750c0f2fd33ae8497f4d926|629a8a5234944b1b4d76ba7214fbf3372e93842d26706f60c4ecf25bd85ba3a6": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    \n    # Check if sorted\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    \n    # Check if any number appears more than twice\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    \n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "3e644aafd47b9817ac3edef7200a6c8a6d819663822f8b1f19b3dcc3a1989488|629a8a5234944b1b4d76ba7214fbf3372e93842d26706f60c4ecf25bd85ba3a6": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    \n    # Check if sorted\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    \n    # Check for more than 1 duplicate (i.e., count > 2)\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    \n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "4222051a8a56c3ff4d45c6959c422e29c9da48ffd824bcdbbaecd72fac312add|629a8a5234944b1b4d76ba7214fbf3372e93842d26706f60c4ecf25bd85ba3a6": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "31b0e0fb23d030d0260371c3e8c184528b612a5677065b75597349ac90bf98e8|629a8a5234944b1b4d76ba7214fbf3372e93842d26706f60c4ecf25bd85ba3a6": {
+      "stitched_code": "def is_sorted(lst):\n    '''\n    Given a list of numbers, return whether or not they are sorted\n    in ascending order. If list has more than 1 duplicate of the same\n    number, return False. Assume no negative numbers and only integers.\n\n    Examples\n    is_sorted([5]) \u279e True\n    is_sorted([1, 2, 3, 4, 5]) \u279e True\n    is_sorted([1, 3, 2, 4, 5]) \u279e False\n    is_sorted([1, 2, 3, 4, 5, 6]) \u279e True\n    is_sorted([1, 2, 3, 4, 5, 6, 7]) \u279e True\n    is_sorted([1, 3, 2, 4, 5, 6, 7]) \u279e False\n    is_sorted([1, 2, 2, 3, 3, 4]) \u279e True\n    is_sorted([1, 2, 2, 2, 3, 4]) \u279e False\n    '''\n    if len(lst) == 0:\n        return True\n    \n    # Check if sorted in ascending order\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    \n    # Check for more than 1 duplicate (i.e., more than 2 occurrences)\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    \n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "a89753fdc985f0d25d2b8f33b164ff12d62e65350c5d89716d2e47d9d986c1c8|2ad918c4c8081c043b98efd286e14bedf854d64e0750c0f2fd33ae8497f4d926": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "dde733b031f3b35b19ff38df93b0c1176a2a1c194e851cf2b8e8fdf50138c123|629a8a5234944b1b4d76ba7214fbf3372e93842d26706f60c4ecf25bd85ba3a6": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "f67d5be088e56fdad5f7ab03e0ddb1b0ac0a419b6543ff28fa703d365ecbd561|629a8a5234944b1b4d76ba7214fbf3372e93842d26706f60c4ecf25bd85ba3a6": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "fc35650ca8e808e1d75dd59fe276b10b153bfd3b8295823e0a76751b1712cc44|2ad918c4c8081c043b98efd286e14bedf854d64e0750c0f2fd33ae8497f4d926": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "4222051a8a56c3ff4d45c6959c422e29c9da48ffd824bcdbbaecd72fac312add|2ad918c4c8081c043b98efd286e14bedf854d64e0750c0f2fd33ae8497f4d926": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

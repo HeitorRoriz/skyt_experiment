@@ -1,0 +1,45 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "2bdca315080dfffaf737af9af0b28c905f875fe972ece87adee821032da89eae|812ecce26508155eacf769fe80c8b820a6bdc2ed33ffb3fd9eadcbce3102e3b4": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # include the last term which is 1\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "812ecce26508155eacf769fe80c8b820a6bdc2ed33ffb3fd9eadcbce3102e3b4|812ecce26508155eacf769fe80c8b820a6bdc2ed33ffb3fd9eadcbce3102e3b4": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Include the last term which is 1\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

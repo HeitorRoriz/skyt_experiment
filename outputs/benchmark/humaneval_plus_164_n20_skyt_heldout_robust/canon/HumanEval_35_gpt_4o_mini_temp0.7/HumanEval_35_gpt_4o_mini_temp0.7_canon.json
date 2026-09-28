@@ -1,0 +1,394 @@
+{
+  "contract_id": "HumanEval_35_gpt_4o_mini_temp0.7",
+  "canonical_code": "\n\ndef max_element(l: list):\n    \"\"\"Return maximum element in the list.\n    >>> max_element([1, 2, 3])\n    3\n    >>> max_element([5, 3, -5, 2, -3, 3, 9, 0, 123, 1, -10])\n    123\n    \"\"\"\n    if not l:\n        return None\n    max_val = l[0]\n    for num in l:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 2,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [],
+      "nested_depth": 2,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_1"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [
+          "v1"
+        ]
+      },
+      "assignments": {
+        "v0": "Name(id='v1', ctx=Load())"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_max_element"
+        ],
+        [
+          "function_max_element",
+          "branch"
+        ],
+        [
+          "function_max_element",
+          "loop"
+        ],
+        [
+          "function_max_element",
+          "loop",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "max_element": {
+        "name": "max_element",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": []
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": false,
+      "numeric_constants": [
+        0
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Gt"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Name",
+        "Load",
+        "If",
+        "UnaryOp",
+        "Not",
+        "Name",
+        "Load",
+        "Return",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "For",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Return",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 6,
+      "ast_hash": "9012ca8a9508a1f214af6554393a18e0",
+      "alpha_renamed_hash": "9012ca8a9508a1f214af6554393a18e0"
+    },
+    "operator_precedence": {
+      "operator_sequence": [],
+      "precedence_levels": {}
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Return",
+        "Assign",
+        "For",
+        "If",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Return_2",
+        "Assign_3",
+        "For_4",
+        "If_5",
+        "Assign_6",
+        "Return_7"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If",
+        "For",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "not p0",
+          "return_type": "constant"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "not p0"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_35_gpt_4o_mini_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/35",
+    "prompt": "\n\ndef max_element(l: list):\n    \"\"\"Return maximum element in the list.\n    >>> max_element([1, 2, 3])\n    3\n    >>> max_element([5, 3, -5, 2, -3, 3, 9, 0, 123, 1, -10])\n    123\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "max_element"
+    },
+    "anchor_signature": "1394b8f3ad193f490606479e49a771dd5604db03fcbd4aa0d281a649403da561",
+    "canonical_code": "\n\ndef max_element(l: list):\n    \"\"\"Return maximum element in the list.\n    >>> max_element([1, 2, 3])\n    3\n    >>> max_element([5, 3, -5, 2, -3, 3, 9, 0, 123, 1, -10])\n    123\n    \"\"\"\n    if not l:\n        return None\n    max_val = l[0]\n    for num in l:\n        if num > max_val:\n            max_val = num\n    return max_val\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 2,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [],
+        "nested_depth": 2,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_1"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [
+            "v1"
+          ]
+        },
+        "assignments": {
+          "v0": "Name(id='v1', ctx=Load())"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_max_element"
+          ],
+          [
+            "function_max_element",
+            "branch"
+          ],
+          [
+            "function_max_element",
+            "loop"
+          ],
+          [
+            "function_max_element",
+            "loop",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "max_element": {
+          "name": "max_element",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": [
+          0
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Gt"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Name",
+          "Load",
+          "If",
+          "UnaryOp",
+          "Not",
+          "Name",
+          "Load",
+          "Return",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "For",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Return",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 6,
+        "ast_hash": "9012ca8a9508a1f214af6554393a18e0",
+        "alpha_renamed_hash": "9012ca8a9508a1f214af6554393a18e0"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "Assign",
+          "For",
+          "If",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "Assign_3",
+          "For_4",
+          "If_5",
+          "Assign_6",
+          "Return_7"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "For",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "not p0",
+            "return_type": "constant"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "not p0"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

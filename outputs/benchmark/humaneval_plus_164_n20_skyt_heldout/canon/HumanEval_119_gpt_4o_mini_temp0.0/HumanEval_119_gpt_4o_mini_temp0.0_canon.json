@@ -1,0 +1,554 @@
+{
+  "contract_id": "HumanEval_119_gpt_4o_mini_temp0.0",
+  "canonical_code": "def match_parens(lst):\n    def is_good(s):\n        balance = 0\n        for char in s:\n            if char == '(':\n                balance += 1\n            else:\n                balance -= 1\n            if balance < 0:\n                return False\n        return balance == 0\n\n    a, b = lst\n    return 'Yes' if is_good(a + b) or is_good(b + a) else 'No'\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 2,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [
+        "is_good",
+        "is_good"
+      ],
+      "nested_depth": 2,
+      "branch_patterns": [
+        "if_at_depth_1",
+        "if_at_depth_1"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": []
+      },
+      "assignments": {
+        "v0": "Constant(value=0)"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_match_parens"
+        ],
+        [
+          "function_match_parens",
+          "function_is_good"
+        ],
+        [
+          "function_match_parens",
+          "function_is_good",
+          "loop"
+        ],
+        [
+          "function_match_parens",
+          "function_is_good",
+          "loop",
+          "branch"
+        ],
+        [
+          "function_match_parens",
+          "function_is_good",
+          "loop",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "match_parens": {
+        "name": "match_parens",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      },
+      "is_good": {
+        "name": "is_good",
+        "args": [
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 2,
+      "estimated_complexity": "O(2^n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add",
+        "Add"
+      ],
+      "associative_ops": [
+        "Add",
+        "Add"
+      ],
+      "binary_operations": [
+        "Add",
+        "Add"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        0,
+        1,
+        1,
+        0,
+        false,
+        0
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [
+        "Or"
+      ],
+      "comparisons": [
+        "Eq",
+        "Lt",
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "For",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Add",
+        "Constant",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Sub",
+        "Constant",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Lt",
+        "Constant",
+        "Return",
+        "Constant",
+        "Return",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Assign",
+        "Tuple",
+        "Name",
+        "Store",
+        "Name",
+        "Store",
+        "Store",
+        "Name",
+        "Load",
+        "Return",
+        "IfExp",
+        "BoolOp",
+        "Or",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Name",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Name",
+        "Load",
+        "Constant",
+        "Constant"
+      ],
+      "ast_depth": 8,
+      "ast_hash": "ba6744eb71ed01c6f4083a6a4a09bf47",
+      "alpha_renamed_hash": "ba6744eb71ed01c6f4083a6a4a09bf47"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Add",
+        "Add"
+      ],
+      "precedence_levels": {
+        "Add": 3
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "FunctionDef",
+        "Assign",
+        "For",
+        "If",
+        "AugAssign",
+        "AugAssign",
+        "If",
+        "Return",
+        "Return",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "FunctionDef_1",
+        "Assign_2",
+        "For_3",
+        "If_4",
+        "AugAssign_5",
+        "AugAssign_6",
+        "If_7",
+        "Return_8",
+        "Return_9",
+        "Assign_10",
+        "Return_11"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "FunctionDef",
+        "For",
+        "If",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_119_gpt_4o_mini_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/119",
+    "prompt": "\ndef match_parens(lst):\n    '''\n    You are given a list of two strings, both strings consist of open\n    parentheses '(' or close parentheses ')' only.\n    Your job is to check if it is possible to concatenate the two strings in\n    some order, that the resulting string will be good.\n    A string S is considered to be good if and only if all parentheses in S\n    are balanced. For example: the string '(())()' is good, while the string\n    '())' is not.\n    Return 'Yes' if there's a way to make a good string, and return 'No' otherwise.\n\n    Examples:\n    match_parens(['()(', ')']) == 'Yes'\n    match_parens([')', ')']) == 'No'\n    '''\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "match_parens"
+    },
+    "anchor_signature": "95a4a6b9ff902e083ea9a14c1bce897ffc637c8b29968023c4f4a4837daf099d",
+    "canonical_code": "def match_parens(lst):\n    def is_good(s):\n        balance = 0\n        for char in s:\n            if char == '(':\n                balance += 1\n            else:\n                balance -= 1\n            if balance < 0:\n                return False\n        return balance == 0\n\n    a, b = lst\n    return 'Yes' if is_good(a + b) or is_good(b + a) else 'No'\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 2,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "is_good",
+          "is_good"
+        ],
+        "nested_depth": 2,
+        "branch_patterns": [
+          "if_at_depth_1",
+          "if_at_depth_1"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": []
+        },
+        "assignments": {
+          "v0": "Constant(value=0)"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_match_parens"
+          ],
+          [
+            "function_match_parens",
+            "function_is_good"
+          ],
+          [
+            "function_match_parens",
+            "function_is_good",
+            "loop"
+          ],
+          [
+            "function_match_parens",
+            "function_is_good",
+            "loop",
+            "branch"
+          ],
+          [
+            "function_match_parens",
+            "function_is_good",
+            "loop",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "match_parens": {
+          "name": "match_parens",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        },
+        "is_good": {
+          "name": "is_good",
+          "args": [
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 2,
+        "estimated_complexity": "O(2^n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add",
+          "Add"
+        ],
+        "associative_ops": [
+          "Add",
+          "Add"
+        ],
+        "binary_operations": [
+          "Add",
+          "Add"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          0,
+          1,
+          1,
+          0,
+          false,
+          0
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [
+          "Or"
+        ],
+        "comparisons": [
+          "Eq",
+          "Lt",
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Add",
+          "Constant",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Sub",
+          "Constant",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Lt",
+          "Constant",
+          "Return",
+          "Constant",
+          "Return",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Assign",
+          "Tuple",
+          "Name",
+          "Store",
+          "Name",
+          "Store",
+          "Store",
+          "Name",
+          "Load",
+          "Return",
+          "IfExp",
+          "BoolOp",
+          "Or",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Name",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Name",
+          "Load",
+          "Constant",
+          "Constant"
+        ],
+        "ast_depth": 8,
+        "ast_hash": "ba6744eb71ed01c6f4083a6a4a09bf47",
+        "alpha_renamed_hash": "ba6744eb71ed01c6f4083a6a4a09bf47"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Add",
+          "Add"
+        ],
+        "precedence_levels": {
+          "Add": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "FunctionDef",
+          "Assign",
+          "For",
+          "If",
+          "AugAssign",
+          "AugAssign",
+          "If",
+          "Return",
+          "Return",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "FunctionDef_1",
+          "Assign_2",
+          "For_3",
+          "If_4",
+          "AugAssign_5",
+          "AugAssign_6",
+          "If_7",
+          "Return_8",
+          "Return_9",
+          "Assign_10",
+          "Return_11"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "FunctionDef",
+          "For",
+          "If",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

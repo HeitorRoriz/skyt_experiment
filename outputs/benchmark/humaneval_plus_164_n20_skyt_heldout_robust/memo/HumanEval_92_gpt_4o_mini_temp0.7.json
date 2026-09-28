@@ -1,0 +1,67 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "c26623f28311da2b1a2dcbae7ce6980a06bc31433e442967ca4205833f300499|c26623f28311da2b1a2dcbae7ce6980a06bc31433e442967ca4205833f300499": {
+      "stitched_code": "def any_int(x, y, z):\n    if all(isinstance(i, int) for i in (x, y, z)):\n        return x == y + z or y == x + z or z == x + y\n    return False\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "63189872c07088f426ebc415a70bb9c2b5c42035c3494503e05e46ea71c17984|c26623f28311da2b1a2dcbae7ce6980a06bc31433e442967ca4205833f300499": {
+      "stitched_code": "def any_int(x, y, z):\n    if all(isinstance(i, int) for i in [x, y, z]):\n        return x == y + z or y == x + z or z == x + y\n    return False\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.07142857142857142,
+        "transformation_level": 0
+      }
+    },
+    "dce8883a1c0f3c644c9e20942fd2d552d7b592241b6fb6e32569ee393057b0a6|c26623f28311da2b1a2dcbae7ce6980a06bc31433e442967ca4205833f300499": {
+      "stitched_code": "def any_int(x, y, z):\n    if all(isinstance(n, int) for n in (x, y, z)):\n        return x == y + z or y == x + z or z == x + y\n    return False\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

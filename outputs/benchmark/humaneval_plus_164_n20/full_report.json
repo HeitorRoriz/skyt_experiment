@@ -1,0 +1,354 @@
+{
+  "schema": "skyt-humaneval-plus-full-v1",
+  "updated_at": "2026-09-18T10:00:40.205268+00:00",
+  "n_configs": 24,
+  "n_complete": 24,
+  "n_tasks": 6,
+  "n": 20,
+  "models": [
+    "claude-sonnet-4-5-20250929",
+    "gpt-4o-mini"
+  ],
+  "temperatures": [
+    0.0,
+    0.7
+  ],
+  "no_skyt_repair": true,
+  "restrict_to_pilot": false,
+  "analyze": false,
+  "cost": {
+    "schema": "skyt-humaneval-plus-cost-v1",
+    "updated_at": "2026-09-18T10:00:40.202582+00:00",
+    "pricing_as_of": "2026-09-01",
+    "pricing_usd_per_million": {
+      "gpt-4o-mini": {
+        "input": 0.15,
+        "output": 0.6,
+        "source": "OpenAI list price (standard, not batch/cache)"
+      },
+      "claude-sonnet-4-5-20250929": {
+        "input": 3.0,
+        "output": 15.0,
+        "source": "Anthropic list price Sonnet 4.5 \u2264200K context"
+      }
+    },
+    "note": "USD is list-price \u00d7 billed tokens on stored responses. Retries that never returned usage are not billed here. Provider invoices can differ (cache, tax, tier).",
+    "n_records": 13120,
+    "n_with_tokens": 13120,
+    "n_failed": 0,
+    "usd_spent_so_far": 26.962295,
+    "usd_spent_estimate": 26.962295,
+    "usd_per_billed_call": 0.00205505,
+    "by_model": {
+      "claude-sonnet-4-5-20250929": {
+        "n_records": 6560,
+        "n_with_tokens": 6560,
+        "n_failed": 0,
+        "input_tokens": 1166480,
+        "output_tokens": 1535478,
+        "usd_estimate": 26.53161,
+        "usd_per_call": 0.00404445,
+        "projected_pilot_usd": 2.4267,
+        "projected_full_n10_usd": 13.2658,
+        "projected_full_n20_usd": 26.5316
+      },
+      "gpt-4o-mini": {
+        "n_records": 6560,
+        "n_with_tokens": 6560,
+        "n_failed": 0,
+        "input_tokens": 1071360,
+        "output_tokens": 449969,
+        "usd_estimate": 0.430685,
+        "usd_per_call": 6.565e-05,
+        "projected_pilot_usd": 0.0394,
+        "projected_full_n10_usd": 0.2153,
+        "projected_full_n20_usd": 0.4307
+      }
+    },
+    "forecast": {
+      "pilot_tasks": 30,
+      "full_tasks": 164,
+      "pilot_target_calls": 1200,
+      "full_n10_target_calls": 6560,
+      "full_n20_target_calls": 13120,
+      "models_pending": [],
+      "projected_pilot_from_models_seen_usd": 2.4661,
+      "projected_full_n10_from_models_seen_usd": 13.4811,
+      "projected_full_n20_from_models_seen_usd": 26.9623,
+      "same_grid_n10_full_usd": 13.4811,
+      "same_grid_n20_full_usd": 26.9623,
+      "assumption": "Per-model mean USD/call \u00d7 remaining grid. Until both models have billed calls, OpenAI is omitted (it is much cheaper than Claude). N=20 is 2\u00d7 N=10. Harder leftover tasks can cost more than the mean so far."
+    },
+    "ledger_path": "outputs\\benchmark\\humaneval_plus_164_n20\\cost_ledger.json"
+  },
+  "configs": [
+    {
+      "task_id": "HumanEval/10",
+      "model": "claude-sonnet-4-5-20250929",
+      "temperature": 0.0,
+      "n_plus_certified": null,
+      "n_base_passed": null,
+      "usd_estimate": 0.08982,
+      "same_at_2": null,
+      "same_at_2_given_cert": null,
+      "plus_pass": null,
+      "skipped": "complete"
+    },
+    {
+      "task_id": "HumanEval/10",
+      "model": "claude-sonnet-4-5-20250929",
+      "temperature": 0.7,
+      "n_plus_certified": null,
+      "n_base_passed": null,
+      "usd_estimate": 0.09102,
+      "same_at_2": null,
+      "same_at_2_given_cert": null,
+      "plus_pass": null,
+      "skipped": "complete"
+    },
+    {
+      "task_id": "HumanEval/113",
+      "model": "claude-sonnet-4-5-20250929",
+      "temperature": 0.0,
+      "n_plus_certified": null,
+      "n_base_passed": null,
+      "usd_estimate": 0.12603,
+      "same_at_2": null,
+      "same_at_2_given_cert": null,
+      "plus_pass": null,
+      "skipped": "complete"
+    },
+    {
+      "task_id": "HumanEval/113",
+      "model": "claude-sonnet-4-5-20250929",
+      "temperature": 0.7,
+      "n_plus_certified": null,
+      "n_base_passed": null,
+      "usd_estimate": 0.12165,
+      "same_at_2": null,
+      "same_at_2_given_cert": null,
+      "plus_pass": null,
+      "skipped": "complete"
+    },
+    {
+      "task_id": "HumanEval/14",
+      "model": "claude-sonnet-4-5-20250929",
+      "temperature": 0.0,
+      "n_plus_certified": null,
+      "n_base_passed": null,
+      "usd_estimate": 0.03306,
+      "same_at_2": 1.0,
+      "same_at_2_given_cert": 1.0,
+      "plus_pass": 1.0
+    },
+    {
+      "task_id": "HumanEval/14",
+      "model": "claude-sonnet-4-5-20250929",
+      "temperature": 0.7,
+      "n_plus_certified": null,
+      "n_base_passed": null,
+      "usd_estimate": 0.033315,
+      "same_at_2": 0.9,
+      "same_at_2_given_cert": 0.9,
+      "plus_pass": 1.0
+    },
+    {
+      "task_id": "HumanEval/21",
+      "model": "claude-sonnet-4-5-20250929",
+      "temperature": 0.0,
+      "n_plus_certified": null,
+      "n_base_passed": null,
+      "usd_estimate": 0.06528,
+      "same_at_2": 0.0,
+      "same_at_2_given_cert": null,
+      "plus_pass": 0.0
+    },
+    {
+      "task_id": "HumanEval/21",
+      "model": "claude-sonnet-4-5-20250929",
+      "temperature": 0.7,
+      "n_plus_certified": null,
+      "n_base_passed": null,
+      "usd_estimate": 0.061605,
+      "same_at_2": 0.0,
+      "same_at_2_given_cert": null,
+      "plus_pass": 0.0
+    },
+    {
+      "task_id": "HumanEval/38",
+      "model": "claude-sonnet-4-5-20250929",
+      "temperature": 0.0,
+      "n_plus_certified": null,
+      "n_base_passed": null,
+      "usd_estimate": 0.087345,
+      "same_at_2": 0.0,
+      "same_at_2_given_cert": null,
+      "plus_pass": 0.0
+    },
+    {
+      "task_id": "HumanEval/38",
+      "model": "claude-sonnet-4-5-20250929",
+      "temperature": 0.7,
+      "n_plus_certified": null,
+      "n_base_passed": null,
+      "usd_estimate": 0.09018,
+      "same_at_2": 0.0,
+      "same_at_2_given_cert": null,
+      "plus_pass": 0.0
+    },
+    {
+      "task_id": "HumanEval/93",
+      "model": "claude-sonnet-4-5-20250929",
+      "temperature": 0.0,
+      "n_plus_certified": null,
+      "n_base_passed": null,
+      "usd_estimate": 0.09471,
+      "same_at_2": 0.32105263157894737,
+      "same_at_2_given_cert": 0.32105263157894737,
+      "plus_pass": 1.0
+    },
+    {
+      "task_id": "HumanEval/93",
+      "model": "claude-sonnet-4-5-20250929",
+      "temperature": 0.7,
+      "n_plus_certified": null,
+      "n_base_passed": null,
+      "usd_estimate": 0.103305,
+      "same_at_2": 0.12105263157894737,
+      "same_at_2_given_cert": 0.12105263157894737,
+      "plus_pass": 1.0
+    },
+    {
+      "task_id": "HumanEval/10",
+      "model": "gpt-4o-mini",
+      "temperature": 0.0,
+      "n_plus_certified": null,
+      "n_base_passed": null,
+      "usd_estimate": 0.001422,
+      "same_at_2": 0.5526315789473685,
+      "same_at_2_given_cert": 1.0,
+      "plus_pass": 0.75
+    },
+    {
+      "task_id": "HumanEval/10",
+      "model": "gpt-4o-mini",
+      "temperature": 0.7,
+      "n_plus_certified": null,
+      "n_base_passed": null,
+      "usd_estimate": 0.0017676,
+      "same_at_2": 0.2894736842105263,
+      "same_at_2_given_cert": 0.4583333333333333,
+      "plus_pass": 0.8
+    },
+    {
+      "task_id": "HumanEval/113",
+      "model": "gpt-4o-mini",
+      "temperature": 0.0,
+      "n_plus_certified": null,
+      "n_base_passed": null,
+      "usd_estimate": 0.00156,
+      "same_at_2": 1.0,
+      "same_at_2_given_cert": 1.0,
+      "plus_pass": 1.0
+    },
+    {
+      "task_id": "HumanEval/113",
+      "model": "gpt-4o-mini",
+      "temperature": 0.7,
+      "n_plus_certified": null,
+      "n_base_passed": null,
+      "usd_estimate": 0.001563,
+      "same_at_2": 0.8052631578947368,
+      "same_at_2_given_cert": 0.8052631578947368,
+      "plus_pass": 1.0
+    },
+    {
+      "task_id": "HumanEval/14",
+      "model": "gpt-4o-mini",
+      "temperature": 0.0,
+      "n_plus_certified": null,
+      "n_base_passed": null,
+      "usd_estimate": 0.000555,
+      "same_at_2": 1.0,
+      "same_at_2_given_cert": 1.0,
+      "plus_pass": 1.0
+    },
+    {
+      "task_id": "HumanEval/14",
+      "model": "gpt-4o-mini",
+      "temperature": 0.7,
+      "n_plus_certified": null,
+      "n_base_passed": null,
+      "usd_estimate": 0.000555,
+      "same_at_2": 1.0,
+      "same_at_2_given_cert": 1.0,
+      "plus_pass": 1.0
+    },
+    {
+      "task_id": "HumanEval/21",
+      "model": "gpt-4o-mini",
+      "temperature": 0.0,
+      "n_plus_certified": null,
+      "n_base_passed": null,
+      "usd_estimate": 0.0009209999999999999,
+      "same_at_2": 0.0,
+      "same_at_2_given_cert": null,
+      "plus_pass": 0.0
+    },
+    {
+      "task_id": "HumanEval/21",
+      "model": "gpt-4o-mini",
+      "temperature": 0.7,
+      "n_plus_certified": null,
+      "n_base_passed": null,
+      "usd_estimate": 0.000939,
+      "same_at_2": 0.0,
+      "same_at_2_given_cert": null,
+      "plus_pass": 0.0
+    },
+    {
+      "task_id": "HumanEval/38",
+      "model": "gpt-4o-mini",
+      "temperature": 0.0,
+      "n_plus_certified": null,
+      "n_base_passed": null,
+      "usd_estimate": 0.0018419999999999999,
+      "same_at_2": 1.0,
+      "same_at_2_given_cert": 1.0,
+      "plus_pass": 1.0
+    },
+    {
+      "task_id": "HumanEval/38",
+      "model": "gpt-4o-mini",
+      "temperature": 0.7,
+      "n_plus_certified": null,
+      "n_base_passed": null,
+      "usd_estimate": 0.0019097999999999997,
+      "same_at_2": 0.631578947368421,
+      "same_at_2_given_cert": 1.0,
+      "plus_pass": 0.8
+    },
+    {
+      "task_id": "HumanEval/93",
+      "model": "gpt-4o-mini",
+      "temperature": 0.0,
+      "n_plus_certified": null,
+      "n_base_passed": null,
+      "usd_estimate": 0.0022398,
+      "same_at_2": 0.0,
+      "same_at_2_given_cert": null,
+      "plus_pass": 0.0
+    },
+    {
+      "task_id": "HumanEval/93",
+      "model": "gpt-4o-mini",
+      "temperature": 0.7,
+      "n_plus_certified": null,
+      "n_base_passed": null,
+      "usd_estimate": 0.0019554,
+      "same_at_2": 0.0,
+      "same_at_2_given_cert": 0.0,
+      "plus_pass": 0.15
+    }
+  ]
+}

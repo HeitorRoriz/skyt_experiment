@@ -1,0 +1,25 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "6b23ea99cdf88fbae897f5c571d40228c62cf0a36513ce1c9b16797d2fa4cbe1|6b23ea99cdf88fbae897f5c571d40228c62cf0a36513ce1c9b16797d2fa4cbe1": {
+      "stitched_code": "def is_prime(n):\n    if n <= 1:\n        return False\n    for i in range(2, int(n**0.5) + 1):\n        if n % i == 0:\n            return False\n    return True\n\ndef intersection(interval1, interval2):\n    start1, end1 = interval1\n    start2, end2 = interval2\n    \n    # Find the intersection\n    start_intersection = max(start1, start2)\n    end_intersection = min(end1, end2)\n    \n    if start_intersection > end_intersection:\n        return \"NO\"\n    \n    length = end_intersection - start_intersection\n    if is_prime(length):\n        return \"YES\"\n    else:\n        return \"NO\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

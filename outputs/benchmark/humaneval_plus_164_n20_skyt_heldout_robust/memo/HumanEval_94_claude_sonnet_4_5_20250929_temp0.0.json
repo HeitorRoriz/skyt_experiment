@@ -1,0 +1,25 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "9a6ddb3350ae7aa7060a05cafa7dac8f11ca3b612b7fb3ef4e6c30a8f5cef099|9a6ddb3350ae7aa7060a05cafa7dac8f11ca3b612b7fb3ef4e6c30a8f5cef099": {
+      "stitched_code": "def skjkasdkd(lst):\n    def is_prime(n):\n        if n < 2:\n            return False\n        if n == 2:\n            return True\n        if n % 2 == 0:\n            return False\n        for i in range(3, int(n**0.5) + 1, 2):\n            if n % i == 0:\n                return False\n        return True\n    \n    # Find all primes in the list\n    primes = [num for num in lst if is_prime(num)]\n    \n    # If no primes found, return 0\n    if not primes:\n        return 0\n    \n    # Get the largest prime\n    largest_prime = max(primes)\n    \n    # Calculate sum of digits\n    return sum(int(digit) for digit in str(largest_prime))\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

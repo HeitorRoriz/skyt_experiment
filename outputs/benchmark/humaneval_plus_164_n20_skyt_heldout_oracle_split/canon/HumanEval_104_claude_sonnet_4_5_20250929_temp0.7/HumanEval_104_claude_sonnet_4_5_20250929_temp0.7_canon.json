@@ -1,0 +1,446 @@
+{
+  "contract_id": "HumanEval_104_claude_sonnet_4_5_20250929_temp0.7",
+  "canonical_code": "def unique_digits(x):\n    \"\"\"Given a list of positive integers x. return a sorted list of all \n    elements that hasn't any even digit.\n\n    Note: Returned list should be sorted in increasing order.\n    \n    For example:\n    >>> unique_digits([15, 33, 1422, 1])\n    [1, 15, 33]\n    >>> unique_digits([152, 323, 1422, 10])\n    []\n    \"\"\"\n    def has_no_even_digit(n):\n        for digit in str(n):\n            if int(digit) % 2 == 0:\n                return False\n        return True\n    \n    result = [num for num in x if has_no_even_digit(num)]\n    return sorted(result)\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 1,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [
+        "str",
+        "int",
+        "has_no_even_digit",
+        "sorted"
+      ],
+      "nested_depth": 2,
+      "branch_patterns": [
+        "if_at_depth_1"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v1": []
+      },
+      "assignments": {
+        "v1": "ListComp(elt=Name(id='v2', ctx=Load()), generators=[comprehension(target=Name(id='v2', ctx=Store()), iter=Name(id='p0', ctx=Load()), ifs=[Call(func=Name(id='has_no_even_digit', ctx=Load()), args=[Name(id='v2', ctx=Load())])], is_async=0)])"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_unique_digits"
+        ],
+        [
+          "function_unique_digits",
+          "function_has_no_even_digit"
+        ],
+        [
+          "function_unique_digits",
+          "function_has_no_even_digit",
+          "loop"
+        ],
+        [
+          "function_unique_digits",
+          "function_has_no_even_digit",
+          "loop",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "unique_digits": {
+        "name": "unique_digits",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      },
+      "has_no_even_digit": {
+        "name": "has_no_even_digit",
+        "args": [
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 1,
+      "estimated_complexity": "O(2^n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": [
+        "Mod"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        2,
+        0,
+        false,
+        true
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Mod",
+        "Constant",
+        "Eq",
+        "Constant",
+        "Return",
+        "Constant",
+        "Return",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "ListComp",
+        "Name",
+        "Load",
+        "comprehension",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Return",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 9,
+      "ast_hash": "4af8aba37232c755f19fb12946bf7ceb",
+      "alpha_renamed_hash": "4af8aba37232c755f19fb12946bf7ceb"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Mod"
+      ],
+      "precedence_levels": {
+        "Mod": 4
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "FunctionDef",
+        "For",
+        "If",
+        "Return",
+        "Return",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "FunctionDef_1",
+        "For_2",
+        "If_3",
+        "Return_4",
+        "Return_5",
+        "Assign_6",
+        "Return_7"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "FunctionDef",
+        "For",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_104_claude_sonnet_4_5_20250929_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/104",
+    "prompt": "\ndef unique_digits(x):\n    \"\"\"Given a list of positive integers x. return a sorted list of all \n    elements that hasn't any even digit.\n\n    Note: Returned list should be sorted in increasing order.\n    \n    For example:\n    >>> unique_digits([15, 33, 1422, 1])\n    [1, 15, 33]\n    >>> unique_digits([152, 323, 1422, 10])\n    []\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "unique_digits"
+    },
+    "anchor_signature": "eefcf20b8013c66205adb16b45141541cb5cddc2110d10aa370d10d3c64b1745",
+    "canonical_code": "def unique_digits(x):\n    \"\"\"Given a list of positive integers x. return a sorted list of all \n    elements that hasn't any even digit.\n\n    Note: Returned list should be sorted in increasing order.\n    \n    For example:\n    >>> unique_digits([15, 33, 1422, 1])\n    [1, 15, 33]\n    >>> unique_digits([152, 323, 1422, 10])\n    []\n    \"\"\"\n    def has_no_even_digit(n):\n        for digit in str(n):\n            if int(digit) % 2 == 0:\n                return False\n        return True\n    \n    result = [num for num in x if has_no_even_digit(num)]\n    return sorted(result)\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 1,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "str",
+          "int",
+          "has_no_even_digit",
+          "sorted"
+        ],
+        "nested_depth": 2,
+        "branch_patterns": [
+          "if_at_depth_1"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v1": []
+        },
+        "assignments": {
+          "v1": "ListComp(elt=Name(id='v2', ctx=Load()), generators=[comprehension(target=Name(id='v2', ctx=Store()), iter=Name(id='p0', ctx=Load()), ifs=[Call(func=Name(id='has_no_even_digit', ctx=Load()), args=[Name(id='v2', ctx=Load())])], is_async=0)])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_unique_digits"
+          ],
+          [
+            "function_unique_digits",
+            "function_has_no_even_digit"
+          ],
+          [
+            "function_unique_digits",
+            "function_has_no_even_digit",
+            "loop"
+          ],
+          [
+            "function_unique_digits",
+            "function_has_no_even_digit",
+            "loop",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "unique_digits": {
+          "name": "unique_digits",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        },
+        "has_no_even_digit": {
+          "name": "has_no_even_digit",
+          "args": [
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 1,
+        "estimated_complexity": "O(2^n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": [
+          "Mod"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          2,
+          0,
+          false,
+          true
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Mod",
+          "Constant",
+          "Eq",
+          "Constant",
+          "Return",
+          "Constant",
+          "Return",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "ListComp",
+          "Name",
+          "Load",
+          "comprehension",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Return",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 9,
+        "ast_hash": "4af8aba37232c755f19fb12946bf7ceb",
+        "alpha_renamed_hash": "4af8aba37232c755f19fb12946bf7ceb"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Mod"
+        ],
+        "precedence_levels": {
+          "Mod": 4
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "FunctionDef",
+          "For",
+          "If",
+          "Return",
+          "Return",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "FunctionDef_1",
+          "For_2",
+          "If_3",
+          "Return_4",
+          "Return_5",
+          "Assign_6",
+          "Return_7"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "FunctionDef",
+          "For",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

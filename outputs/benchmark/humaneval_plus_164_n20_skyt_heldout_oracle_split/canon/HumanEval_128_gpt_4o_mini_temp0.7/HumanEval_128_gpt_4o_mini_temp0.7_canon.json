@@ -1,0 +1,512 @@
+{
+  "contract_id": "HumanEval_128_gpt_4o_mini_temp0.7",
+  "canonical_code": "def prod_signs(arr):\n    if not arr:\n        return None\n\n    product_sign = 1\n    magnitude_sum = 0\n\n    for num in arr:\n        if num > 0:\n            magnitude_sum += num\n        elif num < 0:\n            magnitude_sum += -num\n            product_sign *= -1\n        else:\n            return 0\n\n    return product_sign * magnitude_sum\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 3,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [],
+      "nested_depth": 3,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_1",
+        "if_at_depth_2"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [],
+        "v1": []
+      },
+      "assignments": {
+        "v0": "Constant(value=1)",
+        "v1": "Constant(value=0)"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_prod_signs"
+        ],
+        [
+          "function_prod_signs",
+          "branch"
+        ],
+        [
+          "function_prod_signs",
+          "loop"
+        ],
+        [
+          "function_prod_signs",
+          "loop",
+          "branch"
+        ],
+        [
+          "function_prod_signs",
+          "loop",
+          "branch",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "prod_signs": {
+        "name": "prod_signs",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Mult"
+      ],
+      "associative_ops": [
+        "Mult"
+      ],
+      "binary_operations": [
+        "Mult"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Gt",
+        "Lt"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "If",
+        "UnaryOp",
+        "Not",
+        "Name",
+        "Load",
+        "Return",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "For",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Constant",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Add",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Lt",
+        "Constant",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Add",
+        "UnaryOp",
+        "USub",
+        "Name",
+        "Load",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Mult",
+        "UnaryOp",
+        "USub",
+        "Constant",
+        "Return",
+        "Constant",
+        "Return",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mult",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 8,
+      "ast_hash": "348652e5ff706e316287a88bbc96756e",
+      "alpha_renamed_hash": "348652e5ff706e316287a88bbc96756e"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Mult"
+      ],
+      "precedence_levels": {
+        "Mult": 4
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Return",
+        "Assign",
+        "Assign",
+        "For",
+        "If",
+        "AugAssign",
+        "If",
+        "AugAssign",
+        "AugAssign",
+        "Return",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Return_2",
+        "Assign_3",
+        "Assign_4",
+        "For_5",
+        "If_6",
+        "AugAssign_7",
+        "If_8",
+        "AugAssign_9",
+        "AugAssign_10",
+        "Return_11",
+        "Return_12"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If",
+        "For",
+        "If",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "not p0",
+          "return_type": "constant"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "not p0"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_128_gpt_4o_mini_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/128",
+    "prompt": "\ndef prod_signs(arr):\n    \"\"\"\n    You are given an array arr of integers and you need to return\n    sum of magnitudes of integers multiplied by product of all signs\n    of each number in the array, represented by 1, -1 or 0.\n    Note: return None for empty arr.\n\n    Example:\n    >>> prod_signs([1, 2, 2, -4]) == -9\n    >>> prod_signs([0, 1]) == 0\n    >>> prod_signs([]) == None\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "prod_signs"
+    },
+    "anchor_signature": "ac5e7960e0d5a64913dbce75b8a91c19e4449088d7cfb2538efc27b6c0566cd9",
+    "canonical_code": "def prod_signs(arr):\n    if not arr:\n        return None\n\n    product_sign = 1\n    magnitude_sum = 0\n\n    for num in arr:\n        if num > 0:\n            magnitude_sum += num\n        elif num < 0:\n            magnitude_sum += -num\n            product_sign *= -1\n        else:\n            return 0\n\n    return product_sign * magnitude_sum\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 3,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [],
+        "nested_depth": 3,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_1",
+          "if_at_depth_2"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [],
+          "v1": []
+        },
+        "assignments": {
+          "v0": "Constant(value=1)",
+          "v1": "Constant(value=0)"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_prod_signs"
+          ],
+          [
+            "function_prod_signs",
+            "branch"
+          ],
+          [
+            "function_prod_signs",
+            "loop"
+          ],
+          [
+            "function_prod_signs",
+            "loop",
+            "branch"
+          ],
+          [
+            "function_prod_signs",
+            "loop",
+            "branch",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "prod_signs": {
+          "name": "prod_signs",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Mult"
+        ],
+        "associative_ops": [
+          "Mult"
+        ],
+        "binary_operations": [
+          "Mult"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Gt",
+          "Lt"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "If",
+          "UnaryOp",
+          "Not",
+          "Name",
+          "Load",
+          "Return",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Constant",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Add",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Lt",
+          "Constant",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Add",
+          "UnaryOp",
+          "USub",
+          "Name",
+          "Load",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Mult",
+          "UnaryOp",
+          "USub",
+          "Constant",
+          "Return",
+          "Constant",
+          "Return",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mult",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 8,
+        "ast_hash": "348652e5ff706e316287a88bbc96756e",
+        "alpha_renamed_hash": "348652e5ff706e316287a88bbc96756e"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Mult"
+        ],
+        "precedence_levels": {
+          "Mult": 4
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "Assign",
+          "Assign",
+          "For",
+          "If",
+          "AugAssign",
+          "If",
+          "AugAssign",
+          "AugAssign",
+          "Return",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "Assign_3",
+          "Assign_4",
+          "For_5",
+          "If_6",
+          "AugAssign_7",
+          "If_8",
+          "AugAssign_9",
+          "AugAssign_10",
+          "Return_11",
+          "Return_12"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "For",
+          "If",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "not p0",
+            "return_type": "constant"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "not p0"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

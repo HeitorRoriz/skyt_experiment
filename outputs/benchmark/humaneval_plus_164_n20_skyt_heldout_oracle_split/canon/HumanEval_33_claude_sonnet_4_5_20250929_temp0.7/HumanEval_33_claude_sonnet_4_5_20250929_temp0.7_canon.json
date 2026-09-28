@@ -1,0 +1,502 @@
+{
+  "contract_id": "HumanEval_33_claude_sonnet_4_5_20250929_temp0.7",
+  "canonical_code": "def sort_third(l: list):\n    if len(l) == 0:\n        return l\n    \n    # Extract elements at indices divisible by 3\n    third_elements = [l[i] for i in range(0, len(l), 3)]\n    \n    # Sort them\n    third_elements.sort()\n    \n    # Create result list\n    result = l.copy()\n    \n    # Put sorted elements back at indices divisible by 3\n    for i, val in enumerate(third_elements):\n        result[i * 3] = val\n    \n    return result\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 1,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [
+        "len",
+        "range",
+        "len",
+        "enumerate"
+      ],
+      "nested_depth": 1,
+      "branch_patterns": [
+        "if_at_depth_0"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [],
+        "v2": []
+      },
+      "assignments": {
+        "v0": "ListComp(elt=Subscript(value=Name(id='p0', ctx=Load()), slice=Name(id='v1', ctx=Load()), ctx=Load()), generators=[comprehension(target=Name(id='v1', ctx=Store()), iter=Call(func=Name(id='range', ctx=Load()), args=[Constant(value=0), Call(func=Name(id='len', ctx=Load()), args=[Name(id='p0', ctx=Load())]), Constant(value=3)]), is_async=0)])",
+        "v2": "Call(func=Attribute(value=Name(id='p0', ctx=Load()), attr='copy', ctx=Load()))"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_sort_third"
+        ],
+        [
+          "function_sort_third",
+          "branch"
+        ],
+        [
+          "function_sort_third",
+          "loop"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "sort_third": {
+        "name": "sort_third",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Mult"
+      ],
+      "associative_ops": [
+        "Mult"
+      ],
+      "binary_operations": [
+        "Mult"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        0,
+        0,
+        3,
+        3
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Return",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "ListComp",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "comprehension",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Constant",
+        "Expr",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "For",
+        "Tuple",
+        "Name",
+        "Store",
+        "Name",
+        "Store",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Assign",
+        "Subscript",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mult",
+        "Constant",
+        "Store",
+        "Name",
+        "Load",
+        "Return",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 8,
+      "ast_hash": "b70d552b7eac0837ae5a1184ab382d06",
+      "alpha_renamed_hash": "b70d552b7eac0837ae5a1184ab382d06"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Mult"
+      ],
+      "precedence_levels": {
+        "Mult": 4
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Return",
+        "Assign",
+        "Expr",
+        "Assign",
+        "For",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Return_2",
+        "Assign_3",
+        "Expr_4",
+        "Assign_5",
+        "For_6",
+        "Assign_7",
+        "Return_8"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If",
+        "For"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "len(p0) == 0",
+          "return_type": "expression"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "len(p0) == 0"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_33_claude_sonnet_4_5_20250929_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/33",
+    "prompt": "\n\ndef sort_third(l: list):\n    \"\"\"This function takes a list l and returns a list l' such that\n    l' is identical to l in the indicies that are not divisible by three, while its values at the indicies that are divisible by three are equal\n    to the values of the corresponding indicies of l, but sorted.\n    >>> sort_third([1, 2, 3])\n    [1, 2, 3]\n    >>> sort_third([5, 6, 3, 4, 8, 9, 2])\n    [2, 6, 3, 4, 8, 9, 5]\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "sort_third"
+    },
+    "anchor_signature": "1e9916530aaa7e5740acd74d6db92e45b4c7d36d23a006daa41488ca61e0df30",
+    "canonical_code": "def sort_third(l: list):\n    if len(l) == 0:\n        return l\n    \n    # Extract elements at indices divisible by 3\n    third_elements = [l[i] for i in range(0, len(l), 3)]\n    \n    # Sort them\n    third_elements.sort()\n    \n    # Create result list\n    result = l.copy()\n    \n    # Put sorted elements back at indices divisible by 3\n    for i, val in enumerate(third_elements):\n        result[i * 3] = val\n    \n    return result\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 1,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "len",
+          "range",
+          "len",
+          "enumerate"
+        ],
+        "nested_depth": 1,
+        "branch_patterns": [
+          "if_at_depth_0"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [],
+          "v2": []
+        },
+        "assignments": {
+          "v0": "ListComp(elt=Subscript(value=Name(id='p0', ctx=Load()), slice=Name(id='v1', ctx=Load()), ctx=Load()), generators=[comprehension(target=Name(id='v1', ctx=Store()), iter=Call(func=Name(id='range', ctx=Load()), args=[Constant(value=0), Call(func=Name(id='len', ctx=Load()), args=[Name(id='p0', ctx=Load())]), Constant(value=3)]), is_async=0)])",
+          "v2": "Call(func=Attribute(value=Name(id='p0', ctx=Load()), attr='copy', ctx=Load()))"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_sort_third"
+          ],
+          [
+            "function_sort_third",
+            "branch"
+          ],
+          [
+            "function_sort_third",
+            "loop"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "sort_third": {
+          "name": "sort_third",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Mult"
+        ],
+        "associative_ops": [
+          "Mult"
+        ],
+        "binary_operations": [
+          "Mult"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          0,
+          0,
+          3,
+          3
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Return",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "ListComp",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "comprehension",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Constant",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "For",
+          "Tuple",
+          "Name",
+          "Store",
+          "Name",
+          "Store",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Assign",
+          "Subscript",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mult",
+          "Constant",
+          "Store",
+          "Name",
+          "Load",
+          "Return",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 8,
+        "ast_hash": "b70d552b7eac0837ae5a1184ab382d06",
+        "alpha_renamed_hash": "b70d552b7eac0837ae5a1184ab382d06"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Mult"
+        ],
+        "precedence_levels": {
+          "Mult": 4
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "Assign",
+          "Expr",
+          "Assign",
+          "For",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "Assign_3",
+          "Expr_4",
+          "Assign_5",
+          "For_6",
+          "Assign_7",
+          "Return_8"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "For"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "len(p0) == 0",
+            "return_type": "expression"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "len(p0) == 0"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

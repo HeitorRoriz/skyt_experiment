@@ -1,0 +1,402 @@
+{
+  "contract_id": "HumanEval_21_claude_sonnet_4_5_20250929_temp0.7",
+  "canonical_code": "def rescale_to_unit(numbers: List[float]) -> List[float]:\n    \"\"\" Given list of numbers (of at least two elements), apply a linear transform to that list,\n    such that the smallest number will become 0 and the largest will become 1\n    >>> rescale_to_unit([1.0, 2.0, 3.0, 4.0, 5.0])\n    [0.0, 0.25, 0.5, 0.75, 1.0]\n    \"\"\"\n    min_val = min(numbers)\n    max_val = max(numbers)\n    range_val = max_val - min_val\n    \n    return [(x - min_val) / range_val for x in numbers]\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 0,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "min",
+        "max"
+      ],
+      "nested_depth": 0,
+      "branch_patterns": []
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [
+          "p0"
+        ],
+        "v1": [
+          "p0"
+        ],
+        "v2": [
+          "v0",
+          "v1"
+        ]
+      },
+      "assignments": {
+        "v0": "Call(func=Name(id='min', ctx=Load()), args=[Name(id='p0', ctx=Load())])",
+        "v1": "Call(func=Name(id='max', ctx=Load()), args=[Name(id='p0', ctx=Load())])",
+        "v2": "BinOp(left=Name(id='v1', ctx=Load()), op=Sub(), right=Name(id='v0', ctx=Load()))"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_rescale_to_unit"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "rescale_to_unit": {
+        "name": "rescale_to_unit",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": [
+        "Sub",
+        "Div",
+        "Sub"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": false,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": []
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "BinOp",
+        "Name",
+        "Load",
+        "Sub",
+        "Name",
+        "Load",
+        "Return",
+        "ListComp",
+        "BinOp",
+        "BinOp",
+        "Name",
+        "Load",
+        "Sub",
+        "Name",
+        "Load",
+        "Div",
+        "Name",
+        "Load",
+        "comprehension",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load"
+      ],
+      "ast_depth": 7,
+      "ast_hash": "409c7e2c10b51473d260f8abc646b1d4",
+      "alpha_renamed_hash": "409c7e2c10b51473d260f8abc646b1d4"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Sub",
+        "Div",
+        "Sub"
+      ],
+      "precedence_levels": {
+        "Sub": 3,
+        "Div": 4
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "Assign",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "Assign_2",
+        "Assign_3",
+        "Return_4"
+      ],
+      "control_flow_order": [
+        "FunctionDef"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_21_claude_sonnet_4_5_20250929_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/21",
+    "prompt": "from typing import List\n\n\ndef rescale_to_unit(numbers: List[float]) -> List[float]:\n    \"\"\" Given list of numbers (of at least two elements), apply a linear transform to that list,\n    such that the smallest number will become 0 and the largest will become 1\n    >>> rescale_to_unit([1.0, 2.0, 3.0, 4.0, 5.0])\n    [0.0, 0.25, 0.5, 0.75, 1.0]\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "rescale_to_unit"
+    },
+    "anchor_signature": "e56c430431d20431421f806625173e38eb062834fd2bff500926e5b521e0817a",
+    "canonical_code": "def rescale_to_unit(numbers: List[float]) -> List[float]:\n    \"\"\" Given list of numbers (of at least two elements), apply a linear transform to that list,\n    such that the smallest number will become 0 and the largest will become 1\n    >>> rescale_to_unit([1.0, 2.0, 3.0, 4.0, 5.0])\n    [0.0, 0.25, 0.5, 0.75, 1.0]\n    \"\"\"\n    min_val = min(numbers)\n    max_val = max(numbers)\n    range_val = max_val - min_val\n    \n    return [(x - min_val) / range_val for x in numbers]\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 0,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "min",
+          "max"
+        ],
+        "nested_depth": 0,
+        "branch_patterns": []
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [
+            "p0"
+          ],
+          "v1": [
+            "p0"
+          ],
+          "v2": [
+            "v0",
+            "v1"
+          ]
+        },
+        "assignments": {
+          "v0": "Call(func=Name(id='min', ctx=Load()), args=[Name(id='p0', ctx=Load())])",
+          "v1": "Call(func=Name(id='max', ctx=Load()), args=[Name(id='p0', ctx=Load())])",
+          "v2": "BinOp(left=Name(id='v1', ctx=Load()), op=Sub(), right=Name(id='v0', ctx=Load()))"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_rescale_to_unit"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "rescale_to_unit": {
+          "name": "rescale_to_unit",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": [
+          "Sub",
+          "Div",
+          "Sub"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": false,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": []
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "BinOp",
+          "Name",
+          "Load",
+          "Sub",
+          "Name",
+          "Load",
+          "Return",
+          "ListComp",
+          "BinOp",
+          "BinOp",
+          "Name",
+          "Load",
+          "Sub",
+          "Name",
+          "Load",
+          "Div",
+          "Name",
+          "Load",
+          "comprehension",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load"
+        ],
+        "ast_depth": 7,
+        "ast_hash": "409c7e2c10b51473d260f8abc646b1d4",
+        "alpha_renamed_hash": "409c7e2c10b51473d260f8abc646b1d4"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Sub",
+          "Div",
+          "Sub"
+        ],
+        "precedence_levels": {
+          "Sub": 3,
+          "Div": 4
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "Assign_2",
+          "Assign_3",
+          "Return_4"
+        ],
+        "control_flow_order": [
+          "FunctionDef"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

@@ -1,0 +1,111 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "236ad3451cb0a8abd50df59cc95a7636070a2853f9854f96b854ccd51bf8bccb|236ad3451cb0a8abd50df59cc95a7636070a2853f9854f96b854ccd51bf8bccb": {
+      "stitched_code": "def closest_integer(value):\n    '''\n    Create a function that takes a value (string) representing a number\n    and returns the closest integer to it. If the number is equidistant\n    from two integers, round it away from zero.\n\n    Examples\n    >>> closest_integer(\"10\")\n    10\n    >>> closest_integer(\"15.3\")\n    15\n\n    Note:\n    Rounding away from zero means that if the given number is equidistant\n    from two integers, the one you should return is the one that is the\n    farthest from zero. For example closest_integer(\"14.5\") should\n    return 15 and closest_integer(\"-14.5\") should return -15.\n    '''\n    num = float(value)\n    \n    # Check if the number is exactly halfway between two integers\n    if num >= 0:\n        # For positive numbers, round away from zero means round up when at .5\n        if num - int(num) == 0.5:\n            return int(num) + 1\n        else:\n            return round(num)\n    else:\n        # For negative numbers, round away from zero means round down (more negative) when at .5\n        if abs(num) - int(abs(num)) == 0.5:\n            return int(num) - 1\n        else:\n            return round(num)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "a89cc9b6fd72ff5c4d79d275d5556a118172a1e9f201bbbf9c3a04f5314064fd|236ad3451cb0a8abd50df59cc95a7636070a2853f9854f96b854ccd51bf8bccb": {
+      "stitched_code": "def closest_integer(value):\n    num = float(value)\n    \n    # Check if we're exactly at .5\n    if num > 0:\n        # For positive numbers, if decimal part is >= 0.5, round up\n        if num - int(num) == 0.5:\n            return int(num) + 1\n        else:\n            return round(num)\n    else:\n        # For negative numbers, if decimal part is exactly -0.5, round down (away from zero)\n        if num - int(num) == -0.5:\n            return int(num) - 1\n        else:\n            return round(num)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "c72fd2aa91b2ace21ecf4079e7296f733e9a0352dce86e14196a06040401112c|236ad3451cb0a8abd50df59cc95a7636070a2853f9854f96b854ccd51bf8bccb": {
+      "stitched_code": "def closest_integer(value):\n    \"\"\"\n    Create a function that takes a value (string) representing a number\n    and returns the closest integer to it. If the number is equidistant\n    from two integers, round it away from zero.\n\n    Examples\n    >>> closest_integer(\"10\")\n    10\n    >>> closest_integer(\"15.3\")\n    15\n\n    Note:\n    Rounding away from zero means that if the given number is equidistant\n    from two integers, the one you should return is the one that is the\n    farthest from zero. For example closest_integer(\"14.5\") should\n    return 15 and closest_integer(\"-14.5\") should return -15.\n    \"\"\"\n    num = float(value)\n    if num >= 0:\n        if num - int(num) == 0.5:\n            return int(num) + 1\n        else:\n            return round(num)\n    elif abs(num) - int(abs(num)) == 0.5:\n        return int(num) - 1\n    else:\n        return round(num)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "236ad3451cb0a8abd50df59cc95a7636070a2853f9854f96b854ccd51bf8bccb|a89cc9b6fd72ff5c4d79d275d5556a118172a1e9f201bbbf9c3a04f5314064fd": {
+      "stitched_code": "def closest_integer(value):\n    '''\n    Create a function that takes a value (string) representing a number\n    and returns the closest integer to it. If the number is equidistant\n    from two integers, round it away from zero.\n\n    Examples\n    >>> closest_integer(\"10\")\n    10\n    >>> closest_integer(\"15.3\")\n    15\n\n    Note:\n    Rounding away from zero means that if the given number is equidistant\n    from two integers, the one you should return is the one that is the\n    farthest from zero. For example closest_integer(\"14.5\") should\n    return 15 and closest_integer(\"-14.5\") should return -15.\n    '''\n    num = float(value)\n    \n    # Check if the number is exactly halfway between two integers\n    if num >= 0:\n        # For positive numbers, round away from zero means round up when at .5\n        if num - int(num) == 0.5:\n            return int(num) + 1\n        else:\n            return round(num)\n    else:\n        # For negative numbers, round away from zero means round down (more negative) when at .5\n        if abs(num) - int(abs(num)) == 0.5:\n            return int(num) - 1\n        else:\n            return round(num)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "a89cc9b6fd72ff5c4d79d275d5556a118172a1e9f201bbbf9c3a04f5314064fd|a89cc9b6fd72ff5c4d79d275d5556a118172a1e9f201bbbf9c3a04f5314064fd": {
+      "stitched_code": "def closest_integer(value):\n    num = float(value)\n    \n    # Check if we're exactly at .5\n    if num > 0:\n        # For positive numbers, if decimal part is >= 0.5, round up\n        if num - int(num) == 0.5:\n            return int(num) + 1\n        else:\n            return round(num)\n    else:\n        # For negative numbers, if decimal part is exactly -0.5, round down (away from zero)\n        if num - int(num) == -0.5:\n            return int(num) - 1\n        else:\n            return round(num)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

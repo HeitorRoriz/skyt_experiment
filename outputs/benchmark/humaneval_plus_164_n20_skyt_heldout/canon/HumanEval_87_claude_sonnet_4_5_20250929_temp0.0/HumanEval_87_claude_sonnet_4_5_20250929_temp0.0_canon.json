@@ -1,0 +1,466 @@
+{
+  "contract_id": "HumanEval_87_claude_sonnet_4_5_20250929_temp0.0",
+  "canonical_code": "def get_row(lst, x):\n    coordinates = []\n    \n    # Find all occurrences of x\n    for row_idx, row in enumerate(lst):\n        for col_idx, value in enumerate(row):\n            if value == x:\n                coordinates.append((row_idx, col_idx))\n    \n    # Sort by row ascending, then by column descending\n    coordinates.sort(key=lambda coord: (coord[0], -coord[1]))\n    \n    return coordinates\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 1,
+      "for_loops": 2,
+      "while_loops": 0,
+      "function_calls": [
+        "enumerate",
+        "enumerate"
+      ],
+      "nested_depth": 3,
+      "branch_patterns": [
+        "if_at_depth_2"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": []
+      },
+      "assignments": {
+        "v0": "List(ctx=Load())"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_get_row"
+        ],
+        [
+          "function_get_row",
+          "loop"
+        ],
+        [
+          "function_get_row",
+          "loop",
+          "loop"
+        ],
+        [
+          "function_get_row",
+          "loop",
+          "loop",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "get_row": {
+        "name": "get_row",
+        "args": [
+          "p0",
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 2,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n^2)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": []
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": false,
+      "numeric_constants": [
+        0,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "List",
+        "Load",
+        "For",
+        "Tuple",
+        "Name",
+        "Store",
+        "Name",
+        "Store",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "For",
+        "Tuple",
+        "Name",
+        "Store",
+        "Name",
+        "Store",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Name",
+        "Load",
+        "Expr",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Tuple",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Expr",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "keyword",
+        "Lambda",
+        "arguments",
+        "arg",
+        "Tuple",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "UnaryOp",
+        "USub",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "Load",
+        "Return",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 10,
+      "ast_hash": "96e67b71c0e1f94742bf5b3225dc5764",
+      "alpha_renamed_hash": "96e67b71c0e1f94742bf5b3225dc5764"
+    },
+    "operator_precedence": {
+      "operator_sequence": [],
+      "precedence_levels": {}
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "For",
+        "For",
+        "If",
+        "Expr",
+        "Expr",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "For_2",
+        "For_3",
+        "If_4",
+        "Expr_5",
+        "Expr_6",
+        "Return_7"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "For",
+        "For",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_87_claude_sonnet_4_5_20250929_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/87",
+    "prompt": "\ndef get_row(lst, x):\n    \"\"\"\n    You are given a 2 dimensional data, as a nested lists,\n    which is similar to matrix, however, unlike matrices,\n    each row may contain a different number of columns.\n    Given lst, and integer x, find integers x in the list,\n    and return list of tuples, [(x1, y1), (x2, y2) ...] such that\n    each tuple is a coordinate - (row, columns), starting with 0.\n    Sort coordinates initially by rows in ascending order.\n    Also, sort coordinates of the row by columns in descending order.\n    \n    Examples:\n    get_row([\n      [1,2,3,4,5,6],\n      [1,2,3,4,1,6],\n      [1,2,3,4,5,1]\n    ], 1) == [(0, 0), (1, 4), (1, 0), (2, 5), (2, 0)]\n    get_row([], 1) == []\n    get_row([[], [1], [1, 2, 3]], 3) == [(2, 2)]\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "get_row"
+    },
+    "anchor_signature": "866b03c490b48983f526b3fdf5ac780fe4aa24731c53f97baae89fc9c86d0825",
+    "canonical_code": "def get_row(lst, x):\n    coordinates = []\n    \n    # Find all occurrences of x\n    for row_idx, row in enumerate(lst):\n        for col_idx, value in enumerate(row):\n            if value == x:\n                coordinates.append((row_idx, col_idx))\n    \n    # Sort by row ascending, then by column descending\n    coordinates.sort(key=lambda coord: (coord[0], -coord[1]))\n    \n    return coordinates\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 1,
+        "for_loops": 2,
+        "while_loops": 0,
+        "function_calls": [
+          "enumerate",
+          "enumerate"
+        ],
+        "nested_depth": 3,
+        "branch_patterns": [
+          "if_at_depth_2"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": []
+        },
+        "assignments": {
+          "v0": "List(ctx=Load())"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_get_row"
+          ],
+          [
+            "function_get_row",
+            "loop"
+          ],
+          [
+            "function_get_row",
+            "loop",
+            "loop"
+          ],
+          [
+            "function_get_row",
+            "loop",
+            "loop",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "get_row": {
+          "name": "get_row",
+          "args": [
+            "p0",
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 2,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n^2)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": [
+          0,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "List",
+          "Load",
+          "For",
+          "Tuple",
+          "Name",
+          "Store",
+          "Name",
+          "Store",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "For",
+          "Tuple",
+          "Name",
+          "Store",
+          "Name",
+          "Store",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Name",
+          "Load",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Tuple",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "keyword",
+          "Lambda",
+          "arguments",
+          "arg",
+          "Tuple",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "UnaryOp",
+          "USub",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "Load",
+          "Return",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 10,
+        "ast_hash": "96e67b71c0e1f94742bf5b3225dc5764",
+        "alpha_renamed_hash": "96e67b71c0e1f94742bf5b3225dc5764"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "For",
+          "For",
+          "If",
+          "Expr",
+          "Expr",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "For_2",
+          "For_3",
+          "If_4",
+          "Expr_5",
+          "Expr_6",
+          "Return_7"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "For",
+          "For",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

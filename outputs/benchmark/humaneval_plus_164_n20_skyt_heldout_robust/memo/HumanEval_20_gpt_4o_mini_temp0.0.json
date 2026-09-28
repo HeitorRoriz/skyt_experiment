@@ -1,0 +1,47 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "335c74faba39af44f3fa30dfad3c09d8e1fe2a4db3d0aaccdcfe0a7e441ffe28|335c74faba39af44f3fa30dfad3c09d8e1fe2a4db3d0aaccdcfe0a7e441ffe28": {
+      "stitched_code": "from typing import List, Tuple\n\n\ndef find_closest_elements(numbers: List[float]) -> Tuple[float, float]:\n    \"\"\" From a supplied list of numbers (of length at least two) select and return two that are the closest to each\n    other and return them in order (smaller number, larger number).\n    >>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.2])\n    (2.0, 2.2)\n    >>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.0])\n    (2.0, 2.0)\n    \"\"\"\n    numbers.sort()\n    closest_pair = (numbers[0], numbers[1])\n    min_diff = abs(numbers[1] - numbers[0])\n    \n    for i in range(1, len(numbers)):\n        diff = abs(numbers[i] - numbers[i - 1])\n        if diff < min_diff:\n            min_diff = diff\n            closest_pair = (numbers[i - 1], numbers[i])\n    \n    return closest_pair\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "8b4330cbc69acf6b444933a4216cb7ffe8f3ae424e2390f8d7560589766bc021|335c74faba39af44f3fa30dfad3c09d8e1fe2a4db3d0aaccdcfe0a7e441ffe28": {
+      "stitched_code": "from typing import List, Tuple\n\n\ndef find_closest_elements(numbers: List[float]) ->Tuple[float, float]:\n    \"\"\" From a supplied list of numbers (of length at least two) select and return two that are the closest to each\n    other and return them in order (smaller number, larger number).\n    >>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.2])\n    (2.0, 2.2)\n    >>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.0])\n    (2.0, 2.0)\n    \"\"\"\n    numbers.sort()\n    closest_pair = numbers[0], numbers[1]\n    min_diff = abs(numbers[1] - numbers[0])\n    for i in range(1, len(numbers)):\n        diff = abs(numbers[i] - numbers[i - 1])\n        if diff < min_diff:\n            min_diff = diff\n            closest_pair = numbers[i - 1], numbers[i]\n    return closest_pair\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

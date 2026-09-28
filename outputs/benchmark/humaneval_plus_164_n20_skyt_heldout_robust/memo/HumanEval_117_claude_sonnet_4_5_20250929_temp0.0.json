@@ -1,0 +1,89 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "98d637d74afa26cef21060eb52ae5e5ebf99834288a7589776361c2da32fcf58|98d637d74afa26cef21060eb52ae5e5ebf99834288a7589776361c2da32fcf58": {
+      "stitched_code": "def select_words(s, n):\n    if not s:\n        return []\n    \n    words = s.split()\n    result = []\n    vowels = set('aeiouAEIOU')\n    \n    for word in words:\n        consonant_count = 0\n        for char in word:\n            if char.isalpha() and char not in vowels:\n                consonant_count += 1\n        \n        if consonant_count == n:\n            result.append(word)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "a3ddcdb9151aee9becba2555b5b61e79e9353e8d96280950210adbe8fccceff5|98d637d74afa26cef21060eb52ae5e5ebf99834288a7589776361c2da32fcf58": {
+      "stitched_code": "def select_words(s, n):\n    if not s:\n        return []\n    words = s.split()\n    result = []\n    vowels = set('aeiouAEIOU')\n    for word in words:\n        consonant_count = 0\n        for char in word:\n            if char.isalpha() and char not in vowels:\n                consonant_count += 1\n        if consonant_count == n:\n            result.append(word)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "a3ddcdb9151aee9becba2555b5b61e79e9353e8d96280950210adbe8fccceff5|a3ddcdb9151aee9becba2555b5b61e79e9353e8d96280950210adbe8fccceff5": {
+      "stitched_code": "def select_words(s, n):\n    if not s:\n        return []\n    \n    vowels = set('aeiouAEIOU')\n    words = s.split()\n    result = []\n    \n    for word in words:\n        consonant_count = sum(1 for char in word if char.isalpha() and char not in vowels)\n        if consonant_count == n:\n            result.append(word)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "98d637d74afa26cef21060eb52ae5e5ebf99834288a7589776361c2da32fcf58|a3ddcdb9151aee9becba2555b5b61e79e9353e8d96280950210adbe8fccceff5": {
+      "stitched_code": "def select_words(s, n):\n    if not s:\n        return []\n    vowels = set('aeiouAEIOU')\n    words = s.split()\n    result = []\n    for word in words:\n        consonant_count = sum(1 for char in word if char.isalpha() and char\n             not in vowels)\n        if consonant_count == n:\n            result.append(word)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

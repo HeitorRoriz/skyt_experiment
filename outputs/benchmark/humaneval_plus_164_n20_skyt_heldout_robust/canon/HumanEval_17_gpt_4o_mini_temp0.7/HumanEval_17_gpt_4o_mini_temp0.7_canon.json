@@ -1,0 +1,330 @@
+{
+  "contract_id": "HumanEval_17_gpt_4o_mini_temp0.7",
+  "canonical_code": "def parse_music(music_string: str) -> List[int]:\n    note_durations = {\n        'o': 4,\n        'o|': 2,\n        '.|': 1,\n    }\n    \n    notes = music_string.split()\n    return [note_durations[note] for note in notes]\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 0,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [],
+      "nested_depth": 0,
+      "branch_patterns": []
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [],
+        "v1": []
+      },
+      "assignments": {
+        "v0": "Dict(keys=[Constant(value='o'), Constant(value='o|'), Constant(value='.|')], values=[Constant(value=4), Constant(value=2), Constant(value=1)])",
+        "v1": "Call(func=Attribute(value=Name(id='p0', ctx=Load()), attr='split', ctx=Load()))"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_parse_music"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "parse_music": {
+        "name": "parse_music",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": []
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": false,
+      "numeric_constants": [
+        4,
+        2,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Dict",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Return",
+        "ListComp",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "comprehension",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load"
+      ],
+      "ast_depth": 6,
+      "ast_hash": "9c3dc93563fa7c2e42237fab9b19c0a6",
+      "alpha_renamed_hash": "9c3dc93563fa7c2e42237fab9b19c0a6"
+    },
+    "operator_precedence": {
+      "operator_sequence": [],
+      "precedence_levels": {}
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "Assign_2",
+        "Return_3"
+      ],
+      "control_flow_order": [
+        "FunctionDef"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_17_gpt_4o_mini_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/17",
+    "prompt": "from typing import List\n\n\ndef parse_music(music_string: str) -> List[int]:\n    \"\"\" Input to this function is a string representing musical notes in a special ASCII format.\n    Your task is to parse this string and return list of integers corresponding to how many beats does each\n    not last.\n\n    Here is a legend:\n    'o' - whole note, lasts four beats\n    'o|' - half note, lasts two beats\n    '.|' - quater note, lasts one beat\n\n    >>> parse_music('o o| .| o| o| .| .| .| .| o o')\n    [4, 2, 1, 2, 2, 1, 1, 1, 1, 4, 4]\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "parse_music"
+    },
+    "anchor_signature": "1b5aa2fd6e439e79b7efd1b76225fb8aee0f9236c2fe1d25002b2c10fa166c9c",
+    "canonical_code": "def parse_music(music_string: str) -> List[int]:\n    note_durations = {\n        'o': 4,\n        'o|': 2,\n        '.|': 1,\n    }\n    \n    notes = music_string.split()\n    return [note_durations[note] for note in notes]\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 0,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [],
+        "nested_depth": 0,
+        "branch_patterns": []
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [],
+          "v1": []
+        },
+        "assignments": {
+          "v0": "Dict(keys=[Constant(value='o'), Constant(value='o|'), Constant(value='.|')], values=[Constant(value=4), Constant(value=2), Constant(value=1)])",
+          "v1": "Call(func=Attribute(value=Name(id='p0', ctx=Load()), attr='split', ctx=Load()))"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_parse_music"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "parse_music": {
+          "name": "parse_music",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": [
+          4,
+          2,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Dict",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Return",
+          "ListComp",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "comprehension",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load"
+        ],
+        "ast_depth": 6,
+        "ast_hash": "9c3dc93563fa7c2e42237fab9b19c0a6",
+        "alpha_renamed_hash": "9c3dc93563fa7c2e42237fab9b19c0a6"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "Assign_2",
+          "Return_3"
+        ],
+        "control_flow_order": [
+          "FunctionDef"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

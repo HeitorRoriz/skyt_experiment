@@ -1,0 +1,336 @@
+{
+  "contract_id": "HumanEval_26_claude_sonnet_4_5_20250929_temp0.7",
+  "canonical_code": "def remove_duplicates(numbers: List[int]) -> List[int]:\n    \"\"\" From a list of integers, remove all elements that occur more than once.\n    Keep order of elements left the same as in the input.\n    >>> remove_duplicates([1, 2, 3, 2, 4])\n    [1, 3, 4]\n    \"\"\"\n    from collections import Counter\n    \n    counts = Counter(numbers)\n    return [num for num in numbers if counts[num] == 1]\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 0,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "v1"
+      ],
+      "nested_depth": 0,
+      "branch_patterns": []
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [
+          "p0"
+        ]
+      },
+      "assignments": {
+        "v0": "Call(func=Name(id='v1', ctx=Load()), args=[Name(id='p0', ctx=Load())])"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_remove_duplicates"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "remove_duplicates": {
+        "name": "remove_duplicates",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": []
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": false,
+      "numeric_constants": [
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "ImportFrom",
+        "alias",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Return",
+        "ListComp",
+        "Name",
+        "Load",
+        "comprehension",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Compare",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Eq",
+        "Constant",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load"
+      ],
+      "ast_depth": 8,
+      "ast_hash": "ec43654e7c11cf136f3b83cbe60c0d53",
+      "alpha_renamed_hash": "692df53ead6b9e2b71c67b7dcf4b81b7"
+    },
+    "operator_precedence": {
+      "operator_sequence": [],
+      "precedence_levels": {}
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "ImportFrom",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "ImportFrom_1",
+        "Assign_2",
+        "Return_3"
+      ],
+      "control_flow_order": [
+        "FunctionDef"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_26_claude_sonnet_4_5_20250929_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/26",
+    "prompt": "from typing import List\n\n\ndef remove_duplicates(numbers: List[int]) -> List[int]:\n    \"\"\" From a list of integers, remove all elements that occur more than once.\n    Keep order of elements left the same as in the input.\n    >>> remove_duplicates([1, 2, 3, 2, 4])\n    [1, 3, 4]\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "remove_duplicates"
+    },
+    "anchor_signature": "e4a7c9da1d00bfcc4f81b0084d280b8f10c8f028387aa0dda231c9e025654e83",
+    "canonical_code": "def remove_duplicates(numbers: List[int]) -> List[int]:\n    \"\"\" From a list of integers, remove all elements that occur more than once.\n    Keep order of elements left the same as in the input.\n    >>> remove_duplicates([1, 2, 3, 2, 4])\n    [1, 3, 4]\n    \"\"\"\n    from collections import Counter\n    \n    counts = Counter(numbers)\n    return [num for num in numbers if counts[num] == 1]\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 0,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "v1"
+        ],
+        "nested_depth": 0,
+        "branch_patterns": []
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [
+            "p0"
+          ]
+        },
+        "assignments": {
+          "v0": "Call(func=Name(id='v1', ctx=Load()), args=[Name(id='p0', ctx=Load())])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_remove_duplicates"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "remove_duplicates": {
+          "name": "remove_duplicates",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": [
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "ImportFrom",
+          "alias",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Return",
+          "ListComp",
+          "Name",
+          "Load",
+          "comprehension",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Compare",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Eq",
+          "Constant",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load"
+        ],
+        "ast_depth": 8,
+        "ast_hash": "ec43654e7c11cf136f3b83cbe60c0d53",
+        "alpha_renamed_hash": "692df53ead6b9e2b71c67b7dcf4b81b7"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "ImportFrom",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "ImportFrom_1",
+          "Assign_2",
+          "Return_3"
+        ],
+        "control_flow_order": [
+          "FunctionDef"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

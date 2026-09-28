@@ -1,0 +1,456 @@
+{
+  "contract_id": "HumanEval_4_gpt_4o_mini_temp0.7",
+  "canonical_code": "from typing import List\n\n\ndef mean_absolute_deviation(numbers: List[float]) -> float:\n    \"\"\" For a given list of input numbers, calculate Mean Absolute Deviation\n    around the mean of this dataset.\n    Mean Absolute Deviation is the average absolute difference between each\n    element and a centerpoint (mean in this case):\n    MAD = average | x - x_mean |\n    >>> mean_absolute_deviation([1.0, 2.0, 3.0, 4.0])\n    1.0\n    \"\"\"\n    if not numbers:\n        return 0.0\n\n    mean = sum(numbers) / len(numbers)\n    mad = sum(abs(x - mean) for x in numbers) / len(numbers)\n    return mad\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 1,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "sum",
+        "len",
+        "sum",
+        "abs",
+        "len"
+      ],
+      "nested_depth": 1,
+      "branch_patterns": [
+        "if_at_depth_0"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v1": [
+          "p0"
+        ],
+        "v2": [
+          "p0"
+        ]
+      },
+      "assignments": {
+        "v1": "BinOp(left=Call(func=Name(id='sum', ctx=Load()), args=[Name(id='p0', ctx=Load())]), op=Div(), right=Call(func=Name(id='len', ctx=Load()), args=[Name(id='p0', ctx=Load())]))",
+        "v2": "BinOp(left=Call(func=Name(id='sum', ctx=Load()), args=[GeneratorExp(elt=Call(func=Name(id='abs', ctx=Load()), args=[BinOp(left=Name(id='v3', ctx=Load()), op=Sub(), right=Name(id='v1', ctx=Load()))]), generators=[comprehension(target=Name(id='v3', ctx=Store()), iter=Name(id='p0', ctx=Load()), is_async=0)])]), op=Div(), right=Call(func=Name(id='len', ctx=Load()), args=[Name(id='p0', ctx=Load())]))"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_mean_absolute_deviation"
+        ],
+        [
+          "function_mean_absolute_deviation",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "mean_absolute_deviation": {
+        "name": "mean_absolute_deviation",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": [
+        "Div",
+        "Div",
+        "Sub"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": false,
+      "uses_floats": true,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        0.0
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "ImportFrom",
+        "alias",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "If",
+        "UnaryOp",
+        "Not",
+        "Name",
+        "Load",
+        "Return",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Div",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "GeneratorExp",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Sub",
+        "Name",
+        "Load",
+        "comprehension",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Div",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Return",
+        "Name",
+        "Load",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 9,
+      "ast_hash": "0994012e5fa139f624e8b3ec1492277f",
+      "alpha_renamed_hash": "9bffc21942820ce40980b86a023bce4a"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Div",
+        "Div",
+        "Sub"
+      ],
+      "precedence_levels": {
+        "Div": 4,
+        "Sub": 3
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "ImportFrom",
+        "FunctionDef",
+        "If",
+        "Return",
+        "Assign",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "ImportFrom_0",
+        "FunctionDef_1",
+        "If_2",
+        "Return_3",
+        "Assign_4",
+        "Assign_5",
+        "Return_6"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "not p0",
+          "return_type": "constant"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "not p0"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_4_gpt_4o_mini_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/4",
+    "prompt": "from typing import List\n\n\ndef mean_absolute_deviation(numbers: List[float]) -> float:\n    \"\"\" For a given list of input numbers, calculate Mean Absolute Deviation\n    around the mean of this dataset.\n    Mean Absolute Deviation is the average absolute difference between each\n    element and a centerpoint (mean in this case):\n    MAD = average | x - x_mean |\n    >>> mean_absolute_deviation([1.0, 2.0, 3.0, 4.0])\n    1.0\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "mean_absolute_deviation"
+    },
+    "anchor_signature": "dfda24c598766f0dfbbf12855ee2bf2358e89845f46eefa9e6c6b6f038ea34d5",
+    "canonical_code": "from typing import List\n\n\ndef mean_absolute_deviation(numbers: List[float]) -> float:\n    \"\"\" For a given list of input numbers, calculate Mean Absolute Deviation\n    around the mean of this dataset.\n    Mean Absolute Deviation is the average absolute difference between each\n    element and a centerpoint (mean in this case):\n    MAD = average | x - x_mean |\n    >>> mean_absolute_deviation([1.0, 2.0, 3.0, 4.0])\n    1.0\n    \"\"\"\n    if not numbers:\n        return 0.0\n\n    mean = sum(numbers) / len(numbers)\n    mad = sum(abs(x - mean) for x in numbers) / len(numbers)\n    return mad\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 1,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "sum",
+          "len",
+          "sum",
+          "abs",
+          "len"
+        ],
+        "nested_depth": 1,
+        "branch_patterns": [
+          "if_at_depth_0"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v1": [
+            "p0"
+          ],
+          "v2": [
+            "p0"
+          ]
+        },
+        "assignments": {
+          "v1": "BinOp(left=Call(func=Name(id='sum', ctx=Load()), args=[Name(id='p0', ctx=Load())]), op=Div(), right=Call(func=Name(id='len', ctx=Load()), args=[Name(id='p0', ctx=Load())]))",
+          "v2": "BinOp(left=Call(func=Name(id='sum', ctx=Load()), args=[GeneratorExp(elt=Call(func=Name(id='abs', ctx=Load()), args=[BinOp(left=Name(id='v3', ctx=Load()), op=Sub(), right=Name(id='v1', ctx=Load()))]), generators=[comprehension(target=Name(id='v3', ctx=Store()), iter=Name(id='p0', ctx=Load()), is_async=0)])]), op=Div(), right=Call(func=Name(id='len', ctx=Load()), args=[Name(id='p0', ctx=Load())]))"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_mean_absolute_deviation"
+          ],
+          [
+            "function_mean_absolute_deviation",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "mean_absolute_deviation": {
+          "name": "mean_absolute_deviation",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": [
+          "Div",
+          "Div",
+          "Sub"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": false,
+        "uses_floats": true,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          0.0
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "ImportFrom",
+          "alias",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "If",
+          "UnaryOp",
+          "Not",
+          "Name",
+          "Load",
+          "Return",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Div",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "GeneratorExp",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Sub",
+          "Name",
+          "Load",
+          "comprehension",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Div",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Return",
+          "Name",
+          "Load",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 9,
+        "ast_hash": "0994012e5fa139f624e8b3ec1492277f",
+        "alpha_renamed_hash": "9bffc21942820ce40980b86a023bce4a"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Div",
+          "Div",
+          "Sub"
+        ],
+        "precedence_levels": {
+          "Div": 4,
+          "Sub": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "ImportFrom",
+          "FunctionDef",
+          "If",
+          "Return",
+          "Assign",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "ImportFrom_0",
+          "FunctionDef_1",
+          "If_2",
+          "Return_3",
+          "Assign_4",
+          "Assign_5",
+          "Return_6"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "not p0",
+            "return_type": "constant"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "not p0"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

@@ -1,0 +1,404 @@
+{
+  "contract_id": "HumanEval_136_claude_sonnet_4_5_20250929_temp0.7",
+  "canonical_code": "def largest_smallest_integers(lst):\n    '''\n    Create a function that returns a tuple (a, b), where 'a' is\n    the largest of negative integers, and 'b' is the smallest\n    of positive integers in a list.\n    If there is no negative or positive integers, return them as None.\n\n    Examples:\n    largest_smallest_integers([2, 4, 1, 3, 5, 7]) == (None, 1)\n    largest_smallest_integers([]) == (None, None)\n    largest_smallest_integers([0]) == (None, None)\n    '''\n    negative_integers = [num for num in lst if num < 0]\n    positive_integers = [num for num in lst if num > 0]\n    \n    largest_negative = max(negative_integers) if negative_integers else None\n    smallest_positive = min(positive_integers) if positive_integers else None\n    \n    return (largest_negative, smallest_positive)\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 0,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "max",
+        "min"
+      ],
+      "nested_depth": 0,
+      "branch_patterns": []
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [],
+        "v2": [],
+        "v3": [],
+        "v4": []
+      },
+      "assignments": {
+        "v0": "ListComp(elt=Name(id='v1', ctx=Load()), generators=[comprehension(target=Name(id='v1', ctx=Store()), iter=Name(id='p0', ctx=Load()), ifs=[Compare(left=Name(id='v1', ctx=Load()), ops=[Lt()], comparators=[Constant(value=0)])], is_async=0)])",
+        "v2": "ListComp(elt=Name(id='v1', ctx=Load()), generators=[comprehension(target=Name(id='v1', ctx=Store()), iter=Name(id='p0', ctx=Load()), ifs=[Compare(left=Name(id='v1', ctx=Load()), ops=[Gt()], comparators=[Constant(value=0)])], is_async=0)])",
+        "v3": "IfExp(test=Name(id='v0', ctx=Load()), body=Call(func=Name(id='max', ctx=Load()), args=[Name(id='v0', ctx=Load())]), orelse=Constant(value=None))",
+        "v4": "IfExp(test=Name(id='v2', ctx=Load()), body=Call(func=Name(id='min', ctx=Load()), args=[Name(id='v2', ctx=Load())]), orelse=Constant(value=None))"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_largest_smallest_integers"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "largest_smallest_integers": {
+        "name": "largest_smallest_integers",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": []
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": false,
+      "numeric_constants": [
+        0,
+        0
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Lt",
+        "Gt"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "ListComp",
+        "Name",
+        "Load",
+        "comprehension",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Compare",
+        "Name",
+        "Load",
+        "Lt",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "ListComp",
+        "Name",
+        "Load",
+        "comprehension",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "IfExp",
+        "Name",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "IfExp",
+        "Name",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Constant",
+        "Return",
+        "Tuple",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load"
+      ],
+      "ast_depth": 7,
+      "ast_hash": "b1ebcfa1aa1268437ff3964bf2947ab7",
+      "alpha_renamed_hash": "b1ebcfa1aa1268437ff3964bf2947ab7"
+    },
+    "operator_precedence": {
+      "operator_sequence": [],
+      "precedence_levels": {}
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "Assign",
+        "Assign",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "Assign_2",
+        "Assign_3",
+        "Assign_4",
+        "Return_5"
+      ],
+      "control_flow_order": [
+        "FunctionDef"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_136_claude_sonnet_4_5_20250929_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/136",
+    "prompt": "\ndef largest_smallest_integers(lst):\n    '''\n    Create a function that returns a tuple (a, b), where 'a' is\n    the largest of negative integers, and 'b' is the smallest\n    of positive integers in a list.\n    If there is no negative or positive integers, return them as None.\n\n    Examples:\n    largest_smallest_integers([2, 4, 1, 3, 5, 7]) == (None, 1)\n    largest_smallest_integers([]) == (None, None)\n    largest_smallest_integers([0]) == (None, None)\n    '''\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "largest_smallest_integers"
+    },
+    "anchor_signature": "297deae4a3625a79e6ecad390422b3e3a5f70f1ec253237c992ce2649589b8e2",
+    "canonical_code": "def largest_smallest_integers(lst):\n    '''\n    Create a function that returns a tuple (a, b), where 'a' is\n    the largest of negative integers, and 'b' is the smallest\n    of positive integers in a list.\n    If there is no negative or positive integers, return them as None.\n\n    Examples:\n    largest_smallest_integers([2, 4, 1, 3, 5, 7]) == (None, 1)\n    largest_smallest_integers([]) == (None, None)\n    largest_smallest_integers([0]) == (None, None)\n    '''\n    negative_integers = [num for num in lst if num < 0]\n    positive_integers = [num for num in lst if num > 0]\n    \n    largest_negative = max(negative_integers) if negative_integers else None\n    smallest_positive = min(positive_integers) if positive_integers else None\n    \n    return (largest_negative, smallest_positive)\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 0,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "max",
+          "min"
+        ],
+        "nested_depth": 0,
+        "branch_patterns": []
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [],
+          "v2": [],
+          "v3": [],
+          "v4": []
+        },
+        "assignments": {
+          "v0": "ListComp(elt=Name(id='v1', ctx=Load()), generators=[comprehension(target=Name(id='v1', ctx=Store()), iter=Name(id='p0', ctx=Load()), ifs=[Compare(left=Name(id='v1', ctx=Load()), ops=[Lt()], comparators=[Constant(value=0)])], is_async=0)])",
+          "v2": "ListComp(elt=Name(id='v1', ctx=Load()), generators=[comprehension(target=Name(id='v1', ctx=Store()), iter=Name(id='p0', ctx=Load()), ifs=[Compare(left=Name(id='v1', ctx=Load()), ops=[Gt()], comparators=[Constant(value=0)])], is_async=0)])",
+          "v3": "IfExp(test=Name(id='v0', ctx=Load()), body=Call(func=Name(id='max', ctx=Load()), args=[Name(id='v0', ctx=Load())]), orelse=Constant(value=None))",
+          "v4": "IfExp(test=Name(id='v2', ctx=Load()), body=Call(func=Name(id='min', ctx=Load()), args=[Name(id='v2', ctx=Load())]), orelse=Constant(value=None))"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_largest_smallest_integers"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "largest_smallest_integers": {
+          "name": "largest_smallest_integers",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": [
+          0,
+          0
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Lt",
+          "Gt"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "ListComp",
+          "Name",
+          "Load",
+          "comprehension",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Compare",
+          "Name",
+          "Load",
+          "Lt",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "ListComp",
+          "Name",
+          "Load",
+          "comprehension",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "IfExp",
+          "Name",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "IfExp",
+          "Name",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Constant",
+          "Return",
+          "Tuple",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load"
+        ],
+        "ast_depth": 7,
+        "ast_hash": "b1ebcfa1aa1268437ff3964bf2947ab7",
+        "alpha_renamed_hash": "b1ebcfa1aa1268437ff3964bf2947ab7"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "Assign_2",
+          "Assign_3",
+          "Assign_4",
+          "Return_5"
+        ],
+        "control_flow_order": [
+          "FunctionDef"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

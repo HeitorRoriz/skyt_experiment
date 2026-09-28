@@ -1,0 +1,520 @@
+{
+  "contract_id": "HumanEval_137_gpt_4o_mini_temp0.0",
+  "canonical_code": "def compare_one(a, b):\n    def parse_value(value):\n        if isinstance(value, str):\n            value = value.replace(',', '.')\n        return float(value)\n\n    a_parsed = parse_value(a)\n    b_parsed = parse_value(b)\n\n    if a_parsed > b_parsed:\n        return a\n    elif b_parsed > a_parsed:\n        return b\n    else:\n        return None\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 3,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "isinstance",
+        "float",
+        "parse_value",
+        "parse_value"
+      ],
+      "nested_depth": 2,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_0",
+        "if_at_depth_1"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "p2": [],
+        "v0": [
+          "p0"
+        ],
+        "v1": [
+          "p1"
+        ]
+      },
+      "assignments": {
+        "p2": "Call(func=Attribute(value=Name(id='p2', ctx=Load()), attr='replace', ctx=Load()), args=[Constant(value=','), Constant(value='.')])",
+        "v0": "Call(func=Name(id='parse_value', ctx=Load()), args=[Name(id='p0', ctx=Load())])",
+        "v1": "Call(func=Name(id='parse_value', ctx=Load()), args=[Name(id='p1', ctx=Load())])"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_compare_one"
+        ],
+        [
+          "function_compare_one",
+          "function_parse_value"
+        ],
+        [
+          "function_compare_one",
+          "function_parse_value",
+          "branch"
+        ],
+        [
+          "function_compare_one",
+          "branch"
+        ],
+        [
+          "function_compare_one",
+          "branch",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "compare_one": {
+        "name": "compare_one",
+        "args": [
+          "p0",
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      },
+      "parse_value": {
+        "name": "parse_value",
+        "args": [
+          "p2"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 2,
+      "estimated_complexity": "O(2^n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": []
+    },
+    "numerical_behavior": {
+      "uses_integers": false,
+      "uses_floats": false,
+      "has_arithmetic": false,
+      "numeric_constants": []
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Gt",
+        "Gt"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "arg",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "If",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Constant",
+        "Constant",
+        "Return",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Name",
+        "Load",
+        "Return",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Name",
+        "Load",
+        "Return",
+        "Name",
+        "Load",
+        "Return",
+        "Constant"
+      ],
+      "ast_depth": 8,
+      "ast_hash": "cd1803390e947bf8722197060017de47",
+      "alpha_renamed_hash": "cd1803390e947bf8722197060017de47"
+    },
+    "operator_precedence": {
+      "operator_sequence": [],
+      "precedence_levels": {}
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "FunctionDef",
+        "If",
+        "Assign",
+        "Return",
+        "Assign",
+        "Assign",
+        "If",
+        "Return",
+        "If",
+        "Return",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "FunctionDef_1",
+        "If_2",
+        "Assign_3",
+        "Return_4",
+        "Assign_5",
+        "Assign_6",
+        "If_7",
+        "Return_8",
+        "If_9",
+        "Return_10",
+        "Return_11"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "FunctionDef",
+        "If",
+        "If",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "v0 > v1",
+          "return_type": "expression"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "v0 > v1"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_137_gpt_4o_mini_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/137",
+    "prompt": "\ndef compare_one(a, b):\n    \"\"\"\n    Create a function that takes integers, floats, or strings representing\n    real numbers, and returns the larger variable in its given variable type.\n    Return None if the values are equal.\n    Note: If a real number is represented as a string, the floating point might be . or ,\n\n    compare_one(1, 2.5) \u279e 2.5\n    compare_one(1, \"2,3\") \u279e \"2,3\"\n    compare_one(\"5,1\", \"6\") \u279e \"6\"\n    compare_one(\"1\", 1) \u279e None\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "compare_one"
+    },
+    "anchor_signature": "d1805ee39daa01f243b3feb506c120a0719844aeffee958d6bf2670de794db23",
+    "canonical_code": "def compare_one(a, b):\n    def parse_value(value):\n        if isinstance(value, str):\n            value = value.replace(',', '.')\n        return float(value)\n\n    a_parsed = parse_value(a)\n    b_parsed = parse_value(b)\n\n    if a_parsed > b_parsed:\n        return a\n    elif b_parsed > a_parsed:\n        return b\n    else:\n        return None\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 3,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "isinstance",
+          "float",
+          "parse_value",
+          "parse_value"
+        ],
+        "nested_depth": 2,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_0",
+          "if_at_depth_1"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "p2": [],
+          "v0": [
+            "p0"
+          ],
+          "v1": [
+            "p1"
+          ]
+        },
+        "assignments": {
+          "p2": "Call(func=Attribute(value=Name(id='p2', ctx=Load()), attr='replace', ctx=Load()), args=[Constant(value=','), Constant(value='.')])",
+          "v0": "Call(func=Name(id='parse_value', ctx=Load()), args=[Name(id='p0', ctx=Load())])",
+          "v1": "Call(func=Name(id='parse_value', ctx=Load()), args=[Name(id='p1', ctx=Load())])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_compare_one"
+          ],
+          [
+            "function_compare_one",
+            "function_parse_value"
+          ],
+          [
+            "function_compare_one",
+            "function_parse_value",
+            "branch"
+          ],
+          [
+            "function_compare_one",
+            "branch"
+          ],
+          [
+            "function_compare_one",
+            "branch",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "compare_one": {
+          "name": "compare_one",
+          "args": [
+            "p0",
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        },
+        "parse_value": {
+          "name": "parse_value",
+          "args": [
+            "p2"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 2,
+        "estimated_complexity": "O(2^n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": false,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": []
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Gt",
+          "Gt"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "If",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Constant",
+          "Constant",
+          "Return",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Name",
+          "Load",
+          "Return",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Name",
+          "Load",
+          "Return",
+          "Name",
+          "Load",
+          "Return",
+          "Constant"
+        ],
+        "ast_depth": 8,
+        "ast_hash": "cd1803390e947bf8722197060017de47",
+        "alpha_renamed_hash": "cd1803390e947bf8722197060017de47"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "FunctionDef",
+          "If",
+          "Assign",
+          "Return",
+          "Assign",
+          "Assign",
+          "If",
+          "Return",
+          "If",
+          "Return",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "FunctionDef_1",
+          "If_2",
+          "Assign_3",
+          "Return_4",
+          "Assign_5",
+          "Assign_6",
+          "If_7",
+          "Return_8",
+          "If_9",
+          "Return_10",
+          "Return_11"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "FunctionDef",
+          "If",
+          "If",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "v0 > v1",
+            "return_type": "expression"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "v0 > v1"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

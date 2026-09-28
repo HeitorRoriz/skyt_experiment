@@ -1,0 +1,368 @@
+{
+  "contract_id": "HumanEval_160_gpt_4o_mini_temp0.7",
+  "canonical_code": "def do_algebra(operator, operand):\n    expression = str(operand[0])\n    \n    for op, num in zip(operator, operand[1:]):\n        expression += f\" {op} {num}\"\n    \n    return eval(expression)\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 0,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [
+        "str",
+        "zip",
+        "eval"
+      ],
+      "nested_depth": 1,
+      "branch_patterns": []
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": []
+      },
+      "assignments": {
+        "v0": "Call(func=Name(id='str', ctx=Load()), args=[Subscript(value=Name(id='p1', ctx=Load()), slice=Constant(value=0), ctx=Load())])"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_do_algebra"
+        ],
+        [
+          "function_do_algebra",
+          "loop"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "do_algebra": {
+        "name": "do_algebra",
+        "args": [
+          "p0",
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": []
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": false,
+      "numeric_constants": [
+        0,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "For",
+        "Tuple",
+        "Name",
+        "Store",
+        "Name",
+        "Store",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Slice",
+        "Constant",
+        "Load",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Add",
+        "JoinedStr",
+        "Constant",
+        "FormattedValue",
+        "Name",
+        "Load",
+        "Constant",
+        "FormattedValue",
+        "Name",
+        "Load",
+        "Return",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 7,
+      "ast_hash": "8b6cfafba6753ff31f1ad46f11bb069c",
+      "alpha_renamed_hash": "8b6cfafba6753ff31f1ad46f11bb069c"
+    },
+    "operator_precedence": {
+      "operator_sequence": [],
+      "precedence_levels": {}
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "For",
+        "AugAssign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "For_2",
+        "AugAssign_3",
+        "Return_4"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "For"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_160_gpt_4o_mini_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/160",
+    "prompt": "\ndef do_algebra(operator, operand):\n    \"\"\"\n    Given two lists operator, and operand. The first list has basic algebra operations, and \n    the second list is a list of integers. Use the two given lists to build the algebric \n    expression and return the evaluation of this expression.\n\n    The basic algebra operations:\n    Addition ( + ) \n    Subtraction ( - ) \n    Multiplication ( * ) \n    Floor division ( // ) \n    Exponentiation ( ** ) \n\n    Example:\n    operator['+', '*', '-']\n    array = [2, 3, 4, 5]\n    result = 2 + 3 * 4 - 5\n    => result = 9\n\n    Note:\n        The length of operator list is equal to the length of operand list minus one.\n        Operand is a list of of non-negative integers.\n        Operator list has at least one operator, and operand list has at least two operands.\n\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "do_algebra"
+    },
+    "anchor_signature": "0e8e91f509858e08e796077807884eb6ac060c1dc761f1310634f3c44af6a9ed",
+    "canonical_code": "def do_algebra(operator, operand):\n    expression = str(operand[0])\n    \n    for op, num in zip(operator, operand[1:]):\n        expression += f\" {op} {num}\"\n    \n    return eval(expression)\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 0,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "str",
+          "zip",
+          "eval"
+        ],
+        "nested_depth": 1,
+        "branch_patterns": []
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": []
+        },
+        "assignments": {
+          "v0": "Call(func=Name(id='str', ctx=Load()), args=[Subscript(value=Name(id='p1', ctx=Load()), slice=Constant(value=0), ctx=Load())])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_do_algebra"
+          ],
+          [
+            "function_do_algebra",
+            "loop"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "do_algebra": {
+          "name": "do_algebra",
+          "args": [
+            "p0",
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": [
+          0,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "For",
+          "Tuple",
+          "Name",
+          "Store",
+          "Name",
+          "Store",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Slice",
+          "Constant",
+          "Load",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Add",
+          "JoinedStr",
+          "Constant",
+          "FormattedValue",
+          "Name",
+          "Load",
+          "Constant",
+          "FormattedValue",
+          "Name",
+          "Load",
+          "Return",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 7,
+        "ast_hash": "8b6cfafba6753ff31f1ad46f11bb069c",
+        "alpha_renamed_hash": "8b6cfafba6753ff31f1ad46f11bb069c"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "For",
+          "AugAssign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "For_2",
+          "AugAssign_3",
+          "Return_4"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "For"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

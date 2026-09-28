@@ -1,0 +1,392 @@
+{
+  "contract_id": "HumanEval_67_gpt_4o_mini_temp0.7",
+  "canonical_code": "def fruit_distribution(s, n):\n    words = s.split()\n    apples = int(words[0])\n    oranges = int(words[3])\n    mangoes = n - apples - oranges\n    return mangoes\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 0,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "int",
+        "int"
+      ],
+      "nested_depth": 0,
+      "branch_patterns": []
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [],
+        "v1": [],
+        "v2": [],
+        "v3": [
+          "p1",
+          "v1",
+          "v2"
+        ]
+      },
+      "assignments": {
+        "v0": "Call(func=Attribute(value=Name(id='p0', ctx=Load()), attr='split', ctx=Load()))",
+        "v1": "Call(func=Name(id='int', ctx=Load()), args=[Subscript(value=Name(id='v0', ctx=Load()), slice=Constant(value=0), ctx=Load())])",
+        "v2": "Call(func=Name(id='int', ctx=Load()), args=[Subscript(value=Name(id='v0', ctx=Load()), slice=Constant(value=3), ctx=Load())])",
+        "v3": "BinOp(left=BinOp(left=Name(id='p1', ctx=Load()), op=Sub(), right=Name(id='v1', ctx=Load())), op=Sub(), right=Name(id='v2', ctx=Load()))"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_fruit_distribution"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "fruit_distribution": {
+        "name": "fruit_distribution",
+        "args": [
+          "p0",
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": [
+        "Sub",
+        "Sub"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        0,
+        3
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "BinOp",
+        "BinOp",
+        "Name",
+        "Load",
+        "Sub",
+        "Name",
+        "Load",
+        "Sub",
+        "Name",
+        "Load",
+        "Return",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 6,
+      "ast_hash": "60fb07fb04413eb6918487c1899a1206",
+      "alpha_renamed_hash": "60fb07fb04413eb6918487c1899a1206"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Sub",
+        "Sub"
+      ],
+      "precedence_levels": {
+        "Sub": 3
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "Assign",
+        "Assign",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "Assign_2",
+        "Assign_3",
+        "Assign_4",
+        "Return_5"
+      ],
+      "control_flow_order": [
+        "FunctionDef"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_67_gpt_4o_mini_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/67",
+    "prompt": "\ndef fruit_distribution(s,n):\n    \"\"\"\n    In this task, you will be given a string that represents a number of apples and oranges \n    that are distributed in a basket of fruit this basket contains \n    apples, oranges, and mango fruits. Given the string that represents the total number of \n    the oranges and apples and an integer that represent the total number of the fruits \n    in the basket return the number of the mango fruits in the basket.\n    for examble:\n    fruit_distribution(\"5 apples and 6 oranges\", 19) ->19 - 5 - 6 = 8\n    fruit_distribution(\"0 apples and 1 oranges\",3) -> 3 - 0 - 1 = 2\n    fruit_distribution(\"2 apples and 3 oranges\", 100) -> 100 - 2 - 3 = 95\n    fruit_distribution(\"100 apples and 1 oranges\",120) -> 120 - 100 - 1 = 19\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "fruit_distribution"
+    },
+    "anchor_signature": "f0f9a57ca43f2da855f1e48452f255c074dcc7cf0050c84a31223d69bdcb7232",
+    "canonical_code": "def fruit_distribution(s, n):\n    words = s.split()\n    apples = int(words[0])\n    oranges = int(words[3])\n    mangoes = n - apples - oranges\n    return mangoes\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 0,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "int",
+          "int"
+        ],
+        "nested_depth": 0,
+        "branch_patterns": []
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [],
+          "v1": [],
+          "v2": [],
+          "v3": [
+            "p1",
+            "v1",
+            "v2"
+          ]
+        },
+        "assignments": {
+          "v0": "Call(func=Attribute(value=Name(id='p0', ctx=Load()), attr='split', ctx=Load()))",
+          "v1": "Call(func=Name(id='int', ctx=Load()), args=[Subscript(value=Name(id='v0', ctx=Load()), slice=Constant(value=0), ctx=Load())])",
+          "v2": "Call(func=Name(id='int', ctx=Load()), args=[Subscript(value=Name(id='v0', ctx=Load()), slice=Constant(value=3), ctx=Load())])",
+          "v3": "BinOp(left=BinOp(left=Name(id='p1', ctx=Load()), op=Sub(), right=Name(id='v1', ctx=Load())), op=Sub(), right=Name(id='v2', ctx=Load()))"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_fruit_distribution"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "fruit_distribution": {
+          "name": "fruit_distribution",
+          "args": [
+            "p0",
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": [
+          "Sub",
+          "Sub"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          0,
+          3
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "BinOp",
+          "BinOp",
+          "Name",
+          "Load",
+          "Sub",
+          "Name",
+          "Load",
+          "Sub",
+          "Name",
+          "Load",
+          "Return",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 6,
+        "ast_hash": "60fb07fb04413eb6918487c1899a1206",
+        "alpha_renamed_hash": "60fb07fb04413eb6918487c1899a1206"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Sub",
+          "Sub"
+        ],
+        "precedence_levels": {
+          "Sub": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "Assign_2",
+          "Assign_3",
+          "Assign_4",
+          "Return_5"
+        ],
+        "control_flow_order": [
+          "FunctionDef"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

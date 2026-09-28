@@ -1,0 +1,532 @@
+{
+  "contract_id": "HumanEval_153_claude_sonnet_4_5_20250929_temp0.7",
+  "canonical_code": "def Strongest_Extension(class_name, extensions):\n    max_strength = float('-inf')\n    strongest_ext = \"\"\n    \n    for ext in extensions:\n        cap = sum(1 for c in ext if c.isupper())\n        sm = sum(1 for c in ext if c.islower())\n        strength = cap - sm\n        \n        if strength > max_strength:\n            max_strength = strength\n            strongest_ext = ext\n    \n    return f\"{class_name}.{strongest_ext}\"\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 1,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [
+        "float",
+        "sum",
+        "sum"
+      ],
+      "nested_depth": 2,
+      "branch_patterns": [
+        "if_at_depth_1"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [
+          "v6"
+        ],
+        "v1": [
+          "v2"
+        ],
+        "v3": [],
+        "v5": [],
+        "v6": [
+          "v3",
+          "v5"
+        ]
+      },
+      "assignments": {
+        "v0": "Name(id='v6', ctx=Load())",
+        "v1": "Name(id='v2', ctx=Load())",
+        "v3": "Call(func=Name(id='sum', ctx=Load()), args=[GeneratorExp(elt=Constant(value=1), generators=[comprehension(target=Name(id='v4', ctx=Store()), iter=Name(id='v2', ctx=Load()), ifs=[Call(func=Attribute(value=Name(id='v4', ctx=Load()), attr='isupper', ctx=Load()))], is_async=0)])])",
+        "v5": "Call(func=Name(id='sum', ctx=Load()), args=[GeneratorExp(elt=Constant(value=1), generators=[comprehension(target=Name(id='v4', ctx=Store()), iter=Name(id='v2', ctx=Load()), ifs=[Call(func=Attribute(value=Name(id='v4', ctx=Load()), attr='islower', ctx=Load()))], is_async=0)])])",
+        "v6": "BinOp(left=Name(id='v3', ctx=Load()), op=Sub(), right=Name(id='v5', ctx=Load()))"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_Strongest_Extension"
+        ],
+        [
+          "function_Strongest_Extension",
+          "loop"
+        ],
+        [
+          "function_Strongest_Extension",
+          "loop",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "Strongest_Extension": {
+        "name": "Strongest_Extension",
+        "args": [
+          "p0",
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": [
+        "Sub"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        1,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Gt"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "For",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "GeneratorExp",
+        "Constant",
+        "comprehension",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "GeneratorExp",
+        "Constant",
+        "comprehension",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "BinOp",
+        "Name",
+        "Load",
+        "Sub",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Return",
+        "JoinedStr",
+        "FormattedValue",
+        "Name",
+        "Load",
+        "Constant",
+        "FormattedValue",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 10,
+      "ast_hash": "3f9dbcc872fd8c8dede0c3dbdb106131",
+      "alpha_renamed_hash": "3f9dbcc872fd8c8dede0c3dbdb106131"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Sub"
+      ],
+      "precedence_levels": {
+        "Sub": 3
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "Assign",
+        "For",
+        "Assign",
+        "Assign",
+        "Assign",
+        "If",
+        "Assign",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "Assign_2",
+        "For_3",
+        "Assign_4",
+        "Assign_5",
+        "Assign_6",
+        "If_7",
+        "Assign_8",
+        "Assign_9",
+        "Return_10"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "For",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_153_claude_sonnet_4_5_20250929_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/153",
+    "prompt": "\ndef Strongest_Extension(class_name, extensions):\n    \"\"\"You will be given the name of a class (a string) and a list of extensions.\n    The extensions are to be used to load additional classes to the class. The\n    strength of the extension is as follows: Let CAP be the number of the uppercase\n    letters in the extension's name, and let SM be the number of lowercase letters \n    in the extension's name, the strength is given by the fraction CAP - SM. \n    You should find the strongest extension and return a string in this \n    format: ClassName.StrongestExtensionName.\n    If there are two or more extensions with the same strength, you should\n    choose the one that comes first in the list.\n    For example, if you are given \"Slices\" as the class and a list of the\n    extensions: ['SErviNGSliCes', 'Cheese', 'StuFfed'] then you should\n    return 'Slices.SErviNGSliCes' since 'SErviNGSliCes' is the strongest extension \n    (its strength is -1).\n    Example:\n    for Strongest_Extension('my_class', ['AA', 'Be', 'CC']) == 'my_class.AA'\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "Strongest_Extension"
+    },
+    "anchor_signature": "ca996f2a39e6f9177463f34376c92f1445875fdbb37c0512f9abd0213a52affe",
+    "canonical_code": "def Strongest_Extension(class_name, extensions):\n    max_strength = float('-inf')\n    strongest_ext = \"\"\n    \n    for ext in extensions:\n        cap = sum(1 for c in ext if c.isupper())\n        sm = sum(1 for c in ext if c.islower())\n        strength = cap - sm\n        \n        if strength > max_strength:\n            max_strength = strength\n            strongest_ext = ext\n    \n    return f\"{class_name}.{strongest_ext}\"\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 1,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "float",
+          "sum",
+          "sum"
+        ],
+        "nested_depth": 2,
+        "branch_patterns": [
+          "if_at_depth_1"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [
+            "v6"
+          ],
+          "v1": [
+            "v2"
+          ],
+          "v3": [],
+          "v5": [],
+          "v6": [
+            "v3",
+            "v5"
+          ]
+        },
+        "assignments": {
+          "v0": "Name(id='v6', ctx=Load())",
+          "v1": "Name(id='v2', ctx=Load())",
+          "v3": "Call(func=Name(id='sum', ctx=Load()), args=[GeneratorExp(elt=Constant(value=1), generators=[comprehension(target=Name(id='v4', ctx=Store()), iter=Name(id='v2', ctx=Load()), ifs=[Call(func=Attribute(value=Name(id='v4', ctx=Load()), attr='isupper', ctx=Load()))], is_async=0)])])",
+          "v5": "Call(func=Name(id='sum', ctx=Load()), args=[GeneratorExp(elt=Constant(value=1), generators=[comprehension(target=Name(id='v4', ctx=Store()), iter=Name(id='v2', ctx=Load()), ifs=[Call(func=Attribute(value=Name(id='v4', ctx=Load()), attr='islower', ctx=Load()))], is_async=0)])])",
+          "v6": "BinOp(left=Name(id='v3', ctx=Load()), op=Sub(), right=Name(id='v5', ctx=Load()))"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_Strongest_Extension"
+          ],
+          [
+            "function_Strongest_Extension",
+            "loop"
+          ],
+          [
+            "function_Strongest_Extension",
+            "loop",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "Strongest_Extension": {
+          "name": "Strongest_Extension",
+          "args": [
+            "p0",
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": [
+          "Sub"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          1,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Gt"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "GeneratorExp",
+          "Constant",
+          "comprehension",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "GeneratorExp",
+          "Constant",
+          "comprehension",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "BinOp",
+          "Name",
+          "Load",
+          "Sub",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Return",
+          "JoinedStr",
+          "FormattedValue",
+          "Name",
+          "Load",
+          "Constant",
+          "FormattedValue",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 10,
+        "ast_hash": "3f9dbcc872fd8c8dede0c3dbdb106131",
+        "alpha_renamed_hash": "3f9dbcc872fd8c8dede0c3dbdb106131"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Sub"
+        ],
+        "precedence_levels": {
+          "Sub": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "For",
+          "Assign",
+          "Assign",
+          "Assign",
+          "If",
+          "Assign",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "Assign_2",
+          "For_3",
+          "Assign_4",
+          "Assign_5",
+          "Assign_6",
+          "If_7",
+          "Assign_8",
+          "Assign_9",
+          "Return_10"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "For",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

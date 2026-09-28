@@ -1,0 +1,428 @@
+{
+  "contract_id": "HumanEval_102_gpt_4o_mini_temp0.0",
+  "canonical_code": "def choose_num(x, y):\n    if x > y:\n        return -1\n    for num in range(y, x - 1, -1):\n        if num % 2 == 0:\n            return num\n    return -1\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 2,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [
+        "range"
+      ],
+      "nested_depth": 2,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_1"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {},
+      "assignments": {}
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_choose_num"
+        ],
+        [
+          "function_choose_num",
+          "branch"
+        ],
+        [
+          "function_choose_num",
+          "loop"
+        ],
+        [
+          "function_choose_num",
+          "loop",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "choose_num": {
+        "name": "choose_num",
+        "args": [
+          "p0",
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": [
+        "Sub",
+        "Mod"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        1,
+        1,
+        1,
+        2,
+        0,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Gt",
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "arg",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Name",
+        "Load",
+        "Return",
+        "UnaryOp",
+        "USub",
+        "Constant",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Sub",
+        "Constant",
+        "UnaryOp",
+        "USub",
+        "Constant",
+        "If",
+        "Compare",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mod",
+        "Constant",
+        "Eq",
+        "Constant",
+        "Return",
+        "Name",
+        "Load",
+        "Return",
+        "UnaryOp",
+        "USub",
+        "Constant"
+      ],
+      "ast_depth": 7,
+      "ast_hash": "1b2b4cb050ac2e8966443869e4288ee1",
+      "alpha_renamed_hash": "1b2b4cb050ac2e8966443869e4288ee1"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Sub",
+        "Mod"
+      ],
+      "precedence_levels": {
+        "Sub": 3,
+        "Mod": 4
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Return",
+        "For",
+        "If",
+        "Return",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Return_2",
+        "For_3",
+        "If_4",
+        "Return_5",
+        "Return_6"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If",
+        "For",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "p0 > p1",
+          "return_type": "expression"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "p0 > p1"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_102_gpt_4o_mini_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/102",
+    "prompt": "\ndef choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1.\n\n    For example:\n    choose_num(12, 15) = 14\n    choose_num(13, 12) = -1\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "choose_num"
+    },
+    "anchor_signature": "a062bedc4def80609a7cea6bf4993bb3b8399a62370403acdc7f134807e38cc8",
+    "canonical_code": "def choose_num(x, y):\n    if x > y:\n        return -1\n    for num in range(y, x - 1, -1):\n        if num % 2 == 0:\n            return num\n    return -1\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 2,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "range"
+        ],
+        "nested_depth": 2,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_1"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {},
+        "assignments": {}
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_choose_num"
+          ],
+          [
+            "function_choose_num",
+            "branch"
+          ],
+          [
+            "function_choose_num",
+            "loop"
+          ],
+          [
+            "function_choose_num",
+            "loop",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "choose_num": {
+          "name": "choose_num",
+          "args": [
+            "p0",
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": [
+          "Sub",
+          "Mod"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          1,
+          1,
+          1,
+          2,
+          0,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Gt",
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Name",
+          "Load",
+          "Return",
+          "UnaryOp",
+          "USub",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Sub",
+          "Constant",
+          "UnaryOp",
+          "USub",
+          "Constant",
+          "If",
+          "Compare",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mod",
+          "Constant",
+          "Eq",
+          "Constant",
+          "Return",
+          "Name",
+          "Load",
+          "Return",
+          "UnaryOp",
+          "USub",
+          "Constant"
+        ],
+        "ast_depth": 7,
+        "ast_hash": "1b2b4cb050ac2e8966443869e4288ee1",
+        "alpha_renamed_hash": "1b2b4cb050ac2e8966443869e4288ee1"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Sub",
+          "Mod"
+        ],
+        "precedence_levels": {
+          "Sub": 3,
+          "Mod": 4
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "For",
+          "If",
+          "Return",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "For_3",
+          "If_4",
+          "Return_5",
+          "Return_6"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "For",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "p0 > p1",
+            "return_type": "expression"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "p0 > p1"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

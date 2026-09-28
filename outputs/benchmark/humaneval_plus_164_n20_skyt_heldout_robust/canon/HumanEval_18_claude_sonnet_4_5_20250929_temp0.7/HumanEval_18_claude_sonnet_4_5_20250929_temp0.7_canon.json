@@ -1,0 +1,504 @@
+{
+  "contract_id": "HumanEval_18_claude_sonnet_4_5_20250929_temp0.7",
+  "canonical_code": "def how_many_times(string: str, substring: str) -> int:\n    \"\"\" Find how many times a given substring can be found in the original string. Count overlaping cases.\n    >>> how_many_times('', 'a')\n    0\n    >>> how_many_times('aaa', 'a')\n    3\n    >>> how_many_times('aaaa', 'aa')\n    3\n    \"\"\"\n    if not substring:\n        return 0\n    \n    count = 0\n    for i in range(len(string) - len(substring) + 1):\n        if string[i:i + len(substring)] == substring:\n            count += 1\n    \n    return count\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 2,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [
+        "range",
+        "len",
+        "len",
+        "len"
+      ],
+      "nested_depth": 2,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_1"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": []
+      },
+      "assignments": {
+        "v0": "Constant(value=0)"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_how_many_times"
+        ],
+        [
+          "function_how_many_times",
+          "branch"
+        ],
+        [
+          "function_how_many_times",
+          "loop"
+        ],
+        [
+          "function_how_many_times",
+          "loop",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "how_many_times": {
+        "name": "how_many_times",
+        "args": [
+          "p0",
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add",
+        "Add"
+      ],
+      "associative_ops": [
+        "Add",
+        "Add"
+      ],
+      "binary_operations": [
+        "Add",
+        "Sub",
+        "Add"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Name",
+        "Load",
+        "arg",
+        "Name",
+        "Load",
+        "If",
+        "UnaryOp",
+        "Not",
+        "Name",
+        "Load",
+        "Return",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Sub",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Add",
+        "Constant",
+        "If",
+        "Compare",
+        "Subscript",
+        "Name",
+        "Load",
+        "Slice",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Eq",
+        "Name",
+        "Load",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Add",
+        "Constant",
+        "Return",
+        "Name",
+        "Load",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 10,
+      "ast_hash": "82840fdfd2e16711221318a0ec42838c",
+      "alpha_renamed_hash": "82840fdfd2e16711221318a0ec42838c"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Add",
+        "Sub",
+        "Add"
+      ],
+      "precedence_levels": {
+        "Add": 3,
+        "Sub": 3
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Return",
+        "Assign",
+        "For",
+        "If",
+        "AugAssign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Return_2",
+        "Assign_3",
+        "For_4",
+        "If_5",
+        "AugAssign_6",
+        "Return_7"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If",
+        "For",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "not p1",
+          "return_type": "constant"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "not p1"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_18_claude_sonnet_4_5_20250929_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/18",
+    "prompt": "\n\ndef how_many_times(string: str, substring: str) -> int:\n    \"\"\" Find how many times a given substring can be found in the original string. Count overlaping cases.\n    >>> how_many_times('', 'a')\n    0\n    >>> how_many_times('aaa', 'a')\n    3\n    >>> how_many_times('aaaa', 'aa')\n    3\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "how_many_times"
+    },
+    "anchor_signature": "a02897be37d2d0103a38ef54866da3a10c3b1d1c25ed806203e6be41ae295810",
+    "canonical_code": "def how_many_times(string: str, substring: str) -> int:\n    \"\"\" Find how many times a given substring can be found in the original string. Count overlaping cases.\n    >>> how_many_times('', 'a')\n    0\n    >>> how_many_times('aaa', 'a')\n    3\n    >>> how_many_times('aaaa', 'aa')\n    3\n    \"\"\"\n    if not substring:\n        return 0\n    \n    count = 0\n    for i in range(len(string) - len(substring) + 1):\n        if string[i:i + len(substring)] == substring:\n            count += 1\n    \n    return count\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 2,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "range",
+          "len",
+          "len",
+          "len"
+        ],
+        "nested_depth": 2,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_1"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": []
+        },
+        "assignments": {
+          "v0": "Constant(value=0)"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_how_many_times"
+          ],
+          [
+            "function_how_many_times",
+            "branch"
+          ],
+          [
+            "function_how_many_times",
+            "loop"
+          ],
+          [
+            "function_how_many_times",
+            "loop",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "how_many_times": {
+          "name": "how_many_times",
+          "args": [
+            "p0",
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add",
+          "Add"
+        ],
+        "associative_ops": [
+          "Add",
+          "Add"
+        ],
+        "binary_operations": [
+          "Add",
+          "Sub",
+          "Add"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          0,
+          0,
+          1,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Name",
+          "Load",
+          "arg",
+          "Name",
+          "Load",
+          "If",
+          "UnaryOp",
+          "Not",
+          "Name",
+          "Load",
+          "Return",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Sub",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Add",
+          "Constant",
+          "If",
+          "Compare",
+          "Subscript",
+          "Name",
+          "Load",
+          "Slice",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Eq",
+          "Name",
+          "Load",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Add",
+          "Constant",
+          "Return",
+          "Name",
+          "Load",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 10,
+        "ast_hash": "82840fdfd2e16711221318a0ec42838c",
+        "alpha_renamed_hash": "82840fdfd2e16711221318a0ec42838c"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Add",
+          "Sub",
+          "Add"
+        ],
+        "precedence_levels": {
+          "Add": 3,
+          "Sub": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "Assign",
+          "For",
+          "If",
+          "AugAssign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "Assign_3",
+          "For_4",
+          "If_5",
+          "AugAssign_6",
+          "Return_7"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "For",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "not p1",
+            "return_type": "constant"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "not p1"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

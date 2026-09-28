@@ -1,0 +1,502 @@
+{
+  "contract_id": "HumanEval_158_claude_sonnet_4_5_20250929_temp0.0",
+  "canonical_code": "def find_max(words):\n    if not words:\n        return \"\"\n    \n    max_unique = -1\n    result = \"\"\n    \n    for word in words:\n        unique_count = len(set(word))\n        if unique_count > max_unique or (unique_count == max_unique and word < result):\n            max_unique = unique_count\n            result = word\n    \n    return result\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 2,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [
+        "len",
+        "set"
+      ],
+      "nested_depth": 2,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_1"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [
+          "v3"
+        ],
+        "v1": [
+          "v2"
+        ],
+        "v3": [
+          "v2"
+        ]
+      },
+      "assignments": {
+        "v0": "Name(id='v3', ctx=Load())",
+        "v1": "Name(id='v2', ctx=Load())",
+        "v3": "Call(func=Name(id='len', ctx=Load()), args=[Call(func=Name(id='set', ctx=Load()), args=[Name(id='v2', ctx=Load())])])"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_find_max"
+        ],
+        [
+          "function_find_max",
+          "branch"
+        ],
+        [
+          "function_find_max",
+          "loop"
+        ],
+        [
+          "function_find_max",
+          "loop",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "find_max": {
+        "name": "find_max",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": []
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": false,
+      "numeric_constants": [
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [
+        "Or",
+        "And"
+      ],
+      "comparisons": [
+        "Gt",
+        "Eq",
+        "Lt"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "If",
+        "UnaryOp",
+        "Not",
+        "Name",
+        "Load",
+        "Return",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "UnaryOp",
+        "USub",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "For",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "If",
+        "BoolOp",
+        "Or",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Name",
+        "Load",
+        "BoolOp",
+        "And",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Name",
+        "Load",
+        "Compare",
+        "Name",
+        "Load",
+        "Lt",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Return",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 8,
+      "ast_hash": "7a8ec44229e4b72cf384c9d524d3c1c5",
+      "alpha_renamed_hash": "7a8ec44229e4b72cf384c9d524d3c1c5"
+    },
+    "operator_precedence": {
+      "operator_sequence": [],
+      "precedence_levels": {}
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Return",
+        "Assign",
+        "Assign",
+        "For",
+        "Assign",
+        "If",
+        "Assign",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Return_2",
+        "Assign_3",
+        "Assign_4",
+        "For_5",
+        "Assign_6",
+        "If_7",
+        "Assign_8",
+        "Assign_9",
+        "Return_10"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If",
+        "For",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "not p0",
+          "return_type": "constant"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "not p0"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_158_claude_sonnet_4_5_20250929_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/158",
+    "prompt": "\ndef find_max(words):\n    \"\"\"Write a function that accepts a list of strings.\n    The list contains different words. Return the word with maximum number\n    of unique characters. If multiple strings have maximum number of unique\n    characters, return the one which comes first in lexicographical order.\n\n    find_max([\"name\", \"of\", \"string\"]) == \"string\"\n    find_max([\"name\", \"enam\", \"game\"]) == \"enam\"\n    find_max([\"aaaaaaa\", \"bb\" ,\"cc\"]) == \"\"aaaaaaa\"\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "find_max"
+    },
+    "anchor_signature": "96c5a7cb78dffc082744ffedca19b33141dbb833bbcb8d66b6158156f1497ddd",
+    "canonical_code": "def find_max(words):\n    if not words:\n        return \"\"\n    \n    max_unique = -1\n    result = \"\"\n    \n    for word in words:\n        unique_count = len(set(word))\n        if unique_count > max_unique or (unique_count == max_unique and word < result):\n            max_unique = unique_count\n            result = word\n    \n    return result\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 2,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "len",
+          "set"
+        ],
+        "nested_depth": 2,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_1"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [
+            "v3"
+          ],
+          "v1": [
+            "v2"
+          ],
+          "v3": [
+            "v2"
+          ]
+        },
+        "assignments": {
+          "v0": "Name(id='v3', ctx=Load())",
+          "v1": "Name(id='v2', ctx=Load())",
+          "v3": "Call(func=Name(id='len', ctx=Load()), args=[Call(func=Name(id='set', ctx=Load()), args=[Name(id='v2', ctx=Load())])])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_find_max"
+          ],
+          [
+            "function_find_max",
+            "branch"
+          ],
+          [
+            "function_find_max",
+            "loop"
+          ],
+          [
+            "function_find_max",
+            "loop",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "find_max": {
+          "name": "find_max",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": [
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [
+          "Or",
+          "And"
+        ],
+        "comparisons": [
+          "Gt",
+          "Eq",
+          "Lt"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "If",
+          "UnaryOp",
+          "Not",
+          "Name",
+          "Load",
+          "Return",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "UnaryOp",
+          "USub",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "If",
+          "BoolOp",
+          "Or",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Name",
+          "Load",
+          "BoolOp",
+          "And",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Name",
+          "Load",
+          "Compare",
+          "Name",
+          "Load",
+          "Lt",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Return",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 8,
+        "ast_hash": "7a8ec44229e4b72cf384c9d524d3c1c5",
+        "alpha_renamed_hash": "7a8ec44229e4b72cf384c9d524d3c1c5"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "Assign",
+          "Assign",
+          "For",
+          "Assign",
+          "If",
+          "Assign",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "Assign_3",
+          "Assign_4",
+          "For_5",
+          "Assign_6",
+          "If_7",
+          "Assign_8",
+          "Assign_9",
+          "Return_10"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "For",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "not p0",
+            "return_type": "constant"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "not p0"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

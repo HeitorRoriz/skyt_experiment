@@ -1,0 +1,47 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "3cfc1ae916b594aecde8712413e2c3dec61af1c24d9ef6b1d1f8fd8edfa770c1|3cfc1ae916b594aecde8712413e2c3dec61af1c24d9ef6b1d1f8fd8edfa770c1": {
+      "stitched_code": "def prod_signs(arr):\n    if not arr:\n        return None\n    \n    product_sign = 1\n    magnitude_sum = 0\n    \n    for num in arr:\n        if num > 0:\n            magnitude_sum += num\n        elif num < 0:\n            magnitude_sum += -num\n            product_sign *= -1\n        else:\n            return 0\n    \n    return product_sign * magnitude_sum\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "6ba6e46660d9a7c96f659033c807db95f4a39b18f488290dd0ffb30a7e19f71e|3cfc1ae916b594aecde8712413e2c3dec61af1c24d9ef6b1d1f8fd8edfa770c1": {
+      "stitched_code": "def prod_signs(arr):\n    if not arr:\n        return None\n    product_sign = 1\n    magnitude_sum = 0\n    for num in arr:\n        if num > 0:\n            magnitude_sum += num\n        elif num < 0:\n            magnitude_sum += -num\n            product_sign *= -1\n        else:\n            return 0\n    return product_sign * magnitude_sum\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

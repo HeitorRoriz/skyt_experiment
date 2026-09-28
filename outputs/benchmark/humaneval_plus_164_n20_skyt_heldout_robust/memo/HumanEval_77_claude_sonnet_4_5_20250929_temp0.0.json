@@ -1,0 +1,89 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "ed286a4bc2d42642405380e4a268075c1e16aa7de9651a48c8ed970f94b80833|ed286a4bc2d42642405380e4a268075c1e16aa7de9651a48c8ed970f94b80833": {
+      "stitched_code": "def iscube(a):\n    if a == 0:\n        return True\n    \n    # Handle negative numbers\n    if a < 0:\n        a = -a\n        cube_root = round(a ** (1/3))\n        return cube_root ** 3 == a or (cube_root + 1) ** 3 == a\n    \n    # Handle positive numbers\n    cube_root = round(a ** (1/3))\n    return cube_root ** 3 == a or (cube_root + 1) ** 3 == a or (cube_root - 1) ** 3 == a\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "51df3cedc319d1b7f65c44fa638389b7ee783242dd1ef6744b5fd1168172af99|ed286a4bc2d42642405380e4a268075c1e16aa7de9651a48c8ed970f94b80833": {
+      "stitched_code": "def iscube(a):\n    if a == 0:\n        return True\n    if a < 0:\n        a = -a\n        cube_root = round(a ** (1 / 3))\n        return cube_root ** 3 == a or (cube_root + 1) ** 3 == a\n    cube_root = round(a ** (1 / 3))\n    return cube_root ** 3 == a or (cube_root + 1) ** 3 == a or (cube_root - 1\n        ) ** 3 == a\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "ed286a4bc2d42642405380e4a268075c1e16aa7de9651a48c8ed970f94b80833|51df3cedc319d1b7f65c44fa638389b7ee783242dd1ef6744b5fd1168172af99": {
+      "stitched_code": "def iscube(a):\n    if a == 0:\n        return True\n    if a < 0:\n        a = -a\n        cube_root = round(a ** (1 / 3))\n        return cube_root ** 3 == a\n    cube_root = round(a ** (1 / 3))\n    return cube_root ** 3 == a\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "51df3cedc319d1b7f65c44fa638389b7ee783242dd1ef6744b5fd1168172af99|51df3cedc319d1b7f65c44fa638389b7ee783242dd1ef6744b5fd1168172af99": {
+      "stitched_code": "def iscube(a):\n    if a == 0:\n        return True\n    \n    # Handle negative numbers\n    if a < 0:\n        a = -a\n        cube_root = round(a ** (1/3))\n        return cube_root ** 3 == a\n    \n    # Handle positive numbers\n    cube_root = round(a ** (1/3))\n    return cube_root ** 3 == a\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

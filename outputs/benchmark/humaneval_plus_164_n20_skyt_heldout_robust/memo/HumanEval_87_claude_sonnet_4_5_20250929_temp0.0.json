@@ -1,0 +1,65 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "1c8e73d7ff2ae0e4cb675fc1892e82fef4df47df95d368e82d4e1aa2e28e4a82|51ab0bf58f68b7f99857fca29021502b99c5905c1c5c02080a1f51c487b87a96": {
+      "stitched_code": "def get_row(lst, x):\n    coordinates = []\n    \n    for row_idx, row in enumerate(lst):\n        for col_idx, value in enumerate(row):\n            if value == x:\n                coordinates.append((row_idx, col_idx))\n    \n    # Sort by row ascending (primary), then by column descending (secondary)\n    coordinates.sort(key=lambda coord: (coord[0], -coord[1]))\n    \n    return coordinates\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "51ab0bf58f68b7f99857fca29021502b99c5905c1c5c02080a1f51c487b87a96|51ab0bf58f68b7f99857fca29021502b99c5905c1c5c02080a1f51c487b87a96": {
+      "stitched_code": "def get_row(lst, x):\n    coordinates = []\n    \n    # Find all occurrences of x\n    for row_idx, row in enumerate(lst):\n        for col_idx, value in enumerate(row):\n            if value == x:\n                coordinates.append((row_idx, col_idx))\n    \n    # Sort by row ascending, then by column descending\n    coordinates.sort(key=lambda coord: (coord[0], -coord[1]))\n    \n    return coordinates\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "abde9afbd7f03106f3d0c99b6ecc74dd6a6b2139b1d2edd7ab13247667b608fb|51ab0bf58f68b7f99857fca29021502b99c5905c1c5c02080a1f51c487b87a96": {
+      "stitched_code": "def get_row(lst, x):\n    coordinates = []\n    \n    for row_idx, row in enumerate(lst):\n        for col_idx, value in enumerate(row):\n            if value == x:\n                coordinates.append((row_idx, col_idx))\n    \n    # Sort by row ascending (first element), then by column descending (second element)\n    coordinates.sort(key=lambda coord: (coord[0], -coord[1]))\n    \n    return coordinates\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

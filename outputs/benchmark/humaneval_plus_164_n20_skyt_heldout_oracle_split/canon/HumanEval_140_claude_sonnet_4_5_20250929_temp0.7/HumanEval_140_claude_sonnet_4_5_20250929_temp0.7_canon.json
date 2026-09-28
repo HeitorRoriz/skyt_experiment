@@ -1,0 +1,644 @@
+{
+  "contract_id": "HumanEval_140_claude_sonnet_4_5_20250929_temp0.7",
+  "canonical_code": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then replace all consecutive spaces with - \n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"\n    result = []\n    i = 0\n    while i < len(text):\n        if text[i] == ' ':\n            # Count consecutive spaces\n            space_count = 0\n            j = i\n            while j < len(text) and text[j] == ' ':\n                space_count += 1\n                j += 1\n            \n            # If more than 2 consecutive spaces, replace with -\n            if space_count > 2:\n                result.append('-')\n            else:\n                # Replace each space with underscore\n                result.append('_' * space_count)\n            \n            i = j\n        else:\n            result.append(text[i])\n            i += 1\n    \n    return ''.join(result)\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 2,
+      "for_loops": 0,
+      "while_loops": 2,
+      "function_calls": [
+        "len",
+        "len"
+      ],
+      "nested_depth": 3,
+      "branch_patterns": [
+        "if_at_depth_1",
+        "if_at_depth_2"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [],
+        "v1": [
+          "v3"
+        ],
+        "v2": [],
+        "v3": [
+          "v1"
+        ]
+      },
+      "assignments": {
+        "v0": "List(ctx=Load())",
+        "v1": "Name(id='v3', ctx=Load())",
+        "v2": "Constant(value=0)",
+        "v3": "Name(id='v1', ctx=Load())"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_fix_spaces"
+        ],
+        [
+          "function_fix_spaces",
+          "branch"
+        ],
+        [
+          "function_fix_spaces",
+          "branch",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "fix_spaces": {
+        "name": "fix_spaces",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 2,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n^2)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Mult"
+      ],
+      "associative_ops": [
+        "Mult"
+      ],
+      "binary_operations": [
+        "Mult"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [
+        "And"
+      ],
+      "comparisons": [
+        "Lt",
+        "Eq",
+        "Lt",
+        "Eq",
+        "Gt"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "List",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "While",
+        "Compare",
+        "Name",
+        "Load",
+        "Lt",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Eq",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "While",
+        "BoolOp",
+        "And",
+        "Compare",
+        "Name",
+        "Load",
+        "Lt",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Compare",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Eq",
+        "Constant",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Add",
+        "Constant",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Add",
+        "Constant",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Constant",
+        "Expr",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Constant",
+        "Expr",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "BinOp",
+        "Constant",
+        "Mult",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Expr",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Add",
+        "Constant",
+        "Return",
+        "Call",
+        "Attribute",
+        "Constant",
+        "Load",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 9,
+      "ast_hash": "52139d6b34405bd548dbc1f71287b60e",
+      "alpha_renamed_hash": "52139d6b34405bd548dbc1f71287b60e"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Mult"
+      ],
+      "precedence_levels": {
+        "Mult": 4
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "Assign",
+        "While",
+        "If",
+        "Assign",
+        "Assign",
+        "While",
+        "AugAssign",
+        "AugAssign",
+        "If",
+        "Expr",
+        "Expr",
+        "Assign",
+        "Expr",
+        "AugAssign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "Assign_2",
+        "While_3",
+        "If_4",
+        "Assign_5",
+        "Assign_6",
+        "While_7",
+        "AugAssign_8",
+        "AugAssign_9",
+        "If_10",
+        "Expr_11",
+        "Expr_12",
+        "Assign_13",
+        "Expr_14",
+        "AugAssign_15",
+        "Return_16"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "While",
+        "If",
+        "While",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_140_claude_sonnet_4_5_20250929_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/140",
+    "prompt": "\ndef fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then replace all consecutive spaces with - \n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "fix_spaces"
+    },
+    "anchor_signature": "0ec0dd1c33067aa71460833fc3fcd7f6a18b65101c59d7becb3c4581bd56f227",
+    "canonical_code": "def fix_spaces(text):\n    \"\"\"\n    Given a string text, replace all spaces in it with underscores, \n    and if a string has more than 2 consecutive spaces, \n    then replace all consecutive spaces with - \n    \n    fix_spaces(\"Example\") == \"Example\"\n    fix_spaces(\"Example 1\") == \"Example_1\"\n    fix_spaces(\" Example 2\") == \"_Example_2\"\n    fix_spaces(\" Example   3\") == \"_Example-3\"\n    \"\"\"\n    result = []\n    i = 0\n    while i < len(text):\n        if text[i] == ' ':\n            # Count consecutive spaces\n            space_count = 0\n            j = i\n            while j < len(text) and text[j] == ' ':\n                space_count += 1\n                j += 1\n            \n            # If more than 2 consecutive spaces, replace with -\n            if space_count > 2:\n                result.append('-')\n            else:\n                # Replace each space with underscore\n                result.append('_' * space_count)\n            \n            i = j\n        else:\n            result.append(text[i])\n            i += 1\n    \n    return ''.join(result)\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 2,
+        "for_loops": 0,
+        "while_loops": 2,
+        "function_calls": [
+          "len",
+          "len"
+        ],
+        "nested_depth": 3,
+        "branch_patterns": [
+          "if_at_depth_1",
+          "if_at_depth_2"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [],
+          "v1": [
+            "v3"
+          ],
+          "v2": [],
+          "v3": [
+            "v1"
+          ]
+        },
+        "assignments": {
+          "v0": "List(ctx=Load())",
+          "v1": "Name(id='v3', ctx=Load())",
+          "v2": "Constant(value=0)",
+          "v3": "Name(id='v1', ctx=Load())"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_fix_spaces"
+          ],
+          [
+            "function_fix_spaces",
+            "branch"
+          ],
+          [
+            "function_fix_spaces",
+            "branch",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "fix_spaces": {
+          "name": "fix_spaces",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 2,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n^2)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Mult"
+        ],
+        "associative_ops": [
+          "Mult"
+        ],
+        "binary_operations": [
+          "Mult"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          0,
+          0,
+          1,
+          1,
+          2,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [
+          "And"
+        ],
+        "comparisons": [
+          "Lt",
+          "Eq",
+          "Lt",
+          "Eq",
+          "Gt"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "List",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "While",
+          "Compare",
+          "Name",
+          "Load",
+          "Lt",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Eq",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "While",
+          "BoolOp",
+          "And",
+          "Compare",
+          "Name",
+          "Load",
+          "Lt",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Compare",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Eq",
+          "Constant",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Add",
+          "Constant",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Add",
+          "Constant",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Constant",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Constant",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "BinOp",
+          "Constant",
+          "Mult",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Add",
+          "Constant",
+          "Return",
+          "Call",
+          "Attribute",
+          "Constant",
+          "Load",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 9,
+        "ast_hash": "52139d6b34405bd548dbc1f71287b60e",
+        "alpha_renamed_hash": "52139d6b34405bd548dbc1f71287b60e"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Mult"
+        ],
+        "precedence_levels": {
+          "Mult": 4
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "While",
+          "If",
+          "Assign",
+          "Assign",
+          "While",
+          "AugAssign",
+          "AugAssign",
+          "If",
+          "Expr",
+          "Expr",
+          "Assign",
+          "Expr",
+          "AugAssign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "Assign_2",
+          "While_3",
+          "If_4",
+          "Assign_5",
+          "Assign_6",
+          "While_7",
+          "AugAssign_8",
+          "AugAssign_9",
+          "If_10",
+          "Expr_11",
+          "Expr_12",
+          "Assign_13",
+          "Expr_14",
+          "AugAssign_15",
+          "Return_16"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "While",
+          "If",
+          "While",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

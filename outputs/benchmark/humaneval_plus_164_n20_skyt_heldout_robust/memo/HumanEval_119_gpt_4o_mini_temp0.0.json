@@ -1,0 +1,25 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "89aafde5263b2295f2abde80172f773c1c9749a60f3e9a5bc4274cf8b8872595|89aafde5263b2295f2abde80172f773c1c9749a60f3e9a5bc4274cf8b8872595": {
+      "stitched_code": "def match_parens(lst):\n    def is_good(s):\n        balance = 0\n        for char in s:\n            if char == '(':\n                balance += 1\n            else:\n                balance -= 1\n            if balance < 0:\n                return False\n        return balance == 0\n\n    a, b = lst\n    return 'Yes' if is_good(a + b) or is_good(b + a) else 'No'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

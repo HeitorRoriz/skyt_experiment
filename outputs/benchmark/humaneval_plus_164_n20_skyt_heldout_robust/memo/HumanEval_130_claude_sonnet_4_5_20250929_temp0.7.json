@@ -1,0 +1,3945 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "0d124ec7d40d8b39042e0be18f0c944f996019da9e34593aa9aa6c2db3c1c24e|430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8250a6cb22ed62265a4be41a3c7dc62fd2d5b1fca0841f558416bbe9c5eb4e35|430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10|430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]  # tri(0) = 1, tri(1) = 3\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            # Even: tri(i) = 1 + i/2\n            result.append(1 + i // 2)\n        else:\n            # Odd: tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # Since i is odd, i+1 is even, so tri(i+1) = 1 + (i+1)/2\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "505c3c4dc1eb79d49b2bb137f5cba4042f9c722989d8bbcbcb2138498a1e5b65|430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80|430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf|430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 2,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 2
+      }
+    },
+    "e5dc7fe426590f06c6ede2477eb8fa12ff850a30284c10288e42a678ac812418|430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "33eae58a7d1378bad9743adcf24c21bab7ac3181ce77908b2d5e21b6434232ae|430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 2,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 2
+      }
+    },
+    "77d27099cf973974d0dfa80318952f83a704f55a9a34a0794168cf9e0d1cd649|430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 2,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 2
+      }
+    },
+    "dadd5e7405d60ee108fee8dbaa38ac531610486949f755867531b0a3a83d519d|430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]  # tri(0) = 1, tri(1) = 3\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:  # i is even\n            result.append(1 + i // 2)\n        else:  # i is odd\n            # tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # tri(i+1) is even, so tri(i+1) = 1 + (i+1)/2\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0ab27ba1431ce830de4e675e983724831370dd9b059894adf536681f5a463f2b|621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8250a6cb22ed62265a4be41a3c7dc62fd2d5b1fca0841f558416bbe9c5eb4e35|621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10|621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "92262d9d0bb7b1fa983a17da9987a535164a285e66ca21cde31399d3e537fe23|621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "33eae58a7d1378bad9743adcf24c21bab7ac3181ce77908b2d5e21b6434232ae|621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d7a37bafeece2f9abfc755a56046302c8e46bada0082caa390fdcdfbfa7e5219|621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556|621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "dadd5e7405d60ee108fee8dbaa38ac531610486949f755867531b0a3a83d519d|621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6|621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]  # tri(0) = 1, tri(1) = 3\n    \n    if n == 1:\n        return result\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            # Even: tri(i) = 1 + i / 2\n            result.append(1 + i // 2)\n        else:\n            # Odd: tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # Need to compute tri(i+1) first\n            tri_next = 1 + (i + 1) // 2  # i+1 is even\n            result.append(result[i-1] + result[i-2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc|430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]  # tri(0) = 1, tri(1) = 3\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            # Even case\n            result.append(1 + i // 2)\n        else:\n            # Odd case: tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # We need tri(i+1) which is even, so we can calculate it\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "92262d9d0bb7b1fa983a17da9987a535164a285e66ca21cde31399d3e537fe23|430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]  # tri(0) = 1, tri(1) = 3\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            # Even: tri(n) = 1 + n/2\n            result.append(1 + i // 2)\n        else:\n            # Odd: tri(n) = tri(n-1) + tri(n-2) + tri(n+1)\n            # tri(n+1) is even, so tri(n+1) = 1 + (n+1)/2\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556|430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 2,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 2
+      }
+    },
+    "b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6|430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 2,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 2
+      }
+    },
+    "39a85d82c3e6836d18c3b31d6ca60abc69ab57f421bf4746ea5439ddb3357f44|430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d7a37bafeece2f9abfc755a56046302c8e46bada0082caa390fdcdfbfa7e5219|430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]  # tri(0) = 1, tri(1) = 3\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:  # even\n            result.append(1 + i // 2)\n        else:  # odd\n            # tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # tri(i+1) is even, so tri(i+1) = 1 + (i+1)/2\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e|430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 2,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 2
+      }
+    },
+    "0d124ec7d40d8b39042e0be18f0c944f996019da9e34593aa9aa6c2db3c1c24e|4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8250a6cb22ed62265a4be41a3c7dc62fd2d5b1fca0841f558416bbe9c5eb4e35|4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "39a85d82c3e6836d18c3b31d6ca60abc69ab57f421bf4746ea5439ddb3357f44|4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "e5dc7fe426590f06c6ede2477eb8fa12ff850a30284c10288e42a678ac812418|4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "33eae58a7d1378bad9743adcf24c21bab7ac3181ce77908b2d5e21b6434232ae|4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 2,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 2
+      }
+    },
+    "77d27099cf973974d0dfa80318952f83a704f55a9a34a0794168cf9e0d1cd649|4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 2,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 2
+      }
+    },
+    "8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556|4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 2,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 2
+      }
+    },
+    "430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55|4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            # For odd i, tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # tri(i+1) is even, so tri(i+1) = 1 + (i+1)/2\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i-1] + result[i-2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6|4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 2,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 2
+      }
+    },
+    "2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10|4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]  # tri(0) = 1, tri(1) = 3\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            # Even: tri(i) = 1 + i/2\n            result.append(1 + i // 2)\n        else:\n            # Odd: tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # Since i is odd, i+1 is even, so tri(i+1) = 1 + (i+1)/2\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80|4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf|4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 2,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 2
+      }
+    },
+    "d7a37bafeece2f9abfc755a56046302c8e46bada0082caa390fdcdfbfa7e5219|4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]  # tri(0) = 1, tri(1) = 3\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:  # even\n            result.append(1 + i // 2)\n        else:  # odd\n            # tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # tri(i+1) is even, so tri(i+1) = 1 + (i+1)/2\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e|4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 2,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 2
+      }
+    },
+    "0d124ec7d40d8b39042e0be18f0c944f996019da9e34593aa9aa6c2db3c1c24e|8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc|8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8250a6cb22ed62265a4be41a3c7dc62fd2d5b1fca0841f558416bbe9c5eb4e35|8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "505c3c4dc1eb79d49b2bb137f5cba4042f9c722989d8bbcbcb2138498a1e5b65|8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf|8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "39a85d82c3e6836d18c3b31d6ca60abc69ab57f421bf4746ea5439ddb3357f44|8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "77d27099cf973974d0dfa80318952f83a704f55a9a34a0794168cf9e0d1cd649|8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55|8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "dadd5e7405d60ee108fee8dbaa38ac531610486949f755867531b0a3a83d519d|8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e|8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0d124ec7d40d8b39042e0be18f0c944f996019da9e34593aa9aa6c2db3c1c24e|b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0ab27ba1431ce830de4e675e983724831370dd9b059894adf536681f5a463f2b|b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8250a6cb22ed62265a4be41a3c7dc62fd2d5b1fca0841f558416bbe9c5eb4e35|b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10|b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80|b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "33eae58a7d1378bad9743adcf24c21bab7ac3181ce77908b2d5e21b6434232ae|b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "77d27099cf973974d0dfa80318952f83a704f55a9a34a0794168cf9e0d1cd649|b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]  # tri(0) and tri(1)\n    \n    if n == 1:\n        return result\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            # Even case\n            result.append(1 + i // 2)\n        else:\n            # Odd case: tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # We need tri(i+1) which is even, so calculate it\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "d7a37bafeece2f9abfc755a56046302c8e46bada0082caa390fdcdfbfa7e5219|b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556|b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "dadd5e7405d60ee108fee8dbaa38ac531610486949f755867531b0a3a83d519d|b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc|7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8250a6cb22ed62265a4be41a3c7dc62fd2d5b1fca0841f558416bbe9c5eb4e35|7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10|7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "92262d9d0bb7b1fa983a17da9987a535164a285e66ca21cde31399d3e537fe23|7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80|7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "e5dc7fe426590f06c6ede2477eb8fa12ff850a30284c10288e42a678ac812418|7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "33eae58a7d1378bad9743adcf24c21bab7ac3181ce77908b2d5e21b6434232ae|7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55|7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6|7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]  # tri(0) = 1, tri(1) = 3\n    \n    if n == 1:\n        return result\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            # Even: tri(i) = 1 + i / 2\n            result.append(1 + i // 2)\n        else:\n            # Odd: tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # Need to compute tri(i+1) first\n            tri_next = 1 + (i + 1) // 2  # i+1 is even\n            result.append(result[i-1] + result[i-2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e|7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]  # tri(0) = 1, tri(1) = 3\n    \n    if n == 1:\n        return result\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:  # even\n            result.append(1 + i // 2)\n        else:  # odd\n            # tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # tri(i+1) is even, so tri(i+1) = 1 + (i+1)/2\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i-1] + result[i-2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc|621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "505c3c4dc1eb79d49b2bb137f5cba4042f9c722989d8bbcbcb2138498a1e5b65|621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80|621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55|621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "505c3c4dc1eb79d49b2bb137f5cba4042f9c722989d8bbcbcb2138498a1e5b65|b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "92262d9d0bb7b1fa983a17da9987a535164a285e66ca21cde31399d3e537fe23|b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf|b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]  # tri(0) and tri(1)\n    \n    if n == 1:\n        return result\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            # Even case\n            result.append(1 + i // 2)\n        else:\n            # Odd case: tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # Since i is odd, i+1 is even, so tri(i+1) = 1 + (i+1)/2\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "39a85d82c3e6836d18c3b31d6ca60abc69ab57f421bf4746ea5439ddb3357f44|b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55|b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0d124ec7d40d8b39042e0be18f0c944f996019da9e34593aa9aa6c2db3c1c24e|7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8250a6cb22ed62265a4be41a3c7dc62fd2d5b1fca0841f558416bbe9c5eb4e35|7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]\n    \n    if n == 1:\n        return result\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            # For odd i: tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # We need to find tri(i+1) first\n            # tri(i+1) = 1 + (i+1)/2 since i+1 is even\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10|7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "92262d9d0bb7b1fa983a17da9987a535164a285e66ca21cde31399d3e537fe23|7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "33eae58a7d1378bad9743adcf24c21bab7ac3181ce77908b2d5e21b6434232ae|7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "77d27099cf973974d0dfa80318952f83a704f55a9a34a0794168cf9e0d1cd649|7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556|7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55|7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "dadd5e7405d60ee108fee8dbaa38ac531610486949f755867531b0a3a83d519d|7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e|7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0ab27ba1431ce830de4e675e983724831370dd9b059894adf536681f5a463f2b|4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "92262d9d0bb7b1fa983a17da9987a535164a285e66ca21cde31399d3e537fe23|4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]  # tri(0) = 1, tri(1) = 3\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            # Even: tri(n) = 1 + n/2\n            result.append(1 + i // 2)\n        else:\n            # Odd: tri(n) = tri(n-1) + tri(n-2) + tri(n+1)\n            # tri(n+1) is even, so tri(n+1) = 1 + (n+1)/2\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "dadd5e7405d60ee108fee8dbaa38ac531610486949f755867531b0a3a83d519d|4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]  # tri(0) = 1, tri(1) = 3\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:  # i is even\n            result.append(1 + i // 2)\n        else:  # i is odd\n            # tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # tri(i+1) is even, so tri(i+1) = 1 + (i+1)/2\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "e5dc7fe426590f06c6ede2477eb8fa12ff850a30284c10288e42a678ac812418|621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc|b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "e5dc7fe426590f06c6ede2477eb8fa12ff850a30284c10288e42a678ac812418|b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0ab27ba1431ce830de4e675e983724831370dd9b059894adf536681f5a463f2b|430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0d124ec7d40d8b39042e0be18f0c944f996019da9e34593aa9aa6c2db3c1c24e|2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc|2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]  # tri(0) = 1, tri(1) = 3\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            # Even case\n            result.append(1 + i // 2)\n        else:\n            # Odd case: tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # We need tri(i+1) which is even, so we can calculate it\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "8250a6cb22ed62265a4be41a3c7dc62fd2d5b1fca0841f558416bbe9c5eb4e35|2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80|2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "33eae58a7d1378bad9743adcf24c21bab7ac3181ce77908b2d5e21b6434232ae|2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 2,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 2
+      }
+    },
+    "77d27099cf973974d0dfa80318952f83a704f55a9a34a0794168cf9e0d1cd649|2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 2,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 2
+      }
+    },
+    "430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55|2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            # For odd i, tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # tri(i+1) is even, so tri(i+1) = 1 + (i+1)/2\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i-1] + result[i-2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "dadd5e7405d60ee108fee8dbaa38ac531610486949f755867531b0a3a83d519d|2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]  # tri(0) = 1, tri(1) = 3\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:  # i is even\n            result.append(1 + i // 2)\n        else:  # i is odd\n            # tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # tri(i+1) is even, so tri(i+1) = 1 + (i+1)/2\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6|2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 2,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 2
+      }
+    },
+    "621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e|2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 2,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 2
+      }
+    },
+    "505c3c4dc1eb79d49b2bb137f5cba4042f9c722989d8bbcbcb2138498a1e5b65|4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0d124ec7d40d8b39042e0be18f0c944f996019da9e34593aa9aa6c2db3c1c24e|92262d9d0bb7b1fa983a17da9987a535164a285e66ca21cde31399d3e537fe23": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc|92262d9d0bb7b1fa983a17da9987a535164a285e66ca21cde31399d3e537fe23": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]  # tri(0) = 1, tri(1) = 3\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            # Even case\n            result.append(1 + i // 2)\n        else:\n            # Odd case: tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # We need tri(i+1) which is even, so we can calculate it\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0ab27ba1431ce830de4e675e983724831370dd9b059894adf536681f5a463f2b|92262d9d0bb7b1fa983a17da9987a535164a285e66ca21cde31399d3e537fe23": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10|92262d9d0bb7b1fa983a17da9987a535164a285e66ca21cde31399d3e537fe23": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]  # tri(0) = 1, tri(1) = 3\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            # Even: tri(i) = 1 + i/2\n            result.append(1 + i // 2)\n        else:\n            # Odd: tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # Since i is odd, i+1 is even, so tri(i+1) = 1 + (i+1)/2\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "505c3c4dc1eb79d49b2bb137f5cba4042f9c722989d8bbcbcb2138498a1e5b65|92262d9d0bb7b1fa983a17da9987a535164a285e66ca21cde31399d3e537fe23": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80|92262d9d0bb7b1fa983a17da9987a535164a285e66ca21cde31399d3e537fe23": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf|92262d9d0bb7b1fa983a17da9987a535164a285e66ca21cde31399d3e537fe23": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 2,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 2
+      }
+    },
+    "77d27099cf973974d0dfa80318952f83a704f55a9a34a0794168cf9e0d1cd649|92262d9d0bb7b1fa983a17da9987a535164a285e66ca21cde31399d3e537fe23": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 2,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 2
+      }
+    },
+    "8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556|92262d9d0bb7b1fa983a17da9987a535164a285e66ca21cde31399d3e537fe23": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 2,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 2
+      }
+    },
+    "430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55|92262d9d0bb7b1fa983a17da9987a535164a285e66ca21cde31399d3e537fe23": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            # For odd i, tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # tri(i+1) is even, so tri(i+1) = 1 + (i+1)/2\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i-1] + result[i-2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e|b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]  # tri(0) = 1, tri(1) = 3\n    \n    if n == 1:\n        return result\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:  # even\n            result.append(1 + i // 2)\n        else:  # odd\n            # tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # tri(i+1) is even, so tri(i+1) = 1 + (i+1)/2\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i-1] + result[i-2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0ab27ba1431ce830de4e675e983724831370dd9b059894adf536681f5a463f2b|7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]\n    \n    if n == 1:\n        return result\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            # For odd i: tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # We need tri(i+1) which is even: tri(i+1) = 1 + (i+1)/2\n            tri_i_plus_1 = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_i_plus_1)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "505c3c4dc1eb79d49b2bb137f5cba4042f9c722989d8bbcbcb2138498a1e5b65|7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6|7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0ab27ba1431ce830de4e675e983724831370dd9b059894adf536681f5a463f2b|2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556|2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 2,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 2
+      }
+    },
+    "77d27099cf973974d0dfa80318952f83a704f55a9a34a0794168cf9e0d1cd649|621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]  # tri(0) and tri(1)\n    \n    if n == 1:\n        return result\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            # Even case\n            result.append(1 + i // 2)\n        else:\n            # Odd case: tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # We need tri(i+1) which is even, so calculate it\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "e5dc7fe426590f06c6ede2477eb8fa12ff850a30284c10288e42a678ac812418|8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d7a37bafeece2f9abfc755a56046302c8e46bada0082caa390fdcdfbfa7e5219|8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10|8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "92262d9d0bb7b1fa983a17da9987a535164a285e66ca21cde31399d3e537fe23|8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80|8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0d124ec7d40d8b39042e0be18f0c944f996019da9e34593aa9aa6c2db3c1c24e|8250a6cb22ed62265a4be41a3c7dc62fd2d5b1fca0841f558416bbe9c5eb4e35": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc|8250a6cb22ed62265a4be41a3c7dc62fd2d5b1fca0841f558416bbe9c5eb4e35": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10|8250a6cb22ed62265a4be41a3c7dc62fd2d5b1fca0841f558416bbe9c5eb4e35": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "92262d9d0bb7b1fa983a17da9987a535164a285e66ca21cde31399d3e537fe23|8250a6cb22ed62265a4be41a3c7dc62fd2d5b1fca0841f558416bbe9c5eb4e35": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80|8250a6cb22ed62265a4be41a3c7dc62fd2d5b1fca0841f558416bbe9c5eb4e35": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]\n    \n    if n == 1:\n        return result\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            # For odd i: tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # We need to compute tri(i+1) first if it's even\n            # tri(i+1) = 1 + (i+1)/2 since i+1 is even when i is odd\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "33eae58a7d1378bad9743adcf24c21bab7ac3181ce77908b2d5e21b6434232ae|8250a6cb22ed62265a4be41a3c7dc62fd2d5b1fca0841f558416bbe9c5eb4e35": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d7a37bafeece2f9abfc755a56046302c8e46bada0082caa390fdcdfbfa7e5219|8250a6cb22ed62265a4be41a3c7dc62fd2d5b1fca0841f558416bbe9c5eb4e35": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556|8250a6cb22ed62265a4be41a3c7dc62fd2d5b1fca0841f558416bbe9c5eb4e35": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6|8250a6cb22ed62265a4be41a3c7dc62fd2d5b1fca0841f558416bbe9c5eb4e35": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e|8250a6cb22ed62265a4be41a3c7dc62fd2d5b1fca0841f558416bbe9c5eb4e35": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0d124ec7d40d8b39042e0be18f0c944f996019da9e34593aa9aa6c2db3c1c24e|621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc|7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "39a85d82c3e6836d18c3b31d6ca60abc69ab57f421bf4746ea5439ddb3357f44|7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d7a37bafeece2f9abfc755a56046302c8e46bada0082caa390fdcdfbfa7e5219|7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "92262d9d0bb7b1fa983a17da9987a535164a285e66ca21cde31399d3e537fe23|2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]  # tri(0) = 1, tri(1) = 3\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            # Even: tri(n) = 1 + n/2\n            result.append(1 + i // 2)\n        else:\n            # Odd: tri(n) = tri(n-1) + tri(n-2) + tri(n+1)\n            # tri(n+1) is even, so tri(n+1) = 1 + (n+1)/2\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf|2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 2,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 2
+      }
+    },
+    "7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf|7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0ab27ba1431ce830de4e675e983724831370dd9b059894adf536681f5a463f2b|8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "39a85d82c3e6836d18c3b31d6ca60abc69ab57f421bf4746ea5439ddb3357f44|8250a6cb22ed62265a4be41a3c7dc62fd2d5b1fca0841f558416bbe9c5eb4e35": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "77d27099cf973974d0dfa80318952f83a704f55a9a34a0794168cf9e0d1cd649|8250a6cb22ed62265a4be41a3c7dc62fd2d5b1fca0841f558416bbe9c5eb4e35": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "430aa9ceeb3cdf5f4e09ac4cea0d12910881827e078c4e353ed8217662da9f55|8250a6cb22ed62265a4be41a3c7dc62fd2d5b1fca0841f558416bbe9c5eb4e35": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0ab27ba1431ce830de4e675e983724831370dd9b059894adf536681f5a463f2b|7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "39a85d82c3e6836d18c3b31d6ca60abc69ab57f421bf4746ea5439ddb3357f44|7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d7a37bafeece2f9abfc755a56046302c8e46bada0082caa390fdcdfbfa7e5219|7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556|7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "e5dc7fe426590f06c6ede2477eb8fa12ff850a30284c10288e42a678ac812418|7f0597d24d46a99a491207fb0deba63348a51999e6459c6a91fa7daeea624a80": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]\n    \n    if n == 1:\n        return result\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            # For odd i: tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # We need to find tri(i+1) first if i+1 is even\n            # tri(i+1) = 1 + (i+1) / 2\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "dadd5e7405d60ee108fee8dbaa38ac531610486949f755867531b0a3a83d519d|8250a6cb22ed62265a4be41a3c7dc62fd2d5b1fca0841f558416bbe9c5eb4e35": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "e5dc7fe426590f06c6ede2477eb8fa12ff850a30284c10288e42a678ac812418|92262d9d0bb7b1fa983a17da9987a535164a285e66ca21cde31399d3e537fe23": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "33eae58a7d1378bad9743adcf24c21bab7ac3181ce77908b2d5e21b6434232ae|92262d9d0bb7b1fa983a17da9987a535164a285e66ca21cde31399d3e537fe23": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 2,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 2
+      }
+    },
+    "b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6|92262d9d0bb7b1fa983a17da9987a535164a285e66ca21cde31399d3e537fe23": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 2,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 2
+      }
+    },
+    "621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e|92262d9d0bb7b1fa983a17da9987a535164a285e66ca21cde31399d3e537fe23": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 2,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 2
+      }
+    },
+    "39a85d82c3e6836d18c3b31d6ca60abc69ab57f421bf4746ea5439ddb3357f44|2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "e5dc7fe426590f06c6ede2477eb8fa12ff850a30284c10288e42a678ac812418|2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "b258b6a46552213c610374fad1a4f2c1c641d724591a690d72fc37ec608b77a6|8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "505c3c4dc1eb79d49b2bb137f5cba4042f9c722989d8bbcbcb2138498a1e5b65|2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "39a85d82c3e6836d18c3b31d6ca60abc69ab57f421bf4746ea5439ddb3357f44|621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf|621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]  # tri(0) and tri(1)\n    \n    if n == 1:\n        return result\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            # Even case\n            result.append(1 + i // 2)\n        else:\n            # Odd case: tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # Since i is odd, i+1 is even, so tri(i+1) = 1 + (i+1)/2\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "4a766bffe5a7e81bfd33ba65deda67c920df4f65140b527a09967560b173ddfc|33eae58a7d1378bad9743adcf24c21bab7ac3181ce77908b2d5e21b6434232ae": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0ab27ba1431ce830de4e675e983724831370dd9b059894adf536681f5a463f2b|33eae58a7d1378bad9743adcf24c21bab7ac3181ce77908b2d5e21b6434232ae": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10|33eae58a7d1378bad9743adcf24c21bab7ac3181ce77908b2d5e21b6434232ae": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "92262d9d0bb7b1fa983a17da9987a535164a285e66ca21cde31399d3e537fe23|33eae58a7d1378bad9743adcf24c21bab7ac3181ce77908b2d5e21b6434232ae": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf|33eae58a7d1378bad9743adcf24c21bab7ac3181ce77908b2d5e21b6434232ae": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "e5dc7fe426590f06c6ede2477eb8fa12ff850a30284c10288e42a678ac812418|33eae58a7d1378bad9743adcf24c21bab7ac3181ce77908b2d5e21b6434232ae": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "77d27099cf973974d0dfa80318952f83a704f55a9a34a0794168cf9e0d1cd649|33eae58a7d1378bad9743adcf24c21bab7ac3181ce77908b2d5e21b6434232ae": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556|33eae58a7d1378bad9743adcf24c21bab7ac3181ce77908b2d5e21b6434232ae": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    \n    result = [1, 3]\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            # Even: tri(i) = 1 + i/2\n            result.append(1 + i // 2)\n        else:\n            # Odd: tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # Since i is odd, i+1 is even, so tri(i+1) = 1 + (i+1)/2\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "dadd5e7405d60ee108fee8dbaa38ac531610486949f755867531b0a3a83d519d|33eae58a7d1378bad9743adcf24c21bab7ac3181ce77908b2d5e21b6434232ae": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "621c6ce64ca72b0e13db4b4fd09fe7dc49a643d2102439453dbf522745aa4a0e|33eae58a7d1378bad9743adcf24c21bab7ac3181ce77908b2d5e21b6434232ae": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    result = [1, 3]\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "505c3c4dc1eb79d49b2bb137f5cba4042f9c722989d8bbcbcb2138498a1e5b65|8250a6cb22ed62265a4be41a3c7dc62fd2d5b1fca0841f558416bbe9c5eb4e35": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf|8250a6cb22ed62265a4be41a3c7dc62fd2d5b1fca0841f558416bbe9c5eb4e35": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i / 2)\n        else:\n            tri_next = 1 + (i + 1) / 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d7a37bafeece2f9abfc755a56046302c8e46bada0082caa390fdcdfbfa7e5219|2c9c8ee805b617ce4359182570afcefbf153070d35183d46000e8a376b9e8b10": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    \n    result = [1, 3]  # tri(0) = 1, tri(1) = 3\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:  # even\n            result.append(1 + i // 2)\n        else:  # odd\n            # tri(i) = tri(i-1) + tri(i-2) + tri(i+1)\n            # tri(i+1) is even, so tri(i+1) = 1 + (i+1)/2\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "505c3c4dc1eb79d49b2bb137f5cba4042f9c722989d8bbcbcb2138498a1e5b65|7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "dadd5e7405d60ee108fee8dbaa38ac531610486949f755867531b0a3a83d519d|7b600350ad135ac81dcbcfdaf2913bc75402a955e8b3dc189172eb9f7cfb2bdf": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    result = [1, 3]\n    if n == 1:\n        return result\n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "33eae58a7d1378bad9743adcf24c21bab7ac3181ce77908b2d5e21b6434232ae|8ccec9b01dea11626c5fc67eb3c5e547fd6e983e17bc6ec6db3efd7eb63a7556": {
+      "stitched_code": "def tri(n):\n    if n == 0:\n        return [1]\n    if n == 1:\n        return [1, 3]\n    \n    result = [1, 3]\n    \n    for i in range(2, n + 1):\n        if i % 2 == 0:\n            result.append(1 + i // 2)\n        else:\n            # i is odd, so i+1 is even\n            tri_next = 1 + (i + 1) // 2\n            result.append(result[i - 1] + result[i - 2] + tri_next)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "a5e85acd855a6d1cf77d7d7cee2727f1695ddf7c6fd10c1efc4302c26c1608eb|a5e85acd855a6d1cf77d7d7cee2727f1695ddf7c6fd10c1efc4302c26c1608eb": {
+      "stitched_code": "def add_elements(arr, k):\n    return sum(x for x in arr[:k] if -100 < x < 100)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "e302323b7286c3bcf009c42c1699f2316cbbc486f8f2515e261461eccc386bcf|a5e85acd855a6d1cf77d7d7cee2727f1695ddf7c6fd10c1efc4302c26c1608eb": {
+      "stitched_code": "def add_elements(arr, k):\n    return sum(x for x in arr[:k] if -10 < x < 100)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "fail",
+        "plus_passed": false,
+        "certified": false
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.08928571428571429,
+        "transformation_level": 0
+      }
+    }
+  }
+}

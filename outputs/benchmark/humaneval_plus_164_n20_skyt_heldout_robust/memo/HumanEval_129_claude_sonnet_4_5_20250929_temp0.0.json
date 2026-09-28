@@ -1,0 +1,457 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "8d165900636167d20a92ff6ab72532e1d123bda1fb33c5f0a7702221f49bbea4|fb6fb7aecae997ea0c9a048c105d51e681d36b24c788dfb369d3b5b830b5bb9b": {
+      "stitched_code": "def minPath(grid, k):\n    n = len(grid)\n    \n    # Find the position of the minimum value (which is 1)\n    min_val = float('inf')\n    min_pos = (0, 0)\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] < min_val:\n                min_val = grid[i][j]\n                min_pos = (i, j)\n    \n    # Find the minimum value among all neighbors of the cell with value 1\n    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]\n    min_neighbor = float('inf')\n    \n    i, j = min_pos\n    for di, dj in directions:\n        ni, nj = i + di, j + dj\n        if 0 <= ni < n and 0 <= nj < n:\n            min_neighbor = min(min_neighbor, grid[ni][nj])\n    \n    # Build the path\n    # The optimal strategy is to alternate between the minimum value (1) \n    # and the minimum neighbor value\n    path = []\n    for step in range(k):\n        if step % 2 == 0:\n            path.append(min_val)\n        else:\n            path.append(min_neighbor)\n    \n    return path\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "fb6fb7aecae997ea0c9a048c105d51e681d36b24c788dfb369d3b5b830b5bb9b|fb6fb7aecae997ea0c9a048c105d51e681d36b24c788dfb369d3b5b830b5bb9b": {
+      "stitched_code": "def minPath(grid, k):\n    n = len(grid)\n    \n    # Find the position of the minimum value (which is 1)\n    min_val = float('inf')\n    min_pos = (0, 0)\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] < min_val:\n                min_val = grid[i][j]\n                min_pos = (i, j)\n    \n    # Find the minimum value among all neighbors of the cell with value 1\n    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]\n    min_neighbor = float('inf')\n    \n    i, j = min_pos\n    for di, dj in directions:\n        ni, nj = i + di, j + dj\n        if 0 <= ni < n and 0 <= nj < n:\n            min_neighbor = min(min_neighbor, grid[ni][nj])\n    \n    # Build the path\n    # The optimal strategy is to alternate between the minimum value (1)\n    # and the minimum neighbor value\n    path = []\n    for step in range(k):\n        if step % 2 == 0:\n            path.append(min_val)\n        else:\n            path.append(min_neighbor)\n    \n    return path\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "41f426ae21fa85125200b917411371a1bca8fcbb985ed07ff47a8e6f1dd40eeb|fb6fb7aecae997ea0c9a048c105d51e681d36b24c788dfb369d3b5b830b5bb9b": {
+      "stitched_code": "def minPath(grid, k):\n    n = len(grid)\n    min_val = float('inf')\n    min_pos = 0, 0\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] < min_val:\n                min_val = grid[i][j]\n                min_pos = i, j\n    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]\n    min_neighbor = float('inf')\n    i, j = min_pos\n    for di, dj in directions:\n        ni, nj = i + di, j + dj\n        if 0 <= ni < n and 0 <= nj < n:\n            min_neighbor = min(min_neighbor, grid[ni][nj])\n    path = []\n    for step in range(k):\n        if step % 2 == 0:\n            path.append(min_val)\n        else:\n            path.append(min_neighbor)\n    return path\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "5377b2b3a654f50745fd1558dd6face89bb2720957418ade3a47755d20d522dc|fb6fb7aecae997ea0c9a048c105d51e681d36b24c788dfb369d3b5b830b5bb9b": {
+      "stitched_code": "def minPath(grid, k):\n    n = len(grid)\n    min_val = float('inf')\n    min_pos = 0, 0\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] < min_val:\n                min_val = grid[i][j]\n                min_pos = i, j\n    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]\n    min_neighbor = float('inf')\n    i, j = min_pos\n    for di, dj in directions:\n        ni, nj = i + di, j + dj\n        if 0 <= ni < n and 0 <= nj < n:\n            min_neighbor = min(min_neighbor, grid[ni][nj])\n    path = []\n    for step in range(k):\n        if step % 2 == 0:\n            path.append(min_val)\n        else:\n            path.append(min_neighbor)\n    return path\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8e3094225cead890bed5c29475919ba14d2b8fd5e9679b77eb86f8f604d6326f|fb6fb7aecae997ea0c9a048c105d51e681d36b24c788dfb369d3b5b830b5bb9b": {
+      "stitched_code": "def minPath(grid, k):\n    n = len(grid)\n    min_val = float('inf')\n    min_pos = 0, 0\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] < min_val:\n                min_val = grid[i][j]\n                min_pos = i, j\n    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]\n    min_neighbor = float('inf')\n    i, j = min_pos\n    for di, dj in directions:\n        ni, nj = i + di, j + dj\n        if 0 <= ni < n and 0 <= nj < n:\n            min_neighbor = min(min_neighbor, grid[ni][nj])\n    path = []\n    for step in range(k):\n        if step % 2 == 0:\n            path.append(min_val)\n        else:\n            path.append(min_neighbor)\n    return path\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "18ae9bcf7a4b3ef36053be829f239badf5fbcbb592f5bdc0bb5f37320ebc0724|fb6fb7aecae997ea0c9a048c105d51e681d36b24c788dfb369d3b5b830b5bb9b": {
+      "stitched_code": "def minPath(grid, k):\n    n = len(grid)\n    min_val = float('inf')\n    min_pos = 0, 0\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] < min_val:\n                min_val = grid[i][j]\n                min_pos = i, j\n    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]\n    min_neighbor = float('inf')\n    i, j = min_pos\n    for di, dj in directions:\n        ni, nj = i + di, j + dj\n        if 0 <= ni < n and 0 <= nj < n:\n            min_neighbor = min(min_neighbor, grid[ni][nj])\n    path = []\n    for step in range(k):\n        if step % 2 == 0:\n            path.append(min_val)\n        else:\n            path.append(min_neighbor)\n    return path\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "585c87d2478a215a4d34f96f9380da5d1f64d3fb8baec039fef66be6aab9d2b8|fb6fb7aecae997ea0c9a048c105d51e681d36b24c788dfb369d3b5b830b5bb9b": {
+      "stitched_code": "def minPath(grid, k):\n    n = len(grid)\n    min_val = float('inf')\n    min_pos = 0, 0\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] < min_val:\n                min_val = grid[i][j]\n                min_pos = i, j\n    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]\n    min_neighbor = float('inf')\n    i, j = min_pos\n    for di, dj in directions:\n        ni, nj = i + di, j + dj\n        if 0 <= ni < n and 0 <= nj < n:\n            min_neighbor = min(min_neighbor, grid[ni][nj])\n    path = []\n    for step in range(k):\n        if step % 2 == 0:\n            path.append(min_val)\n        else:\n            path.append(min_neighbor)\n    return path\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8d165900636167d20a92ff6ab72532e1d123bda1fb33c5f0a7702221f49bbea4|8e3094225cead890bed5c29475919ba14d2b8fd5e9679b77eb86f8f604d6326f": {
+      "stitched_code": "def minPath(grid, k):\n    n = len(grid)\n    min_val = float('inf')\n    min_pos = 0, 0\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] < min_val:\n                min_val = grid[i][j]\n                min_pos = i, j\n    path = [min_val]\n    current_pos = min_pos\n    for _ in range(k - 1):\n        i, j = current_pos\n        neighbors = []\n        if i > 0:\n            neighbors.append((grid[i - 1][j], (i - 1, j)))\n        if i < n - 1:\n            neighbors.append((grid[i + 1][j], (i + 1, j)))\n        if j > 0:\n            neighbors.append((grid[i][j - 1], (i, j - 1)))\n        if j < n - 1:\n            neighbors.append((grid[i][j + 1], (i, j + 1)))\n        min_neighbor_val, min_neighbor_pos = min(neighbors)\n        path.append(min_neighbor_val)\n        current_pos = min_neighbor_pos\n    return path\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "5377b2b3a654f50745fd1558dd6face89bb2720957418ade3a47755d20d522dc|8e3094225cead890bed5c29475919ba14d2b8fd5e9679b77eb86f8f604d6326f": {
+      "stitched_code": "def minPath(grid, k):\n    n = len(grid)\n    min_val = float('inf')\n    min_pos = 0, 0\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] < min_val:\n                min_val = grid[i][j]\n                min_pos = i, j\n    path = [min_val]\n    current_pos = min_pos\n    for _ in range(k - 1):\n        i, j = current_pos\n        neighbors = []\n        if i > 0:\n            neighbors.append((grid[i - 1][j], (i - 1, j)))\n        if i < n - 1:\n            neighbors.append((grid[i + 1][j], (i + 1, j)))\n        if j > 0:\n            neighbors.append((grid[i][j - 1], (i, j - 1)))\n        if j < n - 1:\n            neighbors.append((grid[i][j + 1], (i, j + 1)))\n        min_neighbor_val, min_neighbor_pos = min(neighbors)\n        path.append(min_neighbor_val)\n        current_pos = min_neighbor_pos\n    return path\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "fb6fb7aecae997ea0c9a048c105d51e681d36b24c788dfb369d3b5b830b5bb9b|8e3094225cead890bed5c29475919ba14d2b8fd5e9679b77eb86f8f604d6326f": {
+      "stitched_code": "def minPath(grid, k):\n    n = len(grid)\n    min_val = float('inf')\n    min_pos = 0, 0\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] < min_val:\n                min_val = grid[i][j]\n                min_pos = i, j\n    path = [min_val]\n    current_pos = min_pos\n    for _ in range(k - 1):\n        i, j = current_pos\n        neighbors = []\n        if i > 0:\n            neighbors.append((grid[i - 1][j], (i - 1, j)))\n        if i < n - 1:\n            neighbors.append((grid[i + 1][j], (i + 1, j)))\n        if j > 0:\n            neighbors.append((grid[i][j - 1], (i, j - 1)))\n        if j < n - 1:\n            neighbors.append((grid[i][j + 1], (i, j + 1)))\n        min_neighbor_val, min_neighbor_pos = min(neighbors)\n        path.append(min_neighbor_val)\n        current_pos = min_neighbor_pos\n    return path\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8e3094225cead890bed5c29475919ba14d2b8fd5e9679b77eb86f8f604d6326f|8e3094225cead890bed5c29475919ba14d2b8fd5e9679b77eb86f8f604d6326f": {
+      "stitched_code": "def minPath(grid, k):\n    n = len(grid)\n    \n    # Find the cell with minimum value\n    min_val = float('inf')\n    min_pos = (0, 0)\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] < min_val:\n                min_val = grid[i][j]\n                min_pos = (i, j)\n    \n    # Start building the path\n    path = [min_val]\n    current_pos = min_pos\n    \n    # For remaining k-1 steps\n    for _ in range(k - 1):\n        i, j = current_pos\n        \n        # Find minimum value among neighbors\n        neighbors = []\n        # Up\n        if i > 0:\n            neighbors.append((grid[i-1][j], (i-1, j)))\n        # Down\n        if i < n - 1:\n            neighbors.append((grid[i+1][j], (i+1, j)))\n        # Left\n        if j > 0:\n            neighbors.append((grid[i][j-1], (i, j-1)))\n        # Right\n        if j < n - 1:\n            neighbors.append((grid[i][j+1], (i, j+1)))\n        \n        # Find minimum neighbor\n        min_neighbor_val, min_neighbor_pos = min(neighbors)\n        \n        path.append(min_neighbor_val)\n        current_pos = min_neighbor_pos\n    \n    return path\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "18ae9bcf7a4b3ef36053be829f239badf5fbcbb592f5bdc0bb5f37320ebc0724|8e3094225cead890bed5c29475919ba14d2b8fd5e9679b77eb86f8f604d6326f": {
+      "stitched_code": "def minPath(grid, k):\n    n = len(grid)\n    min_val = float('inf')\n    min_pos = 0, 0\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] < min_val:\n                min_val = grid[i][j]\n                min_pos = i, j\n    path = [min_val]\n    current_pos = min_pos\n    for _ in range(k - 1):\n        i, j = current_pos\n        neighbors = []\n        if i > 0:\n            neighbors.append((grid[i - 1][j], (i - 1, j)))\n        if i < n - 1:\n            neighbors.append((grid[i + 1][j], (i + 1, j)))\n        if j > 0:\n            neighbors.append((grid[i][j - 1], (i, j - 1)))\n        if j < n - 1:\n            neighbors.append((grid[i][j + 1], (i, j + 1)))\n        min_neighbor_val, min_neighbor_pos = min(neighbors)\n        path.append(min_neighbor_val)\n        current_pos = min_neighbor_pos\n    return path\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "41f426ae21fa85125200b917411371a1bca8fcbb985ed07ff47a8e6f1dd40eeb|8e3094225cead890bed5c29475919ba14d2b8fd5e9679b77eb86f8f604d6326f": {
+      "stitched_code": "def minPath(grid, k):\n    n = len(grid)\n    min_val = float('inf')\n    min_pos = 0, 0\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] < min_val:\n                min_val = grid[i][j]\n                min_pos = i, j\n    path = [min_val]\n    current_pos = min_pos\n    for _ in range(k - 1):\n        i, j = current_pos\n        neighbors = []\n        if i > 0:\n            neighbors.append((grid[i - 1][j], (i - 1, j)))\n        if i < n - 1:\n            neighbors.append((grid[i + 1][j], (i + 1, j)))\n        if j > 0:\n            neighbors.append((grid[i][j - 1], (i, j - 1)))\n        if j < n - 1:\n            neighbors.append((grid[i][j + 1], (i, j + 1)))\n        min_neighbor_val, min_neighbor_pos = min(neighbors)\n        path.append(min_neighbor_val)\n        current_pos = min_neighbor_pos\n    return path\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "585c87d2478a215a4d34f96f9380da5d1f64d3fb8baec039fef66be6aab9d2b8|8e3094225cead890bed5c29475919ba14d2b8fd5e9679b77eb86f8f604d6326f": {
+      "stitched_code": "def minPath(grid, k):\n    n = len(grid)\n    min_val = float('inf')\n    min_pos = 0, 0\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] < min_val:\n                min_val = grid[i][j]\n                min_pos = i, j\n    path = [min_val]\n    current_pos = min_pos\n    for _ in range(k - 1):\n        i, j = current_pos\n        neighbors = []\n        if i > 0:\n            neighbors.append((grid[i - 1][j], (i - 1, j)))\n        if i < n - 1:\n            neighbors.append((grid[i + 1][j], (i + 1, j)))\n        if j > 0:\n            neighbors.append((grid[i][j - 1], (i, j - 1)))\n        if j < n - 1:\n            neighbors.append((grid[i][j + 1], (i, j + 1)))\n        min_neighbor_val, min_neighbor_pos = min(neighbors)\n        path.append(min_neighbor_val)\n        current_pos = min_neighbor_pos\n    return path\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8e3094225cead890bed5c29475919ba14d2b8fd5e9679b77eb86f8f604d6326f|8d165900636167d20a92ff6ab72532e1d123bda1fb33c5f0a7702221f49bbea4": {
+      "stitched_code": "def minPath(grid, k):\n    n = len(grid)\n    min_val = float('inf')\n    min_pos = 0, 0\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] < min_val:\n                min_val = grid[i][j]\n                min_pos = i, j\n    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]\n    min_neighbor = float('inf')\n    i, j = min_pos\n    for di, dj in directions:\n        ni, nj = i + di, j + dj\n        if 0 <= ni < n and 0 <= nj < n:\n            min_neighbor = min(min_neighbor, grid[ni][nj])\n    path = []\n    for step in range(k):\n        if step % 2 == 0:\n            path.append(min_val)\n        else:\n            path.append(min_neighbor)\n    return path\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "fb6fb7aecae997ea0c9a048c105d51e681d36b24c788dfb369d3b5b830b5bb9b|8d165900636167d20a92ff6ab72532e1d123bda1fb33c5f0a7702221f49bbea4": {
+      "stitched_code": "def minPath(grid, k):\n    n = len(grid)\n    \n    # Find the position of the minimum value (which is 1)\n    min_val = float('inf')\n    min_pos = (0, 0)\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] < min_val:\n                min_val = grid[i][j]\n                min_pos = (i, j)\n    \n    # Find the minimum value among all neighbors of the cell with value 1\n    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]\n    min_neighbor = float('inf')\n    \n    i, j = min_pos\n    for di, dj in directions:\n        ni, nj = i + di, j + dj\n        if 0 <= ni < n and 0 <= nj < n:\n            min_neighbor = min(min_neighbor, grid[ni][nj])\n    \n    # Build the path\n    # The optimal strategy is to alternate between the minimum value (1)\n    # and the minimum neighbor value\n    path = []\n    for step in range(k):\n        if step % 2 == 0:\n            path.append(min_val)\n        else:\n            path.append(min_neighbor)\n    \n    return path\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "41f426ae21fa85125200b917411371a1bca8fcbb985ed07ff47a8e6f1dd40eeb|8d165900636167d20a92ff6ab72532e1d123bda1fb33c5f0a7702221f49bbea4": {
+      "stitched_code": "def minPath(grid, k):\n    n = len(grid)\n    min_val = float('inf')\n    min_pos = 0, 0\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] < min_val:\n                min_val = grid[i][j]\n                min_pos = i, j\n    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]\n    min_neighbor = float('inf')\n    i, j = min_pos\n    for di, dj in directions:\n        ni, nj = i + di, j + dj\n        if 0 <= ni < n and 0 <= nj < n:\n            min_neighbor = min(min_neighbor, grid[ni][nj])\n    path = []\n    for step in range(k):\n        if step % 2 == 0:\n            path.append(min_val)\n        else:\n            path.append(min_neighbor)\n    return path\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "5377b2b3a654f50745fd1558dd6face89bb2720957418ade3a47755d20d522dc|8d165900636167d20a92ff6ab72532e1d123bda1fb33c5f0a7702221f49bbea4": {
+      "stitched_code": "def minPath(grid, k):\n    n = len(grid)\n    min_val = float('inf')\n    min_pos = 0, 0\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] < min_val:\n                min_val = grid[i][j]\n                min_pos = i, j\n    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]\n    min_neighbor = float('inf')\n    i, j = min_pos\n    for di, dj in directions:\n        ni, nj = i + di, j + dj\n        if 0 <= ni < n and 0 <= nj < n:\n            min_neighbor = min(min_neighbor, grid[ni][nj])\n    path = []\n    for step in range(k):\n        if step % 2 == 0:\n            path.append(min_val)\n        else:\n            path.append(min_neighbor)\n    return path\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "18ae9bcf7a4b3ef36053be829f239badf5fbcbb592f5bdc0bb5f37320ebc0724|8d165900636167d20a92ff6ab72532e1d123bda1fb33c5f0a7702221f49bbea4": {
+      "stitched_code": "def minPath(grid, k):\n    n = len(grid)\n    min_val = float('inf')\n    min_pos = 0, 0\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] < min_val:\n                min_val = grid[i][j]\n                min_pos = i, j\n    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]\n    min_neighbor = float('inf')\n    i, j = min_pos\n    for di, dj in directions:\n        ni, nj = i + di, j + dj\n        if 0 <= ni < n and 0 <= nj < n:\n            min_neighbor = min(min_neighbor, grid[ni][nj])\n    path = []\n    for step in range(k):\n        if step % 2 == 0:\n            path.append(min_val)\n        else:\n            path.append(min_neighbor)\n    return path\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "585c87d2478a215a4d34f96f9380da5d1f64d3fb8baec039fef66be6aab9d2b8|8d165900636167d20a92ff6ab72532e1d123bda1fb33c5f0a7702221f49bbea4": {
+      "stitched_code": "def minPath(grid, k):\n    n = len(grid)\n    min_val = float('inf')\n    min_pos = 0, 0\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] < min_val:\n                min_val = grid[i][j]\n                min_pos = i, j\n    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]\n    min_neighbor = float('inf')\n    i, j = min_pos\n    for di, dj in directions:\n        ni, nj = i + di, j + dj\n        if 0 <= ni < n and 0 <= nj < n:\n            min_neighbor = min(min_neighbor, grid[ni][nj])\n    path = []\n    for step in range(k):\n        if step % 2 == 0:\n            path.append(min_val)\n        else:\n            path.append(min_neighbor)\n    return path\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8d165900636167d20a92ff6ab72532e1d123bda1fb33c5f0a7702221f49bbea4|8d165900636167d20a92ff6ab72532e1d123bda1fb33c5f0a7702221f49bbea4": {
+      "stitched_code": "def minPath(grid, k):\n    n = len(grid)\n    \n    # Find the position of the minimum value (which is 1)\n    min_val = float('inf')\n    min_pos = (0, 0)\n    for i in range(n):\n        for j in range(n):\n            if grid[i][j] < min_val:\n                min_val = grid[i][j]\n                min_pos = (i, j)\n    \n    # Find the minimum value among all neighbors of the cell with value 1\n    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]\n    min_neighbor = float('inf')\n    \n    i, j = min_pos\n    for di, dj in directions:\n        ni, nj = i + di, j + dj\n        if 0 <= ni < n and 0 <= nj < n:\n            min_neighbor = min(min_neighbor, grid[ni][nj])\n    \n    # Build the path\n    # The optimal strategy is to alternate between the minimum value (1) \n    # and the minimum neighbor value\n    path = []\n    for step in range(k):\n        if step % 2 == 0:\n            path.append(min_val)\n        else:\n            path.append(min_neighbor)\n    \n    return path\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

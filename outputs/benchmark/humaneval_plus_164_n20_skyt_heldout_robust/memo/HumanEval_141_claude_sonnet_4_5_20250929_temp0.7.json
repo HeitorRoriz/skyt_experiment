@@ -1,0 +1,2445 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "15748d80aee679a9f38d0439003e4b7abdb01a6056c31fa068b45d054f8c6d16|2f61d90eae8c4798346e7c32afdeb7d32a8f06d13475d3b05604dabf14b1170f": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "92f22e14fd9da6dab09b302029c66879ca7b6760dba752b7f916928db09912b5|2f61d90eae8c4798346e7c32afdeb7d32a8f06d13475d3b05604dabf14b1170f": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "05f09657406c80b1692afee7bfd856ef8fe860ff949d461104521cb7add1b6c1|2f61d90eae8c4798346e7c32afdeb7d32a8f06d13475d3b05604dabf14b1170f": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name_part = parts[0]\n    extension = parts[1]\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Check if name part is not empty\n    if len(name_part) == 0:\n        return 'No'\n    \n    # Check if name starts with a letter\n    if not name_part[0].isalpha():\n        return 'No'\n    \n    # Count digits in the entire filename\n    digit_count = sum(1 for char in file_name if char.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "7714d97ad06719d904bd4c5d6b8b7e45a24839c03ebec2a9a2bb459daa46a85c|2f61d90eae8c4798346e7c32afdeb7d32a8f06d13475d3b05604dabf14b1170f": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if name starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Count digits in the entire file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "8748a4bb7771280f20bbf192f8e3a39a6862c31f52fbbe82f309a7077ebf0624|2f61d90eae8c4798346e7c32afdeb7d32a8f06d13475d3b05604dabf14b1170f": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Check if name is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if name starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Count digits in the entire file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "2f61d90eae8c4798346e7c32afdeb7d32a8f06d13475d3b05604dabf14b1170f|2f61d90eae8c4798346e7c32afdeb7d32a8f06d13475d3b05604dabf14b1170f": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Count digits in the file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "b7be0448ba58ca8fc045a9647874e2bcfdd7778ee809c2d973be4d5ecfa01722|2f61d90eae8c4798346e7c32afdeb7d32a8f06d13475d3b05604dabf14b1170f": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "a0bfdfa362ae92e15ea5653d8c9ffe2c372d0a6533f51dcac6b5cfd4b45bfe6f|2f61d90eae8c4798346e7c32afdeb7d32a8f06d13475d3b05604dabf14b1170f": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name_part = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name_part) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name_part[0].isalpha():\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Count digits in the file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "64cb4a42e86dcd6366a9790f8520c0265656c50b9df511777066c9fa75d9e1f6|2f61d90eae8c4798346e7c32afdeb7d32a8f06d13475d3b05604dabf14b1170f": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "ea013a6c23ec19f5e1cff723311a67dfec29dc909586e90ecb4684083974620d|2f61d90eae8c4798346e7c32afdeb7d32a8f06d13475d3b05604dabf14b1170f": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name_part = parts[0]\n    extension = parts[1]\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Check if name part is not empty\n    if len(name_part) == 0:\n        return 'No'\n    \n    # Check if name starts with a letter\n    if not name_part[0].isalpha():\n        return 'No'\n    \n    # Count digits in the entire filename\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "edf306c4acd56a61d3a531ed91bbec49d2e1deffac7df4e64493b16daabb3341|2f61d90eae8c4798346e7c32afdeb7d32a8f06d13475d3b05604dabf14b1170f": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter from latin alphabet\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Count digits in the file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "9c1124ee9d0a6fbe787b129ff73c073e0b0407d55837936bdb8f58b42b81ced2|2f61d90eae8c4798346e7c32afdeb7d32a8f06d13475d3b05604dabf14b1170f": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name_part = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name_part) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name_part[0].isalpha():\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Count digits in the entire file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "3bb67fbdee5fcd91d893b08c79735f4360262ed75d56d18f3a870dd02eda809a|2f61d90eae8c4798346e7c32afdeb7d32a8f06d13475d3b05604dabf14b1170f": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "f1311d5f2a8886c153de0159f41b4e89283276c348d424ad23905372371a1c91|2f61d90eae8c4798346e7c32afdeb7d32a8f06d13475d3b05604dabf14b1170f": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "15748d80aee679a9f38d0439003e4b7abdb01a6056c31fa068b45d054f8c6d16|2df969d014de039073409011532f5e27fa67b1c2fcb52b67f64f9a628945ba8d": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2f61d90eae8c4798346e7c32afdeb7d32a8f06d13475d3b05604dabf14b1170f|2df969d014de039073409011532f5e27fa67b1c2fcb52b67f64f9a628945ba8d": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Count digits in the file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "92f22e14fd9da6dab09b302029c66879ca7b6760dba752b7f916928db09912b5|2df969d014de039073409011532f5e27fa67b1c2fcb52b67f64f9a628945ba8d": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "05f09657406c80b1692afee7bfd856ef8fe860ff949d461104521cb7add1b6c1|2df969d014de039073409011532f5e27fa67b1c2fcb52b67f64f9a628945ba8d": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name_part = parts[0]\n    extension = parts[1]\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Check if name part is not empty\n    if len(name_part) == 0:\n        return 'No'\n    \n    # Check if name starts with a letter\n    if not name_part[0].isalpha():\n        return 'No'\n    \n    # Count digits in the entire filename\n    digit_count = sum(1 for char in file_name if char.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "edf306c4acd56a61d3a531ed91bbec49d2e1deffac7df4e64493b16daabb3341|2df969d014de039073409011532f5e27fa67b1c2fcb52b67f64f9a628945ba8d": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter from latin alphabet\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Count digits in the file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "b7be0448ba58ca8fc045a9647874e2bcfdd7778ee809c2d973be4d5ecfa01722|2df969d014de039073409011532f5e27fa67b1c2fcb52b67f64f9a628945ba8d": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "a0bfdfa362ae92e15ea5653d8c9ffe2c372d0a6533f51dcac6b5cfd4b45bfe6f|2df969d014de039073409011532f5e27fa67b1c2fcb52b67f64f9a628945ba8d": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name_part = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name_part) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name_part[0].isalpha():\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Count digits in the file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "f1311d5f2a8886c153de0159f41b4e89283276c348d424ad23905372371a1c91|2df969d014de039073409011532f5e27fa67b1c2fcb52b67f64f9a628945ba8d": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8748a4bb7771280f20bbf192f8e3a39a6862c31f52fbbe82f309a7077ebf0624|2df969d014de039073409011532f5e27fa67b1c2fcb52b67f64f9a628945ba8d": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Check if name is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if name starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Count digits in the entire file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "2f61d90eae8c4798346e7c32afdeb7d32a8f06d13475d3b05604dabf14b1170f|1f08ebb3b6daf09f6899a3a54750f920e01e51a72adddd63c259788ae5e9671a": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "92f22e14fd9da6dab09b302029c66879ca7b6760dba752b7f916928db09912b5|1f08ebb3b6daf09f6899a3a54750f920e01e51a72adddd63c259788ae5e9671a": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if there are more than 3 digits in the file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "edf306c4acd56a61d3a531ed91bbec49d2e1deffac7df4e64493b16daabb3341|1f08ebb3b6daf09f6899a3a54750f920e01e51a72adddd63c259788ae5e9671a": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8748a4bb7771280f20bbf192f8e3a39a6862c31f52fbbe82f309a7077ebf0624|1f08ebb3b6daf09f6899a3a54750f920e01e51a72adddd63c259788ae5e9671a": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "b7be0448ba58ca8fc045a9647874e2bcfdd7778ee809c2d973be4d5ecfa01722|1f08ebb3b6daf09f6899a3a54750f920e01e51a72adddd63c259788ae5e9671a": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if there are more than 3 digits\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "a0bfdfa362ae92e15ea5653d8c9ffe2c372d0a6533f51dcac6b5cfd4b45bfe6f|1f08ebb3b6daf09f6899a3a54750f920e01e51a72adddd63c259788ae5e9671a": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "3bb67fbdee5fcd91d893b08c79735f4360262ed75d56d18f3a870dd02eda809a|1f08ebb3b6daf09f6899a3a54750f920e01e51a72adddd63c259788ae5e9671a": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if there are no more than 3 digits in the file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "2df969d014de039073409011532f5e27fa67b1c2fcb52b67f64f9a628945ba8d|1f08ebb3b6daf09f6899a3a54750f920e01e51a72adddd63c259788ae5e9671a": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "9c1124ee9d0a6fbe787b129ff73c073e0b0407d55837936bdb8f58b42b81ced2|2df969d014de039073409011532f5e27fa67b1c2fcb52b67f64f9a628945ba8d": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name_part = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name_part) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name_part[0].isalpha():\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Count digits in the entire file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "1f08ebb3b6daf09f6899a3a54750f920e01e51a72adddd63c259788ae5e9671a|2df969d014de039073409011532f5e27fa67b1c2fcb52b67f64f9a628945ba8d": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "1f08ebb3b6daf09f6899a3a54750f920e01e51a72adddd63c259788ae5e9671a|2f61d90eae8c4798346e7c32afdeb7d32a8f06d13475d3b05604dabf14b1170f": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2df969d014de039073409011532f5e27fa67b1c2fcb52b67f64f9a628945ba8d|2f61d90eae8c4798346e7c32afdeb7d32a8f06d13475d3b05604dabf14b1170f": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Check if name is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if name starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if there are no more than three digits\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "15748d80aee679a9f38d0439003e4b7abdb01a6056c31fa068b45d054f8c6d16|8748a4bb7771280f20bbf192f8e3a39a6862c31f52fbbe82f309a7077ebf0624": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2f61d90eae8c4798346e7c32afdeb7d32a8f06d13475d3b05604dabf14b1170f|8748a4bb7771280f20bbf192f8e3a39a6862c31f52fbbe82f309a7077ebf0624": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Count digits in the file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "92f22e14fd9da6dab09b302029c66879ca7b6760dba752b7f916928db09912b5|8748a4bb7771280f20bbf192f8e3a39a6862c31f52fbbe82f309a7077ebf0624": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7714d97ad06719d904bd4c5d6b8b7e45a24839c03ebec2a9a2bb459daa46a85c|8748a4bb7771280f20bbf192f8e3a39a6862c31f52fbbe82f309a7077ebf0624": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if name starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Count digits in the entire file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "8748a4bb7771280f20bbf192f8e3a39a6862c31f52fbbe82f309a7077ebf0624|8748a4bb7771280f20bbf192f8e3a39a6862c31f52fbbe82f309a7077ebf0624": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Check if name is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if name starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Count digits in the entire file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "a0bfdfa362ae92e15ea5653d8c9ffe2c372d0a6533f51dcac6b5cfd4b45bfe6f|8748a4bb7771280f20bbf192f8e3a39a6862c31f52fbbe82f309a7077ebf0624": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name_part = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name_part) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name_part[0].isalpha():\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Count digits in the file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "1f08ebb3b6daf09f6899a3a54750f920e01e51a72adddd63c259788ae5e9671a|8748a4bb7771280f20bbf192f8e3a39a6862c31f52fbbe82f309a7077ebf0624": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "64cb4a42e86dcd6366a9790f8520c0265656c50b9df511777066c9fa75d9e1f6|8748a4bb7771280f20bbf192f8e3a39a6862c31f52fbbe82f309a7077ebf0624": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2df969d014de039073409011532f5e27fa67b1c2fcb52b67f64f9a628945ba8d|8748a4bb7771280f20bbf192f8e3a39a6862c31f52fbbe82f309a7077ebf0624": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Check if name is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if name starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if there are no more than three digits\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "7714d97ad06719d904bd4c5d6b8b7e45a24839c03ebec2a9a2bb459daa46a85c|2df969d014de039073409011532f5e27fa67b1c2fcb52b67f64f9a628945ba8d": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if name starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Count digits in the entire file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "64cb4a42e86dcd6366a9790f8520c0265656c50b9df511777066c9fa75d9e1f6|2df969d014de039073409011532f5e27fa67b1c2fcb52b67f64f9a628945ba8d": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "05f09657406c80b1692afee7bfd856ef8fe860ff949d461104521cb7add1b6c1|8748a4bb7771280f20bbf192f8e3a39a6862c31f52fbbe82f309a7077ebf0624": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name_part = parts[0]\n    extension = parts[1]\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Check if name part is not empty\n    if len(name_part) == 0:\n        return 'No'\n    \n    # Check if name starts with a letter\n    if not name_part[0].isalpha():\n        return 'No'\n    \n    # Count digits in the entire filename\n    digit_count = sum(1 for char in file_name if char.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "edf306c4acd56a61d3a531ed91bbec49d2e1deffac7df4e64493b16daabb3341|8748a4bb7771280f20bbf192f8e3a39a6862c31f52fbbe82f309a7077ebf0624": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter from latin alphabet\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Count digits in the file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "9c1124ee9d0a6fbe787b129ff73c073e0b0407d55837936bdb8f58b42b81ced2|8748a4bb7771280f20bbf192f8e3a39a6862c31f52fbbe82f309a7077ebf0624": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name_part = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name_part) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name_part[0].isalpha():\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Count digits in the entire file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "f1311d5f2a8886c153de0159f41b4e89283276c348d424ad23905372371a1c91|8748a4bb7771280f20bbf192f8e3a39a6862c31f52fbbe82f309a7077ebf0624": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "3bb67fbdee5fcd91d893b08c79735f4360262ed75d56d18f3a870dd02eda809a|2df969d014de039073409011532f5e27fa67b1c2fcb52b67f64f9a628945ba8d": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "ea013a6c23ec19f5e1cff723311a67dfec29dc909586e90ecb4684083974620d|1f08ebb3b6daf09f6899a3a54750f920e01e51a72adddd63c259788ae5e9671a": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "9c1124ee9d0a6fbe787b129ff73c073e0b0407d55837936bdb8f58b42b81ced2|1f08ebb3b6daf09f6899a3a54750f920e01e51a72adddd63c259788ae5e9671a": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "64cb4a42e86dcd6366a9790f8520c0265656c50b9df511777066c9fa75d9e1f6|1f08ebb3b6daf09f6899a3a54750f920e01e51a72adddd63c259788ae5e9671a": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name_part = parts[0]\n    extension_part = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name_part) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name_part[0].isalpha():\n        return 'No'\n    \n    # Check if there are more than three digits\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    # Check if extension is valid\n    if extension_part not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "05f09657406c80b1692afee7bfd856ef8fe860ff949d461104521cb7add1b6c1|1f08ebb3b6daf09f6899a3a54750f920e01e51a72adddd63c259788ae5e9671a": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7714d97ad06719d904bd4c5d6b8b7e45a24839c03ebec2a9a2bb459daa46a85c|1f08ebb3b6daf09f6899a3a54750f920e01e51a72adddd63c259788ae5e9671a": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "ea013a6c23ec19f5e1cff723311a67dfec29dc909586e90ecb4684083974620d|8748a4bb7771280f20bbf192f8e3a39a6862c31f52fbbe82f309a7077ebf0624": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name_part = parts[0]\n    extension = parts[1]\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Check if name part is not empty\n    if len(name_part) == 0:\n        return 'No'\n    \n    # Check if name starts with a letter\n    if not name_part[0].isalpha():\n        return 'No'\n    \n    # Count digits in the entire filename\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "3bb67fbdee5fcd91d893b08c79735f4360262ed75d56d18f3a870dd02eda809a|8748a4bb7771280f20bbf192f8e3a39a6862c31f52fbbe82f309a7077ebf0624": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "05f09657406c80b1692afee7bfd856ef8fe860ff949d461104521cb7add1b6c1|92f22e14fd9da6dab09b302029c66879ca7b6760dba752b7f916928db09912b5": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7714d97ad06719d904bd4c5d6b8b7e45a24839c03ebec2a9a2bb459daa46a85c|92f22e14fd9da6dab09b302029c66879ca7b6760dba752b7f916928db09912b5": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8748a4bb7771280f20bbf192f8e3a39a6862c31f52fbbe82f309a7077ebf0624|92f22e14fd9da6dab09b302029c66879ca7b6760dba752b7f916928db09912b5": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2f61d90eae8c4798346e7c32afdeb7d32a8f06d13475d3b05604dabf14b1170f|92f22e14fd9da6dab09b302029c66879ca7b6760dba752b7f916928db09912b5": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "9c1124ee9d0a6fbe787b129ff73c073e0b0407d55837936bdb8f58b42b81ced2|92f22e14fd9da6dab09b302029c66879ca7b6760dba752b7f916928db09912b5": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "b7be0448ba58ca8fc045a9647874e2bcfdd7778ee809c2d973be4d5ecfa01722|92f22e14fd9da6dab09b302029c66879ca7b6760dba752b7f916928db09912b5": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if there are more than 3 digits\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "a0bfdfa362ae92e15ea5653d8c9ffe2c372d0a6533f51dcac6b5cfd4b45bfe6f|92f22e14fd9da6dab09b302029c66879ca7b6760dba752b7f916928db09912b5": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "f1311d5f2a8886c153de0159f41b4e89283276c348d424ad23905372371a1c91|92f22e14fd9da6dab09b302029c66879ca7b6760dba752b7f916928db09912b5": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if there are more than three digits\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1f08ebb3b6daf09f6899a3a54750f920e01e51a72adddd63c259788ae5e9671a|92f22e14fd9da6dab09b302029c66879ca7b6760dba752b7f916928db09912b5": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there is exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if there are more than 3 digits in the file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "92f22e14fd9da6dab09b302029c66879ca7b6760dba752b7f916928db09912b5|b7be0448ba58ca8fc045a9647874e2bcfdd7778ee809c2d973be4d5ecfa01722": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if there are more than 3 digits in the file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "05f09657406c80b1692afee7bfd856ef8fe860ff949d461104521cb7add1b6c1|b7be0448ba58ca8fc045a9647874e2bcfdd7778ee809c2d973be4d5ecfa01722": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7714d97ad06719d904bd4c5d6b8b7e45a24839c03ebec2a9a2bb459daa46a85c|b7be0448ba58ca8fc045a9647874e2bcfdd7778ee809c2d973be4d5ecfa01722": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8748a4bb7771280f20bbf192f8e3a39a6862c31f52fbbe82f309a7077ebf0624|b7be0448ba58ca8fc045a9647874e2bcfdd7778ee809c2d973be4d5ecfa01722": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2f61d90eae8c4798346e7c32afdeb7d32a8f06d13475d3b05604dabf14b1170f|b7be0448ba58ca8fc045a9647874e2bcfdd7778ee809c2d973be4d5ecfa01722": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "9c1124ee9d0a6fbe787b129ff73c073e0b0407d55837936bdb8f58b42b81ced2|b7be0448ba58ca8fc045a9647874e2bcfdd7778ee809c2d973be4d5ecfa01722": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "a0bfdfa362ae92e15ea5653d8c9ffe2c372d0a6533f51dcac6b5cfd4b45bfe6f|b7be0448ba58ca8fc045a9647874e2bcfdd7778ee809c2d973be4d5ecfa01722": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "3bb67fbdee5fcd91d893b08c79735f4360262ed75d56d18f3a870dd02eda809a|b7be0448ba58ca8fc045a9647874e2bcfdd7778ee809c2d973be4d5ecfa01722": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if there are no more than 3 digits in the file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1f08ebb3b6daf09f6899a3a54750f920e01e51a72adddd63c259788ae5e9671a|b7be0448ba58ca8fc045a9647874e2bcfdd7778ee809c2d973be4d5ecfa01722": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there is exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if there are more than 3 digits in the file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ea013a6c23ec19f5e1cff723311a67dfec29dc909586e90ecb4684083974620d|2df969d014de039073409011532f5e27fa67b1c2fcb52b67f64f9a628945ba8d": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name_part = parts[0]\n    extension = parts[1]\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Check if name part is not empty\n    if len(name_part) == 0:\n        return 'No'\n    \n    # Check if name starts with a letter\n    if not name_part[0].isalpha():\n        return 'No'\n    \n    # Count digits in the entire filename\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "edf306c4acd56a61d3a531ed91bbec49d2e1deffac7df4e64493b16daabb3341|b7be0448ba58ca8fc045a9647874e2bcfdd7778ee809c2d973be4d5ecfa01722": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2df969d014de039073409011532f5e27fa67b1c2fcb52b67f64f9a628945ba8d|b7be0448ba58ca8fc045a9647874e2bcfdd7778ee809c2d973be4d5ecfa01722": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "b7be0448ba58ca8fc045a9647874e2bcfdd7778ee809c2d973be4d5ecfa01722|8748a4bb7771280f20bbf192f8e3a39a6862c31f52fbbe82f309a7077ebf0624": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "f1311d5f2a8886c153de0159f41b4e89283276c348d424ad23905372371a1c91|1f08ebb3b6daf09f6899a3a54750f920e01e51a72adddd63c259788ae5e9671a": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if there are more than three digits\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "15748d80aee679a9f38d0439003e4b7abdb01a6056c31fa068b45d054f8c6d16|1f08ebb3b6daf09f6899a3a54750f920e01e51a72adddd63c259788ae5e9671a": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name_part = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name_part) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name_part[0].isalpha():\n        return 'No'\n    \n    # Check if there are no more than 3 digits in the file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ea013a6c23ec19f5e1cff723311a67dfec29dc909586e90ecb4684083974620d|92f22e14fd9da6dab09b302029c66879ca7b6760dba752b7f916928db09912b5": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "edf306c4acd56a61d3a531ed91bbec49d2e1deffac7df4e64493b16daabb3341|92f22e14fd9da6dab09b302029c66879ca7b6760dba752b7f916928db09912b5": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "ea013a6c23ec19f5e1cff723311a67dfec29dc909586e90ecb4684083974620d|b7be0448ba58ca8fc045a9647874e2bcfdd7778ee809c2d973be4d5ecfa01722": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "15748d80aee679a9f38d0439003e4b7abdb01a6056c31fa068b45d054f8c6d16|b7be0448ba58ca8fc045a9647874e2bcfdd7778ee809c2d973be4d5ecfa01722": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name_part = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name_part) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name_part[0].isalpha():\n        return 'No'\n    \n    # Check if there are no more than 3 digits in the file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "f1311d5f2a8886c153de0159f41b4e89283276c348d424ad23905372371a1c91|b7be0448ba58ca8fc045a9647874e2bcfdd7778ee809c2d973be4d5ecfa01722": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if there are more than three digits\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "64cb4a42e86dcd6366a9790f8520c0265656c50b9df511777066c9fa75d9e1f6|b7be0448ba58ca8fc045a9647874e2bcfdd7778ee809c2d973be4d5ecfa01722": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name_part = parts[0]\n    extension_part = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name_part) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name_part[0].isalpha():\n        return 'No'\n    \n    # Check if there are more than three digits\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    # Check if extension is valid\n    if extension_part not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "15748d80aee679a9f38d0439003e4b7abdb01a6056c31fa068b45d054f8c6d16|edf306c4acd56a61d3a531ed91bbec49d2e1deffac7df4e64493b16daabb3341": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2f61d90eae8c4798346e7c32afdeb7d32a8f06d13475d3b05604dabf14b1170f|edf306c4acd56a61d3a531ed91bbec49d2e1deffac7df4e64493b16daabb3341": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Count digits in the file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ea013a6c23ec19f5e1cff723311a67dfec29dc909586e90ecb4684083974620d|edf306c4acd56a61d3a531ed91bbec49d2e1deffac7df4e64493b16daabb3341": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name_part = parts[0]\n    extension = parts[1]\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Check if name part is not empty\n    if len(name_part) == 0:\n        return 'No'\n    \n    # Check if name starts with a letter\n    if not name_part[0].isalpha():\n        return 'No'\n    \n    # Count digits in the entire filename\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "92f22e14fd9da6dab09b302029c66879ca7b6760dba752b7f916928db09912b5|edf306c4acd56a61d3a531ed91bbec49d2e1deffac7df4e64493b16daabb3341": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8748a4bb7771280f20bbf192f8e3a39a6862c31f52fbbe82f309a7077ebf0624|edf306c4acd56a61d3a531ed91bbec49d2e1deffac7df4e64493b16daabb3341": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Check if name is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if name starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Count digits in the entire file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "f1311d5f2a8886c153de0159f41b4e89283276c348d424ad23905372371a1c91|edf306c4acd56a61d3a531ed91bbec49d2e1deffac7df4e64493b16daabb3341": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "1f08ebb3b6daf09f6899a3a54750f920e01e51a72adddd63c259788ae5e9671a|edf306c4acd56a61d3a531ed91bbec49d2e1deffac7df4e64493b16daabb3341": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "05f09657406c80b1692afee7bfd856ef8fe860ff949d461104521cb7add1b6c1|edf306c4acd56a61d3a531ed91bbec49d2e1deffac7df4e64493b16daabb3341": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name_part = parts[0]\n    extension = parts[1]\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Check if name part is not empty\n    if len(name_part) == 0:\n        return 'No'\n    \n    # Check if name starts with a letter\n    if not name_part[0].isalpha():\n        return 'No'\n    \n    # Count digits in the entire filename\n    digit_count = sum(1 for char in file_name if char.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "64cb4a42e86dcd6366a9790f8520c0265656c50b9df511777066c9fa75d9e1f6|edf306c4acd56a61d3a531ed91bbec49d2e1deffac7df4e64493b16daabb3341": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "15748d80aee679a9f38d0439003e4b7abdb01a6056c31fa068b45d054f8c6d16|92f22e14fd9da6dab09b302029c66879ca7b6760dba752b7f916928db09912b5": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name_part = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name_part) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name_part[0].isalpha():\n        return 'No'\n    \n    # Check if there are no more than 3 digits in the file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "2df969d014de039073409011532f5e27fa67b1c2fcb52b67f64f9a628945ba8d|92f22e14fd9da6dab09b302029c66879ca7b6760dba752b7f916928db09912b5": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "64cb4a42e86dcd6366a9790f8520c0265656c50b9df511777066c9fa75d9e1f6|92f22e14fd9da6dab09b302029c66879ca7b6760dba752b7f916928db09912b5": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name_part = parts[0]\n    extension_part = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name_part) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name_part[0].isalpha():\n        return 'No'\n    \n    # Check if there are more than three digits\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    # Check if extension is valid\n    if extension_part not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ea013a6c23ec19f5e1cff723311a67dfec29dc909586e90ecb4684083974620d|f1311d5f2a8886c153de0159f41b4e89283276c348d424ad23905372371a1c91": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "92f22e14fd9da6dab09b302029c66879ca7b6760dba752b7f916928db09912b5|f1311d5f2a8886c153de0159f41b4e89283276c348d424ad23905372371a1c91": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if there are more than 3 digits in the file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "7714d97ad06719d904bd4c5d6b8b7e45a24839c03ebec2a9a2bb459daa46a85c|f1311d5f2a8886c153de0159f41b4e89283276c348d424ad23905372371a1c91": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "edf306c4acd56a61d3a531ed91bbec49d2e1deffac7df4e64493b16daabb3341|f1311d5f2a8886c153de0159f41b4e89283276c348d424ad23905372371a1c91": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2f61d90eae8c4798346e7c32afdeb7d32a8f06d13475d3b05604dabf14b1170f|f1311d5f2a8886c153de0159f41b4e89283276c348d424ad23905372371a1c91": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "b7be0448ba58ca8fc045a9647874e2bcfdd7778ee809c2d973be4d5ecfa01722|f1311d5f2a8886c153de0159f41b4e89283276c348d424ad23905372371a1c91": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if there are more than 3 digits\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "a0bfdfa362ae92e15ea5653d8c9ffe2c372d0a6533f51dcac6b5cfd4b45bfe6f|f1311d5f2a8886c153de0159f41b4e89283276c348d424ad23905372371a1c91": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "1f08ebb3b6daf09f6899a3a54750f920e01e51a72adddd63c259788ae5e9671a|f1311d5f2a8886c153de0159f41b4e89283276c348d424ad23905372371a1c91": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there is exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if there are more than 3 digits in the file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "8748a4bb7771280f20bbf192f8e3a39a6862c31f52fbbe82f309a7077ebf0624|f1311d5f2a8886c153de0159f41b4e89283276c348d424ad23905372371a1c91": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2df969d014de039073409011532f5e27fa67b1c2fcb52b67f64f9a628945ba8d|f1311d5f2a8886c153de0159f41b4e89283276c348d424ad23905372371a1c91": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "b7be0448ba58ca8fc045a9647874e2bcfdd7778ee809c2d973be4d5ecfa01722|edf306c4acd56a61d3a531ed91bbec49d2e1deffac7df4e64493b16daabb3341": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2df969d014de039073409011532f5e27fa67b1c2fcb52b67f64f9a628945ba8d|edf306c4acd56a61d3a531ed91bbec49d2e1deffac7df4e64493b16daabb3341": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    # Check if name is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if name starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if there are no more than three digits\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "3bb67fbdee5fcd91d893b08c79735f4360262ed75d56d18f3a870dd02eda809a|92f22e14fd9da6dab09b302029c66879ca7b6760dba752b7f916928db09912b5": {
+      "stitched_code": "def file_name_check(file_name):\n    # Check if there's exactly one dot\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    # Split by dot\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    \n    # Check if substring before dot is not empty\n    if len(name) == 0:\n        return 'No'\n    \n    # Check if it starts with a letter\n    if not name[0].isalpha():\n        return 'No'\n    \n    # Check if there are no more than 3 digits in the file name\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    \n    # Check if extension is valid\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "05f09657406c80b1692afee7bfd856ef8fe860ff949d461104521cb7add1b6c1|f1311d5f2a8886c153de0159f41b4e89283276c348d424ad23905372371a1c91": {
+      "stitched_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    parts = file_name.split('.')\n    name = parts[0]\n    extension = parts[1]\n    if len(name) == 0:\n        return 'No'\n    if not name[0].isalpha():\n        return 'No'\n    digit_count = sum(1 for c in file_name if c.isdigit())\n    if digit_count > 3:\n        return 'No'\n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    return 'Yes'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

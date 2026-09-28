@@ -1,0 +1,47 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "644d6fbaefda97245b0ab2fcde92d355c5ebf5e58bd80063a6e44c3bd0c271d9|fac0c5dcfc4d23c6d146a0cb31f05d36d4707b40cfe1ea700cd3b85d0b5b787f": {
+      "stitched_code": "from typing import List\n\n\ndef remove_duplicates(numbers: List[int]) ->List[int]:\n    \"\"\" From a list of integers, remove all elements that occur more than once.\n    Keep order of elements left the same as in the input.\n    >>> remove_duplicates([1, 2, 3, 2, 4])\n    [1, 3, 4]\n    \"\"\"\n    from collections import Counter\n    counts = Counter(numbers)\n    return [num for num in numbers if counts[num] == 1]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "fac0c5dcfc4d23c6d146a0cb31f05d36d4707b40cfe1ea700cd3b85d0b5b787f|fac0c5dcfc4d23c6d146a0cb31f05d36d4707b40cfe1ea700cd3b85d0b5b787f": {
+      "stitched_code": "def remove_duplicates(numbers: List[int]) -> List[int]:\n    \"\"\" From a list of integers, remove all elements that occur more than once.\n    Keep order of elements left the same as in the input.\n    >>> remove_duplicates([1, 2, 3, 2, 4])\n    [1, 3, 4]\n    \"\"\"\n    from collections import Counter\n    \n    counts = Counter(numbers)\n    return [num for num in numbers if counts[num] == 1]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

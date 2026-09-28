@@ -1,0 +1,434 @@
+{
+  "contract_id": "HumanEval_44_claude_sonnet_4_5_20250929_temp0.0",
+  "canonical_code": "def change_base(x: int, base: int):\n    \"\"\"Change numerical base of input number x to base.\n    return string representation after the conversion.\n    base numbers are less than 10.\n    >>> change_base(8, 3)\n    '22'\n    >>> change_base(8, 2)\n    '1000'\n    >>> change_base(7, 2)\n    '111'\n    \"\"\"\n    if x == 0:\n        return '0'\n    \n    result = ''\n    while x > 0:\n        result = str(x % base) + result\n        x //= base\n    \n    return result\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 1,
+      "for_loops": 0,
+      "while_loops": 1,
+      "function_calls": [
+        "str"
+      ],
+      "nested_depth": 1,
+      "branch_patterns": [
+        "if_at_depth_0"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [
+          "p0",
+          "p1",
+          "v0"
+        ]
+      },
+      "assignments": {
+        "v0": "BinOp(left=Call(func=Name(id='str', ctx=Load()), args=[BinOp(left=Name(id='p0', ctx=Load()), op=Mod(), right=Name(id='p1', ctx=Load()))]), op=Add(), right=Name(id='v0', ctx=Load()))"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_change_base"
+        ],
+        [
+          "function_change_base",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "change_base": {
+        "name": "change_base",
+        "args": [
+          "p0",
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add"
+      ],
+      "associative_ops": [
+        "Add"
+      ],
+      "binary_operations": [
+        "Add",
+        "Mod"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        0,
+        0
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Eq",
+        "Gt"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Name",
+        "Load",
+        "arg",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Return",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "While",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mod",
+        "Name",
+        "Load",
+        "Add",
+        "Name",
+        "Load",
+        "AugAssign",
+        "Name",
+        "Store",
+        "FloorDiv",
+        "Name",
+        "Load",
+        "Return",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 8,
+      "ast_hash": "ce33fa863faf6140cdd31a2aebb733ed",
+      "alpha_renamed_hash": "ce33fa863faf6140cdd31a2aebb733ed"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Add",
+        "Mod"
+      ],
+      "precedence_levels": {
+        "Add": 3,
+        "Mod": 4
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Return",
+        "Assign",
+        "While",
+        "Assign",
+        "AugAssign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Return_2",
+        "Assign_3",
+        "While_4",
+        "Assign_5",
+        "AugAssign_6",
+        "Return_7"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If",
+        "While"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "p0 == 0",
+          "return_type": "constant"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "p0 == 0"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_44_claude_sonnet_4_5_20250929_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/44",
+    "prompt": "\n\ndef change_base(x: int, base: int):\n    \"\"\"Change numerical base of input number x to base.\n    return string representation after the conversion.\n    base numbers are less than 10.\n    >>> change_base(8, 3)\n    '22'\n    >>> change_base(8, 2)\n    '1000'\n    >>> change_base(7, 2)\n    '111'\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "change_base"
+    },
+    "anchor_signature": "630ef6280e99c39c2cf683b26645e8bddca689559867685fff301d527e51b50a",
+    "canonical_code": "def change_base(x: int, base: int):\n    \"\"\"Change numerical base of input number x to base.\n    return string representation after the conversion.\n    base numbers are less than 10.\n    >>> change_base(8, 3)\n    '22'\n    >>> change_base(8, 2)\n    '1000'\n    >>> change_base(7, 2)\n    '111'\n    \"\"\"\n    if x == 0:\n        return '0'\n    \n    result = ''\n    while x > 0:\n        result = str(x % base) + result\n        x //= base\n    \n    return result\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 1,
+        "for_loops": 0,
+        "while_loops": 1,
+        "function_calls": [
+          "str"
+        ],
+        "nested_depth": 1,
+        "branch_patterns": [
+          "if_at_depth_0"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [
+            "p0",
+            "p1",
+            "v0"
+          ]
+        },
+        "assignments": {
+          "v0": "BinOp(left=Call(func=Name(id='str', ctx=Load()), args=[BinOp(left=Name(id='p0', ctx=Load()), op=Mod(), right=Name(id='p1', ctx=Load()))]), op=Add(), right=Name(id='v0', ctx=Load()))"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_change_base"
+          ],
+          [
+            "function_change_base",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "change_base": {
+          "name": "change_base",
+          "args": [
+            "p0",
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add"
+        ],
+        "associative_ops": [
+          "Add"
+        ],
+        "binary_operations": [
+          "Add",
+          "Mod"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          0,
+          0
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Eq",
+          "Gt"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Name",
+          "Load",
+          "arg",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Return",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "While",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mod",
+          "Name",
+          "Load",
+          "Add",
+          "Name",
+          "Load",
+          "AugAssign",
+          "Name",
+          "Store",
+          "FloorDiv",
+          "Name",
+          "Load",
+          "Return",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 8,
+        "ast_hash": "ce33fa863faf6140cdd31a2aebb733ed",
+        "alpha_renamed_hash": "ce33fa863faf6140cdd31a2aebb733ed"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Add",
+          "Mod"
+        ],
+        "precedence_levels": {
+          "Add": 3,
+          "Mod": 4
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "Assign",
+          "While",
+          "Assign",
+          "AugAssign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "Assign_3",
+          "While_4",
+          "Assign_5",
+          "AugAssign_6",
+          "Return_7"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "While"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "p0 == 0",
+            "return_type": "constant"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "p0 == 0"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

@@ -1,0 +1,490 @@
+{
+  "contract_id": "HumanEval_65_claude_sonnet_4_5_20250929_temp0.7",
+  "canonical_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' chars and put them at the beginning\n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 1,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "str",
+        "len"
+      ],
+      "nested_depth": 1,
+      "branch_patterns": [
+        "if_at_depth_0"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [
+          "p0"
+        ],
+        "v1": [
+          "v0"
+        ],
+        "p1": [
+          "p1",
+          "v1"
+        ]
+      },
+      "assignments": {
+        "v0": "Call(func=Name(id='str', ctx=Load()), args=[Name(id='p0', ctx=Load())])",
+        "v1": "Call(func=Name(id='len', ctx=Load()), args=[Name(id='v0', ctx=Load())])",
+        "p1": "BinOp(left=Name(id='p1', ctx=Load()), op=Mod(), right=Name(id='v1', ctx=Load()))"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_circular_shift"
+        ],
+        [
+          "function_circular_shift",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "circular_shift": {
+        "name": "circular_shift",
+        "args": [
+          "p0",
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add"
+      ],
+      "associative_ops": [
+        "Add"
+      ],
+      "binary_operations": [
+        "Mod",
+        "Add"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        1,
+        0
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Gt",
+        "Gt"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Name",
+        "Load",
+        "Return",
+        "Subscript",
+        "Name",
+        "Load",
+        "Slice",
+        "UnaryOp",
+        "USub",
+        "Constant",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mod",
+        "Name",
+        "Load",
+        "Return",
+        "IfExp",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Constant",
+        "BinOp",
+        "Subscript",
+        "Name",
+        "Load",
+        "Slice",
+        "UnaryOp",
+        "USub",
+        "Name",
+        "Load",
+        "Load",
+        "Add",
+        "Subscript",
+        "Name",
+        "Load",
+        "Slice",
+        "UnaryOp",
+        "USub",
+        "Name",
+        "Load",
+        "Load",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 9,
+      "ast_hash": "c3e9a402d3c81b485cf9ce77eb8175ef",
+      "alpha_renamed_hash": "c3e9a402d3c81b485cf9ce77eb8175ef"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Mod",
+        "Add"
+      ],
+      "precedence_levels": {
+        "Mod": 4,
+        "Add": 3
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "Assign",
+        "If",
+        "Return",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "Assign_2",
+        "If_3",
+        "Return_4",
+        "Assign_5",
+        "Return_6"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "p1 > v1",
+          "return_type": "expression"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "p1 > v1"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_65_claude_sonnet_4_5_20250929_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/65",
+    "prompt": "\ndef circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "circular_shift"
+    },
+    "anchor_signature": "750d193c866ab43e98bc25369075d1900a0575b0ccbc44b699de3b2c24f6b683",
+    "canonical_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' chars and put them at the beginning\n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 1,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "str",
+          "len"
+        ],
+        "nested_depth": 1,
+        "branch_patterns": [
+          "if_at_depth_0"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [
+            "p0"
+          ],
+          "v1": [
+            "v0"
+          ],
+          "p1": [
+            "p1",
+            "v1"
+          ]
+        },
+        "assignments": {
+          "v0": "Call(func=Name(id='str', ctx=Load()), args=[Name(id='p0', ctx=Load())])",
+          "v1": "Call(func=Name(id='len', ctx=Load()), args=[Name(id='v0', ctx=Load())])",
+          "p1": "BinOp(left=Name(id='p1', ctx=Load()), op=Mod(), right=Name(id='v1', ctx=Load()))"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_circular_shift"
+          ],
+          [
+            "function_circular_shift",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "circular_shift": {
+          "name": "circular_shift",
+          "args": [
+            "p0",
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add"
+        ],
+        "associative_ops": [
+          "Add"
+        ],
+        "binary_operations": [
+          "Mod",
+          "Add"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          1,
+          0
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Gt",
+          "Gt"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Name",
+          "Load",
+          "Return",
+          "Subscript",
+          "Name",
+          "Load",
+          "Slice",
+          "UnaryOp",
+          "USub",
+          "Constant",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mod",
+          "Name",
+          "Load",
+          "Return",
+          "IfExp",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Constant",
+          "BinOp",
+          "Subscript",
+          "Name",
+          "Load",
+          "Slice",
+          "UnaryOp",
+          "USub",
+          "Name",
+          "Load",
+          "Load",
+          "Add",
+          "Subscript",
+          "Name",
+          "Load",
+          "Slice",
+          "UnaryOp",
+          "USub",
+          "Name",
+          "Load",
+          "Load",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 9,
+        "ast_hash": "c3e9a402d3c81b485cf9ce77eb8175ef",
+        "alpha_renamed_hash": "c3e9a402d3c81b485cf9ce77eb8175ef"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Mod",
+          "Add"
+        ],
+        "precedence_levels": {
+          "Mod": 4,
+          "Add": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "If",
+          "Return",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "Assign_2",
+          "If_3",
+          "Return_4",
+          "Assign_5",
+          "Return_6"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "p1 > v1",
+            "return_type": "expression"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "p1 > v1"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

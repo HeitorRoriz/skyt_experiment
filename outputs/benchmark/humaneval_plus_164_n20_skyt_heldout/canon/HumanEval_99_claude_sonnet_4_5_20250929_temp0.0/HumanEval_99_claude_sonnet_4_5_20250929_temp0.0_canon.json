@@ -1,0 +1,532 @@
+{
+  "contract_id": "HumanEval_99_claude_sonnet_4_5_20250929_temp0.0",
+  "canonical_code": "def closest_integer(value):\n    '''\n    Create a function that takes a value (string) representing a number\n    and returns the closest integer to it. If the number is equidistant\n    from two integers, round it away from zero.\n\n    Examples\n    >>> closest_integer(\"10\")\n    10\n    >>> closest_integer(\"15.3\")\n    15\n\n    Note:\n    Rounding away from zero means that if the given number is equidistant\n    from two integers, the one you should return is the one that is the\n    farthest from zero. For example closest_integer(\"14.5\") should\n    return 15 and closest_integer(\"-14.5\") should return -15.\n    '''\n    num = float(value)\n    \n    # Check if the number is exactly halfway between two integers\n    if num >= 0:\n        # For positive numbers, round away from zero means round up when at .5\n        if num - int(num) == 0.5:\n            return int(num) + 1\n        else:\n            return round(num)\n    else:\n        # For negative numbers, round away from zero means round down (more negative) when at .5\n        if abs(num) - int(abs(num)) == 0.5:\n            return int(num) - 1\n        else:\n            return round(num)\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 3,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "float",
+        "int",
+        "int",
+        "round",
+        "abs",
+        "int",
+        "abs",
+        "int",
+        "round"
+      ],
+      "nested_depth": 2,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_1",
+        "if_at_depth_1"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [
+          "p0"
+        ]
+      },
+      "assignments": {
+        "v0": "Call(func=Name(id='float', ctx=Load()), args=[Name(id='p0', ctx=Load())])"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_closest_integer"
+        ],
+        [
+          "function_closest_integer",
+          "branch"
+        ],
+        [
+          "function_closest_integer",
+          "branch",
+          "branch"
+        ],
+        [
+          "function_closest_integer",
+          "branch",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "closest_integer": {
+        "name": "closest_integer",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add"
+      ],
+      "associative_ops": [
+        "Add"
+      ],
+      "binary_operations": [
+        "Sub",
+        "Add",
+        "Sub",
+        "Sub"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": true,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        0,
+        0.5,
+        1,
+        0.5,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "GtE",
+        "Eq",
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "GtE",
+        "Constant",
+        "If",
+        "Compare",
+        "BinOp",
+        "Name",
+        "Load",
+        "Sub",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Return",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Add",
+        "Constant",
+        "Return",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Sub",
+        "Call",
+        "Name",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Return",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Sub",
+        "Constant",
+        "Return",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 9,
+      "ast_hash": "7c550e7b9f68c91c80aff3719d0cf0d5",
+      "alpha_renamed_hash": "7c550e7b9f68c91c80aff3719d0cf0d5"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Sub",
+        "Add",
+        "Sub",
+        "Sub"
+      ],
+      "precedence_levels": {
+        "Sub": 3,
+        "Add": 3
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "If",
+        "If",
+        "Return",
+        "Return",
+        "If",
+        "Return",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "If_2",
+        "If_3",
+        "Return_4",
+        "Return_5",
+        "If_6",
+        "Return_7",
+        "Return_8"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If",
+        "If",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_99_claude_sonnet_4_5_20250929_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/99",
+    "prompt": "\ndef closest_integer(value):\n    '''\n    Create a function that takes a value (string) representing a number\n    and returns the closest integer to it. If the number is equidistant\n    from two integers, round it away from zero.\n\n    Examples\n    >>> closest_integer(\"10\")\n    10\n    >>> closest_integer(\"15.3\")\n    15\n\n    Note:\n    Rounding away from zero means that if the given number is equidistant\n    from two integers, the one you should return is the one that is the\n    farthest from zero. For example closest_integer(\"14.5\") should\n    return 15 and closest_integer(\"-14.5\") should return -15.\n    '''\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "closest_integer"
+    },
+    "anchor_signature": "d145e8bb64b54ca1d065b73bb1b59341e0bcd6a7907530b7f32c3f109df724c1",
+    "canonical_code": "def closest_integer(value):\n    '''\n    Create a function that takes a value (string) representing a number\n    and returns the closest integer to it. If the number is equidistant\n    from two integers, round it away from zero.\n\n    Examples\n    >>> closest_integer(\"10\")\n    10\n    >>> closest_integer(\"15.3\")\n    15\n\n    Note:\n    Rounding away from zero means that if the given number is equidistant\n    from two integers, the one you should return is the one that is the\n    farthest from zero. For example closest_integer(\"14.5\") should\n    return 15 and closest_integer(\"-14.5\") should return -15.\n    '''\n    num = float(value)\n    \n    # Check if the number is exactly halfway between two integers\n    if num >= 0:\n        # For positive numbers, round away from zero means round up when at .5\n        if num - int(num) == 0.5:\n            return int(num) + 1\n        else:\n            return round(num)\n    else:\n        # For negative numbers, round away from zero means round down (more negative) when at .5\n        if abs(num) - int(abs(num)) == 0.5:\n            return int(num) - 1\n        else:\n            return round(num)\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 3,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "float",
+          "int",
+          "int",
+          "round",
+          "abs",
+          "int",
+          "abs",
+          "int",
+          "round"
+        ],
+        "nested_depth": 2,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_1",
+          "if_at_depth_1"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [
+            "p0"
+          ]
+        },
+        "assignments": {
+          "v0": "Call(func=Name(id='float', ctx=Load()), args=[Name(id='p0', ctx=Load())])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_closest_integer"
+          ],
+          [
+            "function_closest_integer",
+            "branch"
+          ],
+          [
+            "function_closest_integer",
+            "branch",
+            "branch"
+          ],
+          [
+            "function_closest_integer",
+            "branch",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "closest_integer": {
+          "name": "closest_integer",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add"
+        ],
+        "associative_ops": [
+          "Add"
+        ],
+        "binary_operations": [
+          "Sub",
+          "Add",
+          "Sub",
+          "Sub"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": true,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          0,
+          0.5,
+          1,
+          0.5,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "GtE",
+          "Eq",
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "GtE",
+          "Constant",
+          "If",
+          "Compare",
+          "BinOp",
+          "Name",
+          "Load",
+          "Sub",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Return",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Add",
+          "Constant",
+          "Return",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Sub",
+          "Call",
+          "Name",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Return",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Sub",
+          "Constant",
+          "Return",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 9,
+        "ast_hash": "7c550e7b9f68c91c80aff3719d0cf0d5",
+        "alpha_renamed_hash": "7c550e7b9f68c91c80aff3719d0cf0d5"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Sub",
+          "Add",
+          "Sub",
+          "Sub"
+        ],
+        "precedence_levels": {
+          "Sub": 3,
+          "Add": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "If",
+          "If",
+          "Return",
+          "Return",
+          "If",
+          "Return",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "If_2",
+          "If_3",
+          "Return_4",
+          "Return_5",
+          "If_6",
+          "Return_7",
+          "Return_8"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "If",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

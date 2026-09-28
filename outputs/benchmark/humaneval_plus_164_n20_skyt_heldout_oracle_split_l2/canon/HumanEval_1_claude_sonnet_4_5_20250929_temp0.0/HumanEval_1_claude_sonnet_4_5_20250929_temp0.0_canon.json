@@ -1,0 +1,590 @@
+{
+  "contract_id": "HumanEval_1_claude_sonnet_4_5_20250929_temp0.0",
+  "canonical_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    >>> separate_paren_groups('( ) (( )) (( )( ))')\n    ['()', '(())', '(()())']\n    \"\"\"\n    result = []\n    current_group = []\n    depth = 0\n    \n    for char in paren_string:\n        if char == ' ':\n            continue\n        \n        if char == '(':\n            current_group.append(char)\n            depth += 1\n        elif char == ')':\n            current_group.append(char)\n            depth -= 1\n            \n            if depth == 0:\n                result.append(''.join(current_group))\n                current_group = []\n    \n    return result\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 4,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [],
+      "nested_depth": 4,
+      "branch_patterns": [
+        "if_at_depth_1",
+        "if_at_depth_1",
+        "if_at_depth_2",
+        "if_at_depth_3"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [],
+        "v1": [],
+        "v2": []
+      },
+      "assignments": {
+        "v0": "List(ctx=Load())",
+        "v1": "List(ctx=Load())",
+        "v2": "Constant(value=0)"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_separate_paren_groups"
+        ],
+        [
+          "function_separate_paren_groups",
+          "loop"
+        ],
+        [
+          "function_separate_paren_groups",
+          "loop",
+          "branch"
+        ],
+        [
+          "function_separate_paren_groups",
+          "loop",
+          "branch"
+        ],
+        [
+          "function_separate_paren_groups",
+          "loop",
+          "branch",
+          "branch"
+        ],
+        [
+          "function_separate_paren_groups",
+          "loop",
+          "branch",
+          "branch",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "separate_paren_groups": {
+        "name": "separate_paren_groups",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": []
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": false,
+      "numeric_constants": [
+        0,
+        1,
+        1,
+        0
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Eq",
+        "Eq",
+        "Eq",
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "List",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "List",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "For",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Continue",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Expr",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Name",
+        "Load",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Add",
+        "Constant",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Expr",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Name",
+        "Load",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Sub",
+        "Constant",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Expr",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Call",
+        "Attribute",
+        "Constant",
+        "Load",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "List",
+        "Load",
+        "Return",
+        "Name",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load"
+      ],
+      "ast_depth": 10,
+      "ast_hash": "dee808e6bcb785b2ed6151da7bda41c8",
+      "alpha_renamed_hash": "dee808e6bcb785b2ed6151da7bda41c8"
+    },
+    "operator_precedence": {
+      "operator_sequence": [],
+      "precedence_levels": {}
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "Assign",
+        "Assign",
+        "For",
+        "If",
+        "Continue",
+        "If",
+        "Expr",
+        "AugAssign",
+        "If",
+        "Expr",
+        "AugAssign",
+        "If",
+        "Expr",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "Assign_2",
+        "Assign_3",
+        "For_4",
+        "If_5",
+        "Continue_6",
+        "If_7",
+        "Expr_8",
+        "AugAssign_9",
+        "If_10",
+        "Expr_11",
+        "AugAssign_12",
+        "If_13",
+        "Expr_14",
+        "Assign_15",
+        "Return_16"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "For",
+        "If",
+        "If",
+        "If",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_1_claude_sonnet_4_5_20250929_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/1",
+    "prompt": "from typing import List\n\n\ndef separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    >>> separate_paren_groups('( ) (( )) (( )( ))')\n    ['()', '(())', '(()())']\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "separate_paren_groups"
+    },
+    "anchor_signature": "8084af132ce8c38d7e28c88a0eba8d26d11d2db1af48c36d6e8e81c4edb3a073",
+    "canonical_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    \"\"\" Input to this function is a string containing multiple groups of nested parentheses. Your goal is to\n    separate those group into separate strings and return the list of those.\n    Separate groups are balanced (each open brace is properly closed) and not nested within each other\n    Ignore any spaces in the input string.\n    >>> separate_paren_groups('( ) (( )) (( )( ))')\n    ['()', '(())', '(()())']\n    \"\"\"\n    result = []\n    current_group = []\n    depth = 0\n    \n    for char in paren_string:\n        if char == ' ':\n            continue\n        \n        if char == '(':\n            current_group.append(char)\n            depth += 1\n        elif char == ')':\n            current_group.append(char)\n            depth -= 1\n            \n            if depth == 0:\n                result.append(''.join(current_group))\n                current_group = []\n    \n    return result\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 4,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [],
+        "nested_depth": 4,
+        "branch_patterns": [
+          "if_at_depth_1",
+          "if_at_depth_1",
+          "if_at_depth_2",
+          "if_at_depth_3"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [],
+          "v1": [],
+          "v2": []
+        },
+        "assignments": {
+          "v0": "List(ctx=Load())",
+          "v1": "List(ctx=Load())",
+          "v2": "Constant(value=0)"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_separate_paren_groups"
+          ],
+          [
+            "function_separate_paren_groups",
+            "loop"
+          ],
+          [
+            "function_separate_paren_groups",
+            "loop",
+            "branch"
+          ],
+          [
+            "function_separate_paren_groups",
+            "loop",
+            "branch"
+          ],
+          [
+            "function_separate_paren_groups",
+            "loop",
+            "branch",
+            "branch"
+          ],
+          [
+            "function_separate_paren_groups",
+            "loop",
+            "branch",
+            "branch",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "separate_paren_groups": {
+          "name": "separate_paren_groups",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": [
+          0,
+          1,
+          1,
+          0
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Eq",
+          "Eq",
+          "Eq",
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "List",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "List",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Continue",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Name",
+          "Load",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Add",
+          "Constant",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Name",
+          "Load",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Sub",
+          "Constant",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Call",
+          "Attribute",
+          "Constant",
+          "Load",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "List",
+          "Load",
+          "Return",
+          "Name",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load"
+        ],
+        "ast_depth": 10,
+        "ast_hash": "dee808e6bcb785b2ed6151da7bda41c8",
+        "alpha_renamed_hash": "dee808e6bcb785b2ed6151da7bda41c8"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "Assign",
+          "For",
+          "If",
+          "Continue",
+          "If",
+          "Expr",
+          "AugAssign",
+          "If",
+          "Expr",
+          "AugAssign",
+          "If",
+          "Expr",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "Assign_2",
+          "Assign_3",
+          "For_4",
+          "If_5",
+          "Continue_6",
+          "If_7",
+          "Expr_8",
+          "AugAssign_9",
+          "If_10",
+          "Expr_11",
+          "AugAssign_12",
+          "If_13",
+          "Expr_14",
+          "Assign_15",
+          "Return_16"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "For",
+          "If",
+          "If",
+          "If",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

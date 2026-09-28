@@ -1,0 +1,47 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "1fcb3b57db206f20e79ada7adfa4c1fa6d7b4bb9f58f7ff69d76b5c6bfa9a3fb|1fcb3b57db206f20e79ada7adfa4c1fa6d7b4bb9f58f7ff69d76b5c6bfa9a3fb": {
+      "stitched_code": "from typing import List\n\n\ndef intersperse(numbers: List[int], delimeter: int) -> List[int]:\n    \"\"\" Insert a number 'delimeter' between every two consecutive elements of input list `numbers'\n    >>> intersperse([], 4)\n    []\n    >>> intersperse([1, 2, 3], 4)\n    [1, 4, 2, 4, 3]\n    \"\"\"\n    if not numbers:\n        return []\n    \n    result = []\n    for i in range(len(numbers) - 1):\n        result.append(numbers[i])\n        result.append(delimeter)\n    result.append(numbers[-1])\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "a43c7b37050d39a20834b40eb9c76ee963ccc671a3be682d01540624423256be|1fcb3b57db206f20e79ada7adfa4c1fa6d7b4bb9f58f7ff69d76b5c6bfa9a3fb": {
+      "stitched_code": "from typing import List\n\n\ndef intersperse(numbers: List[int], delimeter: int) ->List[int]:\n    \"\"\" Insert a number 'delimeter' between every two consecutive elements of input list `numbers'\n    >>> intersperse([], 4)\n    []\n    >>> intersperse([1, 2, 3], 4)\n    [1, 4, 2, 4, 3]\n    \"\"\"\n    if not numbers:\n        return []\n    result = []\n    for i in range(len(numbers) - 1):\n        result.append(numbers[i])\n        result.append(delimeter)\n    result.append(numbers[-1])\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

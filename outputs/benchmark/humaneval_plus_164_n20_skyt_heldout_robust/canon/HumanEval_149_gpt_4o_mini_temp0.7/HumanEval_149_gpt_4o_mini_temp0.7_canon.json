@@ -1,0 +1,348 @@
+{
+  "contract_id": "HumanEval_149_gpt_4o_mini_temp0.7",
+  "canonical_code": "def sorted_list_sum(lst):\n    filtered_lst = [s for s in lst if len(s) % 2 == 0]\n    return sorted(filtered_lst, key=lambda x: (len(x), x))\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 0,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "len",
+        "sorted",
+        "len"
+      ],
+      "nested_depth": 0,
+      "branch_patterns": []
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": []
+      },
+      "assignments": {
+        "v0": "ListComp(elt=Name(id='v1', ctx=Load()), generators=[comprehension(target=Name(id='v1', ctx=Store()), iter=Name(id='p0', ctx=Load()), ifs=[Compare(left=BinOp(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='v1', ctx=Load())]), op=Mod(), right=Constant(value=2)), ops=[Eq()], comparators=[Constant(value=0)])], is_async=0)])"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_sorted_list_sum"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "sorted_list_sum": {
+        "name": "sorted_list_sum",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": [
+        "Mod"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        2,
+        0
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "ListComp",
+        "Name",
+        "Load",
+        "comprehension",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Compare",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Mod",
+        "Constant",
+        "Eq",
+        "Constant",
+        "Return",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "keyword",
+        "Lambda",
+        "arguments",
+        "arg",
+        "Tuple",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load"
+      ],
+      "ast_depth": 9,
+      "ast_hash": "b9051c07d7818dfc979d501c18e4129a",
+      "alpha_renamed_hash": "b9051c07d7818dfc979d501c18e4129a"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Mod"
+      ],
+      "precedence_levels": {
+        "Mod": 4
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "Return_2"
+      ],
+      "control_flow_order": [
+        "FunctionDef"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_149_gpt_4o_mini_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/149",
+    "prompt": "\ndef sorted_list_sum(lst):\n    \"\"\"Write a function that accepts a list of strings as a parameter,\n    deletes the strings that have odd lengths from it,\n    and returns the resulted list with a sorted order,\n    The list is always a list of strings and never an array of numbers,\n    and it may contain duplicates.\n    The order of the list should be ascending by length of each word, and you\n    should return the list sorted by that rule.\n    If two words have the same length, sort the list alphabetically.\n    The function should return a list of strings in sorted order.\n    You may assume that all words will have the same length.\n    For example:\n    assert list_sort([\"aa\", \"a\", \"aaa\"]) => [\"aa\"]\n    assert list_sort([\"ab\", \"a\", \"aaa\", \"cd\"]) => [\"ab\", \"cd\"]\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "sorted_list_sum"
+    },
+    "anchor_signature": "f8a650defe372d8ae1a9237e1c3bd89a978bf18e651a636f15171213f3cdb3be",
+    "canonical_code": "def sorted_list_sum(lst):\n    filtered_lst = [s for s in lst if len(s) % 2 == 0]\n    return sorted(filtered_lst, key=lambda x: (len(x), x))\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 0,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "len",
+          "sorted",
+          "len"
+        ],
+        "nested_depth": 0,
+        "branch_patterns": []
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": []
+        },
+        "assignments": {
+          "v0": "ListComp(elt=Name(id='v1', ctx=Load()), generators=[comprehension(target=Name(id='v1', ctx=Store()), iter=Name(id='p0', ctx=Load()), ifs=[Compare(left=BinOp(left=Call(func=Name(id='len', ctx=Load()), args=[Name(id='v1', ctx=Load())]), op=Mod(), right=Constant(value=2)), ops=[Eq()], comparators=[Constant(value=0)])], is_async=0)])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_sorted_list_sum"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "sorted_list_sum": {
+          "name": "sorted_list_sum",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": [
+          "Mod"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          2,
+          0
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "ListComp",
+          "Name",
+          "Load",
+          "comprehension",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Compare",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Mod",
+          "Constant",
+          "Eq",
+          "Constant",
+          "Return",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "keyword",
+          "Lambda",
+          "arguments",
+          "arg",
+          "Tuple",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load"
+        ],
+        "ast_depth": 9,
+        "ast_hash": "b9051c07d7818dfc979d501c18e4129a",
+        "alpha_renamed_hash": "b9051c07d7818dfc979d501c18e4129a"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Mod"
+        ],
+        "precedence_levels": {
+          "Mod": 4
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "Return_2"
+        ],
+        "control_flow_order": [
+          "FunctionDef"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

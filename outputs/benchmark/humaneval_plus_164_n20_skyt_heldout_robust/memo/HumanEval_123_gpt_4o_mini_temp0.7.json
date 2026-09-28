@@ -1,0 +1,2191 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "ad7199d00f4a459a1375bce00fb94aa6045bce7487c5d9d5a29f19fb26240591|4a01a4af53cc1560f32a97fd058b7252d01995fd9e6bb5e83fcfedfe57e43bde": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [x for x in collatz_sequence if x % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "5051da845115b497af3d3163e147eeb5c28a0b57ddad78c558685fbadd14b5ed|4a01a4af53cc1560f32a97fd058b7252d01995fd9e6bb5e83fcfedfe57e43bde": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Add the last term, which is 1\n\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "97d4c996933233bd512ef4d0c0357e0953533671be8fb5ca145341714f987628|4a01a4af53cc1560f32a97fd058b7252d01995fd9e6bb5e83fcfedfe57e43bde": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # include the last term which is 1\n\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "d078b5fe487f3508c5b39ce0b9d3850deb99ec1689b0e94b93f973c0ff4ce9dd|4a01a4af53cc1560f32a97fd058b7252d01995fd9e6bb5e83fcfedfe57e43bde": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [x for x in collatz_sequence if x % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "cbf948b192c1221b93a85404c87c1ac22af3b229658e35c8bd2656810713c345|4a01a4af53cc1560f32a97fd058b7252d01995fd9e6bb5e83fcfedfe57e43bde": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    \n    collatz_sequence.append(1)  # Include the last term which is 1\n    odd_numbers = [x for x in collatz_sequence if x % 2 != 0]\n    \n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "8f4b44a66f8be1b50c7b9ae05fff05c638547f7d4d5c955d72b209d1546d92a2|4a01a4af53cc1560f32a97fd058b7252d01995fd9e6bb5e83fcfedfe57e43bde": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    \n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "c9cb2b65c35711e376aaac070666bc273f8a809b47ff43666b35c19e8acebce1|4a01a4af53cc1560f32a97fd058b7252d01995fd9e6bb5e83fcfedfe57e43bde": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n            \n    collatz_sequence.append(1)\n    \n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "078e71e8d601dc96143016e908baacf243532c5321baebd80c809fb9353ab81d|4a01a4af53cc1560f32a97fd058b7252d01995fd9e6bb5e83fcfedfe57e43bde": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Include the last element which is 1\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "afa1774ad87e46dacff4788d2e3c59fdf9ce8ec94d4736696f7801ea3049b738|4a01a4af53cc1560f32a97fd058b7252d01995fd9e6bb5e83fcfedfe57e43bde": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Include the last term which is 1\n\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "749c47a8409b2471a291c4eb2ffd900cef2fb929aae5654e09f8f38fd7c28a53|4a01a4af53cc1560f32a97fd058b7252d01995fd9e6bb5e83fcfedfe57e43bde": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [x for x in collatz_sequence if x % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "4142161329a505bbcb44eeaef8b6d3a31ae3dea95ba4d568d9969660ee4f421b|cbf948b192c1221b93a85404c87c1ac22af3b229658e35c8bd2656810713c345": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [x for x in collatz_sequence if x % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "5051da845115b497af3d3163e147eeb5c28a0b57ddad78c558685fbadd14b5ed|cbf948b192c1221b93a85404c87c1ac22af3b229658e35c8bd2656810713c345": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Add the last term, which is 1\n\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "97d4c996933233bd512ef4d0c0357e0953533671be8fb5ca145341714f987628|cbf948b192c1221b93a85404c87c1ac22af3b229658e35c8bd2656810713c345": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # include the last term which is 1\n\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "4bd3ec1c2abe43d99ee4056015147fbcc057610bb26646b1acf710592f5f2243|cbf948b192c1221b93a85404c87c1ac22af3b229658e35c8bd2656810713c345": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Add the final 1 to the sequence\n\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "3b2bd12c8ef89f57fac7bdf0bb7bd1d59a9f9c348ce2624399eaa2c4e0891840|cbf948b192c1221b93a85404c87c1ac22af3b229658e35c8bd2656810713c345": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n            \n    collatz_sequence.append(1)  # include the last number which is 1\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    \n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "078e71e8d601dc96143016e908baacf243532c5321baebd80c809fb9353ab81d|cbf948b192c1221b93a85404c87c1ac22af3b229658e35c8bd2656810713c345": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Include the last element which is 1\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "2bdca315080dfffaf737af9af0b28c905f875fe972ece87adee821032da89eae|cbf948b192c1221b93a85404c87c1ac22af3b229658e35c8bd2656810713c345": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # include the last term which is 1\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "818750da309aaf5e1f7b420ba175bcda19f9e2166c8979e436d85e4bbfeedfd9|cbf948b192c1221b93a85404c87c1ac22af3b229658e35c8bd2656810713c345": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [x for x in collatz_sequence if x % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "749c47a8409b2471a291c4eb2ffd900cef2fb929aae5654e09f8f38fd7c28a53|cbf948b192c1221b93a85404c87c1ac22af3b229658e35c8bd2656810713c345": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [x for x in collatz_sequence if x % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8f4b44a66f8be1b50c7b9ae05fff05c638547f7d4d5c955d72b209d1546d92a2|cbf948b192c1221b93a85404c87c1ac22af3b229658e35c8bd2656810713c345": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    \n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ad7199d00f4a459a1375bce00fb94aa6045bce7487c5d9d5a29f19fb26240591|cbf948b192c1221b93a85404c87c1ac22af3b229658e35c8bd2656810713c345": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [x for x in collatz_sequence if x % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "a63c984951e05bfdc4fd9e09b41cc514f7be3cbfadf160816d2fbe9a9f2a3b03|cbf948b192c1221b93a85404c87c1ac22af3b229658e35c8bd2656810713c345": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n            \n    collatz_sequence.append(1)  # Add the last element, which is 1\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    \n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "c9cb2b65c35711e376aaac070666bc273f8a809b47ff43666b35c19e8acebce1|cbf948b192c1221b93a85404c87c1ac22af3b229658e35c8bd2656810713c345": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n            \n    collatz_sequence.append(1)\n    \n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "afa1774ad87e46dacff4788d2e3c59fdf9ce8ec94d4736696f7801ea3049b738|cbf948b192c1221b93a85404c87c1ac22af3b229658e35c8bd2656810713c345": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Include the last term which is 1\n\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "a63c984951e05bfdc4fd9e09b41cc514f7be3cbfadf160816d2fbe9a9f2a3b03|4a01a4af53cc1560f32a97fd058b7252d01995fd9e6bb5e83fcfedfe57e43bde": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n            \n    collatz_sequence.append(1)  # Add the last element, which is 1\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    \n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "4bd3ec1c2abe43d99ee4056015147fbcc057610bb26646b1acf710592f5f2243|4a01a4af53cc1560f32a97fd058b7252d01995fd9e6bb5e83fcfedfe57e43bde": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Add the final 1 to the sequence\n\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "e3854aeb29ab7f7b4de2182665f142ce031e7a5433b27ff4a5d6ca2954809475|4a01a4af53cc1560f32a97fd058b7252d01995fd9e6bb5e83fcfedfe57e43bde": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Include the last term which is 1\n    \n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "2bdca315080dfffaf737af9af0b28c905f875fe972ece87adee821032da89eae|4a01a4af53cc1560f32a97fd058b7252d01995fd9e6bb5e83fcfedfe57e43bde": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # include the last term which is 1\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "bfa88e332635ddeed3134f853c7bffc9ec73b564c661f7f23f5aefa7996dc050|4a01a4af53cc1560f32a97fd058b7252d01995fd9e6bb5e83fcfedfe57e43bde": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [x for x in collatz_sequence if x % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "e3854aeb29ab7f7b4de2182665f142ce031e7a5433b27ff4a5d6ca2954809475|cbf948b192c1221b93a85404c87c1ac22af3b229658e35c8bd2656810713c345": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Include the last term which is 1\n    \n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "4a01a4af53cc1560f32a97fd058b7252d01995fd9e6bb5e83fcfedfe57e43bde|cbf948b192c1221b93a85404c87c1ac22af3b229658e35c8bd2656810713c345": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    \n    collatz_sequence.append(1)  # add the last term which is 1\n    \n    odd_numbers = [x for x in collatz_sequence if x % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ad7199d00f4a459a1375bce00fb94aa6045bce7487c5d9d5a29f19fb26240591|a63c984951e05bfdc4fd9e09b41cc514f7be3cbfadf160816d2fbe9a9f2a3b03": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "97d4c996933233bd512ef4d0c0357e0953533671be8fb5ca145341714f987628|a63c984951e05bfdc4fd9e09b41cc514f7be3cbfadf160816d2fbe9a9f2a3b03": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # include the last term which is 1\n\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "cbf948b192c1221b93a85404c87c1ac22af3b229658e35c8bd2656810713c345|a63c984951e05bfdc4fd9e09b41cc514f7be3cbfadf160816d2fbe9a9f2a3b03": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    \n    collatz_sequence.append(1)  # Include the last term which is 1\n    odd_numbers = [x for x in collatz_sequence if x % 2 != 0]\n    \n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "8f4b44a66f8be1b50c7b9ae05fff05c638547f7d4d5c955d72b209d1546d92a2|a63c984951e05bfdc4fd9e09b41cc514f7be3cbfadf160816d2fbe9a9f2a3b03": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    \n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "c9cb2b65c35711e376aaac070666bc273f8a809b47ff43666b35c19e8acebce1|a63c984951e05bfdc4fd9e09b41cc514f7be3cbfadf160816d2fbe9a9f2a3b03": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n            \n    collatz_sequence.append(1)\n    \n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "078e71e8d601dc96143016e908baacf243532c5321baebd80c809fb9353ab81d|a63c984951e05bfdc4fd9e09b41cc514f7be3cbfadf160816d2fbe9a9f2a3b03": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Include the last element which is 1\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "afa1774ad87e46dacff4788d2e3c59fdf9ce8ec94d4736696f7801ea3049b738|a63c984951e05bfdc4fd9e09b41cc514f7be3cbfadf160816d2fbe9a9f2a3b03": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Include the last term which is 1\n\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "2bdca315080dfffaf737af9af0b28c905f875fe972ece87adee821032da89eae|a63c984951e05bfdc4fd9e09b41cc514f7be3cbfadf160816d2fbe9a9f2a3b03": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # include the last term which is 1\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "4a01a4af53cc1560f32a97fd058b7252d01995fd9e6bb5e83fcfedfe57e43bde|a63c984951e05bfdc4fd9e09b41cc514f7be3cbfadf160816d2fbe9a9f2a3b03": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    \n    collatz_sequence.append(1)  # add the last term which is 1\n    \n    odd_numbers = [x for x in collatz_sequence if x % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "bfa88e332635ddeed3134f853c7bffc9ec73b564c661f7f23f5aefa7996dc050|a63c984951e05bfdc4fd9e09b41cc514f7be3cbfadf160816d2fbe9a9f2a3b03": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d078b5fe487f3508c5b39ce0b9d3850deb99ec1689b0e94b93f973c0ff4ce9dd|cbf948b192c1221b93a85404c87c1ac22af3b229658e35c8bd2656810713c345": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [x for x in collatz_sequence if x % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "bfa88e332635ddeed3134f853c7bffc9ec73b564c661f7f23f5aefa7996dc050|cbf948b192c1221b93a85404c87c1ac22af3b229658e35c8bd2656810713c345": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [x for x in collatz_sequence if x % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "4142161329a505bbcb44eeaef8b6d3a31ae3dea95ba4d568d9969660ee4f421b|4a01a4af53cc1560f32a97fd058b7252d01995fd9e6bb5e83fcfedfe57e43bde": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [x for x in collatz_sequence if x % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "818750da309aaf5e1f7b420ba175bcda19f9e2166c8979e436d85e4bbfeedfd9|4a01a4af53cc1560f32a97fd058b7252d01995fd9e6bb5e83fcfedfe57e43bde": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [x for x in collatz_sequence if x % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "a63c984951e05bfdc4fd9e09b41cc514f7be3cbfadf160816d2fbe9a9f2a3b03|3b2bd12c8ef89f57fac7bdf0bb7bd1d59a9f9c348ce2624399eaa2c4e0891840": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n            \n    collatz_sequence.append(1)  # Add the last element, which is 1\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    \n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "5051da845115b497af3d3163e147eeb5c28a0b57ddad78c558685fbadd14b5ed|3b2bd12c8ef89f57fac7bdf0bb7bd1d59a9f9c348ce2624399eaa2c4e0891840": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Add the last term, which is 1\n\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "97d4c996933233bd512ef4d0c0357e0953533671be8fb5ca145341714f987628|3b2bd12c8ef89f57fac7bdf0bb7bd1d59a9f9c348ce2624399eaa2c4e0891840": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # include the last term which is 1\n\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "4bd3ec1c2abe43d99ee4056015147fbcc057610bb26646b1acf710592f5f2243|3b2bd12c8ef89f57fac7bdf0bb7bd1d59a9f9c348ce2624399eaa2c4e0891840": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Add the final 1 to the sequence\n\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "cbf948b192c1221b93a85404c87c1ac22af3b229658e35c8bd2656810713c345|3b2bd12c8ef89f57fac7bdf0bb7bd1d59a9f9c348ce2624399eaa2c4e0891840": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    \n    collatz_sequence.append(1)  # Include the last term which is 1\n    odd_numbers = [x for x in collatz_sequence if x % 2 != 0]\n    \n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "c9cb2b65c35711e376aaac070666bc273f8a809b47ff43666b35c19e8acebce1|3b2bd12c8ef89f57fac7bdf0bb7bd1d59a9f9c348ce2624399eaa2c4e0891840": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n            \n    collatz_sequence.append(1)\n    \n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "078e71e8d601dc96143016e908baacf243532c5321baebd80c809fb9353ab81d|3b2bd12c8ef89f57fac7bdf0bb7bd1d59a9f9c348ce2624399eaa2c4e0891840": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Include the last element which is 1\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "4a01a4af53cc1560f32a97fd058b7252d01995fd9e6bb5e83fcfedfe57e43bde|3b2bd12c8ef89f57fac7bdf0bb7bd1d59a9f9c348ce2624399eaa2c4e0891840": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    \n    collatz_sequence.append(1)  # add the last term which is 1\n    \n    odd_numbers = [x for x in collatz_sequence if x % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "8f4b44a66f8be1b50c7b9ae05fff05c638547f7d4d5c955d72b209d1546d92a2|3b2bd12c8ef89f57fac7bdf0bb7bd1d59a9f9c348ce2624399eaa2c4e0891840": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    \n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "bfa88e332635ddeed3134f853c7bffc9ec73b564c661f7f23f5aefa7996dc050|3b2bd12c8ef89f57fac7bdf0bb7bd1d59a9f9c348ce2624399eaa2c4e0891840": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "a63c984951e05bfdc4fd9e09b41cc514f7be3cbfadf160816d2fbe9a9f2a3b03|c9cb2b65c35711e376aaac070666bc273f8a809b47ff43666b35c19e8acebce1": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n            \n    collatz_sequence.append(1)  # Add the last element, which is 1\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    \n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "5051da845115b497af3d3163e147eeb5c28a0b57ddad78c558685fbadd14b5ed|c9cb2b65c35711e376aaac070666bc273f8a809b47ff43666b35c19e8acebce1": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Add the last term, which is 1\n\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "d078b5fe487f3508c5b39ce0b9d3850deb99ec1689b0e94b93f973c0ff4ce9dd|c9cb2b65c35711e376aaac070666bc273f8a809b47ff43666b35c19e8acebce1": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "cbf948b192c1221b93a85404c87c1ac22af3b229658e35c8bd2656810713c345|c9cb2b65c35711e376aaac070666bc273f8a809b47ff43666b35c19e8acebce1": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    \n    collatz_sequence.append(1)  # Include the last term which is 1\n    odd_numbers = [x for x in collatz_sequence if x % 2 != 0]\n    \n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "3b2bd12c8ef89f57fac7bdf0bb7bd1d59a9f9c348ce2624399eaa2c4e0891840|c9cb2b65c35711e376aaac070666bc273f8a809b47ff43666b35c19e8acebce1": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n            \n    collatz_sequence.append(1)  # include the last number which is 1\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    \n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "078e71e8d601dc96143016e908baacf243532c5321baebd80c809fb9353ab81d|c9cb2b65c35711e376aaac070666bc273f8a809b47ff43666b35c19e8acebce1": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Include the last element which is 1\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "818750da309aaf5e1f7b420ba175bcda19f9e2166c8979e436d85e4bbfeedfd9|c9cb2b65c35711e376aaac070666bc273f8a809b47ff43666b35c19e8acebce1": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "4a01a4af53cc1560f32a97fd058b7252d01995fd9e6bb5e83fcfedfe57e43bde|c9cb2b65c35711e376aaac070666bc273f8a809b47ff43666b35c19e8acebce1": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    \n    collatz_sequence.append(1)  # add the last term which is 1\n    \n    odd_numbers = [x for x in collatz_sequence if x % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "749c47a8409b2471a291c4eb2ffd900cef2fb929aae5654e09f8f38fd7c28a53|c9cb2b65c35711e376aaac070666bc273f8a809b47ff43666b35c19e8acebce1": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8f4b44a66f8be1b50c7b9ae05fff05c638547f7d4d5c955d72b209d1546d92a2|c9cb2b65c35711e376aaac070666bc273f8a809b47ff43666b35c19e8acebce1": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    \n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "4142161329a505bbcb44eeaef8b6d3a31ae3dea95ba4d568d9969660ee4f421b|a63c984951e05bfdc4fd9e09b41cc514f7be3cbfadf160816d2fbe9a9f2a3b03": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "5051da845115b497af3d3163e147eeb5c28a0b57ddad78c558685fbadd14b5ed|a63c984951e05bfdc4fd9e09b41cc514f7be3cbfadf160816d2fbe9a9f2a3b03": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Add the last term, which is 1\n\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "d078b5fe487f3508c5b39ce0b9d3850deb99ec1689b0e94b93f973c0ff4ce9dd|a63c984951e05bfdc4fd9e09b41cc514f7be3cbfadf160816d2fbe9a9f2a3b03": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "749c47a8409b2471a291c4eb2ffd900cef2fb929aae5654e09f8f38fd7c28a53|a63c984951e05bfdc4fd9e09b41cc514f7be3cbfadf160816d2fbe9a9f2a3b03": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "ad7199d00f4a459a1375bce00fb94aa6045bce7487c5d9d5a29f19fb26240591|8f4b44a66f8be1b50c7b9ae05fff05c638547f7d4d5c955d72b209d1546d92a2": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "a63c984951e05bfdc4fd9e09b41cc514f7be3cbfadf160816d2fbe9a9f2a3b03|8f4b44a66f8be1b50c7b9ae05fff05c638547f7d4d5c955d72b209d1546d92a2": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n            \n    collatz_sequence.append(1)  # Add the last element, which is 1\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    \n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "5051da845115b497af3d3163e147eeb5c28a0b57ddad78c558685fbadd14b5ed|8f4b44a66f8be1b50c7b9ae05fff05c638547f7d4d5c955d72b209d1546d92a2": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Add the last term, which is 1\n\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "4bd3ec1c2abe43d99ee4056015147fbcc057610bb26646b1acf710592f5f2243|8f4b44a66f8be1b50c7b9ae05fff05c638547f7d4d5c955d72b209d1546d92a2": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Add the final 1 to the sequence\n\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "cbf948b192c1221b93a85404c87c1ac22af3b229658e35c8bd2656810713c345|8f4b44a66f8be1b50c7b9ae05fff05c638547f7d4d5c955d72b209d1546d92a2": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    \n    collatz_sequence.append(1)  # Include the last term which is 1\n    odd_numbers = [x for x in collatz_sequence if x % 2 != 0]\n    \n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "c9cb2b65c35711e376aaac070666bc273f8a809b47ff43666b35c19e8acebce1|8f4b44a66f8be1b50c7b9ae05fff05c638547f7d4d5c955d72b209d1546d92a2": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n            \n    collatz_sequence.append(1)\n    \n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "3b2bd12c8ef89f57fac7bdf0bb7bd1d59a9f9c348ce2624399eaa2c4e0891840|8f4b44a66f8be1b50c7b9ae05fff05c638547f7d4d5c955d72b209d1546d92a2": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n            \n    collatz_sequence.append(1)  # include the last number which is 1\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    \n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "078e71e8d601dc96143016e908baacf243532c5321baebd80c809fb9353ab81d|8f4b44a66f8be1b50c7b9ae05fff05c638547f7d4d5c955d72b209d1546d92a2": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Include the last element which is 1\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "2bdca315080dfffaf737af9af0b28c905f875fe972ece87adee821032da89eae|8f4b44a66f8be1b50c7b9ae05fff05c638547f7d4d5c955d72b209d1546d92a2": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # include the last term which is 1\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "4a01a4af53cc1560f32a97fd058b7252d01995fd9e6bb5e83fcfedfe57e43bde|8f4b44a66f8be1b50c7b9ae05fff05c638547f7d4d5c955d72b209d1546d92a2": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    \n    collatz_sequence.append(1)  # add the last term which is 1\n    \n    odd_numbers = [x for x in collatz_sequence if x % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ad7199d00f4a459a1375bce00fb94aa6045bce7487c5d9d5a29f19fb26240591|c9cb2b65c35711e376aaac070666bc273f8a809b47ff43666b35c19e8acebce1": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "afa1774ad87e46dacff4788d2e3c59fdf9ce8ec94d4736696f7801ea3049b738|c9cb2b65c35711e376aaac070666bc273f8a809b47ff43666b35c19e8acebce1": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Include the last term which is 1\n\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "bfa88e332635ddeed3134f853c7bffc9ec73b564c661f7f23f5aefa7996dc050|c9cb2b65c35711e376aaac070666bc273f8a809b47ff43666b35c19e8acebce1": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "97d4c996933233bd512ef4d0c0357e0953533671be8fb5ca145341714f987628|c9cb2b65c35711e376aaac070666bc273f8a809b47ff43666b35c19e8acebce1": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # include the last term which is 1\n\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "4bd3ec1c2abe43d99ee4056015147fbcc057610bb26646b1acf710592f5f2243|c9cb2b65c35711e376aaac070666bc273f8a809b47ff43666b35c19e8acebce1": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Add the final 1 to the sequence\n\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "e3854aeb29ab7f7b4de2182665f142ce031e7a5433b27ff4a5d6ca2954809475|c9cb2b65c35711e376aaac070666bc273f8a809b47ff43666b35c19e8acebce1": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Include the last term which is 1\n    \n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "3b2bd12c8ef89f57fac7bdf0bb7bd1d59a9f9c348ce2624399eaa2c4e0891840|a63c984951e05bfdc4fd9e09b41cc514f7be3cbfadf160816d2fbe9a9f2a3b03": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n            \n    collatz_sequence.append(1)  # include the last number which is 1\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    \n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "818750da309aaf5e1f7b420ba175bcda19f9e2166c8979e436d85e4bbfeedfd9|a63c984951e05bfdc4fd9e09b41cc514f7be3cbfadf160816d2fbe9a9f2a3b03": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "4142161329a505bbcb44eeaef8b6d3a31ae3dea95ba4d568d9969660ee4f421b|c9cb2b65c35711e376aaac070666bc273f8a809b47ff43666b35c19e8acebce1": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2bdca315080dfffaf737af9af0b28c905f875fe972ece87adee821032da89eae|3b2bd12c8ef89f57fac7bdf0bb7bd1d59a9f9c348ce2624399eaa2c4e0891840": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # include the last term which is 1\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "818750da309aaf5e1f7b420ba175bcda19f9e2166c8979e436d85e4bbfeedfd9|3b2bd12c8ef89f57fac7bdf0bb7bd1d59a9f9c348ce2624399eaa2c4e0891840": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "749c47a8409b2471a291c4eb2ffd900cef2fb929aae5654e09f8f38fd7c28a53|3b2bd12c8ef89f57fac7bdf0bb7bd1d59a9f9c348ce2624399eaa2c4e0891840": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2bdca315080dfffaf737af9af0b28c905f875fe972ece87adee821032da89eae|c9cb2b65c35711e376aaac070666bc273f8a809b47ff43666b35c19e8acebce1": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # include the last term which is 1\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "3b2bd12c8ef89f57fac7bdf0bb7bd1d59a9f9c348ce2624399eaa2c4e0891840|4a01a4af53cc1560f32a97fd058b7252d01995fd9e6bb5e83fcfedfe57e43bde": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    \n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n            \n    collatz_sequence.append(1)  # include the last number which is 1\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    \n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "afa1774ad87e46dacff4788d2e3c59fdf9ce8ec94d4736696f7801ea3049b738|3b2bd12c8ef89f57fac7bdf0bb7bd1d59a9f9c348ce2624399eaa2c4e0891840": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Include the last term which is 1\n\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "97d4c996933233bd512ef4d0c0357e0953533671be8fb5ca145341714f987628|8f4b44a66f8be1b50c7b9ae05fff05c638547f7d4d5c955d72b209d1546d92a2": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # include the last term which is 1\n\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "8f4b44a66f8be1b50c7b9ae05fff05c638547f7d4d5c955d72b209d1546d92a2|8f4b44a66f8be1b50c7b9ae05fff05c638547f7d4d5c955d72b209d1546d92a2": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    \n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "afa1774ad87e46dacff4788d2e3c59fdf9ce8ec94d4736696f7801ea3049b738|8f4b44a66f8be1b50c7b9ae05fff05c638547f7d4d5c955d72b209d1546d92a2": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Include the last term which is 1\n\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ad7199d00f4a459a1375bce00fb94aa6045bce7487c5d9d5a29f19fb26240591|3b2bd12c8ef89f57fac7bdf0bb7bd1d59a9f9c348ce2624399eaa2c4e0891840": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "e3854aeb29ab7f7b4de2182665f142ce031e7a5433b27ff4a5d6ca2954809475|3b2bd12c8ef89f57fac7bdf0bb7bd1d59a9f9c348ce2624399eaa2c4e0891840": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Include the last term which is 1\n    \n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "e3854aeb29ab7f7b4de2182665f142ce031e7a5433b27ff4a5d6ca2954809475|a63c984951e05bfdc4fd9e09b41cc514f7be3cbfadf160816d2fbe9a9f2a3b03": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Include the last term which is 1\n    \n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "4142161329a505bbcb44eeaef8b6d3a31ae3dea95ba4d568d9969660ee4f421b|3b2bd12c8ef89f57fac7bdf0bb7bd1d59a9f9c348ce2624399eaa2c4e0891840": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d078b5fe487f3508c5b39ce0b9d3850deb99ec1689b0e94b93f973c0ff4ce9dd|3b2bd12c8ef89f57fac7bdf0bb7bd1d59a9f9c348ce2624399eaa2c4e0891840": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "4bd3ec1c2abe43d99ee4056015147fbcc057610bb26646b1acf710592f5f2243|a63c984951e05bfdc4fd9e09b41cc514f7be3cbfadf160816d2fbe9a9f2a3b03": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Add the final 1 to the sequence\n\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "4142161329a505bbcb44eeaef8b6d3a31ae3dea95ba4d568d9969660ee4f421b|8f4b44a66f8be1b50c7b9ae05fff05c638547f7d4d5c955d72b209d1546d92a2": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "bfa88e332635ddeed3134f853c7bffc9ec73b564c661f7f23f5aefa7996dc050|8f4b44a66f8be1b50c7b9ae05fff05c638547f7d4d5c955d72b209d1546d92a2": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "e3854aeb29ab7f7b4de2182665f142ce031e7a5433b27ff4a5d6ca2954809475|8f4b44a66f8be1b50c7b9ae05fff05c638547f7d4d5c955d72b209d1546d92a2": {
+      "stitched_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)  # Include the last term which is 1\n    \n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

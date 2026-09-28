@@ -1,0 +1,408 @@
+{
+  "contract_id": "HumanEval_90_claude_sonnet_4_5_20250929_temp0.0",
+  "canonical_code": "def next_smallest(lst):\n    if len(lst) < 2:\n        return None\n    \n    unique_sorted = sorted(set(lst))\n    \n    if len(unique_sorted) < 2:\n        return None\n    \n    return unique_sorted[1]\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 2,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "len",
+        "sorted",
+        "set",
+        "len"
+      ],
+      "nested_depth": 1,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_0"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [
+          "p0"
+        ]
+      },
+      "assignments": {
+        "v0": "Call(func=Name(id='sorted', ctx=Load()), args=[Call(func=Name(id='set', ctx=Load()), args=[Name(id='p0', ctx=Load())])])"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_next_smallest"
+        ],
+        [
+          "function_next_smallest",
+          "branch"
+        ],
+        [
+          "function_next_smallest",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "next_smallest": {
+        "name": "next_smallest",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": []
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": false,
+      "numeric_constants": [
+        2,
+        2,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Lt",
+        "Lt"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "If",
+        "Compare",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Lt",
+        "Constant",
+        "Return",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Lt",
+        "Constant",
+        "Return",
+        "Constant",
+        "Return",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load"
+      ],
+      "ast_depth": 6,
+      "ast_hash": "be03cecb9d94e5517c7f3eb1ab5b877e",
+      "alpha_renamed_hash": "be03cecb9d94e5517c7f3eb1ab5b877e"
+    },
+    "operator_precedence": {
+      "operator_sequence": [],
+      "precedence_levels": {}
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Return",
+        "Assign",
+        "If",
+        "Return",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Return_2",
+        "Assign_3",
+        "If_4",
+        "Return_5",
+        "Return_6"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "len(p0) < 2",
+          "return_type": "constant"
+        },
+        {
+          "condition": "len(v0) < 2",
+          "return_type": "constant"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "len(p0) < 2",
+        "len(v0) < 2"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_90_claude_sonnet_4_5_20250929_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/90",
+    "prompt": "\ndef next_smallest(lst):\n    \"\"\"\n    You are given a list of integers.\n    Write a function next_smallest() that returns the 2nd smallest element of the list.\n    Return None if there is no such element.\n    \n    next_smallest([1, 2, 3, 4, 5]) == 2\n    next_smallest([5, 1, 4, 3, 2]) == 2\n    next_smallest([]) == None\n    next_smallest([1, 1]) == None\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "next_smallest"
+    },
+    "anchor_signature": "b4e8a6b4ca2632fd2a775d25b847e669dc96f0b7e5da28cf5420cf1319c67d1d",
+    "canonical_code": "def next_smallest(lst):\n    if len(lst) < 2:\n        return None\n    \n    unique_sorted = sorted(set(lst))\n    \n    if len(unique_sorted) < 2:\n        return None\n    \n    return unique_sorted[1]\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 2,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "len",
+          "sorted",
+          "set",
+          "len"
+        ],
+        "nested_depth": 1,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_0"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [
+            "p0"
+          ]
+        },
+        "assignments": {
+          "v0": "Call(func=Name(id='sorted', ctx=Load()), args=[Call(func=Name(id='set', ctx=Load()), args=[Name(id='p0', ctx=Load())])])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_next_smallest"
+          ],
+          [
+            "function_next_smallest",
+            "branch"
+          ],
+          [
+            "function_next_smallest",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "next_smallest": {
+          "name": "next_smallest",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": [
+          2,
+          2,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Lt",
+          "Lt"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "If",
+          "Compare",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Lt",
+          "Constant",
+          "Return",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Lt",
+          "Constant",
+          "Return",
+          "Constant",
+          "Return",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load"
+        ],
+        "ast_depth": 6,
+        "ast_hash": "be03cecb9d94e5517c7f3eb1ab5b877e",
+        "alpha_renamed_hash": "be03cecb9d94e5517c7f3eb1ab5b877e"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "Assign",
+          "If",
+          "Return",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "Assign_3",
+          "If_4",
+          "Return_5",
+          "Return_6"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "len(p0) < 2",
+            "return_type": "constant"
+          },
+          {
+            "condition": "len(v0) < 2",
+            "return_type": "constant"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "len(p0) < 2",
+          "len(v0) < 2"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

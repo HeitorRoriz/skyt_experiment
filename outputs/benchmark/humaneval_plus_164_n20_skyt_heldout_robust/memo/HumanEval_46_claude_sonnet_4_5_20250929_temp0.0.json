@@ -1,0 +1,65 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "d3f2c1691bad8212e39bf24fd979d536131612c82465cac5badb7852e0da10ba|d3f2c1691bad8212e39bf24fd979d536131612c82465cac5badb7852e0da10ba": {
+      "stitched_code": "def fib4(n: int):\n    \"\"\"The Fib4 number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:\n    fib4(0) -> 0\n    fib4(1) -> 0\n    fib4(2) -> 2\n    fib4(3) -> 0\n    fib4(n) -> fib4(n-1) + fib4(n-2) + fib4(n-3) + fib4(n-4).\n    Please write a function to efficiently compute the n-th element of the fib4 number sequence.  Do not use recursion.\n    >>> fib4(5)\n    4\n    >>> fib4(6)\n    8\n    >>> fib4(7)\n    14\n    \"\"\"\n    if n == 0:\n        return 0\n    elif n == 1:\n        return 0\n    elif n == 2:\n        return 2\n    elif n == 3:\n        return 0\n    \n    # Initialize the first four values\n    a, b, c, d = 0, 0, 2, 0\n    \n    # Compute iteratively\n    for i in range(4, n + 1):\n        new_val = a + b + c + d\n        a, b, c, d = b, c, d, new_val\n    \n    return d\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "c0f1ee5e30d48395416c76eeac0afec76e54459799b4adfb3fe85bb79393a8e2|d3f2c1691bad8212e39bf24fd979d536131612c82465cac5badb7852e0da10ba": {
+      "stitched_code": "def fib4(n: int):\n    if n == 0:\n        return 0\n    elif n == 1:\n        return 0\n    elif n == 2:\n        return 2\n    elif n == 3:\n        return 0\n    \n    # Initialize the first four values\n    a, b, c, d = 0, 0, 2, 0\n    \n    # Compute iteratively from 4 to n\n    for i in range(4, n + 1):\n        new_val = a + b + c + d\n        a, b, c, d = b, c, d, new_val\n    \n    return d\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "89472059771daaa190637b0b1504db2c9e327479eaecf989b062e9491a1d5722|d3f2c1691bad8212e39bf24fd979d536131612c82465cac5badb7852e0da10ba": {
+      "stitched_code": "def fib4(n: int):\n    if n == 0:\n        return 0\n    elif n == 1:\n        return 0\n    elif n == 2:\n        return 2\n    elif n == 3:\n        return 0\n    \n    # Keep track of the last 4 values\n    a, b, c, d = 0, 0, 2, 0  # fib4(0), fib4(1), fib4(2), fib4(3)\n    \n    for i in range(4, n + 1):\n        new_val = a + b + c + d\n        a, b, c, d = b, c, d, new_val\n    \n    return d\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

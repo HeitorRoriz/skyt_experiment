@@ -1,0 +1,215 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "d447f9a8e3b4332e93b4eb38c52da1f946981bb25fb86f6f83abcf01ec98f7cd|684508eef4e26e67863b27f280b26a69966553821ad48d6f6f2112432ade745d": {
+      "stitched_code": "def compare_one(a, b):\n    \"\"\"\n    Create a function that takes integers, floats, or strings representing\n    real numbers, and returns the larger variable in its given variable type.\n    Return None if the values are equal.\n    Note: If a real number is represented as a string, the floating point might be . or ,\n\n    compare_one(1, 2.5) \u279e 2.5\n    compare_one(1, \"2,3\") \u279e \"2,3\"\n    compare_one(\"5,1\", \"6\") \u279e \"6\"\n    compare_one(\"1\", 1) \u279e None\n    \"\"\"\n\n    def convert_to_float(val):\n        if isinstance(val, str):\n            return float(val.replace(',', '.'))\n        return float(val)\n    a_float = convert_to_float(a)\n    b_float = convert_to_float(b)\n    if a_float == b_float:\n        return None\n    elif a_float > b_float:\n        return a\n    else:\n        return b\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "684508eef4e26e67863b27f280b26a69966553821ad48d6f6f2112432ade745d|684508eef4e26e67863b27f280b26a69966553821ad48d6f6f2112432ade745d": {
+      "stitched_code": "def compare_one(a, b):\n    \"\"\"\n    Create a function that takes integers, floats, or strings representing\n    real numbers, and returns the larger variable in its given variable type.\n    Return None if the values are equal.\n    Note: If a real number is represented as a string, the floating point might be . or ,\n\n    compare_one(1, 2.5) \u279e 2.5\n    compare_one(1, \"2,3\") \u279e \"2,3\"\n    compare_one(\"5,1\", \"6\") \u279e \"6\"\n    compare_one(\"1\", 1) \u279e None\n    \"\"\"\n    def convert_to_float(val):\n        if isinstance(val, str):\n            return float(val.replace(',', '.'))\n        return float(val)\n    \n    a_float = convert_to_float(a)\n    b_float = convert_to_float(b)\n    \n    if a_float == b_float:\n        return None\n    elif a_float > b_float:\n        return a\n    else:\n        return b\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "c5cad4b1a7eba21c42c5d994701ac0a43797663618f7feab9bf86e8aec457634|684508eef4e26e67863b27f280b26a69966553821ad48d6f6f2112432ade745d": {
+      "stitched_code": "def compare_one(a, b):\n    \"\"\"\n    Create a function that takes integers, floats, or strings representing\n    real numbers, and returns the larger variable in its given variable type.\n    Return None if the values are equal.\n    Note: If a real number is represented as a string, the floating point might be . or ,\n\n    compare_one(1, 2.5) \u279e 2.5\n    compare_one(1, \"2,3\") \u279e \"2,3\"\n    compare_one(\"5,1\", \"6\") \u279e \"6\"\n    compare_one(\"1\", 1) \u279e None\n    \"\"\"\n    def convert_to_float(x):\n        if isinstance(x, str):\n            return float(x.replace(',', '.'))\n        return float(x)\n    \n    a_float = convert_to_float(a)\n    b_float = convert_to_float(b)\n    \n    if a_float == b_float:\n        return None\n    elif a_float > b_float:\n        return a\n    else:\n        return b\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "759a8e2baa19e8152c1d479d246cc91e17a93dd705ecf336d7dbf593f5e4977b|684508eef4e26e67863b27f280b26a69966553821ad48d6f6f2112432ade745d": {
+      "stitched_code": "def compare_one(a, b):\n    \"\"\"\n    Create a function that takes integers, floats, or strings representing\n    real numbers, and returns the larger variable in its given variable type.\n    Return None if the values are equal.\n    Note: If a real number is represented as a string, the floating point might be . or ,\n\n    compare_one(1, 2.5) \u279e 2.5\n    compare_one(1, \"2,3\") \u279e \"2,3\"\n    compare_one(\"5,1\", \"6\") \u279e \"6\"\n    compare_one(\"1\", 1) \u279e None\n    \"\"\"\n\n    def convert_to_float(val):\n        if isinstance(val, str):\n            return float(val.replace(',', '.'))\n        return float(val)\n    a_float = convert_to_float(a)\n    b_float = convert_to_float(b)\n    if a_float == b_float:\n        return None\n    elif a_float > b_float:\n        return a\n    else:\n        return b\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "007d024458693ce4810e283c7bcc83c6c45f0b899034f4f942e342fe5df4e8aa|684508eef4e26e67863b27f280b26a69966553821ad48d6f6f2112432ade745d": {
+      "stitched_code": "def compare_one(a, b):\n    \"\"\"\n    Create a function that takes integers, floats, or strings representing\n    real numbers, and returns the larger variable in its given variable type.\n    Return None if the values are equal.\n    Note: If a real number is represented as a string, the floating point might be . or ,\n\n    compare_one(1, 2.5) \u279e 2.5\n    compare_one(1, \"2,3\") \u279e \"2,3\"\n    compare_one(\"5,1\", \"6\") \u279e \"6\"\n    compare_one(\"1\", 1) \u279e None\n    \"\"\"\n    def convert_to_float(x):\n        if isinstance(x, str):\n            return float(x.replace(',', '.'))\n        return float(x)\n    \n    val_a = convert_to_float(a)\n    val_b = convert_to_float(b)\n    \n    if val_a == val_b:\n        return None\n    elif val_a > val_b:\n        return a\n    else:\n        return b\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "d447f9a8e3b4332e93b4eb38c52da1f946981bb25fb86f6f83abcf01ec98f7cd|d447f9a8e3b4332e93b4eb38c52da1f946981bb25fb86f6f83abcf01ec98f7cd": {
+      "stitched_code": "def compare_one(a, b):\n    \"\"\"\n    Create a function that takes integers, floats, or strings representing\n    real numbers, and returns the larger variable in its given variable type.\n    Return None if the values are equal.\n    Note: If a real number is represented as a string, the floating point might be . or ,\n\n    compare_one(1, 2.5) \u279e 2.5\n    compare_one(1, \"2,3\") \u279e \"2,3\"\n    compare_one(\"5,1\", \"6\") \u279e \"6\"\n    compare_one(\"1\", 1) \u279e None\n    \"\"\"\n    # Convert to float for comparison\n    def to_float(x):\n        if isinstance(x, str):\n            return float(x.replace(',', '.'))\n        return float(x)\n    \n    a_val = to_float(a)\n    b_val = to_float(b)\n    \n    if a_val == b_val:\n        return None\n    elif a_val > b_val:\n        return a\n    else:\n        return b\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "684508eef4e26e67863b27f280b26a69966553821ad48d6f6f2112432ade745d|d447f9a8e3b4332e93b4eb38c52da1f946981bb25fb86f6f83abcf01ec98f7cd": {
+      "stitched_code": "def compare_one(a, b):\n    \"\"\"\n    Create a function that takes integers, floats, or strings representing\n    real numbers, and returns the larger variable in its given variable type.\n    Return None if the values are equal.\n    Note: If a real number is represented as a string, the floating point might be . or ,\n\n    compare_one(1, 2.5) \u279e 2.5\n    compare_one(1, \"2,3\") \u279e \"2,3\"\n    compare_one(\"5,1\", \"6\") \u279e \"6\"\n    compare_one(\"1\", 1) \u279e None\n    \"\"\"\n\n    def to_float(x):\n        if isinstance(x, str):\n            return float(x.replace(',', '.'))\n        return float(x)\n    a_val = to_float(a)\n    b_val = to_float(b)\n    if a_val == b_val:\n        return None\n    elif a_val > b_val:\n        return a\n    else:\n        return b\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "759a8e2baa19e8152c1d479d246cc91e17a93dd705ecf336d7dbf593f5e4977b|d447f9a8e3b4332e93b4eb38c52da1f946981bb25fb86f6f83abcf01ec98f7cd": {
+      "stitched_code": "def compare_one(a, b):\n    \"\"\"\n    Create a function that takes integers, floats, or strings representing\n    real numbers, and returns the larger variable in its given variable type.\n    Return None if the values are equal.\n    Note: If a real number is represented as a string, the floating point might be . or ,\n\n    compare_one(1, 2.5) \u279e 2.5\n    compare_one(1, \"2,3\") \u279e \"2,3\"\n    compare_one(\"5,1\", \"6\") \u279e \"6\"\n    compare_one(\"1\", 1) \u279e None\n    \"\"\"\n    def to_float(val):\n        if isinstance(val, str):\n            return float(val.replace(',', '.'))\n        return float(val)\n    \n    a_float = to_float(a)\n    b_float = to_float(b)\n    \n    if a_float == b_float:\n        return None\n    elif a_float > b_float:\n        return a\n    else:\n        return b\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "007d024458693ce4810e283c7bcc83c6c45f0b899034f4f942e342fe5df4e8aa|d447f9a8e3b4332e93b4eb38c52da1f946981bb25fb86f6f83abcf01ec98f7cd": {
+      "stitched_code": "def compare_one(a, b):\n    \"\"\"\n    Create a function that takes integers, floats, or strings representing\n    real numbers, and returns the larger variable in its given variable type.\n    Return None if the values are equal.\n    Note: If a real number is represented as a string, the floating point might be . or ,\n\n    compare_one(1, 2.5) \u279e 2.5\n    compare_one(1, \"2,3\") \u279e \"2,3\"\n    compare_one(\"5,1\", \"6\") \u279e \"6\"\n    compare_one(\"1\", 1) \u279e None\n    \"\"\"\n\n    def to_float(x):\n        if isinstance(x, str):\n            return float(x.replace(',', '.'))\n        return float(x)\n    a_val = to_float(a)\n    b_val = to_float(b)\n    if a_val == b_val:\n        return None\n    elif a_val > b_val:\n        return a\n    else:\n        return b\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "c5cad4b1a7eba21c42c5d994701ac0a43797663618f7feab9bf86e8aec457634|d447f9a8e3b4332e93b4eb38c52da1f946981bb25fb86f6f83abcf01ec98f7cd": {
+      "stitched_code": "def compare_one(a, b):\n    \"\"\"\n    Create a function that takes integers, floats, or strings representing\n    real numbers, and returns the larger variable in its given variable type.\n    Return None if the values are equal.\n    Note: If a real number is represented as a string, the floating point might be . or ,\n\n    compare_one(1, 2.5) \u279e 2.5\n    compare_one(1, \"2,3\") \u279e \"2,3\"\n    compare_one(\"5,1\", \"6\") \u279e \"6\"\n    compare_one(\"1\", 1) \u279e None\n    \"\"\"\n\n    def to_float(x):\n        if isinstance(x, str):\n            return float(x.replace(',', '.'))\n        return float(x)\n    a_val = to_float(a)\n    b_val = to_float(b)\n    if a_val == b_val:\n        return None\n    elif a_val > b_val:\n        return a\n    else:\n        return b\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

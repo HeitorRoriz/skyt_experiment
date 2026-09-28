@@ -1,0 +1,554 @@
+{
+  "contract_id": "HumanEval_117_claude_sonnet_4_5_20250929_temp0.7",
+  "canonical_code": "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s.\n    If the string s is empty then the function should return an empty list.\n    Note: you may assume the input string contains only letters and spaces.\n    Examples:\n    select_words(\"Mary had a little lamb\", 4) ==> [\"little\"]\n    select_words(\"Mary had a little lamb\", 3) ==> [\"Mary\", \"lamb\"]\n    select_words(\"simple white space\", 2) ==> []\n    select_words(\"Hello world\", 4) ==> [\"world\"]\n    select_words(\"Uncle sam\", 3) ==> [\"Uncle\"]\n    \"\"\"\n    if not s:\n        return []\n    \n    words = s.split()\n    result = []\n    vowels = set('aeiouAEIOU')\n    \n    for word in words:\n        consonant_count = 0\n        for char in word:\n            if char.isalpha() and char not in vowels:\n                consonant_count += 1\n        \n        if consonant_count == n:\n            result.append(word)\n    \n    return result\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 3,
+      "for_loops": 2,
+      "while_loops": 0,
+      "function_calls": [
+        "set"
+      ],
+      "nested_depth": 3,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_2",
+        "if_at_depth_1"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [],
+        "v1": [],
+        "v2": [],
+        "v4": []
+      },
+      "assignments": {
+        "v0": "Call(func=Attribute(value=Name(id='p0', ctx=Load()), attr='split', ctx=Load()))",
+        "v1": "List(ctx=Load())",
+        "v2": "Call(func=Name(id='set', ctx=Load()), args=[Constant(value='aeiouAEIOU')])",
+        "v4": "Constant(value=0)"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_select_words"
+        ],
+        [
+          "function_select_words",
+          "branch"
+        ],
+        [
+          "function_select_words",
+          "loop"
+        ],
+        [
+          "function_select_words",
+          "loop",
+          "loop"
+        ],
+        [
+          "function_select_words",
+          "loop",
+          "loop",
+          "branch"
+        ],
+        [
+          "function_select_words",
+          "loop",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "select_words": {
+        "name": "select_words",
+        "args": [
+          "p0",
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 2,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n^2)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": []
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": false,
+      "numeric_constants": [
+        0,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [
+        "And"
+      ],
+      "comparisons": [
+        "NotIn",
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "arg",
+        "If",
+        "UnaryOp",
+        "Not",
+        "Name",
+        "Load",
+        "Return",
+        "List",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "List",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "For",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "For",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "If",
+        "BoolOp",
+        "And",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Compare",
+        "Name",
+        "Load",
+        "NotIn",
+        "Name",
+        "Load",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Add",
+        "Constant",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Name",
+        "Load",
+        "Expr",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Name",
+        "Load",
+        "Return",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 9,
+      "ast_hash": "727feff9ea1a88dfe3e20f1f8fd9ec2f",
+      "alpha_renamed_hash": "727feff9ea1a88dfe3e20f1f8fd9ec2f"
+    },
+    "operator_precedence": {
+      "operator_sequence": [],
+      "precedence_levels": {}
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Return",
+        "Assign",
+        "Assign",
+        "Assign",
+        "For",
+        "Assign",
+        "For",
+        "If",
+        "AugAssign",
+        "If",
+        "Expr",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Return_2",
+        "Assign_3",
+        "Assign_4",
+        "Assign_5",
+        "For_6",
+        "Assign_7",
+        "For_8",
+        "If_9",
+        "AugAssign_10",
+        "If_11",
+        "Expr_12",
+        "Return_13"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If",
+        "For",
+        "For",
+        "If",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "not p0",
+          "return_type": "expression"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "not p0"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_117_claude_sonnet_4_5_20250929_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/117",
+    "prompt": "\ndef select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s.\n    If the string s is empty then the function should return an empty list.\n    Note: you may assume the input string contains only letters and spaces.\n    Examples:\n    select_words(\"Mary had a little lamb\", 4) ==> [\"little\"]\n    select_words(\"Mary had a little lamb\", 3) ==> [\"Mary\", \"lamb\"]\n    select_words(\"simple white space\", 2) ==> []\n    select_words(\"Hello world\", 4) ==> [\"world\"]\n    select_words(\"Uncle sam\", 3) ==> [\"Uncle\"]\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "select_words"
+    },
+    "anchor_signature": "0995f51d9bab01afda58a8dd1a2b6ade8efb6fe412bcf4a8d599fa15661de51c",
+    "canonical_code": "def select_words(s, n):\n    \"\"\"Given a string s and a natural number n, you have been tasked to implement \n    a function that returns a list of all words from string s that contain exactly \n    n consonants, in order these words appear in the string s.\n    If the string s is empty then the function should return an empty list.\n    Note: you may assume the input string contains only letters and spaces.\n    Examples:\n    select_words(\"Mary had a little lamb\", 4) ==> [\"little\"]\n    select_words(\"Mary had a little lamb\", 3) ==> [\"Mary\", \"lamb\"]\n    select_words(\"simple white space\", 2) ==> []\n    select_words(\"Hello world\", 4) ==> [\"world\"]\n    select_words(\"Uncle sam\", 3) ==> [\"Uncle\"]\n    \"\"\"\n    if not s:\n        return []\n    \n    words = s.split()\n    result = []\n    vowels = set('aeiouAEIOU')\n    \n    for word in words:\n        consonant_count = 0\n        for char in word:\n            if char.isalpha() and char not in vowels:\n                consonant_count += 1\n        \n        if consonant_count == n:\n            result.append(word)\n    \n    return result\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 3,
+        "for_loops": 2,
+        "while_loops": 0,
+        "function_calls": [
+          "set"
+        ],
+        "nested_depth": 3,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_2",
+          "if_at_depth_1"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [],
+          "v1": [],
+          "v2": [],
+          "v4": []
+        },
+        "assignments": {
+          "v0": "Call(func=Attribute(value=Name(id='p0', ctx=Load()), attr='split', ctx=Load()))",
+          "v1": "List(ctx=Load())",
+          "v2": "Call(func=Name(id='set', ctx=Load()), args=[Constant(value='aeiouAEIOU')])",
+          "v4": "Constant(value=0)"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_select_words"
+          ],
+          [
+            "function_select_words",
+            "branch"
+          ],
+          [
+            "function_select_words",
+            "loop"
+          ],
+          [
+            "function_select_words",
+            "loop",
+            "loop"
+          ],
+          [
+            "function_select_words",
+            "loop",
+            "loop",
+            "branch"
+          ],
+          [
+            "function_select_words",
+            "loop",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "select_words": {
+          "name": "select_words",
+          "args": [
+            "p0",
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 2,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n^2)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": [
+          0,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [
+          "And"
+        ],
+        "comparisons": [
+          "NotIn",
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "If",
+          "UnaryOp",
+          "Not",
+          "Name",
+          "Load",
+          "Return",
+          "List",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "List",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "If",
+          "BoolOp",
+          "And",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Compare",
+          "Name",
+          "Load",
+          "NotIn",
+          "Name",
+          "Load",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Add",
+          "Constant",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Name",
+          "Load",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Name",
+          "Load",
+          "Return",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 9,
+        "ast_hash": "727feff9ea1a88dfe3e20f1f8fd9ec2f",
+        "alpha_renamed_hash": "727feff9ea1a88dfe3e20f1f8fd9ec2f"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "Assign",
+          "Assign",
+          "Assign",
+          "For",
+          "Assign",
+          "For",
+          "If",
+          "AugAssign",
+          "If",
+          "Expr",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "Assign_3",
+          "Assign_4",
+          "Assign_5",
+          "For_6",
+          "Assign_7",
+          "For_8",
+          "If_9",
+          "AugAssign_10",
+          "If_11",
+          "Expr_12",
+          "Return_13"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "For",
+          "For",
+          "If",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "not p0",
+            "return_type": "expression"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "not p0"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

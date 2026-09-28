@@ -1,0 +1,569 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "cd6841e0b2a7a717b0b9d8ff6d097c780939ba43f3be35de02e47704c06085b8|4c4e3b1509267e57f52ed6fcbc7b40b3475cdad341dd8501f10c5f4d9e2b106c": {
+      "stitched_code": "def strange_sort_list(lst):\n    \"\"\"\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    \"\"\"\n    if not lst:\n        return []\n    result = []\n    remaining = lst.copy()\n    min_turn = True\n    while remaining:\n        if min_turn:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        min_turn = not min_turn\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "f421f0213aa88da28c2a0ee2f78dcbbcdfe2debff9795c8d53c4bd1c114fbc92|4c4e3b1509267e57f52ed6fcbc7b40b3475cdad341dd8501f10c5f4d9e2b106c": {
+      "stitched_code": "def strange_sort_list(lst):\n    '''\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    '''\n    if not lst:\n        return []\n    \n    result = []\n    remaining = lst.copy()\n    take_min = True\n    \n    while remaining:\n        if take_min:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        take_min = not take_min\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "58c5be3a51df5072c23df4f9f2d3987cabb0c0f0aeb82cbab8a1aa4a13543a5e|4c4e3b1509267e57f52ed6fcbc7b40b3475cdad341dd8501f10c5f4d9e2b106c": {
+      "stitched_code": "def strange_sort_list(lst):\n    \"\"\"\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    \"\"\"\n    if not lst:\n        return []\n    result = []\n    remaining = lst.copy()\n    min_turn = True\n    while remaining:\n        if min_turn:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        min_turn = not min_turn\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "44e94a62dc64a9e710a21019de90a51413c207f463939b3b13790743225d7c66|4c4e3b1509267e57f52ed6fcbc7b40b3475cdad341dd8501f10c5f4d9e2b106c": {
+      "stitched_code": "def strange_sort_list(lst):\n    '''\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    '''\n    if not lst:\n        return []\n    \n    result = []\n    remaining = lst.copy()\n    use_min = True\n    \n    while remaining:\n        if use_min:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        use_min = not use_min\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1753066e7e357a52f31615e5c37cb6f4b4904456530d9a269bcde4cc394bfb3d|4c4e3b1509267e57f52ed6fcbc7b40b3475cdad341dd8501f10c5f4d9e2b106c": {
+      "stitched_code": "def strange_sort_list(lst):\n    '''\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    '''\n    if not lst:\n        return []\n    \n    result = []\n    remaining = lst.copy()\n    pick_min = True\n    \n    while remaining:\n        if pick_min:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        pick_min = not pick_min\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "5b9e4ab38a76269f7f1c38f4d97a1c5e4e4de1e79dd07dddbc84cb373919fa13|4c4e3b1509267e57f52ed6fcbc7b40b3475cdad341dd8501f10c5f4d9e2b106c": {
+      "stitched_code": "def strange_sort_list(lst):\n    \"\"\"\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    \"\"\"\n    if not lst:\n        return []\n    result = []\n    remaining = lst.copy()\n    min_turn = True\n    while remaining:\n        if min_turn:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        min_turn = not min_turn\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "4c4e3b1509267e57f52ed6fcbc7b40b3475cdad341dd8501f10c5f4d9e2b106c|1753066e7e357a52f31615e5c37cb6f4b4904456530d9a269bcde4cc394bfb3d": {
+      "stitched_code": "def strange_sort_list(lst):\n    '''\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    '''\n    if not lst:\n        return []\n    \n    result = []\n    remaining = lst.copy()\n    min_turn = True\n    \n    while remaining:\n        if min_turn:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        min_turn = not min_turn\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "f421f0213aa88da28c2a0ee2f78dcbbcdfe2debff9795c8d53c4bd1c114fbc92|1753066e7e357a52f31615e5c37cb6f4b4904456530d9a269bcde4cc394bfb3d": {
+      "stitched_code": "def strange_sort_list(lst):\n    '''\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    '''\n    if not lst:\n        return []\n    \n    result = []\n    remaining = lst.copy()\n    take_min = True\n    \n    while remaining:\n        if take_min:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        take_min = not take_min\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "58c5be3a51df5072c23df4f9f2d3987cabb0c0f0aeb82cbab8a1aa4a13543a5e|1753066e7e357a52f31615e5c37cb6f4b4904456530d9a269bcde4cc394bfb3d": {
+      "stitched_code": "def strange_sort_list(lst):\n    \"\"\"\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    \"\"\"\n    if not lst:\n        return []\n    result = []\n    remaining = lst.copy()\n    pick_min = True\n    while remaining:\n        if pick_min:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        pick_min = not pick_min\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "ad595d03d0e67ca3e49f2ac3a987a2a141aabaad6248331c8049f90695593a0f|1753066e7e357a52f31615e5c37cb6f4b4904456530d9a269bcde4cc394bfb3d": {
+      "stitched_code": "def strange_sort_list(lst):\n    '''\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    '''\n    if not lst:\n        return []\n    \n    result = []\n    remaining = lst.copy()\n    take_min = True\n    \n    while remaining:\n        if take_min:\n            value = min(remaining)\n        else:\n            value = max(remaining)\n        result.append(value)\n        remaining.remove(value)\n        take_min = not take_min\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "5b9e4ab38a76269f7f1c38f4d97a1c5e4e4de1e79dd07dddbc84cb373919fa13|1753066e7e357a52f31615e5c37cb6f4b4904456530d9a269bcde4cc394bfb3d": {
+      "stitched_code": "def strange_sort_list(lst):\n    \"\"\"\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    \"\"\"\n    if not lst:\n        return []\n    result = []\n    remaining = lst.copy()\n    pick_min = True\n    while remaining:\n        if pick_min:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        pick_min = not pick_min\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "44e94a62dc64a9e710a21019de90a51413c207f463939b3b13790743225d7c66|1753066e7e357a52f31615e5c37cb6f4b4904456530d9a269bcde4cc394bfb3d": {
+      "stitched_code": "def strange_sort_list(lst):\n    '''\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    '''\n    if not lst:\n        return []\n    \n    result = []\n    remaining = lst.copy()\n    use_min = True\n    \n    while remaining:\n        if use_min:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        use_min = not use_min\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1753066e7e357a52f31615e5c37cb6f4b4904456530d9a269bcde4cc394bfb3d|1753066e7e357a52f31615e5c37cb6f4b4904456530d9a269bcde4cc394bfb3d": {
+      "stitched_code": "def strange_sort_list(lst):\n    '''\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    '''\n    if not lst:\n        return []\n    \n    result = []\n    remaining = lst.copy()\n    pick_min = True\n    \n    while remaining:\n        if pick_min:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        pick_min = not pick_min\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ad595d03d0e67ca3e49f2ac3a987a2a141aabaad6248331c8049f90695593a0f|4c4e3b1509267e57f52ed6fcbc7b40b3475cdad341dd8501f10c5f4d9e2b106c": {
+      "stitched_code": "def strange_sort_list(lst):\n    '''\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    '''\n    if not lst:\n        return []\n    \n    result = []\n    remaining = lst.copy()\n    take_min = True\n    \n    while remaining:\n        if take_min:\n            value = min(remaining)\n        else:\n            value = max(remaining)\n        result.append(value)\n        remaining.remove(value)\n        take_min = not take_min\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "4c4e3b1509267e57f52ed6fcbc7b40b3475cdad341dd8501f10c5f4d9e2b106c|4c4e3b1509267e57f52ed6fcbc7b40b3475cdad341dd8501f10c5f4d9e2b106c": {
+      "stitched_code": "def strange_sort_list(lst):\n    '''\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    '''\n    if not lst:\n        return []\n    \n    result = []\n    remaining = lst.copy()\n    min_turn = True\n    \n    while remaining:\n        if min_turn:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        min_turn = not min_turn\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "c94d09feb86dac3fd32c198d59f132ffd3d5223a5c3b6c1c02a86def2b657118|4c4e3b1509267e57f52ed6fcbc7b40b3475cdad341dd8501f10c5f4d9e2b106c": {
+      "stitched_code": "def strange_sort_list(lst):\n    \"\"\"\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    \"\"\"\n    if not lst:\n        return []\n    result = []\n    remaining = lst.copy()\n    min_turn = True\n    while remaining:\n        if min_turn:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        min_turn = not min_turn\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "cd6841e0b2a7a717b0b9d8ff6d097c780939ba43f3be35de02e47704c06085b8|1753066e7e357a52f31615e5c37cb6f4b4904456530d9a269bcde4cc394bfb3d": {
+      "stitched_code": "def strange_sort_list(lst):\n    \"\"\"\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    \"\"\"\n    if not lst:\n        return []\n    result = []\n    remaining = lst.copy()\n    pick_min = True\n    while remaining:\n        if pick_min:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        pick_min = not pick_min\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "c94d09feb86dac3fd32c198d59f132ffd3d5223a5c3b6c1c02a86def2b657118|1753066e7e357a52f31615e5c37cb6f4b4904456530d9a269bcde4cc394bfb3d": {
+      "stitched_code": "def strange_sort_list(lst):\n    \"\"\"\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    \"\"\"\n    if not lst:\n        return []\n    result = []\n    remaining = lst.copy()\n    pick_min = True\n    while remaining:\n        if pick_min:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        pick_min = not pick_min\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "4c4e3b1509267e57f52ed6fcbc7b40b3475cdad341dd8501f10c5f4d9e2b106c|f421f0213aa88da28c2a0ee2f78dcbbcdfe2debff9795c8d53c4bd1c114fbc92": {
+      "stitched_code": "def strange_sort_list(lst):\n    '''\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    '''\n    if not lst:\n        return []\n    \n    result = []\n    remaining = lst.copy()\n    min_turn = True\n    \n    while remaining:\n        if min_turn:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        min_turn = not min_turn\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "f421f0213aa88da28c2a0ee2f78dcbbcdfe2debff9795c8d53c4bd1c114fbc92|f421f0213aa88da28c2a0ee2f78dcbbcdfe2debff9795c8d53c4bd1c114fbc92": {
+      "stitched_code": "def strange_sort_list(lst):\n    '''\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    '''\n    if not lst:\n        return []\n    \n    result = []\n    remaining = lst.copy()\n    take_min = True\n    \n    while remaining:\n        if take_min:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        take_min = not take_min\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "58c5be3a51df5072c23df4f9f2d3987cabb0c0f0aeb82cbab8a1aa4a13543a5e|f421f0213aa88da28c2a0ee2f78dcbbcdfe2debff9795c8d53c4bd1c114fbc92": {
+      "stitched_code": "def strange_sort_list(lst):\n    \"\"\"\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    \"\"\"\n    if not lst:\n        return []\n    result = []\n    remaining = lst.copy()\n    take_min = True\n    while remaining:\n        if take_min:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        take_min = not take_min\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "44e94a62dc64a9e710a21019de90a51413c207f463939b3b13790743225d7c66|f421f0213aa88da28c2a0ee2f78dcbbcdfe2debff9795c8d53c4bd1c114fbc92": {
+      "stitched_code": "def strange_sort_list(lst):\n    '''\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    '''\n    if not lst:\n        return []\n    \n    result = []\n    remaining = lst.copy()\n    use_min = True\n    \n    while remaining:\n        if use_min:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        use_min = not use_min\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1753066e7e357a52f31615e5c37cb6f4b4904456530d9a269bcde4cc394bfb3d|f421f0213aa88da28c2a0ee2f78dcbbcdfe2debff9795c8d53c4bd1c114fbc92": {
+      "stitched_code": "def strange_sort_list(lst):\n    '''\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    '''\n    if not lst:\n        return []\n    \n    result = []\n    remaining = lst.copy()\n    pick_min = True\n    \n    while remaining:\n        if pick_min:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        pick_min = not pick_min\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "5b9e4ab38a76269f7f1c38f4d97a1c5e4e4de1e79dd07dddbc84cb373919fa13|f421f0213aa88da28c2a0ee2f78dcbbcdfe2debff9795c8d53c4bd1c114fbc92": {
+      "stitched_code": "def strange_sort_list(lst):\n    \"\"\"\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    \"\"\"\n    if not lst:\n        return []\n    result = []\n    remaining = lst.copy()\n    take_min = True\n    while remaining:\n        if take_min:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        take_min = not take_min\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "cd6841e0b2a7a717b0b9d8ff6d097c780939ba43f3be35de02e47704c06085b8|f421f0213aa88da28c2a0ee2f78dcbbcdfe2debff9795c8d53c4bd1c114fbc92": {
+      "stitched_code": "def strange_sort_list(lst):\n    \"\"\"\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    \"\"\"\n    if not lst:\n        return []\n    result = []\n    remaining = lst.copy()\n    take_min = True\n    while remaining:\n        if take_min:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        take_min = not take_min\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "ad595d03d0e67ca3e49f2ac3a987a2a141aabaad6248331c8049f90695593a0f|f421f0213aa88da28c2a0ee2f78dcbbcdfe2debff9795c8d53c4bd1c114fbc92": {
+      "stitched_code": "def strange_sort_list(lst):\n    '''\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    '''\n    if not lst:\n        return []\n    \n    result = []\n    remaining = lst.copy()\n    take_min = True\n    \n    while remaining:\n        if take_min:\n            value = min(remaining)\n        else:\n            value = max(remaining)\n        result.append(value)\n        remaining.remove(value)\n        take_min = not take_min\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "c94d09feb86dac3fd32c198d59f132ffd3d5223a5c3b6c1c02a86def2b657118|f421f0213aa88da28c2a0ee2f78dcbbcdfe2debff9795c8d53c4bd1c114fbc92": {
+      "stitched_code": "def strange_sort_list(lst):\n    \"\"\"\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    \"\"\"\n    if not lst:\n        return []\n    result = []\n    remaining = lst.copy()\n    take_min = True\n    while remaining:\n        if take_min:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        take_min = not take_min\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

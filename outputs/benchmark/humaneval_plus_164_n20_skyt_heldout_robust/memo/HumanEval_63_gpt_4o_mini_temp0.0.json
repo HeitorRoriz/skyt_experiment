@@ -1,0 +1,25 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "1cc12e861b6216aca368fa6dca1c2ddb01f9c16becaed45154573190c33e37b9|1cc12e861b6216aca368fa6dca1c2ddb01f9c16becaed45154573190c33e37b9": {
+      "stitched_code": "def fibfib(n: int):\n    if n == 0 or n == 1:\n        return 0\n    elif n == 2:\n        return 1\n    \n    fibfib_sequence = [0, 0, 1] + [0] * (n - 2)\n    \n    for i in range(3, n + 1):\n        fibfib_sequence[i] = fibfib_sequence[i - 1] + fibfib_sequence[i - 2] + fibfib_sequence[i - 3]\n    \n    return fibfib_sequence[n]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

@@ -1,0 +1,713 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "53d9dfb37e4ff6153cdd8dccc5716d6d9773969601dd06f33612d2e95ba72a39|33149757eacd0a5f6dfc683f2ab5597c82cffeb3ec79631cf0c26cf8b6c59b90": {
+      "stitched_code": "def eat(number, need, remaining):\n    actual_eaten = min(need, remaining)\n    total_eaten = number + actual_eaten\n    carrots_left = remaining - actual_eaten\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "729a5c9e4ec71b22622f75980481d5d12cb0ca52e114e0e743ee696214d78f1b|33149757eacd0a5f6dfc683f2ab5597c82cffeb3ec79631cf0c26cf8b6c59b90": {
+      "stitched_code": "def eat(number, need, remaining):\n    eaten_now = min(need, remaining)\n    total_eaten = number + eaten_now\n    carrots_left = remaining - eaten_now\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "4ea4263b11e873dcac623fe2b41a294b4400ef54ffb57d153f7ec45d6fd0cb8c|33149757eacd0a5f6dfc683f2ab5597c82cffeb3ec79631cf0c26cf8b6c59b90": {
+      "stitched_code": "def eat(number, need, remaining):\n    carrots_to_eat = min(need, remaining)\n    total_eaten = number + carrots_to_eat\n    carrots_left = remaining - carrots_to_eat\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1d2de930f5619149f0afd4169fdcaef1db37bda557a15cc09aa32d1f037e61aa|33149757eacd0a5f6dfc683f2ab5597c82cffeb3ec79631cf0c26cf8b6c59b90": {
+      "stitched_code": "def eat(number, need, remaining):\n    actually_eaten = min(need, remaining)\n    total_eaten = number + actually_eaten\n    carrots_left = remaining - actually_eaten\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "b767b148ab7e5b4a78a07330ab0b2477d9000cf6f93450506b3f08e7d9b2b741|33149757eacd0a5f6dfc683f2ab5597c82cffeb3ec79631cf0c26cf8b6c59b90": {
+      "stitched_code": "def eat(number, need, remaining):\n    # Determine how many carrots will actually be eaten\n    actually_eaten = min(need, remaining)\n    \n    # Calculate total eaten and remaining\n    total_eaten = number + actually_eaten\n    carrots_left = remaining - actually_eaten\n    \n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "bcf9cff45a25266067368d8442bf76abeec754d7badbbed4f40ffbe20630cfca|33149757eacd0a5f6dfc683f2ab5597c82cffeb3ec79631cf0c26cf8b6c59b90": {
+      "stitched_code": "def eat(number, need, remaining):\n    \"\"\"\n    You're a hungry rabbit, and you already have eaten a certain number of carrots,\n    but now you need to eat more carrots to complete the day's meals.\n    you should return an array of [ total number of eaten carrots after your meals,\n                                    the number of carrots left after your meals ]\n    if there are not enough remaining carrots, you will eat all remaining carrots, but will still be hungry.\n    \n    Example:\n    * eat(5, 6, 10) -> [11, 4]\n    * eat(4, 8, 9) -> [12, 1]\n    * eat(1, 10, 10) -> [11, 0]\n    * eat(2, 11, 5) -> [7, 0]\n    \n    Variables:\n    @number : integer\n        the number of carrots that you have eaten.\n    @need : integer\n        the number of carrots that you need to eat.\n    @remaining : integer\n        the number of remaining carrots thet exist in stock\n    \n    Constrain:\n    * 0 <= number <= 1000\n    * 0 <= need <= 1000\n    * 0 <= remaining <= 1000\n\n    Have fun :)\n    \"\"\"\n    can_eat = min(need, remaining)\n    total_eaten = number + can_eat\n    carrots_left = remaining - can_eat\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "729a5c9e4ec71b22622f75980481d5d12cb0ca52e114e0e743ee696214d78f1b|b767b148ab7e5b4a78a07330ab0b2477d9000cf6f93450506b3f08e7d9b2b741": {
+      "stitched_code": "def eat(number, need, remaining):\n    eaten_now = min(need, remaining)\n    total_eaten = number + eaten_now\n    carrots_left = remaining - eaten_now\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1d2de930f5619149f0afd4169fdcaef1db37bda557a15cc09aa32d1f037e61aa|b767b148ab7e5b4a78a07330ab0b2477d9000cf6f93450506b3f08e7d9b2b741": {
+      "stitched_code": "def eat(number, need, remaining):\n    actually_eaten = min(need, remaining)\n    total_eaten = number + actually_eaten\n    carrots_left = remaining - actually_eaten\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "84b63cd8089cb4ace23887607d8ad9aff313324d2092d39afdd3d5d0e9dadc36|b767b148ab7e5b4a78a07330ab0b2477d9000cf6f93450506b3f08e7d9b2b741": {
+      "stitched_code": "def eat(number, need, remaining):\n    can_eat = min(need, remaining)\n    total_eaten = number + can_eat\n    carrots_left = remaining - can_eat\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "33149757eacd0a5f6dfc683f2ab5597c82cffeb3ec79631cf0c26cf8b6c59b90|b767b148ab7e5b4a78a07330ab0b2477d9000cf6f93450506b3f08e7d9b2b741": {
+      "stitched_code": "def eat(number, need, remaining):\n    \"\"\"\n    You're a hungry rabbit, and you already have eaten a certain number of carrots,\n    but now you need to eat more carrots to complete the day's meals.\n    you should return an array of [ total number of eaten carrots after your meals,\n                                    the number of carrots left after your meals ]\n    if there are not enough remaining carrots, you will eat all remaining carrots, but will still be hungry.\n    \n    Example:\n    * eat(5, 6, 10) -> [11, 4]\n    * eat(4, 8, 9) -> [12, 1]\n    * eat(1, 10, 10) -> [11, 0]\n    * eat(2, 11, 5) -> [7, 0]\n    \n    Variables:\n    @number : integer\n        the number of carrots that you have eaten.\n    @need : integer\n        the number of carrots that you need to eat.\n    @remaining : integer\n        the number of remaining carrots thet exist in stock\n    \n    Constrain:\n    * 0 <= number <= 1000\n    * 0 <= need <= 1000\n    * 0 <= remaining <= 1000\n\n    Have fun :)\n    \"\"\"\n    # Calculate how many carrots we can actually eat\n    can_eat = min(need, remaining)\n    \n    # Total eaten = already eaten + what we eat now\n    total_eaten = number + can_eat\n    \n    # Remaining = what was remaining - what we ate\n    carrots_left = remaining - can_eat\n    \n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "84b63cd8089cb4ace23887607d8ad9aff313324d2092d39afdd3d5d0e9dadc36|33149757eacd0a5f6dfc683f2ab5597c82cffeb3ec79631cf0c26cf8b6c59b90": {
+      "stitched_code": "def eat(number, need, remaining):\n    can_eat = min(need, remaining)\n    total_eaten = number + can_eat\n    carrots_left = remaining - can_eat\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "53d9dfb37e4ff6153cdd8dccc5716d6d9773969601dd06f33612d2e95ba72a39|b767b148ab7e5b4a78a07330ab0b2477d9000cf6f93450506b3f08e7d9b2b741": {
+      "stitched_code": "def eat(number, need, remaining):\n    actual_eaten = min(need, remaining)\n    total_eaten = number + actual_eaten\n    carrots_left = remaining - actual_eaten\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "4ea4263b11e873dcac623fe2b41a294b4400ef54ffb57d153f7ec45d6fd0cb8c|b767b148ab7e5b4a78a07330ab0b2477d9000cf6f93450506b3f08e7d9b2b741": {
+      "stitched_code": "def eat(number, need, remaining):\n    carrots_to_eat = min(need, remaining)\n    total_eaten = number + carrots_to_eat\n    carrots_left = remaining - carrots_to_eat\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "53d9dfb37e4ff6153cdd8dccc5716d6d9773969601dd06f33612d2e95ba72a39|1d2de930f5619149f0afd4169fdcaef1db37bda557a15cc09aa32d1f037e61aa": {
+      "stitched_code": "def eat(number, need, remaining):\n    actual_eaten = min(need, remaining)\n    total_eaten = number + actual_eaten\n    carrots_left = remaining - actual_eaten\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "729a5c9e4ec71b22622f75980481d5d12cb0ca52e114e0e743ee696214d78f1b|1d2de930f5619149f0afd4169fdcaef1db37bda557a15cc09aa32d1f037e61aa": {
+      "stitched_code": "def eat(number, need, remaining):\n    eaten_now = min(need, remaining)\n    total_eaten = number + eaten_now\n    carrots_left = remaining - eaten_now\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1d2de930f5619149f0afd4169fdcaef1db37bda557a15cc09aa32d1f037e61aa|1d2de930f5619149f0afd4169fdcaef1db37bda557a15cc09aa32d1f037e61aa": {
+      "stitched_code": "def eat(number, need, remaining):\n    actually_eaten = min(need, remaining)\n    total_eaten = number + actually_eaten\n    carrots_left = remaining - actually_eaten\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "84b63cd8089cb4ace23887607d8ad9aff313324d2092d39afdd3d5d0e9dadc36|1d2de930f5619149f0afd4169fdcaef1db37bda557a15cc09aa32d1f037e61aa": {
+      "stitched_code": "def eat(number, need, remaining):\n    can_eat = min(need, remaining)\n    total_eaten = number + can_eat\n    carrots_left = remaining - can_eat\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "b767b148ab7e5b4a78a07330ab0b2477d9000cf6f93450506b3f08e7d9b2b741|1d2de930f5619149f0afd4169fdcaef1db37bda557a15cc09aa32d1f037e61aa": {
+      "stitched_code": "def eat(number, need, remaining):\n    # Determine how many carrots will actually be eaten\n    actually_eaten = min(need, remaining)\n    \n    # Calculate total eaten and remaining\n    total_eaten = number + actually_eaten\n    carrots_left = remaining - actually_eaten\n    \n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "33149757eacd0a5f6dfc683f2ab5597c82cffeb3ec79631cf0c26cf8b6c59b90|1d2de930f5619149f0afd4169fdcaef1db37bda557a15cc09aa32d1f037e61aa": {
+      "stitched_code": "def eat(number, need, remaining):\n    \"\"\"\n    You're a hungry rabbit, and you already have eaten a certain number of carrots,\n    but now you need to eat more carrots to complete the day's meals.\n    you should return an array of [ total number of eaten carrots after your meals,\n                                    the number of carrots left after your meals ]\n    if there are not enough remaining carrots, you will eat all remaining carrots, but will still be hungry.\n    \n    Example:\n    * eat(5, 6, 10) -> [11, 4]\n    * eat(4, 8, 9) -> [12, 1]\n    * eat(1, 10, 10) -> [11, 0]\n    * eat(2, 11, 5) -> [7, 0]\n    \n    Variables:\n    @number : integer\n        the number of carrots that you have eaten.\n    @need : integer\n        the number of carrots that you need to eat.\n    @remaining : integer\n        the number of remaining carrots thet exist in stock\n    \n    Constrain:\n    * 0 <= number <= 1000\n    * 0 <= need <= 1000\n    * 0 <= remaining <= 1000\n\n    Have fun :)\n    \"\"\"\n    # Calculate how many carrots we can actually eat\n    can_eat = min(need, remaining)\n    \n    # Total eaten = already eaten + what we eat now\n    total_eaten = number + can_eat\n    \n    # Remaining = what was remaining - what we ate\n    carrots_left = remaining - can_eat\n    \n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "4ea4263b11e873dcac623fe2b41a294b4400ef54ffb57d153f7ec45d6fd0cb8c|1d2de930f5619149f0afd4169fdcaef1db37bda557a15cc09aa32d1f037e61aa": {
+      "stitched_code": "def eat(number, need, remaining):\n    carrots_to_eat = min(need, remaining)\n    total_eaten = number + carrots_to_eat\n    carrots_left = remaining - carrots_to_eat\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "bcf9cff45a25266067368d8442bf76abeec754d7badbbed4f40ffbe20630cfca|1d2de930f5619149f0afd4169fdcaef1db37bda557a15cc09aa32d1f037e61aa": {
+      "stitched_code": "def eat(number, need, remaining):\n    actually_eaten = min(need, remaining)\n    total_eaten = number + actually_eaten\n    carrots_left = remaining - actually_eaten\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "53d9dfb37e4ff6153cdd8dccc5716d6d9773969601dd06f33612d2e95ba72a39|84b63cd8089cb4ace23887607d8ad9aff313324d2092d39afdd3d5d0e9dadc36": {
+      "stitched_code": "def eat(number, need, remaining):\n    actual_eaten = min(need, remaining)\n    total_eaten = number + actual_eaten\n    carrots_left = remaining - actual_eaten\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1d2de930f5619149f0afd4169fdcaef1db37bda557a15cc09aa32d1f037e61aa|84b63cd8089cb4ace23887607d8ad9aff313324d2092d39afdd3d5d0e9dadc36": {
+      "stitched_code": "def eat(number, need, remaining):\n    actually_eaten = min(need, remaining)\n    total_eaten = number + actually_eaten\n    carrots_left = remaining - actually_eaten\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "729a5c9e4ec71b22622f75980481d5d12cb0ca52e114e0e743ee696214d78f1b|84b63cd8089cb4ace23887607d8ad9aff313324d2092d39afdd3d5d0e9dadc36": {
+      "stitched_code": "def eat(number, need, remaining):\n    eaten_now = min(need, remaining)\n    total_eaten = number + eaten_now\n    carrots_left = remaining - eaten_now\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "b767b148ab7e5b4a78a07330ab0b2477d9000cf6f93450506b3f08e7d9b2b741|84b63cd8089cb4ace23887607d8ad9aff313324d2092d39afdd3d5d0e9dadc36": {
+      "stitched_code": "def eat(number, need, remaining):\n    # Determine how many carrots will actually be eaten\n    actually_eaten = min(need, remaining)\n    \n    # Calculate total eaten and remaining\n    total_eaten = number + actually_eaten\n    carrots_left = remaining - actually_eaten\n    \n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "33149757eacd0a5f6dfc683f2ab5597c82cffeb3ec79631cf0c26cf8b6c59b90|84b63cd8089cb4ace23887607d8ad9aff313324d2092d39afdd3d5d0e9dadc36": {
+      "stitched_code": "def eat(number, need, remaining):\n    \"\"\"\n    You're a hungry rabbit, and you already have eaten a certain number of carrots,\n    but now you need to eat more carrots to complete the day's meals.\n    you should return an array of [ total number of eaten carrots after your meals,\n                                    the number of carrots left after your meals ]\n    if there are not enough remaining carrots, you will eat all remaining carrots, but will still be hungry.\n    \n    Example:\n    * eat(5, 6, 10) -> [11, 4]\n    * eat(4, 8, 9) -> [12, 1]\n    * eat(1, 10, 10) -> [11, 0]\n    * eat(2, 11, 5) -> [7, 0]\n    \n    Variables:\n    @number : integer\n        the number of carrots that you have eaten.\n    @need : integer\n        the number of carrots that you need to eat.\n    @remaining : integer\n        the number of remaining carrots thet exist in stock\n    \n    Constrain:\n    * 0 <= number <= 1000\n    * 0 <= need <= 1000\n    * 0 <= remaining <= 1000\n\n    Have fun :)\n    \"\"\"\n    # Calculate how many carrots we can actually eat\n    can_eat = min(need, remaining)\n    \n    # Total eaten = already eaten + what we eat now\n    total_eaten = number + can_eat\n    \n    # Remaining = what was remaining - what we ate\n    carrots_left = remaining - can_eat\n    \n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "729a5c9e4ec71b22622f75980481d5d12cb0ca52e114e0e743ee696214d78f1b|53d9dfb37e4ff6153cdd8dccc5716d6d9773969601dd06f33612d2e95ba72a39": {
+      "stitched_code": "def eat(number, need, remaining):\n    eaten_now = min(need, remaining)\n    total_eaten = number + eaten_now\n    carrots_left = remaining - eaten_now\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1d2de930f5619149f0afd4169fdcaef1db37bda557a15cc09aa32d1f037e61aa|53d9dfb37e4ff6153cdd8dccc5716d6d9773969601dd06f33612d2e95ba72a39": {
+      "stitched_code": "def eat(number, need, remaining):\n    actually_eaten = min(need, remaining)\n    total_eaten = number + actually_eaten\n    carrots_left = remaining - actually_eaten\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "84b63cd8089cb4ace23887607d8ad9aff313324d2092d39afdd3d5d0e9dadc36|53d9dfb37e4ff6153cdd8dccc5716d6d9773969601dd06f33612d2e95ba72a39": {
+      "stitched_code": "def eat(number, need, remaining):\n    can_eat = min(need, remaining)\n    total_eaten = number + can_eat\n    carrots_left = remaining - can_eat\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "bcf9cff45a25266067368d8442bf76abeec754d7badbbed4f40ffbe20630cfca|53d9dfb37e4ff6153cdd8dccc5716d6d9773969601dd06f33612d2e95ba72a39": {
+      "stitched_code": "def eat(number, need, remaining):\n    actual_eaten = min(need, remaining)\n    total_eaten = number + actual_eaten\n    carrots_left = remaining - actual_eaten\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "b767b148ab7e5b4a78a07330ab0b2477d9000cf6f93450506b3f08e7d9b2b741|53d9dfb37e4ff6153cdd8dccc5716d6d9773969601dd06f33612d2e95ba72a39": {
+      "stitched_code": "def eat(number, need, remaining):\n    # Determine how many carrots will actually be eaten\n    actually_eaten = min(need, remaining)\n    \n    # Calculate total eaten and remaining\n    total_eaten = number + actually_eaten\n    carrots_left = remaining - actually_eaten\n    \n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "33149757eacd0a5f6dfc683f2ab5597c82cffeb3ec79631cf0c26cf8b6c59b90|53d9dfb37e4ff6153cdd8dccc5716d6d9773969601dd06f33612d2e95ba72a39": {
+      "stitched_code": "def eat(number, need, remaining):\n    \"\"\"\n    You're a hungry rabbit, and you already have eaten a certain number of carrots,\n    but now you need to eat more carrots to complete the day's meals.\n    you should return an array of [ total number of eaten carrots after your meals,\n                                    the number of carrots left after your meals ]\n    if there are not enough remaining carrots, you will eat all remaining carrots, but will still be hungry.\n    \n    Example:\n    * eat(5, 6, 10) -> [11, 4]\n    * eat(4, 8, 9) -> [12, 1]\n    * eat(1, 10, 10) -> [11, 0]\n    * eat(2, 11, 5) -> [7, 0]\n    \n    Variables:\n    @number : integer\n        the number of carrots that you have eaten.\n    @need : integer\n        the number of carrots that you need to eat.\n    @remaining : integer\n        the number of remaining carrots thet exist in stock\n    \n    Constrain:\n    * 0 <= number <= 1000\n    * 0 <= need <= 1000\n    * 0 <= remaining <= 1000\n\n    Have fun :)\n    \"\"\"\n    # Calculate how many carrots we can actually eat\n    can_eat = min(need, remaining)\n    \n    # Total eaten = already eaten + what we eat now\n    total_eaten = number + can_eat\n    \n    # Remaining = what was remaining - what we ate\n    carrots_left = remaining - can_eat\n    \n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "bcf9cff45a25266067368d8442bf76abeec754d7badbbed4f40ffbe20630cfca|b767b148ab7e5b4a78a07330ab0b2477d9000cf6f93450506b3f08e7d9b2b741": {
+      "stitched_code": "def eat(number, need, remaining):\n    actually_eaten = min(need, remaining)\n    total_eaten = number + actually_eaten\n    carrots_left = remaining - actually_eaten\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "4ea4263b11e873dcac623fe2b41a294b4400ef54ffb57d153f7ec45d6fd0cb8c|53d9dfb37e4ff6153cdd8dccc5716d6d9773969601dd06f33612d2e95ba72a39": {
+      "stitched_code": "def eat(number, need, remaining):\n    carrots_to_eat = min(need, remaining)\n    total_eaten = number + carrots_to_eat\n    carrots_left = remaining - carrots_to_eat\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "4ea4263b11e873dcac623fe2b41a294b4400ef54ffb57d153f7ec45d6fd0cb8c|84b63cd8089cb4ace23887607d8ad9aff313324d2092d39afdd3d5d0e9dadc36": {
+      "stitched_code": "def eat(number, need, remaining):\n    carrots_to_eat = min(need, remaining)\n    total_eaten = number + carrots_to_eat\n    carrots_left = remaining - carrots_to_eat\n    return [total_eaten, carrots_left]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

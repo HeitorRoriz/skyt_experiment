@@ -1,0 +1,3685 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8|8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i * i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    \n    # Count triples\n    result = 0\n    \n    # Case 1: All three elements have same remainder (0, 0, 0), (1, 1, 1), or (2, 2, 2)\n    for i in range(3):\n        # Choose 3 from count[i] elements: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One element from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "f0318b1020d4d0a8b24888d77495cb0cd9ee04f85bad8a3a7415063cb0f69d03|8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8f6e04bf868841389381b354e299ae0116bd4342b95bb17612cf78c9beaf5606|8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "026e24ab0ef611df7f8ee6242bdee0d79fd89d6a8f32fe9c4c4712e53e654ecb|8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35|8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c|8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i * i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Case 1: All three from same remainder class (0, 0, 0), (1, 1, 1), or (2, 2, 2)\n    for i in range(3):\n        # Choose 3 from count[i]: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "d73dc8b4a7755497e6f221d47e1277daeae933d22b1546689fe558f146e284af|8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "452d7958c68ba741e9dca98f1231b2cb4888662969f37f401937f39b311aa2ff|8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "ca9759357f337480f7e4c782b015fdfb1c935abd0b390898e33fdceb0887e64c|8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7aa6d76c7193e59e967617bf4e7043a2109ff364973ef809c58c1844b09b5f53|8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Case 1: All three have same remainder (0, 0, 0) or (1, 1, 1) or (2, 2, 2)\n    for i in range(3):\n        # Choose 3 from count[i] elements: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One element from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0e5d1f30b818d10a37bf1cdecee21ef49950ab155bad4b12d4da6cc229d1ac57|0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "f0318b1020d4d0a8b24888d77495cb0cd9ee04f85bad8a3a7415063cb0f69d03|0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8f6e04bf868841389381b354e299ae0116bd4342b95bb17612cf78c9beaf5606|0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1|0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Case 1: All three from same remainder group (0, 0, 0), (1, 1, 1), or (2, 2, 2)\n    for i in range(3):\n        # Choose 3 elements from count[i] elements\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One from each group (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "369c4841f7d959e5f00a17b0b2d1d03fb7221983ebc7feaaa871e2a942973cfb|0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "452d7958c68ba741e9dca98f1231b2cb4888662969f37f401937f39b311aa2ff|0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "3c37ddfa64decf456d2493a396e98a69c6f6cfd0df2e5ecdec2cca0d13bbed9d|0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4|0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i * i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Three elements with same remainder (0, 1, or 2)\n    for i in range(3):\n        # C(count[i], 3) = count[i] * (count[i] - 1) * (count[i] - 2) / 6\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # One element from each remainder group (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "7aa6d76c7193e59e967617bf4e7043a2109ff364973ef809c58c1844b09b5f53|0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Case 1: All three have same remainder (0, 0, 0) or (1, 1, 1) or (2, 2, 2)\n    for i in range(3):\n        # Choose 3 from count[i] elements: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One element from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "73b02fa6b686de565e61a9865946b7a6845aa3e4e14392bd7a430db05481a636|0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # All three elements have same remainder (0, 1, or 2)\n    for c in count:\n        # C(c, 3) = c * (c-1) * (c-2) / 6\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    \n    # One element from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.08928571428571429,
+        "transformation_level": 0
+      }
+    },
+    "0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8|173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i * i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    \n    # Count triples\n    result = 0\n    \n    # Case 1: All three elements have same remainder (0, 0, 0), (1, 1, 1), or (2, 2, 2)\n    for i in range(3):\n        # Choose 3 from count[i] elements: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One element from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ac7cfed907d32b81a038aefbc1f2ef1850e7bd18d6eb283d761b8e879c5451ba|173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Three elements with same remainder (0, 1, or 2)\n    for i in range(3):\n        # Choose 3 from count[i]: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # One element from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "f0318b1020d4d0a8b24888d77495cb0cd9ee04f85bad8a3a7415063cb0f69d03|173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8f6e04bf868841389381b354e299ae0116bd4342b95bb17612cf78c9beaf5606|173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1|173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Case 1: All three from same remainder group (0, 0, 0), (1, 1, 1), or (2, 2, 2)\n    for i in range(3):\n        # Choose 3 elements from count[i] elements\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One from each group (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "d73dc8b4a7755497e6f221d47e1277daeae933d22b1546689fe558f146e284af|173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "452d7958c68ba741e9dca98f1231b2cb4888662969f37f401937f39b311aa2ff|173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "ca9759357f337480f7e4c782b015fdfb1c935abd0b390898e33fdceb0887e64c|173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4|173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i * i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Three elements with same remainder (0, 1, or 2)\n    for i in range(3):\n        # C(count[i], 3) = count[i] * (count[i] - 1) * (count[i] - 2) / 6\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # One element from each remainder group (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "73b02fa6b686de565e61a9865946b7a6845aa3e4e14392bd7a430db05481a636|173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # All three elements have same remainder (0, 1, or 2)\n    for c in count:\n        # C(c, 3) = c * (c-1) * (c-2) / 6\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    \n    # One element from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.08928571428571429,
+        "transformation_level": 0
+      }
+    },
+    "ac7cfed907d32b81a038aefbc1f2ef1850e7bd18d6eb283d761b8e879c5451ba|0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Three elements with same remainder (0, 1, or 2)\n    for i in range(3):\n        # Choose 3 from count[i]: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # One element from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35|0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c|0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i * i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Case 1: All three from same remainder class (0, 0, 0), (1, 1, 1), or (2, 2, 2)\n    for i in range(3):\n        # Choose 3 from count[i]: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "d0872bb2097efb086e94ced4e7b77e6ce75539d0009eddf3e5b5ba6ecf5d3f26|0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "ca9759357f337480f7e4c782b015fdfb1c935abd0b390898e33fdceb0887e64c|0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662|0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d0872bb2097efb086e94ced4e7b77e6ce75539d0009eddf3e5b5ba6ecf5d3f26|173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "369c4841f7d959e5f00a17b0b2d1d03fb7221983ebc7feaaa871e2a942973cfb|173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6|173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Case 1: All three from same remainder group (0, 0, 0 or 1, 1, 1 or 2, 2, 2)\n    for i in range(3):\n        # Choose 3 from count[i] elements: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One from each remainder group (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "3c37ddfa64decf456d2493a396e98a69c6f6cfd0df2e5ecdec2cca0d13bbed9d|8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6|8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Case 1: All three from same remainder group (0, 0, 0 or 1, 1, 1 or 2, 2, 2)\n    for i in range(3):\n        # Choose 3 from count[i] elements: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One from each remainder group (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662|8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8|dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "ac7cfed907d32b81a038aefbc1f2ef1850e7bd18d6eb283d761b8e879c5451ba|dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "f0318b1020d4d0a8b24888d77495cb0cd9ee04f85bad8a3a7415063cb0f69d03|dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "026e24ab0ef611df7f8ee6242bdee0d79fd89d6a8f32fe9c4c4712e53e654ecb|dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c|dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d0872bb2097efb086e94ced4e7b77e6ce75539d0009eddf3e5b5ba6ecf5d3f26|dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "ca9759357f337480f7e4c782b015fdfb1c935abd0b390898e33fdceb0887e64c|dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6|dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7aa6d76c7193e59e967617bf4e7043a2109ff364973ef809c58c1844b09b5f53|dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662|dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0e5d1f30b818d10a37bf1cdecee21ef49950ab155bad4b12d4da6cc229d1ac57|173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35|173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "3c37ddfa64decf456d2493a396e98a69c6f6cfd0df2e5ecdec2cca0d13bbed9d|173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7aa6d76c7193e59e967617bf4e7043a2109ff364973ef809c58c1844b09b5f53|173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Case 1: All three have same remainder (0, 0, 0) or (1, 1, 1) or (2, 2, 2)\n    for i in range(3):\n        # Choose 3 from count[i] elements: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One element from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "d73dc8b4a7755497e6f221d47e1277daeae933d22b1546689fe558f146e284af|0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6|0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Case 1: All three from same remainder group (0, 0, 0 or 1, 1, 1 or 2, 2, 2)\n    for i in range(3):\n        # Choose 3 from count[i] elements: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One from each remainder group (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "026e24ab0ef611df7f8ee6242bdee0d79fd89d6a8f32fe9c4c4712e53e654ecb|0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8f6e04bf868841389381b354e299ae0116bd4342b95bb17612cf78c9beaf5606|dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1|dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4|dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "369c4841f7d959e5f00a17b0b2d1d03fb7221983ebc7feaaa871e2a942973cfb|dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0e5d1f30b818d10a37bf1cdecee21ef49950ab155bad4b12d4da6cc229d1ac57|dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Case 1: All three from same remainder class\n    # Choose 3 from count[0]\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    # Choose 3 from count[1]\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    # Choose 3 from count[2]\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    \n    # Case 2: One from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "73b02fa6b686de565e61a9865946b7a6845aa3e4e14392bd7a430db05481a636|dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "026e24ab0ef611df7f8ee6242bdee0d79fd89d6a8f32fe9c4c4712e53e654ecb|173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662|173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8|370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i * i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    \n    # Count triples\n    result = 0\n    \n    # Case 1: All three elements have same remainder (0, 0, 0), (1, 1, 1), or (2, 2, 2)\n    for i in range(3):\n        # Choose 3 from count[i] elements: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One element from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ac7cfed907d32b81a038aefbc1f2ef1850e7bd18d6eb283d761b8e879c5451ba|370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Three elements with same remainder (0, 1, or 2)\n    for i in range(3):\n        # Choose 3 from count[i]: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # One element from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0e5d1f30b818d10a37bf1cdecee21ef49950ab155bad4b12d4da6cc229d1ac57|370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8f6e04bf868841389381b354e299ae0116bd4342b95bb17612cf78c9beaf5606|370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "026e24ab0ef611df7f8ee6242bdee0d79fd89d6a8f32fe9c4c4712e53e654ecb|370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35|370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c|370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i * i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Case 1: All three from same remainder class (0, 0, 0), (1, 1, 1), or (2, 2, 2)\n    for i in range(3):\n        # Choose 3 from count[i]: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ca9759357f337480f7e4c782b015fdfb1c935abd0b390898e33fdceb0887e64c|370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4|370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i * i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Three elements with same remainder (0, 1, or 2)\n    for i in range(3):\n        # C(count[i], 3) = count[i] * (count[i] - 1) * (count[i] - 2) / 6\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # One element from each remainder group (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6|370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Case 1: All three from same remainder group (0, 0, 0 or 1, 1, 1 or 2, 2, 2)\n    for i in range(3):\n        # Choose 3 from count[i] elements: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One from each remainder group (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8|bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i * i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    \n    # Count triples\n    result = 0\n    \n    # Case 1: All three elements have same remainder (0, 0, 0), (1, 1, 1), or (2, 2, 2)\n    for i in range(3):\n        # Choose 3 from count[i] elements: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One element from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0e5d1f30b818d10a37bf1cdecee21ef49950ab155bad4b12d4da6cc229d1ac57|bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "f0318b1020d4d0a8b24888d77495cb0cd9ee04f85bad8a3a7415063cb0f69d03|bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8f6e04bf868841389381b354e299ae0116bd4342b95bb17612cf78c9beaf5606|bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c|bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i * i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Case 1: All three from same remainder class (0, 0, 0), (1, 1, 1), or (2, 2, 2)\n    for i in range(3):\n        # Choose 3 from count[i]: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "d0872bb2097efb086e94ced4e7b77e6ce75539d0009eddf3e5b5ba6ecf5d3f26|bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "452d7958c68ba741e9dca98f1231b2cb4888662969f37f401937f39b311aa2ff|bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "3c37ddfa64decf456d2493a396e98a69c6f6cfd0df2e5ecdec2cca0d13bbed9d|bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4|bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i * i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Three elements with same remainder (0, 1, or 2)\n    for i in range(3):\n        # C(count[i], 3) = count[i] * (count[i] - 1) * (count[i] - 2) / 6\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # One element from each remainder group (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "7aa6d76c7193e59e967617bf4e7043a2109ff364973ef809c58c1844b09b5f53|bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Case 1: All three have same remainder (0, 0, 0) or (1, 1, 1) or (2, 2, 2)\n    for i in range(3):\n        # Choose 3 from count[i] elements: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One element from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1|bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Case 1: All three from same remainder group (0, 0, 0), (1, 1, 1), or (2, 2, 2)\n    for i in range(3):\n        # Choose 3 elements from count[i] elements\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One from each group (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35|bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "369c4841f7d959e5f00a17b0b2d1d03fb7221983ebc7feaaa871e2a942973cfb|bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662|bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "026e24ab0ef611df7f8ee6242bdee0d79fd89d6a8f32fe9c4c4712e53e654ecb|bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d73dc8b4a7755497e6f221d47e1277daeae933d22b1546689fe558f146e284af|bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0e5d1f30b818d10a37bf1cdecee21ef49950ab155bad4b12d4da6cc229d1ac57|8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1|8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Case 1: All three from same remainder group (0, 0, 0), (1, 1, 1), or (2, 2, 2)\n    for i in range(3):\n        # Choose 3 elements from count[i] elements\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One from each group (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "d0872bb2097efb086e94ced4e7b77e6ce75539d0009eddf3e5b5ba6ecf5d3f26|8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "369c4841f7d959e5f00a17b0b2d1d03fb7221983ebc7feaaa871e2a942973cfb|8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "73b02fa6b686de565e61a9865946b7a6845aa3e4e14392bd7a430db05481a636|8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # All three elements have same remainder (0, 1, or 2)\n    for c in count:\n        # C(c, 3) = c * (c-1) * (c-2) / 6\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    \n    # One element from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.08928571428571429,
+        "transformation_level": 0
+      }
+    },
+    "0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8|d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "ac7cfed907d32b81a038aefbc1f2ef1850e7bd18d6eb283d761b8e879c5451ba|d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1|d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35|d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c|d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d0872bb2097efb086e94ced4e7b77e6ce75539d0009eddf3e5b5ba6ecf5d3f26|d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d73dc8b4a7755497e6f221d47e1277daeae933d22b1546689fe558f146e284af|d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "ca9759357f337480f7e4c782b015fdfb1c935abd0b390898e33fdceb0887e64c|d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662": {
+      "stitched_code": "def get_max_triples(n):\n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    \n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Three elements with same remainder (0, 1, or 2)\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    \n    # One element from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6|d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7aa6d76c7193e59e967617bf4e7043a2109ff364973ef809c58c1844b09b5f53|d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "f0318b1020d4d0a8b24888d77495cb0cd9ee04f85bad8a3a7415063cb0f69d03|d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8f6e04bf868841389381b354e299ae0116bd4342b95bb17612cf78c9beaf5606|d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "3c37ddfa64decf456d2493a396e98a69c6f6cfd0df2e5ecdec2cca0d13bbed9d|d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4|d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "73b02fa6b686de565e61a9865946b7a6845aa3e4e14392bd7a430db05481a636|d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "73b02fa6b686de565e61a9865946b7a6845aa3e4e14392bd7a430db05481a636|bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # All three elements have same remainder (0, 1, or 2)\n    for c in count:\n        # C(c, 3) = c * (c-1) * (c-2) / 6\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    \n    # One element from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.08928571428571429,
+        "transformation_level": 0
+      }
+    },
+    "d0872bb2097efb086e94ced4e7b77e6ce75539d0009eddf3e5b5ba6ecf5d3f26|370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "452d7958c68ba741e9dca98f1231b2cb4888662969f37f401937f39b311aa2ff|370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662|370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "452d7958c68ba741e9dca98f1231b2cb4888662969f37f401937f39b311aa2ff|dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0e5d1f30b818d10a37bf1cdecee21ef49950ab155bad4b12d4da6cc229d1ac57|d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "452d7958c68ba741e9dca98f1231b2cb4888662969f37f401937f39b311aa2ff|d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "ac7cfed907d32b81a038aefbc1f2ef1850e7bd18d6eb283d761b8e879c5451ba|8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Three elements with same remainder (0, 1, or 2)\n    for i in range(3):\n        # Choose 3 from count[i]: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # One element from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8|d73dc8b4a7755497e6f221d47e1277daeae933d22b1546689fe558f146e284af": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "ac7cfed907d32b81a038aefbc1f2ef1850e7bd18d6eb283d761b8e879c5451ba|d73dc8b4a7755497e6f221d47e1277daeae933d22b1546689fe558f146e284af": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8f6e04bf868841389381b354e299ae0116bd4342b95bb17612cf78c9beaf5606|d73dc8b4a7755497e6f221d47e1277daeae933d22b1546689fe558f146e284af": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1|d73dc8b4a7755497e6f221d47e1277daeae933d22b1546689fe558f146e284af": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35|d73dc8b4a7755497e6f221d47e1277daeae933d22b1546689fe558f146e284af": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i * i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Case 1: All three from same remainder class\n    # Choose 3 from count[0]\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    # Choose 3 from count[1]\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    # Choose 3 from count[2]\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    \n    # Case 2: One from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ca9759357f337480f7e4c782b015fdfb1c935abd0b390898e33fdceb0887e64c|d73dc8b4a7755497e6f221d47e1277daeae933d22b1546689fe558f146e284af": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4|d73dc8b4a7755497e6f221d47e1277daeae933d22b1546689fe558f146e284af": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6|d73dc8b4a7755497e6f221d47e1277daeae933d22b1546689fe558f146e284af": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7aa6d76c7193e59e967617bf4e7043a2109ff364973ef809c58c1844b09b5f53|d73dc8b4a7755497e6f221d47e1277daeae933d22b1546689fe558f146e284af": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662|d73dc8b4a7755497e6f221d47e1277daeae933d22b1546689fe558f146e284af": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "026e24ab0ef611df7f8ee6242bdee0d79fd89d6a8f32fe9c4c4712e53e654ecb|d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d73dc8b4a7755497e6f221d47e1277daeae933d22b1546689fe558f146e284af|dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i * i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Case 1: All three have remainder 0\n    # Choose 3 from count[0]\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    \n    # Case 2: All three have remainder 1\n    # Choose 3 from count[1]\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    \n    # Case 3: All three have remainder 2\n    # Choose 3 from count[2]\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    \n    # Case 4: One each of remainder 0, 1, 2\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "3c37ddfa64decf456d2493a396e98a69c6f6cfd0df2e5ecdec2cca0d13bbed9d|dc63913bb627caed631e3741d70ec9801653835505135d2c23ae2a808fbe2c35": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c|d73dc8b4a7755497e6f221d47e1277daeae933d22b1546689fe558f146e284af": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "73b02fa6b686de565e61a9865946b7a6845aa3e4e14392bd7a430db05481a636|d73dc8b4a7755497e6f221d47e1277daeae933d22b1546689fe558f146e284af": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "f0318b1020d4d0a8b24888d77495cb0cd9ee04f85bad8a3a7415063cb0f69d03|370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "73b02fa6b686de565e61a9865946b7a6845aa3e4e14392bd7a430db05481a636|370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # All three elements have same remainder (0, 1, or 2)\n    for c in count:\n        # C(c, 3) = c * (c-1) * (c-2) / 6\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    \n    # One element from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.08928571428571429,
+        "transformation_level": 0
+      }
+    },
+    "ac7cfed907d32b81a038aefbc1f2ef1850e7bd18d6eb283d761b8e879c5451ba|bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Three elements with same remainder (0, 1, or 2)\n    for i in range(3):\n        # Choose 3 from count[i]: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # One element from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ca9759357f337480f7e4c782b015fdfb1c935abd0b390898e33fdceb0887e64c|bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "f0318b1020d4d0a8b24888d77495cb0cd9ee04f85bad8a3a7415063cb0f69d03|d73dc8b4a7755497e6f221d47e1277daeae933d22b1546689fe558f146e284af": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d0872bb2097efb086e94ced4e7b77e6ce75539d0009eddf3e5b5ba6ecf5d3f26|d73dc8b4a7755497e6f221d47e1277daeae933d22b1546689fe558f146e284af": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "369c4841f7d959e5f00a17b0b2d1d03fb7221983ebc7feaaa871e2a942973cfb|d73dc8b4a7755497e6f221d47e1277daeae933d22b1546689fe558f146e284af": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    result += count[0] * (count[0] - 1) * (count[0] - 2) // 6\n    result += count[1] * (count[1] - 1) * (count[1] - 2) // 6\n    result += count[2] * (count[2] - 1) * (count[2] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d73dc8b4a7755497e6f221d47e1277daeae933d22b1546689fe558f146e284af|370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "3c37ddfa64decf456d2493a396e98a69c6f6cfd0df2e5ecdec2cca0d13bbed9d|370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7aa6d76c7193e59e967617bf4e7043a2109ff364973ef809c58c1844b09b5f53|370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Case 1: All three have same remainder (0, 0, 0) or (1, 1, 1) or (2, 2, 2)\n    for i in range(3):\n        # Choose 3 from count[i] elements: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One element from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8|7aa6d76c7193e59e967617bf4e7043a2109ff364973ef809c58c1844b09b5f53": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i * i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    \n    # Count triples\n    result = 0\n    \n    # Case 1: All three elements have same remainder (0, 0, 0), (1, 1, 1), or (2, 2, 2)\n    for i in range(3):\n        # Choose 3 from count[i] elements: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One element from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "8f6e04bf868841389381b354e299ae0116bd4342b95bb17612cf78c9beaf5606|7aa6d76c7193e59e967617bf4e7043a2109ff364973ef809c58c1844b09b5f53": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1|7aa6d76c7193e59e967617bf4e7043a2109ff364973ef809c58c1844b09b5f53": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Case 1: All three from same remainder group (0, 0, 0), (1, 1, 1), or (2, 2, 2)\n    for i in range(3):\n        # Choose 3 elements from count[i] elements\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One from each group (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c|7aa6d76c7193e59e967617bf4e7043a2109ff364973ef809c58c1844b09b5f53": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i * i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Case 1: All three from same remainder class (0, 0, 0), (1, 1, 1), or (2, 2, 2)\n    for i in range(3):\n        # Choose 3 from count[i]: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "d73dc8b4a7755497e6f221d47e1277daeae933d22b1546689fe558f146e284af|7aa6d76c7193e59e967617bf4e7043a2109ff364973ef809c58c1844b09b5f53": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "3c37ddfa64decf456d2493a396e98a69c6f6cfd0df2e5ecdec2cca0d13bbed9d|7aa6d76c7193e59e967617bf4e7043a2109ff364973ef809c58c1844b09b5f53": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4|7aa6d76c7193e59e967617bf4e7043a2109ff364973ef809c58c1844b09b5f53": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i * i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Three elements with same remainder (0, 1, or 2)\n    for i in range(3):\n        # C(count[i], 3) = count[i] * (count[i] - 1) * (count[i] - 2) / 6\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # One element from each remainder group (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "bae290dd67b9b3aa09f1f7952702c2369de1b6b1386fe2a9e607bfe152741ab6|7aa6d76c7193e59e967617bf4e7043a2109ff364973ef809c58c1844b09b5f53": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1 for i from 1 to n\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Case 1: All three from same remainder group (0, 0, 0 or 1, 1, 1 or 2, 2, 2)\n    for i in range(3):\n        # Choose 3 from count[i] elements: C(count[i], 3)\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    \n    # Case 2: One from each remainder group (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "73b02fa6b686de565e61a9865946b7a6845aa3e4e14392bd7a430db05481a636|7aa6d76c7193e59e967617bf4e7043a2109ff364973ef809c58c1844b09b5f53": {
+      "stitched_code": "def get_max_triples(n):\n    # Create array a where a[i] = i*i - i + 1\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    \n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    for num in a:\n        count[num % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # All three elements have same remainder (0, 1, or 2)\n    for c in count:\n        # C(c, 3) = c * (c-1) * (c-2) / 6\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    \n    # One element from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.08928571428571429,
+        "transformation_level": 0
+      }
+    },
+    "d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662|7aa6d76c7193e59e967617bf4e7043a2109ff364973ef809c58c1844b09b5f53": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "369c4841f7d959e5f00a17b0b2d1d03fb7221983ebc7feaaa871e2a942973cfb|370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "369c4841f7d959e5f00a17b0b2d1d03fb7221983ebc7feaaa871e2a942973cfb|d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662": {
+      "stitched_code": "def get_max_triples(n):\n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    \n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Three elements with same remainder (0, 1, or 2)\n    for c in count:\n        # Choose 3 from c elements: C(c, 3) = c * (c-1) * (c-2) / 6\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    \n    # One element from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0a2d8afea55068129f986864c1ae3ab7c6f34bf0931a8a94b3f13a6f0dd3dfc8|369c4841f7d959e5f00a17b0b2d1d03fb7221983ebc7feaaa871e2a942973cfb": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0e5d1f30b818d10a37bf1cdecee21ef49950ab155bad4b12d4da6cc229d1ac57|369c4841f7d959e5f00a17b0b2d1d03fb7221983ebc7feaaa871e2a942973cfb": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8f6e04bf868841389381b354e299ae0116bd4342b95bb17612cf78c9beaf5606|369c4841f7d959e5f00a17b0b2d1d03fb7221983ebc7feaaa871e2a942973cfb": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "370352f202d714bda90e136810fba2e157d5892485fc0994600f924965db11b1|369c4841f7d959e5f00a17b0b2d1d03fb7221983ebc7feaaa871e2a942973cfb": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "173ef56015ea8a104e0dbb32cfacd97b71c9d652d5643b17477f087de33eca2c|369c4841f7d959e5f00a17b0b2d1d03fb7221983ebc7feaaa871e2a942973cfb": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "452d7958c68ba741e9dca98f1231b2cb4888662969f37f401937f39b311aa2ff|369c4841f7d959e5f00a17b0b2d1d03fb7221983ebc7feaaa871e2a942973cfb": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8cb64fea8fca0325c2799358eacafc7bbf2707ebe84f0e728d40bf7ecd3398e4|369c4841f7d959e5f00a17b0b2d1d03fb7221983ebc7feaaa871e2a942973cfb": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7aa6d76c7193e59e967617bf4e7043a2109ff364973ef809c58c1844b09b5f53|369c4841f7d959e5f00a17b0b2d1d03fb7221983ebc7feaaa871e2a942973cfb": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "73b02fa6b686de565e61a9865946b7a6845aa3e4e14392bd7a430db05481a636|369c4841f7d959e5f00a17b0b2d1d03fb7221983ebc7feaaa871e2a942973cfb": {
+      "stitched_code": "def get_max_triples(n):\n    count = [0, 0, 0]\n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    result = 0\n    for c in count:\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d7f82bbbf13ccf801aaed95940d7ee840511b81427ebcfb59a68f83c8c916662|369c4841f7d959e5f00a17b0b2d1d03fb7221983ebc7feaaa871e2a942973cfb": {
+      "stitched_code": "def get_max_triples(n):\n    # Count elements by their remainder mod 3\n    count = [0, 0, 0]\n    \n    for i in range(1, n + 1):\n        val = i * i - i + 1\n        count[val % 3] += 1\n    \n    # Count valid triples\n    result = 0\n    \n    # Three elements with same remainder (0, 0, 0), (1, 1, 1), or (2, 2, 2)\n    for c in count:\n        # Choose 3 from c elements: C(c, 3) = c * (c-1) * (c-2) / 6\n        if c >= 3:\n            result += c * (c - 1) * (c - 2) // 6\n    \n    # One element from each remainder class (0, 1, 2)\n    result += count[0] * count[1] * count[2]\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0e5d1f30b818d10a37bf1cdecee21ef49950ab155bad4b12d4da6cc229d1ac57|7aa6d76c7193e59e967617bf4e7043a2109ff364973ef809c58c1844b09b5f53": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "026e24ab0ef611df7f8ee6242bdee0d79fd89d6a8f32fe9c4c4712e53e654ecb|7aa6d76c7193e59e967617bf4e7043a2109ff364973ef809c58c1844b09b5f53": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d0872bb2097efb086e94ced4e7b77e6ce75539d0009eddf3e5b5ba6ecf5d3f26|7aa6d76c7193e59e967617bf4e7043a2109ff364973ef809c58c1844b09b5f53": {
+      "stitched_code": "def get_max_triples(n):\n    a = [(i * i - i + 1) for i in range(1, n + 1)]\n    count = [0, 0, 0]\n    for val in a:\n        count[val % 3] += 1\n    result = 0\n    for i in range(3):\n        if count[i] >= 3:\n            result += count[i] * (count[i] - 1) * (count[i] - 2) // 6\n    result += count[0] * count[1] * count[2]\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

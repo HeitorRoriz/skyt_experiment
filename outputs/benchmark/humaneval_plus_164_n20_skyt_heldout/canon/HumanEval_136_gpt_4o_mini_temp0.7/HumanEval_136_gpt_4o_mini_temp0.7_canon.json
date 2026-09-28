@@ -1,0 +1,522 @@
+{
+  "contract_id": "HumanEval_136_gpt_4o_mini_temp0.7",
+  "canonical_code": "def largest_smallest_integers(lst):\n    largest_negative = None\n    smallest_positive = None\n\n    for num in lst:\n        if num < 0:\n            if largest_negative is None or num > largest_negative:\n                largest_negative = num\n        elif num > 0:\n            if smallest_positive is None or num < smallest_positive:\n                smallest_positive = num\n\n    return (largest_negative, smallest_positive)\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 4,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [],
+      "nested_depth": 4,
+      "branch_patterns": [
+        "if_at_depth_1",
+        "if_at_depth_2",
+        "if_at_depth_2",
+        "if_at_depth_3"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [
+          "v2"
+        ],
+        "v1": [
+          "v2"
+        ]
+      },
+      "assignments": {
+        "v0": "Name(id='v2', ctx=Load())",
+        "v1": "Name(id='v2', ctx=Load())"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_largest_smallest_integers"
+        ],
+        [
+          "function_largest_smallest_integers",
+          "loop"
+        ],
+        [
+          "function_largest_smallest_integers",
+          "loop",
+          "branch"
+        ],
+        [
+          "function_largest_smallest_integers",
+          "loop",
+          "branch",
+          "branch"
+        ],
+        [
+          "function_largest_smallest_integers",
+          "loop",
+          "branch",
+          "branch"
+        ],
+        [
+          "function_largest_smallest_integers",
+          "loop",
+          "branch",
+          "branch",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "largest_smallest_integers": {
+        "name": "largest_smallest_integers",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": []
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": false,
+      "numeric_constants": [
+        0,
+        0
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [
+        "Or",
+        "Or"
+      ],
+      "comparisons": [
+        "Lt",
+        "Is",
+        "Gt",
+        "Gt",
+        "Is",
+        "Lt"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "For",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Lt",
+        "Constant",
+        "If",
+        "BoolOp",
+        "Or",
+        "Compare",
+        "Name",
+        "Load",
+        "Is",
+        "Constant",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Constant",
+        "If",
+        "BoolOp",
+        "Or",
+        "Compare",
+        "Name",
+        "Load",
+        "Is",
+        "Constant",
+        "Compare",
+        "Name",
+        "Load",
+        "Lt",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Return",
+        "Tuple",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load"
+      ],
+      "ast_depth": 9,
+      "ast_hash": "52114c9cf539fb5ad5c588ddfba41af9",
+      "alpha_renamed_hash": "52114c9cf539fb5ad5c588ddfba41af9"
+    },
+    "operator_precedence": {
+      "operator_sequence": [],
+      "precedence_levels": {}
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "Assign",
+        "For",
+        "If",
+        "If",
+        "Assign",
+        "If",
+        "If",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "Assign_2",
+        "For_3",
+        "If_4",
+        "If_5",
+        "Assign_6",
+        "If_7",
+        "If_8",
+        "Assign_9",
+        "Return_10"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "For",
+        "If",
+        "If",
+        "If",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_136_gpt_4o_mini_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/136",
+    "prompt": "\ndef largest_smallest_integers(lst):\n    '''\n    Create a function that returns a tuple (a, b), where 'a' is\n    the largest of negative integers, and 'b' is the smallest\n    of positive integers in a list.\n    If there is no negative or positive integers, return them as None.\n\n    Examples:\n    largest_smallest_integers([2, 4, 1, 3, 5, 7]) == (None, 1)\n    largest_smallest_integers([]) == (None, None)\n    largest_smallest_integers([0]) == (None, None)\n    '''\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "largest_smallest_integers"
+    },
+    "anchor_signature": "e0bb759c53508f5030f72a0a2c8a182d09525ce42d52dab478d48c693dcec05e",
+    "canonical_code": "def largest_smallest_integers(lst):\n    largest_negative = None\n    smallest_positive = None\n\n    for num in lst:\n        if num < 0:\n            if largest_negative is None or num > largest_negative:\n                largest_negative = num\n        elif num > 0:\n            if smallest_positive is None or num < smallest_positive:\n                smallest_positive = num\n\n    return (largest_negative, smallest_positive)\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 4,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [],
+        "nested_depth": 4,
+        "branch_patterns": [
+          "if_at_depth_1",
+          "if_at_depth_2",
+          "if_at_depth_2",
+          "if_at_depth_3"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [
+            "v2"
+          ],
+          "v1": [
+            "v2"
+          ]
+        },
+        "assignments": {
+          "v0": "Name(id='v2', ctx=Load())",
+          "v1": "Name(id='v2', ctx=Load())"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_largest_smallest_integers"
+          ],
+          [
+            "function_largest_smallest_integers",
+            "loop"
+          ],
+          [
+            "function_largest_smallest_integers",
+            "loop",
+            "branch"
+          ],
+          [
+            "function_largest_smallest_integers",
+            "loop",
+            "branch",
+            "branch"
+          ],
+          [
+            "function_largest_smallest_integers",
+            "loop",
+            "branch",
+            "branch"
+          ],
+          [
+            "function_largest_smallest_integers",
+            "loop",
+            "branch",
+            "branch",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "largest_smallest_integers": {
+          "name": "largest_smallest_integers",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": [
+          0,
+          0
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [
+          "Or",
+          "Or"
+        ],
+        "comparisons": [
+          "Lt",
+          "Is",
+          "Gt",
+          "Gt",
+          "Is",
+          "Lt"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Lt",
+          "Constant",
+          "If",
+          "BoolOp",
+          "Or",
+          "Compare",
+          "Name",
+          "Load",
+          "Is",
+          "Constant",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Constant",
+          "If",
+          "BoolOp",
+          "Or",
+          "Compare",
+          "Name",
+          "Load",
+          "Is",
+          "Constant",
+          "Compare",
+          "Name",
+          "Load",
+          "Lt",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Return",
+          "Tuple",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load"
+        ],
+        "ast_depth": 9,
+        "ast_hash": "52114c9cf539fb5ad5c588ddfba41af9",
+        "alpha_renamed_hash": "52114c9cf539fb5ad5c588ddfba41af9"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "For",
+          "If",
+          "If",
+          "Assign",
+          "If",
+          "If",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "Assign_2",
+          "For_3",
+          "If_4",
+          "If_5",
+          "Assign_6",
+          "If_7",
+          "If_8",
+          "Assign_9",
+          "Return_10"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "For",
+          "If",
+          "If",
+          "If",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

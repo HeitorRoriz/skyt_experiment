@@ -1,0 +1,91 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "2e97667ad8ed5533a2a6329c74bfc4ac03154e8defa503e95f91325508d5b49e|2e97667ad8ed5533a2a6329c74bfc4ac03154e8defa503e95f91325508d5b49e": {
+      "stitched_code": "\n\ndef change_base(x: int, base: int):\n    \"\"\"Change numerical base of input number x to base.\n    return string representation after the conversion.\n    base numbers are less than 10.\n    >>> change_base(8, 3)\n    '22'\n    >>> change_base(8, 2)\n    '1000'\n    >>> change_base(7, 2)\n    '111'\n    \"\"\"\n    if base < 2 or base > 9:\n        raise ValueError(\"Base must be between 2 and 9.\")\n    \n    if x == 0:\n        return '0'\n    \n    result = ''\n    while x > 0:\n        result = str(x % base) + result\n        x //= base\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1cef71a2d39df6afb69301bf0072e0736f09a9e245ae0a71be607f34ad42d428|2e97667ad8ed5533a2a6329c74bfc4ac03154e8defa503e95f91325508d5b49e": {
+      "stitched_code": "def change_base(x: int, base: int):\n    \"\"\"Change numerical base of input number x to base.\n    return string representation after the conversion.\n    base numbers are less than 10.\n    >>> change_base(8, 3)\n    '22'\n    >>> change_base(8, 2)\n    '1000'\n    >>> change_base(7, 2)\n    '111'\n    \"\"\"\n    if base < 2 or base > 9:\n        raise ValueError('Base must be between 2 and 9.')\n    if x == 0:\n        return '0'\n    result = ''\n    while x > 0:\n        result = str(x % base) + result\n        x //= base\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2d00353aa7debcdf4435a9a2a21fd769603b6eeae1d3330713a8793cd8ea63a1|2e97667ad8ed5533a2a6329c74bfc4ac03154e8defa503e95f91325508d5b49e": {
+      "stitched_code": "def change_base(x: int, base: int):\n    \"\"\"Change numerical base of input number x to base.\n    return string representation after the conversion.\n    base numbers are less than 10.\n    >>> change_base(8, 3)\n    '22'\n    >>> change_base(8, 2)\n    '1000'\n    >>> change_base(7, 2)\n    '111'\n    \"\"\"\n    if base < 2 or base > 9:\n        raise ValueError('Base must be between 2 and 9.')\n    if x == 0:\n        return '0'\n    result = ''\n    while x > 0:\n        result = str(x % base) + result\n        x //= base\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d74099947613dae6d641455dc1b5ddce4814a73d11cff8a8701ad9552aa6741a|2e97667ad8ed5533a2a6329c74bfc4ac03154e8defa503e95f91325508d5b49e": {
+      "stitched_code": "\n\ndef change_base(x: int, base: int):\n    \"\"\"Change numerical base of input number x to base.\n    return string representation after the conversion.\n    base numbers are less than 10.\n    >>> change_base(8, 3)\n    '22'\n    >>> change_base(8, 2)\n    '1000'\n    >>> change_base(7, 2)\n    '111'\n    \"\"\"\n    if base < 2 or base > 9:\n        raise ValueError(\"Base must be between 2 and 9\")\n    \n    if x == 0:\n        return '0'\n    \n    result = ''\n    while x > 0:\n        result = str(x % base) + result\n        x //= base\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.07142857142857142,
+        "transformation_level": 0
+      }
+    }
+  }
+}

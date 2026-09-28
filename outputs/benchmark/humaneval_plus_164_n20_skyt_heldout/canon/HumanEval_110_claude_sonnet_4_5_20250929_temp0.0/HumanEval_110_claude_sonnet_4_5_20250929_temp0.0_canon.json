@@ -1,0 +1,446 @@
+{
+  "contract_id": "HumanEval_110_claude_sonnet_4_5_20250929_temp0.0",
+  "canonical_code": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform an exchange of elements\n    between them to make lst1 a list of only even numbers.\n    There is no limit on the number of exchanged elements between lst1 and lst2.\n    If it is possible to exchange elements between the lst1 and lst2 to make\n    all the elements of lst1 to be even, return \"YES\".\n    Otherwise, return \"NO\".\n    For example:\n    exchange([1, 2, 3, 4], [1, 2, 3, 4]) => \"YES\"\n    exchange([1, 2, 3, 4], [1, 5, 3, 4]) => \"NO\"\n    It is assumed that the input lists will be non-empty.\n    \"\"\"\n    # Count total even numbers in both lists\n    total_even = sum(1 for num in lst1 if num % 2 == 0) + sum(1 for num in lst2 if num % 2 == 0)\n    \n    # Check if we have enough even numbers to fill lst1\n    if total_even >= len(lst1):\n        return \"YES\"\n    else:\n        return \"NO\"\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 1,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "sum",
+        "sum",
+        "len"
+      ],
+      "nested_depth": 1,
+      "branch_patterns": [
+        "if_at_depth_0"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": []
+      },
+      "assignments": {
+        "v0": "BinOp(left=Call(func=Name(id='sum', ctx=Load()), args=[GeneratorExp(elt=Constant(value=1), generators=[comprehension(target=Name(id='v1', ctx=Store()), iter=Name(id='p0', ctx=Load()), ifs=[Compare(left=BinOp(left=Name(id='v1', ctx=Load()), op=Mod(), right=Constant(value=2)), ops=[Eq()], comparators=[Constant(value=0)])], is_async=0)])]), op=Add(), right=Call(func=Name(id='sum', ctx=Load()), args=[GeneratorExp(elt=Constant(value=1), generators=[comprehension(target=Name(id='v1', ctx=Store()), iter=Name(id='p1', ctx=Load()), ifs=[Compare(left=BinOp(left=Name(id='v1', ctx=Load()), op=Mod(), right=Constant(value=2)), ops=[Eq()], comparators=[Constant(value=0)])], is_async=0)])]))"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_exchange"
+        ],
+        [
+          "function_exchange",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "exchange": {
+        "name": "exchange",
+        "args": [
+          "p0",
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add"
+      ],
+      "associative_ops": [
+        "Add"
+      ],
+      "binary_operations": [
+        "Add",
+        "Mod",
+        "Mod"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        1,
+        2,
+        0,
+        1,
+        2,
+        0
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Eq",
+        "Eq",
+        "GtE"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "GeneratorExp",
+        "Constant",
+        "comprehension",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Compare",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mod",
+        "Constant",
+        "Eq",
+        "Constant",
+        "Add",
+        "Call",
+        "Name",
+        "Load",
+        "GeneratorExp",
+        "Constant",
+        "comprehension",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Compare",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mod",
+        "Constant",
+        "Eq",
+        "Constant",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "GtE",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Return",
+        "Constant",
+        "Return",
+        "Constant"
+      ],
+      "ast_depth": 10,
+      "ast_hash": "53703b1593dec8c07f5f6e2adad5cc29",
+      "alpha_renamed_hash": "53703b1593dec8c07f5f6e2adad5cc29"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Add",
+        "Mod",
+        "Mod"
+      ],
+      "precedence_levels": {
+        "Add": 3,
+        "Mod": 4
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "If",
+        "Return",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "If_2",
+        "Return_3",
+        "Return_4"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "v0 >= len(p0)",
+          "return_type": "constant"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "v0 >= len(p0)"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_110_claude_sonnet_4_5_20250929_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/110",
+    "prompt": "\ndef exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform an exchange of elements\n    between them to make lst1 a list of only even numbers.\n    There is no limit on the number of exchanged elements between lst1 and lst2.\n    If it is possible to exchange elements between the lst1 and lst2 to make\n    all the elements of lst1 to be even, return \"YES\".\n    Otherwise, return \"NO\".\n    For example:\n    exchange([1, 2, 3, 4], [1, 2, 3, 4]) => \"YES\"\n    exchange([1, 2, 3, 4], [1, 5, 3, 4]) => \"NO\"\n    It is assumed that the input lists will be non-empty.\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "exchange"
+    },
+    "anchor_signature": "92c031be1d3c55d7bf7afdc6dc5360f2fa95c609fb8bdb4a4e2c5cc7cfc42ecd",
+    "canonical_code": "def exchange(lst1, lst2):\n    \"\"\"In this problem, you will implement a function that takes two lists of numbers,\n    and determines whether it is possible to perform an exchange of elements\n    between them to make lst1 a list of only even numbers.\n    There is no limit on the number of exchanged elements between lst1 and lst2.\n    If it is possible to exchange elements between the lst1 and lst2 to make\n    all the elements of lst1 to be even, return \"YES\".\n    Otherwise, return \"NO\".\n    For example:\n    exchange([1, 2, 3, 4], [1, 2, 3, 4]) => \"YES\"\n    exchange([1, 2, 3, 4], [1, 5, 3, 4]) => \"NO\"\n    It is assumed that the input lists will be non-empty.\n    \"\"\"\n    # Count total even numbers in both lists\n    total_even = sum(1 for num in lst1 if num % 2 == 0) + sum(1 for num in lst2 if num % 2 == 0)\n    \n    # Check if we have enough even numbers to fill lst1\n    if total_even >= len(lst1):\n        return \"YES\"\n    else:\n        return \"NO\"\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 1,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "sum",
+          "sum",
+          "len"
+        ],
+        "nested_depth": 1,
+        "branch_patterns": [
+          "if_at_depth_0"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": []
+        },
+        "assignments": {
+          "v0": "BinOp(left=Call(func=Name(id='sum', ctx=Load()), args=[GeneratorExp(elt=Constant(value=1), generators=[comprehension(target=Name(id='v1', ctx=Store()), iter=Name(id='p0', ctx=Load()), ifs=[Compare(left=BinOp(left=Name(id='v1', ctx=Load()), op=Mod(), right=Constant(value=2)), ops=[Eq()], comparators=[Constant(value=0)])], is_async=0)])]), op=Add(), right=Call(func=Name(id='sum', ctx=Load()), args=[GeneratorExp(elt=Constant(value=1), generators=[comprehension(target=Name(id='v1', ctx=Store()), iter=Name(id='p1', ctx=Load()), ifs=[Compare(left=BinOp(left=Name(id='v1', ctx=Load()), op=Mod(), right=Constant(value=2)), ops=[Eq()], comparators=[Constant(value=0)])], is_async=0)])]))"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_exchange"
+          ],
+          [
+            "function_exchange",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "exchange": {
+          "name": "exchange",
+          "args": [
+            "p0",
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add"
+        ],
+        "associative_ops": [
+          "Add"
+        ],
+        "binary_operations": [
+          "Add",
+          "Mod",
+          "Mod"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          1,
+          2,
+          0,
+          1,
+          2,
+          0
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Eq",
+          "Eq",
+          "GtE"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "GeneratorExp",
+          "Constant",
+          "comprehension",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Compare",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mod",
+          "Constant",
+          "Eq",
+          "Constant",
+          "Add",
+          "Call",
+          "Name",
+          "Load",
+          "GeneratorExp",
+          "Constant",
+          "comprehension",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Compare",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mod",
+          "Constant",
+          "Eq",
+          "Constant",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "GtE",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Return",
+          "Constant",
+          "Return",
+          "Constant"
+        ],
+        "ast_depth": 10,
+        "ast_hash": "53703b1593dec8c07f5f6e2adad5cc29",
+        "alpha_renamed_hash": "53703b1593dec8c07f5f6e2adad5cc29"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Add",
+          "Mod",
+          "Mod"
+        ],
+        "precedence_levels": {
+          "Add": 3,
+          "Mod": 4
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "If",
+          "Return",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "If_2",
+          "Return_3",
+          "Return_4"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "v0 >= len(p0)",
+            "return_type": "constant"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "v0 >= len(p0)"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

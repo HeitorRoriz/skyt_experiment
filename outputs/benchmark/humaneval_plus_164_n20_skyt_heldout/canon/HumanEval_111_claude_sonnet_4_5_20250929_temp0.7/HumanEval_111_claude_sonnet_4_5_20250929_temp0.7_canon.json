@@ -1,0 +1,556 @@
+{
+  "contract_id": "HumanEval_111_claude_sonnet_4_5_20250929_temp0.7",
+  "canonical_code": "def histogram(test):\n    \"\"\"Given a string representing a space separated lowercase letters, return a dictionary\n    of the letter with the most repetition and containing the corresponding count.\n    If several letters have the same occurrence, return all of them.\n    \n    Example:\n    histogram('a b c') == {'a': 1, 'b': 1, 'c': 1}\n    histogram('a b b a') == {'a': 2, 'b': 2}\n    histogram('a b c a b') == {'a': 2, 'b': 2}\n    histogram('b b b b a') == {'b': 4}\n    histogram('') == {}\n\n    \"\"\"\n    if not test:\n        return {}\n    \n    # Split the string and count occurrences\n    letters = test.split()\n    if not letters:\n        return {}\n    \n    count_dict = {}\n    for letter in letters:\n        count_dict[letter] = count_dict.get(letter, 0) + 1\n    \n    # Find the maximum count\n    max_count = max(count_dict.values())\n    \n    # Return all letters with maximum count\n    result = {letter: count for letter, count in count_dict.items() if count == max_count}\n    \n    return result\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 2,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [
+        "max"
+      ],
+      "nested_depth": 1,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_0"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [],
+        "v1": [],
+        "v3": [],
+        "v4": []
+      },
+      "assignments": {
+        "v0": "Call(func=Attribute(value=Name(id='p0', ctx=Load()), attr='split', ctx=Load()))",
+        "v1": "Dict()",
+        "v3": "Call(func=Name(id='max', ctx=Load()), args=[Call(func=Attribute(value=Name(id='v1', ctx=Load()), attr='values', ctx=Load()))])",
+        "v4": "DictComp(key=Name(id='v2', ctx=Load()), value=Name(id='v5', ctx=Load()), generators=[comprehension(target=Tuple(elts=[Name(id='v2', ctx=Store()), Name(id='v5', ctx=Store())], ctx=Store()), iter=Call(func=Attribute(value=Name(id='v1', ctx=Load()), attr='items', ctx=Load())), ifs=[Compare(left=Name(id='v5', ctx=Load()), ops=[Eq()], comparators=[Name(id='v3', ctx=Load())])], is_async=0)])"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_histogram"
+        ],
+        [
+          "function_histogram",
+          "branch"
+        ],
+        [
+          "function_histogram",
+          "branch"
+        ],
+        [
+          "function_histogram",
+          "loop"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "histogram": {
+        "name": "histogram",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add"
+      ],
+      "associative_ops": [
+        "Add"
+      ],
+      "binary_operations": [
+        "Add"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        0,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "If",
+        "UnaryOp",
+        "Not",
+        "Name",
+        "Load",
+        "Return",
+        "Dict",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "If",
+        "UnaryOp",
+        "Not",
+        "Name",
+        "Load",
+        "Return",
+        "Dict",
+        "Assign",
+        "Name",
+        "Store",
+        "Dict",
+        "For",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Assign",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Store",
+        "BinOp",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Name",
+        "Load",
+        "Constant",
+        "Add",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "DictComp",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "comprehension",
+        "Tuple",
+        "Name",
+        "Store",
+        "Name",
+        "Store",
+        "Store",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Name",
+        "Load",
+        "Return",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 8,
+      "ast_hash": "a8bf0f077b07f910527cbb50df760a39",
+      "alpha_renamed_hash": "a8bf0f077b07f910527cbb50df760a39"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Add"
+      ],
+      "precedence_levels": {
+        "Add": 3
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Return",
+        "Assign",
+        "If",
+        "Return",
+        "Assign",
+        "For",
+        "Assign",
+        "Assign",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Return_2",
+        "Assign_3",
+        "If_4",
+        "Return_5",
+        "Assign_6",
+        "For_7",
+        "Assign_8",
+        "Assign_9",
+        "Assign_10",
+        "Return_11"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If",
+        "If",
+        "For"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "not p0",
+          "return_type": "expression"
+        },
+        {
+          "condition": "not v0",
+          "return_type": "expression"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "not p0",
+        "not v0"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_111_claude_sonnet_4_5_20250929_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/111",
+    "prompt": "\ndef histogram(test):\n    \"\"\"Given a string representing a space separated lowercase letters, return a dictionary\n    of the letter with the most repetition and containing the corresponding count.\n    If several letters have the same occurrence, return all of them.\n    \n    Example:\n    histogram('a b c') == {'a': 1, 'b': 1, 'c': 1}\n    histogram('a b b a') == {'a': 2, 'b': 2}\n    histogram('a b c a b') == {'a': 2, 'b': 2}\n    histogram('b b b b a') == {'b': 4}\n    histogram('') == {}\n\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "histogram"
+    },
+    "anchor_signature": "d7b1b34681fabac45c5b23dcb99d586590987d8edf27ffc974b2ddfecdd3d973",
+    "canonical_code": "def histogram(test):\n    \"\"\"Given a string representing a space separated lowercase letters, return a dictionary\n    of the letter with the most repetition and containing the corresponding count.\n    If several letters have the same occurrence, return all of them.\n    \n    Example:\n    histogram('a b c') == {'a': 1, 'b': 1, 'c': 1}\n    histogram('a b b a') == {'a': 2, 'b': 2}\n    histogram('a b c a b') == {'a': 2, 'b': 2}\n    histogram('b b b b a') == {'b': 4}\n    histogram('') == {}\n\n    \"\"\"\n    if not test:\n        return {}\n    \n    # Split the string and count occurrences\n    letters = test.split()\n    if not letters:\n        return {}\n    \n    count_dict = {}\n    for letter in letters:\n        count_dict[letter] = count_dict.get(letter, 0) + 1\n    \n    # Find the maximum count\n    max_count = max(count_dict.values())\n    \n    # Return all letters with maximum count\n    result = {letter: count for letter, count in count_dict.items() if count == max_count}\n    \n    return result\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 2,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "max"
+        ],
+        "nested_depth": 1,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_0"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [],
+          "v1": [],
+          "v3": [],
+          "v4": []
+        },
+        "assignments": {
+          "v0": "Call(func=Attribute(value=Name(id='p0', ctx=Load()), attr='split', ctx=Load()))",
+          "v1": "Dict()",
+          "v3": "Call(func=Name(id='max', ctx=Load()), args=[Call(func=Attribute(value=Name(id='v1', ctx=Load()), attr='values', ctx=Load()))])",
+          "v4": "DictComp(key=Name(id='v2', ctx=Load()), value=Name(id='v5', ctx=Load()), generators=[comprehension(target=Tuple(elts=[Name(id='v2', ctx=Store()), Name(id='v5', ctx=Store())], ctx=Store()), iter=Call(func=Attribute(value=Name(id='v1', ctx=Load()), attr='items', ctx=Load())), ifs=[Compare(left=Name(id='v5', ctx=Load()), ops=[Eq()], comparators=[Name(id='v3', ctx=Load())])], is_async=0)])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_histogram"
+          ],
+          [
+            "function_histogram",
+            "branch"
+          ],
+          [
+            "function_histogram",
+            "branch"
+          ],
+          [
+            "function_histogram",
+            "loop"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "histogram": {
+          "name": "histogram",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add"
+        ],
+        "associative_ops": [
+          "Add"
+        ],
+        "binary_operations": [
+          "Add"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          0,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "If",
+          "UnaryOp",
+          "Not",
+          "Name",
+          "Load",
+          "Return",
+          "Dict",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "If",
+          "UnaryOp",
+          "Not",
+          "Name",
+          "Load",
+          "Return",
+          "Dict",
+          "Assign",
+          "Name",
+          "Store",
+          "Dict",
+          "For",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Assign",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Store",
+          "BinOp",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Name",
+          "Load",
+          "Constant",
+          "Add",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "DictComp",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "comprehension",
+          "Tuple",
+          "Name",
+          "Store",
+          "Name",
+          "Store",
+          "Store",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Name",
+          "Load",
+          "Return",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 8,
+        "ast_hash": "a8bf0f077b07f910527cbb50df760a39",
+        "alpha_renamed_hash": "a8bf0f077b07f910527cbb50df760a39"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Add"
+        ],
+        "precedence_levels": {
+          "Add": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "Assign",
+          "If",
+          "Return",
+          "Assign",
+          "For",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "Assign_3",
+          "If_4",
+          "Return_5",
+          "Assign_6",
+          "For_7",
+          "Assign_8",
+          "Assign_9",
+          "Assign_10",
+          "Return_11"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "If",
+          "For"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "not p0",
+            "return_type": "expression"
+          },
+          {
+            "condition": "not v0",
+            "return_type": "expression"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "not p0",
+          "not v0"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

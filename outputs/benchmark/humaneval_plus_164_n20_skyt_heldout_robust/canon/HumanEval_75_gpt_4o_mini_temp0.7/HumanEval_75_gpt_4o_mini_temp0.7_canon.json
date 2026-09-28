@@ -1,0 +1,788 @@
+{
+  "contract_id": "HumanEval_75_gpt_4o_mini_temp0.7",
+  "canonical_code": "def is_multiply_prime(a):\n    def is_prime(n):\n        if n <= 1:\n            return False\n        for i in range(2, int(n**0.5) + 1):\n            if n % i == 0:\n                return False\n        return True\n\n    primes = [i for i in range(2, 100) if is_prime(i)]\n    \n    for i in range(len(primes)):\n        for j in range(i, len(primes)):\n            for k in range(j, len(primes)):\n                if primes[i] * primes[j] * primes[k] == a:\n                    return True\n    return False\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 3,
+      "for_loops": 4,
+      "while_loops": 0,
+      "function_calls": [
+        "range",
+        "int",
+        "range",
+        "is_prime",
+        "range",
+        "len",
+        "range",
+        "len",
+        "range",
+        "len"
+      ],
+      "nested_depth": 4,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_1",
+        "if_at_depth_3"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v1": []
+      },
+      "assignments": {
+        "v1": "ListComp(elt=Name(id='v0', ctx=Load()), generators=[comprehension(target=Name(id='v0', ctx=Store()), iter=Call(func=Name(id='range', ctx=Load()), args=[Constant(value=2), Constant(value=100)]), ifs=[Call(func=Name(id='is_prime', ctx=Load()), args=[Name(id='v0', ctx=Load())])], is_async=0)])"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_is_multiply_prime"
+        ],
+        [
+          "function_is_multiply_prime",
+          "function_is_prime"
+        ],
+        [
+          "function_is_multiply_prime",
+          "function_is_prime",
+          "branch"
+        ],
+        [
+          "function_is_multiply_prime",
+          "function_is_prime",
+          "loop"
+        ],
+        [
+          "function_is_multiply_prime",
+          "function_is_prime",
+          "loop",
+          "branch"
+        ],
+        [
+          "function_is_multiply_prime",
+          "loop"
+        ],
+        [
+          "function_is_multiply_prime",
+          "loop",
+          "loop"
+        ],
+        [
+          "function_is_multiply_prime",
+          "loop",
+          "loop",
+          "loop"
+        ],
+        [
+          "function_is_multiply_prime",
+          "loop",
+          "loop",
+          "loop",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "is_multiply_prime": {
+        "name": "is_multiply_prime",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      },
+      "is_prime": {
+        "name": "is_prime",
+        "args": [
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 3,
+      "recursive_calls": 1,
+      "estimated_complexity": "O(2^n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add",
+        "Mult",
+        "Mult"
+      ],
+      "associative_ops": [
+        "Add",
+        "Mult",
+        "Mult"
+      ],
+      "binary_operations": [
+        "Add",
+        "Pow",
+        "Mod",
+        "Mult",
+        "Mult"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": true,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        1,
+        false,
+        2,
+        0.5,
+        1,
+        0,
+        false,
+        true,
+        2,
+        100,
+        true,
+        false
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "LtE",
+        "Eq",
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "LtE",
+        "Constant",
+        "Return",
+        "Constant",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Pow",
+        "Constant",
+        "Add",
+        "Constant",
+        "If",
+        "Compare",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mod",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Return",
+        "Constant",
+        "Return",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "ListComp",
+        "Name",
+        "Load",
+        "comprehension",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "Constant",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "BinOp",
+        "BinOp",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Mult",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Mult",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Eq",
+        "Name",
+        "Load",
+        "Return",
+        "Constant",
+        "Return",
+        "Constant"
+      ],
+      "ast_depth": 11,
+      "ast_hash": "e7d176a1686431ccdc3e9633dfdeeef7",
+      "alpha_renamed_hash": "e7d176a1686431ccdc3e9633dfdeeef7"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Add",
+        "Pow",
+        "Mod",
+        "Mult",
+        "Mult"
+      ],
+      "precedence_levels": {
+        "Add": 3,
+        "Pow": 6,
+        "Mod": 4,
+        "Mult": 4
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "FunctionDef",
+        "If",
+        "Return",
+        "For",
+        "If",
+        "Return",
+        "Return",
+        "Assign",
+        "For",
+        "For",
+        "For",
+        "If",
+        "Return",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "FunctionDef_1",
+        "If_2",
+        "Return_3",
+        "For_4",
+        "If_5",
+        "Return_6",
+        "Return_7",
+        "Assign_8",
+        "For_9",
+        "For_10",
+        "For_11",
+        "If_12",
+        "Return_13",
+        "Return_14"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "FunctionDef",
+        "If",
+        "For",
+        "If",
+        "For",
+        "For",
+        "For",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "p1 <= 1",
+          "return_type": "constant"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "p1 <= 1"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_75_gpt_4o_mini_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/75",
+    "prompt": "\ndef is_multiply_prime(a):\n    \"\"\"Write a function that returns true if the given number is the multiplication of 3 prime numbers\n    and false otherwise.\n    Knowing that (a) is less then 100. \n    Example:\n    is_multiply_prime(30) == True\n    30 = 2 * 3 * 5\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "is_multiply_prime"
+    },
+    "anchor_signature": "53139f52e3d3dd867399e953550238a7aedc6e25a4e6991b3a216a6476fcbd55",
+    "canonical_code": "def is_multiply_prime(a):\n    def is_prime(n):\n        if n <= 1:\n            return False\n        for i in range(2, int(n**0.5) + 1):\n            if n % i == 0:\n                return False\n        return True\n\n    primes = [i for i in range(2, 100) if is_prime(i)]\n    \n    for i in range(len(primes)):\n        for j in range(i, len(primes)):\n            for k in range(j, len(primes)):\n                if primes[i] * primes[j] * primes[k] == a:\n                    return True\n    return False\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 3,
+        "for_loops": 4,
+        "while_loops": 0,
+        "function_calls": [
+          "range",
+          "int",
+          "range",
+          "is_prime",
+          "range",
+          "len",
+          "range",
+          "len",
+          "range",
+          "len"
+        ],
+        "nested_depth": 4,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_1",
+          "if_at_depth_3"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v1": []
+        },
+        "assignments": {
+          "v1": "ListComp(elt=Name(id='v0', ctx=Load()), generators=[comprehension(target=Name(id='v0', ctx=Store()), iter=Call(func=Name(id='range', ctx=Load()), args=[Constant(value=2), Constant(value=100)]), ifs=[Call(func=Name(id='is_prime', ctx=Load()), args=[Name(id='v0', ctx=Load())])], is_async=0)])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_is_multiply_prime"
+          ],
+          [
+            "function_is_multiply_prime",
+            "function_is_prime"
+          ],
+          [
+            "function_is_multiply_prime",
+            "function_is_prime",
+            "branch"
+          ],
+          [
+            "function_is_multiply_prime",
+            "function_is_prime",
+            "loop"
+          ],
+          [
+            "function_is_multiply_prime",
+            "function_is_prime",
+            "loop",
+            "branch"
+          ],
+          [
+            "function_is_multiply_prime",
+            "loop"
+          ],
+          [
+            "function_is_multiply_prime",
+            "loop",
+            "loop"
+          ],
+          [
+            "function_is_multiply_prime",
+            "loop",
+            "loop",
+            "loop"
+          ],
+          [
+            "function_is_multiply_prime",
+            "loop",
+            "loop",
+            "loop",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "is_multiply_prime": {
+          "name": "is_multiply_prime",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        },
+        "is_prime": {
+          "name": "is_prime",
+          "args": [
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 3,
+        "recursive_calls": 1,
+        "estimated_complexity": "O(2^n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add",
+          "Mult",
+          "Mult"
+        ],
+        "associative_ops": [
+          "Add",
+          "Mult",
+          "Mult"
+        ],
+        "binary_operations": [
+          "Add",
+          "Pow",
+          "Mod",
+          "Mult",
+          "Mult"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": true,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          1,
+          false,
+          2,
+          0.5,
+          1,
+          0,
+          false,
+          true,
+          2,
+          100,
+          true,
+          false
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "LtE",
+          "Eq",
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "LtE",
+          "Constant",
+          "Return",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Pow",
+          "Constant",
+          "Add",
+          "Constant",
+          "If",
+          "Compare",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mod",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Return",
+          "Constant",
+          "Return",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "ListComp",
+          "Name",
+          "Load",
+          "comprehension",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "Constant",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "BinOp",
+          "BinOp",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Mult",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Mult",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Eq",
+          "Name",
+          "Load",
+          "Return",
+          "Constant",
+          "Return",
+          "Constant"
+        ],
+        "ast_depth": 11,
+        "ast_hash": "e7d176a1686431ccdc3e9633dfdeeef7",
+        "alpha_renamed_hash": "e7d176a1686431ccdc3e9633dfdeeef7"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Add",
+          "Pow",
+          "Mod",
+          "Mult",
+          "Mult"
+        ],
+        "precedence_levels": {
+          "Add": 3,
+          "Pow": 6,
+          "Mod": 4,
+          "Mult": 4
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "FunctionDef",
+          "If",
+          "Return",
+          "For",
+          "If",
+          "Return",
+          "Return",
+          "Assign",
+          "For",
+          "For",
+          "For",
+          "If",
+          "Return",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "FunctionDef_1",
+          "If_2",
+          "Return_3",
+          "For_4",
+          "If_5",
+          "Return_6",
+          "Return_7",
+          "Assign_8",
+          "For_9",
+          "For_10",
+          "For_11",
+          "If_12",
+          "Return_13",
+          "Return_14"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "FunctionDef",
+          "If",
+          "For",
+          "If",
+          "For",
+          "For",
+          "For",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "p1 <= 1",
+            "return_type": "constant"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "p1 <= 1"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

@@ -1,0 +1,67 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "02d2a03d47e7df77d5632976350d010d0267c66229d16a72657056ecdfd89362|a96b7035921c4c1a6d7adbfbb6aed9863eea43243359600589b3aaadc01f9023": {
+      "stitched_code": "def is_prime(num):\n    if num <= 1:\n        return False\n    for i in range(2, int(num ** 0.5) + 1):\n        if num % i == 0:\n            return False\n    return True\n\n\ndef x_or_y(n, x, y):\n\n    def is_prime(num):\n        if num <= 1:\n            return False\n        for i in range(2, int(num ** 0.5) + 1):\n            if num % i == 0:\n                return False\n        return True\n    return x if is_prime(n) else y\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "a96b7035921c4c1a6d7adbfbb6aed9863eea43243359600589b3aaadc01f9023|a96b7035921c4c1a6d7adbfbb6aed9863eea43243359600589b3aaadc01f9023": {
+      "stitched_code": "def x_or_y(n, x, y):\n    def is_prime(num):\n        if num <= 1:\n            return False\n        for i in range(2, int(num**0.5) + 1):\n            if num % i == 0:\n                return False\n        return True\n\n    return x if is_prime(n) else y\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "5599135da8917741efa74dc308fcaf48f142f05da2b976b299708ca473e2bd36|a96b7035921c4c1a6d7adbfbb6aed9863eea43243359600589b3aaadc01f9023": {
+      "stitched_code": "def x_or_y(n, x, y):\n    def is_prime(num):\n        if num <= 1:\n            return False\n        for i in range(2, int(num**0.5) + 1):\n            if num % i == 0:\n                return False\n        return True\n    \n    return x if is_prime(n) else y\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

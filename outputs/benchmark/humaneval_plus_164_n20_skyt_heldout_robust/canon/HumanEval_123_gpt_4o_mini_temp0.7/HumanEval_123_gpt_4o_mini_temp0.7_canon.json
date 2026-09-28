@@ -1,0 +1,516 @@
+{
+  "contract_id": "HumanEval_123_gpt_4o_mini_temp0.7",
+  "canonical_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    \n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 1,
+      "for_loops": 0,
+      "while_loops": 1,
+      "function_calls": [
+        "sorted"
+      ],
+      "nested_depth": 2,
+      "branch_patterns": [
+        "if_at_depth_1"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [],
+        "p0": [
+          "p0"
+        ],
+        "v1": []
+      },
+      "assignments": {
+        "v0": "List(ctx=Load())",
+        "p0": "BinOp(left=BinOp(left=Constant(value=3), op=Mult(), right=Name(id='p0', ctx=Load())), op=Add(), right=Constant(value=1))",
+        "v1": "ListComp(elt=Name(id='v2', ctx=Load()), generators=[comprehension(target=Name(id='v2', ctx=Store()), iter=Name(id='v0', ctx=Load()), ifs=[Compare(left=BinOp(left=Name(id='v2', ctx=Load()), op=Mod(), right=Constant(value=2)), ops=[NotEq()], comparators=[Constant(value=0)])], is_async=0)])"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_get_odd_collatz"
+        ],
+        [
+          "function_get_odd_collatz",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "get_odd_collatz": {
+        "name": "get_odd_collatz",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add",
+        "Mult"
+      ],
+      "associative_ops": [
+        "Add",
+        "Mult"
+      ],
+      "binary_operations": [
+        "Mod",
+        "Add",
+        "Mult",
+        "Mod"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        1,
+        2,
+        0,
+        2,
+        3,
+        1,
+        1,
+        2,
+        0
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "NotEq",
+        "Eq",
+        "NotEq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "List",
+        "Load",
+        "While",
+        "Compare",
+        "Name",
+        "Load",
+        "NotEq",
+        "Constant",
+        "Expr",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mod",
+        "Constant",
+        "Eq",
+        "Constant",
+        "AugAssign",
+        "Name",
+        "Store",
+        "FloorDiv",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "BinOp",
+        "BinOp",
+        "Constant",
+        "Mult",
+        "Name",
+        "Load",
+        "Add",
+        "Constant",
+        "Expr",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "ListComp",
+        "Name",
+        "Load",
+        "comprehension",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Compare",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mod",
+        "Constant",
+        "NotEq",
+        "Constant",
+        "Return",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 8,
+      "ast_hash": "80e83618edac10fd71a6bee39710fcf2",
+      "alpha_renamed_hash": "80e83618edac10fd71a6bee39710fcf2"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Mod",
+        "Add",
+        "Mult",
+        "Mod"
+      ],
+      "precedence_levels": {
+        "Mod": 4,
+        "Add": 3,
+        "Mult": 4
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "While",
+        "Expr",
+        "If",
+        "AugAssign",
+        "Assign",
+        "Expr",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "While_2",
+        "Expr_3",
+        "If_4",
+        "AugAssign_5",
+        "Assign_6",
+        "Expr_7",
+        "Assign_8",
+        "Return_9"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "While",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_123_gpt_4o_mini_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/123",
+    "prompt": "\ndef get_odd_collatz(n):\n    \"\"\"\n    Given a positive integer n, return a sorted list that has the odd numbers in collatz sequence.\n\n    The Collatz conjecture is a conjecture in mathematics that concerns a sequence defined\n    as follows: start with any positive integer n. Then each term is obtained from the \n    previous term as follows: if the previous term is even, the next term is one half of \n    the previous term. If the previous term is odd, the next term is 3 times the previous\n    term plus 1. The conjecture is that no matter what value of n, the sequence will always reach 1.\n\n    Note: \n        1. Collatz(1) is [1].\n        2. returned list sorted in increasing order.\n\n    For example:\n    get_odd_collatz(5) returns [1, 5] # The collatz sequence for 5 is [5, 16, 8, 4, 2, 1], so the odd numbers are only 1, and 5.\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "get_odd_collatz"
+    },
+    "anchor_signature": "eb49a77b8697f6b82bd0d93baa79de16865d66f5dd7f7032fa226a283119b04e",
+    "canonical_code": "def get_odd_collatz(n):\n    collatz_sequence = []\n    while n != 1:\n        collatz_sequence.append(n)\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3 * n + 1\n    collatz_sequence.append(1)\n    \n    odd_numbers = [num for num in collatz_sequence if num % 2 != 0]\n    return sorted(odd_numbers)\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 1,
+        "for_loops": 0,
+        "while_loops": 1,
+        "function_calls": [
+          "sorted"
+        ],
+        "nested_depth": 2,
+        "branch_patterns": [
+          "if_at_depth_1"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [],
+          "p0": [
+            "p0"
+          ],
+          "v1": []
+        },
+        "assignments": {
+          "v0": "List(ctx=Load())",
+          "p0": "BinOp(left=BinOp(left=Constant(value=3), op=Mult(), right=Name(id='p0', ctx=Load())), op=Add(), right=Constant(value=1))",
+          "v1": "ListComp(elt=Name(id='v2', ctx=Load()), generators=[comprehension(target=Name(id='v2', ctx=Store()), iter=Name(id='v0', ctx=Load()), ifs=[Compare(left=BinOp(left=Name(id='v2', ctx=Load()), op=Mod(), right=Constant(value=2)), ops=[NotEq()], comparators=[Constant(value=0)])], is_async=0)])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_get_odd_collatz"
+          ],
+          [
+            "function_get_odd_collatz",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "get_odd_collatz": {
+          "name": "get_odd_collatz",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add",
+          "Mult"
+        ],
+        "associative_ops": [
+          "Add",
+          "Mult"
+        ],
+        "binary_operations": [
+          "Mod",
+          "Add",
+          "Mult",
+          "Mod"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          1,
+          2,
+          0,
+          2,
+          3,
+          1,
+          1,
+          2,
+          0
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "NotEq",
+          "Eq",
+          "NotEq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "List",
+          "Load",
+          "While",
+          "Compare",
+          "Name",
+          "Load",
+          "NotEq",
+          "Constant",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mod",
+          "Constant",
+          "Eq",
+          "Constant",
+          "AugAssign",
+          "Name",
+          "Store",
+          "FloorDiv",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "BinOp",
+          "BinOp",
+          "Constant",
+          "Mult",
+          "Name",
+          "Load",
+          "Add",
+          "Constant",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "ListComp",
+          "Name",
+          "Load",
+          "comprehension",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Compare",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mod",
+          "Constant",
+          "NotEq",
+          "Constant",
+          "Return",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 8,
+        "ast_hash": "80e83618edac10fd71a6bee39710fcf2",
+        "alpha_renamed_hash": "80e83618edac10fd71a6bee39710fcf2"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Mod",
+          "Add",
+          "Mult",
+          "Mod"
+        ],
+        "precedence_levels": {
+          "Mod": 4,
+          "Add": 3,
+          "Mult": 4
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "While",
+          "Expr",
+          "If",
+          "AugAssign",
+          "Assign",
+          "Expr",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "While_2",
+          "Expr_3",
+          "If_4",
+          "AugAssign_5",
+          "Assign_6",
+          "Expr_7",
+          "Assign_8",
+          "Return_9"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "While",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

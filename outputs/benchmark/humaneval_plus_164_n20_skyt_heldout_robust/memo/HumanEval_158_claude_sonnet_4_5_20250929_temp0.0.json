@@ -1,0 +1,69 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "7f7cca602da7418dfdbd16d153d1ecaa03a162619786d38ff0c8c9931fd4d4c7|ce05079abb1b35ca5b36ba0b1fbd9cfcf047e457090f94a42816b990cc19a9df": {
+      "stitched_code": "def find_max(words):\n    if not words:\n        return ''\n    max_unique = -1\n    result = ''\n    for word in words:\n        unique_count = len(set(word))\n        if (unique_count > max_unique or unique_count == max_unique and \n            word < result):\n            max_unique = unique_count\n            result = word\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "ce05079abb1b35ca5b36ba0b1fbd9cfcf047e457090f94a42816b990cc19a9df|ce05079abb1b35ca5b36ba0b1fbd9cfcf047e457090f94a42816b990cc19a9df": {
+      "stitched_code": "def find_max(words):\n    if not words:\n        return \"\"\n    \n    max_unique = -1\n    result = \"\"\n    \n    for word in words:\n        unique_count = len(set(word))\n        if unique_count > max_unique or (unique_count == max_unique and word < result):\n            max_unique = unique_count\n            result = word\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ce05079abb1b35ca5b36ba0b1fbd9cfcf047e457090f94a42816b990cc19a9df|7f7cca602da7418dfdbd16d153d1ecaa03a162619786d38ff0c8c9931fd4d4c7": {
+      "stitched_code": "def find_max(words):\n    if not words:\n        return ''\n    max_word = max(words, key=lambda word: (len(set(word)), -ord(word[0]) if\n        word else 0, [(-ord(c)) for c in word]))\n    max_unique = max(len(set(word)) for word in words)\n    candidates = [word for word in words if len(set(word)) == max_unique]\n    return min(candidates)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

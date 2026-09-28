@@ -1,0 +1,25 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "d32782b9b90aa69e6a981e7af347648eba234a70d4ea181d33e21f3e528b9db4|d32782b9b90aa69e6a981e7af347648eba234a70d4ea181d33e21f3e528b9db4": {
+      "stitched_code": "def factorize(n: int) -> List[int]:\n    \"\"\" Return list of prime factors of given integer in the order from smallest to largest.\n    Each of the factors should be listed number of times corresponding to how many times it appeares in factorization.\n    Input number should be equal to the product of all factors\n    >>> factorize(8)\n    [2, 2, 2]\n    >>> factorize(25)\n    [5, 5]\n    >>> factorize(70)\n    [2, 5, 7]\n    \"\"\"\n    factors = []\n    \n    # Check for factor 2\n    while n % 2 == 0:\n        factors.append(2)\n        n = n // 2\n    \n    # Check for odd factors from 3 onwards\n    i = 3\n    while i * i <= n:\n        while n % i == 0:\n            factors.append(i)\n            n = n // i\n        i += 2\n    \n    # If n is still greater than 1, then it's a prime factor\n    if n > 1:\n        factors.append(n)\n    \n    return factors\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

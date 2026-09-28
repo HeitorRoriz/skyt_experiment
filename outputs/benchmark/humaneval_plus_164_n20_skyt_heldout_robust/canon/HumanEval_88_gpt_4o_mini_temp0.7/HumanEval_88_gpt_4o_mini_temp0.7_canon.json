@@ -1,0 +1,424 @@
+{
+  "contract_id": "HumanEval_88_gpt_4o_mini_temp0.7",
+  "canonical_code": "def sort_array(array):\n    if not array:\n        return []\n    \n    if (array[0] + array[-1]) % 2 == 0:\n        return sorted(array, reverse=True)\n    else:\n        return sorted(array)\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 2,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "sorted",
+        "sorted"
+      ],
+      "nested_depth": 1,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_0"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {},
+      "assignments": {}
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_sort_array"
+        ],
+        [
+          "function_sort_array",
+          "branch"
+        ],
+        [
+          "function_sort_array",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "sort_array": {
+        "name": "sort_array",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add"
+      ],
+      "associative_ops": [
+        "Add"
+      ],
+      "binary_operations": [
+        "Mod",
+        "Add"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        0,
+        1,
+        2,
+        0,
+        true
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "If",
+        "UnaryOp",
+        "Not",
+        "Name",
+        "Load",
+        "Return",
+        "List",
+        "Load",
+        "If",
+        "Compare",
+        "BinOp",
+        "BinOp",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "Add",
+        "Subscript",
+        "Name",
+        "Load",
+        "UnaryOp",
+        "USub",
+        "Constant",
+        "Load",
+        "Mod",
+        "Constant",
+        "Eq",
+        "Constant",
+        "Return",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "keyword",
+        "Constant",
+        "Return",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 8,
+      "ast_hash": "270426a177d10982157666cc6dd9e8b3",
+      "alpha_renamed_hash": "270426a177d10982157666cc6dd9e8b3"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Mod",
+        "Add"
+      ],
+      "precedence_levels": {
+        "Mod": 4,
+        "Add": 3
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Return",
+        "If",
+        "Return",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Return_2",
+        "If_3",
+        "Return_4",
+        "Return_5"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "not p0",
+          "return_type": "expression"
+        },
+        {
+          "condition": "(p0[0] + p0[-1]) % 2 == 0",
+          "return_type": "expression"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "not p0",
+        "(p0[0] + p0[-1]) % 2 == 0"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_88_gpt_4o_mini_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/88",
+    "prompt": "\ndef sort_array(array):\n    \"\"\"\n    Given an array of non-negative integers, return a copy of the given array after sorting,\n    you will sort the given array in ascending order if the sum( first index value, last index value) is odd,\n    or sort it in descending order if the sum( first index value, last index value) is even.\n\n    Note:\n    * don't change the given array.\n\n    Examples:\n    * sort_array([]) => []\n    * sort_array([5]) => [5]\n    * sort_array([2, 4, 3, 0, 1, 5]) => [0, 1, 2, 3, 4, 5]\n    * sort_array([2, 4, 3, 0, 1, 5, 6]) => [6, 5, 4, 3, 2, 1, 0]\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "sort_array"
+    },
+    "anchor_signature": "1c1aa59bb28e3232887915158c6c347965ad0ad3d54470309cf6cf5c7085f6a2",
+    "canonical_code": "def sort_array(array):\n    if not array:\n        return []\n    \n    if (array[0] + array[-1]) % 2 == 0:\n        return sorted(array, reverse=True)\n    else:\n        return sorted(array)\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 2,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "sorted",
+          "sorted"
+        ],
+        "nested_depth": 1,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_0"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {},
+        "assignments": {}
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_sort_array"
+          ],
+          [
+            "function_sort_array",
+            "branch"
+          ],
+          [
+            "function_sort_array",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "sort_array": {
+          "name": "sort_array",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add"
+        ],
+        "associative_ops": [
+          "Add"
+        ],
+        "binary_operations": [
+          "Mod",
+          "Add"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          0,
+          1,
+          2,
+          0,
+          true
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "If",
+          "UnaryOp",
+          "Not",
+          "Name",
+          "Load",
+          "Return",
+          "List",
+          "Load",
+          "If",
+          "Compare",
+          "BinOp",
+          "BinOp",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "Add",
+          "Subscript",
+          "Name",
+          "Load",
+          "UnaryOp",
+          "USub",
+          "Constant",
+          "Load",
+          "Mod",
+          "Constant",
+          "Eq",
+          "Constant",
+          "Return",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "keyword",
+          "Constant",
+          "Return",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 8,
+        "ast_hash": "270426a177d10982157666cc6dd9e8b3",
+        "alpha_renamed_hash": "270426a177d10982157666cc6dd9e8b3"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Mod",
+          "Add"
+        ],
+        "precedence_levels": {
+          "Mod": 4,
+          "Add": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "If",
+          "Return",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "If_3",
+          "Return_4",
+          "Return_5"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "not p0",
+            "return_type": "expression"
+          },
+          {
+            "condition": "(p0[0] + p0[-1]) % 2 == 0",
+            "return_type": "expression"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "not p0",
+          "(p0[0] + p0[-1]) % 2 == 0"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

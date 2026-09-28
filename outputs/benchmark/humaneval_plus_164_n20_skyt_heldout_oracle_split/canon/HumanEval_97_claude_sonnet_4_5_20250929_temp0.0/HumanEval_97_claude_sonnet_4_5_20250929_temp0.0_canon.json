@@ -1,0 +1,356 @@
+{
+  "contract_id": "HumanEval_97_claude_sonnet_4_5_20250929_temp0.0",
+  "canonical_code": "def multiply(a, b):\n    \"\"\"Complete the function that takes two integers and returns \n    the product of their unit digits.\n    Assume the input is always valid.\n    Examples:\n    multiply(148, 412) should return 16.\n    multiply(19, 28) should return 72.\n    multiply(2020, 1851) should return 0.\n    multiply(14,-15) should return 20.\n    \"\"\"\n    unit_a = abs(a) % 10\n    unit_b = abs(b) % 10\n    return unit_a * unit_b\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 0,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "abs",
+        "abs"
+      ],
+      "nested_depth": 0,
+      "branch_patterns": []
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [
+          "p0"
+        ],
+        "v1": [
+          "p1"
+        ]
+      },
+      "assignments": {
+        "v0": "BinOp(left=Call(func=Name(id='abs', ctx=Load()), args=[Name(id='p0', ctx=Load())]), op=Mod(), right=Constant(value=10))",
+        "v1": "BinOp(left=Call(func=Name(id='abs', ctx=Load()), args=[Name(id='p1', ctx=Load())]), op=Mod(), right=Constant(value=10))"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_multiply"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "multiply": {
+        "name": "multiply",
+        "args": [
+          "p0",
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Mult"
+      ],
+      "associative_ops": [
+        "Mult"
+      ],
+      "binary_operations": [
+        "Mod",
+        "Mod",
+        "Mult"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        10,
+        10
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Mod",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Mod",
+        "Constant",
+        "Return",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mult",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 6,
+      "ast_hash": "4438b9cb2afd3f31d4e3f9ad95a1fae1",
+      "alpha_renamed_hash": "4438b9cb2afd3f31d4e3f9ad95a1fae1"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Mod",
+        "Mod",
+        "Mult"
+      ],
+      "precedence_levels": {
+        "Mod": 4,
+        "Mult": 4
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "Assign_2",
+        "Return_3"
+      ],
+      "control_flow_order": [
+        "FunctionDef"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_97_claude_sonnet_4_5_20250929_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/97",
+    "prompt": "\ndef multiply(a, b):\n    \"\"\"Complete the function that takes two integers and returns \n    the product of their unit digits.\n    Assume the input is always valid.\n    Examples:\n    multiply(148, 412) should return 16.\n    multiply(19, 28) should return 72.\n    multiply(2020, 1851) should return 0.\n    multiply(14,-15) should return 20.\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "multiply"
+    },
+    "anchor_signature": "d472806590a67a6c870bdf3c0d8b120686dae02a95fd12c30fdd685dc51428e6",
+    "canonical_code": "def multiply(a, b):\n    \"\"\"Complete the function that takes two integers and returns \n    the product of their unit digits.\n    Assume the input is always valid.\n    Examples:\n    multiply(148, 412) should return 16.\n    multiply(19, 28) should return 72.\n    multiply(2020, 1851) should return 0.\n    multiply(14,-15) should return 20.\n    \"\"\"\n    unit_a = abs(a) % 10\n    unit_b = abs(b) % 10\n    return unit_a * unit_b\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 0,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "abs",
+          "abs"
+        ],
+        "nested_depth": 0,
+        "branch_patterns": []
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [
+            "p0"
+          ],
+          "v1": [
+            "p1"
+          ]
+        },
+        "assignments": {
+          "v0": "BinOp(left=Call(func=Name(id='abs', ctx=Load()), args=[Name(id='p0', ctx=Load())]), op=Mod(), right=Constant(value=10))",
+          "v1": "BinOp(left=Call(func=Name(id='abs', ctx=Load()), args=[Name(id='p1', ctx=Load())]), op=Mod(), right=Constant(value=10))"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_multiply"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "multiply": {
+          "name": "multiply",
+          "args": [
+            "p0",
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Mult"
+        ],
+        "associative_ops": [
+          "Mult"
+        ],
+        "binary_operations": [
+          "Mod",
+          "Mod",
+          "Mult"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          10,
+          10
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Mod",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Mod",
+          "Constant",
+          "Return",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mult",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 6,
+        "ast_hash": "4438b9cb2afd3f31d4e3f9ad95a1fae1",
+        "alpha_renamed_hash": "4438b9cb2afd3f31d4e3f9ad95a1fae1"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Mod",
+          "Mod",
+          "Mult"
+        ],
+        "precedence_levels": {
+          "Mod": 4,
+          "Mult": 4
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "Assign_2",
+          "Return_3"
+        ],
+        "control_flow_order": [
+          "FunctionDef"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

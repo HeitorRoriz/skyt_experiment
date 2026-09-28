@@ -1,0 +1,25 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "7c5f5870808d88eb18a1f6da939557f5b25ea892f75b89ca1bf65c6ad72a82c5|7c5f5870808d88eb18a1f6da939557f5b25ea892f75b89ca1bf65c6ad72a82c5": {
+      "stitched_code": "def generate_integers(a, b):\n    \"\"\"\n    Given two positive integers a and b, return the even digits between a\n    and b, in ascending order.\n\n    For example:\n    generate_integers(2, 8) => [2, 4, 6, 8]\n    generate_integers(8, 2) => [2, 4, 6, 8]\n    generate_integers(10, 14) => []\n    \"\"\"\n    lower = min(a, b)\n    upper = max(a, b)\n    \n    result = []\n    for digit in range(lower, upper + 1):\n        if digit < 10 and digit % 2 == 0:\n            result.append(digit)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

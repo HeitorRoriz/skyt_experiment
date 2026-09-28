@@ -1,0 +1,25 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "18767c49084c88a74bb06d6f086131d009428b1c3898453dd1cfcbe9e661b1a0|18767c49084c88a74bb06d6f086131d009428b1c3898453dd1cfcbe9e661b1a0": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift\n    shift = shift % n  # Handle case where shift equals n\n    if shift == 0:\n        return s\n    \n    return s[-shift:] + s[:-shift]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

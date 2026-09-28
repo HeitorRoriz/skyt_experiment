@@ -1,0 +1,802 @@
+{
+  "contract_id": "HumanEval_46_gpt_4o_mini_temp0.7",
+  "canonical_code": "def fib4(n: int):\n    if n == 0:\n        return 0\n    elif n == 1:\n        return 0\n    elif n == 2:\n        return 2\n    elif n == 3:\n        return 0\n\n    fib = [0] * (n + 1)\n    fib[0], fib[1], fib[2], fib[3] = 0, 0, 2, 0\n    \n    for i in range(4, n + 1):\n        fib[i] = fib[i - 1] + fib[i - 2] + fib[i - 3] + fib[i - 4]\n\n    return fib[n]\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 4,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [
+        "range"
+      ],
+      "nested_depth": 4,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_1",
+        "if_at_depth_2",
+        "if_at_depth_3"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [
+          "p0"
+        ]
+      },
+      "assignments": {
+        "v0": "BinOp(left=List(elts=[Constant(value=0)], ctx=Load()), op=Mult(), right=BinOp(left=Name(id='p0', ctx=Load()), op=Add(), right=Constant(value=1)))"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_fib4"
+        ],
+        [
+          "function_fib4",
+          "branch"
+        ],
+        [
+          "function_fib4",
+          "branch",
+          "branch"
+        ],
+        [
+          "function_fib4",
+          "branch",
+          "branch",
+          "branch"
+        ],
+        [
+          "function_fib4",
+          "branch",
+          "branch",
+          "branch",
+          "branch"
+        ],
+        [
+          "function_fib4",
+          "loop"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "fib4": {
+        "name": "fib4",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Mult",
+        "Add",
+        "Add",
+        "Add",
+        "Add",
+        "Add"
+      ],
+      "associative_ops": [
+        "Mult",
+        "Add",
+        "Add",
+        "Add",
+        "Add",
+        "Add"
+      ],
+      "binary_operations": [
+        "Mult",
+        "Add",
+        "Add",
+        "Add",
+        "Add",
+        "Add",
+        "Sub",
+        "Sub",
+        "Sub",
+        "Sub"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        0,
+        0,
+        1,
+        0,
+        2,
+        2,
+        3,
+        0,
+        0,
+        1,
+        0,
+        1,
+        2,
+        3,
+        0,
+        0,
+        2,
+        0,
+        4,
+        1,
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Eq",
+        "Eq",
+        "Eq",
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Return",
+        "Constant",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Return",
+        "Constant",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Return",
+        "Constant",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Return",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "BinOp",
+        "List",
+        "Constant",
+        "Load",
+        "Mult",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Constant",
+        "Assign",
+        "Tuple",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Store",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Store",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Store",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Store",
+        "Store",
+        "Tuple",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Load",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Constant",
+        "Assign",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Store",
+        "BinOp",
+        "BinOp",
+        "BinOp",
+        "Subscript",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Sub",
+        "Constant",
+        "Load",
+        "Add",
+        "Subscript",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Sub",
+        "Constant",
+        "Load",
+        "Add",
+        "Subscript",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Sub",
+        "Constant",
+        "Load",
+        "Add",
+        "Subscript",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Sub",
+        "Constant",
+        "Load",
+        "Return",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load"
+      ],
+      "ast_depth": 10,
+      "ast_hash": "f4abaf818ae140d7e2f2dbf872481d7a",
+      "alpha_renamed_hash": "f4abaf818ae140d7e2f2dbf872481d7a"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Mult",
+        "Add",
+        "Add",
+        "Add",
+        "Add",
+        "Add",
+        "Sub",
+        "Sub",
+        "Sub",
+        "Sub"
+      ],
+      "precedence_levels": {
+        "Mult": 4,
+        "Add": 3,
+        "Sub": 3
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Return",
+        "If",
+        "Return",
+        "If",
+        "Return",
+        "If",
+        "Return",
+        "Assign",
+        "Assign",
+        "For",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Return_2",
+        "If_3",
+        "Return_4",
+        "If_5",
+        "Return_6",
+        "If_7",
+        "Return_8",
+        "Assign_9",
+        "Assign_10",
+        "For_11",
+        "Assign_12",
+        "Return_13"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If",
+        "If",
+        "If",
+        "If",
+        "For"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "p0 == 0",
+          "return_type": "constant"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "p0 == 0"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_46_gpt_4o_mini_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/46",
+    "prompt": "\n\ndef fib4(n: int):\n    \"\"\"The Fib4 number sequence is a sequence similar to the Fibbonacci sequnece that's defined as follows:\n    fib4(0) -> 0\n    fib4(1) -> 0\n    fib4(2) -> 2\n    fib4(3) -> 0\n    fib4(n) -> fib4(n-1) + fib4(n-2) + fib4(n-3) + fib4(n-4).\n    Please write a function to efficiently compute the n-th element of the fib4 number sequence.  Do not use recursion.\n    >>> fib4(5)\n    4\n    >>> fib4(6)\n    8\n    >>> fib4(7)\n    14\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "fib4"
+    },
+    "anchor_signature": "e48e07f036bda21dabc41cfbec0d2b09f98063178ad9a7c4ac86e5c2b9bfa01f",
+    "canonical_code": "def fib4(n: int):\n    if n == 0:\n        return 0\n    elif n == 1:\n        return 0\n    elif n == 2:\n        return 2\n    elif n == 3:\n        return 0\n\n    fib = [0] * (n + 1)\n    fib[0], fib[1], fib[2], fib[3] = 0, 0, 2, 0\n    \n    for i in range(4, n + 1):\n        fib[i] = fib[i - 1] + fib[i - 2] + fib[i - 3] + fib[i - 4]\n\n    return fib[n]\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 4,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "range"
+        ],
+        "nested_depth": 4,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_1",
+          "if_at_depth_2",
+          "if_at_depth_3"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [
+            "p0"
+          ]
+        },
+        "assignments": {
+          "v0": "BinOp(left=List(elts=[Constant(value=0)], ctx=Load()), op=Mult(), right=BinOp(left=Name(id='p0', ctx=Load()), op=Add(), right=Constant(value=1)))"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_fib4"
+          ],
+          [
+            "function_fib4",
+            "branch"
+          ],
+          [
+            "function_fib4",
+            "branch",
+            "branch"
+          ],
+          [
+            "function_fib4",
+            "branch",
+            "branch",
+            "branch"
+          ],
+          [
+            "function_fib4",
+            "branch",
+            "branch",
+            "branch",
+            "branch"
+          ],
+          [
+            "function_fib4",
+            "loop"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "fib4": {
+          "name": "fib4",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Mult",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add"
+        ],
+        "associative_ops": [
+          "Mult",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add"
+        ],
+        "binary_operations": [
+          "Mult",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Sub",
+          "Sub",
+          "Sub",
+          "Sub"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          0,
+          0,
+          1,
+          0,
+          2,
+          2,
+          3,
+          0,
+          0,
+          1,
+          0,
+          1,
+          2,
+          3,
+          0,
+          0,
+          2,
+          0,
+          4,
+          1,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Eq",
+          "Eq",
+          "Eq",
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Return",
+          "Constant",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Return",
+          "Constant",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Return",
+          "Constant",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Return",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "BinOp",
+          "List",
+          "Constant",
+          "Load",
+          "Mult",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Constant",
+          "Assign",
+          "Tuple",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Store",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Store",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Store",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Store",
+          "Store",
+          "Tuple",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Load",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Constant",
+          "Assign",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Store",
+          "BinOp",
+          "BinOp",
+          "BinOp",
+          "Subscript",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Sub",
+          "Constant",
+          "Load",
+          "Add",
+          "Subscript",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Sub",
+          "Constant",
+          "Load",
+          "Add",
+          "Subscript",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Sub",
+          "Constant",
+          "Load",
+          "Add",
+          "Subscript",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Sub",
+          "Constant",
+          "Load",
+          "Return",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load"
+        ],
+        "ast_depth": 10,
+        "ast_hash": "f4abaf818ae140d7e2f2dbf872481d7a",
+        "alpha_renamed_hash": "f4abaf818ae140d7e2f2dbf872481d7a"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Mult",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Sub",
+          "Sub",
+          "Sub",
+          "Sub"
+        ],
+        "precedence_levels": {
+          "Mult": 4,
+          "Add": 3,
+          "Sub": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "If",
+          "Return",
+          "If",
+          "Return",
+          "If",
+          "Return",
+          "Assign",
+          "Assign",
+          "For",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "If_3",
+          "Return_4",
+          "If_5",
+          "Return_6",
+          "If_7",
+          "Return_8",
+          "Assign_9",
+          "Assign_10",
+          "For_11",
+          "Assign_12",
+          "Return_13"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "If",
+          "If",
+          "If",
+          "For"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "p0 == 0",
+            "return_type": "constant"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "p0 == 0"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

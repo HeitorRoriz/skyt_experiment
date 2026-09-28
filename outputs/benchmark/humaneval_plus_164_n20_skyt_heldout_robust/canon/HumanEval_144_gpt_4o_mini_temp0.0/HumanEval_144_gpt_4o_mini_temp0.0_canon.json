@@ -1,0 +1,378 @@
+{
+  "contract_id": "HumanEval_144_gpt_4o_mini_temp0.0",
+  "canonical_code": "def simplify(x, n):\n    from fractions import Fraction\n    \n    frac_x = Fraction(x)\n    frac_n = Fraction(n)\n    \n    result = frac_x * frac_n\n    return result.denominator == 1\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 0,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "v1",
+        "v1"
+      ],
+      "nested_depth": 0,
+      "branch_patterns": []
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [
+          "p0"
+        ],
+        "v2": [
+          "p1"
+        ],
+        "v3": [
+          "v0",
+          "v2"
+        ]
+      },
+      "assignments": {
+        "v0": "Call(func=Name(id='v1', ctx=Load()), args=[Name(id='p0', ctx=Load())])",
+        "v2": "Call(func=Name(id='v1', ctx=Load()), args=[Name(id='p1', ctx=Load())])",
+        "v3": "BinOp(left=Name(id='v0', ctx=Load()), op=Mult(), right=Name(id='v2', ctx=Load()))"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_simplify"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "simplify": {
+        "name": "simplify",
+        "args": [
+          "p0",
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Mult"
+      ],
+      "associative_ops": [
+        "Mult"
+      ],
+      "binary_operations": [
+        "Mult"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "arg",
+        "ImportFrom",
+        "alias",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mult",
+        "Name",
+        "Load",
+        "Return",
+        "Compare",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Eq",
+        "Constant"
+      ],
+      "ast_depth": 6,
+      "ast_hash": "3077e9be0d9af5a186d1aa309f971c1f",
+      "alpha_renamed_hash": "a06f92ca2b5b00d861563f7e98c5cb2b"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Mult"
+      ],
+      "precedence_levels": {
+        "Mult": 4
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "ImportFrom",
+        "Assign",
+        "Assign",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "ImportFrom_1",
+        "Assign_2",
+        "Assign_3",
+        "Assign_4",
+        "Return_5"
+      ],
+      "control_flow_order": [
+        "FunctionDef"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_144_gpt_4o_mini_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/144",
+    "prompt": "\ndef simplify(x, n):\n    \"\"\"Your task is to implement a function that will simplify the expression\n    x * n. The function returns True if x * n evaluates to a whole number and False\n    otherwise. Both x and n, are string representation of a fraction, and have the following format,\n    <numerator>/<denominator> where both numerator and denominator are positive whole numbers.\n\n    You can assume that x, and n are valid fractions, and do not have zero as denominator.\n\n    simplify(\"1/5\", \"5/1\") = True\n    simplify(\"1/6\", \"2/1\") = False\n    simplify(\"7/10\", \"10/2\") = False\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "simplify"
+    },
+    "anchor_signature": "ca8595589273462cebf9d8e8fb2780ceece77dbdeed92daeeec25ba59a7e954f",
+    "canonical_code": "def simplify(x, n):\n    from fractions import Fraction\n    \n    frac_x = Fraction(x)\n    frac_n = Fraction(n)\n    \n    result = frac_x * frac_n\n    return result.denominator == 1\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 0,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "v1",
+          "v1"
+        ],
+        "nested_depth": 0,
+        "branch_patterns": []
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [
+            "p0"
+          ],
+          "v2": [
+            "p1"
+          ],
+          "v3": [
+            "v0",
+            "v2"
+          ]
+        },
+        "assignments": {
+          "v0": "Call(func=Name(id='v1', ctx=Load()), args=[Name(id='p0', ctx=Load())])",
+          "v2": "Call(func=Name(id='v1', ctx=Load()), args=[Name(id='p1', ctx=Load())])",
+          "v3": "BinOp(left=Name(id='v0', ctx=Load()), op=Mult(), right=Name(id='v2', ctx=Load()))"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_simplify"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "simplify": {
+          "name": "simplify",
+          "args": [
+            "p0",
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Mult"
+        ],
+        "associative_ops": [
+          "Mult"
+        ],
+        "binary_operations": [
+          "Mult"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "ImportFrom",
+          "alias",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mult",
+          "Name",
+          "Load",
+          "Return",
+          "Compare",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Eq",
+          "Constant"
+        ],
+        "ast_depth": 6,
+        "ast_hash": "3077e9be0d9af5a186d1aa309f971c1f",
+        "alpha_renamed_hash": "a06f92ca2b5b00d861563f7e98c5cb2b"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Mult"
+        ],
+        "precedence_levels": {
+          "Mult": 4
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "ImportFrom",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "ImportFrom_1",
+          "Assign_2",
+          "Assign_3",
+          "Assign_4",
+          "Return_5"
+        ],
+        "control_flow_order": [
+          "FunctionDef"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

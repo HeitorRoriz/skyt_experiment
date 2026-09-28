@@ -1,0 +1,287 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "7f7247bfd7ae0db8ba5c4614e0a9baa24a198d1ef703041b448316c409a87980|0a91b2c6c730c2a392a0b4fb258384874b69cecd4e67bed0ea0393d89ba3ec7d": {
+      "stitched_code": "def encode(message):\n    result = []\n    vowels = 'aeiouAEIOU'\n    for char in message:\n        if char == ' ':\n            result.append(' ')\n        elif char in vowels:\n            if char.lower() == 'a':\n                new_char = 'c'\n            elif char.lower() == 'e':\n                new_char = 'g'\n            elif char.lower() == 'i':\n                new_char = 'k'\n            elif char.lower() == 'o':\n                new_char = 'q'\n            elif char.lower() == 'u':\n                new_char = 'w'\n            if char.isupper():\n                result.append(new_char.lower())\n            else:\n                result.append(new_char.upper())\n        else:\n            result.append(char.swapcase())\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0a91b2c6c730c2a392a0b4fb258384874b69cecd4e67bed0ea0393d89ba3ec7d|0a91b2c6c730c2a392a0b4fb258384874b69cecd4e67bed0ea0393d89ba3ec7d": {
+      "stitched_code": "def encode(message):\n    result = []\n    vowels = 'aeiouAEIOU'\n    \n    for char in message:\n        if char == ' ':\n            result.append(' ')\n        elif char in vowels:\n            # Replace vowel with letter 2 places ahead\n            if char.lower() == 'a':\n                new_char = 'c'\n            elif char.lower() == 'e':\n                new_char = 'g'\n            elif char.lower() == 'i':\n                new_char = 'k'\n            elif char.lower() == 'o':\n                new_char = 'q'\n            elif char.lower() == 'u':\n                new_char = 'w'\n            \n            # Swap case\n            if char.isupper():\n                result.append(new_char.lower())\n            else:\n                result.append(new_char.upper())\n        else:\n            # Swap case for consonants\n            result.append(char.swapcase())\n    \n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "684de70746e071c670f937edeb1df010a1dd6fd2fa26c0152a6a0eae7f5d70a5|0a91b2c6c730c2a392a0b4fb258384874b69cecd4e67bed0ea0393d89ba3ec7d": {
+      "stitched_code": "def encode(message):\n    result = []\n    vowels = 'aeiouAEIOU'\n    for char in message:\n        if char == ' ':\n            result.append(' ')\n        elif char in vowels:\n            if char.lower() == 'a':\n                new_char = 'c'\n            elif char.lower() == 'e':\n                new_char = 'g'\n            elif char.lower() == 'i':\n                new_char = 'k'\n            elif char.lower() == 'o':\n                new_char = 'q'\n            elif char.lower() == 'u':\n                new_char = 'w'\n            if char.isupper():\n                result.append(new_char.lower())\n            else:\n                result.append(new_char.upper())\n        else:\n            result.append(char.swapcase())\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "dee8f97363f8bf695e7e7986b419f9a6642dd9d73e00178587bb880654327ff0|0a91b2c6c730c2a392a0b4fb258384874b69cecd4e67bed0ea0393d89ba3ec7d": {
+      "stitched_code": "def encode(message):\n    result = []\n    vowels = 'aeiouAEIOU'\n    for char in message:\n        if char == ' ':\n            result.append(' ')\n        elif char in vowels:\n            if char.lower() == 'a':\n                new_char = 'c'\n            elif char.lower() == 'e':\n                new_char = 'g'\n            elif char.lower() == 'i':\n                new_char = 'k'\n            elif char.lower() == 'o':\n                new_char = 'q'\n            elif char.lower() == 'u':\n                new_char = 'w'\n            if char.isupper():\n                result.append(new_char.lower())\n            else:\n                result.append(new_char.upper())\n        else:\n            result.append(char.swapcase())\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "684de70746e071c670f937edeb1df010a1dd6fd2fa26c0152a6a0eae7f5d70a5|684de70746e071c670f937edeb1df010a1dd6fd2fa26c0152a6a0eae7f5d70a5": {
+      "stitched_code": "def encode(message):\n    result = []\n    vowels = 'aeiouAEIOU'\n    \n    for char in message:\n        if char == ' ':\n            result.append(' ')\n        elif char in vowels:\n            # Replace vowel with letter 2 places ahead\n            if char.lower() == 'a':\n                new_char = 'c'\n            elif char.lower() == 'e':\n                new_char = 'g'\n            elif char.lower() == 'i':\n                new_char = 'k'\n            elif char.lower() == 'o':\n                new_char = 'q'\n            elif char.lower() == 'u':\n                new_char = 'w'\n            \n            # Swap case\n            if char.isupper():\n                result.append(new_char.lower())\n            else:\n                result.append(new_char.upper())\n        else:\n            # Swap case for consonants\n            if char.isupper():\n                result.append(char.lower())\n            else:\n                result.append(char.upper())\n    \n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0a91b2c6c730c2a392a0b4fb258384874b69cecd4e67bed0ea0393d89ba3ec7d|684de70746e071c670f937edeb1df010a1dd6fd2fa26c0152a6a0eae7f5d70a5": {
+      "stitched_code": "def encode(message):\n    result = []\n    vowels = 'aeiouAEIOU'\n    for char in message:\n        if char == ' ':\n            result.append(' ')\n        elif char in vowels:\n            if char.lower() == 'a':\n                new_char = 'c'\n            elif char.lower() == 'e':\n                new_char = 'g'\n            elif char.lower() == 'i':\n                new_char = 'k'\n            elif char.lower() == 'o':\n                new_char = 'q'\n            elif char.lower() == 'u':\n                new_char = 'w'\n            if char.isupper():\n                result.append(new_char.lower())\n            else:\n                result.append(new_char.upper())\n        elif char.isupper():\n            result.append(char.lower())\n        else:\n            result.append(char.upper())\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "dee8f97363f8bf695e7e7986b419f9a6642dd9d73e00178587bb880654327ff0|684de70746e071c670f937edeb1df010a1dd6fd2fa26c0152a6a0eae7f5d70a5": {
+      "stitched_code": "def encode(message):\n    result = []\n    vowels = 'aeiouAEIOU'\n    for char in message:\n        if char == ' ':\n            result.append(' ')\n        elif char in vowels:\n            if char.lower() == 'a':\n                new_char = 'c'\n            elif char.lower() == 'e':\n                new_char = 'g'\n            elif char.lower() == 'i':\n                new_char = 'k'\n            elif char.lower() == 'o':\n                new_char = 'q'\n            elif char.lower() == 'u':\n                new_char = 'w'\n            if char.isupper():\n                result.append(new_char.lower())\n            else:\n                result.append(new_char.upper())\n        elif char.isupper():\n            result.append(char.lower())\n        else:\n            result.append(char.upper())\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "47fa704791daeb559d0ebde68eb1492e97bc0128fa3c058c000f3969d5e0ddb7|0a91b2c6c730c2a392a0b4fb258384874b69cecd4e67bed0ea0393d89ba3ec7d": {
+      "stitched_code": "def encode(message):\n    result = []\n    vowels = 'aeiouAEIOU'\n    for char in message:\n        if char == ' ':\n            result.append(' ')\n        elif char in vowels:\n            if char.lower() == 'a':\n                new_char = 'c'\n            elif char.lower() == 'e':\n                new_char = 'g'\n            elif char.lower() == 'i':\n                new_char = 'k'\n            elif char.lower() == 'o':\n                new_char = 'q'\n            elif char.lower() == 'u':\n                new_char = 'w'\n            if char.isupper():\n                result.append(new_char.lower())\n            else:\n                result.append(new_char.upper())\n        else:\n            result.append(char.swapcase())\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7f7247bfd7ae0db8ba5c4614e0a9baa24a198d1ef703041b448316c409a87980|684de70746e071c670f937edeb1df010a1dd6fd2fa26c0152a6a0eae7f5d70a5": {
+      "stitched_code": "def encode(message):\n    result = []\n    vowels = 'aeiouAEIOU'\n    for char in message:\n        if char == ' ':\n            result.append(' ')\n        elif char in vowels:\n            if char.lower() == 'a':\n                new_char = 'c'\n            elif char.lower() == 'e':\n                new_char = 'g'\n            elif char.lower() == 'i':\n                new_char = 'k'\n            elif char.lower() == 'o':\n                new_char = 'q'\n            elif char.lower() == 'u':\n                new_char = 'w'\n            if char.isupper():\n                result.append(new_char.lower())\n            else:\n                result.append(new_char.upper())\n        elif char.isupper():\n            result.append(char.lower())\n        else:\n            result.append(char.upper())\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "47fa704791daeb559d0ebde68eb1492e97bc0128fa3c058c000f3969d5e0ddb7|684de70746e071c670f937edeb1df010a1dd6fd2fa26c0152a6a0eae7f5d70a5": {
+      "stitched_code": "def encode(message):\n    result = []\n    vowels = 'aeiouAEIOU'\n    for char in message:\n        if char == ' ':\n            result.append(' ')\n        elif char in vowels:\n            if char.lower() == 'a':\n                new_char = 'c'\n            elif char.lower() == 'e':\n                new_char = 'g'\n            elif char.lower() == 'i':\n                new_char = 'k'\n            elif char.lower() == 'o':\n                new_char = 'q'\n            elif char.lower() == 'u':\n                new_char = 'w'\n            if char.isupper():\n                result.append(new_char.lower())\n            else:\n                result.append(new_char.upper())\n        elif char.isupper():\n            result.append(char.lower())\n        else:\n            result.append(char.upper())\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "684de70746e071c670f937edeb1df010a1dd6fd2fa26c0152a6a0eae7f5d70a5|47fa704791daeb559d0ebde68eb1492e97bc0128fa3c058c000f3969d5e0ddb7": {
+      "stitched_code": "def encode(message):\n    result = []\n    vowels = 'aeiouAEIOU'\n    for char in message:\n        if char in vowels:\n            if char.lower() == 'a':\n                new_char = 'c'\n            elif char.lower() == 'e':\n                new_char = 'g'\n            elif char.lower() == 'i':\n                new_char = 'k'\n            elif char.lower() == 'o':\n                new_char = 'q'\n            elif char.lower() == 'u':\n                new_char = 'w'\n            if char.isupper():\n                result.append(new_char.lower())\n            else:\n                result.append(new_char.upper())\n        elif char.isalpha():\n            if char.isupper():\n                result.append(char.lower())\n            else:\n                result.append(char.upper())\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0a91b2c6c730c2a392a0b4fb258384874b69cecd4e67bed0ea0393d89ba3ec7d|47fa704791daeb559d0ebde68eb1492e97bc0128fa3c058c000f3969d5e0ddb7": {
+      "stitched_code": "def encode(message):\n    result = []\n    vowels = 'aeiouAEIOU'\n    for char in message:\n        if char in vowels:\n            if char.lower() == 'a':\n                new_char = 'c'\n            elif char.lower() == 'e':\n                new_char = 'g'\n            elif char.lower() == 'i':\n                new_char = 'k'\n            elif char.lower() == 'o':\n                new_char = 'q'\n            elif char.lower() == 'u':\n                new_char = 'w'\n            if char.isupper():\n                result.append(new_char.lower())\n            else:\n                result.append(new_char.upper())\n        elif char.isalpha():\n            if char.isupper():\n                result.append(char.lower())\n            else:\n                result.append(char.upper())\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7f7247bfd7ae0db8ba5c4614e0a9baa24a198d1ef703041b448316c409a87980|47fa704791daeb559d0ebde68eb1492e97bc0128fa3c058c000f3969d5e0ddb7": {
+      "stitched_code": "def encode(message):\n    result = []\n    vowels = 'aeiouAEIOU'\n    for char in message:\n        if char in vowels:\n            if char.lower() == 'a':\n                new_char = 'c'\n            elif char.lower() == 'e':\n                new_char = 'g'\n            elif char.lower() == 'i':\n                new_char = 'k'\n            elif char.lower() == 'o':\n                new_char = 'q'\n            elif char.lower() == 'u':\n                new_char = 'w'\n            if char.isupper():\n                result.append(new_char.lower())\n            else:\n                result.append(new_char.upper())\n        elif char.isalpha():\n            if char.isupper():\n                result.append(char.lower())\n            else:\n                result.append(char.upper())\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

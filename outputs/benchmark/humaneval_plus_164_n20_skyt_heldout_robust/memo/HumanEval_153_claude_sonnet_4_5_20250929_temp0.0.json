@@ -1,0 +1,47 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "b6c4e6ca6466e0c72c03020b49bdc27ef7eecc5de231fece1079904a6e671884|b6c4e6ca6466e0c72c03020b49bdc27ef7eecc5de231fece1079904a6e671884": {
+      "stitched_code": "def Strongest_Extension(class_name, extensions):\n    def calculate_strength(extension):\n        CAP = sum(1 for c in extension if c.isupper())\n        SM = sum(1 for c in extension if c.islower())\n        return CAP - SM\n    \n    strongest = max(extensions, key=calculate_strength)\n    return f\"{class_name}.{strongest}\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "8e21adacb16ebcd09c1ea85883c41a9266bd605697c67d580f03b08f78ae1e44|b6c4e6ca6466e0c72c03020b49bdc27ef7eecc5de231fece1079904a6e671884": {
+      "stitched_code": "def Strongest_Extension(class_name, extensions):\n\n    def calculate_strength(extension):\n        CAP = sum(1 for c in extension if c.isupper())\n        SM = sum(1 for c in extension if c.islower())\n        return CAP - SM\n    strongest = max(extensions, key=calculate_strength)\n    return f'{class_name}.{strongest}'\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

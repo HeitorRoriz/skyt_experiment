@@ -1,0 +1,25 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "793f3b4945c8e001e47d88128a0e9302a3d6cbc866ba7a6687b22a3915d5ab4f|793f3b4945c8e001e47d88128a0e9302a3d6cbc866ba7a6687b22a3915d5ab4f": {
+      "stitched_code": "def is_prime(n):\n    if n <= 1:\n        return False\n    for i in range(2, int(n**0.5) + 1):\n        if n % i == 0:\n            return False\n    return True\n\ndef sum_of_digits(n):\n    return sum(int(digit) for digit in str(n))\n\ndef skjkasdkd(lst):\n    largest_prime = -1\n    for num in lst:\n        if is_prime(num) and num > largest_prime:\n            largest_prime = num\n    if largest_prime == -1:\n        return 0\n    return sum_of_digits(largest_prime)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

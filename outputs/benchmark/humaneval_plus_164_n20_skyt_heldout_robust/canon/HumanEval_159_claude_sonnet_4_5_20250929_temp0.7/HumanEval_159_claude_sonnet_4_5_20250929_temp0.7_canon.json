@@ -1,0 +1,378 @@
+{
+  "contract_id": "HumanEval_159_claude_sonnet_4_5_20250929_temp0.7",
+  "canonical_code": "def eat(number, need, remaining):\n    can_eat = min(need, remaining)\n    total_eaten = number + can_eat\n    carrots_left = remaining - can_eat\n    return [total_eaten, carrots_left]\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 0,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "min"
+      ],
+      "nested_depth": 0,
+      "branch_patterns": []
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [
+          "p1",
+          "p2"
+        ],
+        "v1": [
+          "p0",
+          "v0"
+        ],
+        "v2": [
+          "p2",
+          "v0"
+        ]
+      },
+      "assignments": {
+        "v0": "Call(func=Name(id='min', ctx=Load()), args=[Name(id='p1', ctx=Load()), Name(id='p2', ctx=Load())])",
+        "v1": "BinOp(left=Name(id='p0', ctx=Load()), op=Add(), right=Name(id='v0', ctx=Load()))",
+        "v2": "BinOp(left=Name(id='p2', ctx=Load()), op=Sub(), right=Name(id='v0', ctx=Load()))"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_eat"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "eat": {
+        "name": "eat",
+        "args": [
+          "p0",
+          "p1",
+          "p2"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add"
+      ],
+      "associative_ops": [
+        "Add"
+      ],
+      "binary_operations": [
+        "Add",
+        "Sub"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": false,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": []
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "arg",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "BinOp",
+        "Name",
+        "Load",
+        "Sub",
+        "Name",
+        "Load",
+        "Return",
+        "List",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load"
+      ],
+      "ast_depth": 5,
+      "ast_hash": "a1f95a07909f8b02b7c53765b56e1de6",
+      "alpha_renamed_hash": "a1f95a07909f8b02b7c53765b56e1de6"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Add",
+        "Sub"
+      ],
+      "precedence_levels": {
+        "Add": 3,
+        "Sub": 3
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "Assign",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "Assign_2",
+        "Assign_3",
+        "Return_4"
+      ],
+      "control_flow_order": [
+        "FunctionDef"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_159_claude_sonnet_4_5_20250929_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/159",
+    "prompt": "\ndef eat(number, need, remaining):\n    \"\"\"\n    You're a hungry rabbit, and you already have eaten a certain number of carrots,\n    but now you need to eat more carrots to complete the day's meals.\n    you should return an array of [ total number of eaten carrots after your meals,\n                                    the number of carrots left after your meals ]\n    if there are not enough remaining carrots, you will eat all remaining carrots, but will still be hungry.\n    \n    Example:\n    * eat(5, 6, 10) -> [11, 4]\n    * eat(4, 8, 9) -> [12, 1]\n    * eat(1, 10, 10) -> [11, 0]\n    * eat(2, 11, 5) -> [7, 0]\n    \n    Variables:\n    @number : integer\n        the number of carrots that you have eaten.\n    @need : integer\n        the number of carrots that you need to eat.\n    @remaining : integer\n        the number of remaining carrots thet exist in stock\n    \n    Constrain:\n    * 0 <= number <= 1000\n    * 0 <= need <= 1000\n    * 0 <= remaining <= 1000\n\n    Have fun :)\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "eat"
+    },
+    "anchor_signature": "ab9bc017270fa775f96ec3bca80507ae4a678b1562038370aae9c2923ccf375a",
+    "canonical_code": "def eat(number, need, remaining):\n    can_eat = min(need, remaining)\n    total_eaten = number + can_eat\n    carrots_left = remaining - can_eat\n    return [total_eaten, carrots_left]\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 0,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "min"
+        ],
+        "nested_depth": 0,
+        "branch_patterns": []
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [
+            "p1",
+            "p2"
+          ],
+          "v1": [
+            "p0",
+            "v0"
+          ],
+          "v2": [
+            "p2",
+            "v0"
+          ]
+        },
+        "assignments": {
+          "v0": "Call(func=Name(id='min', ctx=Load()), args=[Name(id='p1', ctx=Load()), Name(id='p2', ctx=Load())])",
+          "v1": "BinOp(left=Name(id='p0', ctx=Load()), op=Add(), right=Name(id='v0', ctx=Load()))",
+          "v2": "BinOp(left=Name(id='p2', ctx=Load()), op=Sub(), right=Name(id='v0', ctx=Load()))"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_eat"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "eat": {
+          "name": "eat",
+          "args": [
+            "p0",
+            "p1",
+            "p2"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add"
+        ],
+        "associative_ops": [
+          "Add"
+        ],
+        "binary_operations": [
+          "Add",
+          "Sub"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": false,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": []
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "BinOp",
+          "Name",
+          "Load",
+          "Sub",
+          "Name",
+          "Load",
+          "Return",
+          "List",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load"
+        ],
+        "ast_depth": 5,
+        "ast_hash": "a1f95a07909f8b02b7c53765b56e1de6",
+        "alpha_renamed_hash": "a1f95a07909f8b02b7c53765b56e1de6"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Add",
+          "Sub"
+        ],
+        "precedence_levels": {
+          "Add": 3,
+          "Sub": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "Assign_2",
+          "Assign_3",
+          "Return_4"
+        ],
+        "control_flow_order": [
+          "FunctionDef"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

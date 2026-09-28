@@ -1,0 +1,25 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "782a4f3c7a3ff376df741890b6f53d1b78d80950427c948ffd2413f06f743f67|782a4f3c7a3ff376df741890b6f53d1b78d80950427c948ffd2413f06f743f67": {
+      "stitched_code": "def largest_smallest_integers(lst):\n    '''\n    Create a function that returns a tuple (a, b), where 'a' is\n    the largest of negative integers, and 'b' is the smallest\n    of positive integers in a list.\n    If there is no negative or positive integers, return them as None.\n\n    Examples:\n    largest_smallest_integers([2, 4, 1, 3, 5, 7]) == (None, 1)\n    largest_smallest_integers([]) == (None, None)\n    largest_smallest_integers([0]) == (None, None)\n    '''\n    negative_integers = [num for num in lst if num < 0]\n    positive_integers = [num for num in lst if num > 0]\n    \n    largest_negative = max(negative_integers) if negative_integers else None\n    smallest_positive = min(positive_integers) if positive_integers else None\n    \n    return (largest_negative, smallest_positive)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

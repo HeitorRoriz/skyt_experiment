@@ -1,0 +1,47 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "475edc4d068b4435061f3b2651d546e4b5be21ba7ad4624f4a2ed8f0b96995e8|475edc4d068b4435061f3b2651d546e4b5be21ba7ad4624f4a2ed8f0b96995e8": {
+      "stitched_code": "import hashlib\n\ndef string_to_md5(text):\n    if not text:\n        return None\n    return hashlib.md5(text.encode()).hexdigest()\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "7ead931ddc32215daa608437fc56fc06436816acb732823079f08c70e0a74e2c|475edc4d068b4435061f3b2651d546e4b5be21ba7ad4624f4a2ed8f0b96995e8": {
+      "stitched_code": "import hashlib\n\ndef string_to_md5(text):\n    if text == \"\":\n        return None\n    return hashlib.md5(text.encode()).hexdigest()\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    }
+  }
+}

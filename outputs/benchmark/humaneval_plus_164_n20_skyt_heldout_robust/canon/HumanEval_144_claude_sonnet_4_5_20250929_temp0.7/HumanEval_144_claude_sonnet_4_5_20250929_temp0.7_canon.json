@@ -1,0 +1,548 @@
+{
+  "contract_id": "HumanEval_144_claude_sonnet_4_5_20250929_temp0.7",
+  "canonical_code": "def simplify(x, n):\n    # Parse x\n    x_parts = x.split('/')\n    x_num = int(x_parts[0])\n    x_den = int(x_parts[1])\n    \n    # Parse n\n    n_parts = n.split('/')\n    n_num = int(n_parts[0])\n    n_den = int(n_parts[1])\n    \n    # Multiply fractions: (x_num/x_den) * (n_num/n_den) = (x_num * n_num) / (x_den * n_den)\n    result_num = x_num * n_num\n    result_den = x_den * n_den\n    \n    # Check if result is a whole number (numerator divisible by denominator)\n    return result_num % result_den == 0\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 0,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "int",
+        "int",
+        "int",
+        "int"
+      ],
+      "nested_depth": 0,
+      "branch_patterns": []
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [],
+        "v1": [],
+        "v2": [],
+        "v3": [],
+        "v4": [],
+        "v5": [],
+        "v6": [
+          "v1",
+          "v4"
+        ],
+        "v7": [
+          "v2",
+          "v5"
+        ]
+      },
+      "assignments": {
+        "v0": "Call(func=Attribute(value=Name(id='p0', ctx=Load()), attr='split', ctx=Load()), args=[Constant(value='/')])",
+        "v1": "Call(func=Name(id='int', ctx=Load()), args=[Subscript(value=Name(id='v0', ctx=Load()), slice=Constant(value=0), ctx=Load())])",
+        "v2": "Call(func=Name(id='int', ctx=Load()), args=[Subscript(value=Name(id='v0', ctx=Load()), slice=Constant(value=1), ctx=Load())])",
+        "v3": "Call(func=Attribute(value=Name(id='p1', ctx=Load()), attr='split', ctx=Load()), args=[Constant(value='/')])",
+        "v4": "Call(func=Name(id='int', ctx=Load()), args=[Subscript(value=Name(id='v3', ctx=Load()), slice=Constant(value=0), ctx=Load())])",
+        "v5": "Call(func=Name(id='int', ctx=Load()), args=[Subscript(value=Name(id='v3', ctx=Load()), slice=Constant(value=1), ctx=Load())])",
+        "v6": "BinOp(left=Name(id='v1', ctx=Load()), op=Mult(), right=Name(id='v4', ctx=Load()))",
+        "v7": "BinOp(left=Name(id='v2', ctx=Load()), op=Mult(), right=Name(id='v5', ctx=Load()))"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_simplify"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "simplify": {
+        "name": "simplify",
+        "args": [
+          "p0",
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Mult",
+        "Mult"
+      ],
+      "associative_ops": [
+        "Mult",
+        "Mult"
+      ],
+      "binary_operations": [
+        "Mult",
+        "Mult",
+        "Mod"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        0,
+        1,
+        0,
+        1,
+        0
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mult",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mult",
+        "Name",
+        "Load",
+        "Return",
+        "Compare",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mod",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant"
+      ],
+      "ast_depth": 6,
+      "ast_hash": "26dfca68dd7df1d6cc49070f65eb068f",
+      "alpha_renamed_hash": "26dfca68dd7df1d6cc49070f65eb068f"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Mult",
+        "Mult",
+        "Mod"
+      ],
+      "precedence_levels": {
+        "Mult": 4,
+        "Mod": 4
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "Assign",
+        "Assign",
+        "Assign",
+        "Assign",
+        "Assign",
+        "Assign",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "Assign_2",
+        "Assign_3",
+        "Assign_4",
+        "Assign_5",
+        "Assign_6",
+        "Assign_7",
+        "Assign_8",
+        "Return_9"
+      ],
+      "control_flow_order": [
+        "FunctionDef"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_144_claude_sonnet_4_5_20250929_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/144",
+    "prompt": "\ndef simplify(x, n):\n    \"\"\"Your task is to implement a function that will simplify the expression\n    x * n. The function returns True if x * n evaluates to a whole number and False\n    otherwise. Both x and n, are string representation of a fraction, and have the following format,\n    <numerator>/<denominator> where both numerator and denominator are positive whole numbers.\n\n    You can assume that x, and n are valid fractions, and do not have zero as denominator.\n\n    simplify(\"1/5\", \"5/1\") = True\n    simplify(\"1/6\", \"2/1\") = False\n    simplify(\"7/10\", \"10/2\") = False\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "simplify"
+    },
+    "anchor_signature": "02df496ed2cf23664802ee0a4cd3fa661f6a99647d03bdf74c30066c1c0805e0",
+    "canonical_code": "def simplify(x, n):\n    # Parse x\n    x_parts = x.split('/')\n    x_num = int(x_parts[0])\n    x_den = int(x_parts[1])\n    \n    # Parse n\n    n_parts = n.split('/')\n    n_num = int(n_parts[0])\n    n_den = int(n_parts[1])\n    \n    # Multiply fractions: (x_num/x_den) * (n_num/n_den) = (x_num * n_num) / (x_den * n_den)\n    result_num = x_num * n_num\n    result_den = x_den * n_den\n    \n    # Check if result is a whole number (numerator divisible by denominator)\n    return result_num % result_den == 0\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 0,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "int",
+          "int",
+          "int",
+          "int"
+        ],
+        "nested_depth": 0,
+        "branch_patterns": []
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [],
+          "v1": [],
+          "v2": [],
+          "v3": [],
+          "v4": [],
+          "v5": [],
+          "v6": [
+            "v1",
+            "v4"
+          ],
+          "v7": [
+            "v2",
+            "v5"
+          ]
+        },
+        "assignments": {
+          "v0": "Call(func=Attribute(value=Name(id='p0', ctx=Load()), attr='split', ctx=Load()), args=[Constant(value='/')])",
+          "v1": "Call(func=Name(id='int', ctx=Load()), args=[Subscript(value=Name(id='v0', ctx=Load()), slice=Constant(value=0), ctx=Load())])",
+          "v2": "Call(func=Name(id='int', ctx=Load()), args=[Subscript(value=Name(id='v0', ctx=Load()), slice=Constant(value=1), ctx=Load())])",
+          "v3": "Call(func=Attribute(value=Name(id='p1', ctx=Load()), attr='split', ctx=Load()), args=[Constant(value='/')])",
+          "v4": "Call(func=Name(id='int', ctx=Load()), args=[Subscript(value=Name(id='v3', ctx=Load()), slice=Constant(value=0), ctx=Load())])",
+          "v5": "Call(func=Name(id='int', ctx=Load()), args=[Subscript(value=Name(id='v3', ctx=Load()), slice=Constant(value=1), ctx=Load())])",
+          "v6": "BinOp(left=Name(id='v1', ctx=Load()), op=Mult(), right=Name(id='v4', ctx=Load()))",
+          "v7": "BinOp(left=Name(id='v2', ctx=Load()), op=Mult(), right=Name(id='v5', ctx=Load()))"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_simplify"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "simplify": {
+          "name": "simplify",
+          "args": [
+            "p0",
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Mult",
+          "Mult"
+        ],
+        "associative_ops": [
+          "Mult",
+          "Mult"
+        ],
+        "binary_operations": [
+          "Mult",
+          "Mult",
+          "Mod"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          0,
+          1,
+          0,
+          1,
+          0
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mult",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mult",
+          "Name",
+          "Load",
+          "Return",
+          "Compare",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mod",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant"
+        ],
+        "ast_depth": 6,
+        "ast_hash": "26dfca68dd7df1d6cc49070f65eb068f",
+        "alpha_renamed_hash": "26dfca68dd7df1d6cc49070f65eb068f"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Mult",
+          "Mult",
+          "Mod"
+        ],
+        "precedence_levels": {
+          "Mult": 4,
+          "Mod": 4
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "Assign_2",
+          "Assign_3",
+          "Assign_4",
+          "Assign_5",
+          "Assign_6",
+          "Assign_7",
+          "Assign_8",
+          "Return_9"
+        ],
+        "control_flow_order": [
+          "FunctionDef"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

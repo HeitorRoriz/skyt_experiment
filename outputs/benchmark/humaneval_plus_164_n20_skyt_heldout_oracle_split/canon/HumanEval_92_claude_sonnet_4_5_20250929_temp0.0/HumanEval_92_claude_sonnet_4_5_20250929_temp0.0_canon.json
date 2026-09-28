@@ -1,0 +1,494 @@
+{
+  "contract_id": "HumanEval_92_claude_sonnet_4_5_20250929_temp0.0",
+  "canonical_code": "def any_int(x, y, z):\n    '''\n    Create a function that takes 3 numbers.\n    Returns true if one of the numbers is equal to the sum of the other two, and all numbers are integers.\n    Returns false in any other cases.\n    \n    Examples\n    any_int(5, 2, 7) \u279e True\n    \n    any_int(3, 2, 2) \u279e False\n\n    any_int(3, -2, 1) \u279e True\n    \n    any_int(3.6, -2.2, 2) \u279e False\n  \n\n    \n    '''\n    # Check if all numbers are integers\n    if not (isinstance(x, int) and isinstance(y, int) and isinstance(z, int)):\n        return False\n    \n    # Check if one number equals the sum of the other two\n    if x == y + z or y == x + z or z == x + y:\n        return True\n    \n    return False\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 2,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "isinstance",
+        "isinstance",
+        "isinstance"
+      ],
+      "nested_depth": 1,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_0"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {},
+      "assignments": {}
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_any_int"
+        ],
+        [
+          "function_any_int",
+          "branch"
+        ],
+        [
+          "function_any_int",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "any_int": {
+        "name": "any_int",
+        "args": [
+          "p0",
+          "p1",
+          "p2"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add",
+        "Add",
+        "Add"
+      ],
+      "associative_ops": [
+        "Add",
+        "Add",
+        "Add"
+      ],
+      "binary_operations": [
+        "Add",
+        "Add",
+        "Add"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        false,
+        true,
+        false
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [
+        "And",
+        "Or"
+      ],
+      "comparisons": [
+        "Eq",
+        "Eq",
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "arg",
+        "arg",
+        "If",
+        "UnaryOp",
+        "Not",
+        "BoolOp",
+        "And",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Return",
+        "Constant",
+        "If",
+        "BoolOp",
+        "Or",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Name",
+        "Load",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Name",
+        "Load",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Name",
+        "Load",
+        "Return",
+        "Constant",
+        "Return",
+        "Constant"
+      ],
+      "ast_depth": 7,
+      "ast_hash": "59e0aa1864f8907d61d7b3ebab2e7e28",
+      "alpha_renamed_hash": "59e0aa1864f8907d61d7b3ebab2e7e28"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Add",
+        "Add",
+        "Add"
+      ],
+      "precedence_levels": {
+        "Add": 3
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Return",
+        "If",
+        "Return",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Return_2",
+        "If_3",
+        "Return_4",
+        "Return_5"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "not (isinstance(p0, int) and isinstance(p1, int) and isinstance(p2, int))",
+          "return_type": "constant"
+        },
+        {
+          "condition": "p0 == p1 + p2 or p1 == p0 + p2 or p2 == p0 + p1",
+          "return_type": "constant"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "not (isinstance(p0, int) and isinstance(p1, int) and isinstance(p2, int))",
+        "p0 == p1 + p2 or p1 == p0 + p2 or p2 == p0 + p1"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_92_claude_sonnet_4_5_20250929_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/92",
+    "prompt": "\ndef any_int(x, y, z):\n    '''\n    Create a function that takes 3 numbers.\n    Returns true if one of the numbers is equal to the sum of the other two, and all numbers are integers.\n    Returns false in any other cases.\n    \n    Examples\n    any_int(5, 2, 7) \u279e True\n    \n    any_int(3, 2, 2) \u279e False\n\n    any_int(3, -2, 1) \u279e True\n    \n    any_int(3.6, -2.2, 2) \u279e False\n  \n\n    \n    '''\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "any_int"
+    },
+    "anchor_signature": "9a48e4e7e64fc4c9497196fc61e1bb68aebc39880ec0f4e34d17e8784663c436",
+    "canonical_code": "def any_int(x, y, z):\n    '''\n    Create a function that takes 3 numbers.\n    Returns true if one of the numbers is equal to the sum of the other two, and all numbers are integers.\n    Returns false in any other cases.\n    \n    Examples\n    any_int(5, 2, 7) \u279e True\n    \n    any_int(3, 2, 2) \u279e False\n\n    any_int(3, -2, 1) \u279e True\n    \n    any_int(3.6, -2.2, 2) \u279e False\n  \n\n    \n    '''\n    # Check if all numbers are integers\n    if not (isinstance(x, int) and isinstance(y, int) and isinstance(z, int)):\n        return False\n    \n    # Check if one number equals the sum of the other two\n    if x == y + z or y == x + z or z == x + y:\n        return True\n    \n    return False\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 2,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "isinstance",
+          "isinstance",
+          "isinstance"
+        ],
+        "nested_depth": 1,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_0"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {},
+        "assignments": {}
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_any_int"
+          ],
+          [
+            "function_any_int",
+            "branch"
+          ],
+          [
+            "function_any_int",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "any_int": {
+          "name": "any_int",
+          "args": [
+            "p0",
+            "p1",
+            "p2"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add",
+          "Add",
+          "Add"
+        ],
+        "associative_ops": [
+          "Add",
+          "Add",
+          "Add"
+        ],
+        "binary_operations": [
+          "Add",
+          "Add",
+          "Add"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          false,
+          true,
+          false
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [
+          "And",
+          "Or"
+        ],
+        "comparisons": [
+          "Eq",
+          "Eq",
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "arg",
+          "If",
+          "UnaryOp",
+          "Not",
+          "BoolOp",
+          "And",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Return",
+          "Constant",
+          "If",
+          "BoolOp",
+          "Or",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Name",
+          "Load",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Name",
+          "Load",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Name",
+          "Load",
+          "Return",
+          "Constant",
+          "Return",
+          "Constant"
+        ],
+        "ast_depth": 7,
+        "ast_hash": "59e0aa1864f8907d61d7b3ebab2e7e28",
+        "alpha_renamed_hash": "59e0aa1864f8907d61d7b3ebab2e7e28"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Add",
+          "Add",
+          "Add"
+        ],
+        "precedence_levels": {
+          "Add": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "If",
+          "Return",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "If_3",
+          "Return_4",
+          "Return_5"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "not (isinstance(p0, int) and isinstance(p1, int) and isinstance(p2, int))",
+            "return_type": "constant"
+          },
+          {
+            "condition": "p0 == p1 + p2 or p1 == p0 + p2 or p2 == p0 + p1",
+            "return_type": "constant"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "not (isinstance(p0, int) and isinstance(p1, int) and isinstance(p2, int))",
+          "p0 == p1 + p2 or p1 == p0 + p2 or p2 == p0 + p1"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

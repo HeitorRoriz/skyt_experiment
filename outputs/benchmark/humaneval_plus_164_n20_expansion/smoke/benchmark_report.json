@@ -1,0 +1,392 @@
+{
+  "schema": "structural-repeatability-benchmark-v2",
+  "created_at": "2026-09-24T21:57:33.712202+00:00",
+  "relation_version": 2,
+  "relation_version_note": "canonical-form fingerprint; docstrings stripped; scope-aware alpha-renaming of bound names only",
+  "inference_version": 1,
+  "inference": {
+    "version": 1,
+    "unit": "task",
+    "estimator": "U-statistic order 2, then equal-cluster mean",
+    "interval": "percentile cluster bootstrap over task_id",
+    "n_bootstrap": 10000,
+    "seed": 20260723,
+    "not": "binomial or Wilson on C(N,2) pairs",
+    "secondary": "leave-one-task-out jackknife (skipped if n_tasks < 3)"
+  },
+  "metrics": {
+    "same_at_2": "Pr[both draws certify and are the same program]. All C(N,2) pairs; non-certifying draws stay in the denominator. Published CI is a task-cluster bootstrap, not a binomial on those pairs.",
+    "same_at_2_given_cert": "Pr[same program | both draws certify]. Undefined when a config has fewer than two certified draws; those configs are dropped.",
+    "plus_pass": "Share of the N draws that certify (task-set oracle)."
+  },
+  "aggregation": "one slice per model \u00d7 temperature; task-mean with cluster bootstrap by task_id (10000, seed 20260723); not binomial on C(N,2) pairs",
+  "slices": [
+    {
+      "model": "claude-haiku-4-5-20251001",
+      "temperature": 0.7,
+      "n_configs": 5,
+      "n_tasks": 5,
+      "n": 20,
+      "n_dropped_same_at_2_given_cert": 0,
+      "inference_version": 1,
+      "pilot_grid": true,
+      "same_at_2": 0.6768421052631579,
+      "same_at_2_ci95": [
+        0.42526315789473684,
+        0.9210526315789473
+      ],
+      "same_at_2_n_defined": 5,
+      "same_at_2_n_missing": 0,
+      "same_at_2_n_clusters": 5,
+      "same_at_2_pct": 67.68,
+      "same_at_2_jackknife_se": 0.1536679876080651,
+      "same_at_2_jackknife_ci95": [
+        0.375658383974603,
+        0.9780258265517128
+      ],
+      "same_at_2_jackknife_skipped": null,
+      "same_at_2_given_cert": 0.6768421052631579,
+      "same_at_2_given_cert_ci95": [
+        0.42526315789473684,
+        0.9210526315789473
+      ],
+      "same_at_2_given_cert_n_defined": 5,
+      "same_at_2_given_cert_n_missing": 0,
+      "same_at_2_given_cert_n_clusters": 5,
+      "same_at_2_given_cert_pct": 67.68,
+      "same_at_2_given_cert_jackknife_se": 0.1536679876080651,
+      "same_at_2_given_cert_jackknife_ci95": [
+        0.375658383974603,
+        0.9780258265517128
+      ],
+      "same_at_2_given_cert_jackknife_skipped": null,
+      "plus_pass": 1.0,
+      "plus_pass_ci95": [
+        1.0,
+        1.0
+      ],
+      "plus_pass_n_defined": 5,
+      "plus_pass_n_missing": 0,
+      "plus_pass_n_clusters": 5,
+      "plus_pass_pct": 100.0,
+      "plus_pass_jackknife_se": 0.0,
+      "plus_pass_jackknife_ci95": [
+        1.0,
+        1.0
+      ],
+      "plus_pass_jackknife_skipped": null
+    },
+    {
+      "model": "claude-sonnet-5",
+      "temperature": null,
+      "n_configs": 5,
+      "n_tasks": 5,
+      "n": 20,
+      "n_dropped_same_at_2_given_cert": 0,
+      "inference_version": 1,
+      "pilot_grid": true,
+      "same_at_2": 0.7431578947368421,
+      "same_at_2_ci95": [
+        0.48,
+        1.0
+      ],
+      "same_at_2_n_defined": 5,
+      "same_at_2_n_missing": 0,
+      "same_at_2_n_clusters": 5,
+      "same_at_2_pct": 74.32,
+      "same_at_2_jackknife_se": 0.15736226004486142,
+      "same_at_2_jackknife_ci95": [
+        0.4347335325230874,
+        1.0515822569505968
+      ],
+      "same_at_2_jackknife_skipped": null,
+      "same_at_2_given_cert": 0.7431578947368421,
+      "same_at_2_given_cert_ci95": [
+        0.48,
+        1.0
+      ],
+      "same_at_2_given_cert_n_defined": 5,
+      "same_at_2_given_cert_n_missing": 0,
+      "same_at_2_given_cert_n_clusters": 5,
+      "same_at_2_given_cert_pct": 74.32,
+      "same_at_2_given_cert_jackknife_se": 0.15736226004486142,
+      "same_at_2_given_cert_jackknife_ci95": [
+        0.4347335325230874,
+        1.0515822569505968
+      ],
+      "same_at_2_given_cert_jackknife_skipped": null,
+      "plus_pass": 1.0,
+      "plus_pass_ci95": [
+        1.0,
+        1.0
+      ],
+      "plus_pass_n_defined": 5,
+      "plus_pass_n_missing": 0,
+      "plus_pass_n_clusters": 5,
+      "plus_pass_pct": 100.0,
+      "plus_pass_jackknife_se": 0.0,
+      "plus_pass_jackknife_ci95": [
+        1.0,
+        1.0
+      ],
+      "plus_pass_jackknife_skipped": null
+    },
+    {
+      "model": "gpt-6-luna",
+      "temperature": 0.7,
+      "n_configs": 5,
+      "n_tasks": 5,
+      "n": 20,
+      "n_dropped_same_at_2_given_cert": 0,
+      "inference_version": 1,
+      "pilot_grid": true,
+      "same_at_2": 0.7031578947368421,
+      "same_at_2_ci95": [
+        0.47894736842105257,
+        0.9273684210526316
+      ],
+      "same_at_2_n_defined": 5,
+      "same_at_2_n_missing": 0,
+      "same_at_2_n_clusters": 5,
+      "same_at_2_pct": 70.32,
+      "same_at_2_jackknife_se": 0.13336264682386534,
+      "same_at_2_jackknife_ci95": [
+        0.441771910079131,
+        0.9645438793945531
+      ],
+      "same_at_2_jackknife_skipped": null,
+      "same_at_2_given_cert": 0.7031578947368421,
+      "same_at_2_given_cert_ci95": [
+        0.47894736842105257,
+        0.9273684210526316
+      ],
+      "same_at_2_given_cert_n_defined": 5,
+      "same_at_2_given_cert_n_missing": 0,
+      "same_at_2_given_cert_n_clusters": 5,
+      "same_at_2_given_cert_pct": 70.32,
+      "same_at_2_given_cert_jackknife_se": 0.13336264682386534,
+      "same_at_2_given_cert_jackknife_ci95": [
+        0.441771910079131,
+        0.9645438793945531
+      ],
+      "same_at_2_given_cert_jackknife_skipped": null,
+      "plus_pass": 1.0,
+      "plus_pass_ci95": [
+        1.0,
+        1.0
+      ],
+      "plus_pass_n_defined": 5,
+      "plus_pass_n_missing": 0,
+      "plus_pass_n_clusters": 5,
+      "plus_pass_pct": 100.0,
+      "plus_pass_jackknife_se": 0.0,
+      "plus_pass_jackknife_ci95": [
+        1.0,
+        1.0
+      ],
+      "plus_pass_jackknife_skipped": null
+    }
+  ],
+  "pilot_grid": true,
+  "configs": [
+    {
+      "task_id": "HumanEval/0",
+      "model": "claude-haiku-4-5-20251001",
+      "temperature": 0.7,
+      "n": 20,
+      "n_certified": 20,
+      "same_at_2": 1.0,
+      "same_at_2_given_cert": 1.0,
+      "plus_pass": 1.0,
+      "u_statistic_pair_count": 190,
+      "u_statistic_certified_pair_count": 190,
+      "relation_version": 2
+    },
+    {
+      "task_id": "HumanEval/0",
+      "model": "claude-sonnet-5",
+      "temperature": null,
+      "n": 20,
+      "n_certified": 20,
+      "same_at_2": 0.34210526315789475,
+      "same_at_2_given_cert": 0.34210526315789475,
+      "plus_pass": 1.0,
+      "u_statistic_pair_count": 190,
+      "u_statistic_certified_pair_count": 190,
+      "relation_version": 2
+    },
+    {
+      "task_id": "HumanEval/0",
+      "model": "gpt-6-luna",
+      "temperature": 0.7,
+      "n": 20,
+      "n_certified": 20,
+      "same_at_2": 0.30526315789473685,
+      "same_at_2_given_cert": 0.30526315789473685,
+      "plus_pass": 1.0,
+      "u_statistic_pair_count": 190,
+      "u_statistic_certified_pair_count": 190,
+      "relation_version": 2
+    },
+    {
+      "task_id": "HumanEval/1",
+      "model": "claude-haiku-4-5-20251001",
+      "temperature": 0.7,
+      "n": 20,
+      "n_certified": 20,
+      "same_at_2": 0.1736842105263158,
+      "same_at_2_given_cert": 0.1736842105263158,
+      "plus_pass": 1.0,
+      "u_statistic_pair_count": 190,
+      "u_statistic_certified_pair_count": 190,
+      "relation_version": 2
+    },
+    {
+      "task_id": "HumanEval/1",
+      "model": "claude-sonnet-5",
+      "temperature": null,
+      "n": 20,
+      "n_certified": 20,
+      "same_at_2": 0.3736842105263158,
+      "same_at_2_given_cert": 0.3736842105263158,
+      "plus_pass": 1.0,
+      "u_statistic_pair_count": 190,
+      "u_statistic_certified_pair_count": 190,
+      "relation_version": 2
+    },
+    {
+      "task_id": "HumanEval/1",
+      "model": "gpt-6-luna",
+      "temperature": 0.7,
+      "n": 20,
+      "n_certified": 20,
+      "same_at_2": 0.6368421052631579,
+      "same_at_2_given_cert": 0.6368421052631579,
+      "plus_pass": 1.0,
+      "u_statistic_pair_count": 190,
+      "u_statistic_certified_pair_count": 190,
+      "relation_version": 2
+    },
+    {
+      "task_id": "HumanEval/2",
+      "model": "claude-haiku-4-5-20251001",
+      "temperature": 0.7,
+      "n": 20,
+      "n_certified": 20,
+      "same_at_2": 1.0,
+      "same_at_2_given_cert": 1.0,
+      "plus_pass": 1.0,
+      "u_statistic_pair_count": 190,
+      "u_statistic_certified_pair_count": 190,
+      "relation_version": 2
+    },
+    {
+      "task_id": "HumanEval/2",
+      "model": "claude-sonnet-5",
+      "temperature": null,
+      "n": 20,
+      "n_certified": 20,
+      "same_at_2": 1.0,
+      "same_at_2_given_cert": 1.0,
+      "plus_pass": 1.0,
+      "u_statistic_pair_count": 190,
+      "u_statistic_certified_pair_count": 190,
+      "relation_version": 2
+    },
+    {
+      "task_id": "HumanEval/2",
+      "model": "gpt-6-luna",
+      "temperature": 0.7,
+      "n": 20,
+      "n_certified": 20,
+      "same_at_2": 0.5736842105263158,
+      "same_at_2_given_cert": 0.5736842105263158,
+      "plus_pass": 1.0,
+      "u_statistic_pair_count": 190,
+      "u_statistic_certified_pair_count": 190,
+      "relation_version": 2
+    },
+    {
+      "task_id": "HumanEval/3",
+      "model": "claude-haiku-4-5-20251001",
+      "temperature": 0.7,
+      "n": 20,
+      "n_certified": 20,
+      "same_at_2": 0.6052631578947368,
+      "same_at_2_given_cert": 0.6052631578947368,
+      "plus_pass": 1.0,
+      "u_statistic_pair_count": 190,
+      "u_statistic_certified_pair_count": 190,
+      "relation_version": 2
+    },
+    {
+      "task_id": "HumanEval/3",
+      "model": "claude-sonnet-5",
+      "temperature": null,
+      "n": 20,
+      "n_certified": 20,
+      "same_at_2": 1.0,
+      "same_at_2_given_cert": 1.0,
+      "plus_pass": 1.0,
+      "u_statistic_pair_count": 190,
+      "u_statistic_certified_pair_count": 190,
+      "relation_version": 2
+    },
+    {
+      "task_id": "HumanEval/3",
+      "model": "gpt-6-luna",
+      "temperature": 0.7,
+      "n": 20,
+      "n_certified": 20,
+      "same_at_2": 1.0,
+      "same_at_2_given_cert": 1.0,
+      "plus_pass": 1.0,
+      "u_statistic_pair_count": 190,
+      "u_statistic_certified_pair_count": 190,
+      "relation_version": 2
+    },
+    {
+      "task_id": "HumanEval/4",
+      "model": "claude-haiku-4-5-20251001",
+      "temperature": 0.7,
+      "n": 20,
+      "n_certified": 20,
+      "same_at_2": 0.6052631578947368,
+      "same_at_2_given_cert": 0.6052631578947368,
+      "plus_pass": 1.0,
+      "u_statistic_pair_count": 190,
+      "u_statistic_certified_pair_count": 190,
+      "relation_version": 2
+    },
+    {
+      "task_id": "HumanEval/4",
+      "model": "claude-sonnet-5",
+      "temperature": null,
+      "n": 20,
+      "n_certified": 20,
+      "same_at_2": 1.0,
+      "same_at_2_given_cert": 1.0,
+      "plus_pass": 1.0,
+      "u_statistic_pair_count": 190,
+      "u_statistic_certified_pair_count": 190,
+      "relation_version": 2
+    },
+    {
+      "task_id": "HumanEval/4",
+      "model": "gpt-6-luna",
+      "temperature": 0.7,
+      "n": 20,
+      "n_certified": 20,
+      "same_at_2": 1.0,
+      "same_at_2_given_cert": 1.0,
+      "plus_pass": 1.0,
+      "u_statistic_pair_count": 190,
+      "u_statistic_certified_pair_count": 190,
+      "relation_version": 2
+    }
+  ],
+  "source_dir": "outputs\\benchmark\\humaneval_plus_164_n20_expansion\\smoke",
+  "note": "Benchmark tape only: canonical-form fingerprint. No Certified Consensus, no SKYT repair, no match-to-human. Do not mix slices into one headline. Do not treat u_statistic_pair_count as the n of a confidence interval.",
+  "n_complete_configs": 15,
+  "n_skipped_incomplete": 0
+}

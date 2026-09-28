@@ -1,0 +1,632 @@
+{
+  "contract_id": "HumanEval_89_claude_sonnet_4_5_20250929_temp0.0",
+  "canonical_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                # Shift by 4 positions in lowercase alphabet\n                new_char = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(new_char)\n            else:\n                # Shift by 4 positions in uppercase alphabet\n                new_char = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(new_char)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 2,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [
+        "chr",
+        "ord",
+        "ord",
+        "ord",
+        "chr",
+        "ord",
+        "ord",
+        "ord"
+      ],
+      "nested_depth": 3,
+      "branch_patterns": [
+        "if_at_depth_1",
+        "if_at_depth_2"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [],
+        "v2": [
+          "v1"
+        ]
+      },
+      "assignments": {
+        "v0": "List(ctx=Load())",
+        "v2": "Call(func=Name(id='chr', ctx=Load()), args=[BinOp(left=BinOp(left=BinOp(left=BinOp(left=Call(func=Name(id='ord', ctx=Load()), args=[Name(id='v1', ctx=Load())]), op=Sub(), right=Call(func=Name(id='ord', ctx=Load()), args=[Constant(value='A')])), op=Add(), right=Constant(value=4)), op=Mod(), right=Constant(value=26)), op=Add(), right=Call(func=Name(id='ord', ctx=Load()), args=[Constant(value='A')]))])"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_encrypt"
+        ],
+        [
+          "function_encrypt",
+          "loop"
+        ],
+        [
+          "function_encrypt",
+          "loop",
+          "branch"
+        ],
+        [
+          "function_encrypt",
+          "loop",
+          "branch",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "encrypt": {
+        "name": "encrypt",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add",
+        "Add",
+        "Add",
+        "Add"
+      ],
+      "associative_ops": [
+        "Add",
+        "Add",
+        "Add",
+        "Add"
+      ],
+      "binary_operations": [
+        "Add",
+        "Mod",
+        "Add",
+        "Sub",
+        "Add",
+        "Mod",
+        "Add",
+        "Sub"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        4,
+        26,
+        4,
+        26
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "List",
+        "Load",
+        "For",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "If",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "If",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "BinOp",
+        "BinOp",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Sub",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "Add",
+        "Constant",
+        "Mod",
+        "Constant",
+        "Add",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "Expr",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "BinOp",
+        "BinOp",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Sub",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "Add",
+        "Constant",
+        "Mod",
+        "Constant",
+        "Add",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "Expr",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Name",
+        "Load",
+        "Expr",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Name",
+        "Load",
+        "Return",
+        "Call",
+        "Attribute",
+        "Constant",
+        "Load",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 13,
+      "ast_hash": "f883df188af2840ab7a8f5b5c4f6a593",
+      "alpha_renamed_hash": "f883df188af2840ab7a8f5b5c4f6a593"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Add",
+        "Mod",
+        "Add",
+        "Sub",
+        "Add",
+        "Mod",
+        "Add",
+        "Sub"
+      ],
+      "precedence_levels": {
+        "Add": 3,
+        "Mod": 4,
+        "Sub": 3
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "For",
+        "If",
+        "If",
+        "Assign",
+        "Expr",
+        "Assign",
+        "Expr",
+        "Expr",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "For_2",
+        "If_3",
+        "If_4",
+        "Assign_5",
+        "Expr_6",
+        "Assign_7",
+        "Expr_8",
+        "Expr_9",
+        "Return_10"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "For",
+        "If",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_89_claude_sonnet_4_5_20250929_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/89",
+    "prompt": "\ndef encrypt(s):\n    \"\"\"Create a function encrypt that takes a string as an argument and\n    returns a string encrypted with the alphabet being rotated. \n    The alphabet should be rotated in a manner such that the letters \n    shift down by two multiplied to two places.\n    For example:\n    encrypt('hi') returns 'lm'\n    encrypt('asdfghjkl') returns 'ewhjklnop'\n    encrypt('gf') returns 'kj'\n    encrypt('et') returns 'ix'\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "encrypt"
+    },
+    "anchor_signature": "d488cfd4ffab467284b48845831b57edd77ec161af8fbf3b612d40c108cccbfa",
+    "canonical_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                # Shift by 4 positions in lowercase alphabet\n                new_char = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(new_char)\n            else:\n                # Shift by 4 positions in uppercase alphabet\n                new_char = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(new_char)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 2,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "chr",
+          "ord",
+          "ord",
+          "ord",
+          "chr",
+          "ord",
+          "ord",
+          "ord"
+        ],
+        "nested_depth": 3,
+        "branch_patterns": [
+          "if_at_depth_1",
+          "if_at_depth_2"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [],
+          "v2": [
+            "v1"
+          ]
+        },
+        "assignments": {
+          "v0": "List(ctx=Load())",
+          "v2": "Call(func=Name(id='chr', ctx=Load()), args=[BinOp(left=BinOp(left=BinOp(left=BinOp(left=Call(func=Name(id='ord', ctx=Load()), args=[Name(id='v1', ctx=Load())]), op=Sub(), right=Call(func=Name(id='ord', ctx=Load()), args=[Constant(value='A')])), op=Add(), right=Constant(value=4)), op=Mod(), right=Constant(value=26)), op=Add(), right=Call(func=Name(id='ord', ctx=Load()), args=[Constant(value='A')]))])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_encrypt"
+          ],
+          [
+            "function_encrypt",
+            "loop"
+          ],
+          [
+            "function_encrypt",
+            "loop",
+            "branch"
+          ],
+          [
+            "function_encrypt",
+            "loop",
+            "branch",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "encrypt": {
+          "name": "encrypt",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add",
+          "Add",
+          "Add",
+          "Add"
+        ],
+        "associative_ops": [
+          "Add",
+          "Add",
+          "Add",
+          "Add"
+        ],
+        "binary_operations": [
+          "Add",
+          "Mod",
+          "Add",
+          "Sub",
+          "Add",
+          "Mod",
+          "Add",
+          "Sub"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          4,
+          26,
+          4,
+          26
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "List",
+          "Load",
+          "For",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "If",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "If",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "BinOp",
+          "BinOp",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Sub",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "Add",
+          "Constant",
+          "Mod",
+          "Constant",
+          "Add",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "BinOp",
+          "BinOp",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Sub",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "Add",
+          "Constant",
+          "Mod",
+          "Constant",
+          "Add",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Name",
+          "Load",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Name",
+          "Load",
+          "Return",
+          "Call",
+          "Attribute",
+          "Constant",
+          "Load",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 13,
+        "ast_hash": "f883df188af2840ab7a8f5b5c4f6a593",
+        "alpha_renamed_hash": "f883df188af2840ab7a8f5b5c4f6a593"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Add",
+          "Mod",
+          "Add",
+          "Sub",
+          "Add",
+          "Mod",
+          "Add",
+          "Sub"
+        ],
+        "precedence_levels": {
+          "Add": 3,
+          "Mod": 4,
+          "Sub": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "For",
+          "If",
+          "If",
+          "Assign",
+          "Expr",
+          "Assign",
+          "Expr",
+          "Expr",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "For_2",
+          "If_3",
+          "If_4",
+          "Assign_5",
+          "Expr_6",
+          "Assign_7",
+          "Expr_8",
+          "Expr_9",
+          "Return_10"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "For",
+          "If",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

@@ -1,0 +1,45 @@
+Cost sketch (list price, not an invoice): USD 26.4092 for 13120 calls (164 tasks, N=20, relation_version=2).
+{
+  "pricing_as_of": "2026-09-01",
+  "pricing_usd_per_million": {
+    "gpt-4o-mini": {
+      "input": 0.15,
+      "output": 0.6,
+      "source": "OpenAI list price (standard, not batch/cache)"
+    },
+    "claude-sonnet-4-5-20250929": {
+      "input": 3.0,
+      "output": 15.0,
+      "source": "Anthropic list price Sonnet 4.5 \u2264200K context"
+    }
+  },
+  "n_tasks": 164,
+  "n": 20,
+  "models": [
+    "gpt-4o-mini",
+    "claude-sonnet-4-5-20250929"
+  ],
+  "temperatures": [
+    0.0,
+    0.7
+  ],
+  "n_calls": 13120,
+  "usd_estimate": 26.4092,
+  "by_model": [
+    {
+      "model": "gpt-4o-mini",
+      "n_calls": 6560,
+      "usd_per_call": 6.5e-05,
+      "usd": 0.4264,
+      "source": "mean billed USD/call from --from-dir"
+    },
+    {
+      "model": "claude-sonnet-4-5-20250929",
+      "n_calls": 6560,
+      "usd_per_call": 0.0039608,
+      "usd": 25.9828,
+      "source": "mean billed USD/call from --from-dir"
+    }
+  ],
+  "note": "List-price sketch, not an invoice. Protocol N is 20 (SPEC OPEN 3 settled 2026-09-16). This command does not silently rewrite stored N=10 jsonl."
+}

@@ -1,0 +1,69 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "c13e7dd40a44f59fe99258c63675f600b821e458a78b48fcd50e51012a4d8776|df8e1478b5cc85dce49f0b01490bad0277d349d61b84ece61d1d66a14bd2189d": {
+      "stitched_code": "def reverse_delete(s, c):\n    \"\"\"Task\n    We are given two strings s and c, you have to deleted all the characters in s that are equal to any character in c\n    then check if the result string is palindrome.\n    A string is called palindrome if it reads the same backward as forward.\n    You should return a tuple containing the result string and True/False for the check.\n    Example\n    For s = \"abcde\", c = \"ae\", the result should be ('bcd',False)\n    For s = \"abcdef\", c = \"b\"  the result should be ('acdef',False)\n    For s = \"abcdedcba\", c = \"ab\", the result should be ('cdedc',True)\n    \"\"\"\n    result = ''.join([char for char in s if char not in c])\n    is_palindrome = result == result[::-1]\n    return result, is_palindrome\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "df8e1478b5cc85dce49f0b01490bad0277d349d61b84ece61d1d66a14bd2189d|df8e1478b5cc85dce49f0b01490bad0277d349d61b84ece61d1d66a14bd2189d": {
+      "stitched_code": "def reverse_delete(s,c):\n    \"\"\"Task\n    We are given two strings s and c, you have to deleted all the characters in s that are equal to any character in c\n    then check if the result string is palindrome.\n    A string is called palindrome if it reads the same backward as forward.\n    You should return a tuple containing the result string and True/False for the check.\n    Example\n    For s = \"abcde\", c = \"ae\", the result should be ('bcd',False)\n    For s = \"abcdef\", c = \"b\"  the result should be ('acdef',False)\n    For s = \"abcdedcba\", c = \"ab\", the result should be ('cdedc',True)\n    \"\"\"\n    # Delete all characters in s that are in c\n    result = ''.join([char for char in s if char not in c])\n    \n    # Check if result is palindrome\n    is_palindrome = result == result[::-1]\n    \n    return (result, is_palindrome)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "df8e1478b5cc85dce49f0b01490bad0277d349d61b84ece61d1d66a14bd2189d|c13e7dd40a44f59fe99258c63675f600b821e458a78b48fcd50e51012a4d8776": {
+      "stitched_code": "def reverse_delete(s, c):\n    result = ''.join(char for char in s if char not in c)\n    is_palindrome = result == result[::-1]\n    return result, is_palindrome\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

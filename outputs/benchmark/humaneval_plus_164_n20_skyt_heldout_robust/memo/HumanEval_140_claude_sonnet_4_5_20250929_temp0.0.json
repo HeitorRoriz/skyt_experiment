@@ -1,0 +1,45 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "0276ca2e1ec7f393869c1cec18e0840a6be433e052d742922b44b2838fbcae49|0276ca2e1ec7f393869c1cec18e0840a6be433e052d742922b44b2838fbcae49": {
+      "stitched_code": "def fix_spaces(text):\n    result = []\n    i = 0\n    \n    while i < len(text):\n        if text[i] == ' ':\n            # Count consecutive spaces\n            space_count = 0\n            j = i\n            while j < len(text) and text[j] == ' ':\n                space_count += 1\n                j += 1\n            \n            # If more than 2 consecutive spaces, replace with -\n            if space_count > 2:\n                result.append('-')\n            else:\n                # Replace each space with underscore\n                result.append('_' * space_count)\n            \n            i = j\n        else:\n            result.append(text[i])\n            i += 1\n    \n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "12c88d8e4a750360fe5143f9073c5d11fcb04eb1410a59ae7c91e689f963b64e|0276ca2e1ec7f393869c1cec18e0840a6be433e052d742922b44b2838fbcae49": {
+      "stitched_code": "def fix_spaces(text):\n    result = []\n    i = 0\n    \n    while i < len(text):\n        if text[i] == ' ':\n            # Count consecutive spaces\n            space_count = 0\n            j = i\n            while j < len(text) and text[j] == ' ':\n                space_count += 1\n                j += 1\n            \n            # Replace based on count\n            if space_count > 2:\n                result.append('-')\n            else:\n                result.append('_' * space_count)\n            \n            i = j\n        else:\n            result.append(text[i])\n            i += 1\n    \n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

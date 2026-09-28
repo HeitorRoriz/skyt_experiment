@@ -1,0 +1,644 @@
+{
+  "contract_id": "HumanEval_147_gpt_4o_mini_temp0.0",
+  "canonical_code": "def get_max_triples(n):\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    count = 0\n    \n    for i in range(n):\n        for j in range(i + 1, n):\n            for k in range(j + 1, n):\n                if (a[i] + a[j] + a[k]) % 3 == 0:\n                    count += 1\n                    \n    return count\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 1,
+      "for_loops": 3,
+      "while_loops": 0,
+      "function_calls": [
+        "range",
+        "range",
+        "range",
+        "range"
+      ],
+      "nested_depth": 4,
+      "branch_patterns": [
+        "if_at_depth_3"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [],
+        "v2": []
+      },
+      "assignments": {
+        "v0": "ListComp(elt=BinOp(left=BinOp(left=BinOp(left=Name(id='v1', ctx=Load()), op=Mult(), right=Name(id='v1', ctx=Load())), op=Sub(), right=Name(id='v1', ctx=Load())), op=Add(), right=Constant(value=1)), generators=[comprehension(target=Name(id='v1', ctx=Store()), iter=Call(func=Name(id='range', ctx=Load()), args=[Constant(value=1), BinOp(left=Name(id='p0', ctx=Load()), op=Add(), right=Constant(value=1))]), is_async=0)])",
+        "v2": "Constant(value=0)"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_get_max_triples"
+        ],
+        [
+          "function_get_max_triples",
+          "loop"
+        ],
+        [
+          "function_get_max_triples",
+          "loop",
+          "loop"
+        ],
+        [
+          "function_get_max_triples",
+          "loop",
+          "loop",
+          "loop"
+        ],
+        [
+          "function_get_max_triples",
+          "loop",
+          "loop",
+          "loop",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "get_max_triples": {
+        "name": "get_max_triples",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 3,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n^2)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add",
+        "Mult",
+        "Add",
+        "Add",
+        "Add",
+        "Add",
+        "Add"
+      ],
+      "associative_ops": [
+        "Add",
+        "Mult",
+        "Add",
+        "Add",
+        "Add",
+        "Add",
+        "Add"
+      ],
+      "binary_operations": [
+        "Add",
+        "Sub",
+        "Mult",
+        "Add",
+        "Add",
+        "Add",
+        "Mod",
+        "Add",
+        "Add"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        3,
+        0,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "ListComp",
+        "BinOp",
+        "BinOp",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mult",
+        "Name",
+        "Load",
+        "Sub",
+        "Name",
+        "Load",
+        "Add",
+        "Constant",
+        "comprehension",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Constant",
+        "Name",
+        "Load",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Constant",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "BinOp",
+        "BinOp",
+        "BinOp",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Add",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Add",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Mod",
+        "Constant",
+        "Eq",
+        "Constant",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Add",
+        "Constant",
+        "Return",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 12,
+      "ast_hash": "3617d733e1465d06088bd99df1d17c3f",
+      "alpha_renamed_hash": "3617d733e1465d06088bd99df1d17c3f"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Add",
+        "Sub",
+        "Mult",
+        "Add",
+        "Add",
+        "Add",
+        "Mod",
+        "Add",
+        "Add"
+      ],
+      "precedence_levels": {
+        "Add": 3,
+        "Sub": 3,
+        "Mult": 4,
+        "Mod": 4
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "Assign",
+        "For",
+        "For",
+        "For",
+        "If",
+        "AugAssign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "Assign_2",
+        "For_3",
+        "For_4",
+        "For_5",
+        "If_6",
+        "AugAssign_7",
+        "Return_8"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "For",
+        "For",
+        "For",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_147_gpt_4o_mini_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/147",
+    "prompt": "\ndef get_max_triples(n):\n    \"\"\"\n    You are given a positive integer n. You have to create an integer array a of length n.\n        For each i (1 \u2264 i \u2264 n), the value of a[i] = i * i - i + 1.\n        Return the number of triples (a[i], a[j], a[k]) of a where i < j < k, \n    and a[i] + a[j] + a[k] is a multiple of 3.\n\n    Example :\n        Input: n = 5\n        Output: 1\n        Explanation: \n        a = [1, 3, 7, 13, 21]\n        The only valid triple is (1, 7, 13).\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "get_max_triples"
+    },
+    "anchor_signature": "469e36f184105fdf7d024943818f55466576dc8b19cfad03a2a56af6cec9b947",
+    "canonical_code": "def get_max_triples(n):\n    a = [i * i - i + 1 for i in range(1, n + 1)]\n    count = 0\n    \n    for i in range(n):\n        for j in range(i + 1, n):\n            for k in range(j + 1, n):\n                if (a[i] + a[j] + a[k]) % 3 == 0:\n                    count += 1\n                    \n    return count\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 1,
+        "for_loops": 3,
+        "while_loops": 0,
+        "function_calls": [
+          "range",
+          "range",
+          "range",
+          "range"
+        ],
+        "nested_depth": 4,
+        "branch_patterns": [
+          "if_at_depth_3"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [],
+          "v2": []
+        },
+        "assignments": {
+          "v0": "ListComp(elt=BinOp(left=BinOp(left=BinOp(left=Name(id='v1', ctx=Load()), op=Mult(), right=Name(id='v1', ctx=Load())), op=Sub(), right=Name(id='v1', ctx=Load())), op=Add(), right=Constant(value=1)), generators=[comprehension(target=Name(id='v1', ctx=Store()), iter=Call(func=Name(id='range', ctx=Load()), args=[Constant(value=1), BinOp(left=Name(id='p0', ctx=Load()), op=Add(), right=Constant(value=1))]), is_async=0)])",
+          "v2": "Constant(value=0)"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_get_max_triples"
+          ],
+          [
+            "function_get_max_triples",
+            "loop"
+          ],
+          [
+            "function_get_max_triples",
+            "loop",
+            "loop"
+          ],
+          [
+            "function_get_max_triples",
+            "loop",
+            "loop",
+            "loop"
+          ],
+          [
+            "function_get_max_triples",
+            "loop",
+            "loop",
+            "loop",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "get_max_triples": {
+          "name": "get_max_triples",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 3,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n^2)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add",
+          "Mult",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add"
+        ],
+        "associative_ops": [
+          "Add",
+          "Mult",
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add"
+        ],
+        "binary_operations": [
+          "Add",
+          "Sub",
+          "Mult",
+          "Add",
+          "Add",
+          "Add",
+          "Mod",
+          "Add",
+          "Add"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          3,
+          0,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "ListComp",
+          "BinOp",
+          "BinOp",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mult",
+          "Name",
+          "Load",
+          "Sub",
+          "Name",
+          "Load",
+          "Add",
+          "Constant",
+          "comprehension",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Constant",
+          "Name",
+          "Load",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Constant",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "BinOp",
+          "BinOp",
+          "BinOp",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Add",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Add",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Mod",
+          "Constant",
+          "Eq",
+          "Constant",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Add",
+          "Constant",
+          "Return",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 12,
+        "ast_hash": "3617d733e1465d06088bd99df1d17c3f",
+        "alpha_renamed_hash": "3617d733e1465d06088bd99df1d17c3f"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Add",
+          "Sub",
+          "Mult",
+          "Add",
+          "Add",
+          "Add",
+          "Mod",
+          "Add",
+          "Add"
+        ],
+        "precedence_levels": {
+          "Add": 3,
+          "Sub": 3,
+          "Mult": 4,
+          "Mod": 4
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "For",
+          "For",
+          "For",
+          "If",
+          "AugAssign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "Assign_2",
+          "For_3",
+          "For_4",
+          "For_5",
+          "If_6",
+          "AugAssign_7",
+          "Return_8"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "For",
+          "For",
+          "For",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

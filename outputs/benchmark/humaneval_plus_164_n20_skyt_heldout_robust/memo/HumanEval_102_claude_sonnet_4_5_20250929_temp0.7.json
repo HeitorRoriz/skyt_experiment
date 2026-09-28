@@ -1,0 +1,45 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "443f640fd2ca41781a32fa6409a8901fdaac0682e16e266d2b5ace3b877720bc|443f640fd2ca41781a32fa6409a8901fdaac0682e16e266d2b5ace3b877720bc": {
+      "stitched_code": "def choose_num(x, y):\n    \"\"\"This function takes two positive numbers x and y and returns the\n    biggest even integer number that is in the range [x, y] inclusive. If \n    there's no such number, then the function should return -1.\n\n    For example:\n    choose_num(12, 15) = 14\n    choose_num(13, 12) = -1\n    \"\"\"\n    if x > y:\n        return -1\n    \n    if y % 2 == 0:\n        return y\n    elif y - 1 >= x:\n        return y - 1\n    else:\n        return -1\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "af0979537a1a07af713bb72df30b0d4441ae9ed3fd69261083877b63affdd8a5|443f640fd2ca41781a32fa6409a8901fdaac0682e16e266d2b5ace3b877720bc": {
+      "stitched_code": "def choose_num(x, y):\n    if x > y:\n        return -1\n    \n    if y % 2 == 0:\n        return y\n    elif y - 1 >= x:\n        return y - 1\n    else:\n        return -1\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

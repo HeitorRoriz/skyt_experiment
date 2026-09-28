@@ -1,0 +1,698 @@
+{
+  "contract_id": "HumanEval_64_gpt_4o_mini_temp0.0",
+  "canonical_code": "def vowels_count(s):\n    vowels = 'aeiou'\n    count = 0\n    s = s.lower()\n    \n    for i in range(len(s)):\n        if s[i] in vowels:\n            count += 1\n        elif s[i] == 'y' and i == len(s) - 1:\n            count += 1\n            \n    return count\n\n# Test cases\nprint(vowels_count(\"abcde\"))  # 2\nprint(vowels_count(\"ACEDY\"))  # 3\nprint(vowels_count(\"sky\"))     # 1\nprint(vowels_count(\"rhythm\"))  # 0\nprint(vowels_count(\"queue\"))   # 4\nprint(vowels_count(\"Y\"))       # 1\nprint(vowels_count(\"Yard\"))     # 1\nprint(vowels_count(\"xyz\"))     # 0\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 2,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [
+        "range",
+        "len",
+        "len",
+        "print",
+        "vowels_count",
+        "print",
+        "vowels_count",
+        "print",
+        "vowels_count",
+        "print",
+        "vowels_count",
+        "print",
+        "vowels_count",
+        "print",
+        "vowels_count",
+        "print",
+        "vowels_count",
+        "print",
+        "vowels_count"
+      ],
+      "nested_depth": 3,
+      "branch_patterns": [
+        "if_at_depth_1",
+        "if_at_depth_2"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [],
+        "v1": [],
+        "p0": []
+      },
+      "assignments": {
+        "v0": "Constant(value='aeiou')",
+        "v1": "Constant(value=0)",
+        "p0": "Call(func=Attribute(value=Name(id='p0', ctx=Load()), attr='lower', ctx=Load()))"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_vowels_count"
+        ],
+        [
+          "function_vowels_count",
+          "loop"
+        ],
+        [
+          "function_vowels_count",
+          "loop",
+          "branch"
+        ],
+        [
+          "function_vowels_count",
+          "loop",
+          "branch",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "vowels_count": {
+        "name": "vowels_count",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 8,
+      "estimated_complexity": "O(2^n)"
+    },
+    "side_effect_profile": {
+      "has_print": true,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": false
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": [
+        "Sub"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        0,
+        1,
+        1,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [
+        "And"
+      ],
+      "comparisons": [
+        "In",
+        "Eq",
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "In",
+        "Name",
+        "Load",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Add",
+        "Constant",
+        "If",
+        "BoolOp",
+        "And",
+        "Compare",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Eq",
+        "Constant",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Sub",
+        "Constant",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Add",
+        "Constant",
+        "Return",
+        "Name",
+        "Load",
+        "Expr",
+        "Call",
+        "Name",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "Expr",
+        "Call",
+        "Name",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "Expr",
+        "Call",
+        "Name",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "Expr",
+        "Call",
+        "Name",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "Expr",
+        "Call",
+        "Name",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "Expr",
+        "Call",
+        "Name",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "Expr",
+        "Call",
+        "Name",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "Expr",
+        "Call",
+        "Name",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Constant"
+      ],
+      "ast_depth": 10,
+      "ast_hash": "946e6079e577afc200d2174233ad638f",
+      "alpha_renamed_hash": "946e6079e577afc200d2174233ad638f"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Sub"
+      ],
+      "precedence_levels": {
+        "Sub": 3
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "Assign",
+        "Assign",
+        "For",
+        "If",
+        "AugAssign",
+        "If",
+        "AugAssign",
+        "Return",
+        "Expr",
+        "Expr",
+        "Expr",
+        "Expr",
+        "Expr",
+        "Expr",
+        "Expr",
+        "Expr"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "Assign_2",
+        "Assign_3",
+        "For_4",
+        "If_5",
+        "AugAssign_6",
+        "If_7",
+        "AugAssign_8",
+        "Return_9",
+        "Expr_10",
+        "Expr_11",
+        "Expr_12",
+        "Expr_13",
+        "Expr_14",
+        "Expr_15",
+        "Expr_16",
+        "Expr_17"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "For",
+        "If",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_64_gpt_4o_mini_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/64",
+    "prompt": "\nFIX = \"\"\"\nAdd more test cases.\n\"\"\"\n\ndef vowels_count(s):\n    \"\"\"Write a function vowels_count which takes a string representing\n    a word as input and returns the number of vowels in the string.\n    Vowels in this case are 'a', 'e', 'i', 'o', 'u'. Here, 'y' is also a\n    vowel, but only when it is at the end of the given word.\n\n    Example:\n    >>> vowels_count(\"abcde\")\n    2\n    >>> vowels_count(\"ACEDY\")\n    3\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "vowels_count"
+    },
+    "anchor_signature": "929d421eff190d940e4175d5236fbc7ad43d79c6176f3e6568f9b1dbb552e63c",
+    "canonical_code": "def vowels_count(s):\n    vowels = 'aeiou'\n    count = 0\n    s = s.lower()\n    \n    for i in range(len(s)):\n        if s[i] in vowels:\n            count += 1\n        elif s[i] == 'y' and i == len(s) - 1:\n            count += 1\n            \n    return count\n\n# Test cases\nprint(vowels_count(\"abcde\"))  # 2\nprint(vowels_count(\"ACEDY\"))  # 3\nprint(vowels_count(\"sky\"))     # 1\nprint(vowels_count(\"rhythm\"))  # 0\nprint(vowels_count(\"queue\"))   # 4\nprint(vowels_count(\"Y\"))       # 1\nprint(vowels_count(\"Yard\"))     # 1\nprint(vowels_count(\"xyz\"))     # 0\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 2,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "range",
+          "len",
+          "len",
+          "print",
+          "vowels_count",
+          "print",
+          "vowels_count",
+          "print",
+          "vowels_count",
+          "print",
+          "vowels_count",
+          "print",
+          "vowels_count",
+          "print",
+          "vowels_count",
+          "print",
+          "vowels_count",
+          "print",
+          "vowels_count"
+        ],
+        "nested_depth": 3,
+        "branch_patterns": [
+          "if_at_depth_1",
+          "if_at_depth_2"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [],
+          "v1": [],
+          "p0": []
+        },
+        "assignments": {
+          "v0": "Constant(value='aeiou')",
+          "v1": "Constant(value=0)",
+          "p0": "Call(func=Attribute(value=Name(id='p0', ctx=Load()), attr='lower', ctx=Load()))"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_vowels_count"
+          ],
+          [
+            "function_vowels_count",
+            "loop"
+          ],
+          [
+            "function_vowels_count",
+            "loop",
+            "branch"
+          ],
+          [
+            "function_vowels_count",
+            "loop",
+            "branch",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "vowels_count": {
+          "name": "vowels_count",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 8,
+        "estimated_complexity": "O(2^n)"
+      },
+      "side_effect_profile": {
+        "has_print": true,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": false
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": [
+          "Sub"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          0,
+          1,
+          1,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [
+          "And"
+        ],
+        "comparisons": [
+          "In",
+          "Eq",
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "In",
+          "Name",
+          "Load",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Add",
+          "Constant",
+          "If",
+          "BoolOp",
+          "And",
+          "Compare",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Eq",
+          "Constant",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Sub",
+          "Constant",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Add",
+          "Constant",
+          "Return",
+          "Name",
+          "Load",
+          "Expr",
+          "Call",
+          "Name",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "Expr",
+          "Call",
+          "Name",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "Expr",
+          "Call",
+          "Name",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "Expr",
+          "Call",
+          "Name",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "Expr",
+          "Call",
+          "Name",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "Expr",
+          "Call",
+          "Name",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "Expr",
+          "Call",
+          "Name",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "Expr",
+          "Call",
+          "Name",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Constant"
+        ],
+        "ast_depth": 10,
+        "ast_hash": "946e6079e577afc200d2174233ad638f",
+        "alpha_renamed_hash": "946e6079e577afc200d2174233ad638f"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Sub"
+        ],
+        "precedence_levels": {
+          "Sub": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "Assign",
+          "For",
+          "If",
+          "AugAssign",
+          "If",
+          "AugAssign",
+          "Return",
+          "Expr",
+          "Expr",
+          "Expr",
+          "Expr",
+          "Expr",
+          "Expr",
+          "Expr",
+          "Expr"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "Assign_2",
+          "Assign_3",
+          "For_4",
+          "If_5",
+          "AugAssign_6",
+          "If_7",
+          "AugAssign_8",
+          "Return_9",
+          "Expr_10",
+          "Expr_11",
+          "Expr_12",
+          "Expr_13",
+          "Expr_14",
+          "Expr_15",
+          "Expr_16",
+          "Expr_17"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "For",
+          "If",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

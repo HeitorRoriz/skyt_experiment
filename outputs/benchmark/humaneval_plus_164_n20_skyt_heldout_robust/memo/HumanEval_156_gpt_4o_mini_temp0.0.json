@@ -1,0 +1,69 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "010f9d5f4273b713a34d9d278b0e38869efb0262241606c371ff44cbca1089a9|010f9d5f4273b713a34d9d278b0e38869efb0262241606c371ff44cbca1089a9": {
+      "stitched_code": "def int_to_mini_roman(number):\n    if not (1 <= number <= 1000):\n        raise ValueError(\"Number must be between 1 and 1000\")\n    \n    val = [\n        1000, 900, 500, 400,\n        100, 90, 50, 40,\n        10, 9, 5, 4,\n        1\n    ]\n    syms = [\n        \"m\", \"cm\", \"d\", \"cd\",\n        \"c\", \"xc\", \"l\", \"xl\",\n        \"x\", \"ix\", \"v\", \"iv\",\n        \"i\"\n    ]\n    \n    roman_numeral = \"\"\n    for i in range(len(val)):\n        while number >= val[i]:\n            roman_numeral += syms[i]\n            number -= val[i]\n    \n    return roman_numeral\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "3bfc7055fb614c2aab6792b12f6a4921c3d64a56abbf23a51b72d61aa50d1dfb|010f9d5f4273b713a34d9d278b0e38869efb0262241606c371ff44cbca1089a9": {
+      "stitched_code": "def int_to_mini_roman(number):\n    if not 1 <= number <= 1000:\n        raise ValueError('Number must be between 1 and 1000')\n    val = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]\n    syms = ['m', 'cm', 'd', 'cd', 'c', 'xc', 'l', 'xl', 'x', 'ix', 'v',\n        'iv', 'i']\n    roman_numeral = ''\n    for i in range(len(val)):\n        while number >= val[i]:\n            roman_numeral += syms[i]\n            number -= val[i]\n    return roman_numeral\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7c759ccff7bf7449a30f580869ff3cc65a22cff09165db072032b82268a5ed39|010f9d5f4273b713a34d9d278b0e38869efb0262241606c371ff44cbca1089a9": {
+      "stitched_code": "def int_to_mini_roman(number):\n    if not 1 <= number <= 1000:\n        raise ValueError('Number must be between 1 and 1000')\n    val = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]\n    syms = ['m', 'cm', 'd', 'cd', 'c', 'xc', 'l', 'xl', 'x', 'ix', 'v',\n        'iv', 'i']\n    roman_numeral = ''\n    for i in range(len(val)):\n        while number >= val[i]:\n            roman_numeral += syms[i]\n            number -= val[i]\n    return roman_numeral\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

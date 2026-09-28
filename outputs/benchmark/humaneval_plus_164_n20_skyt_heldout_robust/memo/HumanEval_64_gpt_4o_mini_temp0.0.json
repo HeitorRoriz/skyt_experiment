@@ -1,0 +1,173 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "6ebf53f1de6683751648c91a68820c548794fdb60092eeaedb569fa77dbfe445|25839af0a594857c479e4347e49884edfc3f36fc99060e8d66d3684dd09d3ddf": {
+      "stitched_code": "def vowels_count(s):\n    vowels = 'aeiou'\n    count = 0\n    s = s.lower()\n    \n    for i in range(len(s)):\n        if s[i] in vowels:\n            count += 1\n        elif s[i] == 'y' and i == len(s) - 1:\n            count += 1\n            \n    return count\n\n# Test cases\nprint(vowels_count(\"abcde\"))  # 2\nprint(vowels_count(\"ACEDY\"))  # 3\nprint(vowels_count(\"sky\"))     # 1\nprint(vowels_count(\"rhythm\"))  # 0\nprint(vowels_count(\"queue\"))   # 4\nprint(vowels_count(\"Y\"))       # 1\nprint(vowels_count(\"Yard\"))    # 1\nprint(vowels_count(\"xyz\"))     # 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "41ae9f43b5371b1165b6793ba9066581e487e56c32c2a1ee7908accf40548975|25839af0a594857c479e4347e49884edfc3f36fc99060e8d66d3684dd09d3ddf": {
+      "stitched_code": "def vowels_count(s):\n    vowels = 'aeiou'\n    count = 0\n    s = s.lower()\n    for i in range(len(s)):\n        if s[i] in vowels:\n            count += 1\n        elif s[i] == 'y' and i == len(s) - 1:\n            count += 1\n    return count\n\n\nprint(vowels_count('abcde'))\nprint(vowels_count('ACEDY'))\nprint(vowels_count('sky'))\nprint(vowels_count('rhythm'))\nprint(vowels_count('queue'))\nprint(vowels_count('Y'))\nprint(vowels_count('Yard'))\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "25839af0a594857c479e4347e49884edfc3f36fc99060e8d66d3684dd09d3ddf|25839af0a594857c479e4347e49884edfc3f36fc99060e8d66d3684dd09d3ddf": {
+      "stitched_code": "def vowels_count(s):\n    vowels = 'aeiou'\n    count = 0\n    s = s.lower()\n    \n    for i in range(len(s)):\n        if s[i] in vowels:\n            count += 1\n        elif s[i] == 'y' and i == len(s) - 1:\n            count += 1\n            \n    return count\n\n# Test cases\nprint(vowels_count(\"abcde\"))  # 2\nprint(vowels_count(\"ACEDY\"))  # 3\nprint(vowels_count(\"sky\"))     # 1\nprint(vowels_count(\"rhythm\"))  # 0\nprint(vowels_count(\"queue\"))   # 4\nprint(vowels_count(\"Y\"))       # 1\nprint(vowels_count(\"Yard\"))     # 1\nprint(vowels_count(\"xyz\"))     # 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "d551218164b7091edd4a77031df87f96810b7caf4111115673b15610339e50ed|25839af0a594857c479e4347e49884edfc3f36fc99060e8d66d3684dd09d3ddf": {
+      "stitched_code": "def vowels_count(s):\n    vowels = 'aeiou'\n    count = 0\n    s = s.lower()\n    for i in range(len(s)):\n        if s[i] in vowels:\n            count += 1\n        elif s[i] == 'y' and i == len(s) - 1:\n            count += 1\n    return count\n\n\nprint(vowels_count('abcde'))\nprint(vowels_count('ACEDY'))\nprint(vowels_count('sky'))\nprint(vowels_count('rhythm'))\nprint(vowels_count('queue'))\nprint(vowels_count('Y'))\nprint(vowels_count('Yard'))\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "6ebf53f1de6683751648c91a68820c548794fdb60092eeaedb569fa77dbfe445|6ebf53f1de6683751648c91a68820c548794fdb60092eeaedb569fa77dbfe445": {
+      "stitched_code": "def vowels_count(s):\n    vowels = 'aeiou'\n    count = 0\n    s = s.lower()\n    \n    for i in range(len(s)):\n        if s[i] in vowels:\n            count += 1\n        elif s[i] == 'y' and i == len(s) - 1:\n            count += 1\n            \n    return count\n\n# Test cases\nprint(vowels_count(\"abcde\"))  # 2\nprint(vowels_count(\"ACEDY\"))  # 3\nprint(vowels_count(\"sky\"))     # 1\nprint(vowels_count(\"rhythm\"))  # 0\nprint(vowels_count(\"queue\"))   # 4\nprint(vowels_count(\"Y\"))       # 1\nprint(vowels_count(\"Yard\"))    # 1\nprint(vowels_count(\"xyz\"))     # 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "25839af0a594857c479e4347e49884edfc3f36fc99060e8d66d3684dd09d3ddf|6ebf53f1de6683751648c91a68820c548794fdb60092eeaedb569fa77dbfe445": {
+      "stitched_code": "def vowels_count(s):\n    vowels = 'aeiou'\n    count = 0\n    s = s.lower()\n    \n    for i in range(len(s)):\n        if s[i] in vowels:\n            count += 1\n        elif s[i] == 'y' and i == len(s) - 1:\n            count += 1\n            \n    return count\n\n# Test cases\nprint(vowels_count(\"abcde\"))  # 2\nprint(vowels_count(\"ACEDY\"))  # 3\nprint(vowels_count(\"sky\"))     # 1\nprint(vowels_count(\"rhythm\"))  # 0\nprint(vowels_count(\"queue\"))   # 4\nprint(vowels_count(\"Y\"))       # 1\nprint(vowels_count(\"Yard\"))     # 1\nprint(vowels_count(\"xyz\"))     # 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "41ae9f43b5371b1165b6793ba9066581e487e56c32c2a1ee7908accf40548975|6ebf53f1de6683751648c91a68820c548794fdb60092eeaedb569fa77dbfe445": {
+      "stitched_code": "def vowels_count(s):\n    vowels = 'aeiou'\n    count = 0\n    s = s.lower()\n    for i in range(len(s)):\n        if s[i] in vowels:\n            count += 1\n        elif s[i] == 'y' and i == len(s) - 1:\n            count += 1\n    return count\n\n\nprint(vowels_count('abcde'))\nprint(vowels_count('ACEDY'))\nprint(vowels_count('sky'))\nprint(vowels_count('rhythm'))\nprint(vowels_count('queue'))\nprint(vowels_count('Y'))\nprint(vowels_count('Yard'))\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "d551218164b7091edd4a77031df87f96810b7caf4111115673b15610339e50ed|6ebf53f1de6683751648c91a68820c548794fdb60092eeaedb569fa77dbfe445": {
+      "stitched_code": "def vowels_count(s):\n    vowels = 'aeiou'\n    count = 0\n    s = s.lower()\n    for i in range(len(s)):\n        if s[i] in vowels:\n            count += 1\n        elif s[i] == 'y' and i == len(s) - 1:\n            count += 1\n    return count\n\n\nprint(vowels_count('abcde'))\nprint(vowels_count('ACEDY'))\nprint(vowels_count('sky'))\nprint(vowels_count('rhythm'))\nprint(vowels_count('queue'))\nprint(vowels_count('Y'))\nprint(vowels_count('Yard'))\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

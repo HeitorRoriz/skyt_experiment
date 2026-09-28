@@ -1,0 +1,889 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "e7b35ccbfebad1fdc7273388bae372f06c8a44f8f2d299361844b5da09f9d016|b378a8397070dcf11e2880c0ac3dc10359f3eeae9bc6d5f2814cb2a841716cce": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "a84cfa1ba69addb16e6f15a31e58d647ad72a5303a3384f5e1983b3987261647|b378a8397070dcf11e2880c0ac3dc10359f3eeae9bc6d5f2814cb2a841716cce": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # Any even number >= 8 can be written as sum of 4 positive even numbers\n    # Any odd number cannot be written as sum of even numbers\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0d0b6ce6831c6a63c4c0afccfcaf5585a1896e9937f3a47d7881b3e3237f77e5|b378a8397070dcf11e2880c0ac3dc10359f3eeae9bc6d5f2814cb2a841716cce": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # n must be even (sum of even numbers is even)\n    # n must be >= 8\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "5bbc0aaffcbad38a32cfab70d22be6b724df8b1b9563a327028134518149ef20|b378a8397070dcf11e2880c0ac3dc10359f3eeae9bc6d5f2814cb2a841716cce": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # Any even number >= 8 can be written as sum of 4 positive even numbers\n    # For example: n = 2+2+2+(n-6) where n-6 must be even and positive\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "69e1544b66fd19dc93f5760767fdfb2abaf09dffa31db70a79aea3fd2b703020|b378a8397070dcf11e2880c0ac3dc10359f3eeae9bc6d5f2814cb2a841716cce": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # Any even number >= 8 can be written as sum of 4 positive even numbers\n    # For odd numbers, it's impossible since sum of even numbers is always even\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0d0b6ce6831c6a63c4c0afccfcaf5585a1896e9937f3a47d7881b3e3237f77e5|5bbc0aaffcbad38a32cfab70d22be6b724df8b1b9563a327028134518149ef20": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # n must be even (sum of even numbers is even)\n    # n must be >= 8\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "a84cfa1ba69addb16e6f15a31e58d647ad72a5303a3384f5e1983b3987261647|5bbc0aaffcbad38a32cfab70d22be6b724df8b1b9563a327028134518149ef20": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # Any even number >= 8 can be written as sum of 4 positive even numbers\n    # Any odd number cannot be written as sum of even numbers\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "b378a8397070dcf11e2880c0ac3dc10359f3eeae9bc6d5f2814cb2a841716cce|5bbc0aaffcbad38a32cfab70d22be6b724df8b1b9563a327028134518149ef20": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # A number can be written as sum of 4 positive even numbers if:\n    # 1. It's at least 8\n    # 2. It's even (sum of even numbers is even)\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "e7b35ccbfebad1fdc7273388bae372f06c8a44f8f2d299361844b5da09f9d016|5bbc0aaffcbad38a32cfab70d22be6b724df8b1b9563a327028134518149ef20": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "e1a60653c2192b3ae7d3d407595779ca5525130dd5454f3bd44df2514d064e94|b378a8397070dcf11e2880c0ac3dc10359f3eeae9bc6d5f2814cb2a841716cce": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # Any even number >= 8 can be written as sum of 4 positive even numbers\n    # If n is odd, it cannot be sum of even numbers\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "69e1544b66fd19dc93f5760767fdfb2abaf09dffa31db70a79aea3fd2b703020|5bbc0aaffcbad38a32cfab70d22be6b724df8b1b9563a327028134518149ef20": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # Any even number >= 8 can be written as sum of 4 positive even numbers\n    # For odd numbers, it's impossible since sum of even numbers is always even\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "e1a60653c2192b3ae7d3d407595779ca5525130dd5454f3bd44df2514d064e94|5bbc0aaffcbad38a32cfab70d22be6b724df8b1b9563a327028134518149ef20": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # Any even number >= 8 can be written as sum of 4 positive even numbers\n    # If n is odd, it cannot be sum of even numbers\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0d0b6ce6831c6a63c4c0afccfcaf5585a1896e9937f3a47d7881b3e3237f77e5|a84cfa1ba69addb16e6f15a31e58d647ad72a5303a3384f5e1983b3987261647": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # n must be even (sum of even numbers is even)\n    # n must be >= 8\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "e7b35ccbfebad1fdc7273388bae372f06c8a44f8f2d299361844b5da09f9d016|a84cfa1ba69addb16e6f15a31e58d647ad72a5303a3384f5e1983b3987261647": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "5bbc0aaffcbad38a32cfab70d22be6b724df8b1b9563a327028134518149ef20|a84cfa1ba69addb16e6f15a31e58d647ad72a5303a3384f5e1983b3987261647": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # Any even number >= 8 can be written as sum of 4 positive even numbers\n    # For example: n = 2+2+2+(n-6) where n-6 must be even and positive\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "69e1544b66fd19dc93f5760767fdfb2abaf09dffa31db70a79aea3fd2b703020|a84cfa1ba69addb16e6f15a31e58d647ad72a5303a3384f5e1983b3987261647": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # Any even number >= 8 can be written as sum of 4 positive even numbers\n    # For odd numbers, it's impossible since sum of even numbers is always even\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "b378a8397070dcf11e2880c0ac3dc10359f3eeae9bc6d5f2814cb2a841716cce|a84cfa1ba69addb16e6f15a31e58d647ad72a5303a3384f5e1983b3987261647": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # A number can be written as sum of 4 positive even numbers if:\n    # 1. It's at least 8\n    # 2. It's even (sum of even numbers is even)\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "a84cfa1ba69addb16e6f15a31e58d647ad72a5303a3384f5e1983b3987261647|e1a60653c2192b3ae7d3d407595779ca5525130dd5454f3bd44df2514d064e94": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # Any even number >= 8 can be written as sum of 4 positive even numbers\n    # Any odd number cannot be written as sum of even numbers\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0d0b6ce6831c6a63c4c0afccfcaf5585a1896e9937f3a47d7881b3e3237f77e5|e1a60653c2192b3ae7d3d407595779ca5525130dd5454f3bd44df2514d064e94": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # n must be even (sum of even numbers is even)\n    # n must be >= 8\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "e7b35ccbfebad1fdc7273388bae372f06c8a44f8f2d299361844b5da09f9d016|e1a60653c2192b3ae7d3d407595779ca5525130dd5454f3bd44df2514d064e94": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "5bbc0aaffcbad38a32cfab70d22be6b724df8b1b9563a327028134518149ef20|e1a60653c2192b3ae7d3d407595779ca5525130dd5454f3bd44df2514d064e94": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # Any even number >= 8 can be written as sum of 4 positive even numbers\n    # For example: n = 2+2+2+(n-6) where n-6 must be even and positive\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "69e1544b66fd19dc93f5760767fdfb2abaf09dffa31db70a79aea3fd2b703020|e1a60653c2192b3ae7d3d407595779ca5525130dd5454f3bd44df2514d064e94": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # Any even number >= 8 can be written as sum of 4 positive even numbers\n    # For odd numbers, it's impossible since sum of even numbers is always even\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "b378a8397070dcf11e2880c0ac3dc10359f3eeae9bc6d5f2814cb2a841716cce|e1a60653c2192b3ae7d3d407595779ca5525130dd5454f3bd44df2514d064e94": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # A number can be written as sum of 4 positive even numbers if:\n    # 1. It's at least 8\n    # 2. It's even (sum of even numbers is even)\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "e1a60653c2192b3ae7d3d407595779ca5525130dd5454f3bd44df2514d064e94|a84cfa1ba69addb16e6f15a31e58d647ad72a5303a3384f5e1983b3987261647": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # Any even number >= 8 can be written as sum of 4 positive even numbers\n    # If n is odd, it cannot be sum of even numbers\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "e1a60653c2192b3ae7d3d407595779ca5525130dd5454f3bd44df2514d064e94|0d0b6ce6831c6a63c4c0afccfcaf5585a1896e9937f3a47d7881b3e3237f77e5": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # Any even number >= 8 can be written as sum of 4 positive even numbers\n    # If n is odd, it cannot be sum of even numbers\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "a84cfa1ba69addb16e6f15a31e58d647ad72a5303a3384f5e1983b3987261647|0d0b6ce6831c6a63c4c0afccfcaf5585a1896e9937f3a47d7881b3e3237f77e5": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # Any even number >= 8 can be written as sum of 4 positive even numbers\n    # Any odd number cannot be written as sum of even numbers\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0d0b6ce6831c6a63c4c0afccfcaf5585a1896e9937f3a47d7881b3e3237f77e5|0d0b6ce6831c6a63c4c0afccfcaf5585a1896e9937f3a47d7881b3e3237f77e5": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # n must be even (sum of even numbers is even)\n    # n must be >= 8\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "e7b35ccbfebad1fdc7273388bae372f06c8a44f8f2d299361844b5da09f9d016|0d0b6ce6831c6a63c4c0afccfcaf5585a1896e9937f3a47d7881b3e3237f77e5": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "5bbc0aaffcbad38a32cfab70d22be6b724df8b1b9563a327028134518149ef20|0d0b6ce6831c6a63c4c0afccfcaf5585a1896e9937f3a47d7881b3e3237f77e5": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # Any even number >= 8 can be written as sum of 4 positive even numbers\n    # For example: n = 2+2+2+(n-6) where n-6 must be even and positive\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "69e1544b66fd19dc93f5760767fdfb2abaf09dffa31db70a79aea3fd2b703020|0d0b6ce6831c6a63c4c0afccfcaf5585a1896e9937f3a47d7881b3e3237f77e5": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # Any even number >= 8 can be written as sum of 4 positive even numbers\n    # For odd numbers, it's impossible since sum of even numbers is always even\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "b378a8397070dcf11e2880c0ac3dc10359f3eeae9bc6d5f2814cb2a841716cce|0d0b6ce6831c6a63c4c0afccfcaf5585a1896e9937f3a47d7881b3e3237f77e5": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # A number can be written as sum of 4 positive even numbers if:\n    # 1. It's at least 8\n    # 2. It's even (sum of even numbers is even)\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "e1a60653c2192b3ae7d3d407595779ca5525130dd5454f3bd44df2514d064e94|69e1544b66fd19dc93f5760767fdfb2abaf09dffa31db70a79aea3fd2b703020": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # Any even number >= 8 can be written as sum of 4 positive even numbers\n    # If n is odd, it cannot be sum of even numbers\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "a84cfa1ba69addb16e6f15a31e58d647ad72a5303a3384f5e1983b3987261647|69e1544b66fd19dc93f5760767fdfb2abaf09dffa31db70a79aea3fd2b703020": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # Any even number >= 8 can be written as sum of 4 positive even numbers\n    # Any odd number cannot be written as sum of even numbers\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0d0b6ce6831c6a63c4c0afccfcaf5585a1896e9937f3a47d7881b3e3237f77e5|69e1544b66fd19dc93f5760767fdfb2abaf09dffa31db70a79aea3fd2b703020": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # n must be even (sum of even numbers is even)\n    # n must be >= 8\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "5bbc0aaffcbad38a32cfab70d22be6b724df8b1b9563a327028134518149ef20|69e1544b66fd19dc93f5760767fdfb2abaf09dffa31db70a79aea3fd2b703020": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # Any even number >= 8 can be written as sum of 4 positive even numbers\n    # For example: n = 2+2+2+(n-6) where n-6 must be even and positive\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "e7b35ccbfebad1fdc7273388bae372f06c8a44f8f2d299361844b5da09f9d016|69e1544b66fd19dc93f5760767fdfb2abaf09dffa31db70a79aea3fd2b703020": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "b378a8397070dcf11e2880c0ac3dc10359f3eeae9bc6d5f2814cb2a841716cce|69e1544b66fd19dc93f5760767fdfb2abaf09dffa31db70a79aea3fd2b703020": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    # The minimum sum of 4 positive even numbers is 2+2+2+2 = 8\n    # A number can be written as sum of 4 positive even numbers if:\n    # 1. It's at least 8\n    # 2. It's even (sum of even numbers is even)\n    return n >= 8 and n % 2 == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0d0b6ce6831c6a63c4c0afccfcaf5585a1896e9937f3a47d7881b3e3237f77e5|e7b35ccbfebad1fdc7273388bae372f06c8a44f8f2d299361844b5da09f9d016": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    return n % 2 == 0 and n >= 8\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "5bbc0aaffcbad38a32cfab70d22be6b724df8b1b9563a327028134518149ef20|e7b35ccbfebad1fdc7273388bae372f06c8a44f8f2d299361844b5da09f9d016": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    return n % 2 == 0 and n >= 8\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "69e1544b66fd19dc93f5760767fdfb2abaf09dffa31db70a79aea3fd2b703020|e7b35ccbfebad1fdc7273388bae372f06c8a44f8f2d299361844b5da09f9d016": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    return n % 2 == 0 and n >= 8\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "b378a8397070dcf11e2880c0ac3dc10359f3eeae9bc6d5f2814cb2a841716cce|e7b35ccbfebad1fdc7273388bae372f06c8a44f8f2d299361844b5da09f9d016": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    return n % 2 == 0 and n >= 8\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "a84cfa1ba69addb16e6f15a31e58d647ad72a5303a3384f5e1983b3987261647|e7b35ccbfebad1fdc7273388bae372f06c8a44f8f2d299361844b5da09f9d016": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    return n % 2 == 0 and n >= 8\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "e1a60653c2192b3ae7d3d407595779ca5525130dd5454f3bd44df2514d064e94|e7b35ccbfebad1fdc7273388bae372f06c8a44f8f2d299361844b5da09f9d016": {
+      "stitched_code": "def is_equal_to_sum_even(n):\n    \"\"\"Evaluate whether the given number n can be written as the sum of exactly 4 positive even numbers\n    Example\n    is_equal_to_sum_even(4) == False\n    is_equal_to_sum_even(6) == False\n    is_equal_to_sum_even(8) == True\n    \"\"\"\n    return n % 2 == 0 and n >= 8\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

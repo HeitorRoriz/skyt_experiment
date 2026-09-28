@@ -1,0 +1,25 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "51e0283954c5c442fd4a0b2bdaad42fb772998067ecd2078a798d4f5cdb6304d|51e0283954c5c442fd4a0b2bdaad42fb772998067ecd2078a798d4f5cdb6304d": {
+      "stitched_code": "def minSubArraySum(nums):\n    min_sum = float('inf')\n    current_sum = 0\n    \n    for num in nums:\n        current_sum += num\n        if current_sum < min_sum:\n            min_sum = current_sum\n        if current_sum > 0:\n            current_sum = 0\n            \n    return min_sum\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

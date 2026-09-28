@@ -1,0 +1,888 @@
+{
+  "contract_id": "HumanEval_124_gpt_4o_mini_temp0.7",
+  "canonical_code": "def valid_date(date):\n    if not date:\n        return False\n    if not isinstance(date, str):\n        return False\n    if len(date) != 10 or date[2] != '-' or date[5] != '-':\n        return False\n    try:\n        month, day, year = map(int, date.split('-'))\n    except ValueError:\n        return False\n    if month < 1 or month > 12:\n        return False\n    if day < 1:\n        return False\n    if month in {1, 3, 5, 7, 8, 10, 12}:\n        if day > 31:\n            return False\n    elif month in {4, 6, 9, 11}:\n        if day > 30:\n            return False\n    else:  # February\n        if day > 29:\n            return False\n    return True\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 10,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "isinstance",
+        "len",
+        "map"
+      ],
+      "nested_depth": 3,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_0",
+        "if_at_depth_0",
+        "if_at_depth_0",
+        "if_at_depth_0",
+        "if_at_depth_0",
+        "if_at_depth_1",
+        "if_at_depth_1",
+        "if_at_depth_2",
+        "if_at_depth_2"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {},
+      "assignments": {}
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_valid_date"
+        ],
+        [
+          "function_valid_date",
+          "branch"
+        ],
+        [
+          "function_valid_date",
+          "branch"
+        ],
+        [
+          "function_valid_date",
+          "branch"
+        ],
+        [
+          "function_valid_date",
+          "branch"
+        ],
+        [
+          "function_valid_date",
+          "branch"
+        ],
+        [
+          "function_valid_date",
+          "branch"
+        ],
+        [
+          "function_valid_date",
+          "branch",
+          "branch"
+        ],
+        [
+          "function_valid_date",
+          "branch",
+          "branch"
+        ],
+        [
+          "function_valid_date",
+          "branch",
+          "branch",
+          "branch"
+        ],
+        [
+          "function_valid_date",
+          "branch",
+          "branch",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "valid_date": {
+        "name": "valid_date",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": []
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": false,
+      "numeric_constants": [
+        false,
+        false,
+        10,
+        2,
+        5,
+        false,
+        false,
+        1,
+        12,
+        false,
+        1,
+        false,
+        1,
+        3,
+        5,
+        7,
+        8,
+        10,
+        12,
+        31,
+        false,
+        4,
+        6,
+        9,
+        11,
+        30,
+        false,
+        29,
+        false,
+        true
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [
+        "Or",
+        "Or"
+      ],
+      "comparisons": [
+        "NotEq",
+        "NotEq",
+        "NotEq",
+        "Lt",
+        "Gt",
+        "Lt",
+        "In",
+        "Gt",
+        "In",
+        "Gt",
+        "Gt"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "If",
+        "UnaryOp",
+        "Not",
+        "Name",
+        "Load",
+        "Return",
+        "Constant",
+        "If",
+        "UnaryOp",
+        "Not",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Return",
+        "Constant",
+        "If",
+        "BoolOp",
+        "Or",
+        "Compare",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "NotEq",
+        "Constant",
+        "Compare",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "NotEq",
+        "Constant",
+        "Compare",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "NotEq",
+        "Constant",
+        "Return",
+        "Constant",
+        "Try",
+        "Assign",
+        "Tuple",
+        "Name",
+        "Store",
+        "Name",
+        "Store",
+        "Name",
+        "Store",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Constant",
+        "ExceptHandler",
+        "Name",
+        "Load",
+        "Return",
+        "Constant",
+        "If",
+        "BoolOp",
+        "Or",
+        "Compare",
+        "Name",
+        "Load",
+        "Lt",
+        "Constant",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Constant",
+        "Return",
+        "Constant",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Lt",
+        "Constant",
+        "Return",
+        "Constant",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "In",
+        "Set",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Constant",
+        "Return",
+        "Constant",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "In",
+        "Set",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Constant",
+        "Return",
+        "Constant",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Constant",
+        "Return",
+        "Constant",
+        "Return",
+        "Constant"
+      ],
+      "ast_depth": 8,
+      "ast_hash": "d9f85ee43e5f7f3b4da79aaf33182bcd",
+      "alpha_renamed_hash": "d9f85ee43e5f7f3b4da79aaf33182bcd"
+    },
+    "operator_precedence": {
+      "operator_sequence": [],
+      "precedence_levels": {}
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Return",
+        "If",
+        "Return",
+        "If",
+        "Return",
+        "Try",
+        "Assign",
+        "Return",
+        "If",
+        "Return",
+        "If",
+        "Return",
+        "If",
+        "If",
+        "Return",
+        "If",
+        "If",
+        "Return",
+        "If",
+        "Return",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Return_2",
+        "If_3",
+        "Return_4",
+        "If_5",
+        "Return_6",
+        "Try_7",
+        "Assign_8",
+        "Return_9",
+        "If_10",
+        "Return_11",
+        "If_12",
+        "Return_13",
+        "If_14",
+        "If_15",
+        "Return_16",
+        "If_17",
+        "If_18",
+        "Return_19",
+        "If_20",
+        "Return_21",
+        "Return_22"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If",
+        "If",
+        "If",
+        "If",
+        "If",
+        "If",
+        "If",
+        "If",
+        "If",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "not p0",
+          "return_type": "constant"
+        },
+        {
+          "condition": "not isinstance(p0, str)",
+          "return_type": "constant"
+        },
+        {
+          "condition": "len(p0) != 10 or p0[2] != '-' or p0[5] != '-'",
+          "return_type": "constant"
+        },
+        {
+          "condition": "v0 < 1 or v0 > 12",
+          "return_type": "constant"
+        },
+        {
+          "condition": "v1 < 1",
+          "return_type": "constant"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "not p0",
+        "not isinstance(p0, str)",
+        "len(p0) != 10 or p0[2] != '-' or p0[5] != '-'",
+        "v0 < 1 or v0 > 12",
+        "v1 < 1"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_124_gpt_4o_mini_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/124",
+    "prompt": "\ndef valid_date(date):\n    \"\"\"You have to write a function which validates a given date string and\n    returns True if the date is valid otherwise False.\n    The date is valid if all of the following rules are satisfied:\n    1. The date string is not empty.\n    2. The number of days is not less than 1 or higher than 31 days for months 1,3,5,7,8,10,12. And the number of days is not less than 1 or higher than 30 days for months 4,6,9,11. And, the number of days is not less than 1 or higher than 29 for the month 2.\n    3. The months should not be less than 1 or higher than 12.\n    4. The date should be in the format: mm-dd-yyyy\n\n    for example: \n    valid_date('03-11-2000') => True\n\n    valid_date('15-01-2012') => False\n\n    valid_date('04-0-2040') => False\n\n    valid_date('06-04-2020') => True\n\n    valid_date('06/04/2020') => False\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "valid_date"
+    },
+    "anchor_signature": "3a7873e2d48e3049694ad2eba07fd1980c68a8b39ce55de0c1a75ff94039f1b1",
+    "canonical_code": "def valid_date(date):\n    if not date:\n        return False\n    if not isinstance(date, str):\n        return False\n    if len(date) != 10 or date[2] != '-' or date[5] != '-':\n        return False\n    try:\n        month, day, year = map(int, date.split('-'))\n    except ValueError:\n        return False\n    if month < 1 or month > 12:\n        return False\n    if day < 1:\n        return False\n    if month in {1, 3, 5, 7, 8, 10, 12}:\n        if day > 31:\n            return False\n    elif month in {4, 6, 9, 11}:\n        if day > 30:\n            return False\n    else:  # February\n        if day > 29:\n            return False\n    return True\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 10,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "isinstance",
+          "len",
+          "map"
+        ],
+        "nested_depth": 3,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_0",
+          "if_at_depth_0",
+          "if_at_depth_0",
+          "if_at_depth_0",
+          "if_at_depth_0",
+          "if_at_depth_1",
+          "if_at_depth_1",
+          "if_at_depth_2",
+          "if_at_depth_2"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {},
+        "assignments": {}
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_valid_date"
+          ],
+          [
+            "function_valid_date",
+            "branch"
+          ],
+          [
+            "function_valid_date",
+            "branch"
+          ],
+          [
+            "function_valid_date",
+            "branch"
+          ],
+          [
+            "function_valid_date",
+            "branch"
+          ],
+          [
+            "function_valid_date",
+            "branch"
+          ],
+          [
+            "function_valid_date",
+            "branch"
+          ],
+          [
+            "function_valid_date",
+            "branch",
+            "branch"
+          ],
+          [
+            "function_valid_date",
+            "branch",
+            "branch"
+          ],
+          [
+            "function_valid_date",
+            "branch",
+            "branch",
+            "branch"
+          ],
+          [
+            "function_valid_date",
+            "branch",
+            "branch",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "valid_date": {
+          "name": "valid_date",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": [
+          false,
+          false,
+          10,
+          2,
+          5,
+          false,
+          false,
+          1,
+          12,
+          false,
+          1,
+          false,
+          1,
+          3,
+          5,
+          7,
+          8,
+          10,
+          12,
+          31,
+          false,
+          4,
+          6,
+          9,
+          11,
+          30,
+          false,
+          29,
+          false,
+          true
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [
+          "Or",
+          "Or"
+        ],
+        "comparisons": [
+          "NotEq",
+          "NotEq",
+          "NotEq",
+          "Lt",
+          "Gt",
+          "Lt",
+          "In",
+          "Gt",
+          "In",
+          "Gt",
+          "Gt"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "If",
+          "UnaryOp",
+          "Not",
+          "Name",
+          "Load",
+          "Return",
+          "Constant",
+          "If",
+          "UnaryOp",
+          "Not",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Return",
+          "Constant",
+          "If",
+          "BoolOp",
+          "Or",
+          "Compare",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "NotEq",
+          "Constant",
+          "Compare",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "NotEq",
+          "Constant",
+          "Compare",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "NotEq",
+          "Constant",
+          "Return",
+          "Constant",
+          "Try",
+          "Assign",
+          "Tuple",
+          "Name",
+          "Store",
+          "Name",
+          "Store",
+          "Name",
+          "Store",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Constant",
+          "ExceptHandler",
+          "Name",
+          "Load",
+          "Return",
+          "Constant",
+          "If",
+          "BoolOp",
+          "Or",
+          "Compare",
+          "Name",
+          "Load",
+          "Lt",
+          "Constant",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Constant",
+          "Return",
+          "Constant",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Lt",
+          "Constant",
+          "Return",
+          "Constant",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "In",
+          "Set",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Constant",
+          "Return",
+          "Constant",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "In",
+          "Set",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Constant",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Constant",
+          "Return",
+          "Constant",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Constant",
+          "Return",
+          "Constant",
+          "Return",
+          "Constant"
+        ],
+        "ast_depth": 8,
+        "ast_hash": "d9f85ee43e5f7f3b4da79aaf33182bcd",
+        "alpha_renamed_hash": "d9f85ee43e5f7f3b4da79aaf33182bcd"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "If",
+          "Return",
+          "If",
+          "Return",
+          "Try",
+          "Assign",
+          "Return",
+          "If",
+          "Return",
+          "If",
+          "Return",
+          "If",
+          "If",
+          "Return",
+          "If",
+          "If",
+          "Return",
+          "If",
+          "Return",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "If_3",
+          "Return_4",
+          "If_5",
+          "Return_6",
+          "Try_7",
+          "Assign_8",
+          "Return_9",
+          "If_10",
+          "Return_11",
+          "If_12",
+          "Return_13",
+          "If_14",
+          "If_15",
+          "Return_16",
+          "If_17",
+          "If_18",
+          "Return_19",
+          "If_20",
+          "Return_21",
+          "Return_22"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "If",
+          "If",
+          "If",
+          "If",
+          "If",
+          "If",
+          "If",
+          "If",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "not p0",
+            "return_type": "constant"
+          },
+          {
+            "condition": "not isinstance(p0, str)",
+            "return_type": "constant"
+          },
+          {
+            "condition": "len(p0) != 10 or p0[2] != '-' or p0[5] != '-'",
+            "return_type": "constant"
+          },
+          {
+            "condition": "v0 < 1 or v0 > 12",
+            "return_type": "constant"
+          },
+          {
+            "condition": "v1 < 1",
+            "return_type": "constant"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "not p0",
+          "not isinstance(p0, str)",
+          "len(p0) != 10 or p0[2] != '-' or p0[5] != '-'",
+          "v0 < 1 or v0 > 12",
+          "v1 < 1"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

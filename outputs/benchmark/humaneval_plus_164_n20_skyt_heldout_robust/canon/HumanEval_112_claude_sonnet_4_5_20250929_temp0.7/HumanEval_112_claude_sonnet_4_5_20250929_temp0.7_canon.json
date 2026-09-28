@@ -1,0 +1,344 @@
+{
+  "contract_id": "HumanEval_112_claude_sonnet_4_5_20250929_temp0.7",
+  "canonical_code": "def reverse_delete(s,c):\n    \"\"\"Task\n    We are given two strings s and c, you have to deleted all the characters in s that are equal to any character in c\n    then check if the result string is palindrome.\n    A string is called palindrome if it reads the same backward as forward.\n    You should return a tuple containing the result string and True/False for the check.\n    Example\n    For s = \"abcde\", c = \"ae\", the result should be ('bcd',False)\n    For s = \"abcdef\", c = \"b\"  the result should be ('acdef',False)\n    For s = \"abcdedcba\", c = \"ab\", the result should be ('cdedc',True)\n    \"\"\"\n    # Delete all characters in s that are in c\n    result = ''.join([char for char in s if char not in c])\n    \n    # Check if result is a palindrome\n    is_palindrome = result == result[::-1]\n    \n    return (result, is_palindrome)\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 0,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [],
+      "nested_depth": 0,
+      "branch_patterns": []
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [],
+        "v2": []
+      },
+      "assignments": {
+        "v0": "Call(func=Attribute(value=Constant(value=''), attr='join', ctx=Load()), args=[ListComp(elt=Name(id='v1', ctx=Load()), generators=[comprehension(target=Name(id='v1', ctx=Store()), iter=Name(id='p0', ctx=Load()), ifs=[Compare(left=Name(id='v1', ctx=Load()), ops=[NotIn()], comparators=[Name(id='p1', ctx=Load())])], is_async=0)])])",
+        "v2": "Compare(left=Name(id='v0', ctx=Load()), ops=[Eq()], comparators=[Subscript(value=Name(id='v0', ctx=Load()), slice=Slice(step=UnaryOp(op=USub(), operand=Constant(value=1))), ctx=Load())])"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_reverse_delete"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "reverse_delete": {
+        "name": "reverse_delete",
+        "args": [
+          "p0",
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": []
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": false,
+      "numeric_constants": [
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "NotIn",
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Attribute",
+        "Constant",
+        "Load",
+        "ListComp",
+        "Name",
+        "Load",
+        "comprehension",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Compare",
+        "Name",
+        "Load",
+        "NotIn",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Subscript",
+        "Name",
+        "Load",
+        "Slice",
+        "UnaryOp",
+        "USub",
+        "Constant",
+        "Load",
+        "Return",
+        "Tuple",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load"
+      ],
+      "ast_depth": 8,
+      "ast_hash": "55f1a3dc2edafdb214a8ac10663c7110",
+      "alpha_renamed_hash": "55f1a3dc2edafdb214a8ac10663c7110"
+    },
+    "operator_precedence": {
+      "operator_sequence": [],
+      "precedence_levels": {}
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "Assign_2",
+        "Return_3"
+      ],
+      "control_flow_order": [
+        "FunctionDef"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_112_claude_sonnet_4_5_20250929_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/112",
+    "prompt": "\ndef reverse_delete(s,c):\n    \"\"\"Task\n    We are given two strings s and c, you have to deleted all the characters in s that are equal to any character in c\n    then check if the result string is palindrome.\n    A string is called palindrome if it reads the same backward as forward.\n    You should return a tuple containing the result string and True/False for the check.\n    Example\n    For s = \"abcde\", c = \"ae\", the result should be ('bcd',False)\n    For s = \"abcdef\", c = \"b\"  the result should be ('acdef',False)\n    For s = \"abcdedcba\", c = \"ab\", the result should be ('cdedc',True)\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "reverse_delete"
+    },
+    "anchor_signature": "afeb4384a5c519e5d54773295b1b4ff22007611768f8ffb1ab6f7d31db4bebe7",
+    "canonical_code": "def reverse_delete(s,c):\n    \"\"\"Task\n    We are given two strings s and c, you have to deleted all the characters in s that are equal to any character in c\n    then check if the result string is palindrome.\n    A string is called palindrome if it reads the same backward as forward.\n    You should return a tuple containing the result string and True/False for the check.\n    Example\n    For s = \"abcde\", c = \"ae\", the result should be ('bcd',False)\n    For s = \"abcdef\", c = \"b\"  the result should be ('acdef',False)\n    For s = \"abcdedcba\", c = \"ab\", the result should be ('cdedc',True)\n    \"\"\"\n    # Delete all characters in s that are in c\n    result = ''.join([char for char in s if char not in c])\n    \n    # Check if result is a palindrome\n    is_palindrome = result == result[::-1]\n    \n    return (result, is_palindrome)\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 0,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [],
+        "nested_depth": 0,
+        "branch_patterns": []
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [],
+          "v2": []
+        },
+        "assignments": {
+          "v0": "Call(func=Attribute(value=Constant(value=''), attr='join', ctx=Load()), args=[ListComp(elt=Name(id='v1', ctx=Load()), generators=[comprehension(target=Name(id='v1', ctx=Store()), iter=Name(id='p0', ctx=Load()), ifs=[Compare(left=Name(id='v1', ctx=Load()), ops=[NotIn()], comparators=[Name(id='p1', ctx=Load())])], is_async=0)])])",
+          "v2": "Compare(left=Name(id='v0', ctx=Load()), ops=[Eq()], comparators=[Subscript(value=Name(id='v0', ctx=Load()), slice=Slice(step=UnaryOp(op=USub(), operand=Constant(value=1))), ctx=Load())])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_reverse_delete"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "reverse_delete": {
+          "name": "reverse_delete",
+          "args": [
+            "p0",
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": [
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "NotIn",
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Attribute",
+          "Constant",
+          "Load",
+          "ListComp",
+          "Name",
+          "Load",
+          "comprehension",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Compare",
+          "Name",
+          "Load",
+          "NotIn",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Subscript",
+          "Name",
+          "Load",
+          "Slice",
+          "UnaryOp",
+          "USub",
+          "Constant",
+          "Load",
+          "Return",
+          "Tuple",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load"
+        ],
+        "ast_depth": 8,
+        "ast_hash": "55f1a3dc2edafdb214a8ac10663c7110",
+        "alpha_renamed_hash": "55f1a3dc2edafdb214a8ac10663c7110"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "Assign_2",
+          "Return_3"
+        ],
+        "control_flow_order": [
+          "FunctionDef"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

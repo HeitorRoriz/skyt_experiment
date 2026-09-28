@@ -1,0 +1,91 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "86f5288249c00b440a4b239525ba1a46eba9c85b5cd10ea792fb236a69297cd0|5f82fa5bf3a4cb13e1f673a954c5852660875a776a099534f4407d1303d8428d": {
+      "stitched_code": "def longest(strings: List[str]) ->Optional[str]:\n    \"\"\" Out of list of strings, return the longest one. Return the first one in case of multiple\n    strings of the same length. Return None in case the input list is empty.\n    >>> longest([])\n\n    >>> longest(['a', 'b', 'c'])\n    'a'\n    >>> longest(['a', 'bb', 'ccc'])\n    'ccc'\n    \"\"\"\n    if not strings:\n        return None\n    max_string = strings[0]\n    for string in strings:\n        if len(string) > len(max_string):\n            max_string = string\n    return max_string\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "86f5288249c00b440a4b239525ba1a46eba9c85b5cd10ea792fb236a69297cd0|86f5288249c00b440a4b239525ba1a46eba9c85b5cd10ea792fb236a69297cd0": {
+      "stitched_code": "def longest(strings: List[str]) -> Optional[str]:\n    \"\"\" Out of list of strings, return the longest one. Return the first one in case of multiple\n    strings of the same length. Return None in case the input list is empty.\n    >>> longest([])\n\n    >>> longest(['a', 'b', 'c'])\n    'a'\n    >>> longest(['a', 'bb', 'ccc'])\n    'ccc'\n    \"\"\"\n    if not strings:\n        return None\n    \n    max_string = strings[0]\n    max_length = len(strings[0])\n    \n    for string in strings[1:]:\n        if len(string) > max_length:\n            max_string = string\n            max_length = len(string)\n    \n    return max_string\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "5f82fa5bf3a4cb13e1f673a954c5852660875a776a099534f4407d1303d8428d|86f5288249c00b440a4b239525ba1a46eba9c85b5cd10ea792fb236a69297cd0": {
+      "stitched_code": "def longest(strings: List[str]) ->Optional[str]:\n    \"\"\" Out of list of strings, return the longest one. Return the first one in case of multiple\n    strings of the same length. Return None in case the input list is empty.\n    >>> longest([])\n\n    >>> longest(['a', 'b', 'c'])\n    'a'\n    >>> longest(['a', 'bb', 'ccc'])\n    'ccc'\n    \"\"\"\n    if not strings:\n        return None\n    max_string = strings[0]\n    max_length = len(strings[0])\n    for string in strings[1:]:\n        if len(string) > max_length:\n            max_string = string\n            max_length = len(string)\n    return max_string\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "6ca816cf29dda960b0ac30962c0409aa987f917ddc78245ba987a72519b60bb7|86f5288249c00b440a4b239525ba1a46eba9c85b5cd10ea792fb236a69297cd0": {
+      "stitched_code": "def longest(strings: List[str]) ->Optional[str]:\n    \"\"\" Out of list of strings, return the longest one. Return the first one in case of multiple\n    strings of the same length. Return None in case the input list is empty.\n    >>> longest([])\n\n    >>> longest(['a', 'b', 'c'])\n    'a'\n    >>> longest(['a', 'bb', 'ccc'])\n    'ccc'\n    \"\"\"\n    if not strings:\n        return None\n    max_string = strings[0]\n    max_length = len(strings[0])\n    for string in strings[1:]:\n        if len(string) > max_length:\n            max_string = string\n            max_length = len(string)\n    return max_string\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

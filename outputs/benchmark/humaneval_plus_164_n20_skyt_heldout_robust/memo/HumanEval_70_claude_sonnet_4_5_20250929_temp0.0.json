@@ -1,0 +1,45 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "44e94a62dc64a9e710a21019de90a51413c207f463939b3b13790743225d7c66|f421f0213aa88da28c2a0ee2f78dcbbcdfe2debff9795c8d53c4bd1c114fbc92": {
+      "stitched_code": "def strange_sort_list(lst):\n    '''\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    '''\n    if not lst:\n        return []\n    \n    result = []\n    remaining = lst.copy()\n    use_min = True\n    \n    while remaining:\n        if use_min:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        use_min = not use_min\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "f421f0213aa88da28c2a0ee2f78dcbbcdfe2debff9795c8d53c4bd1c114fbc92|f421f0213aa88da28c2a0ee2f78dcbbcdfe2debff9795c8d53c4bd1c114fbc92": {
+      "stitched_code": "def strange_sort_list(lst):\n    '''\n    Given list of integers, return list in strange order.\n    Strange sorting, is when you start with the minimum value,\n    then maximum of the remaining integers, then minimum and so on.\n\n    Examples:\n    strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]\n    strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]\n    strange_sort_list([]) == []\n    '''\n    if not lst:\n        return []\n    \n    result = []\n    remaining = lst.copy()\n    take_min = True\n    \n    while remaining:\n        if take_min:\n            val = min(remaining)\n        else:\n            val = max(remaining)\n        result.append(val)\n        remaining.remove(val)\n        take_min = not take_min\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

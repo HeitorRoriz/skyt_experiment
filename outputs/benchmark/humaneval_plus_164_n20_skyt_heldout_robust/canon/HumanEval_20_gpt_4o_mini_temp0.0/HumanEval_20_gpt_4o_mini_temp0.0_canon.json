@@ -1,0 +1,616 @@
+{
+  "contract_id": "HumanEval_20_gpt_4o_mini_temp0.0",
+  "canonical_code": "from typing import List, Tuple\n\n\ndef find_closest_elements(numbers: List[float]) -> Tuple[float, float]:\n    \"\"\" From a supplied list of numbers (of length at least two) select and return two that are the closest to each\n    other and return them in order (smaller number, larger number).\n    >>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.2])\n    (2.0, 2.2)\n    >>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.0])\n    (2.0, 2.0)\n    \"\"\"\n    numbers.sort()\n    closest_pair = (numbers[0], numbers[1])\n    min_diff = abs(numbers[1] - numbers[0])\n    \n    for i in range(1, len(numbers)):\n        diff = abs(numbers[i] - numbers[i - 1])\n        if diff < min_diff:\n            min_diff = diff\n            closest_pair = (numbers[i - 1], numbers[i])\n    \n    return closest_pair\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 1,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [
+        "abs",
+        "range",
+        "len",
+        "abs"
+      ],
+      "nested_depth": 2,
+      "branch_patterns": [
+        "if_at_depth_1"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v1": [],
+        "v2": [
+          "v4"
+        ],
+        "v4": []
+      },
+      "assignments": {
+        "v1": "Tuple(elts=[Subscript(value=Name(id='p0', ctx=Load()), slice=BinOp(left=Name(id='v3', ctx=Load()), op=Sub(), right=Constant(value=1)), ctx=Load()), Subscript(value=Name(id='p0', ctx=Load()), slice=Name(id='v3', ctx=Load()), ctx=Load())], ctx=Load())",
+        "v2": "Name(id='v4', ctx=Load())",
+        "v4": "Call(func=Name(id='abs', ctx=Load()), args=[BinOp(left=Subscript(value=Name(id='p0', ctx=Load()), slice=Name(id='v3', ctx=Load()), ctx=Load()), op=Sub(), right=Subscript(value=Name(id='p0', ctx=Load()), slice=BinOp(left=Name(id='v3', ctx=Load()), op=Sub(), right=Constant(value=1)), ctx=Load()))])"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_find_closest_elements"
+        ],
+        [
+          "function_find_closest_elements",
+          "loop"
+        ],
+        [
+          "function_find_closest_elements",
+          "loop",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "find_closest_elements": {
+        "name": "find_closest_elements",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": [
+        "Sub",
+        "Sub",
+        "Sub",
+        "Sub"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        0,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Lt"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "ImportFrom",
+        "alias",
+        "alias",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Expr",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Tuple",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "Sub",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Sub",
+        "Subscript",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Sub",
+        "Constant",
+        "Load",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Lt",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Tuple",
+        "Subscript",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Sub",
+        "Constant",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Load",
+        "Return",
+        "Name",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Tuple",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Load"
+      ],
+      "ast_depth": 9,
+      "ast_hash": "ab4422a6dd70c9cfcccba6e02acc90d8",
+      "alpha_renamed_hash": "8768d8797ce10e0df8a935e3e1393c90"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Sub",
+        "Sub",
+        "Sub",
+        "Sub"
+      ],
+      "precedence_levels": {
+        "Sub": 3
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "ImportFrom",
+        "FunctionDef",
+        "Expr",
+        "Assign",
+        "Assign",
+        "For",
+        "Assign",
+        "If",
+        "Assign",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "ImportFrom_0",
+        "FunctionDef_1",
+        "Expr_2",
+        "Assign_3",
+        "Assign_4",
+        "For_5",
+        "Assign_6",
+        "If_7",
+        "Assign_8",
+        "Assign_9",
+        "Return_10"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "For",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_20_gpt_4o_mini_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/20",
+    "prompt": "from typing import List, Tuple\n\n\ndef find_closest_elements(numbers: List[float]) -> Tuple[float, float]:\n    \"\"\" From a supplied list of numbers (of length at least two) select and return two that are the closest to each\n    other and return them in order (smaller number, larger number).\n    >>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.2])\n    (2.0, 2.2)\n    >>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.0])\n    (2.0, 2.0)\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "find_closest_elements"
+    },
+    "anchor_signature": "7ca8cfa85fbe72d3a9eb18ca22889d67e5d4698c9fb67ef8472609adbf883381",
+    "canonical_code": "from typing import List, Tuple\n\n\ndef find_closest_elements(numbers: List[float]) -> Tuple[float, float]:\n    \"\"\" From a supplied list of numbers (of length at least two) select and return two that are the closest to each\n    other and return them in order (smaller number, larger number).\n    >>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.2])\n    (2.0, 2.2)\n    >>> find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.0])\n    (2.0, 2.0)\n    \"\"\"\n    numbers.sort()\n    closest_pair = (numbers[0], numbers[1])\n    min_diff = abs(numbers[1] - numbers[0])\n    \n    for i in range(1, len(numbers)):\n        diff = abs(numbers[i] - numbers[i - 1])\n        if diff < min_diff:\n            min_diff = diff\n            closest_pair = (numbers[i - 1], numbers[i])\n    \n    return closest_pair\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 1,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "abs",
+          "range",
+          "len",
+          "abs"
+        ],
+        "nested_depth": 2,
+        "branch_patterns": [
+          "if_at_depth_1"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v1": [],
+          "v2": [
+            "v4"
+          ],
+          "v4": []
+        },
+        "assignments": {
+          "v1": "Tuple(elts=[Subscript(value=Name(id='p0', ctx=Load()), slice=BinOp(left=Name(id='v3', ctx=Load()), op=Sub(), right=Constant(value=1)), ctx=Load()), Subscript(value=Name(id='p0', ctx=Load()), slice=Name(id='v3', ctx=Load()), ctx=Load())], ctx=Load())",
+          "v2": "Name(id='v4', ctx=Load())",
+          "v4": "Call(func=Name(id='abs', ctx=Load()), args=[BinOp(left=Subscript(value=Name(id='p0', ctx=Load()), slice=Name(id='v3', ctx=Load()), ctx=Load()), op=Sub(), right=Subscript(value=Name(id='p0', ctx=Load()), slice=BinOp(left=Name(id='v3', ctx=Load()), op=Sub(), right=Constant(value=1)), ctx=Load()))])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_find_closest_elements"
+          ],
+          [
+            "function_find_closest_elements",
+            "loop"
+          ],
+          [
+            "function_find_closest_elements",
+            "loop",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "find_closest_elements": {
+          "name": "find_closest_elements",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": [
+          "Sub",
+          "Sub",
+          "Sub",
+          "Sub"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          0,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Lt"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "ImportFrom",
+          "alias",
+          "alias",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Tuple",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "Sub",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Sub",
+          "Subscript",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Sub",
+          "Constant",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Lt",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Tuple",
+          "Subscript",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Sub",
+          "Constant",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Load",
+          "Return",
+          "Name",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Tuple",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Load"
+        ],
+        "ast_depth": 9,
+        "ast_hash": "ab4422a6dd70c9cfcccba6e02acc90d8",
+        "alpha_renamed_hash": "8768d8797ce10e0df8a935e3e1393c90"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Sub",
+          "Sub",
+          "Sub",
+          "Sub"
+        ],
+        "precedence_levels": {
+          "Sub": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "ImportFrom",
+          "FunctionDef",
+          "Expr",
+          "Assign",
+          "Assign",
+          "For",
+          "Assign",
+          "If",
+          "Assign",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "ImportFrom_0",
+          "FunctionDef_1",
+          "Expr_2",
+          "Assign_3",
+          "Assign_4",
+          "For_5",
+          "Assign_6",
+          "If_7",
+          "Assign_8",
+          "Assign_9",
+          "Return_10"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "For",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

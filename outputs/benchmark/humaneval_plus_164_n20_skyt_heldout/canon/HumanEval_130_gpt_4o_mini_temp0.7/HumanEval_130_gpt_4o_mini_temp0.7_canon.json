@@ -1,0 +1,678 @@
+{
+  "contract_id": "HumanEval_130_gpt_4o_mini_temp0.7",
+  "canonical_code": "def tri(n):\n    result = []\n    \n    def tribonacci(k):\n        if k == 1:\n            return 3\n        elif k % 2 == 0:\n            return 1 + k / 2\n        else:\n            return tribonacci(k - 1) + tribonacci(k - 2) + tribonacci(k + 1)\n\n    for i in range(n + 1):\n        result.append(tribonacci(i))\n    \n    return result\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 2,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [
+        "tribonacci",
+        "tribonacci",
+        "tribonacci",
+        "range",
+        "tribonacci"
+      ],
+      "nested_depth": 2,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_1"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": []
+      },
+      "assignments": {
+        "v0": "List(ctx=Load())"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_tri"
+        ],
+        [
+          "function_tri",
+          "function_tribonacci"
+        ],
+        [
+          "function_tri",
+          "function_tribonacci",
+          "branch"
+        ],
+        [
+          "function_tri",
+          "function_tribonacci",
+          "branch",
+          "branch"
+        ],
+        [
+          "function_tri",
+          "loop"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "tri": {
+        "name": "tri",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      },
+      "tribonacci": {
+        "name": "tribonacci",
+        "args": [
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 4,
+      "estimated_complexity": "O(2^n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add",
+        "Add",
+        "Add",
+        "Add",
+        "Add"
+      ],
+      "associative_ops": [
+        "Add",
+        "Add",
+        "Add",
+        "Add",
+        "Add"
+      ],
+      "binary_operations": [
+        "Mod",
+        "Add",
+        "Div",
+        "Add",
+        "Add",
+        "Sub",
+        "Sub",
+        "Add",
+        "Add"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        1,
+        3,
+        2,
+        0,
+        1,
+        2,
+        1,
+        2,
+        1,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Eq",
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "List",
+        "Load",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Return",
+        "Constant",
+        "If",
+        "Compare",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mod",
+        "Constant",
+        "Eq",
+        "Constant",
+        "Return",
+        "BinOp",
+        "Constant",
+        "Add",
+        "BinOp",
+        "Name",
+        "Load",
+        "Div",
+        "Constant",
+        "Return",
+        "BinOp",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Sub",
+        "Constant",
+        "Add",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Sub",
+        "Constant",
+        "Add",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Constant",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Constant",
+        "Expr",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Return",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 11,
+      "ast_hash": "57fcc6162c478b20b7a32ccd8c7e9c97",
+      "alpha_renamed_hash": "57fcc6162c478b20b7a32ccd8c7e9c97"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Mod",
+        "Add",
+        "Div",
+        "Add",
+        "Add",
+        "Sub",
+        "Sub",
+        "Add",
+        "Add"
+      ],
+      "precedence_levels": {
+        "Mod": 4,
+        "Add": 3,
+        "Div": 4,
+        "Sub": 3
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "FunctionDef",
+        "If",
+        "Return",
+        "If",
+        "Return",
+        "Return",
+        "For",
+        "Expr",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "FunctionDef_2",
+        "If_3",
+        "Return_4",
+        "If_5",
+        "Return_6",
+        "Return_7",
+        "For_8",
+        "Expr_9",
+        "Return_10"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "FunctionDef",
+        "If",
+        "If",
+        "For"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": true,
+      "base_cases": [
+        {
+          "condition": "p1 == 1",
+          "return_type": "constant"
+        }
+      ],
+      "recursive_calls": [
+        {
+          "num_args": 1,
+          "arg_patterns": [
+            "BinOp"
+          ]
+        },
+        {
+          "num_args": 1,
+          "arg_patterns": [
+            "BinOp"
+          ]
+        },
+        {
+          "num_args": 1,
+          "arg_patterns": [
+            "BinOp"
+          ]
+        }
+      ],
+      "recursion_pattern": "multi-way",
+      "termination_guards": [
+        "p1 == 1"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_130_gpt_4o_mini_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/130",
+    "prompt": "\ndef tri(n):\n    \"\"\"Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in \n    the last couple centuries. However, what people don't know is Tribonacci sequence.\n    Tribonacci sequence is defined by the recurrence:\n    tri(1) = 3\n    tri(n) = 1 + n / 2, if n is even.\n    tri(n) =  tri(n - 1) + tri(n - 2) + tri(n + 1), if n is odd.\n    For example:\n    tri(2) = 1 + (2 / 2) = 2\n    tri(4) = 3\n    tri(3) = tri(2) + tri(1) + tri(4)\n           = 2 + 3 + 3 = 8 \n    You are given a non-negative integer number n, you have to a return a list of the \n    first n + 1 numbers of the Tribonacci sequence.\n    Examples:\n    tri(3) = [1, 3, 2, 8]\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "tri"
+    },
+    "anchor_signature": "52d19dec96bfe73416f798704eb5b1ad6ecd9f51d336650d48ed190c9d511a79",
+    "canonical_code": "def tri(n):\n    result = []\n    \n    def tribonacci(k):\n        if k == 1:\n            return 3\n        elif k % 2 == 0:\n            return 1 + k / 2\n        else:\n            return tribonacci(k - 1) + tribonacci(k - 2) + tribonacci(k + 1)\n\n    for i in range(n + 1):\n        result.append(tribonacci(i))\n    \n    return result\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 2,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "tribonacci",
+          "tribonacci",
+          "tribonacci",
+          "range",
+          "tribonacci"
+        ],
+        "nested_depth": 2,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_1"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": []
+        },
+        "assignments": {
+          "v0": "List(ctx=Load())"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_tri"
+          ],
+          [
+            "function_tri",
+            "function_tribonacci"
+          ],
+          [
+            "function_tri",
+            "function_tribonacci",
+            "branch"
+          ],
+          [
+            "function_tri",
+            "function_tribonacci",
+            "branch",
+            "branch"
+          ],
+          [
+            "function_tri",
+            "loop"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "tri": {
+          "name": "tri",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        },
+        "tribonacci": {
+          "name": "tribonacci",
+          "args": [
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 4,
+        "estimated_complexity": "O(2^n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add"
+        ],
+        "associative_ops": [
+          "Add",
+          "Add",
+          "Add",
+          "Add",
+          "Add"
+        ],
+        "binary_operations": [
+          "Mod",
+          "Add",
+          "Div",
+          "Add",
+          "Add",
+          "Sub",
+          "Sub",
+          "Add",
+          "Add"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          1,
+          3,
+          2,
+          0,
+          1,
+          2,
+          1,
+          2,
+          1,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Eq",
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "List",
+          "Load",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Return",
+          "Constant",
+          "If",
+          "Compare",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mod",
+          "Constant",
+          "Eq",
+          "Constant",
+          "Return",
+          "BinOp",
+          "Constant",
+          "Add",
+          "BinOp",
+          "Name",
+          "Load",
+          "Div",
+          "Constant",
+          "Return",
+          "BinOp",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Sub",
+          "Constant",
+          "Add",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Sub",
+          "Constant",
+          "Add",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Constant",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Return",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 11,
+        "ast_hash": "57fcc6162c478b20b7a32ccd8c7e9c97",
+        "alpha_renamed_hash": "57fcc6162c478b20b7a32ccd8c7e9c97"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Mod",
+          "Add",
+          "Div",
+          "Add",
+          "Add",
+          "Sub",
+          "Sub",
+          "Add",
+          "Add"
+        ],
+        "precedence_levels": {
+          "Mod": 4,
+          "Add": 3,
+          "Div": 4,
+          "Sub": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "FunctionDef",
+          "If",
+          "Return",
+          "If",
+          "Return",
+          "Return",
+          "For",
+          "Expr",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "FunctionDef_2",
+          "If_3",
+          "Return_4",
+          "If_5",
+          "Return_6",
+          "Return_7",
+          "For_8",
+          "Expr_9",
+          "Return_10"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "FunctionDef",
+          "If",
+          "If",
+          "For"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": true,
+        "base_cases": [
+          {
+            "condition": "p1 == 1",
+            "return_type": "constant"
+          }
+        ],
+        "recursive_calls": [
+          {
+            "num_args": 1,
+            "arg_patterns": [
+              "BinOp"
+            ]
+          },
+          {
+            "num_args": 1,
+            "arg_patterns": [
+              "BinOp"
+            ]
+          },
+          {
+            "num_args": 1,
+            "arg_patterns": [
+              "BinOp"
+            ]
+          }
+        ],
+        "recursion_pattern": "multi-way",
+        "termination_guards": [
+          "p1 == 1"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

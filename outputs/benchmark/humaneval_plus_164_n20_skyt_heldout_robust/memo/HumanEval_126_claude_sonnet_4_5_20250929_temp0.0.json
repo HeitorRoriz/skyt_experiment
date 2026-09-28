@@ -1,0 +1,25 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "629a8a5234944b1b4d76ba7214fbf3372e93842d26706f60c4ecf25bd85ba3a6|629a8a5234944b1b4d76ba7214fbf3372e93842d26706f60c4ecf25bd85ba3a6": {
+      "stitched_code": "def is_sorted(lst):\n    if len(lst) == 0:\n        return True\n    \n    # Check if sorted in ascending order\n    for i in range(len(lst) - 1):\n        if lst[i] > lst[i + 1]:\n            return False\n    \n    # Check if any number appears more than twice\n    from collections import Counter\n    counts = Counter(lst)\n    for count in counts.values():\n        if count > 2:\n            return False\n    \n    return True\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

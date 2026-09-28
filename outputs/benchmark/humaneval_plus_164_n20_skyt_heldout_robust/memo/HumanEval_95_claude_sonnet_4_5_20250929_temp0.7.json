@@ -1,0 +1,175 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "8157866830400bcd3d746f53d8f16940386f7aa585f504d9455a1404a48c7e00|8157866830400bcd3d746f53d8f16940386f7aa585f504d9455a1404a48c7e00": {
+      "stitched_code": "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in upper case, else return False.\n    The function should return False is the given dictionary is empty.\n    Examples:\n    check_dict_case({\"a\":\"apple\", \"b\":\"banana\"}) should return True.\n    check_dict_case({\"a\":\"apple\", \"A\":\"banana\", \"B\":\"banana\"}) should return False.\n    check_dict_case({\"a\":\"apple\", 8:\"banana\", \"a\":\"apple\"}) should return False.\n    check_dict_case({\"Name\":\"John\", \"Age\":\"36\", \"City\":\"Houston\"}) should return False.\n    check_dict_case({\"STATE\":\"NC\", \"ZIP\":\"12345\" }) should return True.\n    \"\"\"\n    if not dict:\n        return False\n    \n    # Check if all keys are strings\n    if not all(isinstance(key, str) for key in dict.keys()):\n        return False\n    \n    # Check if all keys are lowercase\n    all_lower = all(key.islower() for key in dict.keys())\n    \n    # Check if all keys are uppercase\n    all_upper = all(key.isupper() for key in dict.keys())\n    \n    return all_lower or all_upper\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "045d876eb8eaafe499043f4c65ffb5a1ee071a91d0469b48ef1c7eeeccd75621|8157866830400bcd3d746f53d8f16940386f7aa585f504d9455a1404a48c7e00": {
+      "stitched_code": "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in upper case, else return False.\n    The function should return False is the given dictionary is empty.\n    Examples:\n    check_dict_case({\"a\":\"apple\", \"b\":\"banana\"}) should return True.\n    check_dict_case({\"a\":\"apple\", \"A\":\"banana\", \"B\":\"banana\"}) should return False.\n    check_dict_case({\"a\":\"apple\", 8:\"banana\", \"a\":\"apple\"}) should return False.\n    check_dict_case({\"Name\":\"John\", \"Age\":\"36\", \"City\":\"Houston\"}) should return False.\n    check_dict_case({\"STATE\":\"NC\", \"ZIP\":\"12345\" }) should return True.\n    \"\"\"\n    if not dict:\n        return False\n    if not all(isinstance(key, str) for key in dict.keys()):\n        return False\n    all_lower = all(key.islower() for key in dict.keys())\n    all_upper = all(key.isupper() for key in dict.keys())\n    return all_lower or all_upper\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "090fa2d23ab5bdbc122ecba5442c39a059128555e67c8033aebbde5a6b93cefe|8157866830400bcd3d746f53d8f16940386f7aa585f504d9455a1404a48c7e00": {
+      "stitched_code": "def check_dict_case(dict):\n    if not dict:  # Empty dictionary\n        return False\n    \n    # Check if all keys are strings\n    if not all(isinstance(key, str) for key in dict.keys()):\n        return False\n    \n    # Check if all keys are lowercase or all keys are uppercase\n    all_lower = all(key.islower() for key in dict.keys())\n    all_upper = all(key.isupper() for key in dict.keys())\n    \n    return all_lower or all_upper\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "244fe5a3d42cfc226b3ae0447f576874de32556d6956a6c6004940c5939569f5|8157866830400bcd3d746f53d8f16940386f7aa585f504d9455a1404a48c7e00": {
+      "stitched_code": "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in upper case, else return False.\n    The function should return False is the given dictionary is empty.\n    Examples:\n    check_dict_case({\"a\":\"apple\", \"b\":\"banana\"}) should return True.\n    check_dict_case({\"a\":\"apple\", \"A\":\"banana\", \"B\":\"banana\"}) should return False.\n    check_dict_case({\"a\":\"apple\", 8:\"banana\", \"a\":\"apple\"}) should return False.\n    check_dict_case({\"Name\":\"John\", \"Age\":\"36\", \"City\":\"Houston\"}) should return False.\n    check_dict_case({\"STATE\":\"NC\", \"ZIP\":\"12345\" }) should return True.\n    \"\"\"\n    if not dict:\n        return False\n    if not all(isinstance(key, str) for key in dict.keys()):\n        return False\n    all_lower = all(key.islower() for key in dict.keys())\n    all_upper = all(key.isupper() for key in dict.keys())\n    return all_lower or all_upper\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "59e472449911e8258bbfcc009ed4e1f3c5c311f1f20430022219b2f46d8fc31b|8157866830400bcd3d746f53d8f16940386f7aa585f504d9455a1404a48c7e00": {
+      "stitched_code": "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in upper case, else return False.\n    The function should return False is the given dictionary is empty.\n    Examples:\n    check_dict_case({\"a\":\"apple\", \"b\":\"banana\"}) should return True.\n    check_dict_case({\"a\":\"apple\", \"A\":\"banana\", \"B\":\"banana\"}) should return False.\n    check_dict_case({\"a\":\"apple\", 8:\"banana\", \"a\":\"apple\"}) should return False.\n    check_dict_case({\"Name\":\"John\", \"Age\":\"36\", \"City\":\"Houston\"}) should return False.\n    check_dict_case({\"STATE\":\"NC\", \"ZIP\":\"12345\" }) should return True.\n    \"\"\"\n    if not dict:\n        return False\n    \n    # Check if all keys are strings\n    if not all(isinstance(key, str) for key in dict.keys()):\n        return False\n    \n    # Check if all keys are lowercase or all keys are uppercase\n    all_lower = all(key.islower() for key in dict.keys())\n    all_upper = all(key.isupper() for key in dict.keys())\n    \n    return all_lower or all_upper\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "8157866830400bcd3d746f53d8f16940386f7aa585f504d9455a1404a48c7e00|244fe5a3d42cfc226b3ae0447f576874de32556d6956a6c6004940c5939569f5": {
+      "stitched_code": "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in upper case, else return False.\n    The function should return False is the given dictionary is empty.\n    Examples:\n    check_dict_case({\"a\":\"apple\", \"b\":\"banana\"}) should return True.\n    check_dict_case({\"a\":\"apple\", \"A\":\"banana\", \"B\":\"banana\"}) should return False.\n    check_dict_case({\"a\":\"apple\", 8:\"banana\", \"a\":\"apple\"}) should return False.\n    check_dict_case({\"Name\":\"John\", \"Age\":\"36\", \"City\":\"Houston\"}) should return False.\n    check_dict_case({\"STATE\":\"NC\", \"ZIP\":\"12345\" }) should return True.\n    \"\"\"\n    if not dict:\n        return False\n    all_lower = True\n    all_upper = True\n    for key in dict.keys():\n        if not isinstance(key, str):\n            return False\n        if not key.islower():\n            all_lower = False\n        if not key.isupper():\n            all_upper = False\n    return all_lower or all_upper\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "090fa2d23ab5bdbc122ecba5442c39a059128555e67c8033aebbde5a6b93cefe|244fe5a3d42cfc226b3ae0447f576874de32556d6956a6c6004940c5939569f5": {
+      "stitched_code": "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in upper case, else return False.\n    The function should return False is the given dictionary is empty.\n    Examples:\n    check_dict_case({\"a\":\"apple\", \"b\":\"banana\"}) should return True.\n    check_dict_case({\"a\":\"apple\", \"A\":\"banana\", \"B\":\"banana\"}) should return False.\n    check_dict_case({\"a\":\"apple\", 8:\"banana\", \"a\":\"apple\"}) should return False.\n    check_dict_case({\"Name\":\"John\", \"Age\":\"36\", \"City\":\"Houston\"}) should return False.\n    check_dict_case({\"STATE\":\"NC\", \"ZIP\":\"12345\" }) should return True.\n    \"\"\"\n    if not dict:\n        return False\n    all_lower = True\n    all_upper = True\n    for key in dict.keys():\n        if not isinstance(key, str):\n            return False\n        if not key.islower():\n            all_lower = False\n        if not key.isupper():\n            all_upper = False\n    return all_lower or all_upper\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "59e472449911e8258bbfcc009ed4e1f3c5c311f1f20430022219b2f46d8fc31b|244fe5a3d42cfc226b3ae0447f576874de32556d6956a6c6004940c5939569f5": {
+      "stitched_code": "def check_dict_case(dict):\n    \"\"\"\n    Given a dictionary, return True if all keys are strings in lower \n    case or all keys are strings in upper case, else return False.\n    The function should return False is the given dictionary is empty.\n    Examples:\n    check_dict_case({\"a\":\"apple\", \"b\":\"banana\"}) should return True.\n    check_dict_case({\"a\":\"apple\", \"A\":\"banana\", \"B\":\"banana\"}) should return False.\n    check_dict_case({\"a\":\"apple\", 8:\"banana\", \"a\":\"apple\"}) should return False.\n    check_dict_case({\"Name\":\"John\", \"Age\":\"36\", \"City\":\"Houston\"}) should return False.\n    check_dict_case({\"STATE\":\"NC\", \"ZIP\":\"12345\" }) should return True.\n    \"\"\"\n    if not dict:\n        return False\n    all_lower = True\n    all_upper = True\n    for key in dict.keys():\n        if not isinstance(key, str):\n            return False\n        if not key.islower():\n            all_lower = False\n        if not key.isupper():\n            all_upper = False\n    return all_lower or all_upper\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

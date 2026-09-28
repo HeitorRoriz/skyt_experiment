@@ -1,0 +1,790 @@
+{
+  "contract_id": "HumanEval_39_gpt_4o_mini_temp0.0",
+  "canonical_code": "def is_prime(num):\n    if num < 2:\n        return False\n    for i in range(2, int(num**0.5) + 1):\n        if num % i == 0:\n            return False\n    return True\n\ndef fibonacci():\n    a, b = 0, 1\n    while True:\n        a, b = b, a + b\n        yield a\n\ndef prime_fib(n: int):\n    fib_gen = fibonacci()\n    count = 0\n    while count < n:\n        fib_num = next(fib_gen)\n        if is_prime(fib_num):\n            count += 1\n            if count == n:\n                return fib_num\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 4,
+      "for_loops": 1,
+      "while_loops": 2,
+      "function_calls": [
+        "range",
+        "int",
+        "fibonacci",
+        "next",
+        "is_prime"
+      ],
+      "nested_depth": 3,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_1",
+        "if_at_depth_1",
+        "if_at_depth_2"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v3": [],
+        "v4": [],
+        "v5": [
+          "v3"
+        ]
+      },
+      "assignments": {
+        "v3": "Call(func=Name(id='fibonacci', ctx=Load()))",
+        "v4": "Constant(value=0)",
+        "v5": "Call(func=Name(id='next', ctx=Load()), args=[Name(id='v3', ctx=Load())])"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_is_prime"
+        ],
+        [
+          "function_is_prime",
+          "branch"
+        ],
+        [
+          "function_is_prime",
+          "loop"
+        ],
+        [
+          "function_is_prime",
+          "loop",
+          "branch"
+        ],
+        [
+          "function_fibonacci"
+        ],
+        [
+          "function_prime_fib"
+        ],
+        [
+          "function_prime_fib",
+          "branch"
+        ],
+        [
+          "function_prime_fib",
+          "branch",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "is_prime": {
+        "name": "is_prime",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      },
+      "fibonacci": {
+        "name": "fibonacci",
+        "args": [],
+        "returns": null,
+        "has_return": false
+      },
+      "prime_fib": {
+        "name": "prime_fib",
+        "args": [
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 2,
+      "estimated_complexity": "O(2^n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add",
+        "Add"
+      ],
+      "associative_ops": [
+        "Add",
+        "Add"
+      ],
+      "binary_operations": [
+        "Add",
+        "Pow",
+        "Mod",
+        "Add"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": true,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        2,
+        false,
+        2,
+        0.5,
+        1,
+        0,
+        false,
+        true,
+        0,
+        1,
+        true,
+        0,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Lt",
+        "Eq",
+        "Lt",
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Lt",
+        "Constant",
+        "Return",
+        "Constant",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Pow",
+        "Constant",
+        "Add",
+        "Constant",
+        "If",
+        "Compare",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mod",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Return",
+        "Constant",
+        "Return",
+        "Constant",
+        "FunctionDef",
+        "arguments",
+        "Assign",
+        "Tuple",
+        "Name",
+        "Store",
+        "Name",
+        "Store",
+        "Store",
+        "Tuple",
+        "Constant",
+        "Constant",
+        "Load",
+        "While",
+        "Constant",
+        "Assign",
+        "Tuple",
+        "Name",
+        "Store",
+        "Name",
+        "Store",
+        "Store",
+        "Tuple",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Name",
+        "Load",
+        "Load",
+        "Expr",
+        "Yield",
+        "Name",
+        "Load",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "While",
+        "Compare",
+        "Name",
+        "Load",
+        "Lt",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "If",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Add",
+        "Constant",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Name",
+        "Load",
+        "Return",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 8,
+      "ast_hash": "a61000080d6c14764e69c0798dce8247",
+      "alpha_renamed_hash": "a61000080d6c14764e69c0798dce8247"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Add",
+        "Pow",
+        "Mod",
+        "Add"
+      ],
+      "precedence_levels": {
+        "Add": 3,
+        "Pow": 6,
+        "Mod": 4
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Return",
+        "For",
+        "If",
+        "Return",
+        "Return",
+        "FunctionDef",
+        "Assign",
+        "While",
+        "Assign",
+        "Expr",
+        "FunctionDef",
+        "Assign",
+        "Assign",
+        "While",
+        "Assign",
+        "If",
+        "AugAssign",
+        "If",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Return_2",
+        "For_3",
+        "If_4",
+        "Return_5",
+        "Return_6",
+        "FunctionDef_7",
+        "Assign_8",
+        "While_9",
+        "Assign_10",
+        "Expr_11",
+        "FunctionDef_12",
+        "Assign_13",
+        "Assign_14",
+        "While_15",
+        "Assign_16",
+        "If_17",
+        "AugAssign_18",
+        "If_19",
+        "Return_20"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If",
+        "For",
+        "If",
+        "FunctionDef",
+        "While",
+        "FunctionDef",
+        "While",
+        "If",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "p0 < 2",
+          "return_type": "constant"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "p0 < 2"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_39_gpt_4o_mini_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/39",
+    "prompt": "\n\ndef prime_fib(n: int):\n    \"\"\"\n    prime_fib returns n-th number that is a Fibonacci number and it's also prime.\n    >>> prime_fib(1)\n    2\n    >>> prime_fib(2)\n    3\n    >>> prime_fib(3)\n    5\n    >>> prime_fib(4)\n    13\n    >>> prime_fib(5)\n    89\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "prime_fib"
+    },
+    "anchor_signature": "984dca5cd9acfa8a9444c0e16a5446e58269659d740fea9b210ed475068c906c",
+    "canonical_code": "def is_prime(num):\n    if num < 2:\n        return False\n    for i in range(2, int(num**0.5) + 1):\n        if num % i == 0:\n            return False\n    return True\n\ndef fibonacci():\n    a, b = 0, 1\n    while True:\n        a, b = b, a + b\n        yield a\n\ndef prime_fib(n: int):\n    fib_gen = fibonacci()\n    count = 0\n    while count < n:\n        fib_num = next(fib_gen)\n        if is_prime(fib_num):\n            count += 1\n            if count == n:\n                return fib_num\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 4,
+        "for_loops": 1,
+        "while_loops": 2,
+        "function_calls": [
+          "range",
+          "int",
+          "fibonacci",
+          "next",
+          "is_prime"
+        ],
+        "nested_depth": 3,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_1",
+          "if_at_depth_1",
+          "if_at_depth_2"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v3": [],
+          "v4": [],
+          "v5": [
+            "v3"
+          ]
+        },
+        "assignments": {
+          "v3": "Call(func=Name(id='fibonacci', ctx=Load()))",
+          "v4": "Constant(value=0)",
+          "v5": "Call(func=Name(id='next', ctx=Load()), args=[Name(id='v3', ctx=Load())])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_is_prime"
+          ],
+          [
+            "function_is_prime",
+            "branch"
+          ],
+          [
+            "function_is_prime",
+            "loop"
+          ],
+          [
+            "function_is_prime",
+            "loop",
+            "branch"
+          ],
+          [
+            "function_fibonacci"
+          ],
+          [
+            "function_prime_fib"
+          ],
+          [
+            "function_prime_fib",
+            "branch"
+          ],
+          [
+            "function_prime_fib",
+            "branch",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "is_prime": {
+          "name": "is_prime",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        },
+        "fibonacci": {
+          "name": "fibonacci",
+          "args": [],
+          "returns": null,
+          "has_return": false
+        },
+        "prime_fib": {
+          "name": "prime_fib",
+          "args": [
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 2,
+        "estimated_complexity": "O(2^n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add",
+          "Add"
+        ],
+        "associative_ops": [
+          "Add",
+          "Add"
+        ],
+        "binary_operations": [
+          "Add",
+          "Pow",
+          "Mod",
+          "Add"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": true,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          2,
+          false,
+          2,
+          0.5,
+          1,
+          0,
+          false,
+          true,
+          0,
+          1,
+          true,
+          0,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Lt",
+          "Eq",
+          "Lt",
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Lt",
+          "Constant",
+          "Return",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Pow",
+          "Constant",
+          "Add",
+          "Constant",
+          "If",
+          "Compare",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mod",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Return",
+          "Constant",
+          "Return",
+          "Constant",
+          "FunctionDef",
+          "arguments",
+          "Assign",
+          "Tuple",
+          "Name",
+          "Store",
+          "Name",
+          "Store",
+          "Store",
+          "Tuple",
+          "Constant",
+          "Constant",
+          "Load",
+          "While",
+          "Constant",
+          "Assign",
+          "Tuple",
+          "Name",
+          "Store",
+          "Name",
+          "Store",
+          "Store",
+          "Tuple",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Name",
+          "Load",
+          "Load",
+          "Expr",
+          "Yield",
+          "Name",
+          "Load",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "While",
+          "Compare",
+          "Name",
+          "Load",
+          "Lt",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "If",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Add",
+          "Constant",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Name",
+          "Load",
+          "Return",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 8,
+        "ast_hash": "a61000080d6c14764e69c0798dce8247",
+        "alpha_renamed_hash": "a61000080d6c14764e69c0798dce8247"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Add",
+          "Pow",
+          "Mod",
+          "Add"
+        ],
+        "precedence_levels": {
+          "Add": 3,
+          "Pow": 6,
+          "Mod": 4
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "For",
+          "If",
+          "Return",
+          "Return",
+          "FunctionDef",
+          "Assign",
+          "While",
+          "Assign",
+          "Expr",
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "While",
+          "Assign",
+          "If",
+          "AugAssign",
+          "If",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "For_3",
+          "If_4",
+          "Return_5",
+          "Return_6",
+          "FunctionDef_7",
+          "Assign_8",
+          "While_9",
+          "Assign_10",
+          "Expr_11",
+          "FunctionDef_12",
+          "Assign_13",
+          "Assign_14",
+          "While_15",
+          "Assign_16",
+          "If_17",
+          "AugAssign_18",
+          "If_19",
+          "Return_20"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "For",
+          "If",
+          "FunctionDef",
+          "While",
+          "FunctionDef",
+          "While",
+          "If",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "p0 < 2",
+            "return_type": "constant"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "p0 < 2"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "f392f65222c7654f0fc056cf2e8a6aec2072fecba27ea955457836b1da86cd44|f392f65222c7654f0fc056cf2e8a6aec2072fecba27ea955457836b1da86cd44": {
+      "stitched_code": "\n\ndef correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"(\" and \")\".\n    return True if every opening bracket has a corresponding closing bracket.\n\n    >>> correct_bracketing(\"(\")\n    False\n    >>> correct_bracketing(\"()\")\n    True\n    >>> correct_bracketing(\"(()())\")\n    True\n    >>> correct_bracketing(\")(()\")\n    False\n    \"\"\"\n    balance = 0\n    for char in brackets:\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance < 0:\n            return False\n    return balance == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "7620e3f62babf7bd4ef1bfe88b6aff54fab690da7fd073fc0b0c2230b8ea98e6|f392f65222c7654f0fc056cf2e8a6aec2072fecba27ea955457836b1da86cd44": {
+      "stitched_code": "def correct_bracketing(brackets: str):\n    balance = 0\n    for char in brackets:\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance < 0:\n            return False\n    return balance == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

@@ -1,0 +1,370 @@
+{
+  "contract_id": "HumanEval_86_gpt_4o_mini_temp0.0",
+  "canonical_code": "def anti_shuffle(s):\n    def sort_word(word):\n        return ''.join(sorted(word))\n    \n    words = s.split(' ')\n    sorted_words = [sort_word(word) for word in words]\n    return ' '.join(sorted_words)\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 0,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "sorted",
+        "sort_word"
+      ],
+      "nested_depth": 0,
+      "branch_patterns": []
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [],
+        "v1": []
+      },
+      "assignments": {
+        "v0": "Call(func=Attribute(value=Name(id='p0', ctx=Load()), attr='split', ctx=Load()), args=[Constant(value=' ')])",
+        "v1": "ListComp(elt=Call(func=Name(id='sort_word', ctx=Load()), args=[Name(id='p1', ctx=Load())]), generators=[comprehension(target=Name(id='p1', ctx=Store()), iter=Name(id='v0', ctx=Load()), is_async=0)])"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_anti_shuffle"
+        ],
+        [
+          "function_anti_shuffle",
+          "function_sort_word"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "anti_shuffle": {
+        "name": "anti_shuffle",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      },
+      "sort_word": {
+        "name": "sort_word",
+        "args": [
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 1,
+      "estimated_complexity": "O(2^n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": []
+    },
+    "numerical_behavior": {
+      "uses_integers": false,
+      "uses_floats": false,
+      "has_arithmetic": false,
+      "numeric_constants": []
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Return",
+        "Call",
+        "Attribute",
+        "Constant",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "ListComp",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "comprehension",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "Return",
+        "Call",
+        "Attribute",
+        "Constant",
+        "Load",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 7,
+      "ast_hash": "7a47776b84d830753f51b21b66a97ba9",
+      "alpha_renamed_hash": "7a47776b84d830753f51b21b66a97ba9"
+    },
+    "operator_precedence": {
+      "operator_sequence": [],
+      "precedence_levels": {}
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "FunctionDef",
+        "Return",
+        "Assign",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "FunctionDef_1",
+        "Return_2",
+        "Assign_3",
+        "Assign_4",
+        "Return_5"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "FunctionDef"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_86_gpt_4o_mini_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/86",
+    "prompt": "\ndef anti_shuffle(s):\n    \"\"\"\n    Write a function that takes a string and returns an ordered version of it.\n    Ordered version of string, is a string where all words (separated by space)\n    are replaced by a new word where all the characters arranged in\n    ascending order based on ascii value.\n    Note: You should keep the order of words and blank spaces in the sentence.\n\n    For example:\n    anti_shuffle('Hi') returns 'Hi'\n    anti_shuffle('hello') returns 'ehllo'\n    anti_shuffle('Hello World!!!') returns 'Hello !!!Wdlor'\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "anti_shuffle"
+    },
+    "anchor_signature": "5c6a471a38f3b47276bc070c613bb9752c14dda84240e1607c44cfa82ec82477",
+    "canonical_code": "def anti_shuffle(s):\n    def sort_word(word):\n        return ''.join(sorted(word))\n    \n    words = s.split(' ')\n    sorted_words = [sort_word(word) for word in words]\n    return ' '.join(sorted_words)\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 0,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "sorted",
+          "sort_word"
+        ],
+        "nested_depth": 0,
+        "branch_patterns": []
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [],
+          "v1": []
+        },
+        "assignments": {
+          "v0": "Call(func=Attribute(value=Name(id='p0', ctx=Load()), attr='split', ctx=Load()), args=[Constant(value=' ')])",
+          "v1": "ListComp(elt=Call(func=Name(id='sort_word', ctx=Load()), args=[Name(id='p1', ctx=Load())]), generators=[comprehension(target=Name(id='p1', ctx=Store()), iter=Name(id='v0', ctx=Load()), is_async=0)])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_anti_shuffle"
+          ],
+          [
+            "function_anti_shuffle",
+            "function_sort_word"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "anti_shuffle": {
+          "name": "anti_shuffle",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        },
+        "sort_word": {
+          "name": "sort_word",
+          "args": [
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 1,
+        "estimated_complexity": "O(2^n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": false,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": []
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Return",
+          "Call",
+          "Attribute",
+          "Constant",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "ListComp",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "comprehension",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "Return",
+          "Call",
+          "Attribute",
+          "Constant",
+          "Load",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 7,
+        "ast_hash": "7a47776b84d830753f51b21b66a97ba9",
+        "alpha_renamed_hash": "7a47776b84d830753f51b21b66a97ba9"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "FunctionDef",
+          "Return",
+          "Assign",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "FunctionDef_1",
+          "Return_2",
+          "Assign_3",
+          "Assign_4",
+          "Return_5"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "FunctionDef"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

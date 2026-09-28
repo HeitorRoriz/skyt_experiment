@@ -1,0 +1,47 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "bebbd8fdfa036202b9bb962b496206567cb5533c2c03fdcb3dddb967c116622f|bebbd8fdfa036202b9bb962b496206567cb5533c2c03fdcb3dddb967c116622f": {
+      "stitched_code": "def sort_even(l: list):\n    even_indices = sorted(l[i] for i in range(0, len(l), 2))\n    result = l[:]\n    result[::2] = even_indices\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "dea12b06d43a8af6468003f85b5331abf4e239349a02f4507fda10af1a2692a6|bebbd8fdfa036202b9bb962b496206567cb5533c2c03fdcb3dddb967c116622f": {
+      "stitched_code": "def sort_even(l: list):\n    even_indices = sorted(l[i] for i in range(0, len(l), 2))\n    result = l[:]\n    result[0::2] = even_indices\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.08928571428571429,
+        "transformation_level": 0
+      }
+    }
+  }
+}

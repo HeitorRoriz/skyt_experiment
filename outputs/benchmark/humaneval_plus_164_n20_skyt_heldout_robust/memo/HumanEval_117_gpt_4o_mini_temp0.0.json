@@ -1,0 +1,89 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "90b7b7bed2bcc35deff7a15c9f581acf1ad5185a6fc08bcbeccf2c1bedc475bb|54f83879fa76fd9afd4e985d92fe3f9b083050d7e4b77f01abd7a9b40fa4e012": {
+      "stitched_code": "def select_words(s, n):\n    if not s:\n        return []\n    vowels = set('aeiouAEIOU')\n    words = s.split()\n    result = []\n    for word in words:\n        consonant_count = sum(1 for char in word if char.isalpha() and char\n             not in vowels)\n        if consonant_count == n:\n            result.append(word)\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "54f83879fa76fd9afd4e985d92fe3f9b083050d7e4b77f01abd7a9b40fa4e012|54f83879fa76fd9afd4e985d92fe3f9b083050d7e4b77f01abd7a9b40fa4e012": {
+      "stitched_code": "def select_words(s, n):\n    if not s:\n        return []\n    \n    vowels = set(\"aeiouAEIOU\")\n    words = s.split()\n    result = []\n    \n    for word in words:\n        consonant_count = sum(1 for char in word if char.isalpha() and char not in vowels)\n        if consonant_count == n:\n            result.append(word)\n    \n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "54f83879fa76fd9afd4e985d92fe3f9b083050d7e4b77f01abd7a9b40fa4e012|90b7b7bed2bcc35deff7a15c9f581acf1ad5185a6fc08bcbeccf2c1bedc475bb": {
+      "stitched_code": "def select_words(s, n):\n\n    def count_consonants(word):\n        consonants = 'bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ'\n        return sum(1 for char in word if char in consonants)\n    if not s:\n        return []\n    words = s.split()\n    return [word for word in words if count_consonants(word) == n]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "90b7b7bed2bcc35deff7a15c9f581acf1ad5185a6fc08bcbeccf2c1bedc475bb|90b7b7bed2bcc35deff7a15c9f581acf1ad5185a6fc08bcbeccf2c1bedc475bb": {
+      "stitched_code": "def select_words(s, n):\n    def count_consonants(word):\n        consonants = \"bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ\"\n        return sum(1 for char in word if char in consonants)\n\n    if not s:\n        return []\n\n    words = s.split()\n    return [word for word in words if count_consonants(word) == n]\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

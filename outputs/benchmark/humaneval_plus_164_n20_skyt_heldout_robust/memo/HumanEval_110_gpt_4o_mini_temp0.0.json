@@ -1,0 +1,45 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "662269b52dfb199b8d35cca9bdc694260abab3643e5e3737eccb6b42140c6a5a|662269b52dfb199b8d35cca9bdc694260abab3643e5e3737eccb6b42140c6a5a": {
+      "stitched_code": "def exchange(lst1, lst2):\n    odd_count = sum(1 for x in lst1 if x % 2 != 0)\n    even_count = sum(1 for x in lst2 if x % 2 == 0)\n    \n    if odd_count <= even_count:\n        return \"YES\"\n    else:\n        return \"NO\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "62f07957ab7e9b2f56a558587ec22cb0b2114f45933a988c5a66e681c9394493|662269b52dfb199b8d35cca9bdc694260abab3643e5e3737eccb6b42140c6a5a": {
+      "stitched_code": "def exchange(lst1, lst2):\n    odd_count = sum(1 for x in lst1 if x % 2 != 0)\n    even_count_in_lst2 = sum(1 for x in lst2 if x % 2 == 0)\n    \n    if odd_count <= even_count_in_lst2:\n        return \"YES\"\n    else:\n        return \"NO\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

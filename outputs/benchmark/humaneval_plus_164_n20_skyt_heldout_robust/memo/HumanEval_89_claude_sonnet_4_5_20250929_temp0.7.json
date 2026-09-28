@@ -1,0 +1,1005 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "39bdf284bc8dd566e0dfd685b54e312cf55485f219a8cd84f626b07f4d22536d|5b9d77f141e94dfcc6a49e5590f9a8fcb75e7ab15bf37965c5c61040943e2840": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                # Shift by 4 positions in lowercase alphabet\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                # Shift by 4 positions in uppercase alphabet\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "5b9d77f141e94dfcc6a49e5590f9a8fcb75e7ab15bf37965c5c61040943e2840|5b9d77f141e94dfcc6a49e5590f9a8fcb75e7ab15bf37965c5c61040943e2840": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                # Shift by 4 positions in lowercase alphabet\n                new_char = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(new_char)\n            else:\n                # Shift by 4 positions in uppercase alphabet\n                new_char = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(new_char)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "8e9c394bf4db3456af872892a6d8df04a58908c8a5b0f0a412eef7d81c98eb6a|5b9d77f141e94dfcc6a49e5590f9a8fcb75e7ab15bf37965c5c61040943e2840": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                new_char = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(new_char)\n            else:\n                new_char = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(new_char)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "729e1894263ad82438ff76f03ff8faaa5dc04632160ae38c9032c68cf7672dd2|5b9d77f141e94dfcc6a49e5590f9a8fcb75e7ab15bf37965c5c61040943e2840": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                new_char = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(new_char)\n            else:\n                new_char = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(new_char)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7ebae96a42a6b4c771e0ad7bdbdea4ad9466f202310cb1608ddc9b35a7da9805|5b9d77f141e94dfcc6a49e5590f9a8fcb75e7ab15bf37965c5c61040943e2840": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                # Shift by 4, wrap around using modulo 26\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                # Handle uppercase\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "b7b780149532ff9ed997d2a4044c8852d6c18b1e593e54a3995f01c0ae1aabcf|5b9d77f141e94dfcc6a49e5590f9a8fcb75e7ab15bf37965c5c61040943e2840": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                new_char = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(new_char)\n            else:\n                new_char = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(new_char)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "43f15c2ee6a99b9929b8a51bf26c050cb255b7a56323ed588ae3980a2422895d|5b9d77f141e94dfcc6a49e5590f9a8fcb75e7ab15bf37965c5c61040943e2840": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                # Shift by 4 positions, wrapping around with modulo 26\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                # Handle uppercase\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "c692b329604f5f18c679f77ff241581d33a1aa1298a22a80706e5212e9c15e33|5b9d77f141e94dfcc6a49e5590f9a8fcb75e7ab15bf37965c5c61040943e2840": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                new_char = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(new_char)\n            else:\n                new_char = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(new_char)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "6b4e0883c6834b48c6d0dcc2e853f3a0475d427af86b3edfdf4defc9b7c6724c|5b9d77f141e94dfcc6a49e5590f9a8fcb75e7ab15bf37965c5c61040943e2840": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                new_char = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(new_char)\n            else:\n                new_char = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(new_char)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "45274fb2afa069de9be53392c01bb3269e5d706a1e129a746df2bbdd375cb961|5b9d77f141e94dfcc6a49e5590f9a8fcb75e7ab15bf37965c5c61040943e2840": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                # Shift by 4 positions, wrapping around the alphabet\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                # Handle uppercase if needed\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "c896378d58943e08fa61800cfc0415af77b42f4be2a0b70ba5325b8ad345cde4|5b9d77f141e94dfcc6a49e5590f9a8fcb75e7ab15bf37965c5c61040943e2840": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                new_char = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(new_char)\n            else:\n                new_char = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(new_char)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "39bdf284bc8dd566e0dfd685b54e312cf55485f219a8cd84f626b07f4d22536d|39bdf284bc8dd566e0dfd685b54e312cf55485f219a8cd84f626b07f4d22536d": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                # Shift by 4 positions in lowercase alphabet\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                # Shift by 4 positions in uppercase alphabet\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "5b9d77f141e94dfcc6a49e5590f9a8fcb75e7ab15bf37965c5c61040943e2840|39bdf284bc8dd566e0dfd685b54e312cf55485f219a8cd84f626b07f4d22536d": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                # Shift by 4 positions in lowercase alphabet\n                new_char = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(new_char)\n            else:\n                # Shift by 4 positions in uppercase alphabet\n                new_char = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(new_char)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "8e9c394bf4db3456af872892a6d8df04a58908c8a5b0f0a412eef7d81c98eb6a|39bdf284bc8dd566e0dfd685b54e312cf55485f219a8cd84f626b07f4d22536d": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "6b4e0883c6834b48c6d0dcc2e853f3a0475d427af86b3edfdf4defc9b7c6724c|39bdf284bc8dd566e0dfd685b54e312cf55485f219a8cd84f626b07f4d22536d": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "b7b780149532ff9ed997d2a4044c8852d6c18b1e593e54a3995f01c0ae1aabcf|39bdf284bc8dd566e0dfd685b54e312cf55485f219a8cd84f626b07f4d22536d": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "43f15c2ee6a99b9929b8a51bf26c050cb255b7a56323ed588ae3980a2422895d|39bdf284bc8dd566e0dfd685b54e312cf55485f219a8cd84f626b07f4d22536d": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                # Shift by 4 positions, wrapping around with modulo 26\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                # Handle uppercase\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "c896378d58943e08fa61800cfc0415af77b42f4be2a0b70ba5325b8ad345cde4|39bdf284bc8dd566e0dfd685b54e312cf55485f219a8cd84f626b07f4d22536d": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7ebae96a42a6b4c771e0ad7bdbdea4ad9466f202310cb1608ddc9b35a7da9805|39bdf284bc8dd566e0dfd685b54e312cf55485f219a8cd84f626b07f4d22536d": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                # Shift by 4, wrap around using modulo 26\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                # Handle uppercase\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "3563da8bbf0f815323a3b8899723ee68c0fad160ce0551e6c95ea66b0cb9cdaf|39bdf284bc8dd566e0dfd685b54e312cf55485f219a8cd84f626b07f4d22536d": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "c692b329604f5f18c679f77ff241581d33a1aa1298a22a80706e5212e9c15e33|39bdf284bc8dd566e0dfd685b54e312cf55485f219a8cd84f626b07f4d22536d": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "39bdf284bc8dd566e0dfd685b54e312cf55485f219a8cd84f626b07f4d22536d|8e9c394bf4db3456af872892a6d8df04a58908c8a5b0f0a412eef7d81c98eb6a": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                new_char = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n            else:\n                new_char = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n            result.append(new_char)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "5b9d77f141e94dfcc6a49e5590f9a8fcb75e7ab15bf37965c5c61040943e2840|8e9c394bf4db3456af872892a6d8df04a58908c8a5b0f0a412eef7d81c98eb6a": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                new_char = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n            else:\n                new_char = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n            result.append(new_char)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "3563da8bbf0f815323a3b8899723ee68c0fad160ce0551e6c95ea66b0cb9cdaf|8e9c394bf4db3456af872892a6d8df04a58908c8a5b0f0a412eef7d81c98eb6a": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                new_char = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n            else:\n                new_char = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n            result.append(new_char)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "b7b780149532ff9ed997d2a4044c8852d6c18b1e593e54a3995f01c0ae1aabcf|8e9c394bf4db3456af872892a6d8df04a58908c8a5b0f0a412eef7d81c98eb6a": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                new_char = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n            else:\n                new_char = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n            result.append(new_char)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "45274fb2afa069de9be53392c01bb3269e5d706a1e129a746df2bbdd375cb961|8e9c394bf4db3456af872892a6d8df04a58908c8a5b0f0a412eef7d81c98eb6a": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                new_char = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n            else:\n                new_char = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n            result.append(new_char)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "43f15c2ee6a99b9929b8a51bf26c050cb255b7a56323ed588ae3980a2422895d|8e9c394bf4db3456af872892a6d8df04a58908c8a5b0f0a412eef7d81c98eb6a": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                new_char = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n            else:\n                new_char = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n            result.append(new_char)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "c896378d58943e08fa61800cfc0415af77b42f4be2a0b70ba5325b8ad345cde4|8e9c394bf4db3456af872892a6d8df04a58908c8a5b0f0a412eef7d81c98eb6a": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                new_char = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n            else:\n                new_char = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n            result.append(new_char)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7ebae96a42a6b4c771e0ad7bdbdea4ad9466f202310cb1608ddc9b35a7da9805|8e9c394bf4db3456af872892a6d8df04a58908c8a5b0f0a412eef7d81c98eb6a": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                new_char = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n            else:\n                new_char = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n            result.append(new_char)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "39bdf284bc8dd566e0dfd685b54e312cf55485f219a8cd84f626b07f4d22536d|45274fb2afa069de9be53392c01bb3269e5d706a1e129a746df2bbdd375cb961": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                # Shift by 4 positions in lowercase alphabet\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                # Shift by 4 positions in uppercase alphabet\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "5b9d77f141e94dfcc6a49e5590f9a8fcb75e7ab15bf37965c5c61040943e2840|45274fb2afa069de9be53392c01bb3269e5d706a1e129a746df2bbdd375cb961": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                # Shift by 4 positions in lowercase alphabet\n                new_char = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(new_char)\n            else:\n                # Shift by 4 positions in uppercase alphabet\n                new_char = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(new_char)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "729e1894263ad82438ff76f03ff8faaa5dc04632160ae38c9032c68cf7672dd2|45274fb2afa069de9be53392c01bb3269e5d706a1e129a746df2bbdd375cb961": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "3563da8bbf0f815323a3b8899723ee68c0fad160ce0551e6c95ea66b0cb9cdaf|45274fb2afa069de9be53392c01bb3269e5d706a1e129a746df2bbdd375cb961": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "7ebae96a42a6b4c771e0ad7bdbdea4ad9466f202310cb1608ddc9b35a7da9805|45274fb2afa069de9be53392c01bb3269e5d706a1e129a746df2bbdd375cb961": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                # Shift by 4, wrap around using modulo 26\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                # Handle uppercase\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "8e9c394bf4db3456af872892a6d8df04a58908c8a5b0f0a412eef7d81c98eb6a|45274fb2afa069de9be53392c01bb3269e5d706a1e129a746df2bbdd375cb961": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "c692b329604f5f18c679f77ff241581d33a1aa1298a22a80706e5212e9c15e33|45274fb2afa069de9be53392c01bb3269e5d706a1e129a746df2bbdd375cb961": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "3563da8bbf0f815323a3b8899723ee68c0fad160ce0551e6c95ea66b0cb9cdaf|5b9d77f141e94dfcc6a49e5590f9a8fcb75e7ab15bf37965c5c61040943e2840": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                new_char = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(new_char)\n            else:\n                new_char = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(new_char)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8e9c394bf4db3456af872892a6d8df04a58908c8a5b0f0a412eef7d81c98eb6a|8e9c394bf4db3456af872892a6d8df04a58908c8a5b0f0a412eef7d81c98eb6a": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                # Shift by 4 positions in lowercase alphabet\n                new_char = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n            else:\n                # Shift by 4 positions in uppercase alphabet\n                new_char = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n            result.append(new_char)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "c692b329604f5f18c679f77ff241581d33a1aa1298a22a80706e5212e9c15e33|8e9c394bf4db3456af872892a6d8df04a58908c8a5b0f0a412eef7d81c98eb6a": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                new_char = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n            else:\n                new_char = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n            result.append(new_char)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "729e1894263ad82438ff76f03ff8faaa5dc04632160ae38c9032c68cf7672dd2|39bdf284bc8dd566e0dfd685b54e312cf55485f219a8cd84f626b07f4d22536d": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "45274fb2afa069de9be53392c01bb3269e5d706a1e129a746df2bbdd375cb961|39bdf284bc8dd566e0dfd685b54e312cf55485f219a8cd84f626b07f4d22536d": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                # Shift by 4 positions, wrapping around the alphabet\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                # Handle uppercase if needed\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "6b4e0883c6834b48c6d0dcc2e853f3a0475d427af86b3edfdf4defc9b7c6724c|8e9c394bf4db3456af872892a6d8df04a58908c8a5b0f0a412eef7d81c98eb6a": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                # Shift by 4, wrapping around the alphabet\n                new_char = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n            else:\n                # Handle uppercase\n                new_char = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n            result.append(new_char)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "b7b780149532ff9ed997d2a4044c8852d6c18b1e593e54a3995f01c0ae1aabcf|45274fb2afa069de9be53392c01bb3269e5d706a1e129a746df2bbdd375cb961": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "c896378d58943e08fa61800cfc0415af77b42f4be2a0b70ba5325b8ad345cde4|45274fb2afa069de9be53392c01bb3269e5d706a1e129a746df2bbdd375cb961": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "729e1894263ad82438ff76f03ff8faaa5dc04632160ae38c9032c68cf7672dd2|8e9c394bf4db3456af872892a6d8df04a58908c8a5b0f0a412eef7d81c98eb6a": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                # Shift by 4, wrap around using modulo 26\n                new_char = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n            else:\n                # Handle uppercase\n                new_char = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n            result.append(new_char)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "6b4e0883c6834b48c6d0dcc2e853f3a0475d427af86b3edfdf4defc9b7c6724c|45274fb2afa069de9be53392c01bb3269e5d706a1e129a746df2bbdd375cb961": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "43f15c2ee6a99b9929b8a51bf26c050cb255b7a56323ed588ae3980a2422895d|45274fb2afa069de9be53392c01bb3269e5d706a1e129a746df2bbdd375cb961": {
+      "stitched_code": "def encrypt(s):\n    result = []\n    for char in s:\n        if char.isalpha():\n            if char.islower():\n                # Shift by 4 positions, wrapping around with modulo 26\n                shifted = chr((ord(char) - ord('a') + 4) % 26 + ord('a'))\n                result.append(shifted)\n            else:\n                # Handle uppercase\n                shifted = chr((ord(char) - ord('A') + 4) % 26 + ord('A'))\n                result.append(shifted)\n        else:\n            result.append(char)\n    return ''.join(result)\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

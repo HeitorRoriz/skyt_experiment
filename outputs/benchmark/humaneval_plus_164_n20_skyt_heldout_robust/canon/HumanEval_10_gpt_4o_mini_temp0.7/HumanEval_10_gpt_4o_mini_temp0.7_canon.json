@@ -1,0 +1,546 @@
+{
+  "contract_id": "HumanEval_10_gpt_4o_mini_temp0.7",
+  "canonical_code": "def make_palindrome(string: str) -> str:\n    if not string:\n        return ''\n    \n    def is_palindrome(s: str) -> bool:\n        return s == s[::-1]\n    \n    # Find the longest palindromic suffix\n    for i in range(len(string)):\n        if is_palindrome(string[i:]):\n            # Append the reverse of the prefix to the end\n            return string + string[:i][::-1]\n    \n    return string + string[::-1]  # In case the whole string is not a palindrome\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 2,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [
+        "range",
+        "len",
+        "is_palindrome"
+      ],
+      "nested_depth": 2,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_1"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {},
+      "assignments": {}
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_make_palindrome"
+        ],
+        [
+          "function_make_palindrome",
+          "branch"
+        ],
+        [
+          "function_make_palindrome",
+          "function_is_palindrome"
+        ],
+        [
+          "function_make_palindrome",
+          "loop"
+        ],
+        [
+          "function_make_palindrome",
+          "loop",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "make_palindrome": {
+        "name": "make_palindrome",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      },
+      "is_palindrome": {
+        "name": "is_palindrome",
+        "args": [
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 1,
+      "estimated_complexity": "O(2^n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add",
+        "Add"
+      ],
+      "associative_ops": [
+        "Add",
+        "Add"
+      ],
+      "binary_operations": [
+        "Add",
+        "Add"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        1,
+        1,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Name",
+        "Load",
+        "If",
+        "UnaryOp",
+        "Not",
+        "Name",
+        "Load",
+        "Return",
+        "Constant",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Name",
+        "Load",
+        "Return",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Subscript",
+        "Name",
+        "Load",
+        "Slice",
+        "UnaryOp",
+        "USub",
+        "Constant",
+        "Load",
+        "Name",
+        "Load",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "If",
+        "Call",
+        "Name",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Slice",
+        "Name",
+        "Load",
+        "Load",
+        "Return",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Subscript",
+        "Subscript",
+        "Name",
+        "Load",
+        "Slice",
+        "Name",
+        "Load",
+        "Load",
+        "Slice",
+        "UnaryOp",
+        "USub",
+        "Constant",
+        "Load",
+        "Return",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Subscript",
+        "Name",
+        "Load",
+        "Slice",
+        "UnaryOp",
+        "USub",
+        "Constant",
+        "Load",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 10,
+      "ast_hash": "4818ed229543c6e7d52b04d83007d935",
+      "alpha_renamed_hash": "4818ed229543c6e7d52b04d83007d935"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Add",
+        "Add"
+      ],
+      "precedence_levels": {
+        "Add": 3
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Return",
+        "FunctionDef",
+        "Return",
+        "For",
+        "If",
+        "Return",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Return_2",
+        "FunctionDef_3",
+        "Return_4",
+        "For_5",
+        "If_6",
+        "Return_7",
+        "Return_8"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If",
+        "FunctionDef",
+        "For",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "not p0",
+          "return_type": "constant"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "not p0"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_10_gpt_4o_mini_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/10",
+    "prompt": "\n\ndef is_palindrome(string: str) -> bool:\n    \"\"\" Test if given string is a palindrome \"\"\"\n    return string == string[::-1]\n\n\ndef make_palindrome(string: str) -> str:\n    \"\"\" Find the shortest palindrome that begins with a supplied string.\n    Algorithm idea is simple:\n    - Find the longest postfix of supplied string that is a palindrome.\n    - Append to the end of the string reverse of a string prefix that comes before the palindromic suffix.\n    >>> make_palindrome('')\n    ''\n    >>> make_palindrome('cat')\n    'catac'\n    >>> make_palindrome('cata')\n    'catac'\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "make_palindrome"
+    },
+    "anchor_signature": "742255f5c9c0fc292443d4bf5b8d77f565f5435ac10ce48bc47d0edc07cf4e15",
+    "canonical_code": "def make_palindrome(string: str) -> str:\n    if not string:\n        return ''\n    \n    def is_palindrome(s: str) -> bool:\n        return s == s[::-1]\n    \n    # Find the longest palindromic suffix\n    for i in range(len(string)):\n        if is_palindrome(string[i:]):\n            # Append the reverse of the prefix to the end\n            return string + string[:i][::-1]\n    \n    return string + string[::-1]  # In case the whole string is not a palindrome\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 2,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "range",
+          "len",
+          "is_palindrome"
+        ],
+        "nested_depth": 2,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_1"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {},
+        "assignments": {}
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_make_palindrome"
+          ],
+          [
+            "function_make_palindrome",
+            "branch"
+          ],
+          [
+            "function_make_palindrome",
+            "function_is_palindrome"
+          ],
+          [
+            "function_make_palindrome",
+            "loop"
+          ],
+          [
+            "function_make_palindrome",
+            "loop",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "make_palindrome": {
+          "name": "make_palindrome",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        },
+        "is_palindrome": {
+          "name": "is_palindrome",
+          "args": [
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 1,
+        "estimated_complexity": "O(2^n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add",
+          "Add"
+        ],
+        "associative_ops": [
+          "Add",
+          "Add"
+        ],
+        "binary_operations": [
+          "Add",
+          "Add"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          1,
+          1,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Name",
+          "Load",
+          "If",
+          "UnaryOp",
+          "Not",
+          "Name",
+          "Load",
+          "Return",
+          "Constant",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Name",
+          "Load",
+          "Return",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Subscript",
+          "Name",
+          "Load",
+          "Slice",
+          "UnaryOp",
+          "USub",
+          "Constant",
+          "Load",
+          "Name",
+          "Load",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "If",
+          "Call",
+          "Name",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Slice",
+          "Name",
+          "Load",
+          "Load",
+          "Return",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Subscript",
+          "Subscript",
+          "Name",
+          "Load",
+          "Slice",
+          "Name",
+          "Load",
+          "Load",
+          "Slice",
+          "UnaryOp",
+          "USub",
+          "Constant",
+          "Load",
+          "Return",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Subscript",
+          "Name",
+          "Load",
+          "Slice",
+          "UnaryOp",
+          "USub",
+          "Constant",
+          "Load",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 10,
+        "ast_hash": "4818ed229543c6e7d52b04d83007d935",
+        "alpha_renamed_hash": "4818ed229543c6e7d52b04d83007d935"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Add",
+          "Add"
+        ],
+        "precedence_levels": {
+          "Add": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "FunctionDef",
+          "Return",
+          "For",
+          "If",
+          "Return",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "FunctionDef_3",
+          "Return_4",
+          "For_5",
+          "If_6",
+          "Return_7",
+          "Return_8"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "FunctionDef",
+          "For",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "not p0",
+            "return_type": "constant"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "not p0"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

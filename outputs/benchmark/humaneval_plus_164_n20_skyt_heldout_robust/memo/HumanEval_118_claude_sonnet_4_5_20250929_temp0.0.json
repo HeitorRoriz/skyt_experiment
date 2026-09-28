@@ -1,0 +1,25 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "00dd8ae35dc8b065da6865a91ef5df2a4bc3a268d3194938d71c3915c69541f0|00dd8ae35dc8b065da6865a91ef5df2a4bc3a268d3194938d71c3915c69541f0": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # We need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Iterate from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

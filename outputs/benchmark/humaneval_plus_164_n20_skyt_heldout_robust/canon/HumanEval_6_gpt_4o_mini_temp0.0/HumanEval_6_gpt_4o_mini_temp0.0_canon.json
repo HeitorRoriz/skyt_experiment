@@ -1,0 +1,542 @@
+{
+  "contract_id": "HumanEval_6_gpt_4o_mini_temp0.0",
+  "canonical_code": "from typing import List\n\n\ndef parse_nested_parens(paren_string: str) -> List[int]:\n    \"\"\" Input to this function is a string represented multiple groups for nested parentheses separated by spaces.\n    For each of the group, output the deepest level of nesting of parentheses.\n    E.g. (()()) has maximum two levels of nesting while ((())) has three.\n\n    >>> parse_nested_parens('(()()) ((())) () ((())()())')\n    [2, 3, 1, 3]\n    \"\"\"\n    def max_nesting_level(s: str) -> int:\n        max_level = 0\n        current_level = 0\n        for char in s:\n            if char == '(':\n                current_level += 1\n                max_level = max(max_level, current_level)\n            elif char == ')':\n                current_level -= 1\n        return max_level\n\n    return [max_nesting_level(group) for group in paren_string.split()]\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 2,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [
+        "max",
+        "max_nesting_level"
+      ],
+      "nested_depth": 3,
+      "branch_patterns": [
+        "if_at_depth_1",
+        "if_at_depth_2"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [
+          "v0",
+          "v1"
+        ],
+        "v1": []
+      },
+      "assignments": {
+        "v0": "Call(func=Name(id='max', ctx=Load()), args=[Name(id='v0', ctx=Load()), Name(id='v1', ctx=Load())])",
+        "v1": "Constant(value=0)"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_parse_nested_parens"
+        ],
+        [
+          "function_parse_nested_parens",
+          "function_max_nesting_level"
+        ],
+        [
+          "function_parse_nested_parens",
+          "function_max_nesting_level",
+          "loop"
+        ],
+        [
+          "function_parse_nested_parens",
+          "function_max_nesting_level",
+          "loop",
+          "branch"
+        ],
+        [
+          "function_parse_nested_parens",
+          "function_max_nesting_level",
+          "loop",
+          "branch",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "parse_nested_parens": {
+        "name": "parse_nested_parens",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      },
+      "max_nesting_level": {
+        "name": "max_nesting_level",
+        "args": [
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 1,
+      "estimated_complexity": "O(2^n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": []
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": false,
+      "numeric_constants": [
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Eq",
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "ImportFrom",
+        "alias",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Name",
+        "Load",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "For",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Add",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Sub",
+        "Constant",
+        "Return",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Return",
+        "ListComp",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "comprehension",
+        "Name",
+        "Store",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load"
+      ],
+      "ast_depth": 8,
+      "ast_hash": "cd28a525eb3e84e12f77b21179c34ff9",
+      "alpha_renamed_hash": "cd28a525eb3e84e12f77b21179c34ff9"
+    },
+    "operator_precedence": {
+      "operator_sequence": [],
+      "precedence_levels": {}
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "ImportFrom",
+        "FunctionDef",
+        "FunctionDef",
+        "Assign",
+        "Assign",
+        "For",
+        "If",
+        "AugAssign",
+        "Assign",
+        "If",
+        "AugAssign",
+        "Return",
+        "Return"
+      ],
+      "statement_sequence": [
+        "ImportFrom_0",
+        "FunctionDef_1",
+        "FunctionDef_2",
+        "Assign_3",
+        "Assign_4",
+        "For_5",
+        "If_6",
+        "AugAssign_7",
+        "Assign_8",
+        "If_9",
+        "AugAssign_10",
+        "Return_11",
+        "Return_12"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "FunctionDef",
+        "For",
+        "If",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_6_gpt_4o_mini_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/6",
+    "prompt": "from typing import List\n\n\ndef parse_nested_parens(paren_string: str) -> List[int]:\n    \"\"\" Input to this function is a string represented multiple groups for nested parentheses separated by spaces.\n    For each of the group, output the deepest level of nesting of parentheses.\n    E.g. (()()) has maximum two levels of nesting while ((())) has three.\n\n    >>> parse_nested_parens('(()()) ((())) () ((())()())')\n    [2, 3, 1, 3]\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "parse_nested_parens"
+    },
+    "anchor_signature": "a380ac25e5df05efed60a24df8a47511ba6c60ea3b717142f980b2d568b556e6",
+    "canonical_code": "from typing import List\n\n\ndef parse_nested_parens(paren_string: str) -> List[int]:\n    \"\"\" Input to this function is a string represented multiple groups for nested parentheses separated by spaces.\n    For each of the group, output the deepest level of nesting of parentheses.\n    E.g. (()()) has maximum two levels of nesting while ((())) has three.\n\n    >>> parse_nested_parens('(()()) ((())) () ((())()())')\n    [2, 3, 1, 3]\n    \"\"\"\n    def max_nesting_level(s: str) -> int:\n        max_level = 0\n        current_level = 0\n        for char in s:\n            if char == '(':\n                current_level += 1\n                max_level = max(max_level, current_level)\n            elif char == ')':\n                current_level -= 1\n        return max_level\n\n    return [max_nesting_level(group) for group in paren_string.split()]\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 2,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "max",
+          "max_nesting_level"
+        ],
+        "nested_depth": 3,
+        "branch_patterns": [
+          "if_at_depth_1",
+          "if_at_depth_2"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [
+            "v0",
+            "v1"
+          ],
+          "v1": []
+        },
+        "assignments": {
+          "v0": "Call(func=Name(id='max', ctx=Load()), args=[Name(id='v0', ctx=Load()), Name(id='v1', ctx=Load())])",
+          "v1": "Constant(value=0)"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_parse_nested_parens"
+          ],
+          [
+            "function_parse_nested_parens",
+            "function_max_nesting_level"
+          ],
+          [
+            "function_parse_nested_parens",
+            "function_max_nesting_level",
+            "loop"
+          ],
+          [
+            "function_parse_nested_parens",
+            "function_max_nesting_level",
+            "loop",
+            "branch"
+          ],
+          [
+            "function_parse_nested_parens",
+            "function_max_nesting_level",
+            "loop",
+            "branch",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "parse_nested_parens": {
+          "name": "parse_nested_parens",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        },
+        "max_nesting_level": {
+          "name": "max_nesting_level",
+          "args": [
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 1,
+        "estimated_complexity": "O(2^n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": [
+          0,
+          0,
+          1,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Eq",
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "ImportFrom",
+          "alias",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Name",
+          "Load",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Add",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Sub",
+          "Constant",
+          "Return",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Return",
+          "ListComp",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "comprehension",
+          "Name",
+          "Store",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load"
+        ],
+        "ast_depth": 8,
+        "ast_hash": "cd28a525eb3e84e12f77b21179c34ff9",
+        "alpha_renamed_hash": "cd28a525eb3e84e12f77b21179c34ff9"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "ImportFrom",
+          "FunctionDef",
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "For",
+          "If",
+          "AugAssign",
+          "Assign",
+          "If",
+          "AugAssign",
+          "Return",
+          "Return"
+        ],
+        "statement_sequence": [
+          "ImportFrom_0",
+          "FunctionDef_1",
+          "FunctionDef_2",
+          "Assign_3",
+          "Assign_4",
+          "For_5",
+          "If_6",
+          "AugAssign_7",
+          "Assign_8",
+          "If_9",
+          "AugAssign_10",
+          "Return_11",
+          "Return_12"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "FunctionDef",
+          "For",
+          "If",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

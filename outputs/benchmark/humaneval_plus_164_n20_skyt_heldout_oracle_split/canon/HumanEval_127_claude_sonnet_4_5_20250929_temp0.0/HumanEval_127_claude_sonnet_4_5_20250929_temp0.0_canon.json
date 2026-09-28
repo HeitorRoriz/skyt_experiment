@@ -1,0 +1,736 @@
+{
+  "contract_id": "HumanEval_127_claude_sonnet_4_5_20250929_temp0.0",
+  "canonical_code": "def intersection(interval1, interval2):\n    start = max(interval1[0], interval2[0])\n    end = min(interval1[1], interval2[1])\n    \n    # Check if intervals intersect\n    if start > end:\n        return \"NO\"\n    \n    # Calculate length of intersection\n    length = end - start\n    \n    # Check if length is prime\n    if length < 2:\n        return \"NO\"\n    \n    # Check for prime\n    if length == 2:\n        return \"YES\"\n    \n    if length % 2 == 0:\n        return \"NO\"\n    \n    for i in range(3, int(length**0.5) + 1, 2):\n        if length % i == 0:\n            return \"NO\"\n    \n    return \"YES\"\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 5,
+      "for_loops": 1,
+      "while_loops": 0,
+      "function_calls": [
+        "max",
+        "min",
+        "range",
+        "int"
+      ],
+      "nested_depth": 2,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_0",
+        "if_at_depth_0",
+        "if_at_depth_0",
+        "if_at_depth_1"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [],
+        "v1": [],
+        "v2": [
+          "v0",
+          "v1"
+        ]
+      },
+      "assignments": {
+        "v0": "Call(func=Name(id='max', ctx=Load()), args=[Subscript(value=Name(id='p0', ctx=Load()), slice=Constant(value=0), ctx=Load()), Subscript(value=Name(id='p1', ctx=Load()), slice=Constant(value=0), ctx=Load())])",
+        "v1": "Call(func=Name(id='min', ctx=Load()), args=[Subscript(value=Name(id='p0', ctx=Load()), slice=Constant(value=1), ctx=Load()), Subscript(value=Name(id='p1', ctx=Load()), slice=Constant(value=1), ctx=Load())])",
+        "v2": "BinOp(left=Name(id='v1', ctx=Load()), op=Sub(), right=Name(id='v0', ctx=Load()))"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_intersection"
+        ],
+        [
+          "function_intersection",
+          "branch"
+        ],
+        [
+          "function_intersection",
+          "branch"
+        ],
+        [
+          "function_intersection",
+          "branch"
+        ],
+        [
+          "function_intersection",
+          "branch"
+        ],
+        [
+          "function_intersection",
+          "loop"
+        ],
+        [
+          "function_intersection",
+          "loop",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "intersection": {
+        "name": "intersection",
+        "args": [
+          "p0",
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 1,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add"
+      ],
+      "associative_ops": [
+        "Add"
+      ],
+      "binary_operations": [
+        "Sub",
+        "Mod",
+        "Add",
+        "Pow",
+        "Mod"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": true,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        2,
+        2,
+        0,
+        3,
+        0.5,
+        1,
+        2,
+        0
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Gt",
+        "Lt",
+        "Eq",
+        "Eq",
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Name",
+        "Load",
+        "Return",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "BinOp",
+        "Name",
+        "Load",
+        "Sub",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Lt",
+        "Constant",
+        "Return",
+        "Constant",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Return",
+        "Constant",
+        "If",
+        "Compare",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mod",
+        "Constant",
+        "Eq",
+        "Constant",
+        "Return",
+        "Constant",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Constant",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Pow",
+        "Constant",
+        "Add",
+        "Constant",
+        "Constant",
+        "If",
+        "Compare",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mod",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Return",
+        "Constant",
+        "Return",
+        "Constant"
+      ],
+      "ast_depth": 8,
+      "ast_hash": "845a9a7d3e50853f130d1082f10a9a46",
+      "alpha_renamed_hash": "845a9a7d3e50853f130d1082f10a9a46"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Sub",
+        "Mod",
+        "Add",
+        "Pow",
+        "Mod"
+      ],
+      "precedence_levels": {
+        "Sub": 3,
+        "Mod": 4,
+        "Add": 3,
+        "Pow": 6
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "Assign",
+        "If",
+        "Return",
+        "Assign",
+        "If",
+        "Return",
+        "If",
+        "Return",
+        "If",
+        "Return",
+        "For",
+        "If",
+        "Return",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "Assign_2",
+        "If_3",
+        "Return_4",
+        "Assign_5",
+        "If_6",
+        "Return_7",
+        "If_8",
+        "Return_9",
+        "If_10",
+        "Return_11",
+        "For_12",
+        "If_13",
+        "Return_14",
+        "Return_15"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If",
+        "If",
+        "If",
+        "If",
+        "For",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "v0 > v1",
+          "return_type": "constant"
+        },
+        {
+          "condition": "v2 < 2",
+          "return_type": "constant"
+        },
+        {
+          "condition": "v2 == 2",
+          "return_type": "constant"
+        },
+        {
+          "condition": "v2 % 2 == 0",
+          "return_type": "constant"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "v0 > v1",
+        "v2 < 2",
+        "v2 == 2",
+        "v2 % 2 == 0"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_127_claude_sonnet_4_5_20250929_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/127",
+    "prompt": "\ndef intersection(interval1, interval2):\n    \"\"\"You are given two intervals,\n    where each interval is a pair of integers. For example, interval = (start, end) = (1, 2).\n    The given intervals are closed which means that the interval (start, end)\n    includes both start and end.\n    For each given interval, it is assumed that its start is less or equal its end.\n    Your task is to determine whether the length of intersection of these two \n    intervals is a prime number.\n    Example, the intersection of the intervals (1, 3), (2, 4) is (2, 3)\n    which its length is 1, which not a prime number.\n    If the length of the intersection is a prime number, return \"YES\",\n    otherwise, return \"NO\".\n    If the two intervals don't intersect, return \"NO\".\n\n\n    [input/output] samples:\n    intersection((1, 2), (2, 3)) ==> \"NO\"\n    intersection((-1, 1), (0, 4)) ==> \"NO\"\n    intersection((-3, -1), (-5, 5)) ==> \"YES\"\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "intersection"
+    },
+    "anchor_signature": "1ba9e592a2336922752e298f410a9b96705e1890a2b4140d4b48a63205a52e45",
+    "canonical_code": "def intersection(interval1, interval2):\n    start = max(interval1[0], interval2[0])\n    end = min(interval1[1], interval2[1])\n    \n    # Check if intervals intersect\n    if start > end:\n        return \"NO\"\n    \n    # Calculate length of intersection\n    length = end - start\n    \n    # Check if length is prime\n    if length < 2:\n        return \"NO\"\n    \n    # Check for prime\n    if length == 2:\n        return \"YES\"\n    \n    if length % 2 == 0:\n        return \"NO\"\n    \n    for i in range(3, int(length**0.5) + 1, 2):\n        if length % i == 0:\n            return \"NO\"\n    \n    return \"YES\"\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 5,
+        "for_loops": 1,
+        "while_loops": 0,
+        "function_calls": [
+          "max",
+          "min",
+          "range",
+          "int"
+        ],
+        "nested_depth": 2,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_0",
+          "if_at_depth_0",
+          "if_at_depth_0",
+          "if_at_depth_1"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [],
+          "v1": [],
+          "v2": [
+            "v0",
+            "v1"
+          ]
+        },
+        "assignments": {
+          "v0": "Call(func=Name(id='max', ctx=Load()), args=[Subscript(value=Name(id='p0', ctx=Load()), slice=Constant(value=0), ctx=Load()), Subscript(value=Name(id='p1', ctx=Load()), slice=Constant(value=0), ctx=Load())])",
+          "v1": "Call(func=Name(id='min', ctx=Load()), args=[Subscript(value=Name(id='p0', ctx=Load()), slice=Constant(value=1), ctx=Load()), Subscript(value=Name(id='p1', ctx=Load()), slice=Constant(value=1), ctx=Load())])",
+          "v2": "BinOp(left=Name(id='v1', ctx=Load()), op=Sub(), right=Name(id='v0', ctx=Load()))"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_intersection"
+          ],
+          [
+            "function_intersection",
+            "branch"
+          ],
+          [
+            "function_intersection",
+            "branch"
+          ],
+          [
+            "function_intersection",
+            "branch"
+          ],
+          [
+            "function_intersection",
+            "branch"
+          ],
+          [
+            "function_intersection",
+            "loop"
+          ],
+          [
+            "function_intersection",
+            "loop",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "intersection": {
+          "name": "intersection",
+          "args": [
+            "p0",
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 1,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add"
+        ],
+        "associative_ops": [
+          "Add"
+        ],
+        "binary_operations": [
+          "Sub",
+          "Mod",
+          "Add",
+          "Pow",
+          "Mod"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": true,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          0,
+          0,
+          1,
+          1,
+          2,
+          2,
+          2,
+          0,
+          3,
+          0.5,
+          1,
+          2,
+          0
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Gt",
+          "Lt",
+          "Eq",
+          "Eq",
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Name",
+          "Load",
+          "Return",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "BinOp",
+          "Name",
+          "Load",
+          "Sub",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Lt",
+          "Constant",
+          "Return",
+          "Constant",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Return",
+          "Constant",
+          "If",
+          "Compare",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mod",
+          "Constant",
+          "Eq",
+          "Constant",
+          "Return",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Constant",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Pow",
+          "Constant",
+          "Add",
+          "Constant",
+          "Constant",
+          "If",
+          "Compare",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mod",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Return",
+          "Constant",
+          "Return",
+          "Constant"
+        ],
+        "ast_depth": 8,
+        "ast_hash": "845a9a7d3e50853f130d1082f10a9a46",
+        "alpha_renamed_hash": "845a9a7d3e50853f130d1082f10a9a46"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Sub",
+          "Mod",
+          "Add",
+          "Pow",
+          "Mod"
+        ],
+        "precedence_levels": {
+          "Sub": 3,
+          "Mod": 4,
+          "Add": 3,
+          "Pow": 6
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "Assign",
+          "If",
+          "Return",
+          "Assign",
+          "If",
+          "Return",
+          "If",
+          "Return",
+          "If",
+          "Return",
+          "For",
+          "If",
+          "Return",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "Assign_2",
+          "If_3",
+          "Return_4",
+          "Assign_5",
+          "If_6",
+          "Return_7",
+          "If_8",
+          "Return_9",
+          "If_10",
+          "Return_11",
+          "For_12",
+          "If_13",
+          "Return_14",
+          "Return_15"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "If",
+          "If",
+          "If",
+          "For",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "v0 > v1",
+            "return_type": "constant"
+          },
+          {
+            "condition": "v2 < 2",
+            "return_type": "constant"
+          },
+          {
+            "condition": "v2 == 2",
+            "return_type": "constant"
+          },
+          {
+            "condition": "v2 % 2 == 0",
+            "return_type": "constant"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "v0 > v1",
+          "v2 < 2",
+          "v2 == 2",
+          "v2 % 2 == 0"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

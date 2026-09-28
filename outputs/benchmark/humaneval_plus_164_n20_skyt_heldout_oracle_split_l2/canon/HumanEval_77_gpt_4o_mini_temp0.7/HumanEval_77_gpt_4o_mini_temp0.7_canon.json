@@ -1,0 +1,360 @@
+{
+  "contract_id": "HumanEval_77_gpt_4o_mini_temp0.7",
+  "canonical_code": "def iscube(a):\n    if a < 0:\n        a = -a\n    return round(a ** (1/3)) ** 3 == a\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 1,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "round"
+      ],
+      "nested_depth": 1,
+      "branch_patterns": [
+        "if_at_depth_0"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "p0": []
+      },
+      "assignments": {
+        "p0": "UnaryOp(op=USub(), operand=Name(id='p0', ctx=Load()))"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_iscube"
+        ],
+        [
+          "function_iscube",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "iscube": {
+        "name": "iscube",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": [
+        "Pow",
+        "Pow",
+        "Div"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        0,
+        1,
+        3,
+        3
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Lt",
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Lt",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "UnaryOp",
+        "USub",
+        "Name",
+        "Load",
+        "Return",
+        "Compare",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Pow",
+        "BinOp",
+        "Constant",
+        "Div",
+        "Constant",
+        "Pow",
+        "Constant",
+        "Eq",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 8,
+      "ast_hash": "3d27089cbcd1df81161b2b96d0511905",
+      "alpha_renamed_hash": "3d27089cbcd1df81161b2b96d0511905"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Pow",
+        "Pow",
+        "Div"
+      ],
+      "precedence_levels": {
+        "Pow": 6,
+        "Div": 4
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Assign_2",
+        "Return_3"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_77_gpt_4o_mini_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/77",
+    "prompt": "\ndef iscube(a):\n    '''\n    Write a function that takes an integer a and returns True \n    if this ingeger is a cube of some integer number.\n    Note: you may assume the input is always valid.\n    Examples:\n    iscube(1) ==> True\n    iscube(2) ==> False\n    iscube(-1) ==> True\n    iscube(64) ==> True\n    iscube(0) ==> True\n    iscube(180) ==> False\n    '''\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "iscube"
+    },
+    "anchor_signature": "74b62f9dc4e56b19bae2beefaab9c857fb64ca84b2b73d45718b370d34189dc5",
+    "canonical_code": "def iscube(a):\n    if a < 0:\n        a = -a\n    return round(a ** (1/3)) ** 3 == a\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 1,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "round"
+        ],
+        "nested_depth": 1,
+        "branch_patterns": [
+          "if_at_depth_0"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "p0": []
+        },
+        "assignments": {
+          "p0": "UnaryOp(op=USub(), operand=Name(id='p0', ctx=Load()))"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_iscube"
+          ],
+          [
+            "function_iscube",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "iscube": {
+          "name": "iscube",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": [
+          "Pow",
+          "Pow",
+          "Div"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          0,
+          1,
+          3,
+          3
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Lt",
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Lt",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "UnaryOp",
+          "USub",
+          "Name",
+          "Load",
+          "Return",
+          "Compare",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Pow",
+          "BinOp",
+          "Constant",
+          "Div",
+          "Constant",
+          "Pow",
+          "Constant",
+          "Eq",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 8,
+        "ast_hash": "3d27089cbcd1df81161b2b96d0511905",
+        "alpha_renamed_hash": "3d27089cbcd1df81161b2b96d0511905"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Pow",
+          "Pow",
+          "Div"
+        ],
+        "precedence_levels": {
+          "Pow": 6,
+          "Div": 4
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Assign_2",
+          "Return_3"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

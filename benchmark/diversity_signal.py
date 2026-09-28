@@ -613,6 +613,14 @@ def _git_hash() -> str:
         return "unknown"
 
 
+def _relative_repo_path(path: Path) -> str:
+    """Store a repo-relative path so a report does not record the machine."""
+    try:
+        return path.resolve().relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return str(path)
+
+
 def _prereg_hash(path: Path) -> str:
     if not path.is_file():
         raise DiversitySignalError(
@@ -777,7 +785,7 @@ def analyze(
         "n_bootstrap": n_bootstrap,
         "git_hash": _git_hash(),
         "prereg_sha256": prereg_digest,
-        "prereg_path": str(prereg_path),
+        "prereg_path": _relative_repo_path(prereg_path),
         "source_dirs": [str(path) for path in source_dirs],
         "n_configs": len(rows),
         "exclusions": {

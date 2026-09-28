@@ -1,0 +1,545 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "ea04fddfc66c4edfe0533ff4acf8de4620873f589d261443a2666e63cb51dd97|144c729edb94590a66f956247da6fbf4b5ab6baead8a16d9542c5f501314b958": {
+      "stitched_code": "def correct_bracketing(brackets: str):\n    count = 0\n    for char in brackets:\n        if char == '<':\n            count += 1\n        elif char == '>':\n            count -= 1\n        if count < 0:\n            return False\n    return count == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "52d4bdfccf4be52edbd22b207e7bd31ea4562a018c41f085f71413bf02db64bc|144c729edb94590a66f956247da6fbf4b5ab6baead8a16d9542c5f501314b958": {
+      "stitched_code": "def correct_bracketing(brackets: str):\n    balance = 0\n    for char in brackets:\n        if char == '<':\n            balance += 1\n        elif char == '>':\n            balance -= 1\n        if balance < 0:\n            return False\n    return balance == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "144c729edb94590a66f956247da6fbf4b5ab6baead8a16d9542c5f501314b958|144c729edb94590a66f956247da6fbf4b5ab6baead8a16d9542c5f501314b958": {
+      "stitched_code": "\n\ndef correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if every opening bracket has a corresponding closing bracket.\n\n    >>> correct_bracketing(\"<\")\n    False\n    >>> correct_bracketing(\"<>\")\n    True\n    >>> correct_bracketing(\"<<><>>\")\n    True\n    >>> correct_bracketing(\"><<>\")\n    False\n    \"\"\"\n    balance = 0\n    for char in brackets:\n        if char == '<':\n            balance += 1\n        elif char == '>':\n            balance -= 1\n        if balance < 0:\n            return False\n    return balance == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "729c8f6b7a9f52e6e7c42a19c3559bb1f735cabf9db41ad4b8057f5ed4380e40|144c729edb94590a66f956247da6fbf4b5ab6baead8a16d9542c5f501314b958": {
+      "stitched_code": "\n\ndef correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if every opening bracket has a corresponding closing bracket.\n\n    >>> correct_bracketing(\"<\")\n    False\n    >>> correct_bracketing(\"<>\")\n    True\n    >>> correct_bracketing(\"<<><>>\")\n    True\n    >>> correct_bracketing(\"><<>\")\n    False\n    \"\"\"\n    balance = 0\n    for char in brackets:\n        if char == \"<\":\n            balance += 1\n        elif char == \">\":\n            balance -= 1\n        if balance < 0:\n            return False\n    return balance == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1bd9aecf60abde164615a5d47b96b5306e21c756c22c1c205b7795ee980af47b|144c729edb94590a66f956247da6fbf4b5ab6baead8a16d9542c5f501314b958": {
+      "stitched_code": "def correct_bracketing(brackets: str):\n    balance = 0\n    for char in brackets:\n        if char == \"<\":\n            balance += 1\n        elif char == \">\":\n            balance -= 1\n        if balance < 0:\n            return False\n    return balance == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "52d4bdfccf4be52edbd22b207e7bd31ea4562a018c41f085f71413bf02db64bc|729c8f6b7a9f52e6e7c42a19c3559bb1f735cabf9db41ad4b8057f5ed4380e40": {
+      "stitched_code": "def correct_bracketing(brackets: str):\n    balance = 0\n    for char in brackets:\n        if char == '<':\n            balance += 1\n        elif char == '>':\n            balance -= 1\n        if balance < 0:\n            return False\n    return balance == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "144c729edb94590a66f956247da6fbf4b5ab6baead8a16d9542c5f501314b958|729c8f6b7a9f52e6e7c42a19c3559bb1f735cabf9db41ad4b8057f5ed4380e40": {
+      "stitched_code": "\n\ndef correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if every opening bracket has a corresponding closing bracket.\n\n    >>> correct_bracketing(\"<\")\n    False\n    >>> correct_bracketing(\"<>\")\n    True\n    >>> correct_bracketing(\"<<><>>\")\n    True\n    >>> correct_bracketing(\"><<>\")\n    False\n    \"\"\"\n    balance = 0\n    for char in brackets:\n        if char == '<':\n            balance += 1\n        elif char == '>':\n            balance -= 1\n        if balance < 0:\n            return False\n    return balance == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ea04fddfc66c4edfe0533ff4acf8de4620873f589d261443a2666e63cb51dd97|729c8f6b7a9f52e6e7c42a19c3559bb1f735cabf9db41ad4b8057f5ed4380e40": {
+      "stitched_code": "def correct_bracketing(brackets: str):\n    count = 0\n    for char in brackets:\n        if char == '<':\n            count += 1\n        elif char == '>':\n            count -= 1\n        if count < 0:\n            return False\n    return count == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1bd9aecf60abde164615a5d47b96b5306e21c756c22c1c205b7795ee980af47b|729c8f6b7a9f52e6e7c42a19c3559bb1f735cabf9db41ad4b8057f5ed4380e40": {
+      "stitched_code": "def correct_bracketing(brackets: str):\n    balance = 0\n    for char in brackets:\n        if char == \"<\":\n            balance += 1\n        elif char == \">\":\n            balance -= 1\n        if balance < 0:\n            return False\n    return balance == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "47f2193719305fd0c2bd9bedc3e4aa520eecea60971330aa0f8edc4c2527ba54|729c8f6b7a9f52e6e7c42a19c3559bb1f735cabf9db41ad4b8057f5ed4380e40": {
+      "stitched_code": "\n\ndef correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if every opening bracket has a corresponding closing bracket.\n\n    >>> correct_bracketing(\"<\")\n    False\n    >>> correct_bracketing(\"<>\")\n    True\n    >>> correct_bracketing(\"<<><>>\")\n    True\n    >>> correct_bracketing(\"><<>\")\n    False\n    \"\"\"\n    count = 0\n    for char in brackets:\n        if char == '<':\n            count += 1\n        elif char == '>':\n            count -= 1\n        if count < 0:\n            return False\n    return count == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "47f2193719305fd0c2bd9bedc3e4aa520eecea60971330aa0f8edc4c2527ba54|144c729edb94590a66f956247da6fbf4b5ab6baead8a16d9542c5f501314b958": {
+      "stitched_code": "\n\ndef correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if every opening bracket has a corresponding closing bracket.\n\n    >>> correct_bracketing(\"<\")\n    False\n    >>> correct_bracketing(\"<>\")\n    True\n    >>> correct_bracketing(\"<<><>>\")\n    True\n    >>> correct_bracketing(\"><<>\")\n    False\n    \"\"\"\n    count = 0\n    for char in brackets:\n        if char == '<':\n            count += 1\n        elif char == '>':\n            count -= 1\n        if count < 0:\n            return False\n    return count == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "144c729edb94590a66f956247da6fbf4b5ab6baead8a16d9542c5f501314b958|52d4bdfccf4be52edbd22b207e7bd31ea4562a018c41f085f71413bf02db64bc": {
+      "stitched_code": "\n\ndef correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if every opening bracket has a corresponding closing bracket.\n\n    >>> correct_bracketing(\"<\")\n    False\n    >>> correct_bracketing(\"<>\")\n    True\n    >>> correct_bracketing(\"<<><>>\")\n    True\n    >>> correct_bracketing(\"><<>\")\n    False\n    \"\"\"\n    balance = 0\n    for char in brackets:\n        if char == '<':\n            balance += 1\n        elif char == '>':\n            balance -= 1\n        if balance < 0:\n            return False\n    return balance == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "729c8f6b7a9f52e6e7c42a19c3559bb1f735cabf9db41ad4b8057f5ed4380e40|52d4bdfccf4be52edbd22b207e7bd31ea4562a018c41f085f71413bf02db64bc": {
+      "stitched_code": "\n\ndef correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if every opening bracket has a corresponding closing bracket.\n\n    >>> correct_bracketing(\"<\")\n    False\n    >>> correct_bracketing(\"<>\")\n    True\n    >>> correct_bracketing(\"<<><>>\")\n    True\n    >>> correct_bracketing(\"><<>\")\n    False\n    \"\"\"\n    balance = 0\n    for char in brackets:\n        if char == \"<\":\n            balance += 1\n        elif char == \">\":\n            balance -= 1\n        if balance < 0:\n            return False\n    return balance == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "52d4bdfccf4be52edbd22b207e7bd31ea4562a018c41f085f71413bf02db64bc|52d4bdfccf4be52edbd22b207e7bd31ea4562a018c41f085f71413bf02db64bc": {
+      "stitched_code": "def correct_bracketing(brackets: str):\n    balance = 0\n    for char in brackets:\n        if char == '<':\n            balance += 1\n        elif char == '>':\n            balance -= 1\n        if balance < 0:\n            return False\n    return balance == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1bd9aecf60abde164615a5d47b96b5306e21c756c22c1c205b7795ee980af47b|52d4bdfccf4be52edbd22b207e7bd31ea4562a018c41f085f71413bf02db64bc": {
+      "stitched_code": "def correct_bracketing(brackets: str):\n    balance = 0\n    for char in brackets:\n        if char == \"<\":\n            balance += 1\n        elif char == \">\":\n            balance -= 1\n        if balance < 0:\n            return False\n    return balance == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "47f2193719305fd0c2bd9bedc3e4aa520eecea60971330aa0f8edc4c2527ba54|52d4bdfccf4be52edbd22b207e7bd31ea4562a018c41f085f71413bf02db64bc": {
+      "stitched_code": "\n\ndef correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if every opening bracket has a corresponding closing bracket.\n\n    >>> correct_bracketing(\"<\")\n    False\n    >>> correct_bracketing(\"<>\")\n    True\n    >>> correct_bracketing(\"<<><>>\")\n    True\n    >>> correct_bracketing(\"><<>\")\n    False\n    \"\"\"\n    count = 0\n    for char in brackets:\n        if char == '<':\n            count += 1\n        elif char == '>':\n            count -= 1\n        if count < 0:\n            return False\n    return count == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "52d4bdfccf4be52edbd22b207e7bd31ea4562a018c41f085f71413bf02db64bc|1bd9aecf60abde164615a5d47b96b5306e21c756c22c1c205b7795ee980af47b": {
+      "stitched_code": "def correct_bracketing(brackets: str):\n    balance = 0\n    for char in brackets:\n        if char == '<':\n            balance += 1\n        elif char == '>':\n            balance -= 1\n        if balance < 0:\n            return False\n    return balance == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "144c729edb94590a66f956247da6fbf4b5ab6baead8a16d9542c5f501314b958|1bd9aecf60abde164615a5d47b96b5306e21c756c22c1c205b7795ee980af47b": {
+      "stitched_code": "\n\ndef correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if every opening bracket has a corresponding closing bracket.\n\n    >>> correct_bracketing(\"<\")\n    False\n    >>> correct_bracketing(\"<>\")\n    True\n    >>> correct_bracketing(\"<<><>>\")\n    True\n    >>> correct_bracketing(\"><<>\")\n    False\n    \"\"\"\n    balance = 0\n    for char in brackets:\n        if char == '<':\n            balance += 1\n        elif char == '>':\n            balance -= 1\n        if balance < 0:\n            return False\n    return balance == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "729c8f6b7a9f52e6e7c42a19c3559bb1f735cabf9db41ad4b8057f5ed4380e40|1bd9aecf60abde164615a5d47b96b5306e21c756c22c1c205b7795ee980af47b": {
+      "stitched_code": "\n\ndef correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if every opening bracket has a corresponding closing bracket.\n\n    >>> correct_bracketing(\"<\")\n    False\n    >>> correct_bracketing(\"<>\")\n    True\n    >>> correct_bracketing(\"<<><>>\")\n    True\n    >>> correct_bracketing(\"><<>\")\n    False\n    \"\"\"\n    balance = 0\n    for char in brackets:\n        if char == \"<\":\n            balance += 1\n        elif char == \">\":\n            balance -= 1\n        if balance < 0:\n            return False\n    return balance == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "47f2193719305fd0c2bd9bedc3e4aa520eecea60971330aa0f8edc4c2527ba54|1bd9aecf60abde164615a5d47b96b5306e21c756c22c1c205b7795ee980af47b": {
+      "stitched_code": "\n\ndef correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if every opening bracket has a corresponding closing bracket.\n\n    >>> correct_bracketing(\"<\")\n    False\n    >>> correct_bracketing(\"<>\")\n    True\n    >>> correct_bracketing(\"<<><>>\")\n    True\n    >>> correct_bracketing(\"><<>\")\n    False\n    \"\"\"\n    count = 0\n    for char in brackets:\n        if char == '<':\n            count += 1\n        elif char == '>':\n            count -= 1\n        if count < 0:\n            return False\n    return count == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "52d4bdfccf4be52edbd22b207e7bd31ea4562a018c41f085f71413bf02db64bc|47f2193719305fd0c2bd9bedc3e4aa520eecea60971330aa0f8edc4c2527ba54": {
+      "stitched_code": "def correct_bracketing(brackets: str):\n    balance = 0\n    for char in brackets:\n        if char == '<':\n            balance += 1\n        elif char == '>':\n            balance -= 1\n        if balance < 0:\n            return False\n    return balance == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "144c729edb94590a66f956247da6fbf4b5ab6baead8a16d9542c5f501314b958|47f2193719305fd0c2bd9bedc3e4aa520eecea60971330aa0f8edc4c2527ba54": {
+      "stitched_code": "\n\ndef correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if every opening bracket has a corresponding closing bracket.\n\n    >>> correct_bracketing(\"<\")\n    False\n    >>> correct_bracketing(\"<>\")\n    True\n    >>> correct_bracketing(\"<<><>>\")\n    True\n    >>> correct_bracketing(\"><<>\")\n    False\n    \"\"\"\n    balance = 0\n    for char in brackets:\n        if char == '<':\n            balance += 1\n        elif char == '>':\n            balance -= 1\n        if balance < 0:\n            return False\n    return balance == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "729c8f6b7a9f52e6e7c42a19c3559bb1f735cabf9db41ad4b8057f5ed4380e40|47f2193719305fd0c2bd9bedc3e4aa520eecea60971330aa0f8edc4c2527ba54": {
+      "stitched_code": "\n\ndef correct_bracketing(brackets: str):\n    \"\"\" brackets is a string of \"<\" and \">\".\n    return True if every opening bracket has a corresponding closing bracket.\n\n    >>> correct_bracketing(\"<\")\n    False\n    >>> correct_bracketing(\"<>\")\n    True\n    >>> correct_bracketing(\"<<><>>\")\n    True\n    >>> correct_bracketing(\"><<>\")\n    False\n    \"\"\"\n    balance = 0\n    for char in brackets:\n        if char == \"<\":\n            balance += 1\n        elif char == \">\":\n            balance -= 1\n        if balance < 0:\n            return False\n    return balance == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ea04fddfc66c4edfe0533ff4acf8de4620873f589d261443a2666e63cb51dd97|52d4bdfccf4be52edbd22b207e7bd31ea4562a018c41f085f71413bf02db64bc": {
+      "stitched_code": "def correct_bracketing(brackets: str):\n    count = 0\n    for char in brackets:\n        if char == '<':\n            count += 1\n        elif char == '>':\n            count -= 1\n        if count < 0:\n            return False\n    return count == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ea04fddfc66c4edfe0533ff4acf8de4620873f589d261443a2666e63cb51dd97|1bd9aecf60abde164615a5d47b96b5306e21c756c22c1c205b7795ee980af47b": {
+      "stitched_code": "def correct_bracketing(brackets: str):\n    count = 0\n    for char in brackets:\n        if char == '<':\n            count += 1\n        elif char == '>':\n            count -= 1\n        if count < 0:\n            return False\n    return count == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ea04fddfc66c4edfe0533ff4acf8de4620873f589d261443a2666e63cb51dd97|47f2193719305fd0c2bd9bedc3e4aa520eecea60971330aa0f8edc4c2527ba54": {
+      "stitched_code": "def correct_bracketing(brackets: str):\n    count = 0\n    for char in brackets:\n        if char == '<':\n            count += 1\n        elif char == '>':\n            count -= 1\n        if count < 0:\n            return False\n    return count == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1bd9aecf60abde164615a5d47b96b5306e21c756c22c1c205b7795ee980af47b|47f2193719305fd0c2bd9bedc3e4aa520eecea60971330aa0f8edc4c2527ba54": {
+      "stitched_code": "def correct_bracketing(brackets: str):\n    balance = 0\n    for char in brackets:\n        if char == \"<\":\n            balance += 1\n        elif char == \">\":\n            balance -= 1\n        if balance < 0:\n            return False\n    return balance == 0\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

@@ -1,0 +1,1501 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "60bfdb9a38fca649d5447009184c24d3f2f1006ccd20bf99a5d54dbf03e94ebc|00dd8ae35dc8b065da6865a91ef5df2a4bc3a268d3194938d71c3915c69541f0": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Iterate from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if characters on both sides are consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "00dd8ae35dc8b065da6865a91ef5df2a4bc3a268d3194938d71c3915c69541f0|00dd8ae35dc8b065da6865a91ef5df2a4bc3a268d3194938d71c3915c69541f0": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # We need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Iterate from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ce8ba04547be9594d0d5d6c3ef99b29ec20088bf8677aef7047ed4dd2cdd1849|00dd8ae35dc8b065da6865a91ef5df2a4bc3a268d3194938d71c3915c69541f0": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Iterate from right to left, excluding the first and last character\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0abd5fd1132d6204df7d701beb0ee29a417e37f28a46d0937a0f08a30c7202e7|00dd8ae35dc8b065da6865a91ef5df2a4bc3a268d3194938d71c3915c69541f0": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # We need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Iterate from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ccfd9613487b102d6d2c5593f9c16fe99a1999ac20b74b109ad22445b6ebfbaf|00dd8ae35dc8b065da6865a91ef5df2a4bc3a268d3194938d71c3915c69541f0": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # We need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding the first and last character\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "701a60377d2be27477e9e7362e7d4a63b5683a63ab22977f6dd25c0d02a1d011|00dd8ae35dc8b065da6865a91ef5df2a4bc3a268d3194938d71c3915c69541f0": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Check from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "6789b6e3e5c394e68daf94660b5a8d4aefe4c7218f4c3bd50b28217aefae8a99|00dd8ae35dc8b065da6865a91ef5df2a4bc3a268d3194938d71c3915c69541f0": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "27597b49bcd02266b59a89fe8f171a1f3ddf3061dc68e57692a7972084f7a800|00dd8ae35dc8b065da6865a91ef5df2a4bc3a268d3194938d71c3915c69541f0": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "17cdd6ffeccf39c207a3fd17bc474aa8cc077149cb90d4692ec1d0f451e6b4ad|00dd8ae35dc8b065da6865a91ef5df2a4bc3a268d3194938d71c3915c69541f0": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Iterate from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "c85adc343ef7a26954442ad600e6750233f0eb5ac209468219160c5252cf0119|0abd5fd1132d6204df7d701beb0ee29a417e37f28a46d0937a0f08a30c7202e7": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "00dd8ae35dc8b065da6865a91ef5df2a4bc3a268d3194938d71c3915c69541f0|0abd5fd1132d6204df7d701beb0ee29a417e37f28a46d0937a0f08a30c7202e7": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # We need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Iterate from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ce8ba04547be9594d0d5d6c3ef99b29ec20088bf8677aef7047ed4dd2cdd1849|0abd5fd1132d6204df7d701beb0ee29a417e37f28a46d0937a0f08a30c7202e7": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Iterate from right to left, excluding the first and last character\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "5b25a66cdbd8aef9b91a84a1098bc5ee6241b759a3673e891f8e6912ffa56829|0abd5fd1132d6204df7d701beb0ee29a417e37f28a46d0937a0f08a30c7202e7": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding first and last positions\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if both neighbors are consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0a1578fcdb6e8cfae00a08acd48948dd5d64df3e31a13b85be8e442338e1c041|0abd5fd1132d6204df7d701beb0ee29a417e37f28a46d0937a0f08a30c7202e7": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # We need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Start from the right side, but not including the last character\n    # and not including the first character\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "6789b6e3e5c394e68daf94660b5a8d4aefe4c7218f4c3bd50b28217aefae8a99|0abd5fd1132d6204df7d701beb0ee29a417e37f28a46d0937a0f08a30c7202e7": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "8e11523026200499978e8657683bc4a59f7a8c38e81a9fe2150973dc8102c8b6|0abd5fd1132d6204df7d701beb0ee29a417e37f28a46d0937a0f08a30c7202e7": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "17cdd6ffeccf39c207a3fd17bc474aa8cc077149cb90d4692ec1d0f451e6b4ad|0abd5fd1132d6204df7d701beb0ee29a417e37f28a46d0937a0f08a30c7202e7": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Iterate from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "8e584a7ab29080750da69d1ecdcb6f891ebb64cbf84a57fdee70871ac8c75380|0abd5fd1132d6204df7d701beb0ee29a417e37f28a46d0937a0f08a30c7202e7": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # We need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Start from the right side, but not from the last character (index len(word)-1)\n    # and not from the first character (index 0)\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "60bfdb9a38fca649d5447009184c24d3f2f1006ccd20bf99a5d54dbf03e94ebc|17cdd6ffeccf39c207a3fd17bc474aa8cc077149cb90d4692ec1d0f451e6b4ad": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Iterate from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if characters on both sides are consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "27597b49bcd02266b59a89fe8f171a1f3ddf3061dc68e57692a7972084f7a800|17cdd6ffeccf39c207a3fd17bc474aa8cc077149cb90d4692ec1d0f451e6b4ad": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "00dd8ae35dc8b065da6865a91ef5df2a4bc3a268d3194938d71c3915c69541f0|17cdd6ffeccf39c207a3fd17bc474aa8cc077149cb90d4692ec1d0f451e6b4ad": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # We need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Iterate from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ce8ba04547be9594d0d5d6c3ef99b29ec20088bf8677aef7047ed4dd2cdd1849|17cdd6ffeccf39c207a3fd17bc474aa8cc077149cb90d4692ec1d0f451e6b4ad": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Iterate from right to left, excluding the first and last character\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "5b25a66cdbd8aef9b91a84a1098bc5ee6241b759a3673e891f8e6912ffa56829|17cdd6ffeccf39c207a3fd17bc474aa8cc077149cb90d4692ec1d0f451e6b4ad": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding first and last positions\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if both neighbors are consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "701a60377d2be27477e9e7362e7d4a63b5683a63ab22977f6dd25c0d02a1d011|17cdd6ffeccf39c207a3fd17bc474aa8cc077149cb90d4692ec1d0f451e6b4ad": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Check from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "6789b6e3e5c394e68daf94660b5a8d4aefe4c7218f4c3bd50b28217aefae8a99|17cdd6ffeccf39c207a3fd17bc474aa8cc077149cb90d4692ec1d0f451e6b4ad": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "8e11523026200499978e8657683bc4a59f7a8c38e81a9fe2150973dc8102c8b6|17cdd6ffeccf39c207a3fd17bc474aa8cc077149cb90d4692ec1d0f451e6b4ad": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "8e584a7ab29080750da69d1ecdcb6f891ebb64cbf84a57fdee70871ac8c75380|17cdd6ffeccf39c207a3fd17bc474aa8cc077149cb90d4692ec1d0f451e6b4ad": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # We need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Start from the right side, but not from the last character (index len(word)-1)\n    # and not from the first character (index 0)\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "27597b49bcd02266b59a89fe8f171a1f3ddf3061dc68e57692a7972084f7a800|ce8ba04547be9594d0d5d6c3ef99b29ec20088bf8677aef7047ed4dd2cdd1849": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "00dd8ae35dc8b065da6865a91ef5df2a4bc3a268d3194938d71c3915c69541f0|ce8ba04547be9594d0d5d6c3ef99b29ec20088bf8677aef7047ed4dd2cdd1849": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # We need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Iterate from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "5b25a66cdbd8aef9b91a84a1098bc5ee6241b759a3673e891f8e6912ffa56829|ce8ba04547be9594d0d5d6c3ef99b29ec20088bf8677aef7047ed4dd2cdd1849": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding first and last positions\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if both neighbors are consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ccfd9613487b102d6d2c5593f9c16fe99a1999ac20b74b109ad22445b6ebfbaf|ce8ba04547be9594d0d5d6c3ef99b29ec20088bf8677aef7047ed4dd2cdd1849": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # We need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding the first and last character\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0990a64bd2c5c60c0c19c057e72a2966865286159ab962684d7cb50f27b14cda|ce8ba04547be9594d0d5d6c3ef99b29ec20088bf8677aef7047ed4dd2cdd1849": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = 'aeiouAEIOU'\n    if len(word) < 3:\n        return ''\n    for i in range(len(word) - 2, 0, -1):\n        if word[i] in vowels:\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    return ''\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "6789b6e3e5c394e68daf94660b5a8d4aefe4c7218f4c3bd50b28217aefae8a99|ce8ba04547be9594d0d5d6c3ef99b29ec20088bf8677aef7047ed4dd2cdd1849": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "a910756bf8aa5fa512f3953fbf3286e60b306b10900b4196e1f411fe0f8a1ab0|ce8ba04547be9594d0d5d6c3ef99b29ec20088bf8677aef7047ed4dd2cdd1849": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = 'aeiouAEIOU'\n    if len(word) < 3:\n        return ''\n    for i in range(len(word) - 2, 0, -1):\n        if word[i] in vowels:\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    return ''\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "60bfdb9a38fca649d5447009184c24d3f2f1006ccd20bf99a5d54dbf03e94ebc|ce8ba04547be9594d0d5d6c3ef99b29ec20088bf8677aef7047ed4dd2cdd1849": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Iterate from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if characters on both sides are consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "701a60377d2be27477e9e7362e7d4a63b5683a63ab22977f6dd25c0d02a1d011|ce8ba04547be9594d0d5d6c3ef99b29ec20088bf8677aef7047ed4dd2cdd1849": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Check from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0a1578fcdb6e8cfae00a08acd48948dd5d64df3e31a13b85be8e442338e1c041|ce8ba04547be9594d0d5d6c3ef99b29ec20088bf8677aef7047ed4dd2cdd1849": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # We need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Start from the right side, but not including the last character\n    # and not including the first character\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "8e11523026200499978e8657683bc4a59f7a8c38e81a9fe2150973dc8102c8b6|ce8ba04547be9594d0d5d6c3ef99b29ec20088bf8677aef7047ed4dd2cdd1849": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "b540949cd40a06e9cbf2584f7b5db5de58d9878daca39fbd977ba1c5cb62ff56|ce8ba04547be9594d0d5d6c3ef99b29ec20088bf8677aef7047ed4dd2cdd1849": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Check from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        if word[i] in vowels:\n            # Check if both neighbors are consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "8e584a7ab29080750da69d1ecdcb6f891ebb64cbf84a57fdee70871ac8c75380|ce8ba04547be9594d0d5d6c3ef99b29ec20088bf8677aef7047ed4dd2cdd1849": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # We need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Start from the right side, but not from the last character (index len(word)-1)\n    # and not from the first character (index 0)\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ccfd9613487b102d6d2c5593f9c16fe99a1999ac20b74b109ad22445b6ebfbaf|17cdd6ffeccf39c207a3fd17bc474aa8cc077149cb90d4692ec1d0f451e6b4ad": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # We need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding the first and last character\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "b540949cd40a06e9cbf2584f7b5db5de58d9878daca39fbd977ba1c5cb62ff56|17cdd6ffeccf39c207a3fd17bc474aa8cc077149cb90d4692ec1d0f451e6b4ad": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Check from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        if word[i] in vowels:\n            # Check if both neighbors are consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "a910756bf8aa5fa512f3953fbf3286e60b306b10900b4196e1f411fe0f8a1ab0|17cdd6ffeccf39c207a3fd17bc474aa8cc077149cb90d4692ec1d0f451e6b4ad": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = 'aeiouAEIOU'\n    if len(word) < 3:\n        return ''\n    for i in range(len(word) - 2, 0, -1):\n        if word[i] in vowels:\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    return ''\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0abd5fd1132d6204df7d701beb0ee29a417e37f28a46d0937a0f08a30c7202e7|ce8ba04547be9594d0d5d6c3ef99b29ec20088bf8677aef7047ed4dd2cdd1849": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # We need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Iterate from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "17cdd6ffeccf39c207a3fd17bc474aa8cc077149cb90d4692ec1d0f451e6b4ad|ce8ba04547be9594d0d5d6c3ef99b29ec20088bf8677aef7047ed4dd2cdd1849": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Iterate from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "60bfdb9a38fca649d5447009184c24d3f2f1006ccd20bf99a5d54dbf03e94ebc|0abd5fd1132d6204df7d701beb0ee29a417e37f28a46d0937a0f08a30c7202e7": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Iterate from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if characters on both sides are consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ccfd9613487b102d6d2c5593f9c16fe99a1999ac20b74b109ad22445b6ebfbaf|0abd5fd1132d6204df7d701beb0ee29a417e37f28a46d0937a0f08a30c7202e7": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # We need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding the first and last character\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "27597b49bcd02266b59a89fe8f171a1f3ddf3061dc68e57692a7972084f7a800|0abd5fd1132d6204df7d701beb0ee29a417e37f28a46d0937a0f08a30c7202e7": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "5b25a66cdbd8aef9b91a84a1098bc5ee6241b759a3673e891f8e6912ffa56829|00dd8ae35dc8b065da6865a91ef5df2a4bc3a268d3194938d71c3915c69541f0": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding first and last positions\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if both neighbors are consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0990a64bd2c5c60c0c19c057e72a2966865286159ab962684d7cb50f27b14cda|00dd8ae35dc8b065da6865a91ef5df2a4bc3a268d3194938d71c3915c69541f0": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = 'aeiouAEIOU'\n    if len(word) < 3:\n        return ''\n    for i in range(len(word) - 2, 0, -1):\n        if word[i] in vowels:\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    return ''\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "8e11523026200499978e8657683bc4a59f7a8c38e81a9fe2150973dc8102c8b6|00dd8ae35dc8b065da6865a91ef5df2a4bc3a268d3194938d71c3915c69541f0": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "b540949cd40a06e9cbf2584f7b5db5de58d9878daca39fbd977ba1c5cb62ff56|00dd8ae35dc8b065da6865a91ef5df2a4bc3a268d3194938d71c3915c69541f0": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Check from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        if word[i] in vowels:\n            # Check if both neighbors are consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "b540949cd40a06e9cbf2584f7b5db5de58d9878daca39fbd977ba1c5cb62ff56|0abd5fd1132d6204df7d701beb0ee29a417e37f28a46d0937a0f08a30c7202e7": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Check from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        if word[i] in vowels:\n            # Check if both neighbors are consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "a910756bf8aa5fa512f3953fbf3286e60b306b10900b4196e1f411fe0f8a1ab0|0abd5fd1132d6204df7d701beb0ee29a417e37f28a46d0937a0f08a30c7202e7": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = 'aeiouAEIOU'\n    if len(word) < 3:\n        return ''\n    for i in range(len(word) - 2, 0, -1):\n        if word[i] in vowels:\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    return ''\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "c85adc343ef7a26954442ad600e6750233f0eb5ac209468219160c5252cf0119|ce8ba04547be9594d0d5d6c3ef99b29ec20088bf8677aef7047ed4dd2cdd1849": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "c85adc343ef7a26954442ad600e6750233f0eb5ac209468219160c5252cf0119|00dd8ae35dc8b065da6865a91ef5df2a4bc3a268d3194938d71c3915c69541f0": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "8e584a7ab29080750da69d1ecdcb6f891ebb64cbf84a57fdee70871ac8c75380|00dd8ae35dc8b065da6865a91ef5df2a4bc3a268d3194938d71c3915c69541f0": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # We need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Start from the right side, but not from the last character (index len(word)-1)\n    # and not from the first character (index 0)\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "c85adc343ef7a26954442ad600e6750233f0eb5ac209468219160c5252cf0119|17cdd6ffeccf39c207a3fd17bc474aa8cc077149cb90d4692ec1d0f451e6b4ad": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0abd5fd1132d6204df7d701beb0ee29a417e37f28a46d0937a0f08a30c7202e7|17cdd6ffeccf39c207a3fd17bc474aa8cc077149cb90d4692ec1d0f451e6b4ad": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # We need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Iterate from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0990a64bd2c5c60c0c19c057e72a2966865286159ab962684d7cb50f27b14cda|17cdd6ffeccf39c207a3fd17bc474aa8cc077149cb90d4692ec1d0f451e6b4ad": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = 'aeiouAEIOU'\n    if len(word) < 3:\n        return ''\n    for i in range(len(word) - 2, 0, -1):\n        if word[i] in vowels:\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    return ''\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0a1578fcdb6e8cfae00a08acd48948dd5d64df3e31a13b85be8e442338e1c041|17cdd6ffeccf39c207a3fd17bc474aa8cc077149cb90d4692ec1d0f451e6b4ad": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # We need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Start from the right side, but not including the last character\n    # and not including the first character\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0990a64bd2c5c60c0c19c057e72a2966865286159ab962684d7cb50f27b14cda|0abd5fd1132d6204df7d701beb0ee29a417e37f28a46d0937a0f08a30c7202e7": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = 'aeiouAEIOU'\n    if len(word) < 3:\n        return ''\n    for i in range(len(word) - 2, 0, -1):\n        if word[i] in vowels:\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    return ''\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "701a60377d2be27477e9e7362e7d4a63b5683a63ab22977f6dd25c0d02a1d011|0abd5fd1132d6204df7d701beb0ee29a417e37f28a46d0937a0f08a30c7202e7": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Check from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0a1578fcdb6e8cfae00a08acd48948dd5d64df3e31a13b85be8e442338e1c041|00dd8ae35dc8b065da6865a91ef5df2a4bc3a268d3194938d71c3915c69541f0": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # We need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Start from the right side, but not including the last character\n    # and not including the first character\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "a910756bf8aa5fa512f3953fbf3286e60b306b10900b4196e1f411fe0f8a1ab0|00dd8ae35dc8b065da6865a91ef5df2a4bc3a268d3194938d71c3915c69541f0": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = 'aeiouAEIOU'\n    if len(word) < 3:\n        return ''\n    for i in range(len(word) - 2, 0, -1):\n        if word[i] in vowels:\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    return ''\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "60bfdb9a38fca649d5447009184c24d3f2f1006ccd20bf99a5d54dbf03e94ebc|ccfd9613487b102d6d2c5593f9c16fe99a1999ac20b74b109ad22445b6ebfbaf": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Iterate from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if characters on both sides are consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "27597b49bcd02266b59a89fe8f171a1f3ddf3061dc68e57692a7972084f7a800|ccfd9613487b102d6d2c5593f9c16fe99a1999ac20b74b109ad22445b6ebfbaf": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "00dd8ae35dc8b065da6865a91ef5df2a4bc3a268d3194938d71c3915c69541f0|ccfd9613487b102d6d2c5593f9c16fe99a1999ac20b74b109ad22445b6ebfbaf": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # We need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Iterate from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ce8ba04547be9594d0d5d6c3ef99b29ec20088bf8677aef7047ed4dd2cdd1849|ccfd9613487b102d6d2c5593f9c16fe99a1999ac20b74b109ad22445b6ebfbaf": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Iterate from right to left, excluding the first and last character\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0abd5fd1132d6204df7d701beb0ee29a417e37f28a46d0937a0f08a30c7202e7|ccfd9613487b102d6d2c5593f9c16fe99a1999ac20b74b109ad22445b6ebfbaf": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # We need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Iterate from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "5b25a66cdbd8aef9b91a84a1098bc5ee6241b759a3673e891f8e6912ffa56829|ccfd9613487b102d6d2c5593f9c16fe99a1999ac20b74b109ad22445b6ebfbaf": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters for a vowel to be between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding first and last positions\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if both neighbors are consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "6789b6e3e5c394e68daf94660b5a8d4aefe4c7218f4c3bd50b28217aefae8a99|ccfd9613487b102d6d2c5593f9c16fe99a1999ac20b74b109ad22445b6ebfbaf": {
+      "stitched_code": "def get_closest_vowel(word):\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Search from right to left, excluding first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "17cdd6ffeccf39c207a3fd17bc474aa8cc077149cb90d4692ec1d0f451e6b4ad|ccfd9613487b102d6d2c5593f9c16fe99a1999ac20b74b109ad22445b6ebfbaf": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # Need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Iterate from right to left, excluding the first and last characters\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i - 1] not in vowels and word[i + 1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "8e584a7ab29080750da69d1ecdcb6f891ebb64cbf84a57fdee70871ac8c75380|ccfd9613487b102d6d2c5593f9c16fe99a1999ac20b74b109ad22445b6ebfbaf": {
+      "stitched_code": "def get_closest_vowel(word):\n    \"\"\"You are given a word. Your task is to find the closest vowel that stands between \n    two consonants from the right side of the word (case sensitive).\n    \n    Vowels in the beginning and ending doesn't count. Return empty string if you didn't\n    find any vowel met the above condition. \n\n    You may assume that the given string contains English letter only.\n\n    Example:\n    get_closest_vowel(\"yogurt\") ==> \"u\"\n    get_closest_vowel(\"FULL\") ==> \"U\"\n    get_closest_vowel(\"quick\") ==> \"\"\n    get_closest_vowel(\"ab\") ==> \"\"\n    \"\"\"\n    vowels = \"aeiouAEIOU\"\n    \n    # We need at least 3 characters to have a vowel between two consonants\n    if len(word) < 3:\n        return \"\"\n    \n    # Start from the right side, but not from the last character (index len(word)-1)\n    # and not from the first character (index 0)\n    for i in range(len(word) - 2, 0, -1):\n        # Check if current character is a vowel\n        if word[i] in vowels:\n            # Check if it's between two consonants\n            if word[i-1] not in vowels and word[i+1] not in vowels:\n                return word[i]\n    \n    return \"\"\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}

@@ -1,0 +1,460 @@
+{
+  "contract_id": "HumanEval_103_gpt_4o_mini_temp0.7",
+  "canonical_code": "def rounded_avg(n, m):\n    if n > m:\n        return -1\n    average = sum(range(n, m + 1)) / (m - n + 1)\n    rounded = round(average)\n    return bin(rounded)\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 1,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "sum",
+        "range",
+        "round",
+        "bin"
+      ],
+      "nested_depth": 1,
+      "branch_patterns": [
+        "if_at_depth_0"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [
+          "p0",
+          "p1"
+        ],
+        "v1": [
+          "v0"
+        ]
+      },
+      "assignments": {
+        "v0": "BinOp(left=Call(func=Name(id='sum', ctx=Load()), args=[Call(func=Name(id='range', ctx=Load()), args=[Name(id='p0', ctx=Load()), BinOp(left=Name(id='p1', ctx=Load()), op=Add(), right=Constant(value=1))])]), op=Div(), right=BinOp(left=BinOp(left=Name(id='p1', ctx=Load()), op=Sub(), right=Name(id='p0', ctx=Load())), op=Add(), right=Constant(value=1)))",
+        "v1": "Call(func=Name(id='round', ctx=Load()), args=[Name(id='v0', ctx=Load())])"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_rounded_avg"
+        ],
+        [
+          "function_rounded_avg",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "rounded_avg": {
+        "name": "rounded_avg",
+        "args": [
+          "p0",
+          "p1"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Add",
+        "Add"
+      ],
+      "associative_ops": [
+        "Add",
+        "Add"
+      ],
+      "binary_operations": [
+        "Div",
+        "Add",
+        "Add",
+        "Sub"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        1,
+        1,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Gt"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "arg",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Name",
+        "Load",
+        "Return",
+        "UnaryOp",
+        "USub",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "BinOp",
+        "Call",
+        "Name",
+        "Load",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Add",
+        "Constant",
+        "Div",
+        "BinOp",
+        "BinOp",
+        "Name",
+        "Load",
+        "Sub",
+        "Name",
+        "Load",
+        "Add",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Return",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 8,
+      "ast_hash": "a54a592c21a6833857d4780d867580eb",
+      "alpha_renamed_hash": "a54a592c21a6833857d4780d867580eb"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Div",
+        "Add",
+        "Add",
+        "Sub"
+      ],
+      "precedence_levels": {
+        "Div": 4,
+        "Add": 3,
+        "Sub": 3
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Return",
+        "Assign",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Return_2",
+        "Assign_3",
+        "Assign_4",
+        "Return_5"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "p0 > p1",
+          "return_type": "expression"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "p0 > p1"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_103_gpt_4o_mini_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/103",
+    "prompt": "\ndef rounded_avg(n, m):\n    \"\"\"You are given two positive integers n and m, and your task is to compute the\n    average of the integers from n through m (including n and m). \n    Round the answer to the nearest integer and convert that to binary.\n    If n is greater than m, return -1.\n    Example:\n    rounded_avg(1, 5) => \"0b11\"\n    rounded_avg(7, 5) => -1\n    rounded_avg(10, 20) => \"0b1111\"\n    rounded_avg(20, 33) => \"0b11010\"\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "rounded_avg"
+    },
+    "anchor_signature": "3d04480072420246a490dbce949c769081500a8e9867ac0006b1e8884247594f",
+    "canonical_code": "def rounded_avg(n, m):\n    if n > m:\n        return -1\n    average = sum(range(n, m + 1)) / (m - n + 1)\n    rounded = round(average)\n    return bin(rounded)\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 1,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "sum",
+          "range",
+          "round",
+          "bin"
+        ],
+        "nested_depth": 1,
+        "branch_patterns": [
+          "if_at_depth_0"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [
+            "p0",
+            "p1"
+          ],
+          "v1": [
+            "v0"
+          ]
+        },
+        "assignments": {
+          "v0": "BinOp(left=Call(func=Name(id='sum', ctx=Load()), args=[Call(func=Name(id='range', ctx=Load()), args=[Name(id='p0', ctx=Load()), BinOp(left=Name(id='p1', ctx=Load()), op=Add(), right=Constant(value=1))])]), op=Div(), right=BinOp(left=BinOp(left=Name(id='p1', ctx=Load()), op=Sub(), right=Name(id='p0', ctx=Load())), op=Add(), right=Constant(value=1)))",
+          "v1": "Call(func=Name(id='round', ctx=Load()), args=[Name(id='v0', ctx=Load())])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_rounded_avg"
+          ],
+          [
+            "function_rounded_avg",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "rounded_avg": {
+          "name": "rounded_avg",
+          "args": [
+            "p0",
+            "p1"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Add",
+          "Add"
+        ],
+        "associative_ops": [
+          "Add",
+          "Add"
+        ],
+        "binary_operations": [
+          "Div",
+          "Add",
+          "Add",
+          "Sub"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          1,
+          1,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Gt"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "arg",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Name",
+          "Load",
+          "Return",
+          "UnaryOp",
+          "USub",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "BinOp",
+          "Call",
+          "Name",
+          "Load",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Add",
+          "Constant",
+          "Div",
+          "BinOp",
+          "BinOp",
+          "Name",
+          "Load",
+          "Sub",
+          "Name",
+          "Load",
+          "Add",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Return",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 8,
+        "ast_hash": "a54a592c21a6833857d4780d867580eb",
+        "alpha_renamed_hash": "a54a592c21a6833857d4780d867580eb"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Div",
+          "Add",
+          "Add",
+          "Sub"
+        ],
+        "precedence_levels": {
+          "Div": 4,
+          "Add": 3,
+          "Sub": 3
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "Assign",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "Assign_3",
+          "Assign_4",
+          "Return_5"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "p0 > p1",
+            "return_type": "expression"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "p0 > p1"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

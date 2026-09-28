@@ -1,0 +1,526 @@
+{
+  "contract_id": "HumanEval_77_claude_sonnet_4_5_20250929_temp0.0",
+  "canonical_code": "def iscube(a):\n    if a == 0:\n        return True\n    \n    # Handle negative numbers\n    if a < 0:\n        a = -a\n        cube_root = round(a ** (1/3))\n        return cube_root ** 3 == a\n    \n    # Handle positive numbers\n    cube_root = round(a ** (1/3))\n    return cube_root ** 3 == a\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 2,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "round",
+        "round"
+      ],
+      "nested_depth": 1,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_0"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "p0": [],
+        "v0": [
+          "p0"
+        ]
+      },
+      "assignments": {
+        "p0": "UnaryOp(op=USub(), operand=Name(id='p0', ctx=Load()))",
+        "v0": "Call(func=Name(id='round', ctx=Load()), args=[BinOp(left=Name(id='p0', ctx=Load()), op=Pow(), right=BinOp(left=Constant(value=1), op=Div(), right=Constant(value=3)))])"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_iscube"
+        ],
+        [
+          "function_iscube",
+          "branch"
+        ],
+        [
+          "function_iscube",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "iscube": {
+        "name": "iscube",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": [
+        "Pow",
+        "Div",
+        "Pow",
+        "Pow",
+        "Div",
+        "Pow"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        0,
+        true,
+        0,
+        1,
+        3,
+        3,
+        1,
+        3,
+        3
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Eq",
+        "Lt",
+        "Eq",
+        "Eq"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Return",
+        "Constant",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Lt",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "UnaryOp",
+        "USub",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Pow",
+        "BinOp",
+        "Constant",
+        "Div",
+        "Constant",
+        "Return",
+        "Compare",
+        "BinOp",
+        "Name",
+        "Load",
+        "Pow",
+        "Constant",
+        "Eq",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "BinOp",
+        "Name",
+        "Load",
+        "Pow",
+        "BinOp",
+        "Constant",
+        "Div",
+        "Constant",
+        "Return",
+        "Compare",
+        "BinOp",
+        "Name",
+        "Load",
+        "Pow",
+        "Constant",
+        "Eq",
+        "Name",
+        "Load"
+      ],
+      "ast_depth": 7,
+      "ast_hash": "a48fe53e654e01ef46b3a71fde72cc35",
+      "alpha_renamed_hash": "a48fe53e654e01ef46b3a71fde72cc35"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Pow",
+        "Div",
+        "Pow",
+        "Pow",
+        "Div",
+        "Pow"
+      ],
+      "precedence_levels": {
+        "Pow": 6,
+        "Div": 4
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Return",
+        "If",
+        "Assign",
+        "Assign",
+        "Return",
+        "Assign",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Return_2",
+        "If_3",
+        "Assign_4",
+        "Assign_5",
+        "Return_6",
+        "Assign_7",
+        "Return_8"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "p0 == 0",
+          "return_type": "constant"
+        },
+        {
+          "condition": "p0 < 0",
+          "return_type": "expression"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "p0 == 0",
+        "p0 < 0"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_77_claude_sonnet_4_5_20250929_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/77",
+    "prompt": "\ndef iscube(a):\n    '''\n    Write a function that takes an integer a and returns True \n    if this ingeger is a cube of some integer number.\n    Note: you may assume the input is always valid.\n    Examples:\n    iscube(1) ==> True\n    iscube(2) ==> False\n    iscube(-1) ==> True\n    iscube(64) ==> True\n    iscube(0) ==> True\n    iscube(180) ==> False\n    '''\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "iscube"
+    },
+    "anchor_signature": "bd1f3d81cfd24ad0a6c9a29020bc8c161ffb1e209c1504ab13b5d65a46c33d1c",
+    "canonical_code": "def iscube(a):\n    if a == 0:\n        return True\n    \n    # Handle negative numbers\n    if a < 0:\n        a = -a\n        cube_root = round(a ** (1/3))\n        return cube_root ** 3 == a\n    \n    # Handle positive numbers\n    cube_root = round(a ** (1/3))\n    return cube_root ** 3 == a\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 2,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "round",
+          "round"
+        ],
+        "nested_depth": 1,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_0"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "p0": [],
+          "v0": [
+            "p0"
+          ]
+        },
+        "assignments": {
+          "p0": "UnaryOp(op=USub(), operand=Name(id='p0', ctx=Load()))",
+          "v0": "Call(func=Name(id='round', ctx=Load()), args=[BinOp(left=Name(id='p0', ctx=Load()), op=Pow(), right=BinOp(left=Constant(value=1), op=Div(), right=Constant(value=3)))])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_iscube"
+          ],
+          [
+            "function_iscube",
+            "branch"
+          ],
+          [
+            "function_iscube",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "iscube": {
+          "name": "iscube",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": [
+          "Pow",
+          "Div",
+          "Pow",
+          "Pow",
+          "Div",
+          "Pow"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          0,
+          true,
+          0,
+          1,
+          3,
+          3,
+          1,
+          3,
+          3
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Eq",
+          "Lt",
+          "Eq",
+          "Eq"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Return",
+          "Constant",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Lt",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "UnaryOp",
+          "USub",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Pow",
+          "BinOp",
+          "Constant",
+          "Div",
+          "Constant",
+          "Return",
+          "Compare",
+          "BinOp",
+          "Name",
+          "Load",
+          "Pow",
+          "Constant",
+          "Eq",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "BinOp",
+          "Name",
+          "Load",
+          "Pow",
+          "BinOp",
+          "Constant",
+          "Div",
+          "Constant",
+          "Return",
+          "Compare",
+          "BinOp",
+          "Name",
+          "Load",
+          "Pow",
+          "Constant",
+          "Eq",
+          "Name",
+          "Load"
+        ],
+        "ast_depth": 7,
+        "ast_hash": "a48fe53e654e01ef46b3a71fde72cc35",
+        "alpha_renamed_hash": "a48fe53e654e01ef46b3a71fde72cc35"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Pow",
+          "Div",
+          "Pow",
+          "Pow",
+          "Div",
+          "Pow"
+        ],
+        "precedence_levels": {
+          "Pow": 6,
+          "Div": 4
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "If",
+          "Assign",
+          "Assign",
+          "Return",
+          "Assign",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "If_3",
+          "Assign_4",
+          "Assign_5",
+          "Return_6",
+          "Assign_7",
+          "Return_8"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "p0 == 0",
+            "return_type": "constant"
+          },
+          {
+            "condition": "p0 < 0",
+            "return_type": "expression"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "p0 == 0",
+          "p0 < 0"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

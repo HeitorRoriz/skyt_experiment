@@ -1,0 +1,1541 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "0176c4b46019981df5af28499d94ee7e83d583ba8287ff36a2f4fdd9aaf94a6f|a6676464183ad8bfe3e9b222ab1da1f902b1fccfa45a560e83a767b38310d1b0": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(\" \", \"\")\n    result = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0:\n            result.append(''.join(current_group))\n            current_group = []\n\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "845077394aa7a3a1d85733311abb3fe0cd4d92e8c43af5fa52ad6f2fa23aa467|a6676464183ad8bfe3e9b222ab1da1f902b1fccfa45a560e83a767b38310d1b0": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "e987f47ce08a53941bd42eaa459a40ce019bf51a6857f00f1bd8a833f4bd828b|a6676464183ad8bfe3e9b222ab1da1f902b1fccfa45a560e83a767b38310d1b0": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(\" \", \"\")\n    groups = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "cab982c3dc85d896f1c6bdc4dc00a30821e831c612d2aa6f76439531cf31e02f|a6676464183ad8bfe3e9b222ab1da1f902b1fccfa45a560e83a767b38310d1b0": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0799acc6c5f5989286397e49e83a7ad721cf5e7703b311363518517790054de8|a6676464183ad8bfe3e9b222ab1da1f902b1fccfa45a560e83a767b38310d1b0": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "511bfa2d301b56ea2bfb42802928fe7cecd168306e76f8e9a886140c478be450|a6676464183ad8bfe3e9b222ab1da1f902b1fccfa45a560e83a767b38310d1b0": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(\" \", \"\")\n    groups = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1bbe15aafaf1661f6ac6552a77fc18f05ca97af0759140fb3c856a77c1249141|a6676464183ad8bfe3e9b222ab1da1f902b1fccfa45a560e83a767b38310d1b0": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "65e90c36d784d6aad465f63707fc4f89014b5c492e43ad033082d108c81a7164|a6676464183ad8bfe3e9b222ab1da1f902b1fccfa45a560e83a767b38310d1b0": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n    \n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "be2c81904bb1a80eca388a29149763c46bce7cece19ed3077c4b873df72d4c58|e987f47ce08a53941bd42eaa459a40ce019bf51a6857f00f1bd8a833f4bd828b": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    \n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    \n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "845077394aa7a3a1d85733311abb3fe0cd4d92e8c43af5fa52ad6f2fa23aa467|e987f47ce08a53941bd42eaa459a40ce019bf51a6857f00f1bd8a833f4bd828b": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "e987f47ce08a53941bd42eaa459a40ce019bf51a6857f00f1bd8a833f4bd828b|e987f47ce08a53941bd42eaa459a40ce019bf51a6857f00f1bd8a833f4bd828b": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(\" \", \"\")\n    groups = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 4,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "fcd41d42c611cd9ac92f83251b6dbcb0a9ec8fd35356f47197aa811c683b9493|e987f47ce08a53941bd42eaa459a40ce019bf51a6857f00f1bd8a833f4bd828b": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2e615e2522893a95dfaba8c82a607276c36f927fd5ca79602a2e9e5891c20cba|e987f47ce08a53941bd42eaa459a40ce019bf51a6857f00f1bd8a833f4bd828b": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "65e90c36d784d6aad465f63707fc4f89014b5c492e43ad033082d108c81a7164|e987f47ce08a53941bd42eaa459a40ce019bf51a6857f00f1bd8a833f4bd828b": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n    \n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "04849d3fe5d111002d6adfb667a7c151f78657e78ce75b5c644be5e584f409b4|e987f47ce08a53941bd42eaa459a40ce019bf51a6857f00f1bd8a833f4bd828b": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0176c4b46019981df5af28499d94ee7e83d583ba8287ff36a2f4fdd9aaf94a6f|e987f47ce08a53941bd42eaa459a40ce019bf51a6857f00f1bd8a833f4bd828b": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(\" \", \"\")\n    result = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0:\n            result.append(''.join(current_group))\n            current_group = []\n\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1bbe15aafaf1661f6ac6552a77fc18f05ca97af0759140fb3c856a77c1249141|e987f47ce08a53941bd42eaa459a40ce019bf51a6857f00f1bd8a833f4bd828b": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "3950c549cc522391ba3e6f2b44477a4d59f1123483f1b328cc4744ed6a7a1781|e987f47ce08a53941bd42eaa459a40ce019bf51a6857f00f1bd8a833f4bd828b": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0176c4b46019981df5af28499d94ee7e83d583ba8287ff36a2f4fdd9aaf94a6f|511bfa2d301b56ea2bfb42802928fe7cecd168306e76f8e9a886140c478be450": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(\" \", \"\")\n    result = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0:\n            result.append(''.join(current_group))\n            current_group = []\n\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "a6676464183ad8bfe3e9b222ab1da1f902b1fccfa45a560e83a767b38310d1b0|511bfa2d301b56ea2bfb42802928fe7cecd168306e76f8e9a886140c478be450": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(\" \", \"\")\n    groups = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    \n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "845077394aa7a3a1d85733311abb3fe0cd4d92e8c43af5fa52ad6f2fa23aa467|511bfa2d301b56ea2bfb42802928fe7cecd168306e76f8e9a886140c478be450": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "e987f47ce08a53941bd42eaa459a40ce019bf51a6857f00f1bd8a833f4bd828b|511bfa2d301b56ea2bfb42802928fe7cecd168306e76f8e9a886140c478be450": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(\" \", \"\")\n    groups = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "fcd41d42c611cd9ac92f83251b6dbcb0a9ec8fd35356f47197aa811c683b9493|511bfa2d301b56ea2bfb42802928fe7cecd168306e76f8e9a886140c478be450": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "1bbe15aafaf1661f6ac6552a77fc18f05ca97af0759140fb3c856a77c1249141|511bfa2d301b56ea2bfb42802928fe7cecd168306e76f8e9a886140c478be450": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "65e90c36d784d6aad465f63707fc4f89014b5c492e43ad033082d108c81a7164|511bfa2d301b56ea2bfb42802928fe7cecd168306e76f8e9a886140c478be450": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n    \n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "3950c549cc522391ba3e6f2b44477a4d59f1123483f1b328cc4744ed6a7a1781|511bfa2d301b56ea2bfb42802928fe7cecd168306e76f8e9a886140c478be450": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "a6676464183ad8bfe3e9b222ab1da1f902b1fccfa45a560e83a767b38310d1b0|e987f47ce08a53941bd42eaa459a40ce019bf51a6857f00f1bd8a833f4bd828b": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(\" \", \"\")\n    groups = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    \n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "0799acc6c5f5989286397e49e83a7ad721cf5e7703b311363518517790054de8|e987f47ce08a53941bd42eaa459a40ce019bf51a6857f00f1bd8a833f4bd828b": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "511bfa2d301b56ea2bfb42802928fe7cecd168306e76f8e9a886140c478be450|e987f47ce08a53941bd42eaa459a40ce019bf51a6857f00f1bd8a833f4bd828b": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(\" \", \"\")\n    groups = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "262944b8a4235b2b0e11906850ac0c61b8e57b961ec30a49566f1539d5d0ae09|e987f47ce08a53941bd42eaa459a40ce019bf51a6857f00f1bd8a833f4bd828b": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2e615e2522893a95dfaba8c82a607276c36f927fd5ca79602a2e9e5891c20cba|511bfa2d301b56ea2bfb42802928fe7cecd168306e76f8e9a886140c478be450": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "68f5ec3ddf057e1aee07a5abe5323204fa67eff33eb9042934c5d5d181a93267|511bfa2d301b56ea2bfb42802928fe7cecd168306e76f8e9a886140c478be450": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "68f5ec3ddf057e1aee07a5abe5323204fa67eff33eb9042934c5d5d181a93267|e987f47ce08a53941bd42eaa459a40ce019bf51a6857f00f1bd8a833f4bd828b": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "cab982c3dc85d896f1c6bdc4dc00a30821e831c612d2aa6f76439531cf31e02f|e987f47ce08a53941bd42eaa459a40ce019bf51a6857f00f1bd8a833f4bd828b": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "be2c81904bb1a80eca388a29149763c46bce7cece19ed3077c4b873df72d4c58|511bfa2d301b56ea2bfb42802928fe7cecd168306e76f8e9a886140c478be450": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    \n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    \n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0799acc6c5f5989286397e49e83a7ad721cf5e7703b311363518517790054de8|511bfa2d301b56ea2bfb42802928fe7cecd168306e76f8e9a886140c478be450": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "04849d3fe5d111002d6adfb667a7c151f78657e78ce75b5c644be5e584f409b4|511bfa2d301b56ea2bfb42802928fe7cecd168306e76f8e9a886140c478be450": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "262944b8a4235b2b0e11906850ac0c61b8e57b961ec30a49566f1539d5d0ae09|511bfa2d301b56ea2bfb42802928fe7cecd168306e76f8e9a886140c478be450": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "be2c81904bb1a80eca388a29149763c46bce7cece19ed3077c4b873df72d4c58|0176c4b46019981df5af28499d94ee7e83d583ba8287ff36a2f4fdd9aaf94a6f": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    \n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    \n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "845077394aa7a3a1d85733311abb3fe0cd4d92e8c43af5fa52ad6f2fa23aa467|0176c4b46019981df5af28499d94ee7e83d583ba8287ff36a2f4fdd9aaf94a6f": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    result = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            result.append(''.join(current_group))\n            current_group = []\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "e987f47ce08a53941bd42eaa459a40ce019bf51a6857f00f1bd8a833f4bd828b|0176c4b46019981df5af28499d94ee7e83d583ba8287ff36a2f4fdd9aaf94a6f": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(\" \", \"\")\n    groups = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "cab982c3dc85d896f1c6bdc4dc00a30821e831c612d2aa6f76439531cf31e02f|0176c4b46019981df5af28499d94ee7e83d583ba8287ff36a2f4fdd9aaf94a6f": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    result = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            result.append(''.join(current_group))\n            current_group = []\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "511bfa2d301b56ea2bfb42802928fe7cecd168306e76f8e9a886140c478be450|0176c4b46019981df5af28499d94ee7e83d583ba8287ff36a2f4fdd9aaf94a6f": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(\" \", \"\")\n    groups = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "65e90c36d784d6aad465f63707fc4f89014b5c492e43ad033082d108c81a7164|0176c4b46019981df5af28499d94ee7e83d583ba8287ff36a2f4fdd9aaf94a6f": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n    \n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "3950c549cc522391ba3e6f2b44477a4d59f1123483f1b328cc4744ed6a7a1781|0176c4b46019981df5af28499d94ee7e83d583ba8287ff36a2f4fdd9aaf94a6f": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    result = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            result.append(''.join(current_group))\n            current_group = []\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "262944b8a4235b2b0e11906850ac0c61b8e57b961ec30a49566f1539d5d0ae09|0176c4b46019981df5af28499d94ee7e83d583ba8287ff36a2f4fdd9aaf94a6f": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    result = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            result.append(''.join(current_group))\n            current_group = []\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "cab982c3dc85d896f1c6bdc4dc00a30821e831c612d2aa6f76439531cf31e02f|511bfa2d301b56ea2bfb42802928fe7cecd168306e76f8e9a886140c478be450": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "68f5ec3ddf057e1aee07a5abe5323204fa67eff33eb9042934c5d5d181a93267|a6676464183ad8bfe3e9b222ab1da1f902b1fccfa45a560e83a767b38310d1b0": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "262944b8a4235b2b0e11906850ac0c61b8e57b961ec30a49566f1539d5d0ae09|a6676464183ad8bfe3e9b222ab1da1f902b1fccfa45a560e83a767b38310d1b0": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "a6676464183ad8bfe3e9b222ab1da1f902b1fccfa45a560e83a767b38310d1b0|0176c4b46019981df5af28499d94ee7e83d583ba8287ff36a2f4fdd9aaf94a6f": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(\" \", \"\")\n    groups = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    \n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "0176c4b46019981df5af28499d94ee7e83d583ba8287ff36a2f4fdd9aaf94a6f|0176c4b46019981df5af28499d94ee7e83d583ba8287ff36a2f4fdd9aaf94a6f": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(\" \", \"\")\n    result = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0:\n            result.append(''.join(current_group))\n            current_group = []\n\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "68f5ec3ddf057e1aee07a5abe5323204fa67eff33eb9042934c5d5d181a93267|0176c4b46019981df5af28499d94ee7e83d583ba8287ff36a2f4fdd9aaf94a6f": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    result = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            result.append(''.join(current_group))\n            current_group = []\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "1bbe15aafaf1661f6ac6552a77fc18f05ca97af0759140fb3c856a77c1249141|0176c4b46019981df5af28499d94ee7e83d583ba8287ff36a2f4fdd9aaf94a6f": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "04849d3fe5d111002d6adfb667a7c151f78657e78ce75b5c644be5e584f409b4|0176c4b46019981df5af28499d94ee7e83d583ba8287ff36a2f4fdd9aaf94a6f": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    result = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            result.append(''.join(current_group))\n            current_group = []\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2e615e2522893a95dfaba8c82a607276c36f927fd5ca79602a2e9e5891c20cba|0176c4b46019981df5af28499d94ee7e83d583ba8287ff36a2f4fdd9aaf94a6f": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    result = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            result.append(''.join(current_group))\n            current_group = []\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0799acc6c5f5989286397e49e83a7ad721cf5e7703b311363518517790054de8|0176c4b46019981df5af28499d94ee7e83d583ba8287ff36a2f4fdd9aaf94a6f": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    result = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            result.append(''.join(current_group))\n            current_group = []\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "fcd41d42c611cd9ac92f83251b6dbcb0a9ec8fd35356f47197aa811c683b9493|0176c4b46019981df5af28499d94ee7e83d583ba8287ff36a2f4fdd9aaf94a6f": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    result = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            result.append(''.join(current_group))\n            current_group = []\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "2e615e2522893a95dfaba8c82a607276c36f927fd5ca79602a2e9e5891c20cba|a6676464183ad8bfe3e9b222ab1da1f902b1fccfa45a560e83a767b38310d1b0": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "fcd41d42c611cd9ac92f83251b6dbcb0a9ec8fd35356f47197aa811c683b9493|a6676464183ad8bfe3e9b222ab1da1f902b1fccfa45a560e83a767b38310d1b0": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "04849d3fe5d111002d6adfb667a7c151f78657e78ce75b5c644be5e584f409b4|a6676464183ad8bfe3e9b222ab1da1f902b1fccfa45a560e83a767b38310d1b0": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0176c4b46019981df5af28499d94ee7e83d583ba8287ff36a2f4fdd9aaf94a6f|1bbe15aafaf1661f6ac6552a77fc18f05ca97af0759140fb3c856a77c1249141": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(\" \", \"\")\n    result = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0:\n            result.append(''.join(current_group))\n            current_group = []\n\n    return result\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "e987f47ce08a53941bd42eaa459a40ce019bf51a6857f00f1bd8a833f4bd828b|1bbe15aafaf1661f6ac6552a77fc18f05ca97af0759140fb3c856a77c1249141": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(\" \", \"\")\n    groups = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "fcd41d42c611cd9ac92f83251b6dbcb0a9ec8fd35356f47197aa811c683b9493|1bbe15aafaf1661f6ac6552a77fc18f05ca97af0759140fb3c856a77c1249141": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0799acc6c5f5989286397e49e83a7ad721cf5e7703b311363518517790054de8|1bbe15aafaf1661f6ac6552a77fc18f05ca97af0759140fb3c856a77c1249141": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "511bfa2d301b56ea2bfb42802928fe7cecd168306e76f8e9a886140c478be450|1bbe15aafaf1661f6ac6552a77fc18f05ca97af0759140fb3c856a77c1249141": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(\" \", \"\")\n    groups = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "2e615e2522893a95dfaba8c82a607276c36f927fd5ca79602a2e9e5891c20cba|1bbe15aafaf1661f6ac6552a77fc18f05ca97af0759140fb3c856a77c1249141": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "04849d3fe5d111002d6adfb667a7c151f78657e78ce75b5c644be5e584f409b4|1bbe15aafaf1661f6ac6552a77fc18f05ca97af0759140fb3c856a77c1249141": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "3950c549cc522391ba3e6f2b44477a4d59f1123483f1b328cc4744ed6a7a1781|a6676464183ad8bfe3e9b222ab1da1f902b1fccfa45a560e83a767b38310d1b0": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "a6676464183ad8bfe3e9b222ab1da1f902b1fccfa45a560e83a767b38310d1b0|1bbe15aafaf1661f6ac6552a77fc18f05ca97af0759140fb3c856a77c1249141": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) -> List[str]:\n    paren_string = paren_string.replace(\" \", \"\")\n    groups = []\n    balance = 0\n    current_group = []\n\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        \n        if balance == 0 and current_group:\n            groups.append(''.join(current_group))\n            current_group = []\n    \n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 0,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.09523809523809523,
+        "transformation_level": 0
+      }
+    },
+    "cab982c3dc85d896f1c6bdc4dc00a30821e831c612d2aa6f76439531cf31e02f|1bbe15aafaf1661f6ac6552a77fc18f05ca97af0759140fb3c856a77c1249141": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "3950c549cc522391ba3e6f2b44477a4d59f1123483f1b328cc4744ed6a7a1781|1bbe15aafaf1661f6ac6552a77fc18f05ca97af0759140fb3c856a77c1249141": {
+      "stitched_code": "def separate_paren_groups(paren_string: str) ->List[str]:\n    paren_string = paren_string.replace(' ', '')\n    groups = []\n    balance = 0\n    current_group = []\n    for char in paren_string:\n        current_group.append(char)\n        if char == '(':\n            balance += 1\n        elif char == ')':\n            balance -= 1\n        if balance == 0:\n            groups.append(''.join(current_group))\n            current_group = []\n    return groups\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    }
+  }
+}

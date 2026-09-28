@@ -1,0 +1,556 @@
+{
+  "contract_id": "HumanEval_141_gpt_4o_mini_temp0.7",
+  "canonical_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    name, extension = file_name.split('.')\n    \n    if not name or not name[0].isalpha():\n        return 'No'\n    \n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    digit_count = sum(c.isdigit() for c in file_name)\n    \n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 4,
+      "for_loops": 0,
+      "while_loops": 0,
+      "function_calls": [
+        "sum"
+      ],
+      "nested_depth": 1,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_0",
+        "if_at_depth_0",
+        "if_at_depth_0"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v2": []
+      },
+      "assignments": {
+        "v2": "Call(func=Name(id='sum', ctx=Load()), args=[GeneratorExp(elt=Call(func=Attribute(value=Name(id='v3', ctx=Load()), attr='isdigit', ctx=Load())), generators=[comprehension(target=Name(id='v3', ctx=Store()), iter=Name(id='p0', ctx=Load()), is_async=0)])])"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_file_name_check"
+        ],
+        [
+          "function_file_name_check",
+          "branch"
+        ],
+        [
+          "function_file_name_check",
+          "branch"
+        ],
+        [
+          "function_file_name_check",
+          "branch"
+        ],
+        [
+          "function_file_name_check",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "file_name_check": {
+        "name": "file_name_check",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 0,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(1)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": []
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": false,
+      "numeric_constants": [
+        1,
+        0,
+        3
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [
+        "Or"
+      ],
+      "comparisons": [
+        "NotEq",
+        "NotIn",
+        "Gt"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "If",
+        "Compare",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Constant",
+        "NotEq",
+        "Constant",
+        "Return",
+        "Constant",
+        "Assign",
+        "Tuple",
+        "Name",
+        "Store",
+        "Name",
+        "Store",
+        "Store",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Constant",
+        "If",
+        "BoolOp",
+        "Or",
+        "UnaryOp",
+        "Not",
+        "Name",
+        "Load",
+        "UnaryOp",
+        "Not",
+        "Call",
+        "Attribute",
+        "Subscript",
+        "Name",
+        "Load",
+        "Constant",
+        "Load",
+        "Load",
+        "Return",
+        "Constant",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "NotIn",
+        "List",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Load",
+        "Return",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "GeneratorExp",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "comprehension",
+        "Name",
+        "Store",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Constant",
+        "Return",
+        "Constant",
+        "Return",
+        "Constant"
+      ],
+      "ast_depth": 9,
+      "ast_hash": "f5f638103f7efe89bd557db1527d6292",
+      "alpha_renamed_hash": "f5f638103f7efe89bd557db1527d6292"
+    },
+    "operator_precedence": {
+      "operator_sequence": [],
+      "precedence_levels": {}
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "If",
+        "Return",
+        "Assign",
+        "If",
+        "Return",
+        "If",
+        "Return",
+        "Assign",
+        "If",
+        "Return",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "If_1",
+        "Return_2",
+        "Assign_3",
+        "If_4",
+        "Return_5",
+        "If_6",
+        "Return_7",
+        "Assign_8",
+        "If_9",
+        "Return_10",
+        "Return_11"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If",
+        "If",
+        "If",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "p0.count('.') != 1",
+          "return_type": "constant"
+        },
+        {
+          "condition": "not v0 or not v0[0].isalpha()",
+          "return_type": "constant"
+        },
+        {
+          "condition": "v1 not in ['txt', 'exe', 'dll']",
+          "return_type": "constant"
+        },
+        {
+          "condition": "v2 > 3",
+          "return_type": "constant"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "p0.count('.') != 1",
+        "not v0 or not v0[0].isalpha()",
+        "v1 not in ['txt', 'exe', 'dll']",
+        "v2 > 3"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_141_gpt_4o_mini_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/141",
+    "prompt": "\ndef file_name_check(file_name):\n    \"\"\"Create a function which takes a string representing a file's name, and returns\n    'Yes' if the the file's name is valid, and returns 'No' otherwise.\n    A file's name is considered to be valid if and only if all the following conditions \n    are met:\n    - There should not be more than three digits ('0'-'9') in the file's name.\n    - The file's name contains exactly one dot '.'\n    - The substring before the dot should not be empty, and it starts with a letter from \n    the latin alphapet ('a'-'z' and 'A'-'Z').\n    - The substring after the dot should be one of these: ['txt', 'exe', 'dll']\n    Examples:\n    file_name_check(\"example.txt\") # => 'Yes'\n    file_name_check(\"1example.dll\") # => 'No' (the name should start with a latin alphapet letter)\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "file_name_check"
+    },
+    "anchor_signature": "a8c30f421efd929c9f46390fe4a65730d7a53a6be1ba61334fedbb138f98f091",
+    "canonical_code": "def file_name_check(file_name):\n    if file_name.count('.') != 1:\n        return 'No'\n    \n    name, extension = file_name.split('.')\n    \n    if not name or not name[0].isalpha():\n        return 'No'\n    \n    if extension not in ['txt', 'exe', 'dll']:\n        return 'No'\n    \n    digit_count = sum(c.isdigit() for c in file_name)\n    \n    if digit_count > 3:\n        return 'No'\n    \n    return 'Yes'\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 4,
+        "for_loops": 0,
+        "while_loops": 0,
+        "function_calls": [
+          "sum"
+        ],
+        "nested_depth": 1,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_0",
+          "if_at_depth_0",
+          "if_at_depth_0"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v2": []
+        },
+        "assignments": {
+          "v2": "Call(func=Name(id='sum', ctx=Load()), args=[GeneratorExp(elt=Call(func=Attribute(value=Name(id='v3', ctx=Load()), attr='isdigit', ctx=Load())), generators=[comprehension(target=Name(id='v3', ctx=Store()), iter=Name(id='p0', ctx=Load()), is_async=0)])])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_file_name_check"
+          ],
+          [
+            "function_file_name_check",
+            "branch"
+          ],
+          [
+            "function_file_name_check",
+            "branch"
+          ],
+          [
+            "function_file_name_check",
+            "branch"
+          ],
+          [
+            "function_file_name_check",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "file_name_check": {
+          "name": "file_name_check",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 0,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(1)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": [
+          1,
+          0,
+          3
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [
+          "Or"
+        ],
+        "comparisons": [
+          "NotEq",
+          "NotIn",
+          "Gt"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "If",
+          "Compare",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Constant",
+          "NotEq",
+          "Constant",
+          "Return",
+          "Constant",
+          "Assign",
+          "Tuple",
+          "Name",
+          "Store",
+          "Name",
+          "Store",
+          "Store",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Constant",
+          "If",
+          "BoolOp",
+          "Or",
+          "UnaryOp",
+          "Not",
+          "Name",
+          "Load",
+          "UnaryOp",
+          "Not",
+          "Call",
+          "Attribute",
+          "Subscript",
+          "Name",
+          "Load",
+          "Constant",
+          "Load",
+          "Load",
+          "Return",
+          "Constant",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "NotIn",
+          "List",
+          "Constant",
+          "Constant",
+          "Constant",
+          "Load",
+          "Return",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "GeneratorExp",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "comprehension",
+          "Name",
+          "Store",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Constant",
+          "Return",
+          "Constant",
+          "Return",
+          "Constant"
+        ],
+        "ast_depth": 9,
+        "ast_hash": "f5f638103f7efe89bd557db1527d6292",
+        "alpha_renamed_hash": "f5f638103f7efe89bd557db1527d6292"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "If",
+          "Return",
+          "Assign",
+          "If",
+          "Return",
+          "If",
+          "Return",
+          "Assign",
+          "If",
+          "Return",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "If_1",
+          "Return_2",
+          "Assign_3",
+          "If_4",
+          "Return_5",
+          "If_6",
+          "Return_7",
+          "Assign_8",
+          "If_9",
+          "Return_10",
+          "Return_11"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "If",
+          "If",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "p0.count('.') != 1",
+            "return_type": "constant"
+          },
+          {
+            "condition": "not v0 or not v0[0].isalpha()",
+            "return_type": "constant"
+          },
+          {
+            "condition": "v1 not in ['txt', 'exe', 'dll']",
+            "return_type": "constant"
+          },
+          {
+            "condition": "v2 > 3",
+            "return_type": "constant"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "p0.count('.') != 1",
+          "not v0 or not v0[0].isalpha()",
+          "v1 not in ['txt', 'exe', 'dll']",
+          "v2 > 3"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

@@ -1,0 +1,700 @@
+{
+  "contract_id": "HumanEval_132_claude_sonnet_4_5_20250929_temp0.0",
+  "canonical_code": "def is_nested(string):\n    n = len(string)\n    if n < 4:  # Need at least 4 brackets for nesting: [[]]\n        return False\n    \n    # Check if we can form a nested structure\n    # We'll use dynamic programming approach\n    # For each position, calculate max depth achievable\n    \n    for start in range(n):\n        if string[start] == '[':\n            depth = 0\n            max_depth = 0\n            for i in range(start, n):\n                if string[i] == '[':\n                    depth += 1\n                    max_depth = max(max_depth, depth)\n                else:  # ']'\n                    depth -= 1\n                    if depth < 0:\n                        break\n                if depth == 0 and max_depth >= 2:\n                    return True\n    \n    return False\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 5,
+      "for_loops": 2,
+      "while_loops": 0,
+      "function_calls": [
+        "len",
+        "range",
+        "range",
+        "max"
+      ],
+      "nested_depth": 5,
+      "branch_patterns": [
+        "if_at_depth_0",
+        "if_at_depth_1",
+        "if_at_depth_3",
+        "if_at_depth_4",
+        "if_at_depth_3"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [
+          "p0"
+        ],
+        "v2": [],
+        "v3": [
+          "v2",
+          "v3"
+        ]
+      },
+      "assignments": {
+        "v0": "Call(func=Name(id='len', ctx=Load()), args=[Name(id='p0', ctx=Load())])",
+        "v2": "Constant(value=0)",
+        "v3": "Call(func=Name(id='max', ctx=Load()), args=[Name(id='v3', ctx=Load()), Name(id='v2', ctx=Load())])"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_is_nested"
+        ],
+        [
+          "function_is_nested",
+          "branch"
+        ],
+        [
+          "function_is_nested",
+          "loop"
+        ],
+        [
+          "function_is_nested",
+          "loop",
+          "branch"
+        ],
+        [
+          "function_is_nested",
+          "loop",
+          "branch",
+          "loop"
+        ],
+        [
+          "function_is_nested",
+          "loop",
+          "branch",
+          "loop",
+          "branch"
+        ],
+        [
+          "function_is_nested",
+          "loop",
+          "branch",
+          "loop",
+          "branch",
+          "branch"
+        ],
+        [
+          "function_is_nested",
+          "loop",
+          "branch",
+          "loop",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "is_nested": {
+        "name": "is_nested",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 2,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n^2)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": true,
+      "has_bounded_loops": true,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [],
+      "associative_ops": [],
+      "binary_operations": []
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": false,
+      "numeric_constants": [
+        4,
+        false,
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        2,
+        true,
+        false
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [
+        "And"
+      ],
+      "comparisons": [
+        "Lt",
+        "Eq",
+        "Eq",
+        "Lt",
+        "Eq",
+        "GtE"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Lt",
+        "Constant",
+        "Return",
+        "Constant",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Eq",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "For",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "If",
+        "Compare",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load",
+        "Eq",
+        "Constant",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Add",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Call",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Sub",
+        "Constant",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Lt",
+        "Constant",
+        "Break",
+        "If",
+        "BoolOp",
+        "And",
+        "Compare",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Compare",
+        "Name",
+        "Load",
+        "GtE",
+        "Constant",
+        "Return",
+        "Constant",
+        "Return",
+        "Constant"
+      ],
+      "ast_depth": 9,
+      "ast_hash": "9d5b455899868da993b5d4563915101e",
+      "alpha_renamed_hash": "9d5b455899868da993b5d4563915101e"
+    },
+    "operator_precedence": {
+      "operator_sequence": [],
+      "precedence_levels": {}
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "If",
+        "Return",
+        "For",
+        "If",
+        "Assign",
+        "Assign",
+        "For",
+        "If",
+        "AugAssign",
+        "Assign",
+        "AugAssign",
+        "If",
+        "Break",
+        "If",
+        "Return",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "If_2",
+        "Return_3",
+        "For_4",
+        "If_5",
+        "Assign_6",
+        "Assign_7",
+        "For_8",
+        "If_9",
+        "AugAssign_10",
+        "Assign_11",
+        "AugAssign_12",
+        "If_13",
+        "Break_14",
+        "If_15",
+        "Return_16",
+        "Return_17"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "If",
+        "For",
+        "If",
+        "For",
+        "If",
+        "If",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [
+        {
+          "condition": "v0 < 4",
+          "return_type": "constant"
+        }
+      ],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": [
+        "v0 < 4"
+      ]
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_132_claude_sonnet_4_5_20250929_temp0.0",
+    "task_intent": "HumanEval+ HumanEval/132",
+    "prompt": "\ndef is_nested(string):\n    '''\n    Create a function that takes a string as input which contains only square brackets.\n    The function should return True if and only if there is a valid subsequence of brackets \n    where at least one bracket in the subsequence is nested.\n\n    is_nested('[[]]') \u279e True\n    is_nested('[]]]]]]][[[[[]') \u279e False\n    is_nested('[][]') \u279e False\n    is_nested('[]') \u279e False\n    is_nested('[[][]]') \u279e True\n    is_nested('[[]][[') \u279e True\n    '''\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "is_nested"
+    },
+    "anchor_signature": "d3a6feee4c13b86b5be4e1d0657ac452505e05e2163c0a6c6963aedc7f38217a",
+    "canonical_code": "def is_nested(string):\n    n = len(string)\n    if n < 4:  # Need at least 4 brackets for nesting: [[]]\n        return False\n    \n    # Check if we can form a nested structure\n    # We'll use dynamic programming approach\n    # For each position, calculate max depth achievable\n    \n    for start in range(n):\n        if string[start] == '[':\n            depth = 0\n            max_depth = 0\n            for i in range(start, n):\n                if string[i] == '[':\n                    depth += 1\n                    max_depth = max(max_depth, depth)\n                else:  # ']'\n                    depth -= 1\n                    if depth < 0:\n                        break\n                if depth == 0 and max_depth >= 2:\n                    return True\n    \n    return False\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 5,
+        "for_loops": 2,
+        "while_loops": 0,
+        "function_calls": [
+          "len",
+          "range",
+          "range",
+          "max"
+        ],
+        "nested_depth": 5,
+        "branch_patterns": [
+          "if_at_depth_0",
+          "if_at_depth_1",
+          "if_at_depth_3",
+          "if_at_depth_4",
+          "if_at_depth_3"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [
+            "p0"
+          ],
+          "v2": [],
+          "v3": [
+            "v2",
+            "v3"
+          ]
+        },
+        "assignments": {
+          "v0": "Call(func=Name(id='len', ctx=Load()), args=[Name(id='p0', ctx=Load())])",
+          "v2": "Constant(value=0)",
+          "v3": "Call(func=Name(id='max', ctx=Load()), args=[Name(id='v3', ctx=Load()), Name(id='v2', ctx=Load())])"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_is_nested"
+          ],
+          [
+            "function_is_nested",
+            "branch"
+          ],
+          [
+            "function_is_nested",
+            "loop"
+          ],
+          [
+            "function_is_nested",
+            "loop",
+            "branch"
+          ],
+          [
+            "function_is_nested",
+            "loop",
+            "branch",
+            "loop"
+          ],
+          [
+            "function_is_nested",
+            "loop",
+            "branch",
+            "loop",
+            "branch"
+          ],
+          [
+            "function_is_nested",
+            "loop",
+            "branch",
+            "loop",
+            "branch",
+            "branch"
+          ],
+          [
+            "function_is_nested",
+            "loop",
+            "branch",
+            "loop",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "is_nested": {
+          "name": "is_nested",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 2,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n^2)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": true,
+        "has_bounded_loops": true,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [],
+        "associative_ops": [],
+        "binary_operations": []
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": false,
+        "numeric_constants": [
+          4,
+          false,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          2,
+          true,
+          false
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [
+          "And"
+        ],
+        "comparisons": [
+          "Lt",
+          "Eq",
+          "Eq",
+          "Lt",
+          "Eq",
+          "GtE"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Lt",
+          "Constant",
+          "Return",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Eq",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "For",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "If",
+          "Compare",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load",
+          "Eq",
+          "Constant",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Add",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Call",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Sub",
+          "Constant",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Lt",
+          "Constant",
+          "Break",
+          "If",
+          "BoolOp",
+          "And",
+          "Compare",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Compare",
+          "Name",
+          "Load",
+          "GtE",
+          "Constant",
+          "Return",
+          "Constant",
+          "Return",
+          "Constant"
+        ],
+        "ast_depth": 9,
+        "ast_hash": "9d5b455899868da993b5d4563915101e",
+        "alpha_renamed_hash": "9d5b455899868da993b5d4563915101e"
+      },
+      "operator_precedence": {
+        "operator_sequence": [],
+        "precedence_levels": {}
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "If",
+          "Return",
+          "For",
+          "If",
+          "Assign",
+          "Assign",
+          "For",
+          "If",
+          "AugAssign",
+          "Assign",
+          "AugAssign",
+          "If",
+          "Break",
+          "If",
+          "Return",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "If_2",
+          "Return_3",
+          "For_4",
+          "If_5",
+          "Assign_6",
+          "Assign_7",
+          "For_8",
+          "If_9",
+          "AugAssign_10",
+          "Assign_11",
+          "AugAssign_12",
+          "If_13",
+          "Break_14",
+          "If_15",
+          "Return_16",
+          "Return_17"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "If",
+          "For",
+          "If",
+          "For",
+          "If",
+          "If",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [
+          {
+            "condition": "v0 < 4",
+            "return_type": "constant"
+          }
+        ],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": [
+          "v0 < 4"
+        ]
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

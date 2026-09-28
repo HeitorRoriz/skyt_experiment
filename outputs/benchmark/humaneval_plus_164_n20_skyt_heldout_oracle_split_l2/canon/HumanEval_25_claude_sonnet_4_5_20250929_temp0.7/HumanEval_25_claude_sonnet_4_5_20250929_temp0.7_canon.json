@@ -1,0 +1,584 @@
+{
+  "contract_id": "HumanEval_25_claude_sonnet_4_5_20250929_temp0.7",
+  "canonical_code": "def factorize(n: int) -> List[int]:\n    \"\"\" Return list of prime factors of given integer in the order from smallest to largest.\n    Each of the factors should be listed number of times corresponding to how many times it appeares in factorization.\n    Input number should be equal to the product of all factors\n    >>> factorize(8)\n    [2, 2, 2]\n    >>> factorize(25)\n    [5, 5]\n    >>> factorize(70)\n    [2, 5, 7]\n    \"\"\"\n    factors = []\n    \n    # Check for factor 2\n    while n % 2 == 0:\n        factors.append(2)\n        n = n // 2\n    \n    # Check for odd factors from 3 onwards\n    i = 3\n    while i * i <= n:\n        while n % i == 0:\n            factors.append(i)\n            n = n // i\n        i += 2\n    \n    # If n is still greater than 1, then it's a prime factor\n    if n > 1:\n        factors.append(n)\n    \n    return factors\n",
+  "foundational_properties": {
+    "control_flow_signature": {
+      "if_statements": 1,
+      "for_loops": 0,
+      "while_loops": 3,
+      "function_calls": [],
+      "nested_depth": 2,
+      "branch_patterns": [
+        "if_at_depth_0"
+      ]
+    },
+    "data_dependency_graph": {
+      "dependencies": {
+        "v0": [],
+        "p0": [
+          "p0",
+          "v1"
+        ],
+        "v1": []
+      },
+      "assignments": {
+        "v0": "List(ctx=Load())",
+        "p0": "BinOp(left=Name(id='p0', ctx=Load()), op=FloorDiv(), right=Name(id='v1', ctx=Load()))",
+        "v1": "Constant(value=3)"
+      }
+    },
+    "execution_paths": {
+      "execution_paths": [
+        [
+          "function_factorize"
+        ],
+        [
+          "function_factorize",
+          "branch"
+        ]
+      ]
+    },
+    "function_contracts": {
+      "factorize": {
+        "name": "factorize",
+        "args": [
+          "p0"
+        ],
+        "returns": null,
+        "has_return": true
+      }
+    },
+    "complexity_class": {
+      "nested_loops": 2,
+      "recursive_calls": 0,
+      "estimated_complexity": "O(n^2)"
+    },
+    "side_effect_profile": {
+      "has_print": false,
+      "has_global_access": false,
+      "has_file_io": false,
+      "modifies_arguments": false,
+      "is_pure": true
+    },
+    "termination_properties": {
+      "has_base_case": false,
+      "has_bounded_loops": false,
+      "recursive_depth": 0
+    },
+    "algebraic_structure": {
+      "commutative_ops": [
+        "Mult"
+      ],
+      "associative_ops": [
+        "Mult"
+      ],
+      "binary_operations": [
+        "Mod",
+        "FloorDiv",
+        "Mult",
+        "Mod",
+        "FloorDiv"
+      ]
+    },
+    "numerical_behavior": {
+      "uses_integers": true,
+      "uses_floats": false,
+      "has_arithmetic": true,
+      "numeric_constants": [
+        2,
+        0,
+        2,
+        2,
+        3,
+        0,
+        2,
+        1
+      ]
+    },
+    "logical_equivalence": {
+      "boolean_ops": [],
+      "comparisons": [
+        "Eq",
+        "LtE",
+        "Eq",
+        "Gt"
+      ],
+      "logical_patterns": []
+    },
+    "normalized_ast_structure": {
+      "node_types": [
+        "Module",
+        "FunctionDef",
+        "arguments",
+        "arg",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "List",
+        "Load",
+        "While",
+        "Compare",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mod",
+        "Constant",
+        "Eq",
+        "Constant",
+        "Expr",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "BinOp",
+        "Name",
+        "Load",
+        "FloorDiv",
+        "Constant",
+        "Assign",
+        "Name",
+        "Store",
+        "Constant",
+        "While",
+        "Compare",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mult",
+        "Name",
+        "Load",
+        "LtE",
+        "Name",
+        "Load",
+        "While",
+        "Compare",
+        "BinOp",
+        "Name",
+        "Load",
+        "Mod",
+        "Name",
+        "Load",
+        "Eq",
+        "Constant",
+        "Expr",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Name",
+        "Load",
+        "Assign",
+        "Name",
+        "Store",
+        "BinOp",
+        "Name",
+        "Load",
+        "FloorDiv",
+        "Name",
+        "Load",
+        "AugAssign",
+        "Name",
+        "Store",
+        "Add",
+        "Constant",
+        "If",
+        "Compare",
+        "Name",
+        "Load",
+        "Gt",
+        "Constant",
+        "Expr",
+        "Call",
+        "Attribute",
+        "Name",
+        "Load",
+        "Load",
+        "Name",
+        "Load",
+        "Return",
+        "Name",
+        "Load",
+        "Subscript",
+        "Name",
+        "Load",
+        "Name",
+        "Load",
+        "Load"
+      ],
+      "ast_depth": 8,
+      "ast_hash": "389b275a23125f37822b585ad6892803",
+      "alpha_renamed_hash": "389b275a23125f37822b585ad6892803"
+    },
+    "operator_precedence": {
+      "operator_sequence": [
+        "Mod",
+        "FloorDiv",
+        "Mult",
+        "Mod",
+        "FloorDiv"
+      ],
+      "precedence_levels": {
+        "Mod": 4,
+        "FloorDiv": 4,
+        "Mult": 4
+      }
+    },
+    "statement_ordering": {
+      "statement_types": [
+        "FunctionDef",
+        "Assign",
+        "While",
+        "Expr",
+        "Assign",
+        "Assign",
+        "While",
+        "While",
+        "Expr",
+        "Assign",
+        "AugAssign",
+        "If",
+        "Expr",
+        "Return"
+      ],
+      "statement_sequence": [
+        "FunctionDef_0",
+        "Assign_1",
+        "While_2",
+        "Expr_3",
+        "Assign_4",
+        "Assign_5",
+        "While_6",
+        "While_7",
+        "Expr_8",
+        "Assign_9",
+        "AugAssign_10",
+        "If_11",
+        "Expr_12",
+        "Return_13"
+      ],
+      "control_flow_order": [
+        "FunctionDef",
+        "While",
+        "While",
+        "While",
+        "If"
+      ]
+    },
+    "recursion_schema": {
+      "is_recursive": false,
+      "base_cases": [],
+      "recursive_calls": [],
+      "recursion_pattern": null,
+      "termination_guards": []
+    }
+  },
+  "contract_data": {
+    "id": "HumanEval_25_claude_sonnet_4_5_20250929_temp0.7",
+    "task_intent": "HumanEval+ HumanEval/25",
+    "prompt": "from typing import List\n\n\ndef factorize(n: int) -> List[int]:\n    \"\"\" Return list of prime factors of given integer in the order from smallest to largest.\n    Each of the factors should be listed number of times corresponding to how many times it appeares in factorization.\n    Input number should be equal to the product of all factors\n    >>> factorize(8)\n    [2, 2, 2]\n    >>> factorize(25)\n    [5, 5]\n    >>> factorize(70)\n    [2, 5, 7]\n    \"\"\"\n",
+    "language": "python",
+    "contract_version": "heplus-repair-v1",
+    "created_timestamp": "2026-09-02T00:00:00+00:00",
+    "constraints": {
+      "variable_naming": {
+        "naming_policy": "flexible"
+      },
+      "function_name": "factorize"
+    },
+    "anchor_signature": "224f462bda01f867db1708ec1f234e42e81023d4a3b1449bd76c555f286b50ba",
+    "canonical_code": "def factorize(n: int) -> List[int]:\n    \"\"\" Return list of prime factors of given integer in the order from smallest to largest.\n    Each of the factors should be listed number of times corresponding to how many times it appeares in factorization.\n    Input number should be equal to the product of all factors\n    >>> factorize(8)\n    [2, 2, 2]\n    >>> factorize(25)\n    [5, 5]\n    >>> factorize(70)\n    [2, 5, 7]\n    \"\"\"\n    factors = []\n    \n    # Check for factor 2\n    while n % 2 == 0:\n        factors.append(2)\n        n = n // 2\n    \n    # Check for odd factors from 3 onwards\n    i = 3\n    while i * i <= n:\n        while n % i == 0:\n            factors.append(i)\n            n = n // i\n        i += 2\n    \n    # If n is still greater than 1, then it's a prime factor\n    if n > 1:\n        factors.append(n)\n    \n    return factors\n",
+    "foundational_properties": {
+      "control_flow_signature": {
+        "if_statements": 1,
+        "for_loops": 0,
+        "while_loops": 3,
+        "function_calls": [],
+        "nested_depth": 2,
+        "branch_patterns": [
+          "if_at_depth_0"
+        ]
+      },
+      "data_dependency_graph": {
+        "dependencies": {
+          "v0": [],
+          "p0": [
+            "p0",
+            "v1"
+          ],
+          "v1": []
+        },
+        "assignments": {
+          "v0": "List(ctx=Load())",
+          "p0": "BinOp(left=Name(id='p0', ctx=Load()), op=FloorDiv(), right=Name(id='v1', ctx=Load()))",
+          "v1": "Constant(value=3)"
+        }
+      },
+      "execution_paths": {
+        "execution_paths": [
+          [
+            "function_factorize"
+          ],
+          [
+            "function_factorize",
+            "branch"
+          ]
+        ]
+      },
+      "function_contracts": {
+        "factorize": {
+          "name": "factorize",
+          "args": [
+            "p0"
+          ],
+          "returns": null,
+          "has_return": true
+        }
+      },
+      "complexity_class": {
+        "nested_loops": 2,
+        "recursive_calls": 0,
+        "estimated_complexity": "O(n^2)"
+      },
+      "side_effect_profile": {
+        "has_print": false,
+        "has_global_access": false,
+        "has_file_io": false,
+        "modifies_arguments": false,
+        "is_pure": true
+      },
+      "termination_properties": {
+        "has_base_case": false,
+        "has_bounded_loops": false,
+        "recursive_depth": 0
+      },
+      "algebraic_structure": {
+        "commutative_ops": [
+          "Mult"
+        ],
+        "associative_ops": [
+          "Mult"
+        ],
+        "binary_operations": [
+          "Mod",
+          "FloorDiv",
+          "Mult",
+          "Mod",
+          "FloorDiv"
+        ]
+      },
+      "numerical_behavior": {
+        "uses_integers": true,
+        "uses_floats": false,
+        "has_arithmetic": true,
+        "numeric_constants": [
+          2,
+          0,
+          2,
+          2,
+          3,
+          0,
+          2,
+          1
+        ]
+      },
+      "logical_equivalence": {
+        "boolean_ops": [],
+        "comparisons": [
+          "Eq",
+          "LtE",
+          "Eq",
+          "Gt"
+        ],
+        "logical_patterns": []
+      },
+      "normalized_ast_structure": {
+        "node_types": [
+          "Module",
+          "FunctionDef",
+          "arguments",
+          "arg",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "List",
+          "Load",
+          "While",
+          "Compare",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mod",
+          "Constant",
+          "Eq",
+          "Constant",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "BinOp",
+          "Name",
+          "Load",
+          "FloorDiv",
+          "Constant",
+          "Assign",
+          "Name",
+          "Store",
+          "Constant",
+          "While",
+          "Compare",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mult",
+          "Name",
+          "Load",
+          "LtE",
+          "Name",
+          "Load",
+          "While",
+          "Compare",
+          "BinOp",
+          "Name",
+          "Load",
+          "Mod",
+          "Name",
+          "Load",
+          "Eq",
+          "Constant",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Name",
+          "Load",
+          "Assign",
+          "Name",
+          "Store",
+          "BinOp",
+          "Name",
+          "Load",
+          "FloorDiv",
+          "Name",
+          "Load",
+          "AugAssign",
+          "Name",
+          "Store",
+          "Add",
+          "Constant",
+          "If",
+          "Compare",
+          "Name",
+          "Load",
+          "Gt",
+          "Constant",
+          "Expr",
+          "Call",
+          "Attribute",
+          "Name",
+          "Load",
+          "Load",
+          "Name",
+          "Load",
+          "Return",
+          "Name",
+          "Load",
+          "Subscript",
+          "Name",
+          "Load",
+          "Name",
+          "Load",
+          "Load"
+        ],
+        "ast_depth": 8,
+        "ast_hash": "389b275a23125f37822b585ad6892803",
+        "alpha_renamed_hash": "389b275a23125f37822b585ad6892803"
+      },
+      "operator_precedence": {
+        "operator_sequence": [
+          "Mod",
+          "FloorDiv",
+          "Mult",
+          "Mod",
+          "FloorDiv"
+        ],
+        "precedence_levels": {
+          "Mod": 4,
+          "FloorDiv": 4,
+          "Mult": 4
+        }
+      },
+      "statement_ordering": {
+        "statement_types": [
+          "FunctionDef",
+          "Assign",
+          "While",
+          "Expr",
+          "Assign",
+          "Assign",
+          "While",
+          "While",
+          "Expr",
+          "Assign",
+          "AugAssign",
+          "If",
+          "Expr",
+          "Return"
+        ],
+        "statement_sequence": [
+          "FunctionDef_0",
+          "Assign_1",
+          "While_2",
+          "Expr_3",
+          "Assign_4",
+          "Assign_5",
+          "While_6",
+          "While_7",
+          "Expr_8",
+          "Assign_9",
+          "AugAssign_10",
+          "If_11",
+          "Expr_12",
+          "Return_13"
+        ],
+        "control_flow_order": [
+          "FunctionDef",
+          "While",
+          "While",
+          "While",
+          "If"
+        ]
+      },
+      "recursion_schema": {
+        "is_recursive": false,
+        "base_cases": [],
+        "recursive_calls": [],
+        "recursion_pattern": null,
+        "termination_guards": []
+      }
+    },
+    "compliance_flag": true
+  },
+  "created_timestamp": "2026-09-02T00:00:00+00:00",
+  "canon_version": "1.0",
+  "canon_policy": "certified_consensus",
+  "oracle_validated": true,
+  "oracle_pass_rate": 1.0
+}

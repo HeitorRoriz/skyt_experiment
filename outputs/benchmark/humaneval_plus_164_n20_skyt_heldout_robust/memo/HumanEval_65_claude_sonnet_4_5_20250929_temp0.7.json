@@ -1,0 +1,1121 @@
+{
+  "schema": "skyt-repair-memo-v1",
+  "rows": {
+    "c298cc41b5dea9c31783d3601a5763e7d9f8f6e0ee13745cd78cd12833fe513d|1bae931c9623fb1e8edcc703a713a622a5c65c0fc310be1920313f62b40a7767": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' chars and put them at the front\n    shift = shift % n  # Handle cases where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "78228fb076606d9820bdf273c37f9e5e861e80189760fe315a9818491c859100|1bae931c9623fb1e8edcc703a713a622a5c65c0fc310be1920313f62b40a7767": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "18767c49084c88a74bb06d6f086131d009428b1c3898453dd1cfcbe9e661b1a0|1bae931c9623fb1e8edcc703a713a622a5c65c0fc310be1920313f62b40a7767": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    digits = str(x)\n    n = len(digits)\n    if shift > n:\n        return digits[::-1]\n    shift = shift % n\n    return digits[-shift:] + digits[:-shift] if shift > 0 else digits\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 8,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "0adc095d032a94cf7c4e6e4174973378b8e315fe7573b8e2ce2c1322b47a6529|1bae931c9623fb1e8edcc703a713a622a5c65c0fc310be1920313f62b40a7767": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    digits = str(x)\n    n = len(digits)\n    if shift > n:\n        return digits[::-1]\n    shift = shift % n\n    return digits[-shift:] + digits[:-shift] if shift > 0 else digits\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "1bae931c9623fb1e8edcc703a713a622a5c65c0fc310be1920313f62b40a7767|1bae931c9623fb1e8edcc703a713a622a5c65c0fc310be1920313f62b40a7767": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    digits = str(x)\n    n = len(digits)\n    \n    if shift > n:\n        return digits[::-1]\n    \n    # Circular right shift\n    shift = shift % n  # Handle case where shift equals n\n    return digits[-shift:] + digits[:-shift] if shift > 0 else digits\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 10,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1c83d32bfbc3c251bfe5c9d2170db08eed7e93e2042523d6b4276d356e6bebc2|1bae931c9623fb1e8edcc703a713a622a5c65c0fc310be1920313f62b40a7767": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' digits and put them at front\n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "85b7f28478212cc979b93b0493525dbfe399c1641c7b067c8181130069485882|1bae931c9623fb1e8edcc703a713a622a5c65c0fc310be1920313f62b40a7767": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    shift = shift % n  # Handle shift >= n case for circular shift\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "f2b26ecbcbfd0486393896171c9cee54b25262e4de2fd4190373135bc2f04f64|1bae931c9623fb1e8edcc703a713a622a5c65c0fc310be1920313f62b40a7767": {
+      "stitched_code": "def circular_shift(x, shift):\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular shift right by shift positions\n    shift = shift % n  # Handle case where shift == n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "75c5e9d557ea9b841a7f51fde8a1488bac714bc8b78507c9a37ca86de1ddcacd|1bae931c9623fb1e8edcc703a713a622a5c65c0fc310be1920313f62b40a7767": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' digits and move to front\n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "462da2e48d378e2de3912be6164ac61dd90524f2421db92996d2cff156e7bc11|1bae931c9623fb1e8edcc703a713a622a5c65c0fc310be1920313f62b40a7767": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' chars and put them at the front\n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ec7b27560a6542f0b6dbf1f653d892ac8d51aa9404e436fe05f7e66a181b84dc|1bae931c9623fb1e8edcc703a713a622a5c65c0fc310be1920313f62b40a7767": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' chars and put them at the beginning\n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "fbb0453c955be7f628486b6a87f5adb871bb0155e24eab811aa8e0b03c406d0c|1bae931c9623fb1e8edcc703a713a622a5c65c0fc310be1920313f62b40a7767": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' digits and move to front\n    shift = shift % n  # Handle case where shift == n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "907ea225f971c5d5e7dd1c71ae4434b5847d7d4b09e99cbd0e0fd3211dc5f717|1bae931c9623fb1e8edcc703a713a622a5c65c0fc310be1920313f62b40a7767": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' digits and put them at the front\n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "c298cc41b5dea9c31783d3601a5763e7d9f8f6e0ee13745cd78cd12833fe513d|ec7b27560a6542f0b6dbf1f653d892ac8d51aa9404e436fe05f7e66a181b84dc": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' chars and put them at the front\n    shift = shift % n  # Handle cases where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "18767c49084c88a74bb06d6f086131d009428b1c3898453dd1cfcbe9e661b1a0|ec7b27560a6542f0b6dbf1f653d892ac8d51aa9404e436fe05f7e66a181b84dc": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    if shift > n:\n        return s[::-1]\n    shift = shift % n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "78228fb076606d9820bdf273c37f9e5e861e80189760fe315a9818491c859100|ec7b27560a6542f0b6dbf1f653d892ac8d51aa9404e436fe05f7e66a181b84dc": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1bae931c9623fb1e8edcc703a713a622a5c65c0fc310be1920313f62b40a7767|ec7b27560a6542f0b6dbf1f653d892ac8d51aa9404e436fe05f7e66a181b84dc": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    digits = str(x)\n    n = len(digits)\n    \n    if shift > n:\n        return digits[::-1]\n    \n    # Circular right shift\n    shift = shift % n  # Handle case where shift equals n\n    return digits[-shift:] + digits[:-shift] if shift > 0 else digits\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1c83d32bfbc3c251bfe5c9d2170db08eed7e93e2042523d6b4276d356e6bebc2|ec7b27560a6542f0b6dbf1f653d892ac8d51aa9404e436fe05f7e66a181b84dc": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' digits and put them at front\n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "85b7f28478212cc979b93b0493525dbfe399c1641c7b067c8181130069485882|ec7b27560a6542f0b6dbf1f653d892ac8d51aa9404e436fe05f7e66a181b84dc": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    shift = shift % n  # Handle shift >= n case for circular shift\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "462da2e48d378e2de3912be6164ac61dd90524f2421db92996d2cff156e7bc11|ec7b27560a6542f0b6dbf1f653d892ac8d51aa9404e436fe05f7e66a181b84dc": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' chars and put them at the front\n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "fbb0453c955be7f628486b6a87f5adb871bb0155e24eab811aa8e0b03c406d0c|ec7b27560a6542f0b6dbf1f653d892ac8d51aa9404e436fe05f7e66a181b84dc": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' digits and move to front\n    shift = shift % n  # Handle case where shift == n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "75c5e9d557ea9b841a7f51fde8a1488bac714bc8b78507c9a37ca86de1ddcacd|ec7b27560a6542f0b6dbf1f653d892ac8d51aa9404e436fe05f7e66a181b84dc": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' digits and move to front\n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "fbb0453c955be7f628486b6a87f5adb871bb0155e24eab811aa8e0b03c406d0c|462da2e48d378e2de3912be6164ac61dd90524f2421db92996d2cff156e7bc11": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' digits and move to front\n    shift = shift % n  # Handle case where shift == n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "75c5e9d557ea9b841a7f51fde8a1488bac714bc8b78507c9a37ca86de1ddcacd|462da2e48d378e2de3912be6164ac61dd90524f2421db92996d2cff156e7bc11": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' digits and move to front\n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 2,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "78228fb076606d9820bdf273c37f9e5e861e80189760fe315a9818491c859100|462da2e48d378e2de3912be6164ac61dd90524f2421db92996d2cff156e7bc11": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 3,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "907ea225f971c5d5e7dd1c71ae4434b5847d7d4b09e99cbd0e0fd3211dc5f717|462da2e48d378e2de3912be6164ac61dd90524f2421db92996d2cff156e7bc11": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' digits and put them at the front\n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1bae931c9623fb1e8edcc703a713a622a5c65c0fc310be1920313f62b40a7767|462da2e48d378e2de3912be6164ac61dd90524f2421db92996d2cff156e7bc11": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    digits = str(x)\n    n = len(digits)\n    \n    if shift > n:\n        return digits[::-1]\n    \n    # Circular right shift\n    shift = shift % n  # Handle case where shift equals n\n    return digits[-shift:] + digits[:-shift] if shift > 0 else digits\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "18767c49084c88a74bb06d6f086131d009428b1c3898453dd1cfcbe9e661b1a0|462da2e48d378e2de3912be6164ac61dd90524f2421db92996d2cff156e7bc11": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    if shift > n:\n        return s[::-1]\n    shift = shift % n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "f2b26ecbcbfd0486393896171c9cee54b25262e4de2fd4190373135bc2f04f64|462da2e48d378e2de3912be6164ac61dd90524f2421db92996d2cff156e7bc11": {
+      "stitched_code": "def circular_shift(x, shift):\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular shift right by shift positions\n    shift = shift % n  # Handle case where shift == n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ec7b27560a6542f0b6dbf1f653d892ac8d51aa9404e436fe05f7e66a181b84dc|462da2e48d378e2de3912be6164ac61dd90524f2421db92996d2cff156e7bc11": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' chars and put them at the beginning\n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0adc095d032a94cf7c4e6e4174973378b8e315fe7573b8e2ce2c1322b47a6529|ec7b27560a6542f0b6dbf1f653d892ac8d51aa9404e436fe05f7e66a181b84dc": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    if shift > n:\n        return s[::-1]\n    shift = shift % n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "c298cc41b5dea9c31783d3601a5763e7d9f8f6e0ee13745cd78cd12833fe513d|462da2e48d378e2de3912be6164ac61dd90524f2421db92996d2cff156e7bc11": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' chars and put them at the front\n    shift = shift % n  # Handle cases where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "0adc095d032a94cf7c4e6e4174973378b8e315fe7573b8e2ce2c1322b47a6529|462da2e48d378e2de3912be6164ac61dd90524f2421db92996d2cff156e7bc11": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    if shift > n:\n        return s[::-1]\n    shift = shift % n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 5,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "85b7f28478212cc979b93b0493525dbfe399c1641c7b067c8181130069485882|462da2e48d378e2de3912be6164ac61dd90524f2421db92996d2cff156e7bc11": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    shift = shift % n  # Handle shift >= n case for circular shift\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "462da2e48d378e2de3912be6164ac61dd90524f2421db92996d2cff156e7bc11|462da2e48d378e2de3912be6164ac61dd90524f2421db92996d2cff156e7bc11": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' chars and put them at the front\n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 15,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "f2b26ecbcbfd0486393896171c9cee54b25262e4de2fd4190373135bc2f04f64|ec7b27560a6542f0b6dbf1f653d892ac8d51aa9404e436fe05f7e66a181b84dc": {
+      "stitched_code": "def circular_shift(x, shift):\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular shift right by shift positions\n    shift = shift % n  # Handle case where shift == n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "fbb0453c955be7f628486b6a87f5adb871bb0155e24eab811aa8e0b03c406d0c|c298cc41b5dea9c31783d3601a5763e7d9f8f6e0ee13745cd78cd12833fe513d": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' digits and move to front\n    shift = shift % n  # Handle case where shift == n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 1,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "78228fb076606d9820bdf273c37f9e5e861e80189760fe315a9818491c859100|c298cc41b5dea9c31783d3601a5763e7d9f8f6e0ee13745cd78cd12833fe513d": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 7,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "75c5e9d557ea9b841a7f51fde8a1488bac714bc8b78507c9a37ca86de1ddcacd|c298cc41b5dea9c31783d3601a5763e7d9f8f6e0ee13745cd78cd12833fe513d": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' digits and move to front\n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1bae931c9623fb1e8edcc703a713a622a5c65c0fc310be1920313f62b40a7767|c298cc41b5dea9c31783d3601a5763e7d9f8f6e0ee13745cd78cd12833fe513d": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    digits = str(x)\n    n = len(digits)\n    \n    if shift > n:\n        return digits[::-1]\n    \n    # Circular right shift\n    shift = shift % n  # Handle case where shift equals n\n    return digits[-shift:] + digits[:-shift] if shift > 0 else digits\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "85b7f28478212cc979b93b0493525dbfe399c1641c7b067c8181130069485882|c298cc41b5dea9c31783d3601a5763e7d9f8f6e0ee13745cd78cd12833fe513d": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    shift = shift % n  # Handle shift >= n case for circular shift\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 13,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "462da2e48d378e2de3912be6164ac61dd90524f2421db92996d2cff156e7bc11|c298cc41b5dea9c31783d3601a5763e7d9f8f6e0ee13745cd78cd12833fe513d": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' chars and put them at the front\n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ec7b27560a6542f0b6dbf1f653d892ac8d51aa9404e436fe05f7e66a181b84dc|c298cc41b5dea9c31783d3601a5763e7d9f8f6e0ee13745cd78cd12833fe513d": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' chars and put them at the beginning\n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "907ea225f971c5d5e7dd1c71ae4434b5847d7d4b09e99cbd0e0fd3211dc5f717|ec7b27560a6542f0b6dbf1f653d892ac8d51aa9404e436fe05f7e66a181b84dc": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' digits and put them at the front\n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1c83d32bfbc3c251bfe5c9d2170db08eed7e93e2042523d6b4276d356e6bebc2|462da2e48d378e2de3912be6164ac61dd90524f2421db92996d2cff156e7bc11": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' digits and put them at front\n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "c298cc41b5dea9c31783d3601a5763e7d9f8f6e0ee13745cd78cd12833fe513d|fbb0453c955be7f628486b6a87f5adb871bb0155e24eab811aa8e0b03c406d0c": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' chars and put them at the front\n    shift = shift % n  # Handle cases where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 0,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "18767c49084c88a74bb06d6f086131d009428b1c3898453dd1cfcbe9e661b1a0|fbb0453c955be7f628486b6a87f5adb871bb0155e24eab811aa8e0b03c406d0c": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    if shift > n:\n        return s[::-1]\n    shift = shift % n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 19,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "75c5e9d557ea9b841a7f51fde8a1488bac714bc8b78507c9a37ca86de1ddcacd|fbb0453c955be7f628486b6a87f5adb871bb0155e24eab811aa8e0b03c406d0c": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' digits and move to front\n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 6,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "1bae931c9623fb1e8edcc703a713a622a5c65c0fc310be1920313f62b40a7767|fbb0453c955be7f628486b6a87f5adb871bb0155e24eab811aa8e0b03c406d0c": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    digits = str(x)\n    n = len(digits)\n    \n    if shift > n:\n        return digits[::-1]\n    \n    # Circular right shift\n    shift = shift % n  # Handle case where shift equals n\n    return digits[-shift:] + digits[:-shift] if shift > 0 else digits\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 14,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "462da2e48d378e2de3912be6164ac61dd90524f2421db92996d2cff156e7bc11|fbb0453c955be7f628486b6a87f5adb871bb0155e24eab811aa8e0b03c406d0c": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' chars and put them at the front\n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 16,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "ec7b27560a6542f0b6dbf1f653d892ac8d51aa9404e436fe05f7e66a181b84dc|fbb0453c955be7f628486b6a87f5adb871bb0155e24eab811aa8e0b03c406d0c": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' chars and put them at the beginning\n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 18,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "907ea225f971c5d5e7dd1c71ae4434b5847d7d4b09e99cbd0e0fd3211dc5f717|c298cc41b5dea9c31783d3601a5763e7d9f8f6e0ee13745cd78cd12833fe513d": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' digits and put them at the front\n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 9,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "18767c49084c88a74bb06d6f086131d009428b1c3898453dd1cfcbe9e661b1a0|c298cc41b5dea9c31783d3601a5763e7d9f8f6e0ee13745cd78cd12833fe513d": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    if shift > n:\n        return s[::-1]\n    shift = shift % n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": true,
+      "rolled_back": false,
+      "skipped_reason": null,
+      "transformation_level": 3,
+      "transform_row": {
+        "run_index": 11,
+        "transformation_needed": true,
+        "transformation_success": true,
+        "rolled_back": false,
+        "final_distance": 0.0,
+        "transformation_level": 3
+      }
+    },
+    "1c83d32bfbc3c251bfe5c9d2170db08eed7e93e2042523d6b4276d356e6bebc2|c298cc41b5dea9c31783d3601a5763e7d9f8f6e0ee13745cd78cd12833fe513d": {
+      "stitched_code": "def circular_shift(x, shift):\n    \"\"\"Circular shift the digits of the integer x, shift the digits right by shift\n    and return the result as a string.\n    If shift > number of digits, return digits reversed.\n    >>> circular_shift(12, 1)\n    \"21\"\n    >>> circular_shift(12, 2)\n    \"12\"\n    \"\"\"\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular right shift: take last 'shift' digits and put them at front\n    shift = shift % n  # Handle case where shift equals n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 12,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    },
+    "f2b26ecbcbfd0486393896171c9cee54b25262e4de2fd4190373135bc2f04f64|c298cc41b5dea9c31783d3601a5763e7d9f8f6e0ee13745cd78cd12833fe513d": {
+      "stitched_code": "def circular_shift(x, shift):\n    s = str(x)\n    n = len(s)\n    \n    if shift > n:\n        return s[::-1]\n    \n    # Circular shift right by shift positions\n    shift = shift % n  # Handle case where shift == n\n    return s[-shift:] + s[:-shift] if shift > 0 else s\n",
+      "oracle": {
+        "base_status": "pass",
+        "base_passed": true,
+        "plus_status": "pass",
+        "plus_passed": true,
+        "certified": true
+      },
+      "repair_applied": false,
+      "rolled_back": false,
+      "skipped_reason": "already_consensus_form",
+      "transformation_level": null,
+      "transform_row": {
+        "run_index": 17,
+        "transformation_needed": false,
+        "final_distance": 0.0,
+        "skipped_reason": "already_consensus_form"
+      }
+    }
+  }
+}
