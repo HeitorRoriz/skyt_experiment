@@ -65,25 +65,26 @@ def main() -> None:
         }
     )
 
-    fig, ax = plt.subplots(figsize=(7.15, 3.05), layout="constrained")
+    fig, ax = plt.subplots(figsize=(7.15, 3.15))
     labels = [name for name, _ in CELLS]
     x = np.arange(len(labels))
     width = 0.24
+    # Display names. Data keys stay "same@2|cert" / "same@2".
     metrics = (
-        ("Plus pass", PASS, ""),
-        ("same@2|cert", CERT, "xx"),
-        ("same@2", SAME, "//"),
+        ("Plus pass", "Plus pass", PASS, ""),
+        ("same@2|cert", "same@2 | cert", CERT, "xx"),
+        ("same@2", "same@2", SAME, "//"),
     )
     offsets = (-width, 0.0, width)
 
-    for offset, (metric, color, hatch) in zip(offsets, metrics):
+    for offset, (metric, legend, color, hatch) in zip(offsets, metrics):
         vals = [cell[metric][0] for _, cell in CELLS]
         err = np.array([_yerr(*cell[metric]) for _, cell in CELLS]).T
         ax.bar(
             x + offset,
             vals,
             width,
-            label=metric,
+            label=legend,
             color=color,
             edgecolor="black",
             linewidth=0.4,
@@ -96,15 +97,22 @@ def main() -> None:
     ax.set_xticks(x, labels)
     ax.set_ylim(0, 100)
     ax.set_ylabel("Task-mean (%)")
-    ax.set_title("SameEval on HumanEval+ (164 tasks, N=20)")
-    ax.legend(frameon=False, loc="lower left")
+    ax.set_title("SameEval on HumanEval+ (original two models, 164 tasks, N=20)")
+    ax.legend(
+        frameon=False,
+        ncol=3,
+        loc="upper center",
+        bbox_to_anchor=(0.5, -0.28),
+        borderaxespad=0.0,
+    )
     ax.set_axisbelow(True)
     ax.yaxis.grid(True, linestyle=":", linewidth=0.5, color="#bbbbbb")
+    fig.tight_layout()
 
     pdf = OUT / "fig1.pdf"
     png = OUT / "fig1.png"
-    fig.savefig(pdf, bbox_inches="tight")
-    fig.savefig(png, dpi=300, bbox_inches="tight")
+    fig.savefig(pdf, bbox_inches="tight", pad_inches=0.08)
+    fig.savefig(png, dpi=300, bbox_inches="tight", pad_inches=0.08)
     plt.close(fig)
     print(f"wrote {pdf}")
     print(f"wrote {png}")

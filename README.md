@@ -1,256 +1,71 @@
-# SKYT: Prompt Contracts for Software Repeatability
+# SameEval
 
-**MSR 2026 - Data and Tool Showcase Track**  
-**Artifact for Paper Reproduction**
+Replication package for the FSE 2027 research paper *SameEval: A Structural Repeatability Benchmark for LLM Code Generation*.
 
----
+SameEval is an overlay on an existing benchmark. It does not add prompts or tests. It reports whether two independent generations from the same prompt both pass the benchmark tests and share a canonical-form fingerprint (`same@2`). A second column, `same@2|cert`, asks that question among passing generations only.
 
-> ## RECONCILIATION NOTE — 2026-06-13
->
-> The repo documents **two papers with different, intentionally scoped experiments**; their figures are not interchangeable and are both kept as written:
-> - **SBES/CBSoft 2026 (Industry Track)** — `paper/cbsoft2026/main.tex` — **12 algorithmic contracts · 3,600 generations**. MISRA C / NASA Power-of-10 are cited as *inspiration only*; no certification compliance is claimed or evaluated.
-> - **MSR 2026 (Data & Tool Showcase, camera-ready)** — **15 tasks (12 base + 3 strict variants) · 4,500 generations · 14 foundational properties**.
->
-> **Decision:** we are **not collapsing these into a single number** — each document is read against the paper it belongs to. The active foundational-property count in code (`src/foundational_properties.py`) is **14**, not 13.
->
-> **This document:** the header reads *MSR 2026*, but the body figures below (12 contracts, 3,600 generations, "13 semantic properties") are the **SBES** scope. If this is intended as the MSR artifact, the MSR values above apply; the property count is **14** either way.
->
-> **Strict-contract note (neutral):** the 3 `*_strict` variants (`is_prime_strict`, `binary_search_strict`, `lru_cache_strict`) were run, but at the time of this note no contract had been validated against an actual MISRA C / NASA Power-of-10 rule set — flagged here as a concern (2026-06-13).
->
-> No experimental data (CSV/JSON logs) was deleted in making this note.
+The paper is `paper/fse2027/main.tex`.
 
-## Overview
+## This study
 
-**SKYT** measures and improves **software repeatability** in LLM-generated code through:
+HumanEval+, all 164 tasks, 20 generations per configuration.
 
-1. **Prompt Contracts** - Structured specifications with behavioral oracles
-2. **Canonical Anchoring** - Fixed reference for structural comparison
-3. **Property-Based Repair** - AST-level transformations to canonical form
+| Pool | Configurations | Generations |
+|---|---:|---:|
+| Four models at temperatures 0.0 and 0.7 | 1,312 | 26,240 |
+| One model at provider-default sampling | 164 | 3,280 |
+| Total | 1,476 | 29,520 |
 
-### Research Question
+On the four-model pool, Plus pass is 86.4% and `same@2` is 67.7%. The fifth model passes 92.9% of the time and has `same@2` 66.3%. The mitigation comparison uses only the original two models (GPT-4o-mini and Claude Sonnet 4.5). On static prompts, replaying a stored program is the repeatability ceiling.
 
-*Can prompt contracts and canonicalization improve repeatability of LLM-generated code under pinned settings?*
+Certified means the fingerprinter parses the program and the HumanEval+ suite passes. Fingerprints use `relation_version` 2.
 
----
+## Other papers in this repository
 
-## Experiment Summary
+`paper/cbsoft2026/` and `paper/msr2026/` are earlier papers. They use different tasks and different generation totals. Do not read their figures as results of this study.
 
-### Scope
+## Recompute
 
-- **12 algorithmic contracts** (sorting, searching, math, string processing)
-- **3 model families** (GPT-4o-mini, GPT-4o, Claude Sonnet 4.5)
-- **5 temperature settings** (0.0, 0.3, 0.5, 0.7, 1.0)
-- **20 runs per configuration**
-- **Total: 3,600 LLM generations**
-
-### Key Results
-
-| Task | Model | R_raw | R_anchor_pre | R_anchor_post | Δ_rescue |
-|------|-------|-------|--------------|---------------|----------|
-| Binary-Search | GPT-4o-mini | 0.49 | 0.25 | 0.50 | **+0.25** |
-| Balanced-Brackets | GPT-4o-mini | 0.30 | 0.36 | 0.82 | **+0.46** |
-| Slugify | GPT-4o-mini | 0.56 | 0.54 | 0.76 | **+0.22** |
-
-*Aggregated across all temperatures (N=100 per task/model)*
-
-**Key Finding:** Canonicalization improves repeatability by 22-46% for GPT-4o-mini, with the largest improvement on Balanced-Brackets (Δ_rescue = +0.46).
-
----
-
-## Reproducing Paper Results
-
-### Quick Start
+No language-model calls are required. The commands below read the stored generations.
 
 ```bash
-# 1. Install dependencies
 pip install -r requirements.txt
-
-# 2. Set up API keys
-cp .env.example .env
-# Edit .env with your OPENAI_API_KEY and ANTHROPIC_API_KEY
-
-# 3. Verify existing results match paper
-python reproduce_paper_results.py --verify-only
 ```
 
-### Full Reproduction
+| Result | Command |
+|---|---|
+| Per-cell rows of the main table | `python -m benchmark score` |
+| Pooled rows and model-pair deltas | `python -m benchmarks.humaneval_plus.expansion_analyze` |
+| Temperature intervals | `python -m skyt.fse_final_posthoc tgrid` |
+| Diff-cost summary | `python -m skyt.fse_final_posthoc diffcost` |
+| Human-study table, kappa interval, reweighted rates | `python -m skyt.fse_final_posthoc human` |
+| Three-ruler overlay column | `python -m skyt.zero_api_analysis` |
+| Held-out ruler columns and nested splits | `python -m skyt.heldout_robust --analyze-only` |
+| Diversity signal, pre-registered overlay | `python -m benchmark.diversity_signal --trees outputs/benchmark/humaneval_plus_164_n20` |
+| Diversity signal, five-model replication | `python -m benchmark.diversity_signal --trees outputs/benchmark/humaneval_plus_164_n20 outputs/benchmark/humaneval_plus_164_n20_expansion/haiku45 outputs/benchmark/humaneval_plus_164_n20_expansion/luna outputs/benchmark/humaneval_plus_164_n20_expansion/sonnet5` |
+| Held-out mitigation table and certified disagreement | `python -m skyt.oracle_split_posthoc` |
+| Cache baselines | `python -m skyt.oracle_fair` |
+| Level ablation | `python -m skyt.level_ablation --max-level 3` and `python -m skyt.humaneval_oracle_split --max-transformation-level 2` |
 
-```bash
-# Run all 3,600 experiments (requires API keys, ~2-4 hours)
-python reproduce_paper_results.py
-```
+Intervals are a cluster bootstrap by task: 10,000 resamples, seed `20260723`.
 
-### Granular Experiments
+## Pins
 
-```bash
-# Single experiment
-python main.py --contract binary_search \
-  --model gpt-4o-mini --temperature 0.5 --runs 20
+- Dataset: `evalplus==0.3.1`, HumanEvalPlus `v0.1.10`, MD5 `916d9bfe7b490c2447245ec91595fa4f`
+- Scoring sandbox: `python:3.13-slim`, network disabled. The image digest is recorded with the generations.
+- Generations: `outputs/benchmark/humaneval_plus_164_n20` and `outputs/benchmark/humaneval_plus_164_n20_expansion`
+- Human labels: `outputs/benchmark/fingerprint_annotation_dual`
 
-# Full evaluation (all 12 contracts)
-python run_phase2_full.py
-```
-
----
-
-## Experimental Data
-
-All experimental data is in `outputs/`:
-
-### `metrics_summary.csv`
-Aggregated metrics for all 180 configurations (12 contracts × 3 models × 5 temps):
-- `R_raw` - Raw repeatability (byte-identical)
-- `R_anchor_pre` - Canon match before repair
-- `R_anchor_post` - Canon match after repair
-- `Delta_rescue` - Improvement (R_anchor_post - R_anchor_pre)
-- `R_behavioral` - Oracle pass rate
-- `R_structural` - Structural constraint pass rate
-
-### Per-Run JSON Files
-Detailed logs for each experiment configuration:
-- Raw LLM outputs
-- Canonical anchor
-- Oracle test results
-- Property distances
-- Transformation steps
-
-**Example:** `outputs/binary_search_temp0.5_20260123_115030.json`
-
----
-
-## Repository Structure
+## Layout
 
 ```
-skyt_experiment/
-├── README.md                    # This file
-├── reproduce_paper_results.py   # Single-command reproduction
-├── main.py                      # CLI for experiments
-├── requirements.txt             # Python dependencies
-│
-├── src/                         # Core implementation
-│   ├── llm_client.py            # Multi-provider LLM client
-│   ├── contract.py              # Contract system
-│   ├── oracle_system.py         # Behavioral testing
-│   ├── canon_system.py          # Canonical anchoring
-│   ├── code_transformer.py      # Property-based repair
-│   ├── foundational_properties.py  # 13 semantic properties
-│   ├── metrics.py               # Repeatability metrics
-│   └── enhanced_stats.py        # Statistical analysis
-│
-├── contracts/
-│   └── templates.json           # 12 algorithmic contracts
-│
-└── outputs/
-    ├── metrics_summary.csv      # Aggregated results
-    └── *.json                   # Per-run detailed logs
+paper/fse2027/          paper source and figures
+benchmark/              overlay scorer
+benchmarks/humaneval_plus/   HumanEval+ adapter and expansion analysis
+skyt/                   held-out, cache, ablation, and post hoc scripts
+outputs/benchmark/      stored generations and annotation sheets
 ```
-
----
-
-## Metrics Explained
-
-### R_raw (Raw Repeatability)
-Proportion of byte-identical outputs under pinned settings.
-
-### R_anchor_pre (Pre-Repair Canon Match)
-Proportion of outputs matching canonical anchor before repair.
-
-### R_anchor_post (Post-Repair Canon Match)
-Proportion of outputs matching canonical anchor after property-based repair.
-
-### Δ_rescue (Rescue Delta)
-Improvement from repair: `R_anchor_post - R_anchor_pre`
-
-**Interpretation:**
-- Δ_rescue > 0: Repair successfully increases canon alignment
-- Δ_rescue = 0: No improvement (outputs already canonical or too diverse)
-
----
-
-## Statistical Rigor
-
-All results include:
-
-1. **Wilson 95% Confidence Intervals** (for proportions with n=20)
-2. **Fisher's Exact Test** (for comparing pre/post repair)
-3. **Effect Sizes** (Cohen's h, odds ratios)
-4. **Holm-Bonferroni Correction** (for multiple comparisons)
-
-See `src/enhanced_stats.py` for implementation details.
-
----
-
-## Contracts Evaluated
-
-### Numeric (5 tasks)
-- Fibonacci (iterative)
-- Fibonacci (recursive)
-- Factorial
-- GCD (Euclidean algorithm)
-- Primality test
-
-### String (2 tasks)
-- Slugify (URL normalization)
-- Palindrome check
-
-### Data Structures (2 tasks)
-- Balanced brackets (stack-based)
-- LRU Cache (OrderedDict)
-
-### Sorting/Searching (3 tasks)
-- Binary search
-- Merge sort
-- Quick sort
-
----
-
-## Key Findings
-
-1. **Temperature Effect:** R_raw decreases with temperature (more diversity), but canonicalization maintains structural repeatability.
-
-2. **Model Differences:** 
-   - GPT-4o-mini: Best rescue performance (Δ_rescue up to +0.46)
-   - Claude Sonnet: High raw repeatability but poor canon alignment (different structural patterns)
-
-3. **Task Complexity:** 
-   - Simple tasks (GCD, Fibonacci): High baseline repeatability
-   - Complex tasks (Binary-Search, Balanced-Brackets): Larger improvement from canonicalization
-
----
-
-## Citation
-
-```bibtex
-@inproceedings{skyt2026,
-  title     = {SKYT: Prompt Contracts for Software Repeatability in LLM-Assisted Development},
-  author    = {[Authors]},
-  booktitle = {Proceedings of the 23rd International Conference on Mining Software Repositories (MSR)},
-  series    = {MSR '26},
-  year      = {2026},
-  publisher = {ACM},
-  note      = {Data and Tool Showcase Track}
-}
-```
-
----
 
 ## License
 
-- **Code:** MIT License
-- **Data:** CC-BY-4.0
-- **Documentation:** CC-BY-4.0
-
----
-
-## Contact
-
-**Repository:** https://github.com/HeitorRoriz/skyt_experiment  
-**Branch:** `camera-ready-msr2026`
-
-For questions about reproduction or artifact usage, please open an issue on GitHub.
-
----
-
-## Acknowledgments
-
-We thank the MSR 2026 reviewers for their constructive feedback and Professor Nasser for statistical methodology guidance.
+Code is under the MIT license in `LICENSE.txt`.

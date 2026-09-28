@@ -166,11 +166,9 @@ def score(
         "human_human": human_human,
         "fingerprint_vs_human": vs_fingerprint,
         "note": (
-            "Precision/recall/F1 treat fingerprint_same as the prediction and "
-            "human_same as the reference. The 128-pair set is stratified, so "
-            "precision and F1 are validation-sample metrics, not population "
-            "prevalence estimates. Prefer kappa, raw agreement, sensitivity, "
-            "and specificity."
+            "The 128-pair set is stratified on the fingerprint verdict. "
+            "Unweighted sensitivity/specificity are sample metrics; use "
+            "skyt.fse_final_posthoc for population-reweighted rates."
         ),
     }
 

@@ -75,6 +75,9 @@ def make_figure(report: dict, out_path: Path) -> None:
                 lows.append(max(0.0, 100.0 * estimate - 100.0 * ci[0]))
                 highs.append(max(0.0, 100.0 * ci[1] - 100.0 * estimate))
         offset = (index - (len(cells) - 1) / 2) * width
+        for xpos, height in zip(x + offset, heights):
+            if height == 0:
+                ax.text(xpos, 1.2, "0", ha="center", va="bottom", fontsize=6.5, color="#444444")
         ax.bar(
             x + offset,
             heights,
@@ -89,9 +92,13 @@ def make_figure(report: dict, out_path: Path) -> None:
     ax.set_xticklabels(BIN_LABELS)
     ax.set_ylabel("Extra-failure rate among Base-passers (%)")
     ax.set_xlabel("Form diversity (D = 0, then tertiles of D > 0)")
+    ax.set_title("Original overlay only (two models)")
     ax.legend(frameon=False, ncol=2)
+    ax.set_axisbelow(True)
+    ax.yaxis.grid(True, linestyle=":", linewidth=0.5, color="#bbbbbb")
     out_path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(out_path)
+    fig.savefig(out_path.with_suffix(".png"), dpi=300)
     plt.close(fig)
 
 
