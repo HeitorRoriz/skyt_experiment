@@ -24,6 +24,8 @@
 
 \title[SameEval: Structural Repeatability of LLM Code]{SameEval: A Structural Repeatability Benchmark for LLM Code Generation}
 
+%% Blind review: authors commented until camera-ready.
+
 \renewcommand{\shortauthors}{Anonymous Author(s)}
 \renewcommand{\shorttitle}{SameEval: Structural Repeatability of LLM Code}
 
@@ -31,33 +33,39 @@
 Code-generation benchmarks ask whether a program passes tests, not whether
 regenerating from the same prompt yields the same code.
 This matters wherever generated code is reviewed, audited, or placed under
-change control, and most sharply in safety-critical embedded development,
-where teams expect regeneration to reproduce the same code and standards
-require confidence in the tools that generate it.
-We present \sameeval{}, an overlay that measures structural repeatability on
-an existing benchmark: \sameat{} estimates the probability that two
-independent generations both pass and share a canonical-form fingerprint.
+change control: every regeneration that changes the code, even to another
+passing version, reopens review, re-testing, and traceability work.
+The cost is highest in automotive and embedded-electronics development, where
+production code is safety-relevant, standards such as ISO~26262 require
+confidence in the tools that generate it, and a change that escapes review can
+reach products in the field.
+We present \sameeval{}, a repeatability benchmark built on HumanEval+: its
+metric, \sameat{}, estimates the probability that two independent generations
+both pass and share a canonical-form fingerprint.
 On all 164 HumanEval+ tasks with four models at two temperatures
-(26{,}240 generations), Plus pass is 86.4\% but \sameat{} is 67.7\%; a fifth
-model at provider-default sampling passes 92.9\% of the time yet produces the
-same code in only 66.3\% of pairs.
+(26{,}240 generations), pass@1 is 86.4\% but \sameat{} is 67.7\%; even when
+both programs pass, 23.1\% of pairs differ in form.
+A fifth model at provider-default sampling reaches a pass@1 of 92.9\% yet
+produces the same code in only 66.3\% of pairs.
 Raising temperature from 0 to 0.7 lowers \sameat{} by 11.0 to 28.0 points,
-while Plus pass changes by at most 0.8 points (every 95\% CI within
-$\pm$2.4), and two models with indistinguishable pass
-rates differ by 15 points in repeatability among passers.
-Two engineers ($\kappa{=}0.41$ with each other) judged 63 and 64 of the 64 fingerprint-same pairs to be the same implementation, but also called many structurally different passing pairs the same: models agree on the approach more
-than on the code.
-Form diversity shows no detectable association with hidden-test failure within a task
-(exploratory).
-\sameeval{} also separates mitigation policies: on held-out generations,
-\skyt{}, which regenerates and then substitutes a stored verified function,
-raises \sameat{} by 17.0 points, while replaying a stored program remains the
-ceiling on static prompts.
+while pass@1 changes by at most 0.8 points (every 95\% CI within $\pm$2.4), and
+two models with indistinguishable pass@1 differ by 15 points in repeatability
+among passing programs.
+Two engineers, in fair-to-moderate agreement with each other (Cohen's
+$\kappa{=}0.41$), judged 63 and 64 of the 64 fingerprint-same pairs to be the
+same implementation, but also called many structurally different passing pairs
+the same: models agree on the approach more than on the code.
+Within a task, configurations whose passing programs vary more are not
+detectably more likely to fail hidden tests (exploratory).
+\sameeval{} can also compare mitigation policies: \skyt{}, which takes the
+most frequent verified function from one half of the generations and
+substitutes it into the other half, raises \sameat{} there by 17.0 points,
+while replaying a stored program, which avoids regeneration altogether,
+remains the ceiling on static prompts.
 We distill the study into an eight-step protocol for measuring and reporting
-structural repeatability on any benchmark with an executable oracle, with
-each step backed by evidence from this study.
+structural repeatability on any benchmark with an executable oracle, with each
+step backed by evidence from this study.
 \end{abstract}
-
 \begin{CCSXML}
 <ccs2012>
 <concept>
@@ -86,18 +94,19 @@ each step backed by evidence from this study.
 
 Correctness benchmarks for LLM code generation---HumanEval~\cite{chen2021evaluating},
 MBPP~\cite{austin2021program}, SWE-bench~\cite{jimenez2024swebench}---ask whether
-\emph{a} generated artifact passes tests.
-Production pipelines regenerate: CI retries a generator, an agent re-samples
+a generated artifact passes tests.
+LLM-assisted production pipelines regenerate: CI retries a generator, an agent re-samples
 after a failed test, and two developers issue the same prompt.
 Tests cannot tell two passing regenerations apart, yet the artifacts can
 differ in structure~\cite{ouyang2023llm}, and every structural difference
 reaches a diff, a review, or an audit trail.
 
-This paper's primary contribution is \textbf{\sameeval{}}, a benchmark overlay
-that measures that scatter.
-It ships no new prompts and no new tests.
-It adds a form report on top of an existing task set.
-The report's headline is \sameat{}: the probability that two independent draws
+This paper's primary contribution is \textbf{\sameeval{}}, a repeatability
+benchmark built on HumanEval+.
+Like HumanEval+, which added tests to HumanEval rather than new tasks,
+\sameeval{} keeps the task set and adds a dimension: whether regeneration
+reproduces the same code.
+Its headline is \sameat{}: the probability that two independent draws
 both certify and have the same canonical-form fingerprint.
 A second column, \sameatc{}, asks the same identity question among passers
 only; configs with fewer than two passers are dropped from that column and the
@@ -127,23 +136,26 @@ four questions.
 
 \paragraph{Contributions.}
 \begin{enumerate}
-  \item \sameeval{}: the \sameat{} / \sameatc{} estimators, with failures in
-        the denominator, and a versioned canonical-form fingerprint.
+  \item \sameeval{}, a repeatability benchmark on HumanEval+: the \sameat{} /
+        \sameatc{} estimators, with failures in the denominator, a versioned
+        canonical-form fingerprint, and scored generations from five models.
   \item A measurement and reporting protocol for structural repeatability:
         eight task-agnostic steps, from sampling to evaluating mitigations
-        on held-out generations with hidden tests reserved, each backed by
+        on generations not used to select the stored form, with hidden tests
+        reserved, each backed by
         evidence from this study (Section~\ref{sec:protocol-steps}).
   \item Validity evidence: engineers agree with the fingerprint's ``same''
         (63 and 64 of 64 pairs; specificity 98--100\%); three computational
         rulers preserve the gap; \sameat{} separates models that pass@$k$
         cannot; and ten generations per configuration suffice (split-half
         $r_{10}{\ge}0.89$).
-  \item Empirical findings: on HumanEval+, Plus pass is 86.4\% but \sameat{}
-        is 67.7\%; temperature lowers \sameat{} while Plus pass moves by at most 0.8 points (every CI within $\pm$2.4); generation
+  \item Empirical findings: on HumanEval+, pass@1 is 86.4\% but \sameat{}
+        is 67.7\%; temperature lowers \sameat{} while pass@1 moves by at most
+        0.8 points (every CI within $\pm$2.4); generation
         can be repeatably wrong, so \sameat{} is not a proxy for hidden-test
         correctness (exploratory); and among mitigation policies, a stored
-        program is the ceiling on static prompts while the lift of \skyt{}~\cite{roriz2026skytmsr} comes
-        from canonical substitution.
+        program is the ceiling on static prompts while the lift of
+        \skyt{}~\cite{roriz2026skytmsr} comes from canonical substitution.
   \item An artifact with all generations, the scorer, a protocol checklist,
         and recompute commands (Data Availability).
 \end{enumerate}
@@ -155,7 +167,7 @@ denominator, certification conditioning, a fingerprint whose ``same'' calls
 engineers accept, and a protocol for evaluating mitigations.
 
 \paragraph{Not in this paper.}
-We do not score by pass@$k$ or by match to the HumanEval canonical solution.
+We do not score by match to the HumanEval canonical solution.
 We do not treat copying the first passer as the \skyt{} policy; we \emph{do}
 report it as a cache baseline (Section~\ref{sec:rq4}).
 This study is Python HumanEval+, not an embedded or safety-certification
@@ -166,8 +178,9 @@ A regeneration track under perturbed contexts is future work
 \paragraph{Outline.}
 Section~\ref{sec:motivation} states the measurement problem;
 Section~\ref{sec:related} places \sameeval{} in context;
-Section~\ref{sec:protocol} defines the overlay;
-Section~\ref{sec:setup} pins the runs, the human study, and the held-out split;
+Section~\ref{sec:protocol} defines the benchmark's measures;
+Section~\ref{sec:setup} pins the runs, the human study, and the train/test
+split used to evaluate mitigations;
 Section~\ref{sec:results} answers the four questions;
 Section~\ref{sec:protocol-steps} distills them into a measurement protocol;
 Sections~\ref{sec:discussion}--\ref{sec:implications} interpret the results;
@@ -197,7 +210,7 @@ Caching eliminates regeneration; \skyt{} constrains it; \sameeval{}
 measures what happens when regeneration occurs.
 
 \paragraph{Why not stop calling the model after the first passer?}
-That estimates pass@$1$.
+That yields at most a pass@$1$ estimate.
 \sameat{} is a pairwise rate; it is unidentified if sampling stops at one
 success.
 Agents are not one-shot samplers on a frozen prompt: they re-issue prompts
@@ -214,7 +227,7 @@ regeneration is expected not to invalidate that evidence.
 Functional-safety standards make the dependence explicit.
 ISO~26262 requires confidence in any software tool, including a code
 generator, that could introduce an error into safety-related
-software~\cite{iso26262part8}, and avionics has a dedicated standard for tool
+software~\cite[Clause~11]{iso26262part8}, and avionics has a dedicated standard for tool
 qualification~\cite{rtca2011do330}.
 An LLM that returns structurally different code on each regeneration breaks
 that expectation even when every version passes its tests: review evidence,
@@ -272,7 +285,7 @@ canonical form.
 It is not a clone detector, not observational equivalence, and not algorithm
 identity.
 
-\paragraph{Selection and repair versus overlay.}
+\paragraph{Selection and repair versus measurement.}
 Program repair with language models patches failing
 code~\cite{xia2023apr}.
 Copying the first passer, clustering by input--output behavior as in
@@ -302,17 +315,26 @@ equivalence relation, with failures remaining in the \sameat{} denominator.
 
 \subsection{Inputs and regenerations}
 A \emph{task} supplies a prompt and a behavioral oracle (unit tests).
-A \emph{config} is one task $\times$ one model $\times$ one temperature.
+A \emph{configuration} (config) is one task $\times$ one model $\times$ one
+temperature.
+A \emph{cell} is one model at one temperature (or at provider-default
+sampling); it holds one config per task, 164 in all.
 For each config we draw $N$ independent generations; the protocol uses
 $N{=}20$.
+We call the scored raw generations the \emph{overlay}; RQ4 compares them with
+programs rewritten by mitigation policies.
 
 \subsection{Certification}
 \label{sec:certification}
 We distinguish three test suites: \textbf{Base}, the original HumanEval unit
 tests; \textbf{Extra}, the additional EvalPlus tests; and \textbf{Plus}, the
 full HumanEval+ suite (Base and Extra).
-On the overlay, \emph{certified} (Plus pass) means the fingerprinter parses
-the program and the Plus tests pass.
+A generation is \emph{certified} when the fingerprinter parses it and it
+passes the Plus tests.
+pass@1 is the fraction of a config's generations that are certified, averaged
+over tasks; with $N$ samples per task this is the unbiased pass@1 estimator of
+Chen \etal{}~\cite{chen2021evaluating} on HumanEval+.
+Where RQ4 needs the Base suite alone, we write Base pass@1.
 Unparseable code cannot certify but stays in the \sameat{} denominator.
 
 \subsection{Structural sameness}
@@ -341,14 +363,36 @@ Let a config have $N$ generations and write $C(N,2)$ for the unordered pairs.
         It is a U-statistic of order 2, keeps failures in the denominator,
         and is defined on every config.
   \item \textbf{\sameatc{}} (secondary): the same identity check restricted to
-        pairs of certified generations; undefined when fewer than two
+        pairs of certified generations, that is, the probability that two
+        passing generations share a form; undefined when fewer than two
         generations certify, and those configs are omitted from its mean with
         the omission reported.
 \end{enumerate}
 
-We always report \sameat{}, \sameatc{} (with the drop count), and pass rate
+\paragraph{Why pairs.}
+\sameeval{} asks whether a regeneration reproduces the code already obtained,
+and the smallest event that answers that question involves two independent
+generations.
+\sameat{} is the probability of that event, just as pass@1 is the probability
+that one generation passes.
+Written over forms,
+\[
+  \texttt{same@2} \;=\; \sum_{k} \frac{n_k(n_k-1)}{N(N-1)},
+\]
+where $n_k$ counts the certified generations of form $k$ and uncertified
+generations remain in $N$.
+This is Simpson's concentration index~\cite{simpson1949measurement}, the
+probability that two random draws fall in the same class, restricted to
+certified forms; the pairwise estimator is unbiased for any $N{\ge}2$.
+We prefer it to measures that depend on sample size or on a reference: the
+share of the most common form and the number of distinct forms change with
+$N$, entropy estimates are biased at small $N$, and matching against a single
+anchor program cannot tell a tight cluster from scatter around an
+unrepresentative first draw.
+
+We always report \sameat{}, \sameatc{} (with the drop count), and pass@1
 together.
-Reporting \sameatc{} alone is misleading: it can rise when the pass rate falls.
+Reporting \sameatc{} alone is misleading: it can rise when pass@1 falls.
 Pairs within a config share generations and are not independent trials, so
 inference aggregates one score per task and uses a cluster bootstrap
 (10{,}000 resamples, seed 20260723).
@@ -391,11 +435,10 @@ Fingerprints use \texttt{relation\_version}=2.
 
 \paragraph{Inference.}
 Pooled estimates are task means: each task contributes the mean of its
-model$\times$temperature cells, and tasks are weighted equally.
+cells (one per model and temperature), and tasks are weighted equally.
 Intervals are 95\% percentile bootstrap intervals that resample whole tasks
 with replacement (10{,}000 resamples, seed 20260723).
-Cells where \sameatc{} is undefined are dropped, so a task averages its
-defined cells.
+For \sameatc{}, a task averages only the cells where it is defined.
 Paired differences (between models, or $T{=}0.7$ minus $T{=}0.0$) are formed
 per task before resampling, over tasks where both sides are defined.
 
@@ -416,7 +459,7 @@ code review, verification, maintenance, or change-control purposes?''}
 Model, temperature, test outcomes, and the fingerprint verdict were hidden.
 The fingerprint was not modified after labeling.
 The sample is stratified on the fingerprint verdict, so unweighted
-sensitivity, specificity, precision, and F1 are sample metrics.
+sensitivity, specificity, and precision are sample metrics.
 Population sensitivity, specificity, and PPV reweight each stratum by its
 share of parseable within-configuration pairs in the four annotated cells.
 Cohen's $\kappa$ below is a sample $\kappa$ on this design-balanced set.
@@ -424,7 +467,7 @@ No repaired (post-\skyt{}) programs were labeled.
 
 \subsection{Exploratory analysis (RQ3)}
 We ask whether form diversity among Base-passing programs carries information
-about Extra-test failure beyond the Base pass rate.
+about Extra-test failure beyond Base pass@1.
 The analysis was pre-specified on the original overlay, in a dated analysis plan included in the artifact; the replication uses
 all five models (1{,}476 configurations, including Sonnet 5).
 Forms are fingerprint classes computed only on Base-passers.
@@ -437,7 +480,7 @@ Configurations with fewer than two Base-passers are excluded.
 
 \paragraph{Claim status.}
 Confirmatory: the RQ1 gap; RQ2 human agreement (pre-specified protocol) and
-rank comparison (pre-specified decision rule); RQ4 held-out $\Delta$\sameat{},
+rank comparison (pre-specified decision rule); RQ4 \sameat{} lift,
 certified disagreement, and temperature interaction.
 Descriptive: RQ2 reliability.
 Exploratory: RQ3 (pre-specified on the original overlay; five-model
@@ -448,15 +491,17 @@ implementation-level estimate in Section~\ref{sec:discussion}; the diff-cost
 summary in Section~\ref{sec:rq1}; the RQ3 uniformity check in Section~\ref{sec:rq3}; and RQ4 case
 examples.
 
-\subsection{Held-out split for RQ4}
-\label{sec:heldout-setup}
+\subsection{Train/test split for RQ4}
+\label{sec:split-setup}
 \skyt{} selects a Certified Consensus form from certified train generations
 and repairs later programs toward that stored form, rolling back if the
 operational oracle fails; if no train generation certifies, repair is skipped.
 On the frozen overlay of the two original models we replay the policy without
 new language-model calls.
-For each of the 656 cells we draw 20 balanced 10/10 splits (seed 20260723),
+For each of the 656 configurations we draw 20 balanced 10/10 splits (seed 20260723),
 select the canon on the train 10 only, and repair the test 10.
+We call the test 10 the \emph{test half}: its generations are never used to
+select the canon, so improvements on them are not circular.
 \sameat{} and \sameatc{} are U-statistics on the test 10 ($C(10,2){=}45$
 pairs), averaged over splits.
 Paired effects $\Delta{=}\mathrm{post}{-}\mathrm{pre}$ use the paired cluster
@@ -479,17 +524,14 @@ Grok 4.7 (High).
 General-purpose assistants were used to draft analysis specifications, review
 the statistical design, and check the manuscript against computed results:
 ChatGPT 5.6 Sol (High), Claude Opus 5.5, and Grok 4.7 (High) through Cursor.
-All reported numbers are printed by the scripts listed in Data Availability.
+All reported numbers are printed by the commands in the artifact README (Data Availability).
 The authors made all design and interpretation decisions; the exploratory
 analyses were pre-specified in writing before computation.
 Outputs were verified in four ways: every reported number is produced by a
 script in the artifact and was checked against its JSON output; rescoring the
 original overlay with the current code reproduces its numbers exactly; the
 inference, annotation-scoring, and post hoc analysis code is covered by unit
-tests (\path{tests/test_benchmark_inference.py},
-\path{test_annotation_score.py}, \path{test_annotation_sample.py},
-\path{test_heldout_posthoc.py}, \path{test_diversity_signal.py},
-\path{test_fse_final_posthoc.py}); and every reference was checked against
+tests included in the artifact; and every reference was checked against
 its publisher's record.
 Both annotators were instructed not to use AI assistance while labeling and
 confirmed that they did not; the 128 pair labels are their own judgments.
@@ -502,13 +544,14 @@ confirmed that they did not; the 128 pair labels are their own judgments.
 \label{sec:rq1}
 
 Table~\ref{tab:he-table1} is \sameeval{} on all 164 HumanEval+ tasks; Figure~\ref{fig:overview} shows the two original models.
-On the T-grid pool, Plus pass is 86.4\% but \sameat{} is 67.7\%; \sameatc{} is
-76.9\% on 1{,}167 of 1{,}312 configs (145 had fewer than two Plus-passers).
-Claude Sonnet 5 has the highest Plus-pass point estimate (92.9\%) and a
+On the T-grid pool, pass@1 is 86.4\% but \sameat{} is 67.7\%; \sameatc{} is
+76.9\% on 1{,}167 of 1{,}312 configs (145 had fewer than two certified
+generations).
+Claude Sonnet 5 has the highest pass@1 point estimate (92.9\%) and a
 \sameat{} of 66.3\%: the highest-passing model at its only available setting
 produces different code in about a third of pairs.
-The lowest cell is GPT-4o-mini at $T{=}0.7$ (79.7\% Plus pass, 48.9\%
-\sameat{}).
+The lowest cell is GPT-4o-mini at $T{=}0.7$ (pass@1 79.7\%, \sameat{}
+48.9\%).
 $T{=}0$ does not give identical code: \sameatc{} ranges from 81.4\% (Luna) to
 96.4\% (Haiku).
 
@@ -517,14 +560,16 @@ $T{=}0$ does not give identical code: \sameatc{} ranges from 81.4\% (Luna) to
   \setlength{\tabcolsep}{4pt}
   \caption{\sameeval{} on HumanEval+ (164 tasks, $N{=}20$), in percent with
     95\% cluster-bootstrap CIs by task.
-    \sameatc{} omits configs with fewer than two Plus-passers
+    \sameatc{} omits configs with fewer than two certified generations
     (T-grid pool: 145 of 1{,}312).
     The T-grid pool excludes Sonnet 5.
-    The RQ4 subset is GPT-4o-mini + Claude Sonnet 4.5.}
+    The RQ4 subset is GPT-4o-mini + Claude Sonnet 4.5.
+    Pooled \sameatc{} averages each task's defined cells, so it is not the
+    mean of the rows above.}
   \label{tab:he-table1}
   \begin{tabular}{llccc}
     \toprule
-    Model & $T$ & Plus pass & \sameatc{} & \sameat{} \\
+    Model & $T$ & pass@1 & \sameatc{} & \sameat{} \\
     \midrule
     GPT-4o-mini & 0.0 & 79.3 [73.0, 85.2] & 93.7 [90.9, 96.1] & 74.3 [67.9, 80.3] \\
     GPT-4o-mini & 0.7 & 79.7 [73.8, 85.2] & 60.0 [54.4, 65.6] & 48.9 [42.9, 54.8] \\
@@ -544,7 +589,7 @@ $T{=}0$ does not give identical code: \sameatc{} ranges from 81.4\% (Luna) to
 
 \paragraph{Temperature moves repeatability, not pass rate.}
 Table~\ref{tab:temperature} contrasts $T{=}0.7$ with $T{=}0.0$ per model.
-Plus pass changes by at most 0.8 points (every 95\% CI within $\pm$2.4),
+pass@1 changes by at most 0.8 points (every 95\% CI within $\pm$2.4),
 while \sameat{} falls by 11.0 to 28.0 points.
 With two settings we do not estimate a dose--response curve.
 
@@ -558,7 +603,7 @@ With two settings we do not estimate a dose--response curve.
   \label{tab:temperature}
   \begin{tabular}{lcc}
     \toprule
-    Model & $\Delta$ Plus pass & $\Delta$ \sameat{} \\
+    Model & $\Delta$ pass@1 & $\Delta$ \sameat{} \\
     \midrule
     GPT-4o-mini & $+0.4$ [$-0.8$, $1.8$] & $-25.4$ [$-29.8$, $-21.1$] \\
     Claude Sonnet 4.5 & $-0.6$ [$-1.6$, $0.1$] & $-14.1$ [$-17.2$, $-11.1$] \\
@@ -569,7 +614,7 @@ With two settings we do not estimate a dose--response curve.
 \end{table}
 
 \paragraph{What the difference costs.}
-Among Plus-passing pairs with different fingerprints, the median unified diff
+Among certified pairs with different fingerprints, the median unified diff
 is 7 to 14 changed lines (added plus removed) across the eight T-grid cells, and the median changed-line
 share is 0.149 to 0.478.
 Fingerprint-same pairs have a median of 0 changed lines in every cell; their
@@ -582,19 +627,19 @@ This summary is post hoc.
 \begin{figure}[t]
   \centering
   \includegraphics[width=\linewidth]{fig1.pdf}
-  \Description{Plus pass, same@2|cert, and same@2 for GPT-4o-mini and Claude Sonnet 4.5, with bootstrap intervals. same@2 is below Plus pass in every cell.}
+  \Description{pass@1, same@2|cert, and same@2 for GPT-4o-mini and Claude Sonnet 4.5, with bootstrap intervals. same@2 is below pass@1 in every cell.}
   \caption{\sameeval{} on HumanEval+ for the original two models
     (164 tasks, $N{=}20$).
-    Bars are Plus pass, \sameatc{}, and \sameat{}.
+    Bars are pass@1, \sameatc{}, and \sameat{}.
     All cells are in Table~\ref{tab:he-table1}.
     Whiskers are 95\% cluster bootstrap by task.}
   \label{fig:overview}
 \end{figure}
 
 \rqanswer{RQ1}{Passing tests does not mean regenerating produces the same
-code: Plus pass is 86.4\% but \sameat{} is 67.7\% across four models, and the
+code: pass@1 is 86.4\% but \sameat{} is 67.7\% across four models, and the
 highest-passing model (92.9\%) reaches only 66.3\%. Temperature lowers
-\sameat{} by 11.0 to 28.0 points. Plus pass changes by at most 0.8 points,
+\sameat{} by 11.0 to 28.0 points. pass@1 changes by at most 0.8 points,
 and every 95\% CI for that change lies within $\pm$2.4.}
 
 %% -------------------------------------------------------------------
@@ -615,7 +660,8 @@ The fingerprint's ``different'' is stricter than either engineer on the
 unweighted sample: sensitivity is 77.8\% (A) and 63.4\% (B), and 84.0\% on
 the 96 pairs where they agree.
 The engineers themselves agree on 75\% of pairs (sample $\kappa{=}0.41$,
-95\% CI 0.26--0.55), fair to moderate agreement, and they disagree mostly
+95\% CI 0.26--0.55), fair to moderate agreement on the conventional
+scale~\cite{landis1977measurement}, and they disagree mostly
 where the fingerprint says different and both programs pass (18 of their 32
 disagreements).
 The pairs both engineers still call the same implementation are mostly two
@@ -663,21 +709,21 @@ Tighter rulers widen the gap; the \sameeval{} fingerprint is the most lenient
 of the three (Table~\ref{tab:fingerprint}).
 
 \paragraph{\textup{\sameat{}} separates what pass@$k$ cannot.}
-We compare every T-grid model pair at each temperature on Plus pass and on
+We compare every T-grid model pair at each temperature on pass@1 and on
 \sameatc{} (common support), with paired task-cluster CIs.
-At $T{=}0$, Claude Haiku 4.5 and GPT-6 Luna are indistinguishable on Plus pass
+At $T{=}0$, Claude Haiku 4.5 and GPT-6 Luna are indistinguishable on pass@1
 ($-0.4$ points [$-4.9$, 3.8]) but differ by 15.3 points on \sameatc{}
 ([11.0, 19.7]); Sonnet 4.5 versus Luna shows the same pattern ($-2.0$
 [$-7.1$, 3.1] versus $+7.0$ [2.2, 11.9]).
 Our pre-specified rule flags a rank reversal when the \sameatc{} CI excludes
-zero with sign opposite to the Plus-pass difference; it flags four of the 12
+zero with sign opposite to the pass@1 difference; it flags four of the 12
 pairs.
-In three of them the Plus-pass difference is itself indistinguishable from
+In three of them the pass@1 difference is itself indistinguishable from
 zero, so we describe them as equal pass rates with different repeatability.
 The clean reversal is at $T{=}0$: Luna passes more often than GPT-4o-mini
 ($+10.2$ points [4.5, 16.2]) while GPT-4o-mini is more repeatable among passers
 ($+12.3$ [7.3, 17.3]).
-At $T{=}0.7$, Haiku and Sonnet 4.5 do not differ detectably on Plus pass
+At $T{=}0.7$, Haiku and Sonnet 4.5 do not differ detectably on pass@1
 ($+3.0$ [$-1.0$, 7.2]) but Sonnet 4.5 is more repeatable ($+9.0$
 [3.2, 14.9]).
 Temperature (Table~\ref{tab:temperature}) is a third case pass@$k$ does not
@@ -689,13 +735,13 @@ For each cell, 200 random disjoint 10/10 splits of the 20 generations
 Disjoint halves agree closely (Pearson $r_{10}{=}0.89$--$0.98$ across cells;
 Spearman 0.84--0.95); the Spearman--Brown reliability of the $N{=}20$ estimate
 is 0.94--0.99, and the mean absolute gap between halves is 0.02--0.10.
-Ten generations per configuration suffice for configuration-level ranking.
+Ten generations per configuration support configuration-level ranking (split-half $r_{10}{\ge}0.89$).
 
 \begin{table}[t]
   \small
-  \caption{Overlay and held-out \sameat{} under three equivalence rulers
+  \caption{Overlay and test-half \sameat{} under three equivalence rulers
     (original two models).
-    Held-out $\Delta$ is the paired cluster bootstrap by task on the persist
+    Test-half $\Delta$ is the paired cluster bootstrap by task on the persist
     replay (RQ4).}
   \label{tab:fingerprint}
   \begin{tabular}{lcccc}
@@ -725,14 +771,14 @@ exploratory; the five-model pool (1{,}476 configurations, including Sonnet 5)
 is a replication, and the uniformity check is post hoc.
 
 On the original overlay, form diversity carried no detectable signal
-about hidden-test failure beyond the pass rate (Table~\ref{tab:diversity-signal}, Figure~\ref{fig:diversity-signal}).
+about hidden-test failure beyond Base pass@1 (Table~\ref{tab:diversity-signal}, Figure~\ref{fig:diversity-signal}).
 Among Base-passing programs, modal and non-modal forms survived Extra tests at
 rates within 1.4 points of each other ($\Delta{=}0.06$ points [$-1.4$, 1.4]).
 Configurations with more diverse forms had slightly higher Extra-failure rates
 ($\rho{=}0.13$ [0.02, 0.23]), but the association did not survive adjustment
-for Base pass rate (partial $\rho{=}0.07$ [$-0.04$, 0.18]) or for task
+for Base pass@1 (partial $\rho{=}0.07$ [$-0.04$, 0.18]) or for task
 (within-task $\rho{=}0.02$ [$-0.10$, 0.13]).
-In the five-model replication, it survives adjustment for Base pass rate
+In the five-model replication, it survives adjustment for Base pass@1
 (partial $\rho{=}0.13$ [0.06, 0.20]) but not for task (within-task
 $\rho{=}0.04$ [$-0.02$, 0.11]), and modal and non-modal forms again survive at
 similar rates ($\Delta{=}-0.01$ [$-1.4$, 1.5]).
@@ -744,19 +790,18 @@ Task-level factors such as specification ambiguity may drive both.
 Configurations whose Base-passing programs all shared one form still failed
 Extra tests 10.7\% of the time: generation can be repeatably wrong.
 When any Base-passer failed Extra tests, all of them failed in 53.3\%
-[34.7, 72.0] of configurations that have at least two distinct Base-passing
-forms (five-model replication: 41.5\% [27.8, 56.0]; post hoc uniformity check).
+[34.6, 72.2] of configurations that have at least two distinct Base-passing
+forms (five-model replication: 41.5\% [27.3, 55.9]; post hoc uniformity check).
 
 \begin{table}[t]
   \small
   \setlength{\tabcolsep}{4pt}
   \caption{Diversity and Extra-test failure (exploratory).
-    Rows ``original'' are the original overlay (GPT-4o-mini, Claude
-    Sonnet 4.5; 656 configs); rows ``replication'' pool all five models
+    Rows ``original'' use the two original models (GPT-4o-mini, Claude Sonnet 4.5; 656 configs); rows ``replication'' pool all five models
     (1{,}476 configs).
     A1: Extra survival of modal versus non-modal Base-passers.
-    A2: Spearman $\rho(D_c, F_c)$; partial $\rho$ controls for Base pass
-    rate; within-task $\rho$ uses task-demeaned values.
+    A2: Spearman $\rho(D_c, F_c)$; partial $\rho$ controls for Base
+    pass@1; within-task $\rho$ uses task-demeaned values.
     Per-cell values are in the artifact.}
   \label{tab:diversity-signal}
   \begin{tabular}{lccc}
@@ -786,8 +831,9 @@ forms (five-model replication: 41.5\% [27.8, 56.0]; post hoc uniformity check).
   \label{fig:diversity-signal}
 \end{figure}
 
-\rqanswer{RQ3}{(Exploratory.) Within a task, form diversity shows no detectable association with hidden-test
-failure, in either dataset. Repeatable generation can be repeatably wrong, so
+\rqanswer{RQ3}{(Exploratory.) Within a task, configurations whose passing
+programs vary more are not detectably more likely to fail hidden tests, in
+either dataset. Repeatable generation can be repeatably wrong, so
 \sameat{} measures something other than correctness.}
 
 %% -------------------------------------------------------------------
@@ -806,16 +852,16 @@ RQ2 validated the fingerprint's ``same'' on raw pairs; repaired programs were no
 The policies are raw generation, first Base-certified cache, Base Consensus
 cache, and \skyt{}; each sees only Base tests at selection time, and Extra
 tests are reserved for evaluation.
-On held-out generations, \skyt{} raises Plus \sameat{} from 66.1\% to 83.1\%
-($+17.0$ points [14.5, 19.6]) while Plus pass rises from 83.3\% to 85.9\%
-($+2.7$ [1.7, 3.8]) (Table~\ref{tab:heldout}, Figure~\ref{fig:arrows}).
+On the test half, \skyt{} raises \sameat{} from 66.1\% to 83.1\%
+($+17.0$ points [14.5, 19.6]) while pass@1 rises from 83.3\% to 85.9\%
+($+2.7$ [1.7, 3.8]) (Table~\ref{tab:testhalf}, Figure~\ref{fig:arrows}).
 (The 66.1\% pre-\sameat{} differs from the RQ4-subset row of
-Table~\ref{tab:he-table1}, 65.9\%, because it is computed on the held-out
+Table~\ref{tab:he-table1}, 65.9\%, because it is computed on the test
 halves.)
 Among generations that pass the Base oracle, Extra-test survival rises from
 88.5\% to 89.7\% ($+1.2$ [0.3, 2.3]): repeatability improves without reducing
 the chance that an operationally certified output survives unseen tests.
-Four configurations have a negative held-out Plus-pass delta (HumanEval/124,
+Four configurations have a negative test-half pass@1 delta (HumanEval/124,
 GPT-4o-mini, both temperatures; HumanEval/91, Claude, $T{=}0.0$;
 HumanEval/32, GPT-4o-mini, $T{=}0.7$): Extra tests failed after a
 Base-authorized commit, so operational certification does not eliminate
@@ -825,13 +871,13 @@ No configuration has a negative operational (Base-certified) \sameat{} delta.
 \begin{table}[t]
   \small
   \setlength{\tabcolsep}{3.5pt}
-  \caption{\skyt{} on held-out generations (train 10 / test 10, $B{=}20$
+  \caption{\skyt{} on the test half (train 10 / test 10, $B{=}20$
     splits), Base tests only during repair, Extra reserved for evaluation.
     Task-means; $\Delta$ CIs are paired cluster bootstrap by task.}
-  \label{tab:heldout}
+  \label{tab:testhalf}
   \begin{tabular}{llcccc}
     \toprule
-    Model & $T$ & Plus pass & $\Delta$ Plus & \sameat{} & $\Delta$ \sameat{} \\
+    Model & $T$ & pass@1 & $\Delta$ pass@1 & \sameat{} & $\Delta$ \sameat{} \\
     \midrule
     GPT-4o-mini & 0.0 & 79.2 $\to$ 81.0 & $+1.7$ [0.4, 3.5] & 74.3 $\to$ 80.1 & $+5.9$ [3.4, 8.8] \\
     GPT-4o-mini & 0.7 & 79.6 $\to$ 85.5 & $+5.9$ [3.5, 8.5] & 49.3 $\to$ 78.5 & $+29.3$ [24.6, 34.1] \\
@@ -849,7 +895,7 @@ On a static prompt, caching a Base-certified train program is the stronger
 \skyt{} ($-1.8$ [$-2.9$, $-0.8$] and $-2.1$ [$-3.0$, $-1.1$]).
 Both caches replay one Base-certified train program when one exists (coverage
 94.9\%); 11.7\% (7.5--16.3) of first-cache programs and 11.3\% of consensus-cache programs fail Extra tests.
-\skyt{} is slightly more correct: Plus pass $+0.9$ [0.2, 1.8] and $+0.7$
+\skyt{} is slightly more correct: pass@1 $+0.9$ [0.2, 1.8] and $+0.7$
 [0.1, 1.5] points over the two caches, Extra survival $+1.4$ [0.5, 2.6] and
 $+1.0$ [0.2, 2.0].
 We do not claim that \skyt{} beats caching.
@@ -860,11 +906,13 @@ We do not claim that \skyt{} beats caching.
   \caption{Oracle-fair baselines: every policy sees only Base tests at
     selection time; Plus and Extra are evaluation-only.
     Coverage is the split-mean share of configs with a Base-certified train
-    program.}
+    program.
+    Extra survival is the task mean of per-configuration survival among
+    Base-passers, not pass@1 divided by Base pass@1.}
   \label{tab:cache}
   \begin{tabular}{lcccccc}
     \toprule
-    Policy & Base pass & Plus pass & Extra surv. & \sameat{} & Cov. & Regen.? \\
+    Policy & Base pass@1 & pass@1 & Extra surv. & \sameat{} & Cov. & Regen.? \\
     \midrule
     Raw & 92.0\% & 83.3\% & 88.5\% & 66.1\% & --- & yes \\
     First Base-cert.\ cache & 95.0\% & 85.0\% & 88.3\% & 84.9\% & 94.9\% & no \\
@@ -877,21 +925,21 @@ We do not claim that \skyt{} beats caching.
 \begin{figure}[t]
   \centering
   \includegraphics[width=0.8\linewidth]{fig_arrows.pdf}
-  \Description{Four cell-mean arrows in Plus-pass versus same@2 space. Movement is mostly upward. GPT-4o-mini at T=0.7 also moves right.}
+  \Description{Four cell-mean arrows in pass@1 versus same@2 space. Movement is mostly upward. GPT-4o-mini at T=0.7 also moves right.}
   \caption{Cell means for the four RQ4 model$\times$temperature cells
     (164 tasks each).
-    Circles are raw held-out generations; squares are after \skyt{}.
+    Circles are raw test-half generations; squares are after \skyt{}.
     Movement is mostly upward.
     GPT-4o-mini at $T{=}0.7$ also moves right
-    ($+$5.9 points Plus pass).
+    ($+$5.9 points pass@1).
     Canon selection, repair, and rollback see only Base tests.}
   \label{fig:arrows}
 \end{figure}
 
 \subsubsection{Certified disagreement}
 \label{sec:rq4-disagreement}
-On the 561 of 656 configurations with at least two Plus-passers both before and
-after \skyt{} (common support), \sameatc{} rises from 76.5\% to 96.8\%
+On the 561 of 656 configurations with at least two certified generations both
+before and after \skyt{} (common support), \sameatc{} rises from 76.5\% to 96.8\%
 ($+20.3$ [17.0, 23.8]): certified disagreement falls from 23.5\% to 3.2\%, an
 86.4\% relative reduction (Table~\ref{tab:disagreement},
 Figure~\ref{fig:disagreement}).
@@ -933,14 +981,14 @@ The paired interaction $\Delta_{T{=}0.7}-\Delta_{T{=}0.0}$ is $+18.0$ points
 the benefit is larger at $T{=}0.7$ than at $T{=}0.0$, the setting where
 Table~\ref{tab:temperature} shows repeatability is lowest.
 With two settings we do not estimate a dose--response curve.
-Many cells are rewritten onto a single form, so lift approaches
+Many configurations are rewritten onto a single form, so lift approaches
 $100{-}\text{baseline}$ (Figure~\ref{fig:lift}).
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=0.7\linewidth]{fig_lift.pdf}
-  \Description{Scatter of SKYT lift against baseline Plus same@2. The dashed line is lift equals 100 minus baseline.}
-  \caption{Held-out \skyt{} lift versus baseline Plus \sameat{} (656 configs).
+  \Description{Scatter of SKYT lift against baseline same@2. The dashed line is lift equals 100 minus baseline.}
+  \caption{\skyt{} lift on the test half versus baseline \sameat{} (656 configs).
     The dashed line is lift $= 100 - \mathrm{baseline}$.}
   \label{fig:lift}
 \end{figure}
@@ -951,7 +999,7 @@ When \skyt{} fires, the typical rewrite is Level-3 substitution of the
 entry-point AST with the train Certified Consensus function
 (Table~\ref{tab:level-ablation}).
 The live transformer has no separate Level-1 pass, so L1-only equals raw.
-Level 2, oracle-gated statement removal, moves Plus \sameat{} by $+0.3$
+Level 2, oracle-gated statement removal, moves \sameat{} by $+0.3$
 points [0.1, 0.5] and transforms 0.04 of 10 test programs per split: statement
 removal does not account for the lift.
 Live \skyt{} (Level 2 then Level 3) transforms 1.7 of 10 programs and gains
@@ -962,23 +1010,23 @@ subset of live \skyt{}.
 Canonical substitution can produce a lift at least as large as live \skyt{};
 live \skyt{} is the more conservative policy.
 Level 3 does not invent an algorithm: it pastes a stored verified function.
-The dominant source of zero gain is the absence of a certified train consensus
-on the Base oracle-split design (29 of 656 configurations).
+One source of zero gain is the absence of a certified train consensus on the Base oracle-split design (29 of 656 configurations).
 The largest lifts match the mechanism: for HumanEval/83 under GPT-4o-mini at
 $T{=}0.7$, pre-\sameat{} is near 0 and \skyt{} rewrites the test slice onto the
-train form (post \sameat{} 1.0; Plus pass 29\% $\to$ 100\%); for HumanEval/109
-under Claude at $T{=}0.7$, Plus pass is already 100\% and \sameat{} still rises
+train form (post \sameat{} 1.0; pass@1 29\% $\to$ 100\%); for HumanEval/109
+under Claude at $T{=}0.7$, pass@1 is already 100\% and \sameat{} still rises
 from 4.9\% to 100\%.
 
 \begin{table}[t]
   \small
   \setlength{\tabcolsep}{4pt}
-  \caption{Level ablation (oracle-split design, Plus metrics).
+  \caption{Level ablation (oracle-split design; \sameat{} and pass@1 use the
+    full Plus suite).
     Repair/10 is the mean number of test programs transformed per split.}
   \label{tab:level-ablation}
   \begin{tabular}{lccccc}
     \toprule
-    Policy & \sameat{} & $\Delta$ vs raw & Plus pass & Extra surv. & Repair/10 \\
+    Policy & \sameat{} & $\Delta$ vs raw & pass@1 & Extra surv. & Repair/10 \\
     \midrule
     Raw & 66.1\% & --- & 83.3\% & 88.5\% & 0 \\
     L1 only & 66.1\% & 0 & 83.3\% & 88.5\% & 0 \\
@@ -992,9 +1040,9 @@ from 4.9\% to 100\%.
 \subsubsection{Robustness}
 \label{sec:rq4-robustness}
 The lift survives all three rulers ($+14.9$, $+15.4$, $+17.1$ points;
-Table~\ref{tab:fingerprint}). These come from a persist replay of the repaired programs, which matches the held-out run in Table~\ref{tab:heldout} ($66.1\rightarrow 83.1$, $+17.0$) to 0.1 points.
+Table~\ref{tab:fingerprint}). These come from a persist replay of the repaired programs, which matches the test-half run in Table~\ref{tab:testhalf} ($66.1\rightarrow 83.1$, $+17.0$) to 0.1 points.
 Using the full Plus suite during repair yields an almost identical effect
-($+17.0$ [14.5, 19.6]; Plus pass $+2.4$ [1.5, 3.5]; certified disagreement
+($+17.0$ [14.5, 19.6]; pass@1 $+2.4$ [1.5, 3.5]; certified disagreement
 23.2\% $\to$ 3.5\% on 562 configs), so the result does not depend on which
 tests \skyt{} sees.
 The \sameat{} effect equals the headline at the reported precision; both runs use the same bootstrap seed.
@@ -1047,9 +1095,9 @@ agrees with human judgment (step~6) before drawing conclusions from comparisons 
       Design requirement; \sameat{} keeps failures in the denominator
       (Section~\ref{sec:measures}). \\
     5. Report together &
-      Report pass rate, \sameat{}, and \sameatc{} with its drop count, with
+      Report pass@1, \sameat{}, and \sameatc{} with its drop count, with
       task-cluster bootstrap CIs. Never report \sameatc{} alone. &
-      Pass and \sameat{} diverge (RQ1); \sameatc{} can rise as pass falls
+      pass@1 and \sameat{} diverge (RQ1); \sameatc{} can rise as pass@1 falls
       (Section~\ref{sec:measures}). \\
     6. Calibrate the ruler &
       Check stricter rulers; label a stratified sample of pairs (by
@@ -1061,15 +1109,15 @@ agrees with human judgment (step~6) before drawing conclusions from comparisons 
       0.26--0.55) (RQ2). \\
     7. Compare configurations &
       Use paired task-level differences; pre-specify any rank-reversal
-      rule. Compare temperatures and models on both pass and \sameat{}. &
-      Equal pass, 15.3-point \sameatc{} gap; \sameat{} falls 11.0--28.0
-      points from $T{=}0$ to $0.7$, while every Plus-pass CI lies within $\pm$2.4 points
+      rule. Compare temperatures and models on both pass@1 and \sameat{}. &
+      Equal pass@1, 15.3-point \sameatc{} gap; \sameat{} falls 11.0--28.0
+      points from $T{=}0$ to $0.7$, while every pass@1 CI lies within $\pm$2.4 points
       (RQ1, RQ2). \\
     8. Evaluate a mitigation &
-      Select on a train split, evaluate on held-out generations, reserve
+      Select on a train split, evaluate on a test split never used for selection, reserve
       hidden tests, include a stored-program baseline, report repeatability
       and correctness, and ablate the mechanism. &
-      Held-out design, cache ceiling, Extra survival, level ablation (RQ4). \\
+      Train/test design, cache ceiling, Extra survival, level ablation (RQ4). \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -1112,7 +1160,7 @@ Models agree on the approach more than on the code.
 \paragraph{The shortcuts, revisited.}
 For GPT-4o-mini at $T{=}0.7$, copy-first would freeze a passer from a cell whose
 certified pairs share a form only 60.0\% of the time, and stop-after-first-pass
-would report the 79.7\% pass rate and never the 48.9\% \sameat{}.
+would report the 79.7\% pass@1 and never the 48.9\% \sameat{}.
 
 \paragraph{Cache and \skyt{}.}
 On static prompts, cache is the repeatability ceiling; \skyt{} trades about 2
@@ -1126,7 +1174,7 @@ or a policy that forbids replaying a stored file---and those settings are not
 this experiment.
 How often a train canon exists also depends on the operational oracle:
 relaxing it from Plus to Base raises canon availability from 569 to 627 of 656
-configurations, while held-out repeatability is essentially unchanged.
+configurations, while repeatability on the test half is essentially unchanged.
 
 %% ===================================================================
 \section{Implications}
@@ -1134,7 +1182,7 @@ configurations, while held-out repeatability is essentially unchanged.
 
 \paragraph{For practitioners.}
 If structural repeatability matters, use $T{=}0$ where the provider allows it:
-\sameatc{} reaches 96.4\% (Haiku 4.5), and the step from $T{=}0$ to $T{=}0.7$ moves Plus pass by at most 0.8 points (every CI within $\pm$2.4).
+\sameatc{} reaches 96.4\% (Haiku 4.5), and the step from $T{=}0$ to $T{=}0.7$ moves pass@1 by at most 0.8 points (every CI within $\pm$2.4).
 Choose models on repeatability as well as correctness: at $T{=}0$, Haiku 4.5 and
 Luna pass equally often but differ by 15.3 points among passers.
 Do not assume the highest-passing model is the most repeatable: Sonnet 5 passes
@@ -1174,7 +1222,8 @@ Three computational rulers preserve the gap and the \skyt{} lift.
 
 \paragraph{Internal.}
 The 10/10 split prevents selecting the canon from the evaluation generations.
-Plus pass includes Base tests, so it is not a fully unseen correctness metric;
+pass@1 counts the full Plus suite, which includes the Base tests used during
+repair, so it is not a fully unseen correctness metric;
 Extra tests are unseen, and Extra survival is reported separately.
 RQ4 uses two models; replicating the policy comparison on the expansion models
 is future work.
@@ -1189,8 +1238,8 @@ claim.
 Short functions leave little room for structural variation, so we expect more
 scatter on larger tasks, but we did not test it.
 The protocol's evidence comes from HumanEval+ only.
-The overlay applies unchanged to any benchmark with an executable oracle;
-MBPP+~\cite{liu2023evalplus} uses the same EvalPlus harness and is the
+\sameeval{}'s measures apply unchanged to any benchmark with an executable
+oracle; MBPP+~\cite{liu2023evalplus} uses the same EvalPlus harness and is the
 immediate next task set.
 We make no claim about safety-critical readiness.
 The model-based embedded motivation (Section~\ref{sec:motivation}) is not
@@ -1217,15 +1266,15 @@ Model-pair comparisons (12 pairs, two metrics) use unadjusted 95\% intervals; th
 \label{sec:conclusion}
 
 Tests do not say whether the next passing program is the same code.
-On HumanEval+, Plus pass and \sameat{} are far apart (86.4\% versus 67.7\%
+On HumanEval+, pass@1 and \sameat{} are far apart (86.4\% versus 67.7\%
 across four models), temperature lowers \sameat{} by 11.0 to 28.0 points
-while Plus pass moves by at most 0.8 points, and \sameat{} separates models that
+while pass@1 moves by at most 0.8 points, and \sameat{} separates models that
 pass@$k$ cannot.
 Engineers agree with the fingerprint's ``same'' but judge some structural
 differences to be the same implementation: models agree on the approach more
 than on the code.
-Within a task, form diversity shows no detectable association with hidden-test failure
-(exploratory).
+Within a task, configurations whose passing programs vary more are not
+detectably more likely to fail hidden tests (exploratory).
 \sameeval{} separates mitigation policies: a stored program is the ceiling on
 static prompts, and \skyt{}'s lift comes from canonical substitution.
 The eight-step protocol packages these findings so that repeatability can be
@@ -1245,9 +1294,10 @@ A natural extension would use that diversity instead of discarding it:
 selecting among, and possibly combining, verified forms from several draws to
 build the canon toward which later regenerations converge.
 Our results bound what to expect.
-Within a task, form diversity shows no detectable association with hidden-test failure (RQ3), so
-diversity is material to build from, not a correctness signal, and every
-combined form still needs the oracle.
+Within a task, configurations whose passing programs vary more are not
+detectably more likely to fail hidden tests (RQ3), so diversity is material to
+build from, not a correctness signal, and every combined form still needs the
+oracle.
 Any such extension should be judged with \sameeval{} against a stored program,
 the ceiling on static prompts (RQ4), and in the regeneration settings where
 replay is unavailable.
